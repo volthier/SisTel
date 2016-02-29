@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Ditel</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-datepicker.standalone.min.css}" />
+</head>
+
+<body>
+	<header layout:include="Cabecalho">
+		<p>Topo Pagina</p>
+	</header>
+	<div class="container">
+		<div class="row">
+			<table id="TablePc">
+				<tr>
+					<td class="col-sm-12">
+					<div id="menu" class="col-sm-2" layout:include="Menu">
+						<p>Menu</p>
+					</div>
+					<div id="conteudo" class="col-sm-10" layout:fragment="conteudo">
+						<p>Principal</p>
+					</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</div>
+		
+</body>
+<script th:src="@{/js/jquery-2.2.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.pt-BR.min.js}"></script>
+<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
+<script th:src="@{/js/exclusao.js}"></script>
+<script th:src="@{/js/guideTips.js}"></script>
+
+</html>

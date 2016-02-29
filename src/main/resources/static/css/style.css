@@ -1,0 +1,66 @@
+
+
+.navbar-brand{
+	width:160px; 
+	height:70px;
+}
+
+.navbar-brand img{
+	position: absolute; 
+	top: 0px; 
+	left: 2px;
+}
+
+.panel-default{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.alert{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.dt-link-panel{
+	float: right;
+	pandding: 0px;
+	panding-top:0px;
+}
+
+.dt-link-menu{
+	float: left;
+}
+
+.dt-dispositivo-panel{
+	float: left;
+	pandding-top: 2px;
+}
+
+.container{
+	position:top;
+	margin:0px;
+	padding:0px;
+	bording:0px;
+}
+
+#menu{
+	margin-top:0px;
+	position:absolut;
+	margin:0;
+	padding:0px;
+	bording:0px;
+	
+}
+
+#menu .btn-group, .btn-group-vertical {
+	margin:0px;
+	width:200px;
+	padding:opx;
+}
+
+
+#conteudo{
+	float:left;
+	width:100%;
+/*	position:relative; */
+}
