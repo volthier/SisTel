@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.model.CadastroChip;
 
@@ -28,6 +27,7 @@ public class ChipController extends UrlController {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new CadastroChip());
 		return mv;
+		
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -54,4 +54,11 @@ public class ChipController extends UrlController {
 		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
 		return "redirect:/inicio";
 		}	
+	
+	@RequestMapping("{id}")
+	public ModelAndView edicao(@PathVariable("id") CadastroChip chips){
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject(chips);
+				return mv;
+	}
 }

@@ -1,66 +1,129 @@
-
-
-.navbar-brand{
-	width:160px; 
-	height:70px;
+.navbar-brand {
+	width: 160px;
+	height: 70px;
 }
 
-.navbar-brand img{
-	position: absolute; 
-	top: 0px; 
+.navbar-brand img {
+	position: absolute;
+	top: 0px;
 	left: 2px;
 }
 
-.panel-default{
-	margin-left: 10px;
-	margin-right: 10px;
+.panel-default {
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom:0px;
 }
 
-.alert{
-	margin-left: 10px;
-	margin-right: 10px;
+.alert {
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
-.dt-link-panel{
+.dt-link-panel {
 	float: right;
 	pandding: 0px;
-	panding-top:0px;
+	panding-top: 0px;
 }
 
-.dt-link-menu{
+.dt-link-menu {
 	float: left;
 }
 
-.dt-dispositivo-panel{
+.dt-dispositivo-panel {
 	float: left;
-	pandding-top: 2px;
+
 }
 
-.container{
-	position:top;
-	margin:0px;
-	padding:0px;
-	bording:0px;
+.container {
+	position: top;
+	margin: 0px;
+	padding: 0px;
+	bording: 0px;
 }
 
-#menu{
-	margin-top:0px;
-	position:absolut;
-	margin:0;
-	padding:0px;
-	bording:0px;
+#menu aside{
+	margin-top: 0px;
+	position: absolut;
+	margin: 0;
+	padding: 0px;
+	bording: 0px;
+	alingment: top;
 	
 }
 
-#menu .btn-group, .btn-group-vertical {
-	margin:0px;
-	width:200px;
-	padding:opx;
+#menu{
+	padding-left: 0px; 
+	padding-right: 2px;
 }
 
+#menu .dropdown-menu {
+	min-width: 100%;
+	margin: 0 0 0;
 
-#conteudo{
-	float:left;
-	width:100%;
-/*	position:relative; */
+}
+
+#menu .dropdown-menu > li > a {
+    clear: both;
+    color: #333;
+    display: block;
+    font-weight: 400;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+    width: 100%;
+
+}
+
+#menu .btn-group, .btn-group-vertical {
+	margin: 0px;
+	width: 100%;
+	padding: opx;
+
+}
+
+#espaco {
+	margin: 0px;
+	padding: 0px;
+	height: 100vh;
+	width: 100vh;
+}
+
+body {
+	width: 100%;
+	position: absolute;
+}
+
+footer {
+    position:fixed;
+    bottom:0; 
+    width:100%;
+    margin-top: 10px;
+    z-index : 10;
+}
+
+ html{
+	height: 100vh;
+	width:100vh;
+	margin:0px;
+	padding:0px;
+}
+
+#conteudo {
+	margin-top: 0px;
+	padding-left: 0px; 
+	padding-right: 0px;
+}
+
+aside {
+
+	width: 170px;
+	top: 0px;
+	bottom: 0px;
+}
+
+#cabecalho{
+	
+	margin:0;
+	padding:0;
 }
