@@ -2,9 +2,9 @@ package br.gov.cultura.DitelAdm.model;
 
 public enum VinculoCadastroPessoa {
 	
-	Estagiário("Estagiário"),
-	Terceirizado("Terceirizado"),
-	Servidor("Servidor");
+	ESTAGIARIO("Estagiário"),
+	TERCEIRIZADO("Terceirizado"),
+	SERVIDOR("Servidor");
 	
 	private String descricao;
 	

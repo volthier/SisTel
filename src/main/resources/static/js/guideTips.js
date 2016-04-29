@@ -22,5 +22,7 @@ $(function(){
 			console.log(e);
 			alert('Erro no recebimento!')
 		});
+		
 	});
 });
+

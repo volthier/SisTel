@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
 
-
 @Controller
 @RequestMapping("/pessoas")
 public class PessoaController extends UrlController {

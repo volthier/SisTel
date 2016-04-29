@@ -6,35 +6,8 @@ public class CadastroFiltroPesquisa {
 	private String nome;
 	private String modelo;
 	private String nrseries;
-	private String nlinha;
-	private String id;
-	private String marca;
+
 	
-	
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNlinha() {
-		return nlinha;
-	}
-
-	public void setNlinha(String nlinha) {
-		this.nlinha = nlinha;
-	}
-
 	public String getModelo() {
 		return modelo;
 	}
@@ -65,5 +38,4 @@ public class CadastroFiltroPesquisa {
 	public void setNrseries(String nrseries) {
 		this.nrseries = nrseries;
 	}
-
 }

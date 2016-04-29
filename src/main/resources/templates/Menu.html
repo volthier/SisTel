@@ -6,51 +6,52 @@
 
 
 
-<section id="menu" layout:fragment="Menu">
-	<aside class="btn-group-vertical" role="group">
-		<a class="glyphicon glyphicon-search btn btn btn-default" aria-hidden="true" th:href="@{/consulta}">&nbsp;Consultar
-		</a>
+<section id="Menu" layout:fragment="Menu">
+	<div class="btn-group-vertical" role="group">
+		<button type="button" class="btn btn-default">Consultar
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 
 
-		<div class="btn-group" role="group">
-			<a type="button" class="glyphicon glyphicon-list-alt btn btn-default dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp; Alocação <span class="caret"></span>
-			</a>
+		<div id="btnMenu" class="btn-group" role="group">
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Fornecer <span class="glyphicon glyphicon-list-alt" aria-hidden="true"><br></br></span>
+				<span class="caret"></span>
+			</button>
 			<ul class="dropdown-menu">
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="#">Disponibilizar</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Devolução</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
 			</ul>
 
 		</div>
-		<button type="button" class="glyphicon glyphicon-list btn btn-default">&nbsp;Pedências
-		</button>
+		<button type="button" class="btn btn-default">Alertas/Pedências
+		<span class="glyphicon glyphicon-list" aria-hidden="true"></span></button>
 		<div class="btn-group" role="group">
-		
-			<button type="button" class="glyphicon glyphicon-book btn btn-default dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;Registrar <span class="caret"></span>
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Registrar <span class="glyphicon glyphicon-book" aria-hidden="true"><br></br></span>
+				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/dispositivos/novo}">Dispositivos</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/pessoas/nova}">Pessoas</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/chips/novo}">Chip's</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/linhas/nova}">Linhas</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="#">Linhas</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Faturas</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li>
 			</ul>
 
 		</div>
 		
-		<button type="button" class="glyphicon glyphicon-signal btn btn-default">&nbsp;Relatórios
-		</button>
-		<button type="button" class="glyphicon glyphicon-user btn btn-default">&nbsp;Usuário
-		</button>
-		<button type="button" class="glyphicon glyphicon-warning-sign btn btn-default">&nbsp;Alertas
-		</button>
-		<button type="button" class="glyphicon glyphicon-info-sign btn btn-default">&nbsp;Manuais
-		</button>
-	</aside>
+		<button type="button" class="btn btn-default">Relatórios
+		<span class="glyphicon glyphicon-signal" aria-hidden="true"></span></button>
+		<button type="button" class="btn btn-default">Usuário
+		<span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+		<button type="button" class="btn btn-default">Manuais
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+	</div>
 
 
 

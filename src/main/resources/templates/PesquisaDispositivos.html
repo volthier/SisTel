@@ -5,7 +5,7 @@
 	layout:decorator="LayoutPadrao">
 
 <head>
-<title>Consulta</title>
+<title>Pesquisa Inicio</title>
 </head>
 
 
@@ -16,23 +16,19 @@
 		<div class="panel-heading">
 			<div class="clearfix">
 				<h1 class="panel-title dt-dispositivo-panel">Dispositivos Cadastrados</h1>
-				<a class="btn btn-link dt-link-panel" th:href="@{/dispositivos/novo}">Novo Dispositivo</a> 
-				<a class="btn btn-link dt-link-panel" th:href="@{/pessoas/nova}">Nova Pessoa</a> 
-				<a class="btn btn-link dt-link-panel"	th:href="@{/chips/novo}">Novo Chip</a> 
-				<a class="btn btn-link dt-link-panel" th:href="@{/linhas/nova}">Nova Linha</a>
+				<a class="btn btn-link dt-link-panel" th:href="@{/dispositivos/novo}">Novo Dispositivo</a>
+				<a class="btn btn-link dt-link-panel" th:href="@{/pessoas/nova}">Nova Pessoa</a>
 			</div>
 		</div>
 
 		<div class="panel-body">
 
-			<form method="GET" class="form-horizontal"
-				th:action="@{/dispositivos} or @{/pessoas} or @{/consulta} or @{/chips} or @{/linhas}"
-				th:object="${filtro}">
+			<form method="GET" class="form-horizontal" th:action="@{/dispositivos} or @{/pessoas} or @{/inicio}" th:object="${filtro}">
 				<div class="form-group">
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input class="form-control" placeholder="O que pesquisar?"
-								autofocus="autofocus"></input> <span class="input-group-btn">
+							<input class="form-control" placeholder="O que pesquisar?" autofocus="autofocus"></input> 
+							  <span class="input-group-btn">
 								<button type="submit" class="btn btn-default">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
@@ -42,176 +38,92 @@
 					</div>
 				</div>
 			</form>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md2">Marca</th>
-							<th class="text-center col-md2">Modelo</th>
-							<th class="text-center col-md2">Número de Série</th>
-							<th class="text-center col-md2">IMEI</th>
-							<th class="text-center col-md2">Patrimonio</th>
-							<th class="text-center col-md2">Tipo</th>
-							<th class="text-right col-md2">Valor</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
 
-					<tbody>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="text-center col-md1">Id</th>
+						<th>Descrição</th>
+						<th class="text-center col-md2">Data Vencimento</th>
+						<th class="text-right col-md2">Valor</th>
+						<th class="text-center col-md2">Status</th>
+						<th class="col-md2"></th>
+					</tr>
+				</thead>
 
-						<tr th:each="dispositivo : ${dispositivos}">
-							<td class="text-center" th:text="${dispositivo.id}"></td>
-							<td class="text-center" th:text="${dispositivo.marca}"></td>
-							<td class="text-center" th:text="${dispositivo.modelo}"></td>
-							<td class="text-center" th:text="${dispositivo.nrserie}"></td>
-							<td class="text-center" th:text="${dispositivo.imei}"></td>
-							<td class="text-center" th:text="${dispositivo.patrimonio}"></td>
-							<td class="text-center" th:text="${dispositivo.tipo}"></td>
-							<td class="text-right" th:text="|R$ ${{dispositivo.valor}}|"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/dispositivos/{id}(id=${dispositivo.id})}"
-								title="Editar" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='1',data-excludId=${dispositivo.id}, data-exclude=${dispositivo.modelo}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
-							</a></td>
+				<tbody>
 
-						</tr>
-						<tr>
-							<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-								Dispositivo econtrado!!!</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th>Nome</th>
-							<th class="text-center col-md3">CPF</th>
-							<th class="text-center col-md2">Matricula</th>
-							<th class="text-center col-md2">Vinculo</th>
-							<th class="text-center col-md2">Setor</th>
-							<th class="text-center col-md2">Cargo</th>
-							<th class="text-center col-md2">DAS</th>
-							<th class="text-center col-md1">Email</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
+					<tr th:each="dispositivo : ${dispositivos}">
+						<td class="text-center" th:text="${dispositivo.id}"></td>
+						<td th:text="${dispositivo.marca}"></td>
+						<td class="text-center" th:text="${dispositivo.modelo}"></td>
+						<td class="text-right" th:text="|R$ ${{dispositivo.valor}}|"></td>
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							th:href="@{/dispositivos/{id}(id=${dispositivo.id})}"
+							title="Editar" rel="tooltip" data-placement="left"> <span
+								class="glyphicon glyphicon-pencil"></span>
+						</a> 
+						
+						
+						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
+							th:attr="data-flag='1',data-excludId=${dispositivo.id}, data-exclude=${dispositivo.descricao}"
+							title="Remover" rel="tooltip" data-placement="left"> <span
+								class="glyphicon glyphicon-remove"></span>
+						</a> 
+						
+						
+						
+						</td>
 
-					<tbody>
+					</tr>
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
+							Dispositivo econtrado!!!</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="text-center col-md1">Id</th>
+						<th>Nome</th>
+						<th class="text-center col-md3">CPF</th>
+						<th class="text-center col-md2">Matricula</th>
+						<th class="text-center col-md2">Vinculo</th>
+						<th class="text-center col-md1">DAS</th>
+						<th class="col-md2"></th>
+					</tr>
+				</thead>
 
-						<tr th:each="pessoa : ${pessoas}">
-							<td class="text-center" th:text="${pessoa.id}"></td>
-							<td th:text="${pessoa.nome}"></td>
-							<td class="text-center" th:text="${pessoa.cpf}"></td>
-							<td class="text-right" th:text="${pessoa.matricula}"></td>
-							<td class="text-center" th:text=" ${pessoa.vinculo}"></td>
-							<td class="text-center" th:text=" ${pessoa.setor}"></td>
-							<td class="text-center" th:text=" ${pessoa.cargo}"></td>
-							<td class="text-center" th:text=" ${pessoa.das}"></td>
-							<td class="text-center" th:text=" ${pessoa.email}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/pessoas/{id}(id=${pessoa.id})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='2',data-excludId=${pessoa.id}, data-exclude=${pessoa.nome}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
-							</a></td>
+				<tbody>
 
-						</tr>
-						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(pessoas)}">Nenhuma
-								Pessoa encontrada!!!</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+					<tr th:each="pessoa : ${pessoas}">
+						<td class="text-center" th:text="${pessoa.id}"></td>
+						<td th:text="${pessoa.nome}"></td>
+						<td class="text-center" th:text="${pessoa.cpf}"></td>
+						<td class="text-right" th:text="${pessoa.matricula}"></td>
+						<td class="text-center" th:text=" ${pessoa.vinculo}"></td>
+						<td class="text-center" th:text=" ${pessoa.das}"></td>
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							th:href="@{/pessoas/{id}(id=${pessoa.id})}"
+							title="Editar" rel="tooltip" data-placement="left"> <span
+								class="glyphicon glyphicon-pencil"></span>
+						</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+							data-target="#confirmacaoExclusaoModal"
+							th:attr="data-flag='2',data-excludId=${pessoa.id}, data-exclude=${pessoa.nome}"
+							title="Remover" rel="tooltip" data-placement="left"> <span
+								class="glyphicon glyphicon-remove"></span>
+						</a> </td>
 
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md3">Numero de Serie do Chip</th>
-							<th class="text-center col-md2">Tipo</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="chip : ${chips}">
-							<td class="text-center" th:text="${chip.id}"></td>
-							<td th:text="${chip.nrserie}"></td>
-							<td class="text-center" th:text="${chip.tipo}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/chips/{id}(id=${chip.id})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='3',data-excludId=${chip.id}, data-exclude=${chip.nrserie}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="4" th:if="${#lists.isEmpty(chips)}">Nenhum Chip
-								encontrada!!!</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md3">Linha</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="linha : ${linhas}">
-							<td class="text-center" th:text="${linha.id}"></td>
-							<td th:text="${linha.nlinha}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/linhas/{id}(id=${linha.id})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='4',data-excludId=${linha.id}, data-exclude=${linha.nlinha}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
-								Linha encontrada!!!</td>
-						</tr>
-
-
-
-					</tbody>
-				</table>
-			</div>
-
+					</tr>
+					<tr>
+						<td colspan="7" th:if="${#lists.isEmpty(pessoas)}">Nenhuma
+							Pessoa encontrada!!!</td>
+					</tr>
+				</tbody>
+			</table>
+			
 		</div>
 		<div layout:include="DialogoConfirmacaoExclusao"></div>
 	</div>

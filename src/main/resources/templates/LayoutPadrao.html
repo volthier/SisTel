@@ -4,11 +4,7 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width" />
-
 <title>Ditel</title>
-
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
@@ -20,14 +16,23 @@
 	<header layout:include="Cabecalho">
 		<p>Topo Pagina</p>
 	</header>
-	<aside class="col-sm-1" id="menu" layout:include="Menu">
-		<p>Menu</p>
-	</aside>
-	
-			<div class="col-sm-11" id="conteudo" layout:fragment="conteudo">
-				<p>Principal</p>
-	</div>
-<footer  id="rodape" layout:include="Rodape"></footer>
+	<div class="container">
+		<div class="row">
+			<table id="TablePc">
+				<tr>
+					<td class="col-sm-12">
+					<div id="menu" class="col-sm-2" layout:include="Menu">
+						<p>Menu</p>
+					</div>
+					<div id="conteudo" class="col-sm-10" layout:fragment="conteudo">
+						<p>Principal</p>
+					</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		</div>
+		
 </body>
 <script th:src="@{/js/jquery-2.2.0.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>

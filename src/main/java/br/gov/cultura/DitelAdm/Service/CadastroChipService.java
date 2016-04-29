@@ -15,6 +15,7 @@ public class CadastroChipService {
 
 	public void salvar(CadastroChip chip) {
 		chips.save(chip);
+
 	}
 
 	public void excluir(Long id) {
@@ -22,8 +23,9 @@ public class CadastroChipService {
 		chips.delete(id);
 	}
 
-	public List<CadastroChip> filtrar(CadastroFiltroPesquisa filtro){
-		String nrserie = filtro.getModelo() == null ? "%" : filtro.getModelo();
-		return chips.findByNrserieContaining(nrserie);
+	public List<CadastroChip> filtrar(CadastroFiltroPesquisa filtro) {
+		String nrseries = filtro.getNrseries() == null ? "%" : filtro.getNrseries();
+		return chips.findByNrserieContaining(nrseries);
+
 	}
 }
