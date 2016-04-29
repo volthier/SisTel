@@ -23,22 +23,28 @@
 						para Lista de Dispositivos</a>
 				</div>
 			</div>
- 
+ <p></p>
 			<div class="painel-body">
 			  <input type="hidden" th:field="*{id}"/>
 				<div class="form-group" th:classappend="${#fields.hasErrors('marca')} ? has-error">
 					<label for="marca" class="col-sm-2 control-label">Marca</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="marca"
-							th:field="*{marca}" />
+						<input list="marcas" class="form-control" id="marca" th:field="*{marca}" />
+						<datalist id="marcas">
+						<option th:each="dispositivo : ${dispositivos}" th:value="${dispositivo.marca}" th:text="${dispositivo.getMarca()}">
+						</option>
+						</datalist>
 					</div>
 				</div>
 				
 				<div class="form-group" th:classappend="${#fields.hasErrors('modelo')} ? has-error">
 					<label for="modelo" class="col-sm-2 control-label">Modelo</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="modelo"
-							th:field="*{modelo}" />
+						<input list="modelos" class="form-control" id="modelo"	th:field="*{modelo}" />
+						<datalist id="modelos">
+						<option th:each="dispositivo : ${dispositivos}" th:value="${dispositivo.modelo}" th:text="${dispositivo.getModelo()}">
+						</option>
+						</datalist>
 					</div>
 				</div>
 				
@@ -55,6 +61,13 @@
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="imei"
 							th:field="*{imei}" />
+					</div>
+				</div>
+				
+				<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
+					<label for="patrimonio" class="col-sm-2 control-label">Número de Patrimonio</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="patrimonio"	th:field="*{patrimonio}" />
 					</div>
 				</div>
 				
