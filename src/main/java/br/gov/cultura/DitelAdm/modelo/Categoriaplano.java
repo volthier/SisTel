@@ -20,6 +20,7 @@ public class Categoriaplano implements java.io.Serializable {
 	private int codCatPlano;
 	private String sigla;
 	private String descricao;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Planos> planoses = new HashSet(0);
 
 	public Categoriaplano() {

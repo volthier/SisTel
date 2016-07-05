@@ -40,9 +40,13 @@ public class Fatura implements java.io.Serializable {
 	private Date dataGeraArquivo;
 	private String versaoFormato;
 	private String campoLivreOp;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Trailler> traillers = new HashSet(0);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Enderecos> enderecoses = new HashSet(0);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Notafiscal> notafiscals = new HashSet(0);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Resumo> resumos = new HashSet(0);
 
 	public Fatura() {

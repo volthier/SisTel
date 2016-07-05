@@ -20,6 +20,7 @@ public class Categoriaservico implements java.io.Serializable {
 	private int codCatServico;
 	private String sigla;
 	private String descricao;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Servicos> servicoses = new HashSet(0);
 
 	public Categoriaservico() {

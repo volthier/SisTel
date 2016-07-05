@@ -40,10 +40,15 @@ public class Resumo implements java.io.Serializable {
 	private String velocidade;
 	private String uniVelocidade;
 	private Date dataVenc;
+	
 	private Set ajusteses = new HashSet(0);
+	
 	private Set descontoses = new HashSet(0);
+	
 	private Set planoses = new HashSet(0);
+	
 	private Set chamadases = new HashSet(0);
+	
 	private Set servicoses = new HashSet(0);
 
 	public Resumo() {
@@ -68,8 +73,8 @@ public class Resumo implements java.io.Serializable {
 
 	public Resumo(ResumoId id, Fatura fatura, String idUnico, int cnl, int modServ, Date dataAtiv, Date dataDesativ,
 			int quantRegServ, float valorTotalRegChamadaImp, float valorTotalImp, float valorTotalContaRecursoImp,
-			String degrau, String velocidade, String uniVelocidade, Date dataVenc, Set ajusteses, Set descontoses,
-			Set planoses, Set chamadases, Set servicoses) {
+			String degrau, String velocidade, String uniVelocidade, Date dataVenc, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
+			Set<Planos> planoses, Set<Chamadas> chamadases, Set<Servicos> servicoses) {
 		this.id = id;
 		this.fatura = fatura;
 		this.idUnico = idUnico;
@@ -243,47 +248,47 @@ public class Resumo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set getAjusteses() {
+	public Set<Ajustes> getAjusteses() {
 		return this.ajusteses;
 	}
 
-	public void setAjusteses(Set ajusteses) {
+	public void setAjusteses(Set<Ajustes> ajusteses) {
 		this.ajusteses = ajusteses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set getDescontoses() {
+	public Set<Descontos> getDescontoses() {
 		return this.descontoses;
 	}
 
-	public void setDescontoses(Set descontoses) {
+	public void setDescontoses(Set<Descontos> descontoses) {
 		this.descontoses = descontoses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set getPlanoses() {
+	public Set<Planos> getPlanoses() {
 		return this.planoses;
 	}
 
-	public void setPlanoses(Set planoses) {
+	public void setPlanoses(Set<Planos> planoses) {
 		this.planoses = planoses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set getChamadases() {
+	public Set<Chamadas> getChamadases() {
 		return this.chamadases;
 	}
 
-	public void setChamadases(Set chamadases) {
+	public void setChamadases(Set<Chamadas> chamadases) {
 		this.chamadases = chamadases;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set getServicoses() {
+	public Set<Servicos> getServicoses() {
 		return this.servicoses;
 	}
 
-	public void setServicoses(Set servicoses) {
+	public void setServicoses(Set<Servicos> servicoses) {
 		this.servicoses = servicoses;
 	}
 

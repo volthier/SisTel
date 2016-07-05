@@ -21,6 +21,7 @@ public class Operadora implements java.io.Serializable {
 	private String nome;
 	private String cnpj;
 	private String uf;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Cliente> clientes = new HashSet(0);
 
 	public Operadora() {

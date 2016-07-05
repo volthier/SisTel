@@ -25,6 +25,7 @@ public class Cliente implements java.io.Serializable {
 	private Operadora operadora;
 	private String nome;
 	private String cnpj;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Fatura> faturas = new HashSet(0);
 
 	public Cliente() {

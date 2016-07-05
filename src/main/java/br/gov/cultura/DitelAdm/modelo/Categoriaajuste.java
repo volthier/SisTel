@@ -20,6 +20,7 @@ public class Categoriaajuste implements java.io.Serializable {
 	private int codCatAjuste;
 	private String sigla;
 	private String descricao;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Ajustes>ajusteses = new HashSet(0);
 
 	public Categoriaajuste() {

@@ -20,8 +20,8 @@ public class Categoriadesconto implements java.io.Serializable {
 	private int codCatDesconto;
 	private String sigla;
 	private String descricao;
-	private Set descontoses = new HashSet(0);
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private Set<Descontos> descontoses = new HashSet(0);
 	public Categoriadesconto() {
 	}
 
@@ -31,7 +31,7 @@ public class Categoriadesconto implements java.io.Serializable {
 		this.descricao = descricao;
 	}
 
-	public Categoriadesconto(int codCatDesconto, String sigla, String descricao, Set descontoses) {
+	public Categoriadesconto(int codCatDesconto, String sigla, String descricao, Set<Descontos> descontoses) {
 		this.codCatDesconto = codCatDesconto;
 		this.sigla = sigla;
 		this.descricao = descricao;
@@ -68,11 +68,11 @@ public class Categoriadesconto implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoriadesconto")
-	public Set getDescontoses() {
+	public Set<Descontos> getDescontoses() {
 		return this.descontoses;
 	}
 
-	public void setDescontoses(Set descontoses) {
+	public void setDescontoses(Set<Descontos> descontoses) {
 		this.descontoses = descontoses;
 	}
 

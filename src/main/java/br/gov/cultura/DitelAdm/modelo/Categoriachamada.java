@@ -20,6 +20,7 @@ public class Categoriachamada implements java.io.Serializable {
 	private int codCatChamada;
 	private String sigla;
 	private String descricao;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Chamadas> chamadases = new HashSet(0);
 
 	public Categoriachamada() {
