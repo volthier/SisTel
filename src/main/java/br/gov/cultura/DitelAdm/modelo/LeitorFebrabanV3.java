@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.model;
+package br.gov.cultura.DitelAdm.modelo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,7 +44,7 @@ public class LeitorFebrabanV3 {
 			// "C:\\Users\\Administrador\\Desktop\\Projetos de
 			// ProgramaÃ§Ã£o\\Arquivos DITEL\\Faturas para o Projeto
 			// ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
-			"C:\\Users\\72381817115\\Desktop\\Projetos de Programaï¿½ï¿½o\\"
+			"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\"
 			+ "Arquivos DITEL\\Faturas para o Projeto ditel\\"
 			+ "711725423_919441395_14_02_2016_FebrabanV3.txt");
 
@@ -423,7 +423,7 @@ public class LeitorFebrabanV3 {
 				String chamaIdUnicoRecurso(data.substring(53, 78);*/
 
 				/**
-				 * CNL da ï¿½?rea local onde o terminal estava em uso durante a
+				 * CNL da Ã?rea local onde o terminal estava em uso durante a
 				 * chamada **** CÃ³digo Nacional de localidade: Fixo - definido
 				 * pela ANATEL; MÃ³vel definido pela ABR Telecom
 				 */
@@ -584,7 +584,7 @@ public class LeitorFebrabanV3 {
 				String servIdUnicoRecurso(data.substring(53, 78); */
 
 				/**
-				 * CNL da ï¿½?rea local onde o terminal estava em uso durante a
+				 * CNL da Ã?rea local onde o terminal estava em uso durante a
 				 * chamada **** CÃ³digo Nacional de localidade: Fixo - definido
 				 * pela ANATEL; MÃ³vel definido pela ABR Telecom
 				 */

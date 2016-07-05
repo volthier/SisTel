@@ -19,8 +19,8 @@ $(function(){
 		});
 		
 		response.fail(function(e){
-			console.log(e);
-			alert('Erro no recebimento!')
+			//console.log(e);
+			alert('Erro no recebimento!');
 		});
 	});
 });

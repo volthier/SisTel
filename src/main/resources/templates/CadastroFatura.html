@@ -8,7 +8,8 @@
 </head>
 
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST" th:action="@{/inicio}"
+
+	<form class="form-horizontal" method="POST" th:action="@{/faturas}"
 		th:object="${LeitorFebrabanV3}">
 
 		<div layout:include="MensagemSucesso"></div>
@@ -27,13 +28,15 @@
 				<div class="col-sm-4" modelAttribute="fileBean" method="post"
 					enctype="multipart/form-data">
 					<label for="fileData" path="fileData">Selecione Fatura</label><br />
-					<br /> <input path="fileData" type="file" /> <input type="submit" />
+					<br /> <input path="fileData" type="file" />
 				</div>
 
-
+				<br>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Salvar</button>
+						<button type="submit" class="btn btn-primary">Vizualisar</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input  type="submit" value="Enviar" /> 
 					</div>
 				</div>
 			</div>

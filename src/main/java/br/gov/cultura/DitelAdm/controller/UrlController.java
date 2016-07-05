@@ -49,6 +49,7 @@ public class UrlController {
 		List<CadastroDispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro); 
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		String json = new Gson().toJson(mv); 
+		json = new Gson().toJson(todosDispositivos);
 		mv.addObject("dispositivos", todosDispositivos);
 		mv.addObject("sugestion", json);
 		System.out.println(json);

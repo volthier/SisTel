@@ -8,13 +8,14 @@
 
 <section id="menu" layout:fragment="Menu">
 	<aside class="btn-group-vertical" role="group">
-		<a class="glyphicon glyphicon-search btn btn btn-default" aria-hidden="true" th:href="@{/consulta}">&nbsp;Consultar
+		<a class="glyphicon glyphicon-search btn btn btn-default" aria-hidden="true" th:href="@{/consulta}" style="text-align:center;">&nbsp;Consultar
 		</a>
 
 
-		<div class="btn-group" role="group">
+		<div class="btn-group" role="group" style="text-align:center;">
 			<a type="button" class="glyphicon glyphicon-list-alt btn btn-default dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp; Alocação <span class="caret"></span>
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;Alocação
+				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
@@ -24,31 +25,31 @@
 			</ul>
 
 		</div>
-		<button type="button" class="glyphicon glyphicon-list btn btn-default">&nbsp;Pedências
+		<button type="button" class="glyphicon glyphicon-list btn btn-default" style="text-align:center;">&nbsp;Pedências
 		</button>
-		<div class="btn-group" role="group">
+		<div class="btn-group" role="group" style="text-align:center;">
 		
 			<button type="button" class="glyphicon glyphicon-book btn btn-default dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;Registrar <span class="caret"></span>
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:center;">&nbsp;Registrar <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/dispositivos/novo}">Dispositivos</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/pessoas/nova}">Pessoas</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/chips/novo}">Chip's</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/linhas/nova}">Linhas</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Faturas</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="@{/faturas/nova}">Faturas</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li>
 			</ul>
 
 		</div>
 		
-		<button type="button" class="glyphicon glyphicon-signal btn btn-default">&nbsp;Relatórios
+		<button type="button" class="glyphicon glyphicon-signal btn btn-default" style="text-align:center;">&nbsp;Relatórios
 		</button>
-		<button type="button" class="glyphicon glyphicon-user btn btn-default">&nbsp;Usuário
+		<button type="button" class="glyphicon glyphicon-user btn btn-default" style="text-align:center;">&nbsp;Usuário
 		</button>
-		<button type="button" class="glyphicon glyphicon-warning-sign btn btn-default">&nbsp;Alertas
+		<button type="button" class="glyphicon glyphicon-warning-sign btn btn-default" style="text-align:center;">&nbsp;Alertas
 		</button>
-		<button type="button" class="glyphicon glyphicon-info-sign btn btn-default">&nbsp;Manuais
+		<button type="button" class="glyphicon glyphicon-info-sign btn btn-default" style="text-align:center;" >&nbsp;Manuais
 		</button>
 	</aside>
 

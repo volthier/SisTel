@@ -6,7 +6,7 @@
 .navbar-brand img {
 	position: absolute;
 	top: 0px;
-	left: 2px;
+	right: 2px;
 }
 
 .panel-default {

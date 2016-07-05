@@ -7,9 +7,8 @@
 <head>
 <title>Consulta</title>
 </head>
-
-
 <section layout:fragment="conteudo">
+
 	<div layout:include="MensagemSucesso"></div>
 
 	<div class="panel panel-default">
@@ -18,11 +17,12 @@
 				<h1 class="panel-title dt-dispositivo-panel">Dispositivos Cadastrados</h1>
 				<a class="btn btn-link dt-link-panel" th:href="@{/dispositivos/novo}">Novo Dispositivo</a> 
 				<a class="btn btn-link dt-link-panel" th:href="@{/pessoas/nova}">Nova Pessoa</a> 
-				<a class="btn btn-link dt-link-panel"	th:href="@{/chips/novo}">Novo Chip</a> 
+				<a class="btn btn-link dt-link-panel" th:href="@{/chips/novo}">Novo Chip</a> 
 				<a class="btn btn-link dt-link-panel" th:href="@{/linhas/nova}">Nova Linha</a>
 			</div>
 		</div>
-
+		
+		
 		<div class="panel-body">
 
 			<form method="GET" class="form-horizontal"
@@ -42,6 +42,9 @@
 					</div>
 				</div>
 			</form>
+			
+		
+			
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -110,8 +113,8 @@
 						<tr th:each="pessoa : ${pessoas}">
 							<td class="text-center" th:text="${pessoa.id}"></td>
 							<td th:text="${pessoa.nome}"></td>
-							<td class="text-center" th:text="${pessoa.cpf}"></td>
-							<td class="text-right" th:text="${pessoa.matricula}"></td>
+							<td class="text-center" th:text=" ${pessoa.cpf}"></td>
+							<td class="text-right" th:text="  ${pessoa.matricula}"></td>
 							<td class="text-center" th:text=" ${pessoa.vinculo}"></td>
 							<td class="text-center" th:text=" ${pessoa.setor}"></td>
 							<td class="text-center" th:text=" ${pessoa.cargo}"></td>
