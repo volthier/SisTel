@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import br.gov.cultura.DitelAdm.modelo.Trailler;
 import br.gov.cultura.DitelAdm.modelo.TraillerId;
 import br.gov.cultura.DitelAdm.modelo.Notafiscal;
@@ -15,6 +18,7 @@ import br.gov.cultura.DitelAdm.modelo.NotafiscalId;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.modelo.Planos;
 import br.gov.cultura.DitelAdm.modelo.PlanosId;
+import br.gov.cultura.DitelAdm.Service.FaturaService;
 import br.gov.cultura.DitelAdm.modelo.Ajustes;
 import br.gov.cultura.DitelAdm.modelo.AjustesId;
 import br.gov.cultura.DitelAdm.modelo.Chamadas;
@@ -42,7 +46,7 @@ public class LeitorFebrabanV3 {
 			// "C:\\Users\\Administrador\\Desktop\\Projetos de
 			// Programação\\Arquivos DITEL\\Faturas para o Projeto
 			// ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
-			"C:\\Users\\72381817115\\Desktop\\Projetos de Programa��o\\"
+			"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\"
 			+ "Arquivos DITEL\\Faturas para o Projeto ditel\\"
 			+ "711725423_919441395_14_02_2016_FebrabanV3.txt");
 
@@ -58,7 +62,9 @@ public class LeitorFebrabanV3 {
 		return dataCampo;
 	}
 	
-
+@Autowired
+private static FaturaService faturaService;
+	
 	private static final void read(File file) throws IOException {
 		FileReader fileReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(fileReader);
@@ -73,6 +79,7 @@ public class LeitorFebrabanV3 {
 					 * 00_HEADER do guide Telecom padrão FEBRABAN-V3R0
 					 * Identifica Cabeçalho da conta
 					 */
+				
 					Fatura fatura = new Fatura();
 					FaturaId faturaId = new FaturaId();
 					Cliente cliente = new Cliente();
@@ -83,12 +90,11 @@ public class LeitorFebrabanV3 {
 					String headerControlSeqGrav = data.substring(2, 14);*/
 
 					/** Identificador de Conta Unica ou Numero da conta */
-				//	fatura.setIndConta(data.substring(14, 39));
+					//fatura.setIndConta(data.substring(14, 39));
 					fatura.setIndConta(recuperaTextoCampo(data, PosicaoCamposEnum.CAMPO_HEADER_FATURA_INDCONTA));
-
 					
 					/** Data da emissão da Fatura/conta */
-		//			faturaId.setDataEmissao(sdf.parse(data.substring(39, 47)));
+					//faturaId.setDataEmissao(sdf.parse(data.substring(39, 47)));
 					
 					try {
 						faturaId.setDataEmissao(recuperaDataCampo(data, PosicaoCamposEnum.CAMPO_HEADER_FATURA_DATAEMISSAO));
@@ -97,8 +103,6 @@ public class LeitorFebrabanV3 {
 						e1.printStackTrace();
 					}
 					
-					
-
 					/** Mês de Referência da fatura(cobrança) */
 					fatura.setMesRef(data.substring(47, 53));
 
@@ -189,18 +193,20 @@ public class LeitorFebrabanV3 {
 
 					/** Marcação de FIM 
 					String headerMarcaFim(data.substring(349, 350);*/
-
-
+					
+					faturaService.salvarOp(operadora);
+				
 				break;
 
 			case "10":
+				
 				/**
 				 * 10_RESUMO do guide Telecom padrão FEBRABAN-V3R0 Somatório dos
 				 * Valores por Recurso
 				 * 
-				 * Controle de sequencia de gravação String resumoControlSeqGrav
-				 * = data.substring(2, 14);
-				 */
+				 * Controle de sequencia de gravação 
+				 * String resumoControlSeqGrav = data.substring(2, 14);	*/
+				
 				Resumo resumo = new Resumo();
 				ResumoId resumoId = new ResumoId();
 				
@@ -248,8 +254,6 @@ public class LeitorFebrabanV3 {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 
 				/** Quantidade de Registro de Chamada 
 				String resumoQuantRegChamada(data.substring(119, 128);*/
