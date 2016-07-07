@@ -106,7 +106,7 @@ public class LeitorFebrabanV3 {
 				
 				/** Codigo do Cliente */
 				clienteId.setCodCliente(data.substring(104, 119));
-				//cliente.setId(clienteId);
+				cliente.setId(clienteId);
 				
 				/** Nome do Cliente */
 				cliente.setNome(data.substring(119, 149));
