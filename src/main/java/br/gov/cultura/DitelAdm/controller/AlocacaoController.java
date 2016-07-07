@@ -1,5 +1,7 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,16 @@ import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
+import br.gov.cultura.DitelAdm.Service.FaturaService;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.CadastroChip;
 import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
+import br.gov.cultura.DitelAdm.model.LeitorFebrabanV3;
 import br.gov.cultura.DitelAdm.model.VinculoCadastroChipTipo;
+import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
@@ -42,6 +48,8 @@ public class AlocacaoController extends UrlController {
 	private CadastroChipService cadastroChipService;
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
+	@Autowired
+	private FaturaService faturaService;
 
 	@RequestMapping("/disponibilizar")
 	public @ResponseBody ModelAndView novo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
@@ -55,35 +63,52 @@ public class AlocacaoController extends UrlController {
 		mv.addObject("chips", todosChips);
 		List<CadastroLinha> todasLinhas = cadastroLinhaService.filtrar(filtro);
 		mv.addObject("linhas", todasLinhas);
+		LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
+		File file = new File(
+				// "C:\\Users\\Administrador\\Desktop\\Projetos de
+				// Programação\\Arquivos DITEL\\Faturas para o Projeto
+				// ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
+				"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\"
+						+ "Arquivos DITEL\\Faturas para o Projeto ditel\\"
+						+ "711725423_919441395_14_02_2016_FebrabanV3.txt");
+		try {
+			FaturaArquivoDTO faturaArquivoDTO = leitor.read(file);
+			faturaService.salvarOp(faturaArquivoDTO);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return mv;
 	}
-	 @RequestMapping(method = RequestMethod.POST) 
-	 public String salvar(@Validated Alocacao alocacao, Errors errors, RedirectAttributes attributes){
-		 if(errors.hasErrors()){ 
-			 return CADASTRO_VIEW; 
-	 }
-	 try{
-		 
-	 AlocacaoService.salvar(alocacao);
-	 attributes.addFlashAttribute("mensagem","Registrado vinculo!"); 
-	 return "redirect:/alocacao/disponibilizar"; 
-   	  }
-	 catch(IllegalArgumentException e) { 
-		 
-		 errors.rejectValue("dataVencimento", null, e.getMessage()); 
-		 return	CADASTRO_VIEW;
-		 }
-	 }
 
-	 @RequestMapping(value="{id}", method = RequestMethod.DELETE) 
-	 public String excluir(@PathVariable Long id, RedirectAttributes attributes){
-	 alocacaoService.excluir(id); 
-	 attributes.addFlashAttribute("mensagem","Fornecimento CANCELADO com sucesso!"); 
-	 return "redirect:/inicio"; 
-	 }
-	 
-	 @ModelAttribute("todosCadastroChipTipo")
-		public List<VinculoCadastroChipTipo> todosCadastroChipTipo(){
-			return Arrays.asList(VinculoCadastroChipTipo.values());
+	@RequestMapping(method = RequestMethod.POST)
+	public String salvar(@Validated Alocacao alocacao, Errors errors, RedirectAttributes attributes) {
+		if (errors.hasErrors()) {
+			return CADASTRO_VIEW;
 		}
+		try {
+
+			AlocacaoService.salvar(alocacao);
+			attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
+			return "redirect:/alocacao/disponibilizar";
+		} catch (IllegalArgumentException e) {
+
+			errors.rejectValue("dataVencimento", null, e.getMessage());
+			return CADASTRO_VIEW;
+		}
+	}
+
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
+		alocacaoService.excluir(id);
+		attributes.addFlashAttribute("mensagem", "Fornecimento CANCELADO com sucesso!");
+		return "redirect:/inicio";
+	}
+
+	@ModelAttribute("todosCadastroChipTipo")
+	public List<VinculoCadastroChipTipo> todosCadastroChipTipo() {
+		return Arrays.asList(VinculoCadastroChipTipo.values());
+	}
 }
