@@ -4,6 +4,7 @@ package br.gov.cultura.DitelAdm.modelo;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -40,16 +41,17 @@ public class Resumo implements java.io.Serializable {
 	private String velocidade;
 	private String uniVelocidade;
 	private Date dataVenc;
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Set<Ajustes> ajusteses = new HashSet(0);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Set<Descontos> descontoses = new HashSet(0);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Set<Planos> planoses = new HashSet(0);
+	@SuppressWarnings({ "rawtypes", "unchecked" })	
+	private Set<Chamadas> chamadases = new HashSet(0);
 	
-	private Set ajusteses = new HashSet(0);
-	
-	private Set descontoses = new HashSet(0);
-	
-	private Set planoses = new HashSet(0);
-	
-	private Set chamadases = new HashSet(0);
-	
-	private Set servicoses = new HashSet(0);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Set<Servicos> servicoses = new HashSet(0);
 
 	public Resumo() {
 	}
@@ -165,7 +167,7 @@ public class Resumo implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataDesativ", nullable = false, length = 10)
+	@Column(name = "dataDesativ", length = 10)
 	public Date getDataDesativ() {
 		return this.dataDesativ;
 	}

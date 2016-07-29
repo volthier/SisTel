@@ -24,10 +24,10 @@ public class Operadora implements java.io.Serializable {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Cliente> clientes = new HashSet(0);
 
-	public void configuraCliente(Cliente cliente){
+	/*public void configuraCliente(Cliente cliente){
 		cliente.getId().setOperadoraCodOperadora(getCodOperadora());
 		clientes.add(cliente);
-	}
+	}*/
 	public Operadora() {
 	}
 

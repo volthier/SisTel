@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.gov.cultura.DitelAdm.Service.AlocacaoService;
 import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
@@ -29,7 +31,6 @@ import br.gov.cultura.DitelAdm.model.CadastroPessoa;
 import br.gov.cultura.DitelAdm.model.LeitorFebrabanV3;
 import br.gov.cultura.DitelAdm.model.VinculoCadastroChipTipo;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
-import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
@@ -74,7 +75,10 @@ public class AlocacaoController extends UrlController {
 		try {
 			FaturaArquivoDTO faturaArquivoDTO = leitor.read(file);
 			faturaService.salvarOp(faturaArquivoDTO);
-
+			faturaService.salvarCliente(faturaArquivoDTO);
+			faturaService.salvarFat(faturaArquivoDTO);
+			faturaService.salvarResumo(faturaArquivoDTO);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

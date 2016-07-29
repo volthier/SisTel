@@ -38,7 +38,7 @@ public class ClienteId implements java.io.Serializable {
 	public void setOperadoraCodOperadora(int operadoraCodOperadora) {
 		this.operadoraCodOperadora = operadoraCodOperadora;
 	}
-
+@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -52,7 +52,7 @@ public class ClienteId implements java.io.Serializable {
 				&& castOther.getCodCliente() != null && this.getCodCliente().equals(castOther.getCodCliente())))
 				&& (this.getOperadoraCodOperadora() == castOther.getOperadoraCodOperadora());
 	}
-
+@Override
 	public int hashCode() {
 		int result = 17;
 

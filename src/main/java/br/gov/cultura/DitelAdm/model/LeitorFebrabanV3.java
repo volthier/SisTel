@@ -6,7 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
@@ -14,29 +15,35 @@ import br.gov.cultura.DitelAdm.modelo.ClienteId;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
 import br.gov.cultura.DitelAdm.modelo.FaturaId;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
+import br.gov.cultura.DitelAdm.modelo.Resumo;
+import br.gov.cultura.DitelAdm.modelo.ResumoId;
 
 public class LeitorFebrabanV3 {
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private SimpleDateFormat sdfh = new SimpleDateFormat("HHmmss");
+	private SimpleDateFormat sdfNormal = new SimpleDateFormat("ddMMyyyy");
 
-	private String recuperaTextoCampo(String linha, PosicaoCamposEnum posicao) {
+/*	private String recuperaTextoCampo(String linha, PosicaoCamposEnum posicao) {
 		return linha.substring(posicao.getPosicaoInicial(), posicao.getPosicaoFinal());
-	}
-
-	private Date recuperaDataCampo(String linha, PosicaoCamposEnum posicao) throws Exception {
-		String textoDataEmissao = recuperaTextoCampo(linha, posicao);
-		Date dataCampo = sdf.parse(textoDataEmissao);
-		dataCampo = sdfh.parse(textoDataEmissao);
-
-		return dataCampo;
-	}
+	}*/
 
 	public FaturaArquivoDTO read(File file) throws IOException {
 		FaturaArquivoDTO faturaArquivoDTO = new FaturaArquivoDTO();
 		FileReader fileReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(fileReader);
 		String data = null;
+
+		Fatura fatura = new Fatura();
+		FaturaId faturaId = new FaturaId();
+		Cliente cliente = new Cliente();
+		ClienteId clienteId = new ClienteId();
+		Operadora operadora = new Operadora();
+		//Instaciar List Resumo Reforçar 
+		List<Resumo> resumoLista = new ArrayList<Resumo>();
+		Resumo resumo = new Resumo();
+		ResumoId resumoId = new ResumoId();
+
 		while ((data = reader.readLine()) != null) {
 			String TipoReg = data.substring(0, 2);
 			switch (TipoReg)
@@ -48,27 +55,19 @@ public class LeitorFebrabanV3 {
 				 * Cabeçalho da conta
 				 */
 
-				Fatura fatura = new Fatura();
-				FaturaId faturaId = new FaturaId();
-				Cliente cliente = new Cliente();
-				ClienteId clienteId = new ClienteId();
-				Operadora operadora = new Operadora();
-
 				/**
 				 * Controle de sequencia de gravação String headerControlSeqGrav
 				 * = data.substring(2, 14);
 				 */
 
 				/** Identificador de Conta Unica ou Numero da conta */
-				// fatura.setIndConta(data.substring(14, 39));
-				fatura.setIndConta(recuperaTextoCampo(data, PosicaoCamposEnum.CAMPO_HEADER_FATURA_INDCONTA));
+				 fatura.setIndConta(data.substring(14, 39));
+				//fatura.setIndConta(recuperaTextoCampo(data, PosicaoCamposEnum.CAMPO_HEADER_FATURA_INDCONTA));
 
 				/** Data da emissão da Fatura/conta */
-				// faturaId.setDataEmissao(sdf.parse(data.substring(39, 47)));
-
 				try {
-					faturaId.setDataEmissao(recuperaDataCampo(data, PosicaoCamposEnum.CAMPO_HEADER_FATURA_DATAEMISSAO));
-				} catch (Exception e1) {
+					faturaId.setDataEmissao(sdf.parse(data.substring(39, 47)));
+				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -103,27 +102,206 @@ public class LeitorFebrabanV3 {
 
 				/** UF da Operadora */
 				operadora.setUf(data.substring(102, 104));
-				
+
 				/** Codigo do Cliente */
 				clienteId.setCodCliente(data.substring(104, 119));
+				clienteId.setOperadoraCodOperadora(operadora.getCodOperadora());
+				faturaId.setClienteOperadoraCodOperadora(operadora.getCodOperadora());
+				faturaId.setClienteCodCliente(clienteId.getCodCliente());
 				cliente.setId(clienteId);
-				
+
 				/** Nome do Cliente */
 				cliente.setNome(data.substring(119, 149));
 
 				/** CNPJ do Cliente */
 				cliente.setCnpj(data.substring(149, 164));
-				
-				
-				operadora.configuraCliente(cliente);
+
+				/**
+				 * Versão do Formato do Documento >>> (Tem que aparecer V3R0)
+				 * <<<
+				 */
+				fatura.setVersaoFormato(data.substring(164, 168));
+
+				/** Numero da Fatura */
+				faturaId.setNumFatura(Integer.parseInt(data.substring(168, 184)));
+				fatura.setId(faturaId);
+
+				/** Codigo de Barra */
+				fatura.setCodBarra(data.substring(184, 234));
+
+				/**
+				 * Codigo de Cobrança ( Legenda do Valor) 01 - Debito
+				 * automático; 02 - Crédito em conta; 03 - Cobrança simples; 04
+				 * - Cobrança registrada; 05 - Cartão Crédito; 06 - Outros
+				 */
+
+				fatura.setCodCobranca(data.substring(234, 236));
+
+				/**
+				 * Descrição(Ou Tipo) da Cobrança (Legenda) 01 - Debito
+				 * automático; 02 - Crédito em conta; 03 - Cobrança simples; 04
+				 * - Cobrança registrada; 05 - Cartão Crédito; 06 - Outros
+				 */
+
+				fatura.setDescriCobranca(data.substring(236, 256));
+
+				/** Banco da Cobrança */
+				fatura.setBancoCobranca(data.substring(256, 260));
+
+				/** Agencia da Cobrança */
+				fatura.setAgenciaCobranca(data.substring(260, 264));
+
+				/** Conta Corrente da Cobrança */
+				fatura.setCcCobranca(data.substring(264, 274));
+
+				/** FISCO */
+				fatura.setFisco(data.substring(274, 309));
+
+				/**
+				 * Filler String headerFiller(data.substring(309, 324);
+				 */
+
+				/** Campo Livre Para Operadora */
+				fatura.setCampoLivreOp(data.substring(324, 349));
+
+				/**
+				 * Marcação de FIM String headerMarcaFim(data.substring(349,
+				 * 350);
+				 */
+
 				faturaArquivoDTO.setOperadora(operadora);
-
-				return faturaArquivoDTO;
-				
-
-			case "10":
+				faturaArquivoDTO.setCliente(cliente);
+				faturaArquivoDTO.setFatura(fatura);
 
 				break;
+
+			case "10":
+				/**
+				 * 10_RESUMO do guide Telecom padrão FEBRABAN-V3R0 Somatório dos
+				 * Valores por Recurso
+				 * 
+				 * Controle de sequencia de gravação String resumoControlSeqGrav
+				 * = data.substring(2, 14);
+				 */
+
+				/** Identificador de Conta Unica ou Numero da conta */
+				// resumo.setIdUnico(data.substring(14, 39));
+
+				/** Data da emissão da Fatura/conta */
+				resumoId = new ResumoId();
+				try {
+					resumoId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Mês de Referência da fatura(cobrança) String
+				 * resumoMesRef(data.substring(47, 53));
+				 */
+
+				/** Identificador Único do Recurso */
+				resumo = new Resumo();
+				resumo.setIdUnico(data.substring(53, 78));
+
+				/**
+				 * CNL do Recurso (Legenda) (6) Código Nacional de localidade:
+				 * Fixo - definido pela ANATEL; Móvel definido pela ABR Telecom
+				 */
+				resumo.setCnl(Integer.parseInt(data.substring(78, 83)));
+
+				/** Numero do Recurso */
+				resumoId.setNumRecurso(data.substring(83, 99));
+
+				/** Modalidade de Serviço do recurso */
+				resumo.setModServ(Integer.parseInt(data.substring(99, 103)));
+
+				/** Data da Ativação do Recurso */
+				try {
+					resumo.setDataAtiv(sdf.parse(data.substring(103, 111)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String i ="";
+				i=data.substring(111, 119);
+				/** Data da Desativação do Recurso */
+				if (i.equals("00000000")) {
+					resumo.setDataDesativ(null);
+				}else{
+						try {
+							resumo.setDataDesativ(sdf.parse(data.substring(111, 119)));
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}				
+				}
+				i="";
+				/**
+				 * Quantidade de Registro de Chamada String
+				 * resumoQuantRegChamada(data.substring(119, 128);
+				 */
+
+				/** Valor Total dos Registros de Chamada com Impostos */
+				resumo.setValorTotalRegChamadaImp(Float.parseFloat(data.substring(128, 141)));
+
+				/** Quantidade de Registros de Serviços */
+				resumo.setQuantRegServ(Integer.parseInt(data.substring(141, 150)));
+
+				/**
+				 * Valor Total dos Registros de Serviços com Impostos] String
+				 * resumoValorTotalRegServImp(data.substring(150, 165));
+				 */
+
+				/** Valor Total de Impostos */
+				resumo.setValorTotalImp(Float.parseFloat(data.substring(165, 178)));
+
+				/** Valor Total da Conta do Recurso Com Impostos */
+				resumo.setValorTotalContaRecursoImp(Float.parseFloat(data.substring(178, 191)));
+
+				/** Degrau do Recurso */
+				resumo.setDegrau(data.substring(191, 193));
+
+				/** Velocidade do Recurso */
+				resumo.setVelocidade(data.substring(193, 198));
+
+				/** Unidade da Velocidade do Recurso */
+				resumo.setUniVelocidade(data.substring(198, 202));
+
+				/** Data Vencimento */
+				try {
+					resumo.setDataVenc(sdf.parse(data.substring(202, 210)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Filler String resumoFiller(data.substring(210, 324);
+				 */
+
+				/**
+				 * Campo Livre para Operadora String
+				 * resumoCampoLivreOp(data.substring(324, 349);
+				 */
+
+				/**
+				 * Marcação de Fim String resumoMarcaFim(data.substring(349,
+				 * 350);
+				 */
+				resumoId.setFaturaClienteCodCliente(faturaId.getClienteCodCliente());
+				resumoId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
+				resumoId.setFaturaNumFatura(faturaId.getNumFatura());
+				resumoId.setFaturaDataEmissao(faturaId.getDataEmissao());
+				resumo.setId(resumoId);
+				resumo.setFatura(fatura);
+				//add. lista(Resumo)
+				resumoLista.add(resumo);
+				faturaArquivoDTO.setResumo(resumoLista);
+
+				break;
+
 			case "20":
 
 				break;
@@ -161,7 +339,6 @@ public class LeitorFebrabanV3 {
 		}
 		fileReader.close();
 		reader.close();
-
 		return faturaArquivoDTO;
 	}
 

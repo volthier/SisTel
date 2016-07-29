@@ -46,8 +46,8 @@ public class Cliente implements java.io.Serializable {
 		this.faturas = faturas;
 	}
 
-	@EmbeddedId
 
+	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "codCliente", column = @Column(name = "codCliente", nullable = false, length = 15)),
 			@AttributeOverride(name = "operadoraCodOperadora", column = @Column(name = "operadora_codOperadora", nullable = false)) })
