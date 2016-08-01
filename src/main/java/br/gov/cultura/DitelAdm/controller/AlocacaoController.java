@@ -78,6 +78,7 @@ public class AlocacaoController extends UrlController {
 			faturaService.salvarCliente(faturaArquivoDTO);
 			faturaService.salvarFat(faturaArquivoDTO);
 			faturaService.salvarResumo(faturaArquivoDTO);
+			faturaService.salvarEnderecos(faturaArquivoDTO);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

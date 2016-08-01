@@ -1,5 +1,5 @@
 package br.gov.cultura.DitelAdm.modelo;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 01/08/2016 11:49:03 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EnderecosId implements java.io.Serializable {
 
-	private int idEnderecos;
+	private String idEnderecos;
 	private int faturaNumFatura;
 	private String faturaClienteCodCliente;
 	private int faturaClienteOperadoraCodOperadora;
@@ -20,7 +20,7 @@ public class EnderecosId implements java.io.Serializable {
 	public EnderecosId() {
 	}
 
-	public EnderecosId(int idEnderecos, int faturaNumFatura, String faturaClienteCodCliente,
+	public EnderecosId(String idEnderecos, int faturaNumFatura, String faturaClienteCodCliente,
 			int faturaClienteOperadoraCodOperadora, Date faturaDataEmissao) {
 		this.idEnderecos = idEnderecos;
 		this.faturaNumFatura = faturaNumFatura;
@@ -29,12 +29,12 @@ public class EnderecosId implements java.io.Serializable {
 		this.faturaDataEmissao = faturaDataEmissao;
 	}
 
-	@Column(name = "idEnderecos", nullable = false)
-	public int getIdEnderecos() {
+	@Column(name = "idEnderecos", nullable = false, length = 18)
+	public String getIdEnderecos() {
 		return this.idEnderecos;
 	}
 
-	public void setIdEnderecos(int idEnderecos) {
+	public void setIdEnderecos(String idEnderecos) {
 		this.idEnderecos = idEnderecos;
 	}
 
@@ -83,7 +83,8 @@ public class EnderecosId implements java.io.Serializable {
 			return false;
 		EnderecosId castOther = (EnderecosId) other;
 
-		return (this.getIdEnderecos() == castOther.getIdEnderecos())
+		return ((this.getIdEnderecos() == castOther.getIdEnderecos()) || (this.getIdEnderecos() != null
+				&& castOther.getIdEnderecos() != null && this.getIdEnderecos().equals(castOther.getIdEnderecos())))
 				&& (this.getFaturaNumFatura() == castOther.getFaturaNumFatura())
 				&& ((this.getFaturaClienteCodCliente() == castOther.getFaturaClienteCodCliente())
 						|| (this.getFaturaClienteCodCliente() != null && castOther.getFaturaClienteCodCliente() != null
@@ -97,7 +98,7 @@ public class EnderecosId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getIdEnderecos();
+		result = 37 * result + (getIdEnderecos() == null ? 0 : this.getIdEnderecos().hashCode());
 		result = 37 * result + this.getFaturaNumFatura();
 		result = 37 * result
 				+ (getFaturaClienteCodCliente() == null ? 0 : this.getFaturaClienteCodCliente().hashCode());

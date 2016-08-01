@@ -3,6 +3,7 @@ package br.gov.cultura.DitelAdm.model.dtos;
 import java.util.List;
 
 import br.gov.cultura.DitelAdm.modelo.Cliente;
+import br.gov.cultura.DitelAdm.modelo.Enderecos;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.modelo.Resumo;
@@ -13,6 +14,7 @@ public class FaturaArquivoDTO {
 	private Cliente cliente;
 	private Fatura fatura;
 	private List<Resumo> resumo;
+	private List<Enderecos> enderecos;
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -44,6 +46,14 @@ public class FaturaArquivoDTO {
 
 	public void setResumo(List<Resumo> resumo) {
 		this.resumo = resumo;
+	}
+
+	public List<Enderecos> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Enderecos> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 }

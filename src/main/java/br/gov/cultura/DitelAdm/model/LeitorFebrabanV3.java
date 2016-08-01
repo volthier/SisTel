@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
 import br.gov.cultura.DitelAdm.modelo.ClienteId;
+import br.gov.cultura.DitelAdm.modelo.Enderecos;
+import br.gov.cultura.DitelAdm.modelo.EnderecosId;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
 import br.gov.cultura.DitelAdm.modelo.FaturaId;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
@@ -43,6 +45,10 @@ public class LeitorFebrabanV3 {
 		List<Resumo> resumoLista = new ArrayList<Resumo>();
 		Resumo resumo = new Resumo();
 		ResumoId resumoId = new ResumoId();
+		List<Enderecos> enderecosLista = new ArrayList<Enderecos>();
+		Enderecos enderecos = new Enderecos();
+		EnderecosId enderecosId = new EnderecosId();
+		
 
 		while ((data = reader.readLine()) != null) {
 			String TipoReg = data.substring(0, 2);
@@ -296,7 +302,6 @@ public class LeitorFebrabanV3 {
 				resumoId.setFaturaDataEmissao(faturaId.getDataEmissao());
 				resumo.setId(resumoId);
 				resumo.setFatura(fatura);
-				//add. lista(Resumo)
 				resumoLista.add(resumo);
 				faturaArquivoDTO.setResumo(resumoLista);
 
@@ -304,6 +309,114 @@ public class LeitorFebrabanV3 {
 
 			case "20":
 
+				/**
+				 * 20_ENDEREÇOS do guia Telecom padrão FEBRABAN-V3R0
+				 * Identificação dos endereçõs dos recursos cobrados na fatura
+				 */
+				enderecos = new Enderecos();
+				enderecosId = new EnderecosId();
+				
+				/** Controle de sequencia de gravação 
+				String endControlSeqGrav(data.substring(2, 14));*/
+
+				/** Identificador de Conta Unica ou Numero da conta 
+				String endIndConta(data.substring(14, 39));*/
+
+				/** Data da emissão da Fatura/conta */
+				try {
+					enderecosId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/** Mês de Referência da fatura(cobrança) 
+				String endMesRef(data.substring(47, 53));*/
+
+				/** Identificador Único do Recurso 
+				String endIdUnicoRecurso(data.substring(53, 78));*/
+
+				/** Numero do Recurso */
+				enderecosId.setIdEnderecos(data.substring(78, 94));
+
+				/** CLN do Recurso Endereço Ponta A */
+				enderecos.setCnlRecEnd(data.substring(94, 99));
+
+				/** Nome da Localidade do Endereço Ponta A */
+				enderecos.setNomeLocalEnd(data.substring(99, 114));
+
+				/** UF da Localidade Ponta A */
+				enderecos.setUfLocal(data.substring(114, 116));
+
+				/** Endereço da Ponta A */
+				enderecos.setEndereco(data.substring(116, 146));
+
+				/** Numero do Endereço da Ponta A */
+				enderecos.setNumero(data.substring(146, 151));
+
+				/** Complemento da Ponta A */
+				enderecos.setComplemento(data.substring(151, 159));
+
+				/** Bairro da Ponta A */
+				enderecos.setBairro(data.substring(159, 169));
+
+				/** CLN do Recurso Endereço Ponta B 
+				String endClnRecEndPontaB(data.substring(169, 174));
+
+				/** Nome da Localidade do Endereço Ponta B 
+				String endNomeLocalEndPontaB(data.substring(174, 189));
+
+				/** UF da Localidade Ponta B 
+				String endUfLocalPontaB(data.substring(189, 191));
+
+				/** Endereço da Ponta B 
+				String endEndPontaB(data.substring(191, 221));
+
+				/** Numero do Endereço da Ponta B 
+				String endNumeroEndPontaB(data.substring(221, 226));
+
+				/** Complemento da Ponta B 
+				String endComplementoPontaB(data.substring(226, 234));
+
+				/** Bairro da Ponta B 
+				String endBairroPontaB(data.substring(234, 244));
+
+				/** CLN do Recurso Endereço Ponta C 
+				String endClnRecEndPontaC(data.substring(244, 249));
+
+				/** Nome da Localidade do Endereço Ponta C 
+				String endNomeLocalEndPontaC(data.substring(249, 264));
+
+				/** UF da Localidade Ponta C 
+				String endUfLocalPontaC(data.substring(264, 266));
+
+				/** Endereço da Ponta C 
+				String endEndPontaC(data.substring(266, 296));
+
+				/** Numero do Endereço da Ponta C 
+				String endNumeroEndPontaC(data.substring(296, 301));
+
+				/** Complemento da Ponta C 
+				String endComplementoPontaC(data.substring(301, 309));
+
+				/** Bairro da Ponta C 
+				String endBairroPontaC(data.substring(309, 319));
+
+				/** Filler 
+				String endFiller(data.substring(319, 324);*/
+
+				/** Campo Livre para Operadora */
+				enderecos.setCampoLivreOp(data.substring(324, 349));
+
+				/** Marcação de Fim
+				String endMarcaFim(data.substring(349, 350);*/
+				enderecosId.setFaturaClienteCodCliente(faturaId.getClienteCodCliente());
+				enderecosId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
+				enderecosId.setFaturaNumFatura(faturaId.getNumFatura());
+				enderecos.setId(enderecosId);
+				enderecosLista.add(enderecos);
+				faturaArquivoDTO.setEnderecos(enderecosLista);
+				
 				break;
 
 			case "30":

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.repository.Clientes;
+import br.gov.cultura.DitelAdm.repository.Enderecosas;
 import br.gov.cultura.DitelAdm.repository.Faturas;
 import br.gov.cultura.DitelAdm.repository.Operadoras;
 import br.gov.cultura.DitelAdm.repository.Resumos;
@@ -23,7 +24,9 @@ public class FaturaService {
 
 	@Autowired
 	private Resumos resumos;
-
+	
+	@Autowired
+	private Enderecosas enderecos;
 
 	public void salvarOp(FaturaArquivoDTO faturaArquivoDTO) {
 		operadoras.save(faturaArquivoDTO.getOperadora());
@@ -39,5 +42,9 @@ public class FaturaService {
 
 	public void salvarResumo(FaturaArquivoDTO faturaArquivoDTO) {
 		resumos.save(faturaArquivoDTO.getResumo());
+	}
+	
+	public void salvarEnderecos(FaturaArquivoDTO faturaArquivoDTO){
+		enderecos.save(faturaArquivoDTO.getEnderecos());
 	}
 }
