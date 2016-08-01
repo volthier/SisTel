@@ -23,7 +23,7 @@ public class VerificaCamposFebrabanV3Console {
 			switch (TipoReg)
 
 			{
-			/*case "00":
+		/*	case "00":
 					*//**
 					 * 00_HEADER do guide Telecom padrÃ£o FEBRABAN-V3R0
 					 * Identifica CabeÃ§alho da conta
@@ -148,83 +148,83 @@ public class VerificaCamposFebrabanV3Console {
 				
 
 				break;
-*/
+
 			case "10":
-				/**
+				*//**
 				 * 10_RESUMO do guide Telecom padrÃ£o FEBRABAN-V3R0 SomatÃ³rio dos
 				 * Valores por Recurso
-				 */
+				 *//*
 
-				/** Controle de sequencia de gravaÃ§Ã£o */
+				*//** Controle de sequencia de gravaÃ§Ã£o *//*
 				String resumoControlSeqGrav = data.substring(2, 14);
 
-				/** Identificador de Conta Unica ou Numero da conta */
+				*//** Identificador de Conta Unica ou Numero da conta *//*
 				String resumoIndConta = data.substring(14, 39);
 
-				/** Data da emissÃ£o da Fatura/conta */
+				*//** Data da emissÃ£o da Fatura/conta *//*
 				String resumoDataEmiFatura = data.substring(39, 47);
 
-				/** MÃªs de ReferÃªncia da fatura(cobranÃ§a) */
+				*//** MÃªs de ReferÃªncia da fatura(cobranÃ§a) *//*
 				String resumoMesRef = data.substring(47, 53);
 
-				/** Identificador Ãšnico do Recurso */
+				*//** Identificador Ãšnico do Recurso *//*
 				String resumoIdUnicoRecurso = data.substring(53, 78);
 
-				/**
+				*//**
 				 * CNL do Recurso (Legenda) (6) CÃ³digo Nacional de localidade:
 				 * Fixo - definido pela ANATEL; MÃ³vel definido pela ABR Telecom
-				 */
+				 *//*
 				String resumoCnlRecurso = data.substring(78, 83);
 
-				/** Numero do Recurso */
+				*//** Numero do Recurso *//*
 				String resumoNumRecurso = data.substring(83, 99);
 
-				/** Modalidade de ServiÃ§o do recurso */
+				*//** Modalidade de ServiÃ§o do recurso *//*
 				String resumoModServ = data.substring(99, 103);
 
-				/** Data da AtivaÃ§Ã£o do Recurso */
+				*//** Data da AtivaÃ§Ã£o do Recurso *//*
 				String resumoDataAtivRecurso = data.substring(103, 111);
 
-				/** Data da DesativaÃ§Ã£o do Recurso */
+				*//** Data da DesativaÃ§Ã£o do Recurso *//*
 				String resumoDataDesativRecurso = data.substring(111, 119);
 
-				/** Quantidade de Registro de Chamada */
+				*//** Quantidade de Registro de Chamada *//*
 				String resumoQuantRegChamada = data.substring(119, 128);
 
-				/** Valor Total dos Registros de Chamada com Impostos */
+				*//** Valor Total dos Registros de Chamada com Impostos *//*
 				String resumoValorTotalRegChamadaImp = data.substring(128, 141);
-
-				/** Quantidade de Registros de ServiÃ§os */
+				
+				*//** Quantidade de Registros de ServiÃ§os *//*
 				String resumoQuantRegServ = data.substring(141, 150);
 
-				/** Valor Total dos Registros de ServiÃ§os com Impostos */
+				*//** Valor Total dos Registros de ServiÃ§os com Impostos *//*
 				String resumoValorTotalRegServImp = data.substring(150, 165);
 
-				/** Valor Total de Impostos */
+				*//** Valor Total de Impostos *//*
 				String resumoValorTotalImp = data.substring(165, 178);
 
-				/** Valor Total da Conta do Recurso Com Impostos */
+				*//** Valor Total da Conta do Recurso Com Impostos *//*
 				String resumoValorTotalContaRecursoImp = data.substring(178, 191);
 
-				/** Degrau do Recurso */
+				*//** Degrau do Recurso *//*
 				String resumoDegrauRecurso = data.substring(191, 193);
 
-				/** Velocidade do Recurso */
+				*//** Velocidade do Recurso *//*
 				String resumoVeloRecurso = data.substring(193, 198);
 
-				/** Unidade da Velocidade do Recurso */
+				*//** Unidade da Velocidade do Recurso *//*
 				String resumoUniVeloRecurso = data.substring(198, 202);
 
-				/** Data Vencimento */
+				*//** Data Vencimento *//*
 				String resumoDataVenc = data.substring(202, 210);
 
-				/** Filler */
+				*//** Filler *//*
 				String resumoFiller = data.substring(210, 324);
 
-				/** Campo Livre para Operadora */
+				*//** Campo Livre para Operadora *//*
 				String resumoCampoLivreOp = data.substring(324, 349);
 
-				/** MarcaÃ§Ã£o de Fim */
+				*//** MarcaÃ§Ã£o de Fim *//*
 				String resumoMarcaFim = data.substring(349, 350);
 
 				System.out.println(TipoReg);
@@ -253,7 +253,7 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(resumoMarcaFim);
 
 				break;
-			/*case "20":
+			case "20":
 
 				*//**
 				 * 20_ENDEREÃ‡OS do guia Telecom padrÃ£o FEBRABAN-V3R0
@@ -310,13 +310,13 @@ public class VerificaCamposFebrabanV3Console {
 
 				*//** EndereÃ§o da Ponta B *//*
 				String endEndPontaB = data.substring(191, 221);
-
+				
 				*//** Numero do EndereÃ§o da Ponta B *//*
 				String endNumeroEndPontaB = data.substring(221, 226);
 
 				*//** Complemento da Ponta B *//*
 				String endComplementoPontaB = data.substring(226, 234);
-
+				
 				*//** Bairro da Ponta B *//*
 				String endBairroPontaB = data.substring(234, 244);
 
@@ -328,7 +328,7 @@ public class VerificaCamposFebrabanV3Console {
 
 				*//** UF da Localidade Ponta C *//*
 				String endUfLocalPontaC = data.substring(264, 266);
-
+				
 				*//** EndereÃ§o da Ponta C *//*
 				String endEndPontaC = data.substring(266, 296);
 
@@ -381,88 +381,88 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(endFiller);
 				System.out.println(endCampoLivreOp);
 				System.out.println(endMarcaFim);
-				break;
+				break;*/
 
 			case "30":
-				*//**
+				/**
 				 * 30_CHAMADAS do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * de cham,adas de VOZ cobradas na fatura
-				 *//*
+				 */
 
-				*//** Controle de sequencia de gravaÃ§Ã£o *//*
+				/** Controle de sequencia de gravaÃ§Ã£o */
 				String chamaControlSeqGrav = data.substring(2, 14);
 
-				*//** Identificador de Conta Unica ou Numero da conta *//*
+				/** Identificador de Conta Unica ou Numero da conta */
 				String chamaIndConta = data.substring(14, 39);
 
-				*//** Data da emissÃ£o da Fatura/conta *//*
+				/** Data da emissÃ£o da Fatura/conta */
 				String chamaDataEmiFatura = data.substring(39, 47);
 
-				*//** MÃªs de ReferÃªncia da fatura(cobranÃ§a) *//*
+				/** MÃªs de ReferÃªncia da fatura(cobranÃ§a) */
 				String chamaMesRef = data.substring(47, 53);
 
-				*//** Identificador Ãšnico do Recurso *//*
+				/** Identificador Ãšnico do Recurso */
 				String chamaIdUnicoRecurso = data.substring(53, 78);
 
-				*//**
+				/**
 				 * CNL da Ã�rea local onde o terminal estava em uso durante a
 				 * chamada **** CÃ³digo Nacional de localidade: Fixo - definido
 				 * pela ANATEL; MÃ³vel definido pela ABR Telecom
-				 *//*
+				 */
 				String chamaClnAreaLocalUsochamada = data.substring(78, 83);
 
-				*//** Numero do recurso *//*
+				/** Numero do recurso */
 				String chamaNumRecurso = data.substring(83, 99);
 
-				*//** Data da ligaÃ§Ã£o *//*
+				/** Data da ligaÃ§Ã£o */
 				String chamaDataLigacao = data.substring(99, 107);
 
-				*//**
+				/**
 				 * CNL da localidade de Destino da Chamada **** CÃ³digo Nacional
 				 * de localidade: Fixo - definido pela ANATEL; MÃ³vel definido
 				 * pela ABR Telecom
-				 *//*
+				 */
 				String chamaCnlLocalDestinoChamada = data.substring(107, 112);
 
-				*//** Nome da Localidade de Destino da Chamada *//*
+				/** Nome da Localidade de Destino da Chamada */
 				String chamaNomeLocalDestinoChamada = data.substring(112, 137);
 
-				*//** UF do Telefone de Destino da Chamada *//*
+				/** UF do Telefone de Destino da Chamada */
 				String chamaUfTelDestinoChamada = data.substring(137, 139);
 
-				*//** CÃ³digo Nacional/Internacional *//*
+				/** CÃ³digo Nacional/Internacional */
 				String chamaCodNacInt = data.substring(139, 141);
 
-				*//**
+				/**
 				 * CÃ³digo de SeleÃ§Ã£o da Prestadora - CSP **** Preenchimento
 				 * obrigatÃ³rio para chamadas de longa distÃ¢ncia.
-				 *//*
+				 */
 				String chamaCsp = data.substring(141, 143);
 
-				*//**
+				/**
 				 * Nome Operadora CSP **** Preenchimento obrigatÃ³rio para
 				 * chamadas de longa distÃ¢ncia.
-				 *//*
+				 */
 				String chamaNomeOpCsp = data.substring(143, 163);
 
-				*//**
+				/**
 				 * NÃºmerpo do Telefone Chamado **** Para ligaÃ§Ãµes nacionais
 				 * obedecer o formato: YYNNNNNNNN, onde: "YY" - CÃ³digo de area e
 				 * "NNNNNNNN" - numero chamado. Para chamadas internacionais
 				 * preencher o cÃ³digo do paÃ­s de destino e nÃºmero chamado
-				 *//*
+				 */
 				String chamaNumTelefoneChamada = data.substring(163, 180);
 
-				*//**
+				/**
 				 * CÃ³digo da Operadora de Roaming **** Preencher com o cÃ³digo da
 				 * rede mÃ³vel utilizada em roaming. MCC+MNC (MCC - Mobile
 				 * Country Code e MNC - Mobile Network Code.) OBS: Preenchimento
 				 * obrigatÃ³rio para chamadas/serviÃ§os originadas de telefones
 				 * mÃ³veis, quando em roaming.
-				 *//*
+				 */
 				String chamaCodOpRoaming = data.substring(180, 185);
 
-				*//**
+				/**
 				 * Operadora a Qual o Terminal de Destino estÃ¡
 				 * Vinculado(portabilidade)**** NÃºmero EOT (Empresa Operadora de
 				 * TelecomunicaÃ§Ãµes) junto a ABR Telecom
@@ -470,58 +470,58 @@ public class VerificaCamposFebrabanV3Console {
 				 * ObrigatÃ³rio para Chamadas Nacionais - Conforme condiÃ§Ãµes
 				 * contratuais pactuadas entre operadoras e clientes.
 				 * Â´http://www.abr.net.br/grupos/grupos_cadastro.htm
-				 *//*
+				 */
 				String chamaOpTerminalDestVincPortabilidade = data.substring(185, 188);
 
-				*//** DuraÃ§Ã£o LigaÃ§Ã£o**** *//*
+				/** DuraÃ§Ã£o LigaÃ§Ã£o**** */
 				String chamaDuracaoLigacao = data.substring(188, 195);
 
-				*//** CÃ³digo da Categoria Chamada**** *//*
+				/** CÃ³digo da Categoria Chamada**** */
 				String chamaCodCatChamada = data.substring(195, 198);
 
-				*//** Sigla da Categoria Chamada *//*
+				/** Sigla da Categoria Chamada */
 				String chamaSigCatChamada = data.substring(198, 201);
 
-				*//** DescriÃ§Ã£o da Categoria Chamada *//*
+				/** DescriÃ§Ã£o da Categoria Chamada */
 				String chamaDesCatChamada = data.substring(201, 226);
 
-				*//** HorÃ¡rio da ligaÃ§Ã£o *//*
+				/** HorÃ¡rio da ligaÃ§Ã£o */
 				String chamaHorLig = data.substring(226, 232);
 
-				*//** AlÃ­quota ICMS *//*
+				/** AlÃ­quota ICMS */
 				String chamaAliIcms = data.substring(232, 237);
 
-				*//** Valor da ligaÃ§Ã£o com imposto *//*
+				/** Valor da ligaÃ§Ã£o com imposto */
 				String chamaValLigImp = data.substring(237, 250);
 
-				*//** Valor da LigaÃ§Ã£o sem Imposto *//*
+				/** Valor da LigaÃ§Ã£o sem Imposto */
 				String chamaValLigSemImp = data.substring(250, 265);
 
-				*//** Tipo NF *//*
+				/** Tipo NF */
 				String chamaTipoNf = data.substring(265, 266);
 
-				*//** Numero da Nota Fiscal *//*
+				/** Numero da Nota Fiscal */
 				String chamaNumNf = data.substring(266, 278);
 
-				*//** Tipo de Chamada (TC) *//*
+				/** Tipo de Chamada (TC) */
 				String chamaTipoChamada = data.substring(278, 279);
 
-				*//** Grupo HÃ³rario TarifÃ¡rio *//*
+				/** Grupo HÃ³rario TarifÃ¡rio */
 				String chamaGrupoHoraTarif = data.substring(279, 280);
 
-				*//** DescriÃ§Ã£o do HorÃ¡rio TarifÃ¡rio *//*
+				/** DescriÃ§Ã£o do HorÃ¡rio TarifÃ¡rio */
 				String chamaDesHoraTarif = data.substring(280, 295);
 
-				*//** Degrau da LigaÃ§Ã£o *//*
+				/** Degrau da LigaÃ§Ã£o */
 				String chamaDegrauLig = data.substring(295, 297);
 
-				*//** Filler *//*
+				/** Filler */
 				String chamaFiller = data.substring(297, 324);
 
-				*//** Campo livre para Operadora *//*
+				/** Campo livre para Operadora */
 				String chamaCampoLivreOp = data.substring(324, 349);
 
-				*//** MarcaÃ§Ã£o de Fim *//*
+				/** MarcaÃ§Ã£o de Fim */
 				String chamaMarcaFim = data.substring(349, 350);
 
 				System.out.println(TipoReg);
@@ -564,7 +564,7 @@ public class VerificaCamposFebrabanV3Console {
 
 			case "40":
 
-				*//**
+			/*	*//**
 				 * 40_SERVIÃ‡OS do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * dos serviÃ§os faturados
 				 *//*
@@ -1035,7 +1035,7 @@ public class VerificaCamposFebrabanV3Console {
 				 * dos ajustes financeiros de movimentos anteriores
 				 *//*
 
-				*//** Controle de sequencia de gravaÃ§Ã£o *//*
+				/** Controle de sequencia de gravaÃ§Ã£o 
 				String ajustesControlSeqGrav = data.substring(2, 14);
 
 				*//** Identificador de Conta Unica ou Numero da conta *//*
@@ -1168,7 +1168,7 @@ public class VerificaCamposFebrabanV3Console {
 				 * nota fiscal apresentada
 				 *//*
 
-				*//** Controle de sequencia de gravaÃ§Ã£o *//*
+				/** Controle de sequencia de gravaÃ§Ã£o 
 				String nfControlSeqGrav = data.substring(2, 14);
 
 				*//** Identificador de Conta Unica ou Numero da conta *//*
@@ -1188,7 +1188,7 @@ public class VerificaCamposFebrabanV3Console {
 
 				*//**
 				 * Codigo da Operadora
-				 * 
+				 *
 				 *//*
 				String nfCodOp = data.substring(61, 64);
 
@@ -1513,11 +1513,11 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(traillerQuanReg80);
 				System.out.println(traillerFiller);
 				System.out.println(traillerCampoLivreOp);
-				System.out.println(traillerMarcaFim);
+				System.out.println(traillerMarcaFim);*/
 
 				break;
 			
-*/
+
 			}
 		}
 		fileReader.close();

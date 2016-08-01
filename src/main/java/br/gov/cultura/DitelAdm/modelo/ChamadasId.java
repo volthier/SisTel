@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ChamadasId implements java.io.Serializable {
 
-	private int idChamadas;
+	private String idChamadas;
 	private String numTelefoneChamado;
 	private Date dataLigacao;
 	private Date horaLigacao;
@@ -20,7 +20,7 @@ public class ChamadasId implements java.io.Serializable {
 	public ChamadasId() {
 	}
 
-	public ChamadasId(int idChamadas, String numTelefoneChamado, Date dataLigacao, Date horaLigacao,
+	public ChamadasId(String idChamadas, String numTelefoneChamado, Date dataLigacao, Date horaLigacao,
 			int categoriaChamadaCodCatChamada) {
 		this.idChamadas = idChamadas;
 		this.numTelefoneChamado = numTelefoneChamado;
@@ -30,11 +30,11 @@ public class ChamadasId implements java.io.Serializable {
 	}
 
 	@Column(name = "idChamadas", nullable = false)
-	public int getIdChamadas() {
+	public String getIdChamadas() {
 		return this.idChamadas;
 	}
 
-	public void setIdChamadas(int idChamadas) {
+	public void setIdChamadas(String idChamadas) {
 		this.idChamadas = idChamadas;
 	}
 
@@ -99,7 +99,7 @@ public class ChamadasId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getIdChamadas();
+		result = 37 * result + (getIdChamadas() == null ? 0 : this.getIdChamadas().hashCode());
 		result = 37 * result + (getNumTelefoneChamado() == null ? 0 : this.getNumTelefoneChamado().hashCode());
 		result = 37 * result + (getDataLigacao() == null ? 0 : this.getDataLigacao().hashCode());
 		result = 37 * result + (getHoraLigacao() == null ? 0 : this.getHoraLigacao().hashCode());

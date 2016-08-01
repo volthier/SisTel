@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.modelo.Chamadas;
+import br.gov.cultura.DitelAdm.modelo.ChamadasId;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
 import br.gov.cultura.DitelAdm.modelo.ClienteId;
 import br.gov.cultura.DitelAdm.modelo.Enderecos;
@@ -420,6 +422,164 @@ public class LeitorFebrabanV3 {
 				break;
 
 			case "30":
+				
+				/**
+				 * 30_CHAMADAS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
+				 * de chamadas de VOZ cobradas na fatura
+				 */
+				Chamadas chamadas = new Chamadas();
+				ChamadasId chamadasId = new ChamadasId();
+
+				/** Controle de sequencia de gravação 
+				String chamaControlSeqGrav(data.substring(2, 14);*/
+
+				/** Identificador de Conta Unica ou Numero da conta 
+				String chamaIndConta(data.substring(14, 39);*/
+
+				/** Data da emissão da Fatura/conta 
+				String chamaDataEmiFatura(data.substring(39, 47);*/
+
+				/** Mês de Referência da fatura(cobrança) 
+				String chamaMesRef(data.substring(47, 53);*/
+
+				/** Identificador Único do Recurso 
+				String chamaIdUnicoRecurso(data.substring(53, 78);*/
+
+				/**
+				 * CNL da �?rea local onde o terminal estava em uso durante a
+				 * chamada **** Código Nacional de localidade: Fixo - definido
+				 * pela ANATEL; Móvel definido pela ABR Telecom
+				 */
+				chamadas.setCnlAreaLocalUso(Integer.parseInt(data.substring(78, 83)));
+
+				/** Numero do recurso*/ 
+				chamadasId.setIdChamadas(data.substring(83, 99));
+
+				/** Data da ligação */
+				try {
+					chamadasId.setDataLigacao(sdf.parse(data.substring(99, 107)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * CNL da localidade de Destino da Chamada **** Código Nacional
+				 * de localidade: Fixo - definido pela ANATEL; Móvel definido
+				 * pela ABR Telecom
+				 */
+				chamadas.setCnlLocalDestino(Integer.parseInt(data.substring(107, 112)));
+
+				/** Nome da Localidade de Destino da Chamada */
+				chamadas.setNomeLocalDestino(data.substring(112, 137));
+
+				/** UF do Telefone de Destino da Chamada */
+				chamadas.setUfTelDestino(data.substring(137, 139));
+
+				/** Código Nacional/Internacional */
+				chamadas.setCodNacInt(data.substring(139, 141));
+
+				/**
+				 * Código de Seleção da Prestadora - CSP **** Preenchimento
+				 * obrigatório para chamadas de longa distância.
+				 */
+				chamadas.setCodCsp(data.substring(141, 143));
+
+				/**
+				 * Nome Operadora CSP **** Preenchimento obrigatório para
+				 * chamadas de longa distância.
+				 */
+				chamadas.setNomeOpCsp(data.substring(143, 163));
+
+				/**
+				 * Númerpo do Telefone Chamado **** Para ligações nacionais
+				 * obedecer o formato: YYNNNNNNNN, onde: "YY" - Código de area e
+				 * "NNNNNNNN" - numero chamado. Para chamadas internacionais
+				 * preencher o código do país de destino e número chamado
+				 
+		>>>>		String chamaNumTelefoneChamada(data.substring(163, 180)); <<<<<
+
+				/**
+				 * Código da Operadora de Roaming **** Preencher com o código da
+				 * rede móvel utilizada em roaming. MCC+MNC (MCC - Mobile
+				 * Country Code e MNC - Mobile Network Code.) OBS: Preenchimento
+				 * obrigatório para chamadas/serviços originadas de telefones
+				 * móveis, quando em roaming.
+				 */
+				chamadas.setCodOpRoaming(Integer.parseInt(data.substring(180, 185)));
+
+				/**
+				 * Operadora a Qual o Terminal de Destino está
+				 * Vinculado(portabilidade)**** Número EOT (Empresa Operadora de
+				 * Telecomunicações) junto a ABR Telecom
+				 * 
+				 * Obrigatório para Chamadas Nacionais - Conforme condições
+				 * contratuais pactuadas entre operadoras e clientes.
+				 * ´http://www.abr.net.br/grupos/grupos_cadastro.htm
+				 */
+				chamadas.setOpTerminalVincDestino(data.substring(185, 188));
+
+				/** Duração Ligação**** */
+				try {
+					chamadas.setDuracaoLigacao(sdfh.parse(data.substring(188, 195)));
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+
+				/** Código da Categoria Chamada**** */
+				chamadasId.setCategoriaChamadaCodCatChamada(Integer.parseInt(data.substring(195, 198)));
+
+				/** Sigla da Categoria Chamada 
+				String chamaSigCatChamada(data.substring(198, 201));*/
+
+				/** Descrição da Categoria Chamada 
+				String chamaDesCatChamada(data.substring(201, 226));*/
+
+				/** Horário da ligação */
+				try {
+					chamadasId.setHoraLigacao(sdfh.parse(data.substring(226, 232)));
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+
+				/** Alíquota ICMS */
+				chamadas.setIcms(Integer.parseInt(data.substring(232, 237)));
+
+				/** Valor da ligação com imposto */
+				chamadas.setValLigImp(Float.parseFloat(data.substring(237, 250)));
+
+				/** Valor da Ligação sem Imposto */
+				chamadas.setValLigSemImp(Float.parseFloat(data.substring(250, 265)));
+
+				/** Tipo NF */
+				chamadas.setTipoNf(Integer.parseInt(data.substring(265, 266)));
+
+				/** Numero da Nota Fiscal */
+				chamadas.setNumNf(data.substring(266, 278));
+
+				/** Tipo de Chamada (TC) */
+				chamadas.setTipoChamada(data.substring(278, 279));
+
+				/** Grupo Hórario Tarifário */
+				chamadas.setGrupoHoraTarif(data.substring(279, 280));
+
+				/** Descrição do Horário Tarifário */
+				chamadas.setDesHoraTarif(data.substring(280, 295));
+
+				/** Degrau da Ligação */
+				chamadas.setDegrauLigacao(Integer.parseInt(data.substring(295, 297)));
+
+				/** Filler 
+				String chamaFiller(data.substring(297, 324);*/
+
+				/** Campo livre para Operadora */
+				chamadas.setCampoLivreOp(data.substring(324, 349));
+
+				/** Marcação de Fim 
+				String chamaMarcaFim(data.substring(349, 350);*/
+				
 				break;
 
 			case "40":
