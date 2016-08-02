@@ -26,7 +26,6 @@ public class LeitorFebrabanV3 {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private SimpleDateFormat sdfh = new SimpleDateFormat("HHmmss");
-	private SimpleDateFormat sdfNormal = new SimpleDateFormat("ddMMyyyy");
 
 /*	private String recuperaTextoCampo(String linha, PosicaoCamposEnum posicao) {
 		return linha.substring(posicao.getPosicaoInicial(), posicao.getPosicaoFinal());
@@ -50,6 +49,9 @@ public class LeitorFebrabanV3 {
 		List<Enderecos> enderecosLista = new ArrayList<Enderecos>();
 		Enderecos enderecos = new Enderecos();
 		EnderecosId enderecosId = new EnderecosId();
+		List<Chamadas> chamadasLista = new ArrayList<Chamadas>();
+		Chamadas chamadas = new Chamadas();
+		ChamadasId chamadasId = new ChamadasId();
 		
 
 		while ((data = reader.readLine()) != null) {
@@ -173,8 +175,8 @@ public class LeitorFebrabanV3 {
 				fatura.setCampoLivreOp(data.substring(324, 349));
 
 				/**
-				 * Marcação de FIM String headerMarcaFim(data.substring(349,
-				 * 350);
+				 * Marcação de FIM 
+				 * String headerMarcaFim(data.substring(349, 350);
 				 */
 
 				faturaArquivoDTO.setOperadora(operadora);
@@ -427,8 +429,8 @@ public class LeitorFebrabanV3 {
 				 * 30_CHAMADAS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
 				 * de chamadas de VOZ cobradas na fatura
 				 */
-				Chamadas chamadas = new Chamadas();
-				ChamadasId chamadasId = new ChamadasId();
+				chamadas = new Chamadas();
+				chamadasId = new ChamadasId();
 
 				/** Controle de sequencia de gravação 
 				String chamaControlSeqGrav(data.substring(2, 14);*/
@@ -580,6 +582,9 @@ public class LeitorFebrabanV3 {
 				/** Marcação de Fim 
 				String chamaMarcaFim(data.substring(349, 350);*/
 				
+				chamadas.setId(chamadasId);
+				chamadasLista.add(chamadas);
+				faturaArquivoDTO.setChamadas(chamadasLista);
 				break;
 
 			case "40":
