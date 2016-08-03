@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.modelo.Categoriachamada;
 import br.gov.cultura.DitelAdm.modelo.Chamadas;
 import br.gov.cultura.DitelAdm.modelo.ChamadasId;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
@@ -42,7 +43,6 @@ public class LeitorFebrabanV3 {
 		Cliente cliente = new Cliente();
 		ClienteId clienteId = new ClienteId();
 		Operadora operadora = new Operadora();
-		//Instaciar List Resumo Reforçar 
 		List<Resumo> resumoLista = new ArrayList<Resumo>();
 		Resumo resumo = new Resumo();
 		ResumoId resumoId = new ResumoId();
@@ -52,7 +52,8 @@ public class LeitorFebrabanV3 {
 		List<Chamadas> chamadasLista = new ArrayList<Chamadas>();
 		Chamadas chamadas = new Chamadas();
 		ChamadasId chamadasId = new ChamadasId();
-		
+		List<Categoriachamada> categoriaChamadaLista = new ArrayList<Categoriachamada>();
+		Categoriachamada categoriaChamada = new Categoriachamada();
 
 		while ((data = reader.readLine()) != null) {
 			String TipoReg = data.substring(0, 2);
@@ -431,6 +432,8 @@ public class LeitorFebrabanV3 {
 				 */
 				chamadas = new Chamadas();
 				chamadasId = new ChamadasId();
+				categoriaChamada = new Categoriachamada();
+
 
 				/** Controle de sequencia de gravação 
 				String chamaControlSeqGrav(data.substring(2, 14);*/
@@ -497,9 +500,9 @@ public class LeitorFebrabanV3 {
 				 * Númerpo do Telefone Chamado **** Para ligações nacionais
 				 * obedecer o formato: YYNNNNNNNN, onde: "YY" - Código de area e
 				 * "NNNNNNNN" - numero chamado. Para chamadas internacionais
-				 * preencher o código do país de destino e número chamado
+				 * preencher o código do país de destino e número chamado */
 				 
-		>>>>		String chamaNumTelefoneChamada(data.substring(163, 180)); <<<<<
+				chamadasId.setNumTelefoneChamado(data.substring(163, 180)); 
 
 				/**
 				 * Código da Operadora de Roaming **** Preencher com o código da
@@ -531,12 +534,13 @@ public class LeitorFebrabanV3 {
 
 				/** Código da Categoria Chamada**** */
 				chamadasId.setCategoriaChamadaCodCatChamada(Integer.parseInt(data.substring(195, 198)));
-
-				/** Sigla da Categoria Chamada 
-				String chamaSigCatChamada(data.substring(198, 201));*/
-
-				/** Descrição da Categoria Chamada 
-				String chamaDesCatChamada(data.substring(201, 226));*/
+				categoriaChamada.setCodCatChamada(Integer.parseInt(data.substring(195, 198)));
+				
+				/** Sigla da Categoria Chamada */ 
+				categoriaChamada.setSigla(data.substring(198, 201));
+			
+				/** Descrição da Categoria Chamada */ 
+				categoriaChamada.setDescricao(data.substring(201, 226));
 
 				/** Horário da ligação */
 				try {
@@ -581,10 +585,14 @@ public class LeitorFebrabanV3 {
 
 				/** Marcação de Fim 
 				String chamaMarcaFim(data.substring(349, 350);*/
-				
+				categoriaChamadaLista.add(categoriaChamada);
+				faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
+				chamadas.setCategoriachamada(categoriaChamada);
+				chamadas.setResumo(resumo);
 				chamadas.setId(chamadasId);
 				chamadasLista.add(chamadas);
 				faturaArquivoDTO.setChamadas(chamadasLista);
+				
 				break;
 
 			case "40":
