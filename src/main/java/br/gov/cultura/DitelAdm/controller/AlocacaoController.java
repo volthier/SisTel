@@ -78,6 +78,13 @@ public class AlocacaoController extends UrlController {
 			faturaService.salvarEnderecos(faturaArquivoDTO);
 			faturaService.salvarCategoriasChamadas(faturaArquivoDTO);
 			faturaService.salvarChamadas(faturaArquivoDTO);
+			faturaService.salvarCategoriaServicos(faturaArquivoDTO);
+			faturaService.salvarServicos(faturaArquivoDTO);
+			faturaService.salvarCategoriasDescontos(faturaArquivoDTO);
+			faturaService.salvarDescontos(faturaArquivoDTO);
+			faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
+			faturaService.salvarPlanos(faturaArquivoDTO);
+			
 			
 			
 		} catch (IOException e) {

@@ -6,22 +6,31 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Categoriachamada;
+import br.gov.cultura.DitelAdm.modelo.Categoriadesconto;
+import br.gov.cultura.DitelAdm.modelo.Categoriaplano;
+import br.gov.cultura.DitelAdm.modelo.Categoriaservico;
 import br.gov.cultura.DitelAdm.modelo.Chamadas;
 import br.gov.cultura.DitelAdm.modelo.ChamadasId;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
 import br.gov.cultura.DitelAdm.modelo.ClienteId;
+import br.gov.cultura.DitelAdm.modelo.Descontos;
+import br.gov.cultura.DitelAdm.modelo.DescontosId;
 import br.gov.cultura.DitelAdm.modelo.Enderecos;
 import br.gov.cultura.DitelAdm.modelo.EnderecosId;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
 import br.gov.cultura.DitelAdm.modelo.FaturaId;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
+import br.gov.cultura.DitelAdm.modelo.Planos;
+import br.gov.cultura.DitelAdm.modelo.PlanosId;
 import br.gov.cultura.DitelAdm.modelo.Resumo;
 import br.gov.cultura.DitelAdm.modelo.ResumoId;
+import br.gov.cultura.DitelAdm.modelo.Servicos;
+import br.gov.cultura.DitelAdm.modelo.ServicosId;
 
 public class LeitorFebrabanV3 {
 
@@ -54,6 +63,22 @@ public class LeitorFebrabanV3 {
 		ChamadasId chamadasId = new ChamadasId();
 		List<Categoriachamada> categoriaChamadaLista = new ArrayList<Categoriachamada>();
 		Categoriachamada categoriaChamada = new Categoriachamada();
+		List<Servicos> servicosLista = new ArrayList<Servicos>();
+		Servicos servicos = new Servicos();
+		ServicosId servicosId = new ServicosId();
+		Categoriaservico categoriaServico = new Categoriaservico();
+		List<Categoriaservico> categoriaServicoLista = new ArrayList<Categoriaservico>();
+		Descontos descontos = new Descontos();
+		DescontosId descontosId = new DescontosId();
+		List<Descontos> descontosLista = new ArrayList<Descontos>();
+		Categoriadesconto categoriaDesconto = new Categoriadesconto();
+		List<Categoriadesconto> categoriaDescontoLista = new ArrayList<Categoriadesconto>();
+		Planos planos = new Planos();
+		PlanosId planosId = new PlanosId();
+		List<Planos> PlanosLista = new ArrayList<Planos>();
+		Categoriaplano categoriaPlano = new Categoriaplano();
+		List<Categoriaplano> categoriaPlanoLista = new ArrayList<Categoriaplano>();
+		
 
 		while ((data = reader.readLine()) != null) {
 			String TipoReg = data.substring(0, 2);
@@ -596,16 +621,450 @@ public class LeitorFebrabanV3 {
 				break;
 
 			case "40":
+				/**
+				 * 40_SERVIÇOS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
+				 * dos serviços faturados
+				 */
+				servicos = new Servicos();
+				servicosId = new ServicosId();
+				categoriaServico = new Categoriaservico();
+				
+				/** Controle de sequencia de gravação 
+				String servControlSeqGrav(data.substring(2, 14); */
+
+				/** Identificador de Conta Unica ou Numero da conta 
+				String servIndConta(data.substring(14, 39); */
+
+				/** Data da emissão da Fatura/conta 
+				String servDataEmiFatura(data.substring(39, 47); */
+
+				/** Mês de Referência da fatura(cobrança) 
+				String servMesRef(data.substring(47, 53); */
+
+				/** Identificador Único do Recurso 
+				String servIdUnicoRecurso(data.substring(53, 78); */
+
+				/**
+				 * CNL da �?rea local onde o terminal estava em uso durante a
+				 * chamada **** Código Nacional de localidade: Fixo - definido
+				 * pela ANATEL; Móvel definido pela ABR Telecom
+				 */
+				servicos.setCnlAreaLocalUso(Integer.parseInt(data.substring(78, 83)));
+
+				/**
+				 *  Numero do recurso */
+				
+				servicosId.setIdServicos(data.substring(83, 99));
+
+				/**
+				 *  Data do Serviço 
+				 */
+				try {
+					servicosId.setDataServico(sdf.parse(data.substring(99, 107)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Codigo Nacional / Internacional
+				 */
+				servicos.setCodNacInt(data.substring(107, 109));
+
+				/**
+				 * Número Telefone Destino
+				 */
+				servicos.setNumTelDestino(data.substring(109, 126));
+
+				/**
+				 * Codigo operadora de Roaming
+				 */
+				servicos.setCodOpRoaming(Integer.parseInt(data.substring(126, 131)));
+
+				/**
+				 * Operadora a qual o terminal de destino esta
+				 * vinculado(portabilidade)
+				 */
+				servicos.setOpTerminalVincDestino(data.substring(131, 134));
+
+				/**
+				 * Quantidade Utilizada
+				 */
+				servicos.setQuantUtil(Integer.parseInt(data.substring(134, 140)));
+
+				/**
+				 * Unidade do Serviço
+				 */
+				servicos.setUnidadeServico(data.substring(140, 142));
+
+				/**
+				 * Horario do Serviço
+				 */
+				try {
+					servicosId.setHoraServico(sdfh.parse(data.substring(142, 148)));
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+
+				/**
+				 * Codigo da Categoria do Serviço
+				 */
+				servicosId.setCategoriaServicoCodCatServico(Integer.parseInt(data.substring(148, 151)));
+				categoriaServico.setCodCatServico(Integer.parseInt(data.substring(148, 151)));
+				/**
+				 * Sigla da Categoria do Serviço */
+				  categoriaServico.setSigla(data.substring(151, 154));
+
+				/**
+				 * Decrição da Categoria Serviço */
+				 categoriaServico.setDescricao(data.substring(154, 179));
+
+				/**
+				 * Valor do Serviço com Impostos
+				 */
+				servicos.setValServImp(Float.parseFloat(data.substring(179, 192)));
+
+				/**
+				 * Valor do Serviço Sem Impostos
+				 */
+				servicos.setValServ(Float.parseFloat(data.substring(192, 207)));
+
+				/**
+				 * Tipo Nota Fiscal NF
+				 */
+				servicos.setTipoNf(Integer.parseInt(data.substring(207, 208)));
+
+				/**
+				 * Numero da nota Fiscal
+				 */
+				servicos.setNumNf(data.substring(208, 220));
+
+				/** Filler 
+				String servFiller(data.substring(220, 324); */
+
+				/** Campo livre para Operadora */
+				servicos.setCampoLivreOp(data.substring(324, 349));
+
+				/** Marcação de Fim 
+				String servMarcaFim(data.substring(349, 350);*/
+				
+				categoriaServicoLista.add(categoriaServico);
+				faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+				servicos.setId(servicosId);
+				servicos.setCategoriaservico(categoriaServico);
+				servicos.setResumo(resumo);
+				servicosLista.add(servicos);
+				faturaArquivoDTO.setServicos(servicosLista);
+				
 				break;
 
 			case "50":
+				/**
+				 * 50_DESCONTOS do guia Telecom padrão FEBRABAN-V3R0
+				 * Detalhamento dos descontos concedidos
+				 */
 
+				descontos = new Descontos();
+				descontosId = new DescontosId();
+				categoriaDesconto = new Categoriadesconto();
+				
+				/** Controle de sequencia de gravação 
+				String descControlSeqGrav(data.substring(2, 14); */
+
+				/** Identificador de Conta Unica ou Numero da conta 
+				String descIndConta(data.substring(14, 39);*/
+
+				/** Data da emissão da Fatura/conta 
+				String descDataEmiFatura(data.substring(39, 47); */
+
+				/** Mês de Referência da fatura(cobrança) 
+				String descMesRef(data.substring(47, 53); */
+
+				/** Identificador Único do Recurso 
+				String descIdUnicoRecurso(data.substring(53, 78); */
+
+				/** Numero do Telefone */
+				descontosId.setIdDescontos(data.substring(78, 94));
+
+				/**
+				 * Tipo do Desconto
+				 * 
+				 */
+				descontos.setTipo(data.substring(94, 95));
+
+				/**
+				 * Codigo da Categoria Descontos
+				 */
+				descontosId.setCategoriaDescontoCodCatDesconto(Integer.parseInt(data.substring(95, 98)));
+				categoriaDesconto.setCodCatDesconto(Integer.parseInt(data.substring(95, 98)));
+				/**
+				 * Sigla da Categoria Descontos */
+				
+				  categoriaDesconto.setSigla(data.substring(98, 101)); 
+				 
+				
+
+				/**
+				 * Descrição da Categhoria Desconto */
+				  categoriaDesconto.setDescricao(data.substring(101, 126)); 
+				 
+				
+
+				/**
+				 * Base de Calculo Desconto
+				 * 
+				 */
+				descontos.setBaseCal(Float.parseFloat(data.substring(126, 139)));
+
+				/**
+				 * Tipo de Nota Fiscal NF
+				 * 
+				 */
+				descontos.setTipoNf(Integer.parseInt(data.substring(139, 140)));
+
+				/**
+				 * Numero da Nota Fiscal
+				 * 
+				 */
+				descontos.setNumNf(data.substring(140, 152));
+
+				/**
+				 * Percentual de Desconto
+				 * 
+				 */
+				descontos.setPercentual(Float.parseFloat(data.substring(152, 157)));
+
+				/**
+				 * Sinal do Desconto
+				 * 
+				 */
+				descontos.setSinal(data.substring(157, 158));
+
+				/**
+				 * Valor do Desconto
+				 * 
+				 */
+				descontos.setValor(Float.parseFloat(data.substring(158, 171)));
+
+				/**
+				 * Data Inicio do Desconto
+				 * 
+				 */
+				try {
+					descontosId.setDataInicio(sdf.parse(data.substring(171, 179)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Hora inicio do Desconto
+				 * 
+				 */
+				try {
+					descontosId.setHoraInicio(sdfh.parse(data.substring(179, 185)));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				/**
+				 * Data Fim do Desconto
+				 * 
+				 */
+				try {
+					descontos.setDataFim(sdf.parse(data.substring(185, 193)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Hora Fim do Desconto
+				 * 
+				 */
+				try {
+					descontos.setHoraFim(sdfh.parse(data.substring(193, 199)));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				/** Filler 
+				String descFiller(data.substring(199, 324);*/
+
+				/** Campo livre para Operadora */
+				descontos.setCampoLivreOp(data.substring(324, 349));
+
+				/** Marcação de Fim 
+				String descMarcaFim(data.substring(349, 350); */
+				
+				categoriaDescontoLista.add(categoriaDesconto);
+				descontos.setId(descontosId);
+				descontos.setCategoriadesconto(categoriaDesconto);
+				descontos.setResumo(resumo);
+				descontosLista.add(descontos);
+				faturaArquivoDTO.setCategoriaDescontos(categoriaDescontoLista);
+				faturaArquivoDTO.setDescontos(descontosLista);
+								
 				break;
 
 			case "60":
+				/**
+				 * 60_PLANOS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
+				 * dos planos faturados
+				 */
+				planosId = new PlanosId();
+				planos = new Planos();
+				categoriaPlano = new Categoriaplano();
+				
+				
+				/** Controle de sequencia de gravação 
+				String planosControlSeqGrav(data.substring(2, 14);
 
+				/** Identificador de Conta Unica ou Numero da conta 
+				String planosIndConta(data.substring(14, 39);*/
+
+				/** Data da emissão da Fatura/conta */
+				try {
+					planosId.setResumoFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
+				/** Mês de Referência da fatura(cobrança)
+				String planosMesRef(data.substring(47, 53); */
+
+				/** Identificador Único do Recurso */
+				planosId.setResumoNumRecurso(data.substring(53, 78));
+
+				/** Numero do Telefone 
+				String planoNumTelefone(data.substring(78, 94);*/
+
+				/**
+				 * Tipo do Plano
+				 */
+				planos.setTipo(data.substring(94, 95));
+
+				/**
+				 * Data inicio do Ciclo do Plano
+				 * 
+				 */
+				try {
+					planosId.setDataIniCiclo(sdf.parse(data.substring(95, 103)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Data Fim do Ciclo do Plano
+				 * 
+				 */
+				try {
+					planos.setDataFimCiclo(sdf.parse(data.substring(103, 111)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Codigo da Operadora
+				 * 
+				 */
+				planosId.setResumoFaturaClienteOperadoraCodOperadora(Integer.parseInt(data.substring(111, 114)));
+
+				/**
+				 * Nome da Operadora
+				 * String planoNomeOp(data.substring(114, 129); 
+				 */
+				
+
+				/**
+				 * Consumo Medido
+				 * 
+				 */
+				planos.setConsumoMedido(Float.parseFloat(data.substring(129, 141)));
+
+				/**
+				 * Consumo Franqueado
+				 * 
+				 */
+				planos.setConsumoFranqueado(Float.parseFloat(data.substring(141, 153)));
+
+				/**
+				 * Unidade de Medida
+				 * String planoUnidadeMedida(data.substring(153, 155); 
+				 */
+				
+
+				/** Codigo da Categoria do Plano */
+				 categoriaPlano.setCodCatPlano(Integer.parseInt(data.substring(155, 158))); 
+				 
+				/** Sigla da Categoria do Plano */
+				  categoriaPlano.setSigla(data.substring(158, 161));
+				
+				/** Descrição da Categoria do Plano */
+				 categoriaPlano.setDescricao(data.substring(161, 186)); 
+				
+				/**
+				 * Codigo do Plano
+				 * 
+				 */
+				planos.setCodPlano(data.substring(186, 191));
+
+				/**
+				 * Descrição do plano
+				 * 
+				 */
+				planos.setDescricaoPlano(data.substring(191, 216));
+
+				/**
+				 * Valor do Plano com Imposto
+				 * 
+				 */
+				planos.setValComImp(Float.parseFloat(data.substring(216, 229)));
+
+				/**
+				 * Valor do Plano sem Imposto
+				 * 
+				 */
+				planos.setValSemImp(Float.parseFloat(data.substring(229, 244)));
+
+				/**
+				 * Tipo Nota Fiscal NF
+				 * 
+				 */
+				planos.setTipoNf(Integer.parseInt(data.substring(244, 245)));
+
+				/**
+				 * Numero da Nota Fiscal NF
+				 * 
+				 */
+				planos.setNumNf(data.substring(245, 257));
+
+				/** Filler 
+				String planoFiller(data.substring(257, 324); */
+
+				/** Campo livre para Operadora */
+				planos.setCampoLivreOp(data.substring(324, 349));
+
+				/** Marcação de Fim 
+				String planoMarcaFim(data.substring(349, 350);*/
+				planos.setId(planosId);
+				planos.setResumo(resumo);
+				planos.setCategoriaplano(categoriaPlano);
+				categoriaPlanoLista.add(categoriaPlano);
+				PlanosLista.add(planos);
+				faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+				faturaArquivoDTO.setPlanos(PlanosLista);
+				
 				break;
-
+				
 			case "70":
 
 				break;

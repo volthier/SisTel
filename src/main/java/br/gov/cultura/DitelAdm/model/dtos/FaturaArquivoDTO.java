@@ -3,12 +3,18 @@ package br.gov.cultura.DitelAdm.model.dtos;
 import java.util.List;
 
 import br.gov.cultura.DitelAdm.modelo.Categoriachamada;
+import br.gov.cultura.DitelAdm.modelo.Categoriadesconto;
+import br.gov.cultura.DitelAdm.modelo.Categoriaplano;
+import br.gov.cultura.DitelAdm.modelo.Categoriaservico;
 import br.gov.cultura.DitelAdm.modelo.Chamadas;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
+import br.gov.cultura.DitelAdm.modelo.Descontos;
 import br.gov.cultura.DitelAdm.modelo.Enderecos;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
+import br.gov.cultura.DitelAdm.modelo.Planos;
 import br.gov.cultura.DitelAdm.modelo.Resumo;
+import br.gov.cultura.DitelAdm.modelo.Servicos;
 
 public class FaturaArquivoDTO {
 
@@ -19,7 +25,13 @@ public class FaturaArquivoDTO {
 	private List<Enderecos> enderecos;
 	private List<Chamadas> chamadas;
 	private List<Categoriachamada> categoriaChamadas;
-	
+	private List<Servicos> servicos;
+	private List<Categoriaservico> categoriaServicos;
+	private List<Descontos> descontos;
+	private List<Categoriadesconto> categoriaDescontos;
+	private List<Planos> planos;
+	private List<Categoriaplano> categoriaPlano;
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -74,6 +86,54 @@ public class FaturaArquivoDTO {
 
 	public void setCategoriaChamadas(List<Categoriachamada> categoriaChamadas) {
 		this.categoriaChamadas = categoriaChamadas;
+	}
+
+	public List<Servicos> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servicos> servicos) {
+		this.servicos = servicos;
+	}
+
+	public List<Categoriaservico> getCategoriaServicos() {
+		return categoriaServicos;
+	}
+
+	public void setCategoriaServicos(List<Categoriaservico> categoriaServicos) {
+		this.categoriaServicos = categoriaServicos;
+	}
+
+	public List<Descontos> getDescontos() {
+		return descontos;
+	}
+
+	public void setDescontos(List<Descontos> descontos) {
+		this.descontos = descontos;
+	}
+
+	public List<Categoriadesconto> getCategoriaDescontos() {
+		return categoriaDescontos;
+	}
+
+	public void setCategoriaDescontos(List<Categoriadesconto> categoriaDescontos) {
+		this.categoriaDescontos = categoriaDescontos;
+	}
+
+	public List<Planos> getPlanos() {
+		return planos;
+	}
+
+	public void setPlanos(List<Planos> planos) {
+		this.planos = planos;
+	}
+
+	public List<Categoriaplano> getCategoriaPlano() {
+		return categoriaPlano;
+	}
+
+	public void setCategoriaPlano(List<Categoriaplano> categoriaPlano) {
+		this.categoriaPlano = categoriaPlano;
 	}
 
 }
