@@ -83,7 +83,7 @@ public class AlocacaoController extends UrlController {
 			faturaService.salvarCategoriasDescontos(faturaArquivoDTO);
 			faturaService.salvarDescontos(faturaArquivoDTO);
 			faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
-			faturaService.salvarPlanos(faturaArquivoDTO);
+			faturaService.SalvarPlanos(faturaArquivoDTO);
 			
 			
 			

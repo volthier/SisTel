@@ -55,7 +55,7 @@ public class FaturaService {
 	private CategoriasDescontos categoriasDescontos;
 	
 	@Autowired
-	private Planosas planos;
+	private Planosas planosas;
 	
 	@Autowired
 	private CategoriasPlanos categoriasPlanos;
@@ -103,11 +103,12 @@ public class FaturaService {
 	public void salvarCategoriasDescontos(FaturaArquivoDTO faturaArquivoDTO) {
 		categoriasDescontos.save(faturaArquivoDTO.getCategoriaDescontos());
 	}
-	public void salvarPlanos(FaturaArquivoDTO faturaArquivoDTO){
-		planos.save(faturaArquivoDTO.getPlanos());
-	}
+
 	public void salvarCategoriasPlanos(FaturaArquivoDTO faturaArquivoDTO){
 		categoriasPlanos.save(faturaArquivoDTO.getCategoriaPlano());
+	}
+	public void SalvarPlanos(FaturaArquivoDTO faturaArquivoDTO){
+		planosas.save(faturaArquivoDTO.getPlanos());
 	}
 
 }
