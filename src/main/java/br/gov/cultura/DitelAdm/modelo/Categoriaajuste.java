@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "categoriaajuste", catalog = "diteladmdev")
 public class Categoriaajuste implements java.io.Serializable {
 
-	private int codCatAjuste;
+	private String codCatAjuste;
 	private String sigla;
 	private String descricao;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -26,13 +26,13 @@ public class Categoriaajuste implements java.io.Serializable {
 	public Categoriaajuste() {
 	}
 
-	public Categoriaajuste(int codCatAjuste, String sigla, String descricao) {
+	public Categoriaajuste(String codCatAjuste, String sigla, String descricao) {
 		this.codCatAjuste = codCatAjuste;
 		this.sigla = sigla;
 		this.descricao = descricao;
 	}
 
-	public Categoriaajuste(int codCatAjuste, String sigla, String descricao, Set<Ajustes>ajusteses) {
+	public Categoriaajuste(String codCatAjuste, String sigla, String descricao, Set<Ajustes>ajusteses) {
 		this.codCatAjuste = codCatAjuste;
 		this.sigla = sigla;
 		this.descricao = descricao;
@@ -42,11 +42,11 @@ public class Categoriaajuste implements java.io.Serializable {
 	@Id
 
 	@Column(name = "codCatAjuste", unique = true, nullable = false)
-	public int getCodCatAjuste() {
+	public String getCodCatAjuste() {
 		return this.codCatAjuste;
 	}
 
-	public void setCodCatAjuste(int codCatAjuste) {
+	public void setCodCatAjuste(String codCatAjuste) {
 		this.codCatAjuste = codCatAjuste;
 	}
 
@@ -59,7 +59,7 @@ public class Categoriaajuste implements java.io.Serializable {
 		this.sigla = sigla;
 	}
 
-	@Column(name = "descricao", nullable = false, length = 25)
+	@Column(name = "descricao", nullable = false, length = 41)
 	public String getDescricao() {
 		return this.descricao;
 	}

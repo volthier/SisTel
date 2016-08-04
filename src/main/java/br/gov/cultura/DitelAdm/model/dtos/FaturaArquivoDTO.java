@@ -2,6 +2,8 @@ package br.gov.cultura.DitelAdm.model.dtos;
 
 import java.util.List;
 
+import br.gov.cultura.DitelAdm.modelo.Ajustes;
+import br.gov.cultura.DitelAdm.modelo.Categoriaajuste;
 import br.gov.cultura.DitelAdm.modelo.Categoriachamada;
 import br.gov.cultura.DitelAdm.modelo.Categoriadesconto;
 import br.gov.cultura.DitelAdm.modelo.Categoriaplano;
@@ -31,6 +33,8 @@ public class FaturaArquivoDTO {
 	private List<Categoriadesconto> categoriaDescontos;
 	private List<Planos> planos;
 	private List<Categoriaplano> categoriaPlano;
+	private List<Ajustes> ajustes;
+	private List<Categoriaajuste> categoriaAjuste;
 
 	public Cliente getCliente() {
 		return cliente;
@@ -134,6 +138,22 @@ public class FaturaArquivoDTO {
 
 	public void setCategoriaPlano(List<Categoriaplano> categoriaPlano) {
 		this.categoriaPlano = categoriaPlano;
+	}
+
+	public List<Ajustes> getAjustes() {
+		return ajustes;
+	}
+
+	public void setAjustes(List<Ajustes> ajustes) {
+		this.ajustes = ajustes;
+	}
+
+	public List<Categoriaajuste> getCategoriaAjuste() {
+		return categoriaAjuste;
+	}
+
+	public void setCategoriaAjuste(List<Categoriaajuste> categoriaAjuste) {
+		this.categoriaAjuste = categoriaAjuste;
 	}
 
 }

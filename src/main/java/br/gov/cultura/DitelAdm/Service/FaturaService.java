@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.repository.Ajustesas;
+import br.gov.cultura.DitelAdm.repository.CategoriasAjustes;
 import br.gov.cultura.DitelAdm.repository.CategoriasChamadas;
 import br.gov.cultura.DitelAdm.repository.CategoriasDescontos;
 import br.gov.cultura.DitelAdm.repository.CategoriasPlanos;
@@ -59,6 +61,12 @@ public class FaturaService {
 	
 	@Autowired
 	private CategoriasPlanos categoriasPlanos;
+	
+	@Autowired
+	private Ajustesas ajustesas;
+	
+	@Autowired
+	private CategoriasAjustes categoriasAjustes;
 
 	public void salvarOp(FaturaArquivoDTO faturaArquivoDTO) {
 		operadoras.save(faturaArquivoDTO.getOperadora());
@@ -110,5 +118,10 @@ public class FaturaService {
 	public void SalvarPlanos(FaturaArquivoDTO faturaArquivoDTO){
 		planosas.save(faturaArquivoDTO.getPlanos());
 	}
-
+	public void salvarAjustes(FaturaArquivoDTO faturaArquivoDTO){
+		ajustesas.save(faturaArquivoDTO.getAjustes());
+	}
+	public void salvarCategoriasAjustes(FaturaArquivoDTO faturaArquivoDTO){
+		categoriasAjustes.save(faturaArquivoDTO.getCategoriaAjuste());
+	}
 }

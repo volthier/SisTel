@@ -65,10 +65,10 @@ public class AlocacaoController extends UrlController {
 		List<CadastroLinha> todasLinhas = cadastroLinhaService.filtrar(filtro);
 		mv.addObject("linhas", todasLinhas);
 		LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
-		File file = new File(//"C:\\Users\\Administrador\\Desktop\\Projetos de Programação\\Arquivos DITEL\\Faturas para o Projeto ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
-				"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\"
-						+ "Arquivos DITEL\\Faturas para o Projeto ditel\\"
-						+ "711725423_919441395_14_02_2016_FebrabanV3.txt");
+		File file = new File("C:\\Users\\Administrador\\Desktop\\Projetos de Programação\\Arquivos DITEL\\Faturas para o Projeto ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
+//				"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\"
+//						+ "Arquivos DITEL\\Faturas para o Projeto ditel\\"
+//						+ "711725423_919441395_14_02_2016_FebrabanV3.txt");
 		try {
 			FaturaArquivoDTO faturaArquivoDTO = leitor.read(file);
 			faturaService.salvarOp(faturaArquivoDTO);
@@ -84,6 +84,8 @@ public class AlocacaoController extends UrlController {
 			faturaService.salvarDescontos(faturaArquivoDTO);
 			faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
 			faturaService.SalvarPlanos(faturaArquivoDTO);
+			faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
+			faturaService.salvarAjustes(faturaArquivoDTO);
 			
 			
 			

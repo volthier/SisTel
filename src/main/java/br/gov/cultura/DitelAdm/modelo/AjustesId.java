@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class AjustesId implements java.io.Serializable {
 
-	private int idAjustes;
+	private String idAjustes;
 	private int categoriaAjusteCodCatAjuste;
 	private Date dataInicio;
 	private Date horaInicio;
@@ -19,7 +19,7 @@ public class AjustesId implements java.io.Serializable {
 	public AjustesId() {
 	}
 
-	public AjustesId(int idAjustes, int categoriaAjusteCodCatAjuste, Date dataInicio, Date horaInicio) {
+	public AjustesId(String idAjustes, int categoriaAjusteCodCatAjuste, Date dataInicio, Date horaInicio) {
 		this.idAjustes = idAjustes;
 		this.categoriaAjusteCodCatAjuste = categoriaAjusteCodCatAjuste;
 		this.dataInicio = dataInicio;
@@ -27,11 +27,11 @@ public class AjustesId implements java.io.Serializable {
 	}
 
 	@Column(name = "idAjustes", nullable = false)
-	public int getIdAjustes() {
+	public String getIdAjustes() {
 		return this.idAjustes;
 	}
 
-	public void setIdAjustes(int idAjustes) {
+	public void setIdAjustes(String idAjustes) {
 		this.idAjustes = idAjustes;
 	}
 
@@ -83,7 +83,7 @@ public class AjustesId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getIdAjustes();
+		result = 37 * result + (getIdAjustes() == null ? 0 : this.getIdAjustes().hashCode());
 		result = 37 * result + this.getCategoriaAjusteCodCatAjuste();
 		result = 37 * result + (getDataInicio() == null ? 0 : this.getDataInicio().hashCode());
 		result = 37 * result + (getHoraInicio() == null ? 0 : this.getHoraInicio().hashCode());
