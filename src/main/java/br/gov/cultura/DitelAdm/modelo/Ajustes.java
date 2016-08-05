@@ -1,13 +1,13 @@
 package br.gov.cultura.DitelAdm.modelo;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 05/08/2016 16:57:24 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -22,9 +22,11 @@ import javax.persistence.TemporalType;
 @Table(name = "ajustes", catalog = "diteladmdev")
 public class Ajustes implements java.io.Serializable {
 
-	private AjustesId id;
+	private Integer idAjustes;
 	private Categoriaajuste categoriaajuste;
 	private Resumo resumo;
+	private Date dataInicio;
+	private Date horaInicio;
 	private String tipo;
 	private float baseCalculo;
 	private float percentual;
@@ -33,15 +35,17 @@ public class Ajustes implements java.io.Serializable {
 	private Date dataFim;
 	private Date horaFim;
 	private String campoLivreOp;
+	private String numRecurso;
 
 	public Ajustes() {
 	}
 
-	public Ajustes(AjustesId id, Categoriaajuste categoriaajuste, Resumo resumo, String tipo, float baseCalculo,
-			float percentual, String sinal, float valor) {
-		this.id = id;
+	public Ajustes(Categoriaajuste categoriaajuste, Resumo resumo, Date dataInicio, Date horaInicio, String tipo,
+			float baseCalculo, float percentual, String sinal, float valor) {
 		this.categoriaajuste = categoriaajuste;
 		this.resumo = resumo;
+		this.dataInicio = dataInicio;
+		this.horaInicio = horaInicio;
 		this.tipo = tipo;
 		this.baseCalculo = baseCalculo;
 		this.percentual = percentual;
@@ -49,11 +53,13 @@ public class Ajustes implements java.io.Serializable {
 		this.valor = valor;
 	}
 
-	public Ajustes(AjustesId id, Categoriaajuste categoriaajuste, Resumo resumo, String tipo, float baseCalculo,
-			float percentual, String sinal, float valor, Date dataFim, Date horaFim, String campoLivreOp) {
-		this.id = id;
+	public Ajustes(Categoriaajuste categoriaajuste, Resumo resumo, Date dataInicio, Date horaInicio, String tipo,
+			float baseCalculo, float percentual, String sinal, float valor, Date dataFim, Date horaFim,
+			String campoLivreOp, String numRecurso) {
 		this.categoriaajuste = categoriaajuste;
 		this.resumo = resumo;
+		this.dataInicio = dataInicio;
+		this.horaInicio = horaInicio;
 		this.tipo = tipo;
 		this.baseCalculo = baseCalculo;
 		this.percentual = percentual;
@@ -62,25 +68,23 @@ public class Ajustes implements java.io.Serializable {
 		this.dataFim = dataFim;
 		this.horaFim = horaFim;
 		this.campoLivreOp = campoLivreOp;
+		this.numRecurso = numRecurso;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idAjustes", column = @Column(name = "idAjustes", nullable = false)),
-			@AttributeOverride(name = "categoriaAjusteCodCatAjuste", column = @Column(name = "categoriaAjuste_codCatAjuste", nullable = false)),
-			@AttributeOverride(name = "dataInicio", column = @Column(name = "dataInicio", nullable = false, length = 10)),
-			@AttributeOverride(name = "horaInicio", column = @Column(name = "horaInicio", nullable = false, length = 19)) })
-	public AjustesId getId() {
-		return this.id;
+	@Column(name = "idAjustes", unique = true, nullable = false)
+	public Integer getIdAjustes() {
+		return this.idAjustes;
 	}
 
-	public void setId(AjustesId id) {
-		this.id = id;
+	public void setIdAjustes(Integer idAjustes) {
+		this.idAjustes = idAjustes;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoriaAjuste_codCatAjuste", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "categoriaAjuste_codCatAjuste", nullable = false)
 	public Categoriaajuste getCategoriaajuste() {
 		return this.categoriaajuste;
 	}
@@ -102,6 +106,26 @@ public class Ajustes implements java.io.Serializable {
 
 	public void setResumo(Resumo resumo) {
 		this.resumo = resumo;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dataInicio", nullable = false, length = 10)
+	public Date getDataInicio() {
+		return this.dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "horaInicio", nullable = false, length = 19)
+	public Date getHoraInicio() {
+		return this.horaInicio;
+	}
+
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
 	@Column(name = "tipo", nullable = false, length = 1)
@@ -176,6 +200,15 @@ public class Ajustes implements java.io.Serializable {
 
 	public void setCampoLivreOp(String campoLivreOp) {
 		this.campoLivreOp = campoLivreOp;
+	}
+
+	@Column(name = "numRecurso", length = 17)
+	public String getNumRecurso() {
+		return this.numRecurso;
+	}
+
+	public void setNumRecurso(String numRecurso) {
+		this.numRecurso = numRecurso;
 	}
 
 }

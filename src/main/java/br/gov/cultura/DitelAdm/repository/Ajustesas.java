@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.modelo.Ajustes;
 
 public interface Ajustesas extends JpaRepository<Ajustes, Long>{
 
-	public List<Ajustes> findByIdContaining(String id);
+	public List<Ajustes> findByIdAjustes(Integer id);
 }

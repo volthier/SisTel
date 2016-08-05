@@ -1,9 +1,12 @@
 package br.gov.cultura.DitelAdm.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.modelo.Planos;
 import br.gov.cultura.DitelAdm.repository.Ajustesas;
 import br.gov.cultura.DitelAdm.repository.CategoriasAjustes;
 import br.gov.cultura.DitelAdm.repository.CategoriasChamadas;
@@ -116,7 +119,10 @@ public class FaturaService {
 		categoriasPlanos.save(faturaArquivoDTO.getCategoriaPlano());
 	}
 	public void SalvarPlanos(FaturaArquivoDTO faturaArquivoDTO){
-		planosas.save(faturaArquivoDTO.getPlanos());
+		List<Planos> planos = faturaArquivoDTO.getPlanos();
+		for (Planos plano : planos) {
+			planosas.save(plano);
+		}
 	}
 	public void salvarAjustes(FaturaArquivoDTO faturaArquivoDTO){
 		ajustesas.save(faturaArquivoDTO.getAjustes());

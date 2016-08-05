@@ -8,5 +8,5 @@ import br.gov.cultura.DitelAdm.modelo.Operadora;
 
 public interface Operadoras extends JpaRepository<Operadora, Long>{
 
-	public List<Operadora> findByCodOperadoraContaining(String nome);
+	public List<Operadora> findByCodOperadora(int nome);
 }

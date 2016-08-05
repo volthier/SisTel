@@ -22,7 +22,6 @@ import br.gov.cultura.DitelAdm.modelo.PlanosId;
 import br.gov.cultura.DitelAdm.Service.FaturaService;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Ajustes;
-import br.gov.cultura.DitelAdm.modelo.AjustesId;
 import br.gov.cultura.DitelAdm.modelo.Chamadas;
 import br.gov.cultura.DitelAdm.modelo.ChamadasId;
 import br.gov.cultura.DitelAdm.modelo.Cliente;
@@ -1010,7 +1009,6 @@ public class LeitorFebrabanV4 {
 				 * data.substring(78, 94);
 				 */
 				Ajustes ajustes = new Ajustes();
-				AjustesId ajustesId = new AjustesId();
 
 				/** Tipo do Plano */
 				ajustes.setTipo(data.substring(94, 95));
@@ -1040,7 +1038,7 @@ public class LeitorFebrabanV4 {
 
 				/** Data Inicio do Acerto */
 				try {
-					ajustesId.setDataInicio(sdf.parse(data.substring(173, 181)));
+					ajustes.setDataInicio(sdf.parse(data.substring(173, 181)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1048,7 +1046,7 @@ public class LeitorFebrabanV4 {
 
 				/** Hora Inicio do Acerto */
 				try {
-					ajustesId.setHoraInicio(sdfh.parse(data.substring(181, 187)));
+					ajustes.setHoraInicio(sdfh.parse(data.substring(181, 187)));
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
