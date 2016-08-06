@@ -13,10 +13,12 @@ import br.gov.cultura.DitelAdm.modelo.Cliente;
 import br.gov.cultura.DitelAdm.modelo.Descontos;
 import br.gov.cultura.DitelAdm.modelo.Enderecos;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
+import br.gov.cultura.DitelAdm.modelo.Notafiscal;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.modelo.Planos;
 import br.gov.cultura.DitelAdm.modelo.Resumo;
 import br.gov.cultura.DitelAdm.modelo.Servicos;
+import br.gov.cultura.DitelAdm.modelo.Trailler;
 
 public class FaturaArquivoDTO {
 
@@ -35,6 +37,8 @@ public class FaturaArquivoDTO {
 	private List<Categoriaplano> categoriaPlano;
 	private List<Ajustes> ajustes;
 	private List<Categoriaajuste> categoriaAjuste;
+	private List<Notafiscal> notaFiscal;
+	private List<Trailler> trailler;
 
 	public Cliente getCliente() {
 		return cliente;
@@ -154,6 +158,22 @@ public class FaturaArquivoDTO {
 
 	public void setCategoriaAjuste(List<Categoriaajuste> categoriaAjuste) {
 		this.categoriaAjuste = categoriaAjuste;
+	}
+
+	public List<Notafiscal> getNotaFiscal() {
+		return notaFiscal;
+	}
+
+	public void setNotaFiscal(List<Notafiscal> notaFiscal) {
+		this.notaFiscal = notaFiscal;
+	}
+
+	public List<Trailler> getTrailler() {
+		return trailler;
+	}
+
+	public void setTrailler(List<Trailler> trailler) {
+		this.trailler = trailler;
 	}
 
 }

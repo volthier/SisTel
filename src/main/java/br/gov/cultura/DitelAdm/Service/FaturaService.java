@@ -18,10 +18,12 @@ import br.gov.cultura.DitelAdm.repository.Clientes;
 import br.gov.cultura.DitelAdm.repository.Descontosas;
 import br.gov.cultura.DitelAdm.repository.Enderecosas;
 import br.gov.cultura.DitelAdm.repository.Faturas;
+import br.gov.cultura.DitelAdm.repository.NotasFiscais;
 import br.gov.cultura.DitelAdm.repository.Operadoras;
 import br.gov.cultura.DitelAdm.repository.Planosas;
 import br.gov.cultura.DitelAdm.repository.Resumos;
 import br.gov.cultura.DitelAdm.repository.Servicosas;
+import br.gov.cultura.DitelAdm.repository.Traillers;
 
 @Service
 public class FaturaService {
@@ -71,7 +73,13 @@ public class FaturaService {
 	@Autowired
 	private CategoriasAjustes categoriasAjustes;
 
-	public void salvarOp(FaturaArquivoDTO faturaArquivoDTO) {
+	@Autowired
+	private NotasFiscais notasFiscais;
+	
+	@Autowired
+	private Traillers traillers;
+	
+	public void salvarOperadora(FaturaArquivoDTO faturaArquivoDTO) {
 		operadoras.save(faturaArquivoDTO.getOperadora());
 	}
 
@@ -79,7 +87,7 @@ public class FaturaService {
 		clientes.save(faturaArquivoDTO.getCliente());
 	}
 
-	public void salvarFat(FaturaArquivoDTO faturaArquivoDTO) {
+	public void salvarFatura(FaturaArquivoDTO faturaArquivoDTO) {
 		faturas.save(faturaArquivoDTO.getFatura());
 	}
 
@@ -129,5 +137,11 @@ public class FaturaService {
 	}
 	public void salvarCategoriasAjustes(FaturaArquivoDTO faturaArquivoDTO){
 		categoriasAjustes.save(faturaArquivoDTO.getCategoriaAjuste());
+	}
+	public void salvarNotaFiscal(FaturaArquivoDTO faturaArquivoDTO){
+		notasFiscais.save(faturaArquivoDTO.getNotaFiscal());
+	}
+	public void salvarTrailler(FaturaArquivoDTO faturaArquivoDTO){
+		traillers.save(faturaArquivoDTO.getTrailler());
 	}
 }

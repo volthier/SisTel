@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Ajustes;
 import br.gov.cultura.DitelAdm.modelo.Categoriaajuste;
@@ -27,6 +25,8 @@ import br.gov.cultura.DitelAdm.modelo.Enderecos;
 import br.gov.cultura.DitelAdm.modelo.EnderecosId;
 import br.gov.cultura.DitelAdm.modelo.Fatura;
 import br.gov.cultura.DitelAdm.modelo.FaturaId;
+import br.gov.cultura.DitelAdm.modelo.Notafiscal;
+import br.gov.cultura.DitelAdm.modelo.NotafiscalId;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.modelo.Planos;
 import br.gov.cultura.DitelAdm.modelo.PlanosId;
@@ -34,6 +34,8 @@ import br.gov.cultura.DitelAdm.modelo.Resumo;
 import br.gov.cultura.DitelAdm.modelo.ResumoId;
 import br.gov.cultura.DitelAdm.modelo.Servicos;
 import br.gov.cultura.DitelAdm.modelo.ServicosId;
+import br.gov.cultura.DitelAdm.modelo.Trailler;
+import br.gov.cultura.DitelAdm.modelo.TraillerId;
 
 public class LeitorFebrabanV3 {
 
@@ -87,7 +89,13 @@ public class LeitorFebrabanV3 {
 		List<Ajustes> ajustesLista = new ArrayList<Ajustes>();
 		Categoriaajuste categoriaAjustes = new Categoriaajuste();
 		List<Categoriaajuste> categoriaAjustesLista = new ArrayList<Categoriaajuste>();
-
+		Notafiscal notaFiscal = new Notafiscal();
+		NotafiscalId notaFiscalId = new NotafiscalId();
+		List<Notafiscal> notaFiscalLista = new ArrayList<Notafiscal>();
+		TraillerId traillerId = new TraillerId();
+		Trailler trailler = new Trailler();
+		List<Trailler> traillerLista = new ArrayList<Trailler>();
+		
 		while ((data = reader.readLine()) != null) {
 			String TipoReg = data.substring(0, 2);
 			switch (TipoReg)
@@ -1251,14 +1259,221 @@ public class LeitorFebrabanV3 {
 				break;
 
 			case "80":
+				/**
+				 * 80_NF do guia Telecom padrão FEBRABAN-V3R0 Totalizador por
+				 * nota fiscal apresentada*/
+				notaFiscal = new Notafiscal();
+				notaFiscalId = new NotafiscalId();
+				
+				 /* Controle de sequencia de gravação String nfControlSeqGrav =
+				 * data.substring(2, 14);
+				 *
+				 * Identificador de Conta Unica ou Numero da conta String
+				 * nfIndConta(data.substring(14, 39);
+				 *
+				 * Data da emissão da Fatura/conta String nfDataEmiFatura =
+				 * data.substring(39, 47);
+				 *
+				 * Mês de Referência da fatura(cobrança) String nfMesRef =
+				 * data.substring(47, 53);
+				 *
+				 *
+				 * Data de Vencimento da Nota Fiscal NF*/ 
+				  try {
+					notaFiscal.setDataVencimento(sdf.parse(data.substring(53, 61)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 
+				 /* Codigo da Operadora String nfCodOp(data.substring(61, 64);
+				 *
+				 * Nome da Operadora String nfNomeOp(data.substring(64, 79);
+				 *
+				 * CNPJ Operadora String nfCnpjOp(data.substring(79, 94);
+				 */
 
+				/** Valor da Nota Fiscal NF com Impostos */
+				notaFiscal.setValorNfimp(Float.parseFloat(data.substring(94, 107)));
+
+				/** Tipo de Nota Fiscal NF */
+				notaFiscal.setTipoNf(data.substring(107, 108));
+
+				/** Numero da Nota Fiscal NF */
+				notaFiscalId.setNumNf(data.substring(108, 120));
+
+				/**
+				 * Filler String nfFiller(data.substring(201, 324);
+				 */
+
+				/** Campo livre para Operadora */
+				notaFiscal.setCampoLivreOp(data.substring(324, 349));
+
+				/**	 Marcação de Fim 
+				 String nfMarcaFim(data.substring(349, 350); */
+				
+				notaFiscalId.setFaturaNumFatura(faturaId.getNumFatura());
+				notaFiscalId.setFaturaClienteCodCliente(clienteId.getCodCliente());
+				notaFiscalId.setFaturaClienteOperadoraCodOperadora(operadora.getCodOperadora());
+				notaFiscalId.setFaturaDataEmissao(faturaId.getDataEmissao());
+				notaFiscal.setFatura(fatura);
+				notaFiscal.setId(notaFiscalId);
+				notaFiscalLista.add(notaFiscal);
+				faturaArquivoDTO.setNotaFiscal(notaFiscalLista);
 				break;
 
 			case "90":
 				break;
 
 			case "99":
+				/**
+				 * 99_TRAILLER do guia Telecom padrão FEBRABAN-V3R0 Consolidação
+				 * de valores da conta faturada
+				 * 
+				 * >>> Codigo de leitura comentado para preservação de trabalho
+				 * <<<
+				 */
 
+				traillerId = new TraillerId();
+				trailler = new Trailler();
+				/**
+				 * Controle de sequencia de gravação String
+				 * traillerControlSeqGrav(data.substring(2, 14);
+				 * 
+				 * /** Identificador de Conta Unica ou Numero da conta String
+				 * traillerIndConta(data.substring(14, 39);
+				 */
+
+				/** Data da emissão da Fatura/conta */
+
+				try {
+					traillerId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				/**
+				 * Mês de Referência da fatura(cobrança) String traillerMesRef =
+				 * data.substring(47, 53);
+				 * 
+				/** Data de Vencimento 
+				 * String traillerDataVenc(data.substring(53, 61); 
+				 */
+				 
+				
+				 /** Codigo do Cliente */
+				traillerId.setFaturaClienteCodCliente(data.substring(61, 76));
+
+				/** 
+				 * Valor Total 
+				 */
+				trailler.setValTotal(Float.parseFloat(data.substring(76, 89)));
+
+				/**
+				 * Quantidade de Total de Registros
+				 */
+				trailler.setQuanTotalReg(Integer.parseInt(data.substring(89, 101)));
+
+				/**
+				 * Valor Total Registro 10
+				 */
+				trailler.setValTotal10(Float.parseFloat(data.substring(101, 114)));
+
+				/**
+				 * Quantidade de Registros 10
+				 */
+				trailler.setQuanReg10(Integer.parseInt(data.substring(114, 123)));
+
+				/**
+				 * Quantidade de Registros 20
+				 */
+				trailler.setQuanReg20(Integer.parseInt(data.substring(123, 132)));
+
+				/**
+				 * Valor Total Registro 30
+				 */
+				trailler.setValTotal30(Float.parseFloat(data.substring(132, 145)));
+
+				/**
+				 * Quantidade de Registros 30
+				 */
+				trailler.setQuanReg30(Integer.parseInt(data.substring(145, 154)));
+
+				/**
+				 * Valor Total Registro 40
+				 */
+				trailler.setValTotal40(Float.parseFloat(data.substring(154, 167)));
+
+				/**
+				 * Quantidade de Registros 40
+				 */
+				trailler.setQuanReg40(Integer.parseInt(data.substring(167, 176)));
+
+				/**
+				 * Sinal Total Registro 50
+				 */
+				trailler.setSinTotalReg50(data.substring(176, 177).charAt(0));
+
+				/**
+				 * Valor Total Registro 50
+				 */
+				trailler.setValTotal50(Float.parseFloat(data.substring(177, 190)));
+
+				/**
+				 * Quantidade de Registros 50
+				 */
+				trailler.setQuanReg50(Integer.parseInt(data.substring(191, 199)));
+
+				/**
+				 * Valor Total Registro 60
+				 */
+				trailler.setValTotal60(Float.parseFloat(data.substring(199, 212)));
+
+				/**
+				 * Quantidade de Registros 60
+				 */
+				trailler.setQuanReg60(Integer.parseInt(data.substring(212, 221)));
+
+				/**
+				 * Sinal Total Registro 70
+				 */
+				trailler.setSinTotalReg70(data.substring(221, 222).charAt(0));
+
+				/**
+				 * Valor Total Registro 70
+				 */
+				trailler.setValTotal70(Float.parseFloat(data.substring(222, 235)));
+
+				/**
+				 * Quantidade de Registros 70
+				 */
+				trailler.setQuanReg70(Integer.parseInt(data.substring(235, 244)));
+
+				/**
+				 * Valor Total Registro 80
+				 */
+				trailler.setValTotal80(Float.parseFloat(data.substring(244, 257)));
+
+				/**
+				 * Quantidade de Registros 80
+				 */
+				trailler.setQuanReg80(Integer.parseInt(data.substring(257, 266)));
+
+				/**
+				 * Filler String traillerFiller(data.substring(201, 324);
+				 *
+				 ** Campo livre para Operadora
+				 */
+				trailler.setCampoLivreOp(data.substring(324, 349));
+
+				/** Marcação de Fim
+				 	 String traillerMarcaFim(data.substring(349, 350); */
+				traillerId.setFaturaNumFatura(faturaId.getNumFatura());
+				traillerId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
+				trailler.setId(traillerId);
+				traillerLista.add(trailler);
+				faturaArquivoDTO.setTrailler(traillerLista);
 				break;
 			}
 
