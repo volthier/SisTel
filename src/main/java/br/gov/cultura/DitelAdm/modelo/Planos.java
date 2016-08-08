@@ -31,7 +31,6 @@ public class Planos implements java.io.Serializable {
 	private float consumoFranqueado;
 	private String codPlano;
 	private String descricaoPlano;
-	private String planoscol;
 	private float valComImp;
 	private float valSemImp;
 	private int tipoNf;
@@ -57,7 +56,7 @@ public class Planos implements java.io.Serializable {
 	}
 
 	public Planos(PlanosId id, Categoriaplano categoriaplano, Resumo resumo, Date dataFimCiclo, String tipo,
-			float consumoMedido, float consumoFranqueado, String codPlano, String descricaoPlano, String planoscol,
+			float consumoMedido, float consumoFranqueado, String codPlano, String descricaoPlano,
 			float valComImp, float valSemImp, int tipoNf, String numNf, String campoLivreOp) {
 		this.id = id;
 		this.categoriaplano = categoriaplano;
@@ -68,7 +67,6 @@ public class Planos implements java.io.Serializable {
 		this.consumoFranqueado = consumoFranqueado;
 		this.codPlano = codPlano;
 		this.descricaoPlano = descricaoPlano;
-		this.planoscol = planoscol;
 		this.valComImp = valComImp;
 		this.valSemImp = valSemImp;
 		this.tipoNf = tipoNf;
@@ -174,15 +172,6 @@ public class Planos implements java.io.Serializable {
 
 	public void setDescricaoPlano(String descricaoPlano) {
 		this.descricaoPlano = descricaoPlano;
-	}
-
-	@Column(name = "planoscol", length = 45)
-	public String getPlanoscol() {
-		return this.planoscol;
-	}
-
-	public void setPlanoscol(String planoscol) {
-		this.planoscol = planoscol;
 	}
 
 	@Column(name = "valComImp", nullable = false, precision = 12, scale = 0)

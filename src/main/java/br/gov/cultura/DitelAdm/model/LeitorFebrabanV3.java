@@ -992,11 +992,10 @@ public class LeitorFebrabanV3 {
 				planos = new Planos();
 				categoriaPlano = new Categoriaplano();
 
-				/**
-				 * Controle de sequencia de gravação String
-				 * planosControlSeqGrav(data.substring(2, 14);
-				 * 
-				 * /** Identificador de Conta Unica ou Numero da conta String
+				/** Controle de sequencia de gravação */
+				  planosId.setIdPlanos(Integer.parseInt(data.substring(2, 14)));
+				  
+				 /** Identificador de Conta Unica ou Numero da conta String
 				 * planosIndConta(data.substring(14, 39);
 				 */
 
@@ -1014,12 +1013,11 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Identificador Único do Recurso */
-				planosId.setResumoNumRecurso(data.substring(53, 78));
+				//planosId.setResumoNumRecurso(data.substring(53, 78));
 
-				/**
-				 * Numero do Telefone String planoNumTelefone(data.substring(78,
-				 * 94);
-				 */
+				/** Numero do Telefone */
+				planosId.setResumoNumRecurso(data.substring(78, 94));
+				 
 
 				/**
 				 * Tipo do Plano
@@ -1134,19 +1132,30 @@ public class LeitorFebrabanV3 {
 				 * 350);
 				 */
 
+				for (Resumo r : resumoLista) {
+					if (r.getId().getNumRecurso().equals(planosId.getResumoNumRecurso())) {
+						System.out.println(r.getId().getNumRecurso());
+						
+						planosId.setResumoId(r.getId().getId());
+						planosId.setResumoNumRecurso(r.getId().getNumRecurso());
+						planosId.setResumoFaturaNumFatura(r.getId().getFaturaNumFatura());
+						planosId.setResumoFaturaClienteCodCliente(r.getId().getFaturaClienteCodCliente());
+						planosId.setResumoFaturaClienteOperadoraCodOperadora(
+								r.getId().getFaturaClienteOperadoraCodOperadora());
+						planosId.setResumoFaturaDataEmissao(r.getId().getFaturaDataEmissao());
+						planos.setCategoriaplano(categoriaPlano);
+						planos.setResumo(r);
+						planos.setId(planosId);					 
+						planosLista.add(planos);
+						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+						faturaArquivoDTO.setPlanos(planosLista);
+
+					}
+					;
+
+				}
+				;
 				categoriaPlanoLista.add(categoriaPlano);
-				planosId.setResumoId(resumoId.getId());
-				planosId.setResumoNumRecurso(resumoId.getNumRecurso());
-				planosId.setResumoFaturaNumFatura(faturaId.getNumFatura());
-				planosId.setResumoFaturaClienteCodCliente(clienteId.getCodCliente());
-				planosId.setResumoFaturaClienteOperadoraCodOperadora(operadora.getCodOperadora());
-				planosId.setResumoFaturaDataEmissao(faturaId.getDataEmissao());
-				planos.setCategoriaplano(categoriaPlano);
-				planos.setResumo(resumo);
-				planos.setId(planosId);
-				planosLista.add(planos);
-				faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
-				faturaArquivoDTO.setPlanos(planosLista);
 
 				break;
 

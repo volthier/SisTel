@@ -863,8 +863,8 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(descMarcaFim);
 
 				break;
-*//*
-			 case "60":
+*/
+			/* case "60":
 				*//**
 				 * 60_PLANOS do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * dos planos faturados
@@ -1027,8 +1027,8 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(planoCampoLivreOp);
 				System.out.println(planoMarcaFim);
 
-				break;
-*/
+				break;*/
+
 			case "70":
 				/**
 				 * 70_AJUSTES do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
@@ -1162,16 +1162,16 @@ public class VerificaCamposFebrabanV3Console {
 
 				break;
 
-			case "80":
-				/**
+/*			case "80":
+				*//**
 				 * 80_NF do guia Telecom padrÃ£o FEBRABAN-V3R0 Totalizador por
 				 * nota fiscal apresentada
 				 *//*
 
-				/** Controle de sequencia de gravaÃ§Ã£o 
+				*//** Controle de sequencia de gravaÃ§Ã£o 
 				String nfControlSeqGrav = data.substring(2, 14);
 
-				*//** Identificador de Conta Unica ou Numero da conta *//*
+				/** Identificador de Conta Unica ou Numero da conta *//*
 				String nfIndConta = data.substring(14, 39);
 
 				*//** Data da emissÃ£o da Fatura/conta *//*
@@ -1247,9 +1247,9 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(nfCampoLivreOp);
 				System.out.println(nfMarcaFim);
 
-				break;
+				break;*/
 
-			case "90":
+/*			case "90":
 				*//**
 				 * 90_INFORMATIVOS do guia Telecom padrÃ£o FEBRABAN-V3R0
 				 * Informativo gerencial, valores nÃ£o contemplados na fatura
@@ -1331,9 +1331,9 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(infCampoLivreOp);
 				System.out.println(infMarcaFim);
 
-				break;
+				break;*/
 
-			case "99":
+/*			case "99":
 				*//**
 				 * 99_TRAILLER do guia Telecom padrÃ£o FEBRABAN-V3R0 ConsolidaÃ§Ã£o
 				 * de valores da conta faturada
@@ -1513,9 +1513,9 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(traillerQuanReg80);
 				System.out.println(traillerFiller);
 				System.out.println(traillerCampoLivreOp);
-				System.out.println(traillerMarcaFim);*/
+				System.out.println(traillerMarcaFim);
 
-			//	break;
+				break;*/
 			
 
 			}
