@@ -62,6 +62,7 @@ public class DescontosId implements java.io.Serializable {
 		this.categoriaDescontoCodCatDesconto = categoriaDescontoCodCatDesconto;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -79,6 +80,7 @@ public class DescontosId implements java.io.Serializable {
 				&& (this.getCategoriaDescontoCodCatDesconto() == castOther.getCategoriaDescontoCodCatDesconto());
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 

@@ -64,6 +64,7 @@ public class ServicosId implements java.io.Serializable {
 		this.categoriaServicoCodCatServico = categoriaServicoCodCatServico;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -83,6 +84,7 @@ public class ServicosId implements java.io.Serializable {
 				&& (this.getCategoriaServicoCodCatServico() == castOther.getCategoriaServicoCodCatServico());
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 

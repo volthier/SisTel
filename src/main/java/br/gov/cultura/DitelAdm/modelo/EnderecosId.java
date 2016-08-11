@@ -77,6 +77,7 @@ public class EnderecosId implements java.io.Serializable {
 		this.faturaDataEmissao = faturaDataEmissao;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -98,6 +99,7 @@ public class EnderecosId implements java.io.Serializable {
 								&& this.getFaturaDataEmissao().equals(castOther.getFaturaDataEmissao())));
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 

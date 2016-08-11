@@ -65,6 +65,7 @@ public class FaturaId implements java.io.Serializable {
 		this.dataEmissao = dataEmissao;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -84,6 +85,7 @@ public class FaturaId implements java.io.Serializable {
 								&& this.getDataEmissao().equals(castOther.getDataEmissao())));
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 

@@ -123,6 +123,7 @@ public class AlocacaoController extends UrlController {
 		return "redirect:/inicio";
 	}
 
+	@Override
 	@ModelAttribute("todosCadastroChipTipo")
 	public List<VinculoCadastroChipTipo> todosCadastroChipTipo() {
 		return Arrays.asList(VinculoCadastroChipTipo.values());

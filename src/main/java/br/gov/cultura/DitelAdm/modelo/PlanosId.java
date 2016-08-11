@@ -123,6 +123,7 @@ public class PlanosId implements java.io.Serializable {
 		this.resumoFaturaDataEmissao = resumoFaturaDataEmissao;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -154,6 +155,7 @@ public class PlanosId implements java.io.Serializable {
 								&& this.getResumoFaturaDataEmissao().equals(castOther.getResumoFaturaDataEmissao())));
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 

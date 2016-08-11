@@ -1,11 +1,13 @@
 package br.gov.cultura.DitelAdm.modelo;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 11/08/2016 16:17:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,22 +19,24 @@ import javax.persistence.Table;
 @Table(name = "categoriaajuste", catalog = "diteladmdev")
 public class Categoriaajuste implements java.io.Serializable {
 
-	private String codCatAjuste;
+	private Integer idCatAjuste;
+	private int codCatAjuste;
 	private String sigla;
 	private String descricao;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private Set<Ajustes>ajusteses = new HashSet(0);
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Set<Ajustes> ajusteses = new HashSet(0);
 
 	public Categoriaajuste() {
 	}
 
-	public Categoriaajuste(String codCatAjuste, String sigla, String descricao) {
+	public Categoriaajuste(int codCatAjuste, String sigla, String descricao) {
 		this.codCatAjuste = codCatAjuste;
 		this.sigla = sigla;
 		this.descricao = descricao;
 	}
 
-	public Categoriaajuste(String codCatAjuste, String sigla, String descricao, Set<Ajustes>ajusteses) {
+	public Categoriaajuste(int codCatAjuste, String sigla, String descricao, Set<Ajustes> ajusteses) {
 		this.codCatAjuste = codCatAjuste;
 		this.sigla = sigla;
 		this.descricao = descricao;
@@ -40,13 +44,23 @@ public class Categoriaajuste implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "codCatAjuste", unique = true, nullable = false)
-	public String getCodCatAjuste() {
+	@Column(name = "idCatAjuste", unique = true, nullable = false)
+	public Integer getIdCatAjuste() {
+		return this.idCatAjuste;
+	}
+
+	public void setIdCatAjuste(Integer idCatAjuste) {
+		this.idCatAjuste = idCatAjuste;
+	}
+
+	@Column(name = "codCatAjuste", nullable = false)
+	public int getCodCatAjuste() {
 		return this.codCatAjuste;
 	}
 
-	public void setCodCatAjuste(String codCatAjuste) {
+	public void setCodCatAjuste(int codCatAjuste) {
 		this.codCatAjuste = codCatAjuste;
 	}
 
@@ -59,7 +73,7 @@ public class Categoriaajuste implements java.io.Serializable {
 		this.sigla = sigla;
 	}
 
-	@Column(name = "descricao", nullable = false, length = 41)
+	@Column(name = "descricao", nullable = false, length = 40)
 	public String getDescricao() {
 		return this.descricao;
 	}
@@ -69,11 +83,11 @@ public class Categoriaajuste implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoriaajuste")
-	public Set<Ajustes>getAjusteses() {
+	public Set<Ajustes> getAjusteses() {
 		return this.ajusteses;
 	}
 
-	public void setAjusteses(Set<Ajustes>ajusteses) {
+	public void setAjusteses(Set<Ajustes> ajusteses) {
 		this.ajusteses = ajusteses;
 	}
 

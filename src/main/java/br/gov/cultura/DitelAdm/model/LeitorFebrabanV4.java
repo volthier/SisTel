@@ -8,18 +8,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import br.gov.cultura.DitelAdm.modelo.Trailler;
 import br.gov.cultura.DitelAdm.modelo.TraillerId;
-import br.gov.cultura.DitelAdm.repository.Operadoras;
 import br.gov.cultura.DitelAdm.modelo.Notafiscal;
 import br.gov.cultura.DitelAdm.modelo.NotafiscalId;
 import br.gov.cultura.DitelAdm.modelo.Operadora;
 import br.gov.cultura.DitelAdm.modelo.Planos;
 import br.gov.cultura.DitelAdm.modelo.PlanosId;
-import br.gov.cultura.DitelAdm.Service.FaturaService;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Ajustes;
 import br.gov.cultura.DitelAdm.modelo.Chamadas;

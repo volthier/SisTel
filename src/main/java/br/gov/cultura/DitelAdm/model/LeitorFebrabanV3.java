@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.modelo.Ajustes;
 import br.gov.cultura.DitelAdm.modelo.Categoriaajuste;
@@ -1133,9 +1134,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				for (Resumo r : resumoLista) {
-					if (r.getId().getNumRecurso().equals(planosId.getResumoNumRecurso())) {
-						System.out.println(r.getId().getNumRecurso());
-						
+					if (r.getId().getNumRecurso().equals(planosId.getResumoNumRecurso())) {						
 						planosId.setResumoId(r.getId().getId());
 						planosId.setResumoNumRecurso(r.getId().getNumRecurso());
 						planosId.setResumoFaturaNumFatura(r.getId().getFaturaNumFatura());
@@ -1147,6 +1146,7 @@ public class LeitorFebrabanV3 {
 						planos.setResumo(r);
 						planos.setId(planosId);					 
 						planosLista.add(planos);
+						categoriaPlanoLista.add(categoriaPlano);
 						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
 						faturaArquivoDTO.setPlanos(planosLista);
 
@@ -1155,18 +1155,17 @@ public class LeitorFebrabanV3 {
 
 				}
 				;
-				categoriaPlanoLista.add(categoriaPlano);
+
 
 				break;
 
 			case "70":
 				/**
 				 * 70_AJUSTES do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
-				 * dos ajustes financeiros de movimentos anteriores
+				 * dos ajustes financeiros de movimentos anteriores*/
 				 
 
 				ajustes = new Ajustes();
-				ajustesId = new AjustesId();
 				categoriaAjustes = new Categoriaajuste();
 
 				/**
@@ -1193,7 +1192,7 @@ public class LeitorFebrabanV3 {
 				ajustes.setTipo(data.substring(94, 95));
 
 				/** Codigo da Categoria dos Ajustes */
-				categoriaAjustes.setCodCatAjuste(data.substring(95, 98));
+				categoriaAjustes.setCodCatAjuste(Integer.parseInt(data.substring(95, 98)));
 				/** Sigla da Categoria dos Ajustes */
 				categoriaAjustes.setSigla(data.substring(98, 101));
 
@@ -1257,12 +1256,18 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String
 				 * ajustesMarcaFim(data.substring(349,350);
 				 */
-
+				for (Resumo r : resumoLista) {
+					if (r.getId().getNumRecurso().equals(ajustes.getNumRecurso())) {
+						ajustes.setResumo(r);
+					}else if(r.getId().getNumRecurso().equals("")) {
+						ajustes.setResumo(null);
+					}
+				}
 				categoriaAjustesLista.add(categoriaAjustes);
-				ajustes.setCategoriaajuste(categoriaAjustes);
-				ajustes.setResumo(resumo);
-				ajustesLista.add(ajustes);
 				faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+				
+				ajustes.setCategoriaajuste(categoriaAjustes);
+				ajustesLista.add(ajustes);
 				faturaArquivoDTO.setAjustes(ajustesLista);
 
 				break;

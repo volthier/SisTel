@@ -76,6 +76,7 @@ public class ChamadasId implements java.io.Serializable {
 		this.categoriaChamadaCodCatChamada = categoriaChamadaCodCatChamada;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -98,6 +99,7 @@ public class ChamadasId implements java.io.Serializable {
 				&& (this.getCategoriaChamadaCodCatChamada() == castOther.getCategoriaChamadaCodCatChamada());
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 

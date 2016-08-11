@@ -1,5 +1,5 @@
 package br.gov.cultura.DitelAdm.modelo;
-// Generated 05/08/2016 16:57:24 by Hibernate Tools 4.3.1.Final
+// Generated 11/08/2016 18:12:36 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,8 +28,8 @@ public class Ajustes implements java.io.Serializable {
 	private Date dataInicio;
 	private Date horaInicio;
 	private String tipo;
-	private float baseCalculo;
-	private float percentual;
+	private Float baseCalculo;
+	private Float percentual;
 	private String sinal;
 	private float valor;
 	private Date dataFim;
@@ -40,21 +40,15 @@ public class Ajustes implements java.io.Serializable {
 	public Ajustes() {
 	}
 
-	public Ajustes(Categoriaajuste categoriaajuste, Resumo resumo, Date dataInicio, Date horaInicio, String tipo,
-			float baseCalculo, float percentual, String sinal, float valor) {
+	public Ajustes(Categoriaajuste categoriaajuste, String tipo, String sinal, float valor) {
 		this.categoriaajuste = categoriaajuste;
-		this.resumo = resumo;
-		this.dataInicio = dataInicio;
-		this.horaInicio = horaInicio;
 		this.tipo = tipo;
-		this.baseCalculo = baseCalculo;
-		this.percentual = percentual;
 		this.sinal = sinal;
 		this.valor = valor;
 	}
 
 	public Ajustes(Categoriaajuste categoriaajuste, Resumo resumo, Date dataInicio, Date horaInicio, String tipo,
-			float baseCalculo, float percentual, String sinal, float valor, Date dataFim, Date horaFim,
+			Float baseCalculo, Float percentual, String sinal, float valor, Date dataFim, Date horaFim,
 			String campoLivreOp, String numRecurso) {
 		this.categoriaajuste = categoriaajuste;
 		this.resumo = resumo;
@@ -73,7 +67,6 @@ public class Ajustes implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "idAjustes", unique = true, nullable = false)
 	public Integer getIdAjustes() {
 		return this.idAjustes;
@@ -84,7 +77,7 @@ public class Ajustes implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoriaAjuste_codCatAjuste", nullable = false)
+	@JoinColumn(name = "categoriaAjuste_idCatAjuste", nullable = false)
 	public Categoriaajuste getCategoriaajuste() {
 		return this.categoriaajuste;
 	}
@@ -94,12 +87,12 @@ public class Ajustes implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({ @JoinColumn(name = "resumo_id", referencedColumnName = "id", nullable = false),
-			@JoinColumn(name = "resumo_numRecurso", referencedColumnName = "numRecurso", nullable = false),
-			@JoinColumn(name = "resumo_fatura_numFatura", referencedColumnName = "fatura_numFatura", nullable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_codCliente", referencedColumnName = "fatura_cliente_codCliente", nullable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_operadora_codOperadora", referencedColumnName = "fatura_cliente_operadora_codOperadora", nullable = false),
-			@JoinColumn(name = "resumo_fatura_dataEmissao", referencedColumnName = "fatura_dataEmissao", nullable = false) })
+	@JoinColumns({ @JoinColumn(name = "resumo_id", referencedColumnName = "id"),
+			@JoinColumn(name = "resumo_numRecurso", referencedColumnName = "numRecurso"),
+			@JoinColumn(name = "resumo_fatura_numFatura", referencedColumnName = "fatura_numFatura"),
+			@JoinColumn(name = "resumo_fatura_cliente_codCliente", referencedColumnName = "fatura_cliente_codCliente"),
+			@JoinColumn(name = "resumo_fatura_cliente_operadora_codOperadora", referencedColumnName = "fatura_cliente_operadora_codOperadora"),
+			@JoinColumn(name = "resumo_fatura_dataEmissao", referencedColumnName = "fatura_dataEmissao") })
 	public Resumo getResumo() {
 		return this.resumo;
 	}
@@ -109,7 +102,7 @@ public class Ajustes implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataInicio", nullable = false, length = 10)
+	@Column(name = "dataInicio", length = 10)
 	public Date getDataInicio() {
 		return this.dataInicio;
 	}
@@ -119,7 +112,7 @@ public class Ajustes implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "horaInicio", nullable = false, length = 19)
+	@Column(name = "horaInicio", length = 19)
 	public Date getHoraInicio() {
 		return this.horaInicio;
 	}
@@ -137,21 +130,21 @@ public class Ajustes implements java.io.Serializable {
 		this.tipo = tipo;
 	}
 
-	@Column(name = "baseCalculo", nullable = false, precision = 12, scale = 0)
-	public float getBaseCalculo() {
+	@Column(name = "baseCalculo", precision = 12, scale = 0)
+	public Float getBaseCalculo() {
 		return this.baseCalculo;
 	}
 
-	public void setBaseCalculo(float baseCalculo) {
+	public void setBaseCalculo(Float baseCalculo) {
 		this.baseCalculo = baseCalculo;
 	}
 
-	@Column(name = "percentual", nullable = false, precision = 12, scale = 0)
-	public float getPercentual() {
+	@Column(name = "percentual", precision = 12, scale = 0)
+	public Float getPercentual() {
 		return this.percentual;
 	}
 
-	public void setPercentual(float percentual) {
+	public void setPercentual(Float percentual) {
 		this.percentual = percentual;
 	}
 

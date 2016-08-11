@@ -1,10 +1,9 @@
 package br.gov.cultura.DitelAdm.modelo;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 11/08/2016 16:17:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -47,25 +46,22 @@ public class Resumo implements java.io.Serializable {
 	private Set<Descontos> descontoses = new HashSet(0);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Planos> planoses = new HashSet(0);
-	@SuppressWarnings({ "rawtypes", "unchecked" })	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Chamadas> chamadases = new HashSet(0);
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Servicos> servicoses = new HashSet(0);
 
 	public Resumo() {
 	}
 
-	public Resumo(ResumoId id, Fatura fatura, String idUnico, int cnl, int modServ, Date dataAtiv, Date dataDesativ,
-			int quantRegServ, float valorTotalRegChamadaImp, float valorTotalImp, float valorTotalContaRecursoImp,
-			Date dataVenc) {
+	public Resumo(ResumoId id, Fatura fatura, String idUnico, int cnl, int modServ, Date dataAtiv, int quantRegServ,
+			float valorTotalRegChamadaImp, float valorTotalImp, float valorTotalContaRecursoImp, Date dataVenc) {
 		this.id = id;
 		this.fatura = fatura;
 		this.idUnico = idUnico;
 		this.cnl = cnl;
 		this.modServ = modServ;
 		this.dataAtiv = dataAtiv;
-		this.dataDesativ = dataDesativ;
 		this.quantRegServ = quantRegServ;
 		this.valorTotalRegChamadaImp = valorTotalRegChamadaImp;
 		this.valorTotalImp = valorTotalImp;
