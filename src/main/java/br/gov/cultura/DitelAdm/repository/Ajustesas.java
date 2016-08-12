@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.gov.cultura.DitelAdm.modelo.Ajustes;
+import br.gov.cultura.DitelAdm.model.faturasV3.Ajustes;
 
 public interface Ajustesas extends JpaRepository<Ajustes, Long>{
 

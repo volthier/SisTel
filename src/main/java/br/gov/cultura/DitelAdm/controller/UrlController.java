@@ -19,13 +19,12 @@ import br.gov.cultura.DitelAdm.model.CadastroChip;
 import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
-
-import br.gov.cultura.DitelAdm.model.VinculoCadastroChipTipo;
-import br.gov.cultura.DitelAdm.model.VinculoDispositivoTipo;
-import br.gov.cultura.DitelAdm.model.StatusCadastro;
-import br.gov.cultura.DitelAdm.model.VinculoCadastroPessoa;
-import br.gov.cultura.DitelAdm.model.VinculoCadastroPessoaCargo;
-import br.gov.cultura.DitelAdm.model.VinculoCadastroPessoaDAS;
+import br.gov.cultura.DitelAdm.model.enums.StatusCadastro;
+import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
+import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoa;
+import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaCargo;
+import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaDAS;
+import br.gov.cultura.DitelAdm.model.enums.VinculoDispositivoTipo;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller

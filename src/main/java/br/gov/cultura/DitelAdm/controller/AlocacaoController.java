@@ -29,8 +29,8 @@ import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
 import br.gov.cultura.DitelAdm.model.LeitorFebrabanV3;
-import br.gov.cultura.DitelAdm.model.VinculoCadastroChipTipo;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
@@ -49,8 +49,8 @@ public class AlocacaoController extends UrlController {
 	private CadastroChipService cadastroChipService;
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
-	@Autowired
-	private FaturaService faturaService;
+/*	@Autowired
+	private FaturaService faturaService;*/
 
 	@RequestMapping("/disponibilizar")
 	public @ResponseBody ModelAndView novo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
@@ -64,7 +64,7 @@ public class AlocacaoController extends UrlController {
 		mv.addObject("chips", todosChips);
 		List<CadastroLinha> todasLinhas = cadastroLinhaService.filtrar(filtro);
 		mv.addObject("linhas", todasLinhas);
-		LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
+		/*LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
 		File file = new File(//"C:\\Users\\Administrador\\Desktop\\Projetos de Programação\\Arquivos DITEL\\Faturas para o Projeto ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
 				"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\"
 						+ "Arquivos DITEL\\Faturas para o Projeto ditel\\"
@@ -94,7 +94,7 @@ public class AlocacaoController extends UrlController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		return mv;
 	}

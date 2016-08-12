@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
-import br.gov.cultura.DitelAdm.modelo.Planos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
 import br.gov.cultura.DitelAdm.repository.Ajustesas;
 import br.gov.cultura.DitelAdm.repository.CategoriasAjustes;
 import br.gov.cultura.DitelAdm.repository.CategoriasChamadas;

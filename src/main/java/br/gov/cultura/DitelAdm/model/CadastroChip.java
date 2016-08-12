@@ -10,6 +10,8 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
+
 @Entity
 public class CadastroChip {
 	

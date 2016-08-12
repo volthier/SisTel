@@ -2,23 +2,23 @@ package br.gov.cultura.DitelAdm.model.dtos;
 
 import java.util.List;
 
-import br.gov.cultura.DitelAdm.modelo.Ajustes;
-import br.gov.cultura.DitelAdm.modelo.Categoriaajuste;
-import br.gov.cultura.DitelAdm.modelo.Categoriachamada;
-import br.gov.cultura.DitelAdm.modelo.Categoriadesconto;
-import br.gov.cultura.DitelAdm.modelo.Categoriaplano;
-import br.gov.cultura.DitelAdm.modelo.Categoriaservico;
-import br.gov.cultura.DitelAdm.modelo.Chamadas;
-import br.gov.cultura.DitelAdm.modelo.Cliente;
-import br.gov.cultura.DitelAdm.modelo.Descontos;
-import br.gov.cultura.DitelAdm.modelo.Enderecos;
-import br.gov.cultura.DitelAdm.modelo.Fatura;
-import br.gov.cultura.DitelAdm.modelo.Notafiscal;
-import br.gov.cultura.DitelAdm.modelo.Operadora;
-import br.gov.cultura.DitelAdm.modelo.Planos;
-import br.gov.cultura.DitelAdm.modelo.Resumo;
-import br.gov.cultura.DitelAdm.modelo.Servicos;
-import br.gov.cultura.DitelAdm.modelo.Trailler;
+import br.gov.cultura.DitelAdm.model.faturasV3.Ajustes;
+import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaajuste;
+import br.gov.cultura.DitelAdm.model.faturasV3.Categoriachamada;
+import br.gov.cultura.DitelAdm.model.faturasV3.Categoriadesconto;
+import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaplano;
+import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaservico;
+import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
+import br.gov.cultura.DitelAdm.model.faturasV3.Cliente;
+import br.gov.cultura.DitelAdm.model.faturasV3.Descontos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Enderecos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
+import br.gov.cultura.DitelAdm.model.faturasV3.Notafiscal;
+import br.gov.cultura.DitelAdm.model.faturasV3.Operadora;
+import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
+import br.gov.cultura.DitelAdm.model.faturasV3.Servicos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 
 public class FaturaArquivoDTO {
 
