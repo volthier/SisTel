@@ -8,6 +8,9 @@ import java.util.Locale;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.servlet.LocaleResolver;
@@ -29,6 +32,21 @@ public class DitelAdmApplication {
             Files.createDirectory(Paths.get(FaturaUploadController.ROOT));
 		};
 	}
+	
+	@Bean
+	EmbeddedServletContainerCustomizer containerCustomizer() throws Exception {
+	    return (ConfigurableEmbeddedServletContainer container) -> {
+	        if (container instanceof TomcatEmbeddedServletContainerFactory) {
+	            TomcatEmbeddedServletContainerFactory tomcat = (TomcatEmbeddedServletContainerFactory) container;
+	            tomcat.addConnectorCustomizers(
+	                (connector) -> {
+	                    connector.setMaxPostSize(10000000); // 10 MB
+	                }
+	            );
+	        }
+	    };
+	}
+	
 	@Bean
 	public LocaleResolver localeResolver(){
 		return new FixedLocaleResolver(new Locale("pt","BR"));
