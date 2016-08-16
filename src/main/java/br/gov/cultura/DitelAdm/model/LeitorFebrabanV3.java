@@ -96,7 +96,7 @@ public class LeitorFebrabanV3 {
 		TraillerId traillerId = new TraillerId();
 		Trailler trailler = new Trailler();
 		List<Trailler> traillerLista = new ArrayList<Trailler>();
-		
+
 		while ((data = reader.readLine()) != null) {
 			String TipoReg = data.substring(0, 2);
 			switch (TipoReg)
@@ -117,10 +117,10 @@ public class LeitorFebrabanV3 {
 				cliente = new Cliente();
 				clienteId = new ClienteId();
 				operadora = new Operadora();
+				
 				/** Identificador de Conta Unica ou Numero da conta */
 				fatura.setIndConta(data.substring(14, 39));
-				// fatura.setIndConta(recuperaTextoCampo(data,
-				// PosicaoCamposEnum.CAMPO_HEADER_FATURA_INDCONTA));
+				// fatura.setIndConta(recuperaTextoCampo(data,PosicaoCamposEnum.CAMPO_HEADER_FATURA_INDCONTA));
 
 				/** Data da emissão da Fatura/conta */
 				try {
@@ -994,9 +994,10 @@ public class LeitorFebrabanV3 {
 				categoriaPlano = new Categoriaplano();
 
 				/** Controle de sequencia de gravação */
-				  planosId.setIdPlanos(Integer.parseInt(data.substring(2, 14)));
-				  
-				 /** Identificador de Conta Unica ou Numero da conta String
+				planosId.setIdPlanos(Integer.parseInt(data.substring(2, 14)));
+
+				/**
+				 * Identificador de Conta Unica ou Numero da conta String
 				 * planosIndConta(data.substring(14, 39);
 				 */
 
@@ -1014,11 +1015,10 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Identificador Único do Recurso */
-				//planosId.setResumoNumRecurso(data.substring(53, 78));
+				// planosId.setResumoNumRecurso(data.substring(53, 78));
 
 				/** Numero do Telefone */
 				planosId.setResumoNumRecurso(data.substring(78, 94));
-				 
 
 				/**
 				 * Tipo do Plano
@@ -1078,7 +1078,7 @@ public class LeitorFebrabanV3 {
 				/** Codigo da Categoria do Plano */
 				categoriaPlano.setCodCatPlano(Integer.parseInt(data.substring(155, 158)));
 				planosId.setCategoriaPlanoCodCatPlano(categoriaPlano.getCodCatPlano());
-				
+
 				/** Sigla da Categoria do Plano */
 				categoriaPlano.setSigla(data.substring(158, 161));
 
@@ -1134,7 +1134,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				for (Resumo r : resumoLista) {
-					if (r.getId().getNumRecurso().equals(planosId.getResumoNumRecurso())) {						
+					if (r.getId().getNumRecurso().equals(planosId.getResumoNumRecurso())) {
 						planosId.setResumoId(r.getId().getId());
 						planosId.setResumoNumRecurso(r.getId().getNumRecurso());
 						planosId.setResumoFaturaNumFatura(r.getId().getFaturaNumFatura());
@@ -1144,7 +1144,7 @@ public class LeitorFebrabanV3 {
 						planosId.setResumoFaturaDataEmissao(r.getId().getFaturaDataEmissao());
 						planos.setCategoriaplano(categoriaPlano);
 						planos.setResumo(r);
-						planos.setId(planosId);					 
+						planos.setId(planosId);
 						planosLista.add(planos);
 						categoriaPlanoLista.add(categoriaPlano);
 						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
@@ -1156,14 +1156,13 @@ public class LeitorFebrabanV3 {
 				}
 				;
 
-
 				break;
 
 			case "70":
 				/**
 				 * 70_AJUSTES do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
-				 * dos ajustes financeiros de movimentos anteriores*/
-				 
+				 * dos ajustes financeiros de movimentos anteriores
+				 */
 
 				ajustes = new Ajustes();
 				categoriaAjustes = new Categoriaajuste();
@@ -1259,13 +1258,13 @@ public class LeitorFebrabanV3 {
 				for (Resumo r : resumoLista) {
 					if (r.getId().getNumRecurso().equals(ajustes.getNumRecurso())) {
 						ajustes.setResumo(r);
-					}else if(r.getId().getNumRecurso().equals("")) {
+					} else if (r.getId().getNumRecurso().equals("")) {
 						ajustes.setResumo(null);
 					}
 				}
 				categoriaAjustesLista.add(categoriaAjustes);
 				faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
-				
+
 				ajustes.setCategoriaajuste(categoriaAjustes);
 				ajustesLista.add(ajustes);
 				faturaArquivoDTO.setAjustes(ajustesLista);
@@ -1275,11 +1274,13 @@ public class LeitorFebrabanV3 {
 			case "80":
 				/**
 				 * 80_NF do guia Telecom padrão FEBRABAN-V3R0 Totalizador por
-				 * nota fiscal apresentada*/
+				 * nota fiscal apresentada
+				 */
 				notaFiscal = new Notafiscal();
 				notaFiscalId = new NotafiscalId();
-				
-				 /* Controle de sequencia de gravação String nfControlSeqGrav =
+
+				/*
+				 * Controle de sequencia de gravação String nfControlSeqGrav =
 				 * data.substring(2, 14);
 				 *
 				 * Identificador de Conta Unica ou Numero da conta String
@@ -1292,15 +1293,17 @@ public class LeitorFebrabanV3 {
 				 * data.substring(47, 53);
 				 *
 				 *
-				 * Data de Vencimento da Nota Fiscal NF*/ 
-				  try {
+				 * Data de Vencimento da Nota Fiscal NF
+				 */
+				try {
 					notaFiscal.setDataVencimento(sdf.parse(data.substring(53, 61)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				 
-				 /* Codigo da Operadora String nfCodOp(data.substring(61, 64);
+
+				/*
+				 * Codigo da Operadora String nfCodOp(data.substring(61, 64);
 				 *
 				 * Nome da Operadora String nfNomeOp(data.substring(64, 79);
 				 *
@@ -1323,9 +1326,10 @@ public class LeitorFebrabanV3 {
 				/** Campo livre para Operadora */
 				notaFiscal.setCampoLivreOp(data.substring(324, 349));
 
-				/**	 Marcação de Fim 
-				 String nfMarcaFim(data.substring(349, 350); */
-				
+				/**
+				 * Marcação de Fim String nfMarcaFim(data.substring(349, 350);
+				 */
+
 				notaFiscalId.setFaturaNumFatura(faturaId.getNumFatura());
 				notaFiscalId.setFaturaClienteCodCliente(clienteId.getCodCliente());
 				notaFiscalId.setFaturaClienteOperadoraCodOperadora(operadora.getCodOperadora());
@@ -1371,16 +1375,15 @@ public class LeitorFebrabanV3 {
 				 * Mês de Referência da fatura(cobrança) String traillerMesRef =
 				 * data.substring(47, 53);
 				 * 
-				/** Data de Vencimento 
-				 * String traillerDataVenc(data.substring(53, 61); 
+				 * /** Data de Vencimento String
+				 * traillerDataVenc(data.substring(53, 61);
 				 */
-				 
-				
-				 /** Codigo do Cliente */
+
+				/** Codigo do Cliente */
 				traillerId.setFaturaClienteCodCliente(data.substring(61, 76));
 
-				/** 
-				 * Valor Total 
+				/**
+				 * Valor Total
 				 */
 				trailler.setValTotal(Float.parseFloat(data.substring(76, 89)));
 
@@ -1481,8 +1484,10 @@ public class LeitorFebrabanV3 {
 				 */
 				trailler.setCampoLivreOp(data.substring(324, 349));
 
-				/** Marcação de Fim
-				 	 String traillerMarcaFim(data.substring(349, 350); */
+				/**
+				 * Marcação de Fim String traillerMarcaFim(data.substring(349,
+				 * 350);
+				 */
 				traillerId.setFaturaNumFatura(faturaId.getNumFatura());
 				traillerId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
 				trailler.setId(traillerId);

@@ -36,6 +36,7 @@ public class FaturaUploadController {
 	public static final String ROOT = "upload-dir";
 
 	private final ResourceLoader resourceLoader;
+	
 	@Autowired
 	private FaturaService faturaService;
 
@@ -56,12 +57,11 @@ public class FaturaUploadController {
 		return "CadastroFaturas";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/faturas/{filename:.+}")
+	@RequestMapping(method = RequestMethod.GET, value = "/faturas/nova/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<?> getFile(@PathVariable String filename) {
 
 		try {
-
 			return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(ROOT, filename).toString()));
 		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
@@ -70,22 +70,22 @@ public class FaturaUploadController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/faturas/nova")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-								   RedirectAttributes redirectAttributes)throws IllegalStateException, IOException {
-			
-		 
-
-	
+								   RedirectAttributes redirectAttributes) throws IOException {
+				
 		if (!file.isEmpty()) {
 			try {
 				Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
 				redirectAttributes.addFlashAttribute("message",
 						"You successfully uploaded " + file.getOriginalFilename() + "!");
-			
-			    File convFile = new File( file.getOriginalFilename());
-			    file.transferTo(convFile);
-						
-		    	LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
-				FaturaArquivoDTO faturaArquivoDTO = leitor.read(convFile);
+				
+				File tmpFile = new File(System.getProperty("java.io.tmpdir")+System.getProperty("file.separator")+file.getOriginalFilename());
+			        
+			        file.transferTo(tmpFile);
+			       
+			    
+				
+				LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
+				FaturaArquivoDTO faturaArquivoDTO = leitor.read(tmpFile);
 				faturaService.salvarOperadora(faturaArquivoDTO);
 				faturaService.salvarCliente(faturaArquivoDTO);
 				faturaService.salvarFatura(faturaArquivoDTO);
@@ -102,16 +102,37 @@ public class FaturaUploadController {
 				faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
 				faturaService.salvarAjustes(faturaArquivoDTO);	
 				faturaService.salvarNotaFiscal(faturaArquivoDTO);
-				faturaService.salvarTrailler(faturaArquivoDTO);
-			
+				faturaService.salvarTrailler(faturaArquivoDTO);				
+				
 			} catch (IOException|RuntimeException e) {
-				redirectAttributes.addFlashAttribute("message", "Failued to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+				redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " => " + e.getMessage());
 			}
 		} else {
 			redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
 		}
-
-		return "redirect:/faturas";
+		return "redirect:/faturas/nova";
 	}
-
 }
+
+/* File convFile = new File( file.getOriginalFilename());
+file.transferTo(convFile);
+		
+LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
+FaturaArquivoDTO faturaArquivoDTO = leitor.read(convFile);
+faturaService.salvarOperadora(faturaArquivoDTO);
+faturaService.salvarCliente(faturaArquivoDTO);
+faturaService.salvarFatura(faturaArquivoDTO);
+faturaService.salvarResumo(faturaArquivoDTO);
+faturaService.salvarEnderecos(faturaArquivoDTO);
+faturaService.salvarCategoriasChamadas(faturaArquivoDTO);
+faturaService.salvarChamadas(faturaArquivoDTO);
+faturaService.salvarCategoriaServicos(faturaArquivoDTO);
+faturaService.salvarServicos(faturaArquivoDTO);
+faturaService.salvarCategoriasDescontos(faturaArquivoDTO);
+faturaService.salvarDescontos(faturaArquivoDTO);
+faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
+faturaService.SalvarPlanos(faturaArquivoDTO);
+faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
+faturaService.salvarAjustes(faturaArquivoDTO);	
+faturaService.salvarNotaFiscal(faturaArquivoDTO);
+faturaService.salvarTrailler(faturaArquivoDTO);*/
