@@ -1,7 +1,5 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,14 +20,11 @@ import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
-import br.gov.cultura.DitelAdm.Service.FaturaService;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.CadastroChip;
 import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
-import br.gov.cultura.DitelAdm.model.LeitorFebrabanV3;
-import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 

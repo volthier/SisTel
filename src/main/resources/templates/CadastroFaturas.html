@@ -10,7 +10,7 @@
 <section layout:fragment="conteudo">
 
 	<div th:if="${message}">
-		<h2 th:text="${message}"/>
+		<h2 th:text="${message}"></h2>
 	</div>
 
 	<div>
@@ -25,7 +25,7 @@
 	<div>
 		<ul>
 			<li th:each="file : ${files}">
-				<a th:href="${file.href}" th:text="${file.rel}" />
+				<a th:href="${file.href}" th:text="${file.rel}"></a>
 			</li>
 		</ul>
 	</div>

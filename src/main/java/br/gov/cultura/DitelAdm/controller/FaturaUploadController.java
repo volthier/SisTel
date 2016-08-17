@@ -31,7 +31,7 @@ import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 @Controller
 public class FaturaUploadController {
 
-	private static final Logger log = LoggerFactory.getLogger(FaturaUploadController.class);
+	/*private static final Logger log = LoggerFactory.getLogger(FaturaUploadController.class);*/
 
 	public static final String ROOT = "upload-dir";
 
