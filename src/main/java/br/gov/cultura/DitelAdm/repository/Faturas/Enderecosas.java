@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.repository;
+package br.gov.cultura.DitelAdm.repository.Faturas;
 
 import java.util.List;
 

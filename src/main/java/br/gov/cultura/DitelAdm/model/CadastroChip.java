@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.model;
+/*package br.gov.cultura.DitelAdm.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
+import br.gov.cultura.DitelAdm.model.enums.TipoChip;
 
 @Entity
 public class CadastroChip {
@@ -23,7 +23,7 @@ public class CadastroChip {
 	private String nrserie;
 	
 	@Enumerated(EnumType.STRING)
-	private VinculoCadastroChipTipo tipo;
+	private TipoChip tipo;
 
 	public long getId() {
 		return id;
@@ -41,11 +41,11 @@ public class CadastroChip {
 		this.nrserie = nrserie;
 	}
 
-	public VinculoCadastroChipTipo getTipo() {
+	public TipoChip getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(VinculoCadastroChipTipo tipo) {
+	public void setTipo(TipoChip tipo) {
 		this.tipo = tipo;
 	}
 
@@ -74,3 +74,4 @@ public class CadastroChip {
 	
 }
 
+*/

@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Alocacao {
 
 	@OneToOne(cascade = CascadeType.REFRESH, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	private CadastroChip chip;
+	private Chip chip;
 
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private CadastroPessoa pessoa;
@@ -55,11 +55,11 @@ public class Alocacao {
 		this.dataRecebido = new Date();
 	}
 
-	public CadastroChip getChip() {
+	public Chip getChip() {
 		return chip;
 	}
 
-	public void setChip(CadastroChip chip) {
+	public void setChip(Chip chip) {
 		this.chip = chip;
 	}
 

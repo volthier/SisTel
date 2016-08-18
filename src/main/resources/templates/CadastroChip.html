@@ -10,7 +10,7 @@
 <section layout:fragment="conteudo">
 	<div>
 	<form class="form-horizontal" method="POST"
-		th:action="@{/chips}" th:object="${cadastroChip}">
+		th:action="@{/chips}" th:object="${chip}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
@@ -26,13 +26,13 @@
 			</div>
 
 			<div class="painel-body">
-				<input type="hidden" th:field="*{id}" />
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('nrserie')} ? has-error">
-					<label for="nrserie" class="col-sm-2 control-label">Numero de Serie</label>
+				<!-- <input type="hidden" th:field="*{id}" /> -->
+				<div class="form-group"	th:classappend="${#fields.hasErrors('numeroSerieChip')} ? has-error">
+				
+					<label for="numeroSerieChip" class="col-sm-2 control-label">Numero de Serie</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="nrserie"
-							th:field="*{nrserie}" />
+						<input type="text" class="form-control" id="numeroSerieChip"
+							th:field="*{numeroSerieChip}" />
 					</div>
 				</div>
 
@@ -40,10 +40,10 @@
 					<label for="status" class="col-sm-2 control-label">Tipo de
 						SimCard</label>
 					<div class="col-sm-2">
-						<input list="tipos" name="tipos" class="form-control" th:field="*{tipo}"/>
+						<input list="tipos" name="tipos" class="form-control" th:field="*{tipoChip}"/>
 						<datalist id="tipos">
 							<option th:each="tipo : ${todosCadastroChipTipo}"
-								th:value="${tipo}" th:text="${tipo.descricao}"/>
+								th:value="${tipoChip}" th:text="${tipo.descricao}"/>
 						</datalist>
 					</div>
 				</div>

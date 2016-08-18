@@ -7,23 +7,23 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
-import br.gov.cultura.DitelAdm.repository.Ajustesas;
-import br.gov.cultura.DitelAdm.repository.CategoriasAjustes;
-import br.gov.cultura.DitelAdm.repository.CategoriasChamadas;
-import br.gov.cultura.DitelAdm.repository.CategoriasDescontos;
-import br.gov.cultura.DitelAdm.repository.CategoriasPlanos;
-import br.gov.cultura.DitelAdm.repository.CategoriasServicos;
-import br.gov.cultura.DitelAdm.repository.Chamadasas;
-import br.gov.cultura.DitelAdm.repository.Clientes;
-import br.gov.cultura.DitelAdm.repository.Descontosas;
-import br.gov.cultura.DitelAdm.repository.Enderecosas;
-import br.gov.cultura.DitelAdm.repository.Faturas;
-import br.gov.cultura.DitelAdm.repository.NotasFiscais;
-import br.gov.cultura.DitelAdm.repository.Operadoras;
-import br.gov.cultura.DitelAdm.repository.Planosas;
-import br.gov.cultura.DitelAdm.repository.Resumos;
-import br.gov.cultura.DitelAdm.repository.Servicosas;
-import br.gov.cultura.DitelAdm.repository.Traillers;
+import br.gov.cultura.DitelAdm.repository.Faturas.Faturas;
+import br.gov.cultura.DitelAdm.repository.Faturas.Ajustesas;
+import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasAjustes;
+import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasChamadas;
+import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasDescontos;
+import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasPlanos;
+import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasServicos;
+import br.gov.cultura.DitelAdm.repository.Faturas.Chamadasas;
+import br.gov.cultura.DitelAdm.repository.Faturas.Clientes;
+import br.gov.cultura.DitelAdm.repository.Faturas.Descontosas;
+import br.gov.cultura.DitelAdm.repository.Faturas.Enderecosas;
+import br.gov.cultura.DitelAdm.repository.Faturas.NotasFiscais;
+import br.gov.cultura.DitelAdm.repository.Faturas.Operadoras;
+import br.gov.cultura.DitelAdm.repository.Faturas.Planosas;
+import br.gov.cultura.DitelAdm.repository.Faturas.Resumos;
+import br.gov.cultura.DitelAdm.repository.Faturas.Servicosas;
+import br.gov.cultura.DitelAdm.repository.Faturas.Traillers;
 
 @Service
 public class FaturaService {

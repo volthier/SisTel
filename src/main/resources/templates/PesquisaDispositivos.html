@@ -154,16 +154,16 @@
 					<tbody>
 
 						<tr th:each="chip : ${chips}">
-							<td class="text-center" th:text="${chip.id}"></td>
-							<td th:text="${chip.nrserie}"></td>
-							<td class="text-center" th:text="${chip.tipo}"></td>
+							<td class="text-center" th:text="${chip.idChip}"></td>
+							<td th:text="${chip.numeroSerieChip}"></td>
+							<td class="text-center" th:text="${chip.tipoChip}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/chips/{id}(id=${chip.id})}" title="Editar"
+								th:href="@{/chips/{id}(id=${chip.idChip})}" title="Editar"
 								rel="tooltip" data-placement="left"> <span
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='3',data-excludId=${chip.id}, data-exclude=${chip.nrserie}"
+								th:attr="data-flag='3',data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>

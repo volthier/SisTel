@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.gov.cultura.DitelAdm.Service.CadastroChipService;
-import br.gov.cultura.DitelAdm.model.CadastroChip;
+import br.gov.cultura.DitelAdm.model.Chip;
 
 @Controller
 @RequestMapping("/chips")
@@ -25,13 +26,13 @@ public class ChipController extends UrlController {
 	@RequestMapping("/novo")
 	public ModelAndView novo(){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(new CadastroChip());
+		mv.addObject(new Chip());
 		return mv;
 		
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated CadastroChip cadastroChip, Errors errors, RedirectAttributes attributes){
+	public String salvar(@Validated Chip cadastroChip, Errors errors, RedirectAttributes attributes){
 		//TODO: Salva no banco de dados
 		
 		if(errors.hasErrors()){
@@ -56,7 +57,7 @@ public class ChipController extends UrlController {
 		}	
 	
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") CadastroChip chips){
+	public ModelAndView edicao(@PathVariable("idChip") Chip chips){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(chips);
 				return mv;

@@ -2,6 +2,7 @@ package br.gov.cultura.DitelAdm.controller;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,13 +15,12 @@ import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
-
-import br.gov.cultura.DitelAdm.model.CadastroChip;
 import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
+import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.enums.StatusCadastro;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
+import br.gov.cultura.DitelAdm.model.enums.TipoChip;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoa;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaCargo;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaDAS;
@@ -57,7 +57,7 @@ public class UrlController {
 		mv.addObject("pessoas", todasPessoas);
 		mv.addObject("sugestion", json);
 		System.out.println(json);
-		List<CadastroChip> todosChips = cadastroChipService.filtrar(filtro);
+		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
 		json = new Gson().toJson(todosChips);
 		mv.addObject("chips", todosChips);
 		mv.addObject("sugestion", json);
@@ -90,8 +90,8 @@ public class UrlController {
 		return Arrays.asList(VinculoCadastroPessoaCargo.values());
 	}
 	@ModelAttribute("todosCadastroChipTipo")
-	public List<VinculoCadastroChipTipo> todosCadastroChipTipo(){
-		return Arrays.asList(VinculoCadastroChipTipo.values());
+	public List<TipoChip> todosCadastroChipTipo(){
+		return Arrays.asList(TipoChip.values());
 	}
 	
 	@ModelAttribute("todosDispositivoTipo")

@@ -5,10 +5,11 @@ public class CadastroFiltroPesquisa {
 	private String descricao;
 	private String nome;
 	private String modelo;
-	private String nrseries;
+	private String numeroSerieChip;
 	private String nlinha;
 	private String id;
 	private String marca;
+	private String idChip;
 	
 	
 	public String getMarca() {
@@ -58,12 +59,20 @@ public class CadastroFiltroPesquisa {
 		this.nome = nome;
 	}
 
-	public String getNrseries() {
-		return nrseries;
+	public String getNumeroSerieChip() {
+		return numeroSerieChip;
 	}
 
-	public void setNrseries(String nrseries) {
-		this.nrseries = nrseries;
+	public void setNumeroSerieChip(String numeroSerieChip) {
+		this.numeroSerieChip = numeroSerieChip;
+	}
+
+	public String getIdChip() {
+		return idChip;
+	}
+
+	public void setIdChip(String idChip) {
+		this.idChip = idChip;
 	}
 
 }

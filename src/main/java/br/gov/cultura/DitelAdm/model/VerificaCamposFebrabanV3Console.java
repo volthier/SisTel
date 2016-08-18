@@ -562,133 +562,133 @@ public class VerificaCamposFebrabanV3Console {
 
 				break;*/
 
-/*			case "40":
+			case "40":
 
-				*//**
+				/**
 				 * 40_SERVIÃ‡OS do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * dos serviÃ§os faturados
-				 *//*
+				 */
 
-				*//** Controle de sequencia de gravaÃ§Ã£o *//*
+				/** Controle de sequencia de gravaÃ§Ã£o */
 				String servControlSeqGrav = data.substring(2, 14);
 
-				*//** Identificador de Conta Unica ou Numero da conta *//*
+				/** Identificador de Conta Unica ou Numero da conta */
 				String servIndConta = data.substring(14, 39);
 
-				*//** Data da emissÃ£o da Fatura/conta *//*
+				/** Data da emissÃ£o da Fatura/conta */
 				String servDataEmiFatura = data.substring(39, 47);
 
-				*//** MÃªs de ReferÃªncia da fatura(cobranÃ§a) *//*
+				/** MÃªs de ReferÃªncia da fatura(cobranÃ§a) */
 				String servMesRef = data.substring(47, 53);
 
-				*//** Identificador Ãšnico do Recurso *//*
+				/** Identificador Ãšnico do Recurso */
 				String servIdUnicoRecurso = data.substring(53, 78);
 
-				*//**
+				/**
 				 * CNL da Ã�rea local onde o terminal estava em uso durante a
 				 * chamada **** CÃ³digo Nacional de localidade: Fixo - definido
 				 * pela ANATEL; MÃ³vel definido pela ABR Telecom
-				 *//*
+				 */
 				String servClnAreaLocalUsochamada = data.substring(78, 83);
 
-				*//** Numero do recurso *//*
+				/** Numero do recurso */
 				String servNumRecurso = data.substring(83, 99);
 
-				*//** Data do ServiÃ§o *//*
+				/** Data do ServiÃ§o */
 				String servDataServico = data.substring(99, 107);
 
-				*//**
+				/**
 				 * Codigo Nacional / Internacional
 				 * 
-				 *//*
+				 */
 				String servCodNacInt = data.substring(107, 109);
 
-				*//**
+				/**
 				 * NÃºmero Telefone Destino
 				 * 
-				 *//*
+				 */
 				String servNumTelefoneDestino = data.substring(109, 126);
 
-				*//**
+				/**
 				 * Codigo operadora de Roaming
 				 * 
-				 *//*
+				 */
 				String servCodOpRoaming = data.substring(126, 131);
 
-				*//**
+				/**
 				 * Operadora a qual o terminal de destino esta
 				 * vinculado(portabilidade)
 				 * 
-				 *//*
+				 */
 				String servOpTerminalDestVincPortabilidade = data.substring(131, 134);
 
-				*//**
+				/**
 				 * Quantidade Utilizada
 				 * 
-				 *//*
+				 */
 				String servQuantUtil = data.substring(134, 140);
 
-				*//**
+				/**
 				 * Unidade do ServiÃ§o
 				 * 
-				 *//*
+				 */
 				String servUniServico = data.substring(140, 142);
 
-				*//**
+				/**
 				 * Horario do ServiÃ§o
 				 * 
-				 *//*
+				 */
 				String servHorServico = data.substring(142, 148);
 
-				*//**
+				/**
 				 * Codigo da Categoria do ServiÃ§o
 				 * 
-				 *//*
+				 */
 				String servCodCatServico = data.substring(148, 151);
 
-				*//**
+				/**
 				 * Sigla da Categoria do ServiÃ§o
 				 * 
-				 *//*
+				 */
 				String servSigCatServico = data.substring(151, 154);
 
-				*//**
+				/**
 				 * DecriÃ§Ã£o da Categoria ServiÃ§o
 				 * 
-				 *//*
+				 */
 				String servDesCatServico = data.substring(154, 179);
 
-				*//**
+				/**
 				 * Valor do ServiÃ§o com Impostos
 				 * 
-				 *//*
+				 */
 				String servValServImp = data.substring(179, 192);
 
-				*//**
+				/**
 				 * Valor do ServiÃ§o Sem Impostos
 				 * 
-				 *//*
+				 */
 				String servValServSemImp = data.substring(192, 207);
 
-				*//**
+				/**
 				 * Tipo Nota Fiscal NF
 				 * 
-				 *//*
+				 */
 				String servTipoNf = data.substring(207, 208);
 
-				*//**
+				/**
 				 * Numero da nota Fiscal
 				 * 
-				 *//*
+				 */
 				String servNumNf = data.substring(208, 220);
 
-				*//** Filler *//*
+				/** Filler */
 				String servFiller = data.substring(220, 324);
 
-				*//** Campo livre para Operadora *//*
+				/** Campo livre para Operadora */
 				String servCampoLivreOp = data.substring(324, 349);
 				
-				*//** MarcaÃ§Ã£o de Fim *//*
+				/** MarcaÃ§Ã£o de Fim */
 				String servMarcaFim = data.substring(349, 350);
 
 				System.out.println(TipoReg);
@@ -719,7 +719,7 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(servMarcaFim);
 
 				break;
-*/
+
 		/*	case "50":
 				*//**
 				 * 50_DESCONTOS do guia Telecom padrÃ£o FEBRABAN-V3R0
@@ -1029,112 +1029,112 @@ public class VerificaCamposFebrabanV3Console {
 
 				break;*/
 
-			case "70":
-				/**
+/*			case "70":
+				*//**
 				 * 70_AJUSTES do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * dos ajustes financeiros de movimentos anteriores
-				 */
+				 *//*
 
-				/** Controle de sequencia de gravaÃ§Ã£o */
+				*//** Controle de sequencia de gravaÃ§Ã£o *//*
 				String ajustesControlSeqGrav = data.substring(2, 14);
 
-				/** Identificador de Conta Unica ou Numero da conta */
+				*//** Identificador de Conta Unica ou Numero da conta *//*
 				String ajustesIndConta = data.substring(14, 39);
 
-				/** Data da emissÃ£o da Fatura/conta */
+				*//** Data da emissÃ£o da Fatura/conta *//*
 				String ajustesDataEmiFatura = data.substring(39, 47);
 
-				/** MÃªs de ReferÃªncia da fatura(cobranÃ§a) */
+				*//** MÃªs de ReferÃªncia da fatura(cobranÃ§a) *//*
 				String ajustesMesRef = data.substring(47, 53);
 
-				/** Identificador Ãšnico do Recurso */
+				*//** Identificador Ãšnico do Recurso *//*
 				String ajustesIdUnicoRecurso = data.substring(53, 78);
 
-				/**
+				*//**
 				 * Numero do Telefone
 				 * 
-				 */
+				 *//*
 				String ajustesNumTelefone = data.substring(78, 94);
 
-				/**
+				*//**
 				 * Tipo do Plano
 				 * 
-				 */
+				 *//*
 				String ajustesTipo = data.substring(94, 95);
 
-				/**
+				*//**
 				 * Codigo da Categoria dos Ajustes
 				 *
-				 */
+				 *//*
 				String ajustesCodCat = data.substring(95, 98);
 
-				/**
+				*//**
 				 * Sigla da Categoria dos Ajustes
 				 * 
-				 */
+				 *//*
 				String ajustesSigCat = data.substring(98, 101);
 
-				/**
+				*//**
 				 * DescriÃ§Ã£o da Categoria dos Ajustes
 				 * 
-				 */
+				 *//*
 				String ajustesDescCat = data.substring(101, 141);
 
-				/**
+				*//**
 				 * Base de CÃ¡lculo dos Ajustes
 				 * 
-				 */
+				 *//*
 				String ajustesBaseCalc = data.substring(141, 154);
 
-				/**
+				*//**
 				 * Percentual dos Ajustes
 				 * 
-				 */
+				 *//*
 				String ajustesPercentual = data.substring(154, 159);
 
-				/**
+				*//**
 				 * Sinal de Ajuste
 				 * 
-				 */
+				 *//*
 				String ajustesSinal = data.substring(159, 160);
 
-				/**
+				*//**
 				 * Valor do Ajuste
 				 * 
-				 */
+				 *//*
 				String ajustesValor = data.substring(160, 173);
 
-				/**
+				*//**
 				 * Data Inicio do Acerto
 				 * 
-				 */
+				 *//*
 				String ajustesDataInicioAcerto = data.substring(173, 181);
 
-				/**
+				*//**
 				 * Hora Inicio do Acerto
 				 * 
-				 */
+				 *//*
 				String ajustesHoraInicioAcerto = data.substring(181, 187);
 
-				/**
+				*//**
 				 * Data Fim do Acerto
 				 * 
-				 */
+				 *//*
 				String ajustesDataFimAcerto = data.substring(187, 195);
 
-				/**
+				*//**
 				 * Hora Fim do Acerto
 				 * 
-				 */
+				 *//*
 				String ajustesHoraFimAcerto = data.substring(195, 201);
 
-				/** Filler */
+				*//** Filler *//*
 				String ajustesFiller = data.substring(201, 324);
 
-				/** Campo livre para Operadora */
+				*//** Campo livre para Operadora *//*
 				String ajustesCampoLivreOp = data.substring(324, 349);
 
-				/** MarcaÃ§Ã£o de Fim */
+				*//** MarcaÃ§Ã£o de Fim *//*
 				String ajustesMarcaFim = data.substring(349, 350);
 
 				System.out.println(TipoReg);
@@ -1160,7 +1160,7 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(ajustesCampoLivreOp);
 				System.out.println(ajustesMarcaFim);
 
-				break;
+				break;*/
 
 /*			case "80":
 				*//**

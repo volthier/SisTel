@@ -50,6 +50,8 @@ public class LeitorFebrabanV3 {
 	 */
 
 	public FaturaArquivoDTO read(File file) throws IOException {
+		String convert;
+		
 		FaturaArquivoDTO faturaArquivoDTO = new FaturaArquivoDTO();
 		FileReader fileReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(fileReader);
@@ -306,7 +308,8 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Valor Total dos Registros de Chamada com Impostos */
-				resumo.setValorTotalRegChamadaImp(Float.parseFloat(data.substring(128, 141)));
+				convert=((data.substring(128,139)).concat(".").concat(data.substring(139,141)));
+				resumo.setValorTotalRegChamadaImp(Float.parseFloat(convert));
 
 				/** Quantidade de Registros de Serviços */
 				resumo.setQuantRegServ(Integer.parseInt(data.substring(141, 150)));
@@ -317,10 +320,12 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Valor Total de Impostos */
-				resumo.setValorTotalImp(Float.parseFloat(data.substring(165, 178)));
+				convert=((data.substring(165,176)).concat(".").concat(data.substring(176,178)));
+				resumo.setValorTotalImp(Float.parseFloat(convert));
 
 				/** Valor Total da Conta do Recurso Com Impostos */
-				resumo.setValorTotalContaRecursoImp(Float.parseFloat(data.substring(178, 191)));
+				convert=((data.substring(178,189)).concat(".").concat(data.substring(189,191)));
+				resumo.setValorTotalContaRecursoImp(Float.parseFloat(convert));
 
 				/** Degrau do Recurso */
 				resumo.setDegrau(data.substring(191, 193));
@@ -625,10 +630,12 @@ public class LeitorFebrabanV3 {
 				chamadas.setIcms(Integer.parseInt(data.substring(232, 237)));
 
 				/** Valor da ligação com imposto */
-				chamadas.setValLigImp(Float.parseFloat(data.substring(237, 250)));
+				convert=((data.substring(237,247)).concat(".").concat(data.substring(247,250)));
+				chamadas.setValLigImp(Float.parseFloat(convert));
 
 				/** Valor da Ligação sem Imposto */
-				chamadas.setValLigSemImp(Float.parseFloat(data.substring(250, 265)));
+				convert=((data.substring(250,260)).concat(".").concat(data.substring(260,265)));
+				chamadas.setValLigSemImp(Float.parseFloat(convert));
 
 				/** Tipo NF */
 				chamadas.setTipoNf(Integer.parseInt(data.substring(265, 266)));
@@ -785,12 +792,15 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor do Serviço com Impostos
 				 */
-				servicos.setValServImp(Float.parseFloat(data.substring(179, 192)));
+				convert=((data.substring(179, 190)).concat(".").concat(data.substring(190,192)));
+				servicos.setValServImp(Float.parseFloat(convert));
 
 				/**
 				 * Valor do Serviço Sem Impostos
 				 */
-				servicos.setValServ(Float.parseFloat(data.substring(192, 207)));
+				
+				convert=((data.substring(192, 203)).concat(".").concat(data.substring(203,207)));
+				servicos.setValServ(Float.parseFloat(convert));
 
 				/**
 				 * Tipo Nota Fiscal NF
@@ -917,7 +927,8 @@ public class LeitorFebrabanV3 {
 				 * Valor do Desconto
 				 * 
 				 */
-				descontos.setValor(Float.parseFloat(data.substring(158, 171)));
+				convert=((data.substring(158,169)).concat(".").concat(data.substring(169,171)));
+				descontos.setValor(Float.parseFloat(convert));
 
 				/**
 				 * Data Inicio do Desconto
@@ -1101,13 +1112,15 @@ public class LeitorFebrabanV3 {
 				 * Valor do Plano com Imposto
 				 *
 				 */
-				planos.setValComImp(Float.parseFloat(data.substring(216, 229)));
+				convert=((data.substring(216,226)).concat(".").concat(data.substring(226,229)));
+				planos.setValComImp(Float.parseFloat(convert));
 
 				/**
 				 * Valor do Plano sem Imposto
 				 *
 				 */
-				planos.setValSemImp(Float.parseFloat(data.substring(229, 244)));
+				convert=((data.substring(229,239)).concat(".").concat(data.substring(239,244)));
+				planos.setValSemImp(Float.parseFloat(convert));
 
 				/**
 				 * Tipo Nota Fiscal NF
@@ -1311,6 +1324,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Valor da Nota Fiscal NF com Impostos */
+				convert=((data.substring(94, 105)).concat(".").concat(data.substring(105,107)));
 				notaFiscal.setValorNfimp(Float.parseFloat(data.substring(94, 107)));
 
 				/** Tipo de Nota Fiscal NF */

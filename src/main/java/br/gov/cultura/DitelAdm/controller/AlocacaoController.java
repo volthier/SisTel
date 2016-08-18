@@ -21,11 +21,11 @@ import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
 import br.gov.cultura.DitelAdm.model.Alocacao;
-import br.gov.cultura.DitelAdm.model.CadastroChip;
 import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroChipTipo;
+import br.gov.cultura.DitelAdm.model.Chip;
+import br.gov.cultura.DitelAdm.model.enums.TipoChip;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
@@ -55,7 +55,7 @@ public class AlocacaoController extends UrlController {
 		mv.addObject("dispositivos", todosDispositivos);
 		List<CadastroPessoa> todasPessoas = cadastroPessoaService.filtrar(filtro);
 		mv.addObject("pessoas", todasPessoas);
-		List<CadastroChip> todosChips = cadastroChipService.filtrar(filtro);
+		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
 		mv.addObject("chips", todosChips);
 		List<CadastroLinha> todasLinhas = cadastroLinhaService.filtrar(filtro);
 		mv.addObject("linhas", todasLinhas);
@@ -120,7 +120,7 @@ public class AlocacaoController extends UrlController {
 
 	@Override
 	@ModelAttribute("todosCadastroChipTipo")
-	public List<VinculoCadastroChipTipo> todosCadastroChipTipo() {
-		return Arrays.asList(VinculoCadastroChipTipo.values());
+	public List<TipoChip> todosCadastroChipTipo() {
+		return Arrays.asList(TipoChip.values());
 	}
 }

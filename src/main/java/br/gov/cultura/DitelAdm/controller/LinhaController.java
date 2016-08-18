@@ -32,8 +32,6 @@ public class LinhaController extends UrlController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated CadastroLinha cadastroLinha, Errors errors, RedirectAttributes attributes){
-		//TODO: Salva no banco de dados
-		
 		if(errors.hasErrors()){
 	 		return CADASTRO_VIEW;
 	 	}

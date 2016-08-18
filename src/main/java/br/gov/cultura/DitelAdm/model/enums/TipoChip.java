@@ -1,6 +1,6 @@
 package br.gov.cultura.DitelAdm.model.enums;
 
-public enum VinculoCadastroChipTipo {
+public enum TipoChip {
 	
 	SimCard("Sim Card"),
 	MicroSim("Micro Sim"),
@@ -8,11 +8,11 @@ public enum VinculoCadastroChipTipo {
 
 	private String descricao;
 	
-		VinculoCadastroChipTipo(String descricao){
+		private TipoChip(String descricao) {
 			this.descricao = descricao;
-						
 		}
-		public String getDescricao(){
+		@Override
+		public String toString(){
 		 return descricao;
 		}
 }
