@@ -18,7 +18,6 @@ import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.enums.StatusCadastro;
-import br.gov.cultura.DitelAdm.model.enums.TipoChip;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoa;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaCargo;
 import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaDAS;
@@ -75,10 +74,6 @@ public class ConsultaController {
 		return Arrays.asList(VinculoCadastroPessoaCargo.values());
 	}
 
-	@ModelAttribute("todosCadastroChipTipo")
-	public List<TipoChip> todosCadastroChipTipo() {
-		return Arrays.asList(TipoChip.values());
-	}
 
 	@ModelAttribute("todosDispositivoTipo")
 	public List<VinculoDispositivoTipo> todosDispositivoTipo() {
