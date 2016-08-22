@@ -39,10 +39,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<optional>true</optional>
 		</dependency>
-       <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-hateoas</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -63,6 +63,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -131,6 +136,28 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.12.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaLanguage>WSDL</schemaLanguage>
+					<generatePackage>br.gov.cultura.Sei.ws</generatePackage>
+					<schemas>
+						<schema>
+							<url>http://seitreinamento.cultura.gov.br/sei/controlador_ws.php?servico=sei</url>
+						</schema>
+					</schemas>
+					<!-- <catalog>${project.basedir}/src/main/resources/catalog.cat</catalog> -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
