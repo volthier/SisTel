@@ -10,7 +10,7 @@
 <section layout:fragment="conteudo">
 
 	<form class="form-horizontal" method="POST"
-		th:action="@{/pessoas}" th:object="${cadastroPessoa}">
+		th:action="@{/usuarios}" th:object="${usuario}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
@@ -26,34 +26,34 @@
 			</div>
 
 			<div class="painel-body">
-				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{idUsuario}" />
 				<div class="form-group"
-					th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					th:classappend="${#fields.hasErrors('nomeUsuario')} ? has-error">
 					<label for="nome" class="col-sm-2 control-label">Nome</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="nome"
-							th:field="*{nome}" />
+							th:field="*{nomeUsuario}" />
 					</div>
 				</div>
 
 				<div class="form-group"
-					th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+					th:classappend="${#fields.hasErrors('cpfUsuario')} ? has-error">
 					<label for="cpf" class="col-sm-2 control-label">CPF</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="cpf" th:field="*{cpf}" />
+						<input type="text" class="form-control" id="cpf" th:field="*{cpfUsuario}" />
 					</div>
 				</div>
 
-				<div class="form-group"
+<!-- 				<div class="form-group"
 					th:classappend="${#fields.hasErrors('matricula')} ? has-error">
 					<label for="matricula" class="col-sm-2 control-label">Matricula</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="matricula"
 							th:field="*{matricula}"/>
 					</div>
-				</div>
+				</div> -->
 
-				<div class="form-group">
+<!-- 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">Vinculo</label>
 					<div class="col-sm-4">
 						<select class="form-control" name="vinculo" th:field="*{vinculo}">
@@ -61,18 +61,28 @@
 								th:value="${vinculo}" th:text="${vinculo.descricao}"></option>
 						</select>
 					</div>
-				</div>
+				</div> -->
 				
 				<div class="form-group"
-					th:classappend="${#fields.hasErrors('setor')} ? has-error">
-					<label for="setor" class="col-sm-2 control-label">Setor</label>
+					th:classappend="${#fields.hasErrors('lotacaoUsuario')} ? has-error">
+					<label for="lotacao" class="col-sm-2 control-label">Lotação</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" id="setor"
-							th:field="*{setor}" />
+						<input type="text" class="form-control" id="lotacao"
+							th:field="*{lotacaoUsuario}" />
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<!-- Cargo inserir dropdown -->
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('cargoUsuario')} ? has-error">
+					<label for="cargo" class="col-sm-2 control-label">Cargo</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="cargo"
+							th:field="*{cargoUsuario}" />
+					</div>
+				</div>
+				
+<!-- 			<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">Cargo</label>
 					<div class="col-sm-3">
 						<select class="form-control" name="cargo" th:field="*{cargo}">
@@ -80,27 +90,18 @@
 								th:value="${cargo}" th:text="${cargo.descricao}"></option>
 						</select>
 					</div>
-				</div>
+				</div> -->
 				
-				<div class="form-group">
+<!-- Alterar metodo	<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">DAS</label>
 					<div class="col-sm-2">
 						<select class="form-control" name="das" th:field="*{das}">
 							<option th:each="das : ${todosVinculoCadastroPessoaDAS}"
 								th:value="${das}" th:text="${das.descricao}"></option>
 						</select>
-					</div>
-				</div>
+					</div >
+				</div>-->
 								
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('email')} ? has-error">
-					<label for="email" class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="email"
-							th:field="*{email}" />
-					</div>
-				</div>
-
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-primary">Salvar</button>

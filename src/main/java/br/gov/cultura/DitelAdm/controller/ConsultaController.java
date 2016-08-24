@@ -1,27 +1,19 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
-import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
-import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
-import br.gov.cultura.DitelAdm.model.CadastroLinha;
-import br.gov.cultura.DitelAdm.model.CadastroPessoa;
+import br.gov.cultura.DitelAdm.Service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.model.Chip;
-import br.gov.cultura.DitelAdm.model.enums.StatusCadastro;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoa;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaCargo;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaDAS;
-import br.gov.cultura.DitelAdm.model.enums.VinculoDispositivoTipo;
+import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
@@ -32,7 +24,7 @@ public class ConsultaController {
 	private CadastroDispositivoService cadastroDispositivoService;
 
 	@Autowired
-	private CadastroPessoaService cadastroPessoaService;
+	private CadastroUsuarioService cadastroUsuarioService;
 
 	@Autowired
 	private CadastroChipService cadastroChipService;
@@ -42,19 +34,19 @@ public class ConsultaController {
 
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		List<CadastroDispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
 		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		mv.addObject("dispositivos", todosDispositivos);
-		List<CadastroPessoa> todasPessoas = cadastroPessoaService.filtrar(filtro);
-		mv.addObject("pessoas", todasPessoas);
+		List<Usuario> todosUsuarios = cadastroUsuarioService.filtrar(filtro);
+		mv.addObject("usuarios", todosUsuarios);
 		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
 		mv.addObject("chips", todosChips);
-		List<CadastroLinha> todasLinhas = cadastroLinhaService.filtrar(filtro);
+		List<Linha> todasLinhas = cadastroLinhaService.filtrar(filtro);
 		mv.addObject("linhas", todasLinhas);
 		return mv;
 	}
 
-	@ModelAttribute("todosStatusCadastro")
+	/*@ModelAttribute("todosStatusCadastro")
 	public List<StatusCadastro> todosStatusCadastro() {
 		return Arrays.asList(StatusCadastro.values());
 	}
@@ -74,10 +66,9 @@ public class ConsultaController {
 		return Arrays.asList(VinculoCadastroPessoaCargo.values());
 	}
 
-
 	@ModelAttribute("todosDispositivoTipo")
 	public List<VinculoDispositivoTipo> todosDispositivoTipo() {
 		return Arrays.asList(VinculoDispositivoTipo.values());
-	}
+	}*/
 
 }

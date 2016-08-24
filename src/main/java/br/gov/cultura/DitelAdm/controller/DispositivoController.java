@@ -1,7 +1,11 @@
 package br.gov.cultura.DitelAdm.controller;
 
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
-import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
+import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
 @RequestMapping("/dispositivos")
-public class DispositivoController extends UrlController {
+public class DispositivoController {
 	
 	private static final String CADASTRO_VIEW = "CadastroDispositivo";
  	
@@ -29,16 +34,15 @@ public class DispositivoController extends UrlController {
 	@RequestMapping("/novo")
 	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		List<CadastroDispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
 		mv.addObject("dispositivos", todosDispositivos);		
-		mv.addObject(new CadastroDispositivo());
+		mv.addObject(new Dispositivo());
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated CadastroDispositivo cadastroDispositivo, Errors errors, RedirectAttributes attributes){
-		//TODO: Salva no banco de dados
-		
+	public String salvar(@Validated Dispositivo cadastroDispositivo, Errors errors, RedirectAttributes attributes){
+
 		if(errors.hasErrors()){
 	 		return CADASTRO_VIEW;
 	 	}
@@ -61,9 +65,24 @@ public class DispositivoController extends UrlController {
 		}	
 	
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") CadastroDispositivo Dispositivos){
+	public ModelAndView edicao(@PathVariable("id") Dispositivo dispositivos){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(Dispositivos);
+		mv.addObject(dispositivos);
 				return mv;
 	}
+	
+	//DropDownMenu Atributos
+	@ModelAttribute("tipoDispositivoMap")
+	public Map<String,String> populateTipoDispositivoMap() throws MalformedURLException, IOException 
+	{
+
+	    Map<String,String> tipoDispositivoMap = new HashMap<String,String> ();
+	    tipoDispositivoMap.put("Fixo","Fixo");
+	    tipoDispositivoMap.put("Celular","Celular");
+	    tipoDispositivoMap.put("Tablet","Tablet");
+	    tipoDispositivoMap.put("Modem","Modem");
+	    return tipoDispositivoMap;
+	   
+	}
+	
 }

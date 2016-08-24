@@ -1,13 +1,15 @@
 package br.gov.cultura.DitelAdm.model;
-// Generated 17/08/2016 19:31:54 by Hibernate Tools 4.3.4.Final
+// Generated 24/08/2016 14:33:52 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,47 +23,42 @@ import javax.persistence.TemporalType;
 @Table(name = "alocacao_usuario_linha", catalog = "diteladmdev")
 public class AlocacaoUsuarioLinha implements java.io.Serializable {
 
-	private AlocacaoUsuarioLinhaId id;
+	private Integer idAlocacaoUsuarioLinha;
 	private Linha linha;
 	private Usuario usuario;
-	private Date dtRecebido;
 	private Date dtDevolucao;
+	private Date dtRecebido;
 
 	public AlocacaoUsuarioLinha() {
 	}
 
-	public AlocacaoUsuarioLinha(AlocacaoUsuarioLinhaId id, Linha linha, Usuario usuario, Date dtRecebido) {
-		this.id = id;
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtRecebido) {
 		this.linha = linha;
 		this.usuario = usuario;
 		this.dtRecebido = dtRecebido;
 	}
 
-	public AlocacaoUsuarioLinha(AlocacaoUsuarioLinhaId id, Linha linha, Usuario usuario, Date dtRecebido,
-			Date dtDevolucao) {
-		this.id = id;
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebido) {
 		this.linha = linha;
 		this.usuario = usuario;
-		this.dtRecebido = dtRecebido;
 		this.dtDevolucao = dtDevolucao;
+		this.dtRecebido = dtRecebido;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idAlocacaoUsuarioLinha", column = @Column(name = "idAlocacao_usuario_linha", nullable = false)),
-			@AttributeOverride(name = "idUsuario", column = @Column(name = "idUsuario", nullable = false)),
-			@AttributeOverride(name = "idLinha", column = @Column(name = "idLinha", nullable = false)) })
-	public AlocacaoUsuarioLinhaId getId() {
-		return this.id;
+	@Column(name = "id_alocacao_usuario_linha", unique = true, nullable = false)
+	public Integer getIdAlocacaoUsuarioLinha() {
+		return this.idAlocacaoUsuarioLinha;
 	}
 
-	public void setId(AlocacaoUsuarioLinhaId id) {
-		this.id = id;
+	public void setIdAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha) {
+		this.idAlocacaoUsuarioLinha = idAlocacaoUsuarioLinha;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idLinha", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_linha", nullable = false)
 	public Linha getLinha() {
 		return this.linha;
 	}
@@ -71,7 +68,7 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUsuario", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_usuario", nullable = false)
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -81,23 +78,23 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dtRecebido", nullable = false, length = 19)
-	public Date getDtRecebido() {
-		return this.dtRecebido;
-	}
-
-	public void setDtRecebido(Date dtRecebido) {
-		this.dtRecebido = dtRecebido;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dtDevolucao", length = 19)
+	@Column(name = "dt_devolucao", length = 19)
 	public Date getDtDevolucao() {
 		return this.dtDevolucao;
 	}
 
 	public void setDtDevolucao(Date dtDevolucao) {
 		this.dtDevolucao = dtDevolucao;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dt_recebido", nullable = false, length = 19)
+	public Date getDtRecebido() {
+		return this.dtRecebido;
+	}
+
+	public void setDtRecebido(Date dtRecebido) {
+		this.dtRecebido = dtRecebido;
 	}
 
 }

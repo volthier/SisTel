@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.gov.cultura.DitelAdm.model.CadastroLinha;
+import br.gov.cultura.DitelAdm.model.Linha;
 
-public interface Linhas extends JpaRepository<CadastroLinha, Long>{
+public interface Linhas extends JpaRepository<Linha, Long>{
 	
-	public List<CadastroLinha> findByNlinhaContaining(String nlinha);
+	public List<Linha> findByNumeroLinhaContaining(String numeroLinha);
 
 }

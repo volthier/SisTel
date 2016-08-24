@@ -1,5 +1,5 @@
 package br.gov.cultura.DitelAdm.model;
-// Generated 17/08/2016 19:31:54 by Hibernate Tools 4.3.4.Final
+// Generated 24/08/2016 14:33:52 by Hibernate Tools 4.3.4.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "linha", catalog = "diteladmdev")
 public class Linha implements java.io.Serializable {
 
-	private Integer idlinha;
+	private Integer idLinha;
 	private String numeroLinha;
 	private String planoLinha;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -40,29 +40,29 @@ public class Linha implements java.io.Serializable {
 		this.numeroLinha = numeroLinha;
 	}
 
-	public Linha(String numeroLinha, String planoLinha, Set<AlocacaoLinhaChip> alocacaoLinhaChips, Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos,
+	public Linha(String numeroLinha, String planoLinha,Set<AlocacaoLinhaChip> alocacaoLinhaChips, Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos,
 			Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas) {
 		this.numeroLinha = numeroLinha;
 		this.planoLinha = planoLinha;
-		this.alocacaoLinhaChips = alocacaoLinhaChips;
 		this.alocacaoLinhaDispositivos = alocacaoLinhaDispositivos;
 		this.alocacaoUsuarioLinhas = alocacaoUsuarioLinhas;
+		this.alocacaoLinhaChips = alocacaoLinhaChips;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "idlinha", unique = true, nullable = false)
-	public Integer getIdlinha() {
-		return this.idlinha;
+	@Column(name = "id_linha", unique = true, nullable = false)
+	public Integer getIdLinha() {
+		return this.idLinha;
 	}
 
-	public void setIdlinha(Integer idlinha) {
-		this.idlinha = idlinha;
+	public void setIdLinha(Integer idLinha) {
+		this.idLinha = idLinha;
 	}
 
-	@Column(name = "numeroLinha", nullable = false, length = 17)
-	@NotEmpty(message="Numero da Linha e obrigatório!")
+	@Column(name = "numero_linha", nullable = false, length = 17)
+	@NotEmpty(message="Numero da Linha e obrigat�rio!")
 	public String getNumeroLinha() {
 		return this.numeroLinha;
 	}
@@ -71,22 +71,13 @@ public class Linha implements java.io.Serializable {
 		this.numeroLinha = numeroLinha;
 	}
 
-	@Column(name = "planoLinha", length = 45)
+	@Column(name = "plano_linha", length = 45)
 	public String getPlanoLinha() {
 		return this.planoLinha;
 	}
 
 	public void setPlanoLinha(String planoLinha) {
 		this.planoLinha = planoLinha;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linha")
-	public Set<AlocacaoLinhaChip> getAlocacaoLinhaChips() {
-		return this.alocacaoLinhaChips;
-	}
-
-	public void setAlocacaoLinhaChips(Set<AlocacaoLinhaChip> alocacaoLinhaChips) {
-		this.alocacaoLinhaChips = alocacaoLinhaChips;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linha")
@@ -105,6 +96,15 @@ public class Linha implements java.io.Serializable {
 
 	public void setAlocacaoUsuarioLinhas(Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas) {
 		this.alocacaoUsuarioLinhas = alocacaoUsuarioLinhas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linha")
+	public Set<AlocacaoLinhaChip> getAlocacaoLinhaChips() {
+		return this.alocacaoLinhaChips;
+	}
+
+	public void setAlocacaoLinhaChips(Set<AlocacaoLinhaChip> alocacaoLinhaChips) {
+		this.alocacaoLinhaChips = alocacaoLinhaChips;
 	}
 
 }

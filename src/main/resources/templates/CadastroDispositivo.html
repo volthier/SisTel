@@ -10,7 +10,7 @@
 <section layout:fragment="conteudo">
 
 	<form class="form-horizontal" method="POST" th:action="@{/dispositivos}"
-		th:object="${cadastroDispositivo}">
+		th:object="${dispositivo}">
 		
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
@@ -26,66 +26,75 @@
 			</div>
  <p></p>
 			<div class="painel-body">
-			  <input type="hidden" th:field="*{id}"/>
-				<div class="form-group" th:classappend="${#fields.hasErrors('marca')} ? has-error">
+			  <input type="hidden" th:field="*{idDispositivo}"/>
+				<div class="form-group" th:classappend="${#fields.hasErrors('marcaDispositivo')} ? has-error">
 					<label for="marca" class="col-sm-2 control-label">Marca</label>
 					<div class="col-sm-4">
-						<input list="marcas" class="form-control" id="marca" th:field="*{marca}" />
+						<input list="marcas" class="form-control" id="marca" th:field="*{marcaDispositivo}" />
 						<datalist id="marcas">
-						<option th:each="dispositivo : ${dispositivos}" th:value="${dispositivo.marca}" th:text="${dispositivo.getMarca()}">
+						<option th:each="dispositivo : ${dispositivos}" th:value="${dispositivo.marcaDispositivo}" th:text="${dispositivo.getMarcaDispositivo()}">
 						</option>
 						</datalist>
 					</div>
 				</div>
 				
-				<div class="form-group" th:classappend="${#fields.hasErrors('modelo')} ? has-error">
+				<div class="form-group" th:classappend="${#fields.hasErrors('modeloDispositivo')} ? has-error">
 					<label for="modelo" class="col-sm-2 control-label">Modelo</label>
 					<div class="col-sm-4">
-						<input list="modelos" class="form-control" id="modelo"	th:field="*{modelo}" />
+						<input list="modelos" class="form-control" id="modelo"	th:field="*{modeloDispositivo}" />
 						<datalist id="modelos">
-						<option th:each="dispositivo : ${dispositivos}" th:value="${dispositivo.modelo}" th:text="${dispositivo.getModelo()}">
+						<option th:each="dispositivo : ${dispositivos}" th:value="${dispositivo.modeloDispositivo}" th:text="${dispositivo.getModeloDispositivo()}">
 						</option>
 						</datalist>
 					</div>
 				</div>
 				
-				<div class="form-group" th:classappend="${#fields.hasErrors('nrserie')} ? has-error">
+				<div class="form-group" th:classappend="${#fields.hasErrors('numeroSerieDispositivo')} ? has-error">
 					<label for="nrserie" class="col-sm-2 control-label">Número de Série</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="nrserie"
-							th:field="*{nrserie}" />
+							th:field="*{numeroSerieDispositivo}" />
 					</div>
 				</div>
 
-				<div class="form-group" th:classappend="${#fields.hasErrors('imei')} ? has-error">
+				<div class="form-group" th:classappend="${#fields.hasErrors('imeiDispositivo')} ? has-error">
 					<label for="imei" class="col-sm-2 control-label">Número de IMEI</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="imei"
-							th:field="*{imei}" />
+							th:field="*{imeiDispositivo}" />
 					</div>
 				</div>
 				
-				<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
+				<div class="form-group" th:classappend="${#fields.hasErrors('macDispositivo')} ? has-error">
+					<label for="imei" class="col-sm-2 control-label">Número MAC (Endereço MAC)</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="imei"
+							th:field="*{macDispositivo}" />
+					</div>
+				</div>
+				
+				<div class="form-group" th:classappend="${#fields.hasErrors('patrimonioDispositivo')} ? has-error">
 					<label for="patrimonio" class="col-sm-2 control-label">Número de Patrimonio</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="patrimonio"	th:field="*{patrimonio}" />
+						<input type="text" class="form-control" id="patrimonio"	th:field="*{patrimonioDispositivo}" />
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">Tipo</label>
 					<div class="col-sm-3">
-						<select class="form-control" name="tipo" th:field="*{tipo}">
-							<option th:each="tipo : ${todosDispositivoTipo}"
-								th:value="${tipo}" th:text="${tipo.descricao}"></option>
+						<select class="form-control" name="tipo" th:field="*{tipoDispositivo}">
+						<option value="">----Select----</option>
+							<option th:each="tipo : ${tipoDispositivoMap.entrySet()}"
+								th:value="${tipo.key}" th:text="${tipo.value}"></option>
 						</select>
 					</div>
-				</div>
+				</div> 
 				
-				<div class="form-group" th:classappend="${#fields.hasErrors('valor')} ? has-error">
+				<div class="form-group" th:classappend="${#fields.hasErrors('valorDispositivo')} ? has-error">
 					<label for="valor" class="col-sm-2 control-label">Valor</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control js-valorCss" id="valor" th:field="*{valor}" />
+						<input type="text" class="form-control js-valorCss" id="valor" th:field="*{valorDispositivo}" />
 					</div>
 				</div>
 				

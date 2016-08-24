@@ -1,13 +1,15 @@
 package br.gov.cultura.DitelAdm.model;
-// Generated 17/08/2016 19:31:54 by Hibernate Tools 4.3.4.Final
+// Generated 24/08/2016 14:33:52 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,46 +23,42 @@ import javax.persistence.TemporalType;
 @Table(name = "alocacao_linha_chip", catalog = "diteladmdev")
 public class AlocacaoLinhaChip implements java.io.Serializable {
 
-	private AlocacaoLinhaChipId id;
+	private Integer idAlocacaoLinhaChip;
 	private Chip chip;
 	private Linha linha;
-	private Date dtRecebimento;
 	private Date dtDevolucao;
+	private Date dtRecebimento;
 
 	public AlocacaoLinhaChip() {
 	}
 
-	public AlocacaoLinhaChip(AlocacaoLinhaChipId id, Chip chip, Linha linha, Date dtRecebimento) {
-		this.id = id;
+	public AlocacaoLinhaChip(Chip chip, Linha linha, Date dtRecebimento) {
 		this.chip = chip;
 		this.linha = linha;
 		this.dtRecebimento = dtRecebimento;
 	}
 
-	public AlocacaoLinhaChip(AlocacaoLinhaChipId id, Chip chip, Linha linha, Date dtRecebimento, Date dtDevolucao) {
-		this.id = id;
+	public AlocacaoLinhaChip(Chip chip, Linha linha, Date dtDevolucao, Date dtRecebimento) {
 		this.chip = chip;
 		this.linha = linha;
-		this.dtRecebimento = dtRecebimento;
 		this.dtDevolucao = dtDevolucao;
+		this.dtRecebimento = dtRecebimento;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idAlocacaoLinhaChip", column = @Column(name = "idAlocacao_linha_chip", nullable = false)),
-			@AttributeOverride(name = "idLinha", column = @Column(name = "idLinha", nullable = false)),
-			@AttributeOverride(name = "idChip", column = @Column(name = "idChip", nullable = false)) })
-	public AlocacaoLinhaChipId getId() {
-		return this.id;
+	@Column(name = "id_alocacao_linha_chip", unique = true, nullable = false)
+	public Integer getIdAlocacaoLinhaChip() {
+		return this.idAlocacaoLinhaChip;
 	}
 
-	public void setId(AlocacaoLinhaChipId id) {
-		this.id = id;
+	public void setIdAlocacaoLinhaChip(Integer idAlocacaoLinhaChip) {
+		this.idAlocacaoLinhaChip = idAlocacaoLinhaChip;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idChip", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_chip", nullable = false)
 	public Chip getChip() {
 		return this.chip;
 	}
@@ -70,7 +68,7 @@ public class AlocacaoLinhaChip implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idLinha", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "id_linha", nullable = false)
 	public Linha getLinha() {
 		return this.linha;
 	}
@@ -80,23 +78,23 @@ public class AlocacaoLinhaChip implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dtRecebimento", nullable = false, length = 19)
-	public Date getDtRecebimento() {
-		return this.dtRecebimento;
-	}
-
-	public void setDtRecebimento(Date dtRecebimento) {
-		this.dtRecebimento = dtRecebimento;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dtDevolucao", length = 19)
+	@Column(name = "dt_devolucao", length = 19)
 	public Date getDtDevolucao() {
 		return this.dtDevolucao;
 	}
 
 	public void setDtDevolucao(Date dtDevolucao) {
 		this.dtDevolucao = dtDevolucao;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dt_recebimento", nullable = false, length = 19)
+	public Date getDtRecebimento() {
+		return this.dtRecebimento;
+	}
+
+	public void setDtRecebimento(Date dtRecebimento) {
+		this.dtRecebimento = dtRecebimento;
 	}
 
 }

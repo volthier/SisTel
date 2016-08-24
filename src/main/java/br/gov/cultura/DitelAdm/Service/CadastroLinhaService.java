@@ -3,7 +3,7 @@ package br.gov.cultura.DitelAdm.Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.gov.cultura.DitelAdm.model.CadastroLinha;
+import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.repository.Linhas;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
@@ -13,7 +13,7 @@ public class CadastroLinhaService {
 	@Autowired
 	private Linhas linhas;
 
-	public void salvar(CadastroLinha linha) {
+	public void salvar(Linha linha) {
 		linhas.save(linha);
 	}
 
@@ -22,9 +22,9 @@ public class CadastroLinhaService {
 		linhas.delete(id);
 	}
 
-	public List<CadastroLinha> filtrar(CadastroFiltroPesquisa filtro) {
+	public List<Linha> filtrar(CadastroFiltroPesquisa filtro) {
 		String nlinha = filtro.getNlinha() == null ? "%" : filtro.getNlinha();
-		return linhas.findByNlinhaContaining(nlinha);
+		return linhas.findByNumeroLinhaContaining(nlinha);
 
 	}
 }

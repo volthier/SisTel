@@ -10,36 +10,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
-import br.gov.cultura.DitelAdm.model.CadastroPessoa;
+
+import br.gov.cultura.DitelAdm.Service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.model.Usuario;
 
 
 @Controller
-@RequestMapping("/pessoas")
-public class PessoaController extends UrlController {
+@RequestMapping("/usuarios")
+public class UsuarioController extends UrlController {
 	
-	private static final String CADASTRO_VIEW = "CadastroPessoa";
+	private static final String CADASTRO_VIEW = "CadastroUsuario";
  	
 	@Autowired
-	private CadastroPessoaService cadastroPessoaService;
+	private CadastroUsuarioService cadastroUsuarioService;
 	
-	@RequestMapping("/nova")
+	@RequestMapping("/novo")
 	public ModelAndView nova(){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(new CadastroPessoa());
+		mv.addObject(new Usuario());
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated CadastroPessoa cadastropessoa, Errors errors, RedirectAttributes attributes){
+	public String salvar(@Validated Usuario usuario, Errors errors, RedirectAttributes attributes){
 				
 		if(errors.hasErrors()){
 	 		return CADASTRO_VIEW;
 	 	}
 		try {
-			cadastroPessoaService.salvar(cadastropessoa);
+			cadastroUsuarioService.salvar(usuario);
 			attributes.addFlashAttribute("mensagem","Pessoa cadastrada com sucesso!");
-			return "redirect:/pessoas/nova";		
+			return "redirect:/usuarios/novo";		
 		} catch (IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;
@@ -49,15 +50,15 @@ public class PessoaController extends UrlController {
 	}
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long id, RedirectAttributes attributes){
-		cadastroPessoaService.excluir(id);
+		cadastroUsuarioService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
 		return "redirect:/inicio";
 		}	
 	
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") CadastroPessoa Pessoas){
+	public ModelAndView edicao(@PathVariable("id") Usuario usuario){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(Pessoas);
+		mv.addObject(usuario);
 				return mv;
 	}
 	

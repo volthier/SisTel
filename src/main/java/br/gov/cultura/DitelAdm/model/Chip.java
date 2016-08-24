@@ -1,5 +1,5 @@
 package br.gov.cultura.DitelAdm.model;
-// Generated 17/08/2016 19:31:54 by Hibernate Tools 4.3.4.Final
+// Generated 24/08/2016 14:33:52 by Hibernate Tools 4.3.4.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -8,14 +8,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -34,6 +33,11 @@ public class Chip implements java.io.Serializable {
 	public Chip() {
 	}
 
+	public Chip(String numeroSerieChip, String tipoChip) {
+		this.numeroSerieChip = numeroSerieChip;
+		this.tipoChip = tipoChip;
+	}
+
 	public Chip(String numeroSerieChip, String tipoChip, Set<AlocacaoLinhaChip> alocacaoLinhaChips) {
 		this.numeroSerieChip = numeroSerieChip;
 		this.tipoChip = tipoChip;
@@ -43,7 +47,7 @@ public class Chip implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "idChip", unique = true, nullable = false)
+	@Column(name = "id_chip", unique = true, nullable = false)
 	public Integer getIdChip() {
 		return this.idChip;
 	}
@@ -52,8 +56,8 @@ public class Chip implements java.io.Serializable {
 		this.idChip = idChip;
 	}
 
-	@Column(name = "numeroSerieChip")
-	@NotEmpty(message="Numero de serie e obrigatório!")
+	@Column(name = "numero_serie_chip", nullable = false)
+	@NotEmpty(message="Numero de serie e obrigat�rio!")
 	public String getNumeroSerieChip() {
 		return this.numeroSerieChip;
 	}
@@ -62,8 +66,8 @@ public class Chip implements java.io.Serializable {
 		this.numeroSerieChip = numeroSerieChip;
 	}
 
-	@Column(name = "tipoChip")
-	/*@Enumerated(EnumType.STRING)*/
+	@Column(name = "tipo_chip", nullable = false)
+	@NotBlank(message="Selecione Tipo!")
 	public String getTipoChip() {
 		return this.tipoChip;
 	}

@@ -113,26 +113,3 @@ public class FaturaUploadController {
 		return "redirect:/faturas/nova";
 	}
 }
-
-/* File convFile = new File( file.getOriginalFilename());
-file.transferTo(convFile);
-		
-LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
-FaturaArquivoDTO faturaArquivoDTO = leitor.read(convFile);
-faturaService.salvarOperadora(faturaArquivoDTO);
-faturaService.salvarCliente(faturaArquivoDTO);
-faturaService.salvarFatura(faturaArquivoDTO);
-faturaService.salvarResumo(faturaArquivoDTO);
-faturaService.salvarEnderecos(faturaArquivoDTO);
-faturaService.salvarCategoriasChamadas(faturaArquivoDTO);
-faturaService.salvarChamadas(faturaArquivoDTO);
-faturaService.salvarCategoriaServicos(faturaArquivoDTO);
-faturaService.salvarServicos(faturaArquivoDTO);
-faturaService.salvarCategoriasDescontos(faturaArquivoDTO);
-faturaService.salvarDescontos(faturaArquivoDTO);
-faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
-faturaService.SalvarPlanos(faturaArquivoDTO);
-faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
-faturaService.salvarAjustes(faturaArquivoDTO);	
-faturaService.salvarNotaFiscal(faturaArquivoDTO);
-faturaService.salvarTrailler(faturaArquivoDTO);*/

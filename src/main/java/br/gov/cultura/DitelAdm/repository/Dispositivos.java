@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
+import br.gov.cultura.DitelAdm.model.Dispositivo;
 
-public interface Dispositivos extends JpaRepository<CadastroDispositivo, Long> {
+public interface Dispositivos extends JpaRepository<Dispositivo, Long> {
 	
-	public List<CadastroDispositivo> findByModeloContaining(String modelo); 
+	public List<Dispositivo> findByModeloDispositivoContaining(String modeloDispositivo); 
 
 }

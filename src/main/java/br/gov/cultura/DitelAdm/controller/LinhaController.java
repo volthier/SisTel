@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
-import br.gov.cultura.DitelAdm.model.CadastroLinha;
+
+import br.gov.cultura.DitelAdm.model.Linha;
 
 
 @Controller
@@ -26,17 +28,17 @@ public class LinhaController extends UrlController {
 	@RequestMapping("/nova")
 	public ModelAndView novo(){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(new CadastroLinha());
+		mv.addObject(new Linha());
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated CadastroLinha cadastroLinha, Errors errors, RedirectAttributes attributes){
+	public String salvar(@Validated Linha linha, Errors errors, RedirectAttributes attributes){
 		if(errors.hasErrors()){
 	 		return CADASTRO_VIEW;
 	 	}
 		try {
-			cadastroLinhaService.salvar(cadastroLinha);
+			cadastroLinhaService.salvar(linha);
 			attributes.addFlashAttribute("mensagem","Linha cadastrada com sucesso!");
 			return "redirect:/linhas/nova";		
 		} catch (IllegalArgumentException e) {
@@ -54,7 +56,7 @@ public class LinhaController extends UrlController {
 		}	
 
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") CadastroLinha linhas){
+	public ModelAndView edicao(@PathVariable("id") Linha linhas){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(linhas);
 				return mv;
