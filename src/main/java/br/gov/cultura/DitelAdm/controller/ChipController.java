@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.model.Chip;
+import br.gov.cultura.DitelAdm.service.CadastroChipService;
+
 
 @Controller
 @RequestMapping("/chips")

@@ -92,15 +92,16 @@
 					</div>
 				</div> -->
 				
-<!-- Alterar metodo	<div class="form-group">
+				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">DAS</label>
-					<div class="col-sm-2">
-						<select class="form-control" name="das" th:field="*{das}">
-							<option th:each="das : ${todosVinculoCadastroPessoaDAS}"
-								th:value="${das}" th:text="${das.descricao}"></option>
+					<div class="col-sm-3">
+						<select class="form-control" name="tipo" th:field="*{limiteAtesto}">
+						<option value="">----Select----</option>
+							<option th:each="limite : ${limiteAtesto}"
+								th:value="${limite}" th:text="${limite.dasAtesto}"></option>
 						</select>
-					</div >
-				</div>-->
+					</div>
+				</div> 
 								
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">

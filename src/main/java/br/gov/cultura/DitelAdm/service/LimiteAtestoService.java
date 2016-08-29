@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.Service;
+package br.gov.cultura.DitelAdm.service;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.repository.LimitesAtestos;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Service
 public class LimiteAtestoService {
@@ -19,9 +18,8 @@ public class LimiteAtestoService {
 			limitesAtestos.save(limiteAtesto);
 		}
 		
-		
-		public List<LimiteAtesto> filtrar(CadastroFiltroPesquisa filtro){
-			String dasAtesto = filtro.getDasAtesto() == null ? "%" : filtro.getDasAtesto();
-			return limitesAtestos.findByDasAtestoContaining(dasAtesto);
+		public List<LimiteAtesto> getLimitesAtesto() {
+			return limitesAtestos.findAll();
 		}
+
 }

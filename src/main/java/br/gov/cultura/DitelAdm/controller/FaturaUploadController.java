@@ -9,8 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.Service.FaturaService;
 import br.gov.cultura.DitelAdm.model.LeitorFebrabanV3;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.service.FaturaService;
+
 
 @Controller
 public class FaturaUploadController {
@@ -81,8 +80,6 @@ public class FaturaUploadController {
 				File tmpFile = new File(System.getProperty("java.io.tmpdir")+System.getProperty("file.separator")+file.getOriginalFilename());
 			        
 			        file.transferTo(tmpFile);
-			       
-			    
 				
 				LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
 				FaturaArquivoDTO faturaArquivoDTO = leitor.read(tmpFile);

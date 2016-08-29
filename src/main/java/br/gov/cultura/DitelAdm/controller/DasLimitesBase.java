@@ -1,15 +1,16 @@
 package br.gov.cultura.DitelAdm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import br.gov.cultura.DitelAdm.Service.LimiteAtestoService;
+
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
+import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 public class DasLimitesBase {
 
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
 
-	public void baseInicio(String dados[]) {
+	public void baseInicio() {
 
 		final LimiteAtesto limiteAtesto = new LimiteAtesto();
 
@@ -43,6 +44,5 @@ public class DasLimitesBase {
 			limiteAtestoService.salvar(limiteAtesto);
 
 		}
-
 	}
 }

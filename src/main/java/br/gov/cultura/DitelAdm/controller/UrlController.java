@@ -10,15 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import br.gov.cultura.DitelAdm.Service.CadastroChipService;
-import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
-import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
-import br.gov.cultura.DitelAdm.Service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.service.CadastroChipService;
+import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
+import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+
 
 @Controller
 @RequestMapping("/inicio")

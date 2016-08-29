@@ -1,8 +1,10 @@
-package br.gov.cultura.DitelAdm.Service;
+package br.gov.cultura.DitelAdm.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.repository.Linhas;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;

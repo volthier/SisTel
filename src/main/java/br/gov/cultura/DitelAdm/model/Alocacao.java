@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.model;
+/*package br.gov.cultura.DitelAdm.model;
 
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -24,7 +24,7 @@ public class Alocacao {
 	private CadastroPessoa pessoa;
 
 	@OneToOne(cascade = CascadeType.REFRESH)
-	private CadastroDispositivo dispositivo;
+	private Dispositivo dispositivo;
 
 	@OneToOne(cascade = CascadeType.REFRESH)
 	private CadastroLinha linha;
@@ -71,11 +71,11 @@ public class Alocacao {
 		this.pessoa = pessoa;
 	}
 
-	public CadastroDispositivo getDispositivo() {
+	public Dispositivo getDispositivo() {
 		return dispositivo;
 	}
 
-	public void setDispositivo(CadastroDispositivo dispositivo) {
+	public void setDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
 	}
 
@@ -150,3 +150,4 @@ public class Alocacao {
 	}
 
 }
+*/

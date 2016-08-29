@@ -15,18 +15,17 @@ import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 
 import br.gov.cultura.DitelAdm.controller.FaturaUploadController;
 
-
 @SpringBootApplication
 public class DitelAdmApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DitelAdmApplication.class, args);
 	}
+	
 	@Bean
 	CommandLineRunner init() {
 		return (args) -> {
             FileSystemUtils.deleteRecursively(new File(FaturaUploadController.ROOT));
-
             Files.createDirectory(Paths.get(FaturaUploadController.ROOT));
 		};
 	}

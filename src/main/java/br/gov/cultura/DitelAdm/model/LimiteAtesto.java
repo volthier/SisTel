@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Table(name = "limite_atesto", catalog = "diteladmdev")
 public class LimiteAtesto implements java.io.Serializable {
 
-	private int idLimiteAtesto;
+	private Integer idLimiteAtesto;
 	private String dasAtesto;
 	private String valorLimite;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -29,13 +29,13 @@ public class LimiteAtesto implements java.io.Serializable {
 	public LimiteAtesto() {
 	}
 
-	public LimiteAtesto(int idLimiteAtesto, String dasAtesto, String valorLimite) {
+	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, String valorLimite) {
 		this.idLimiteAtesto = idLimiteAtesto;
 		this.dasAtesto = dasAtesto;
 		this.valorLimite = valorLimite;
 	}
 
-	public LimiteAtesto(int idLimiteAtesto, String dasAtesto, String valorLimite, Set<Usuario> usuarios) {
+	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, String valorLimite, Set<Usuario> usuarios) {
 		this.idLimiteAtesto = idLimiteAtesto;
 		this.dasAtesto = dasAtesto;
 		this.valorLimite = valorLimite;
@@ -46,11 +46,11 @@ public class LimiteAtesto implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id_limite_atesto", unique = true, nullable = false)
-	public int getIdLimiteAtesto() {
+	public Integer getIdLimiteAtesto() {
 		return this.idLimiteAtesto;
 	}
 
-	public void setIdLimiteAtesto(int idLimiteAtesto) {
+	public void setIdLimiteAtesto(Integer idLimiteAtesto) {
 		this.idLimiteAtesto = idLimiteAtesto;
 	}
 

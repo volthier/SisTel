@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Notafiscal;
 
 public interface NotasFiscais extends JpaRepository<Notafiscal, Long>{
 
-	public List<Notafiscal> findById(String id);
+	public List<Notafiscal> findByNumNf(String numNf);
 }

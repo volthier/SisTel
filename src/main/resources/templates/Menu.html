@@ -6,42 +6,9 @@
 
 
 
-<section id="menu" layout:fragment="Menu">
-	<aside class="btn-group-vertical" role="group">
-		<a class="glyphicon glyphicon-search btn btn btn-default" aria-hidden="true" th:href="@{/consulta}" style="text-align:left;">&nbsp;Consultar
-		</a>
-
-
-		<div class="btn-group" role="group" style="text-align:left;">
-			<a type="button" class="glyphicon glyphicon-list-alt btn btn-default dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align: left;">&nbsp;Alocação
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Devolução</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
-			</ul>
-
-		</div>
-		<button type="button" class="glyphicon glyphicon-list btn btn-default" style="text-align:left;">&nbsp;Pedências
-		</button>
-		<div class="btn-group" role="group" style="text-align:center;">
+<section id="menu" layout:fragment="menu">
+	<!-- <aside class="btn-group-vertical" role="group">
 		
-			<button type="button" class="glyphicon glyphicon-book btn btn-default dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:left;">&nbsp;Registrar <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/dispositivos/novo}">Dispositivos</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/pessoas/nova}">Pessoas</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/chips/novo}">Chip's</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/linhas/nova}">Linhas</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/faturas/nova}">Faturas</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li>
-			</ul>
-
-		</div>
 		
 		<button type="button" class="glyphicon glyphicon-signal btn btn-default" style="text-align:left;">&nbsp;Relatórios
 		</button>
@@ -52,8 +19,49 @@
 		<button type="button" class="glyphicon glyphicon-info-sign btn btn-default" style="text-align:left;" >&nbsp;Manuais
 		</button>
 	</aside>
+ -->
+
+<menu>
+
+    <ul class="dropdown">
+        <li><a class="glyphicon glyphicon-search" th:href="@{/consulta}">&nbsp;Consultar
+		</a></li>
+		
+		<li class="dropdown-toggle glyphicon glyphicon-list-alt" data-toggle="dropdown">&nbsp;Alocação
+    		<span class="caret"></span></li>
+		<ul class="dropdown-menu">
+		    <li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="#">Devolução</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
+		</ul>
+		
+        <li><a class="glyphicon glyphicon-list" href="#">&nbsp;Pedências</a></li>
+        </ul>
+       
+        <ul>
+        <li class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" name="registrar">&nbsp;Registrar
+    		<span class="caret"></span></li>
+			<ul id="registrar" class="dropdown-menu">
+				<li><a class="btn btn-link dt-link-menu" th:href="@{/dispositivos/novo}">Dispositivos</a></li>
+ 				<li><a class="btn btn-link dt-link-menu" th:href="@{/usuarios/novo}">Pessoas</a></li>
+				<li><a class="btn btn-link dt-link-menu" th:href="@{/chips/novo}">Chip's</a></li>
+				<li><a class="btn btn-link dt-link-menu" th:href="@{/linhas/nova}">Linhas</a></li>
+				<li><a class="btn btn-link dt-link-menu" th:href="@{/faturas/nova}">Faturas</a></li>
+				<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li> 
+			</ul>
+		
+		
+</ul>
+				
+			
+			
+			
+			
 
 
+
+</menu>
 
 
 </section>

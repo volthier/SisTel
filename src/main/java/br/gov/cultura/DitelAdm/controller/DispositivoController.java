@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
+import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 @Controller
 @RequestMapping("/dispositivos")
@@ -31,11 +33,16 @@ public class DispositivoController {
 	@Autowired
 	private CadastroDispositivoService cadastroDispositivoService;
 	
+	@Autowired
+	private LimiteAtestoService limiteAtestoService;
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
-		mv.addObject("dispositivos", todosDispositivos);		
+		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
+		mv.addObject("dispositivos", todosDispositivos);
+		mv.addObject("limiteAtesto", limiteAtesto);
 		mv.addObject(new Dispositivo());
 		return mv;
 	}

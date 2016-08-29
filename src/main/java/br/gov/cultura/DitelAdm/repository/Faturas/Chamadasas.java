@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
 
 public interface Chamadasas extends JpaRepository<Chamadas, Long>{
 
-	public List<Chamadas> findByIdContaining(String id);
+	public List<Chamadas> findByIdChamadas(Integer idChamadas);
 }

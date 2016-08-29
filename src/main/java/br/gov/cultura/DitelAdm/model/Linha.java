@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -62,6 +64,7 @@ public class Linha implements java.io.Serializable {
 	}
 
 	@Column(name = "numero_linha", nullable = false, length = 17)
+	@Size(max = 17, message = "Numero excede padrão LDN!")
 	@NotEmpty(message="Numero da Linha e obrigat�rio!")
 	public String getNumeroLinha() {
 		return this.numeroLinha;

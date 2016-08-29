@@ -9,7 +9,7 @@
 
 <section layout:fragment="conteudo">
 	<form class="form-horizontal" method="POST" th:action="@{/alocacoes}"
-		th:object="${alocacao}" th:autocomplete="on">
+		th:object="${filtro}" th:autocomplete="on">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
@@ -26,16 +26,16 @@
 
 
 
-				<div class="form-group">
+<!-- 				<div class="form-group">
 					<label id="pessoa" for="status" class="col-sm-2 control-label">Nome</label>
 					<div class="col-sm-2">
-						<select class="form-control" th:field="*{pessoa.id}">
-							<option th:each="pessoa : ${pessoas}" th:value="${pessoa.id}"
-								th:text="${pessoa.nome}" />
+						<select class="form-control" th:field="*{usuario.idUsuario}">
+							<option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}"
+								th:text="${usuario.nomeUsuario}" />
 						</select>
 					</div>
 
-				</div>
+				</div> -->
 
 
 			</div>

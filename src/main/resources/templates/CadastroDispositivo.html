@@ -85,8 +85,8 @@
 					<div class="col-sm-3">
 						<select class="form-control" name="tipo" th:field="*{tipoDispositivo}">
 						<option value="">----Select----</option>
-							<option th:each="tipo : ${tipoDispositivoMap.entrySet()}"
-								th:value="${tipo.key}" th:text="${tipo.value}"></option>
+							<option th:each="limite : ${limiteAtesto}"
+								th:value="${limite.idLimiteAtesto}" th:text="${limite.dasAtesto}"></option>
 						</select>
 					</div>
 				</div> 

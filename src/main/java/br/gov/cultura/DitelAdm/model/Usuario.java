@@ -93,7 +93,7 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	@Column(name = "cpf_usuario", nullable = false, length = 11)
-	@CPF
+	@CPF(message="CPF  inválido!")
 	@NotNull(message="CPF e obrigat�rio!")
 	public String getCpfUsuario() {
 		return this.cpfUsuario;
