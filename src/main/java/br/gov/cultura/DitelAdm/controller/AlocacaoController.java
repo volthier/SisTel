@@ -1,6 +1,5 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
 import br.gov.cultura.DitelAdm.model.CadastroLinha;
 import br.gov.cultura.DitelAdm.model.CadastroPessoa;
 import br.gov.cultura.DitelAdm.model.Chip;
-import br.gov.cultura.DitelAdm.model.enums.TipoChip;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Controller
@@ -118,9 +116,5 @@ public class AlocacaoController extends UrlController {
 		return "redirect:/inicio";
 	}
 
-	@Override
-	@ModelAttribute("todosCadastroChipTipo")
-	public List<TipoChip> todosCadastroChipTipo() {
-		return Arrays.asList(TipoChip.values());
-	}
+
 }

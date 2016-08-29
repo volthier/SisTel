@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="painel-body">
-				<!-- <input type="hidden" th:field="*{id}" /> -->
+				<input type="hidden" th:field="*{idChip}" />
 				<div class="form-group"	th:classappend="${#fields.hasErrors('numeroSerieChip')} ? has-error">
 				
 					<label for="numeroSerieChip" class="col-sm-2 control-label">Numero de Serie</label>
@@ -37,14 +37,17 @@
 				</div>
 
 				<div class="form-group">
-					<label for="status" class="col-sm-2 control-label">Tipo de
-						SimCard</label>
+					<label for="status" class="col-sm-2 control-label">Tipo de	SimCard</label>
 					<div class="col-sm-2">
-						<input list="tipos" name="tipos" class="form-control" th:field="*{tipoChip}"/>
-						<datalist id="tipos">
-							<option th:each="tipo : ${todosCadastroChipTipo}"
-								th:value="${tipoChip}" th:text="${tipo.descricao}"/>
-						</datalist>
+						
+						<!-- <input list="tipos" name="tipos" class="form-control" th:field="*{tipoChip}"/>
+						<datalist id="tipos" th:field="*{tipoChip}"> -->
+						
+						<select class="form-control" th:field="*{tipoChip}">
+							<option value="NONE">----Select----</option>
+							<option th:each="tipo : ${tipoChipMap.entrySet()}"
+								th:value="${tipo.key}" th:text="${tipo.value}"/>
+						</select>
 					</div>
 				</div>
 			
