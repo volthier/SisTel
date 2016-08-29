@@ -174,7 +174,7 @@ public class Ajustes implements java.io.Serializable {
 		this.dataFim = dataFim;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "horaFim", length = 19)
 	public Date getHoraFim() {
 		return this.horaFim;

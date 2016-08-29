@@ -114,7 +114,7 @@ public class Descontos implements java.io.Serializable {
 		this.dataInicio = dataInicio;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "horaInicio", length = 19)
 	public Date getHoraInicio() {
 		return this.horaInicio;
@@ -197,7 +197,7 @@ public class Descontos implements java.io.Serializable {
 		this.dataFim = dataFim;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "horaFim", length = 19)
 	public Date getHoraFim() {
 		return this.horaFim;

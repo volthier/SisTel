@@ -160,7 +160,7 @@ public class Chamadas implements java.io.Serializable {
 		this.dataLigacao = dataLigacao;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "horaLigacao", nullable = false, length = 19)
 	public Date getHoraLigacao() {
 		return this.horaLigacao;
@@ -251,7 +251,7 @@ public class Chamadas implements java.io.Serializable {
 		this.opTerminalVincDestino = opTerminalVincDestino;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "duracaoLigacao", nullable = false, length = 19)
 	public Date getDuracaoLigacao() {
 		return this.duracaoLigacao;
