@@ -1,4 +1,4 @@
-/*package br.gov.cultura.DitelAdm.model;
+package br.gov.cultura.DitelAdm.model;
 
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -21,13 +21,13 @@ public class Alocacao {
 	private Chip chip;
 
 	@ManyToOne(cascade = CascadeType.REFRESH)
-	private CadastroPessoa pessoa;
+	private Usuario usuario;
 
 	@OneToOne(cascade = CascadeType.REFRESH)
 	private Dispositivo dispositivo;
 
 	@OneToOne(cascade = CascadeType.REFRESH)
-	private CadastroLinha linha;
+	private Linha linha;
 
 	// @NotNull(message = "Data e obrigatorio!")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -63,12 +63,12 @@ public class Alocacao {
 		this.chip = chip;
 	}
 
-	public CadastroPessoa getPessoa() {
-		return pessoa;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setPessoa(CadastroPessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setPessoa(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Dispositivo getDispositivo() {
@@ -79,11 +79,11 @@ public class Alocacao {
 		this.dispositivo = dispositivo;
 	}
 
-	public CadastroLinha getLinha() {
+	public Linha getLinha() {
 		return linha;
 	}
 
-	public void setLinha(CadastroLinha linha) {
+	public void setLinha(Linha linha) {
 		this.linha = linha;
 	}
 
@@ -150,4 +150,3 @@ public class Alocacao {
 	}
 
 }
-*/

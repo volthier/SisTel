@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.gov.cultura.DitelAdm.model.Alocacao;
+import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
+import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
+import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
 /*import br.gov.cultura.DitelAdm.model.Alocacao;*/
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
@@ -31,8 +36,8 @@ public class AlocacaoController {
 
 	private final String CADASTRO_VIEW = "AlocacaoDisponibilizar";
 
-/*	@Autowired
-	private AlocacaoService alocacaoService;*/
+	@Autowired
+	private AlocacaoService alocacaoService;
 	@Autowired
 	private CadastroDispositivoService cadastroDispositivoService;
 	@Autowired
@@ -44,22 +49,24 @@ public class AlocacaoController {
 
 	@RequestMapping("/disponibilizar")
 	public @ResponseBody ModelAndView novo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		/*mv.addObject(new Alocacao());*/
-		
+		mv.addObject(new AlocacaoUsuarioLinha());
+		mv.addObject(new AlocacaoLinhaChip());
+		mv.addObject(new AlocacaoLinhaDispositivo());
+		mv.addObject(new Alocacao());
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		mv.addObject("dispositivos", todosDispositivos);
-		List<Usuario> todosUsuarios = cadastroUsuarioService.filtrar(filtro);
+		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
-		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
+		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
-		List<Linha> todasLinhas = cadastroLinhaService.filtrar(filtro);
+		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		mv.addObject("linhas", todasLinhas);
 
 		return mv;
 	}
 
-/*	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Alocacao alocacao, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
 			return CADASTRO_VIEW;
@@ -77,9 +84,9 @@ public class AlocacaoController {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
+	public String excluir(@PathVariable Integer id, RedirectAttributes attributes) {
 		alocacaoService.excluir(id);
 		attributes.addFlashAttribute("mensagem", "Fornecimento CANCELADO com sucesso!");
 		return "redirect:/inicio";
-	}*/
+	}
 }

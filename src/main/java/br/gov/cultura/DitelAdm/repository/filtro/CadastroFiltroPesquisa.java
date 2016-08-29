@@ -7,7 +7,7 @@ public class CadastroFiltroPesquisa {
 	private String modelo;
 	private String numeroSerieChip;
 	private String nlinha;
-	private String id;
+	private Integer id;
 	private String marca;
 	private String idChip;
 	private String dasAtesto;
@@ -29,11 +29,11 @@ public class CadastroFiltroPesquisa {
 		this.marca = marca;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

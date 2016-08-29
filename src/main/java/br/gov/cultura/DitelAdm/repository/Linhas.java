@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.gov.cultura.DitelAdm.model.Linha;
 
-public interface Linhas extends JpaRepository<Linha, Long>{
+public interface Linhas extends JpaRepository<Linha, Integer>{
 	
-	public List<Linha> findByNumeroLinhaContaining(String numeroLinha);
+	public List<Linha> findByIdLinha(Integer idLinha);
 
 }

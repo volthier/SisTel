@@ -102,8 +102,8 @@
 							<th class="text-center col-md2">Vinculo</th> -->
 							<th class="text-center col-md2">Setor</th>
 							<th class="text-center col-md2">Cargo</th>
-							<!-- <th class="text-center col-md2">DAS</th>
-							<th class="text-center col-md1">Email</th> -->
+							 <th class="text-center col-md2">DAS</th>
+							<!--<th class="text-center col-md1">Email</th> -->
 							<th class="col-md2"></th>
 						</tr>
 					</thead>
@@ -116,10 +116,10 @@
 							<td class="text-center" th:text=" ${usuario.cpfUsuario}"></td>
 							<!-- <td class="text-right" th:text="  ${usuario.matricula}"></td>
 							<td class="text-center" th:text=" ${usuario.vinculo}"></td> -->
-							<td class="text-center" th:text=" ${usuario.setor}"></td>
-							<td class="text-center" th:text=" ${usuario.cargo}"></td>
-							<!-- <td class="text-center" th:text=" ${usuario.das}"></td>
-							<td class="text-center" th:text=" ${usuario.email}"></td> -->
+							<td class="text-center" th:text=" ${usuario.lotacaoUsuario}"></td>
+							<td class="text-center" th:text=" ${usuario.cargoUsuario}"></td>
+							<td class="text-center" th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
+							<!--<td class="text-center" th:text=" ${usuario.email}"></td> -->
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" title="Editar"
 								rel="tooltip" data-placement="left"> <span
@@ -133,7 +133,7 @@
 
 						</tr>
 						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(pessoas)}">Nenhuma
+							<td colspan="10" th:if="${#lists.isEmpty(usuarios)}">Nenhuma
 								Pessoa encontrada!!!</td>
 						</tr>
 					</tbody>

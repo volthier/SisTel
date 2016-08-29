@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.repository.Linhas;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Service
 public class CadastroLinhaService {
@@ -19,14 +18,12 @@ public class CadastroLinhaService {
 		linhas.save(linha);
 	}
 
-	public void excluir(Long id) {
+	public void excluir(Integer id) {
 		// TODO Auto-generated method stub
 		linhas.delete(id);
 	}
 
-	public List<Linha> filtrar(CadastroFiltroPesquisa filtro) {
-		String nlinha = filtro.getNlinha() == null ? "%" : filtro.getNlinha();
-		return linhas.findByNumeroLinhaContaining(nlinha);
-
+	public List<Linha> getIdLinha() {
+		return linhas.findAll();
 	}
 }
