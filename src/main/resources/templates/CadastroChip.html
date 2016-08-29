@@ -44,7 +44,7 @@
 						<datalist id="tipos" th:field="*{tipoChip}"> -->
 						
 						<select class="form-control" th:field="*{tipoChip}">
-							<option value="NONE">----Select----</option>
+							<option value="">----Select----</option>
 							<option th:each="tipo : ${tipoChipMap.entrySet()}"
 								th:value="${tipo.key}" th:text="${tipo.value}"/>
 						</select>

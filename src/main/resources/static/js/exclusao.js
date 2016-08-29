@@ -1,4 +1,4 @@
-$('#confirmacaoExclusaoModal').on('show.bs.modal', function(event){
+$('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	var button = $(event.relatedTarget);
 	
@@ -67,4 +67,10 @@ $(function () {
             return $.parseJSON(response);
         }
     })
+});
+
+//Menu Anchor
+$('.menu-anchor').on('click touchstart', function(e){
+	$('html').toggleClass('menu-active');
+  	e.preventDefault();
 });

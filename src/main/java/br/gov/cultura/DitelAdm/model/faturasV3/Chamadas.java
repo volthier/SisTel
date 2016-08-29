@@ -1,15 +1,16 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,9 +23,12 @@ import javax.persistence.TemporalType;
 @Table(name = "chamadas", catalog = "diteladmdev")
 public class Chamadas implements java.io.Serializable {
 
-	private ChamadasId id;
+	private Integer idChamadas;
 	private Categoriachamada categoriachamada;
 	private Resumo resumo;
+	private String numTelefoneChamado;
+	private Date dataLigacao;
+	private Date horaLigacao;
 	private int cnlAreaLocalUso;
 	private int cnlLocalDestino;
 	private String nomeLocalDestino;
@@ -49,19 +53,20 @@ public class Chamadas implements java.io.Serializable {
 	public Chamadas() {
 	}
 
-	public Chamadas(ChamadasId id, Categoriachamada categoriachamada, Resumo resumo, int cnlAreaLocalUso,
-			int cnlLocalDestino, String nomeLocalDestino, String ufTelDestino, String codNacInt,
-			String opTerminalVincDestino, Date duracaoLigacao, int icms, float valLigImp, float valLigSemImp,
-			int tipoNf, String numNf, String tipoChamada) {
-		this.id = id;
+	public Chamadas(Categoriachamada categoriachamada, Resumo resumo, String numTelefoneChamado, Date dataLigacao,
+			Date horaLigacao, int cnlAreaLocalUso, int cnlLocalDestino, String nomeLocalDestino, String ufTelDestino,
+			String codNacInt, Date duracaoLigacao, int icms, float valLigImp, float valLigSemImp, int tipoNf,
+			String numNf, String tipoChamada) {
 		this.categoriachamada = categoriachamada;
 		this.resumo = resumo;
+		this.numTelefoneChamado = numTelefoneChamado;
+		this.dataLigacao = dataLigacao;
+		this.horaLigacao = horaLigacao;
 		this.cnlAreaLocalUso = cnlAreaLocalUso;
 		this.cnlLocalDestino = cnlLocalDestino;
 		this.nomeLocalDestino = nomeLocalDestino;
 		this.ufTelDestino = ufTelDestino;
 		this.codNacInt = codNacInt;
-		this.opTerminalVincDestino = opTerminalVincDestino;
 		this.duracaoLigacao = duracaoLigacao;
 		this.icms = icms;
 		this.valLigImp = valLigImp;
@@ -71,14 +76,17 @@ public class Chamadas implements java.io.Serializable {
 		this.tipoChamada = tipoChamada;
 	}
 
-	public Chamadas(ChamadasId id, Categoriachamada categoriachamada, Resumo resumo, int cnlAreaLocalUso,
-			int cnlLocalDestino, String nomeLocalDestino, String ufTelDestino, String codNacInt, String codCsp,
-			String nomeOpCsp, Integer codOpRoaming, String opTerminalVincDestino, Date duracaoLigacao, int icms,
-			float valLigImp, float valLigSemImp, int tipoNf, String numNf, String tipoChamada, String grupoHoraTarif,
-			String desHoraTarif, Integer degrauLigacao, String campoLivreOp) {
-		this.id = id;
+	public Chamadas(Categoriachamada categoriachamada, Resumo resumo, String numTelefoneChamado, Date dataLigacao,
+			Date horaLigacao, int cnlAreaLocalUso, int cnlLocalDestino, String nomeLocalDestino, String ufTelDestino,
+			String codNacInt, String codCsp, String nomeOpCsp, Integer codOpRoaming, String opTerminalVincDestino,
+			Date duracaoLigacao, int icms, float valLigImp, float valLigSemImp, int tipoNf, String numNf,
+			String tipoChamada, String grupoHoraTarif, String desHoraTarif, Integer degrauLigacao,
+			String campoLivreOp) {
 		this.categoriachamada = categoriachamada;
 		this.resumo = resumo;
+		this.numTelefoneChamado = numTelefoneChamado;
+		this.dataLigacao = dataLigacao;
+		this.horaLigacao = horaLigacao;
 		this.cnlAreaLocalUso = cnlAreaLocalUso;
 		this.cnlLocalDestino = cnlLocalDestino;
 		this.nomeLocalDestino = nomeLocalDestino;
@@ -101,24 +109,20 @@ public class Chamadas implements java.io.Serializable {
 		this.campoLivreOp = campoLivreOp;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idChamadas", column = @Column(name = "idChamadas", nullable = false)),
-			@AttributeOverride(name = "numTelefoneChamado", column = @Column(name = "numTelefoneChamado", nullable = false, length = 17)),
-			@AttributeOverride(name = "dataLigacao", column = @Column(name = "dataLigacao", nullable = false, length = 10)),
-			@AttributeOverride(name = "horaLigacao", column = @Column(name = "horaLigacao", nullable = false, length = 19)),
-			@AttributeOverride(name = "categoriaChamadaCodCatChamada", column = @Column(name = "categoriaChamada_codCatChamada", nullable = false)) })
-	public ChamadasId getId() {
-		return this.id;
+	@Column(name = "id_chamadas", unique = true, nullable = false)
+	public Integer getIdChamadas() {
+		return this.idChamadas;
 	}
 
-	public void setId(ChamadasId id) {
-		this.id = id;
+	public void setIdChamadas(Integer idChamadas) {
+		this.idChamadas = idChamadas;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoriaChamada_codCatChamada", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "categoriaChamada_id_categoriaChamada", nullable = false)
 	public Categoriachamada getCategoriachamada() {
 		return this.categoriachamada;
 	}
@@ -128,18 +132,42 @@ public class Chamadas implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({ @JoinColumn(name = "resumo_id", referencedColumnName = "id", nullable = false),
-			@JoinColumn(name = "resumo_numRecurso", referencedColumnName = "numRecurso", nullable = false),
-			@JoinColumn(name = "resumo_fatura_numFatura", referencedColumnName = "fatura_numFatura", nullable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_codCliente", referencedColumnName = "fatura_cliente_codCliente", nullable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_operadora_codOperadora", referencedColumnName = "fatura_cliente_operadora_codOperadora", nullable = false),
-			@JoinColumn(name = "resumo_fatura_dataEmissao", referencedColumnName = "fatura_dataEmissao", nullable = false) })
+	@JoinColumn(name = "resumo_id_resumo", nullable = false)
 	public Resumo getResumo() {
 		return this.resumo;
 	}
 
 	public void setResumo(Resumo resumo) {
 		this.resumo = resumo;
+	}
+
+	@Column(name = "numTelefoneChamado", nullable = false, length = 17)
+	public String getNumTelefoneChamado() {
+		return this.numTelefoneChamado;
+	}
+
+	public void setNumTelefoneChamado(String numTelefoneChamado) {
+		this.numTelefoneChamado = numTelefoneChamado;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dataLigacao", nullable = false, length = 10)
+	public Date getDataLigacao() {
+		return this.dataLigacao;
+	}
+
+	public void setDataLigacao(Date dataLigacao) {
+		this.dataLigacao = dataLigacao;
+	}
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "horaLigacao", nullable = false, length = 19)
+	public Date getHoraLigacao() {
+		return this.horaLigacao;
+	}
+
+	public void setHoraLigacao(Date horaLigacao) {
+		this.horaLigacao = horaLigacao;
 	}
 
 	@Column(name = "cnlAreaLocalUso", nullable = false)
@@ -214,7 +242,7 @@ public class Chamadas implements java.io.Serializable {
 		this.codOpRoaming = codOpRoaming;
 	}
 
-	@Column(name = "opTerminalVincDestino", nullable = false, length = 3)
+	@Column(name = "opTerminalVincDestino", length = 3)
 	public String getOpTerminalVincDestino() {
 		return this.opTerminalVincDestino;
 	}

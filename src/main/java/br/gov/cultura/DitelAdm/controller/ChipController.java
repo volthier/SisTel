@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.Service.CadastroChipService;
 import br.gov.cultura.DitelAdm.model.Chip;
+import br.gov.cultura.DitelAdm.service.CadastroChipService;
+
 
 @Controller
 @RequestMapping("/chips")
@@ -55,14 +56,14 @@ public class ChipController extends UrlController {
 		
 	}
 	
-	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long id, RedirectAttributes attributes){
-		cadastroChipService.excluir(id);
+	@RequestMapping(value="{idChip}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Long idChip, RedirectAttributes attributes){
+		cadastroChipService.excluir(idChip);
 		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
 		return "redirect:/inicio";
 		}	
 	
-	@RequestMapping("{id}")
+	@RequestMapping("{idChip}")
 	public ModelAndView edicao(@PathVariable("idChip") Chip chips){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(chips);

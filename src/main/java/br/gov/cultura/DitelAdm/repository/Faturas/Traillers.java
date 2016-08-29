@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 
 public interface Traillers extends JpaRepository<Trailler, Long>{
 
-	public List<Trailler> findById(int id);
+	public List<Trailler> findByIdTrailler(Integer idTrailler);
 }

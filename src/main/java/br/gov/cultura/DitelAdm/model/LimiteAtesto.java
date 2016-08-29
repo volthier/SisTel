@@ -1,5 +1,5 @@
 package br.gov.cultura.DitelAdm.model;
-// Generated 17/08/2016 19:31:54 by Hibernate Tools 4.3.4.Final
+// Generated 24/08/2016 15:08:19 by Hibernate Tools 4.3.4.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -26,16 +26,17 @@ public class LimiteAtesto implements java.io.Serializable {
 	private String valorLimite;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Usuario> usuarios = new HashSet(0);
-
 	public LimiteAtesto() {
 	}
 
-	public LimiteAtesto(String dasAtesto, String valorLimite) {
+	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, String valorLimite) {
+		this.idLimiteAtesto = idLimiteAtesto;
 		this.dasAtesto = dasAtesto;
 		this.valorLimite = valorLimite;
 	}
 
-	public LimiteAtesto(String dasAtesto, String valorLimite, Set<Usuario> usuarios) {
+	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, String valorLimite, Set<Usuario> usuarios) {
+		this.idLimiteAtesto = idLimiteAtesto;
 		this.dasAtesto = dasAtesto;
 		this.valorLimite = valorLimite;
 		this.usuarios = usuarios;
@@ -44,7 +45,7 @@ public class LimiteAtesto implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "idLimite_atesto", unique = true, nullable = false)
+	@Column(name = "id_limite_atesto", unique = true, nullable = false)
 	public Integer getIdLimiteAtesto() {
 		return this.idLimiteAtesto;
 	}
@@ -53,7 +54,7 @@ public class LimiteAtesto implements java.io.Serializable {
 		this.idLimiteAtesto = idLimiteAtesto;
 	}
 
-	@Column(name = "dasAtesto", nullable = false)
+	@Column(name = "das_atesto", nullable = false)
 	public String getDasAtesto() {
 		return this.dasAtesto;
 	}
@@ -62,7 +63,7 @@ public class LimiteAtesto implements java.io.Serializable {
 		this.dasAtesto = dasAtesto;
 	}
 
-	@Column(name = "valorLimite", nullable = false)
+	@Column(name = "valor_limite", nullable = false)
 	public String getValorLimite() {
 		return this.valorLimite;
 	}

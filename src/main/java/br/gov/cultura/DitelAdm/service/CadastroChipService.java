@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.Service;
+package br.gov.cultura.DitelAdm.service;
 
 import java.util.List;
 

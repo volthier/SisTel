@@ -10,8 +10,17 @@ public class CadastroFiltroPesquisa {
 	private String id;
 	private String marca;
 	private String idChip;
+	private String dasAtesto;
 	
 	
+	public String getDasAtesto() {
+		return dasAtesto;
+	}
+
+	public void setDasAtesto(String dasAtesto) {
+		this.dasAtesto = dasAtesto;
+	}
+
 	public String getMarca() {
 		return marca;
 	}

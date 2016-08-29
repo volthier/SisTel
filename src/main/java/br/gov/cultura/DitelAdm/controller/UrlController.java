@@ -1,6 +1,5 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import br.gov.cultura.DitelAdm.Service.CadastroChipService;
-import br.gov.cultura.DitelAdm.Service.CadastroDispositivoService;
-import br.gov.cultura.DitelAdm.Service.CadastroLinhaService;
-import br.gov.cultura.DitelAdm.Service.CadastroPessoaService;
-import br.gov.cultura.DitelAdm.model.CadastroDispositivo;
-import br.gov.cultura.DitelAdm.model.CadastroLinha;
-import br.gov.cultura.DitelAdm.model.CadastroPessoa;
 import br.gov.cultura.DitelAdm.model.Chip;
-import br.gov.cultura.DitelAdm.model.enums.StatusCadastro;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoa;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaCargo;
-import br.gov.cultura.DitelAdm.model.enums.VinculoCadastroPessoaDAS;
-import br.gov.cultura.DitelAdm.model.enums.VinculoDispositivoTipo;
+import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.service.CadastroChipService;
+import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
+import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+
 
 @Controller
 @RequestMapping("/inicio")
@@ -34,7 +29,7 @@ public class UrlController {
 	private CadastroDispositivoService cadastroDispositivoService;
 	
 	@Autowired
-	private CadastroPessoaService cadastroPessoaService;
+	private CadastroUsuarioService cadastroUsuarioService;
 	
 	@Autowired
 	private CadastroChipService cadastroChipService;
@@ -44,16 +39,16 @@ public class UrlController {
 		
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
-		List<CadastroDispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro); 
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro); 
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		String json = new Gson().toJson(mv); 
 		json = new Gson().toJson(todosDispositivos);
 		mv.addObject("dispositivos", todosDispositivos);
 		mv.addObject("sugestion", json);
 		System.out.println(json);
-		List<CadastroPessoa> todasPessoas = cadastroPessoaService.filtrar(filtro);
-		json = new Gson().toJson(todasPessoas);
-		mv.addObject("pessoas", todasPessoas);
+		List<Usuario> todosUsuarios = cadastroUsuarioService.filtrar(filtro);
+		json = new Gson().toJson(todosUsuarios);
+		mv.addObject("usuarios", todosUsuarios);
 		mv.addObject("sugestion", json);
 		System.out.println(json);
 		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
@@ -61,37 +56,14 @@ public class UrlController {
 		mv.addObject("chips", todosChips);
 		mv.addObject("sugestion", json);
 		System.out.println(json);
-		List<CadastroLinha> todasLinhas = cadastroLinhaService.filtrar(filtro);
+		List<Linha> todasLinhas = cadastroLinhaService.filtrar(filtro);
 		json = new Gson().toJson(todasLinhas);
 		mv.addObject("linhas", todasLinhas);
 		mv.addObject("sugestion", json);
 		System.out.println(json);		
+		DasLimitesBase dasLimitesBase = new DasLimitesBase();
 		
 		return mv;
 	}	
-
-	@ModelAttribute("todosStatusCadastro")
-	public List<StatusCadastro> todosStatusCadastro(){
-		return Arrays.asList(StatusCadastro.values());
-	}
-	
-	@ModelAttribute("todosVinculoCadastroPessoa")
-	public List<VinculoCadastroPessoa> todosVinculoCadastroPessoa(){
-		return Arrays.asList(VinculoCadastroPessoa.values());
-	}
-
-	@ModelAttribute("todosVinculoCadastroPessoaDAS")
-	public List<VinculoCadastroPessoaDAS> todosVinculoCadastroPessoaDAS(){
-		return Arrays.asList(VinculoCadastroPessoaDAS.values());
-	}
-	@ModelAttribute("todosVinculoCadastroPessoaCargo")
-	public List<VinculoCadastroPessoaCargo> todosVinculoCadastroPessoaCargo(){
-		return Arrays.asList(VinculoCadastroPessoaCargo.values());
-	}
-	
-	@ModelAttribute("todosDispositivoTipo")
-	public List<VinculoDispositivoTipo> todosDispositivoTipo(){
-		return Arrays.asList(VinculoDispositivoTipo.values());
-	}
 	
 }

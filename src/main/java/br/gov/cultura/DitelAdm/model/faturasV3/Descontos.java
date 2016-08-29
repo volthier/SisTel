@@ -1,15 +1,16 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,11 +23,13 @@ import javax.persistence.TemporalType;
 @Table(name = "descontos", catalog = "diteladmdev")
 public class Descontos implements java.io.Serializable {
 
-	private DescontosId id;
+	private Integer idDescontos;
 	private Categoriadesconto categoriadesconto;
 	private Resumo resumo;
+	private Date dataInicio;
+	private Date horaInicio;
 	private String tipo;
-	private float baseCal;
+	private Float baseCal;
 	private int tipoNf;
 	private String numNf;
 	private Float percentual;
@@ -39,25 +42,24 @@ public class Descontos implements java.io.Serializable {
 	public Descontos() {
 	}
 
-	public Descontos(DescontosId id, Categoriadesconto categoriadesconto, Resumo resumo, String tipo, float baseCal,
-			int tipoNf, String numNf, String sinal, float valor) {
-		this.id = id;
+	public Descontos(Categoriadesconto categoriadesconto, Resumo resumo, String tipo, int tipoNf, String numNf,
+			String sinal, float valor) {
 		this.categoriadesconto = categoriadesconto;
 		this.resumo = resumo;
 		this.tipo = tipo;
-		this.baseCal = baseCal;
 		this.tipoNf = tipoNf;
 		this.numNf = numNf;
 		this.sinal = sinal;
 		this.valor = valor;
 	}
 
-	public Descontos(DescontosId id, Categoriadesconto categoriadesconto, Resumo resumo, String tipo, float baseCal,
-			int tipoNf, String numNf, Float percentual, String sinal, float valor, Date dataFim, Date horaFim,
-			String campoLivreOp) {
-		this.id = id;
+	public Descontos(Categoriadesconto categoriadesconto, Resumo resumo, Date dataInicio, Date horaInicio, String tipo,
+			Float baseCal, int tipoNf, String numNf, Float percentual, String sinal, float valor, Date dataFim,
+			Date horaFim, String campoLivreOp) {
 		this.categoriadesconto = categoriadesconto;
 		this.resumo = resumo;
+		this.dataInicio = dataInicio;
+		this.horaInicio = horaInicio;
 		this.tipo = tipo;
 		this.baseCal = baseCal;
 		this.tipoNf = tipoNf;
@@ -70,23 +72,20 @@ public class Descontos implements java.io.Serializable {
 		this.campoLivreOp = campoLivreOp;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idDescontos", column = @Column(name = "idDescontos", nullable = false)),
-			@AttributeOverride(name = "dataInicio", column = @Column(name = "dataInicio", nullable = false, length = 10)),
-			@AttributeOverride(name = "horaInicio", column = @Column(name = "horaInicio", nullable = false, length = 19)),
-			@AttributeOverride(name = "categoriaDescontoCodCatDesconto", column = @Column(name = "categoriaDesconto_codCatDesconto", nullable = false)) })
-	public DescontosId getId() {
-		return this.id;
+	@Column(name = "id_descontos", unique = true, nullable = false)
+	public Integer getIdDescontos() {
+		return this.idDescontos;
 	}
 
-	public void setId(DescontosId id) {
-		this.id = id;
+	public void setIdDescontos(Integer idDescontos) {
+		this.idDescontos = idDescontos;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoriaDesconto_codCatDesconto", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "categoriaDesconto_id_catDesconto", nullable = false)
 	public Categoriadesconto getCategoriadesconto() {
 		return this.categoriadesconto;
 	}
@@ -96,18 +95,33 @@ public class Descontos implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({ @JoinColumn(name = "resumo_id", referencedColumnName = "id", nullable = false),
-			@JoinColumn(name = "resumo_numRecurso", referencedColumnName = "numRecurso", nullable = false),
-			@JoinColumn(name = "resumo_fatura_numFatura", referencedColumnName = "fatura_numFatura", nullable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_codCliente", referencedColumnName = "fatura_cliente_codCliente", nullable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_operadora_codOperadora", referencedColumnName = "fatura_cliente_operadora_codOperadora", nullable = false),
-			@JoinColumn(name = "resumo_fatura_dataEmissao", referencedColumnName = "fatura_dataEmissao", nullable = false) })
+	@JoinColumn(name = "resumo_id_resumo", nullable = false)
 	public Resumo getResumo() {
 		return this.resumo;
 	}
 
 	public void setResumo(Resumo resumo) {
 		this.resumo = resumo;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dataInicio", length = 10)
+	public Date getDataInicio() {
+		return this.dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "horaInicio", length = 19)
+	public Date getHoraInicio() {
+		return this.horaInicio;
+	}
+
+	public void setHoraInicio(Date horaInicio) {
+		this.horaInicio = horaInicio;
 	}
 
 	@Column(name = "tipo", nullable = false, length = 1)
@@ -119,12 +133,12 @@ public class Descontos implements java.io.Serializable {
 		this.tipo = tipo;
 	}
 
-	@Column(name = "baseCal", nullable = false, precision = 12, scale = 0)
-	public float getBaseCal() {
+	@Column(name = "baseCal", precision = 12, scale = 0)
+	public Float getBaseCal() {
 		return this.baseCal;
 	}
 
-	public void setBaseCal(float baseCal) {
+	public void setBaseCal(Float baseCal) {
 		this.baseCal = baseCal;
 	}
 
@@ -183,7 +197,7 @@ public class Descontos implements java.io.Serializable {
 		this.dataFim = dataFim;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "horaFim", length = 19)
 	public Date getHoraFim() {
 		return this.horaFim;

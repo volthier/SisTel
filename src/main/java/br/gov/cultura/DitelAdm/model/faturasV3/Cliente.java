@@ -1,14 +1,13 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,46 +20,44 @@ import javax.persistence.Table;
 @Table(name = "cliente", catalog = "diteladmdev")
 public class Cliente implements java.io.Serializable {
 
-	private ClienteId id;
+	private String codCliente;
 	private Operadora operadora;
 	private String nome;
 	private String cnpj;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Fatura> faturas = new HashSet(0);
 
 	public Cliente() {
 	}
 
-	public Cliente(ClienteId id, Operadora operadora, String nome, String cnpj) {
-		this.id = id;
+	public Cliente(String codCliente, Operadora operadora, String nome, String cnpj) {
+		this.codCliente = codCliente;
 		this.operadora = operadora;
 		this.nome = nome;
 		this.cnpj = cnpj;
 	}
 
-	public Cliente(ClienteId id, Operadora operadora, String nome, String cnpj, Set<Fatura> faturas) {
-		this.id = id;
+	public Cliente(String codCliente, Operadora operadora, String nome, String cnpj, Set<Fatura> faturas) {
+		this.codCliente = codCliente;
 		this.operadora = operadora;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.faturas = faturas;
 	}
 
+	@Id
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "codCliente", column = @Column(name = "codCliente", nullable = false, length = 15)),
-			@AttributeOverride(name = "operadoraCodOperadora", column = @Column(name = "operadora_codOperadora", nullable = false)) })
-	public ClienteId getId() {
-		return this.id;
+	@Column(name = "codCliente", unique = true, nullable = false, length = 15)
+	public String getCodCliente() {
+		return this.codCliente;
 	}
 
-	public void setId(ClienteId id) {
-		this.id = id;
+	public void setCodCliente(String codCliente) {
+		this.codCliente = codCliente;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "operadora_codOperadora", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "operadora_codOperadora", nullable = false)
 	public Operadora getOperadora() {
 		return this.operadora;
 	}

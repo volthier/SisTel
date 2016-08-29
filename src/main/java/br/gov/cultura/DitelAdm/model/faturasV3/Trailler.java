@@ -1,14 +1,14 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "trailler", catalog = "diteladmdev")
 public class Trailler implements java.io.Serializable {
 
-	private TraillerId id;
+	private Integer idTrailler;
 	private Fatura fatura;
 	private int quanReg10;
 	private int quanReg20;
@@ -45,11 +45,10 @@ public class Trailler implements java.io.Serializable {
 	public Trailler() {
 	}
 
-	public Trailler(TraillerId id, Fatura fatura, int quanReg10, int quanReg20, int quanReg30, int quanReg40,
-			int quanReg50, int quanReg60, int quanReg70, int quanReg80, int quanTotalReg, float valTotal,
-			float valTotal10, float valTotal30, float valTotal40, float valTotal50, float valTotal60, float valTotal70,
-			float valTotal80, char sinTotalReg50, char sinTotalReg70) {
-		this.id = id;
+	public Trailler(Fatura fatura, int quanReg10, int quanReg20, int quanReg30, int quanReg40, int quanReg50,
+			int quanReg60, int quanReg70, int quanReg80, int quanTotalReg, float valTotal, float valTotal10,
+			float valTotal30, float valTotal40, float valTotal50, float valTotal60, float valTotal70, float valTotal80,
+			char sinTotalReg50, char sinTotalReg70) {
 		this.fatura = fatura;
 		this.quanReg10 = quanReg10;
 		this.quanReg20 = quanReg20;
@@ -72,11 +71,10 @@ public class Trailler implements java.io.Serializable {
 		this.sinTotalReg70 = sinTotalReg70;
 	}
 
-	public Trailler(TraillerId id, Fatura fatura, int quanReg10, int quanReg20, int quanReg30, int quanReg40,
-			int quanReg50, int quanReg60, int quanReg70, int quanReg80, int quanTotalReg, float valTotal,
-			float valTotal10, float valTotal30, float valTotal40, float valTotal50, float valTotal60, float valTotal70,
-			float valTotal80, char sinTotalReg50, char sinTotalReg70, String campoLivreOp) {
-		this.id = id;
+	public Trailler(Fatura fatura, int quanReg10, int quanReg20, int quanReg30, int quanReg40, int quanReg50,
+			int quanReg60, int quanReg70, int quanReg80, int quanTotalReg, float valTotal, float valTotal10,
+			float valTotal30, float valTotal40, float valTotal50, float valTotal60, float valTotal70, float valTotal80,
+			char sinTotalReg50, char sinTotalReg70, String campoLivreOp) {
 		this.fatura = fatura;
 		this.quanReg10 = quanReg10;
 		this.quanReg20 = quanReg20;
@@ -100,28 +98,20 @@ public class Trailler implements java.io.Serializable {
 		this.campoLivreOp = campoLivreOp;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idtrailler", column = @Column(name = "idtrailler", nullable = false)),
-			@AttributeOverride(name = "faturaNumFatura", column = @Column(name = "fatura_numFatura", nullable = false)),
-			@AttributeOverride(name = "faturaClienteCodCliente", column = @Column(name = "fatura_cliente_codCliente", nullable = false, length = 15)),
-			@AttributeOverride(name = "faturaClienteOperadoraCodOperadora", column = @Column(name = "fatura_cliente_operadora_codOperadora", nullable = false)),
-			@AttributeOverride(name = "faturaDataEmissao", column = @Column(name = "fatura_dataEmissao", nullable = false, length = 10)) })
-	public TraillerId getId() {
-		return this.id;
+	@Column(name = "id_trailler", unique = true, nullable = false)
+	public Integer getIdTrailler() {
+		return this.idTrailler;
 	}
 
-	public void setId(TraillerId id) {
-		this.id = id;
+	public void setIdTrailler(Integer idTrailler) {
+		this.idTrailler = idTrailler;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "fatura_numFatura", referencedColumnName = "numFatura", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_cliente_codCliente", referencedColumnName = "cliente_codCliente", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_cliente_operadora_codOperadora", referencedColumnName = "cliente_operadora_codOperadora", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_dataEmissao", referencedColumnName = "dataEmissao", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "fatura_id_fatura", nullable = false)
 	public Fatura getFatura() {
 		return this.fatura;
 	}

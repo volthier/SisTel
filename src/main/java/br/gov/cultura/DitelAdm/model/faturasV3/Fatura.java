@@ -1,17 +1,18 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,8 +26,10 @@ import javax.persistence.TemporalType;
 @Table(name = "fatura", catalog = "diteladmdev")
 public class Fatura implements java.io.Serializable {
 
-	private FaturaId id;
+	private Integer idFatura;
 	private Cliente cliente;
+	private int numFatura;
+	private Date dataEmissao;
 	private String indConta;
 	private String mesRef;
 	private Date dataVenc;
@@ -52,26 +55,27 @@ public class Fatura implements java.io.Serializable {
 	public Fatura() {
 	}
 
-	public Fatura(FaturaId id, Cliente cliente, String indConta, String mesRef, Date dataVenc, String codBarra,
+	public Fatura(Cliente cliente, int numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
 			String codCobranca, String descriCobranca, Date dataGeraArquivo, String versaoFormato) {
-		this.id = id;
 		this.cliente = cliente;
+		this.numFatura = numFatura;
+		this.dataEmissao = dataEmissao;
 		this.indConta = indConta;
 		this.mesRef = mesRef;
 		this.dataVenc = dataVenc;
-		this.codBarra = codBarra;
 		this.codCobranca = codCobranca;
 		this.descriCobranca = descriCobranca;
 		this.dataGeraArquivo = dataGeraArquivo;
 		this.versaoFormato = versaoFormato;
 	}
 
-	public Fatura(FaturaId id, Cliente cliente, String indConta, String mesRef, Date dataVenc, String codBarra,
-			String codCobranca, String descriCobranca, String bancoCobranca, String agenciaCobranca, String ccCobranca,
-			String fisco, Date dataGeraArquivo, String versaoFormato, String campoLivreOp, Set<Trailler> traillers,
-			Set<Enderecos> enderecoses, Set<Notafiscal> notafiscals, Set<Resumo> resumos) {
-		this.id = id;
+	public Fatura(Cliente cliente, int numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
+			String codBarra, String codCobranca, String descriCobranca, String bancoCobranca, String agenciaCobranca,
+			String ccCobranca, String fisco, Date dataGeraArquivo, String versaoFormato, String campoLivreOp,
+			Set<Trailler> traillers, Set<Enderecos> enderecoses, Set<Notafiscal> notafiscals, Set<Resumo> resumos) {
 		this.cliente = cliente;
+		this.numFatura = numFatura;
+		this.dataEmissao = dataEmissao;
 		this.indConta = indConta;
 		this.mesRef = mesRef;
 		this.dataVenc = dataVenc;
@@ -91,31 +95,45 @@ public class Fatura implements java.io.Serializable {
 		this.resumos = resumos;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "numFatura", column = @Column(name = "numFatura", nullable = false)),
-			@AttributeOverride(name = "clienteCodCliente", column = @Column(name = "cliente_codCliente", nullable = false, length = 15)),
-			@AttributeOverride(name = "clienteOperadoraCodOperadora", column = @Column(name = "cliente_operadora_codOperadora", nullable = false)),
-			@AttributeOverride(name = "dataEmissao", column = @Column(name = "dataEmissao", nullable = false, length = 10)) })
-	public FaturaId getId() {
-		return this.id;
+	@Column(name = "id_fatura", unique = true, nullable = false)
+	public Integer getIdFatura() {
+		return this.idFatura;
 	}
 
-	public void setId(FaturaId id) {
-		this.id = id;
+	public void setIdFatura(Integer idFatura) {
+		this.idFatura = idFatura;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "cliente_codCliente", referencedColumnName = "codCliente", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "cliente_operadora_codOperadora", referencedColumnName = "operadora_codOperadora", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "cliente_codCliente", nullable = false)
 	public Cliente getCliente() {
 		return this.cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	@Column(name = "numFatura", nullable = false)
+	public int getNumFatura() {
+		return this.numFatura;
+	}
+
+	public void setNumFatura(int numFatura) {
+		this.numFatura = numFatura;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dataEmissao", nullable = false, length = 10)
+	public Date getDataEmissao() {
+		return this.dataEmissao;
+	}
+
+	public void setDataEmissao(Date dataEmissao) {
+		this.dataEmissao = dataEmissao;
 	}
 
 	@Column(name = "indConta", nullable = false, length = 25)
@@ -146,7 +164,7 @@ public class Fatura implements java.io.Serializable {
 		this.dataVenc = dataVenc;
 	}
 
-	@Column(name = "codBarra", nullable = false, length = 16777215)
+	@Column(name = "codBarra", length = 16777215)
 	public String getCodBarra() {
 		return this.codBarra;
 	}

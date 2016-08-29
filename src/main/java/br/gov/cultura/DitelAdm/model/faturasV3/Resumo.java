@@ -1,17 +1,18 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 11/08/2016 16:17:37 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,8 +26,9 @@ import javax.persistence.TemporalType;
 @Table(name = "resumo", catalog = "diteladmdev")
 public class Resumo implements java.io.Serializable {
 
-	private ResumoId id;
+	private Integer idResumo;
 	private Fatura fatura;
+	private String numRecurso;
 	private String idUnico;
 	private int cnl;
 	private int modServ;
@@ -54,14 +56,13 @@ public class Resumo implements java.io.Serializable {
 	public Resumo() {
 	}
 
-	public Resumo(ResumoId id, Fatura fatura, String idUnico, int cnl, int modServ, Date dataAtiv, int quantRegServ,
+	public Resumo(Fatura fatura, String numRecurso, String idUnico, int cnl, int modServ, int quantRegServ,
 			float valorTotalRegChamadaImp, float valorTotalImp, float valorTotalContaRecursoImp, Date dataVenc) {
-		this.id = id;
 		this.fatura = fatura;
+		this.numRecurso = numRecurso;
 		this.idUnico = idUnico;
 		this.cnl = cnl;
 		this.modServ = modServ;
-		this.dataAtiv = dataAtiv;
 		this.quantRegServ = quantRegServ;
 		this.valorTotalRegChamadaImp = valorTotalRegChamadaImp;
 		this.valorTotalImp = valorTotalImp;
@@ -69,12 +70,12 @@ public class Resumo implements java.io.Serializable {
 		this.dataVenc = dataVenc;
 	}
 
-	public Resumo(ResumoId id, Fatura fatura, String idUnico, int cnl, int modServ, Date dataAtiv, Date dataDesativ,
-			int quantRegServ, float valorTotalRegChamadaImp, float valorTotalImp, float valorTotalContaRecursoImp,
-			String degrau, String velocidade, String uniVelocidade, Date dataVenc, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
-			Set<Planos> planoses, Set<Chamadas> chamadases, Set<Servicos> servicoses) {
-		this.id = id;
+	public Resumo(Fatura fatura, String numRecurso, String idUnico, int cnl, int modServ, Date dataAtiv,
+			Date dataDesativ, int quantRegServ, float valorTotalRegChamadaImp, float valorTotalImp,
+			float valorTotalContaRecursoImp, String degrau, String velocidade, String uniVelocidade, Date dataVenc,
+			Set<Ajustes> ajusteses, Set<Descontos> descontoses, Set<Planos> planoses, Set<Chamadas> chamadases, Set<Servicos> servicoses) {
 		this.fatura = fatura;
+		this.numRecurso = numRecurso;
 		this.idUnico = idUnico;
 		this.cnl = cnl;
 		this.modServ = modServ;
@@ -95,34 +96,35 @@ public class Resumo implements java.io.Serializable {
 		this.servicoses = servicoses;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "id", nullable = false)),
-			@AttributeOverride(name = "numRecurso", column = @Column(name = "numRecurso", nullable = false, length = 20)),
-			@AttributeOverride(name = "faturaNumFatura", column = @Column(name = "fatura_numFatura", nullable = false)),
-			@AttributeOverride(name = "faturaClienteCodCliente", column = @Column(name = "fatura_cliente_codCliente", nullable = false, length = 15)),
-			@AttributeOverride(name = "faturaClienteOperadoraCodOperadora", column = @Column(name = "fatura_cliente_operadora_codOperadora", nullable = false)),
-			@AttributeOverride(name = "faturaDataEmissao", column = @Column(name = "fatura_dataEmissao", nullable = false, length = 10)) })
-	public ResumoId getId() {
-		return this.id;
+	@Column(name = "id_resumo", unique = true, nullable = false)
+	public Integer getIdResumo() {
+		return this.idResumo;
 	}
 
-	public void setId(ResumoId id) {
-		this.id = id;
+	public void setIdResumo(Integer idResumo) {
+		this.idResumo = idResumo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "fatura_numFatura", referencedColumnName = "numFatura", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_cliente_codCliente", referencedColumnName = "cliente_codCliente", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_cliente_operadora_codOperadora", referencedColumnName = "cliente_operadora_codOperadora", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_dataEmissao", referencedColumnName = "dataEmissao", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "fatura_id_fatura", nullable = false)
 	public Fatura getFatura() {
 		return this.fatura;
 	}
 
 	public void setFatura(Fatura fatura) {
 		this.fatura = fatura;
+	}
+
+	@Column(name = "numRecurso", nullable = false, length = 20)
+	public String getNumRecurso() {
+		return this.numRecurso;
+	}
+
+	public void setNumRecurso(String numRecurso) {
+		this.numRecurso = numRecurso;
 	}
 
 	@Column(name = "idUnico", nullable = false, length = 25)
@@ -153,7 +155,7 @@ public class Resumo implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataAtiv", nullable = false, length = 10)
+	@Column(name = "dataAtiv", length = 10)
 	public Date getDataAtiv() {
 		return this.dataAtiv;
 	}

@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.repository;
+/*package br.gov.cultura.DitelAdm.repository.alocacoes;
 
 import java.util.List;
 
@@ -11,3 +11,4 @@ public interface Alocacoes extends JpaRepository<Alocacao, Long>{
 	public List<Alocacao> findByIdContaining(String id);
 
 }
+*/

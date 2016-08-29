@@ -1,11 +1,15 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "categoriaplano", catalog = "diteladmdev")
 public class Categoriaplano implements java.io.Serializable {
 
+	private Integer idCatPlano;
 	private int codCatPlano;
 	private String sigla;
 	private String descricao;
@@ -40,8 +45,18 @@ public class Categoriaplano implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "codCatPlano", unique = true, nullable = false)
+	@Column(name = "id_catPlano", unique = true, nullable = false)
+	public Integer getIdCatPlano() {
+		return this.idCatPlano;
+	}
+
+	public void setIdCatPlano(Integer idCatPlano) {
+		this.idCatPlano = idCatPlano;
+	}
+
+	@Column(name = "codCatPlano", nullable = false)
 	public int getCodCatPlano() {
 		return this.codCatPlano;
 	}

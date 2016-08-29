@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Servicos;
 
 public interface Servicosas extends JpaRepository<Servicos, Long>{
 
-	public List<Servicos> findByIdContaining(String id);
+	public List<Servicos> findByIdServicos(Integer idServicos);
 }

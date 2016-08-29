@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.Service;
+package br.gov.cultura.DitelAdm.service;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
-import br.gov.cultura.DitelAdm.repository.Faturas.Faturas;
 import br.gov.cultura.DitelAdm.repository.Faturas.Ajustesas;
 import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasAjustes;
 import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasChamadas;
@@ -18,6 +17,7 @@ import br.gov.cultura.DitelAdm.repository.Faturas.Chamadasas;
 import br.gov.cultura.DitelAdm.repository.Faturas.Clientes;
 import br.gov.cultura.DitelAdm.repository.Faturas.Descontosas;
 import br.gov.cultura.DitelAdm.repository.Faturas.Enderecosas;
+import br.gov.cultura.DitelAdm.repository.Faturas.Faturas;
 import br.gov.cultura.DitelAdm.repository.Faturas.NotasFiscais;
 import br.gov.cultura.DitelAdm.repository.Faturas.Operadoras;
 import br.gov.cultura.DitelAdm.repository.Faturas.Planosas;

@@ -1,8 +1,9 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,13 +22,9 @@ public class Operadora implements java.io.Serializable {
 	private String nome;
 	private String cnpj;
 	private String uf;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Cliente> clientes = new HashSet(0);
 
-	/*public void configuraCliente(Cliente cliente){
-		cliente.getId().setOperadoraCodOperadora(getCodOperadora());
-		clientes.add(cliente);
-	}*/
 	public Operadora() {
 	}
 

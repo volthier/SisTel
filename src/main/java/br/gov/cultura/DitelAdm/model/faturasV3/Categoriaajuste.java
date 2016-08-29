@@ -1,13 +1,15 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 11/08/2016 16:17:37 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,10 +25,9 @@ public class Categoriaajuste implements java.io.Serializable {
 	private int codCatAjuste;
 	private String sigla;
 	private String descricao;
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Ajustes> ajusteses = new HashSet(0);
-
+	
 	public Categoriaajuste() {
 	}
 
@@ -46,7 +47,7 @@ public class Categoriaajuste implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "idCatAjuste", unique = true, nullable = false)
+	@Column(name = "id_catAjuste", unique = true, nullable = false)
 	public Integer getIdCatAjuste() {
 		return this.idCatAjuste;
 	}

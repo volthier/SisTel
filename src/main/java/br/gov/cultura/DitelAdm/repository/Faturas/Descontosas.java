@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Descontos;
 
 public interface Descontosas extends JpaRepository<Descontos, Long>{
 
-	public List<Descontos> findByIdContaining(String id);
+	public List<Descontos> findByIdDescontos(Integer idDescontos);
 }

@@ -1,15 +1,16 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,15 +23,17 @@ import javax.persistence.TemporalType;
 @Table(name = "planos", catalog = "diteladmdev")
 public class Planos implements java.io.Serializable {
 
-	private PlanosId id;
+	private Integer idPlanos;
 	private Categoriaplano categoriaplano;
 	private Resumo resumo;
+	private Date dataIniCiclo;
 	private Date dataFimCiclo;
 	private String tipo;
 	private float consumoMedido;
 	private float consumoFranqueado;
 	private String codPlano;
 	private String descricaoPlano;
+	private String planoscol;
 	private float valComImp;
 	private float valSemImp;
 	private int tipoNf;
@@ -40,11 +43,11 @@ public class Planos implements java.io.Serializable {
 	public Planos() {
 	}
 
-	public Planos(PlanosId id, Categoriaplano categoriaplano, Resumo resumo, Date dataFimCiclo, String tipo,
+	public Planos(Categoriaplano categoriaplano, Resumo resumo, Date dataIniCiclo, Date dataFimCiclo, String tipo,
 			float consumoMedido, float consumoFranqueado, float valComImp, float valSemImp, int tipoNf, String numNf) {
-		this.id = id;
 		this.categoriaplano = categoriaplano;
 		this.resumo = resumo;
+		this.dataIniCiclo = dataIniCiclo;
 		this.dataFimCiclo = dataFimCiclo;
 		this.tipo = tipo;
 		this.consumoMedido = consumoMedido;
@@ -55,18 +58,19 @@ public class Planos implements java.io.Serializable {
 		this.numNf = numNf;
 	}
 
-	public Planos(PlanosId id, Categoriaplano categoriaplano, Resumo resumo, Date dataFimCiclo, String tipo,
-			float consumoMedido, float consumoFranqueado, String codPlano, String descricaoPlano,
+	public Planos(Categoriaplano categoriaplano, Resumo resumo, Date dataIniCiclo, Date dataFimCiclo, String tipo,
+			float consumoMedido, float consumoFranqueado, String codPlano, String descricaoPlano, String planoscol,
 			float valComImp, float valSemImp, int tipoNf, String numNf, String campoLivreOp) {
-		this.id = id;
 		this.categoriaplano = categoriaplano;
 		this.resumo = resumo;
+		this.dataIniCiclo = dataIniCiclo;
 		this.dataFimCiclo = dataFimCiclo;
 		this.tipo = tipo;
 		this.consumoMedido = consumoMedido;
 		this.consumoFranqueado = consumoFranqueado;
 		this.codPlano = codPlano;
 		this.descricaoPlano = descricaoPlano;
+		this.planoscol = planoscol;
 		this.valComImp = valComImp;
 		this.valSemImp = valSemImp;
 		this.tipoNf = tipoNf;
@@ -74,27 +78,20 @@ public class Planos implements java.io.Serializable {
 		this.campoLivreOp = campoLivreOp;
 	}
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@AttributeOverrides({ @AttributeOverride(name = "idPlanos", column = @Column(name = "idPlanos", nullable = false)),
-			@AttributeOverride(name = "dataIniCiclo", column = @Column(name = "dataIniCiclo", nullable = false, length = 10)),
-			@AttributeOverride(name = "categoriaPlanoCodCatPlano", column = @Column(name = "categoriaPlano_codCatPlano", nullable = false)),
-			@AttributeOverride(name = "resumoId", column = @Column(name = "resumo_id", nullable = false)),
-			@AttributeOverride(name = "resumoNumRecurso", column = @Column(name = "resumo_numRecurso", nullable = false, length = 20)),
-			@AttributeOverride(name = "resumoFaturaNumFatura", column = @Column(name = "resumo_fatura_numFatura", nullable = false)),
-			@AttributeOverride(name = "resumoFaturaClienteCodCliente", column = @Column(name = "resumo_fatura_cliente_codCliente", nullable = false, length = 15)),
-			@AttributeOverride(name = "resumoFaturaClienteOperadoraCodOperadora", column = @Column(name = "resumo_fatura_cliente_operadora_codOperadora", nullable = false)),
-			@AttributeOverride(name = "resumoFaturaDataEmissao", column = @Column(name = "resumo_fatura_dataEmissao", nullable = false, length = 10)) })
-	public PlanosId getId() {
-		return this.id;
+	@Column(name = "id_planos", unique = true, nullable = false)
+	public Integer getIdPlanos() {
+		return this.idPlanos;
 	}
 
-	public void setId(PlanosId id) {
-		this.id = id;
+	public void setIdPlanos(Integer idPlanos) {
+		this.idPlanos = idPlanos;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoriaPlano_codCatPlano", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "categoriaPlano_id_catPlano", nullable = false)
 	public Categoriaplano getCategoriaplano() {
 		return this.categoriaplano;
 	}
@@ -104,19 +101,23 @@ public class Planos implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "resumo_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "resumo_numRecurso", referencedColumnName = "numRecurso", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "resumo_fatura_numFatura", referencedColumnName = "fatura_numFatura", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_codCliente", referencedColumnName = "fatura_cliente_codCliente", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "resumo_fatura_cliente_operadora_codOperadora", referencedColumnName = "fatura_cliente_operadora_codOperadora", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "resumo_fatura_dataEmissao", referencedColumnName = "fatura_dataEmissao", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "resumo_id_resumo", nullable = false)
 	public Resumo getResumo() {
 		return this.resumo;
 	}
 
 	public void setResumo(Resumo resumo) {
 		this.resumo = resumo;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dataIniCiclo", nullable = false, length = 10)
+	public Date getDataIniCiclo() {
+		return this.dataIniCiclo;
+	}
+
+	public void setDataIniCiclo(Date dataIniCiclo) {
+		this.dataIniCiclo = dataIniCiclo;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -172,6 +173,15 @@ public class Planos implements java.io.Serializable {
 
 	public void setDescricaoPlano(String descricaoPlano) {
 		this.descricaoPlano = descricaoPlano;
+	}
+
+	@Column(name = "planoscol", length = 45)
+	public String getPlanoscol() {
+		return this.planoscol;
+	}
+
+	public void setPlanoscol(String planoscol) {
+		this.planoscol = planoscol;
 	}
 
 	@Column(name = "valComImp", nullable = false, precision = 12, scale = 0)

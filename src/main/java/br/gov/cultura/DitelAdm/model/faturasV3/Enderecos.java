@@ -1,14 +1,11 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 05/07/2016 12:36:15 by Hibernate Tools 4.3.1.Final
+// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "enderecos", catalog = "diteladmdev")
 public class Enderecos implements java.io.Serializable {
 
-	private EnderecosId id;
+	private String idEnderecos;
 	private Fatura fatura;
 	private String tipoEndereco;
 	private String cnlRecEnd;
@@ -34,14 +31,14 @@ public class Enderecos implements java.io.Serializable {
 	public Enderecos() {
 	}
 
-	public Enderecos(EnderecosId id, Fatura fatura) {
-		this.id = id;
+	public Enderecos(String idEnderecos, Fatura fatura) {
+		this.idEnderecos = idEnderecos;
 		this.fatura = fatura;
 	}
 
-	public Enderecos(EnderecosId id, Fatura fatura, String tipoEndereco, String cnlRecEnd, String nomeLocalEnd,
+	public Enderecos(String idEnderecos, Fatura fatura, String tipoEndereco, String cnlRecEnd, String nomeLocalEnd,
 			String ufLocal, String endereco, String numero, String complemento, String bairro, String campoLivreOp) {
-		this.id = id;
+		this.idEnderecos = idEnderecos;
 		this.fatura = fatura;
 		this.tipoEndereco = tipoEndereco;
 		this.cnlRecEnd = cnlRecEnd;
@@ -54,28 +51,19 @@ public class Enderecos implements java.io.Serializable {
 		this.campoLivreOp = campoLivreOp;
 	}
 
-	@EmbeddedId
+	@Id
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "idEnderecos", column = @Column(name = "idEnderecos", nullable = false)),
-			@AttributeOverride(name = "faturaNumFatura", column = @Column(name = "fatura_numFatura", nullable = false)),
-			@AttributeOverride(name = "faturaClienteCodCliente", column = @Column(name = "fatura_cliente_codCliente", nullable = false, length = 15)),
-			@AttributeOverride(name = "faturaClienteOperadoraCodOperadora", column = @Column(name = "fatura_cliente_operadora_codOperadora", nullable = false)),
-			@AttributeOverride(name = "faturaDataEmissao", column = @Column(name = "fatura_dataEmissao", nullable = false, length = 10)) })
-	public EnderecosId getId() {
-		return this.id;
+	@Column(name = "id_enderecos", unique = true, nullable = false, length = 18)
+	public String getIdEnderecos() {
+		return this.idEnderecos;
 	}
 
-	public void setId(EnderecosId id) {
-		this.id = id;
+	public void setIdEnderecos(String idEnderecos) {
+		this.idEnderecos = idEnderecos;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-			@JoinColumn(name = "fatura_numFatura", referencedColumnName = "numFatura", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_cliente_codCliente", referencedColumnName = "cliente_codCliente", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_cliente_operadora_codOperadora", referencedColumnName = "cliente_operadora_codOperadora", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "fatura_dataEmissao", referencedColumnName = "dataEmissao", nullable = false, insertable = false, updatable = false) })
+	@JoinColumn(name = "fatura_id_fatura", nullable = false)
 	public Fatura getFatura() {
 		return this.fatura;
 	}

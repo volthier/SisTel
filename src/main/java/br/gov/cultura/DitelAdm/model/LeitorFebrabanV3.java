@@ -17,26 +17,16 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Categoriadesconto;
 import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaplano;
 import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaservico;
 import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
-import br.gov.cultura.DitelAdm.model.faturasV3.ChamadasId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Cliente;
-import br.gov.cultura.DitelAdm.model.faturasV3.ClienteId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Descontos;
-import br.gov.cultura.DitelAdm.model.faturasV3.DescontosId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Enderecos;
-import br.gov.cultura.DitelAdm.model.faturasV3.EnderecosId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
-import br.gov.cultura.DitelAdm.model.faturasV3.FaturaId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Notafiscal;
-import br.gov.cultura.DitelAdm.model.faturasV3.NotafiscalId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Operadora;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
-import br.gov.cultura.DitelAdm.model.faturasV3.PlanosId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
-import br.gov.cultura.DitelAdm.model.faturasV3.ResumoId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Servicos;
-import br.gov.cultura.DitelAdm.model.faturasV3.ServicosId;
 import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
-import br.gov.cultura.DitelAdm.model.faturasV3.TraillerId;
 
 public class LeitorFebrabanV3 {
 
@@ -58,33 +48,25 @@ public class LeitorFebrabanV3 {
 		String data = null;
 
 		Fatura fatura = new Fatura();
-		FaturaId faturaId = new FaturaId();
 		Cliente cliente = new Cliente();
-		ClienteId clienteId = new ClienteId();
 		Operadora operadora = new Operadora();
 		List<Resumo> resumoLista = new ArrayList<Resumo>();
 		Resumo resumo = new Resumo();
-		ResumoId resumoId = new ResumoId();
 		List<Enderecos> enderecosLista = new ArrayList<Enderecos>();
 		Enderecos enderecos = new Enderecos();
-		EnderecosId enderecosId = new EnderecosId();
 		List<Chamadas> chamadasLista = new ArrayList<Chamadas>();
 		Chamadas chamadas = new Chamadas();
-		ChamadasId chamadasId = new ChamadasId();
 		List<Categoriachamada> categoriaChamadaLista = new ArrayList<Categoriachamada>();
 		Categoriachamada categoriaChamada = new Categoriachamada();
 		List<Servicos> servicosLista = new ArrayList<Servicos>();
 		Servicos servicos = new Servicos();
-		ServicosId servicosId = new ServicosId();
 		Categoriaservico categoriaServico = new Categoriaservico();
 		List<Categoriaservico> categoriaServicoLista = new ArrayList<Categoriaservico>();
 		Descontos descontos = new Descontos();
-		DescontosId descontosId = new DescontosId();
 		List<Descontos> descontosLista = new ArrayList<Descontos>();
 		Categoriadesconto categoriaDesconto = new Categoriadesconto();
 		List<Categoriadesconto> categoriaDescontoLista = new ArrayList<Categoriadesconto>();
 		Planos planos = new Planos();
-		PlanosId planosId = new PlanosId();
 		List<Planos> planosLista = new ArrayList<Planos>();
 		Categoriaplano categoriaPlano = new Categoriaplano();
 		List<Categoriaplano> categoriaPlanoLista = new ArrayList<Categoriaplano>();
@@ -93,9 +75,7 @@ public class LeitorFebrabanV3 {
 		Categoriaajuste categoriaAjustes = new Categoriaajuste();
 		List<Categoriaajuste> categoriaAjustesLista = new ArrayList<Categoriaajuste>();
 		Notafiscal notaFiscal = new Notafiscal();
-		NotafiscalId notaFiscalId = new NotafiscalId();
 		List<Notafiscal> notaFiscalLista = new ArrayList<Notafiscal>();
-		TraillerId traillerId = new TraillerId();
 		Trailler trailler = new Trailler();
 		List<Trailler> traillerLista = new ArrayList<Trailler>();
 
@@ -115,9 +95,7 @@ public class LeitorFebrabanV3 {
 				 * = data.substring(2, 14);
 				 */
 				fatura = new Fatura();
-				faturaId = new FaturaId();
 				cliente = new Cliente();
-				clienteId = new ClienteId();
 				operadora = new Operadora();
 				
 				/** Identificador de Conta Unica ou Numero da conta */
@@ -126,7 +104,7 @@ public class LeitorFebrabanV3 {
 
 				/** Data da emissão da Fatura/conta */
 				try {
-					faturaId.setDataEmissao(sdf.parse(data.substring(39, 47)));
+					fatura.setDataEmissao(sdf.parse(data.substring(39, 47)));
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -164,12 +142,8 @@ public class LeitorFebrabanV3 {
 				operadora.setUf(data.substring(102, 104));
 
 				/** Codigo do Cliente */
-				clienteId.setCodCliente(data.substring(104, 119));
-				clienteId.setOperadoraCodOperadora(operadora.getCodOperadora());
-				faturaId.setClienteOperadoraCodOperadora(operadora.getCodOperadora());
-				faturaId.setClienteCodCliente(clienteId.getCodCliente());
-				cliente.setId(clienteId);
-
+				cliente.setCodCliente(data.substring(104, 119));
+							
 				/** Nome do Cliente */
 				cliente.setNome(data.substring(119, 149));
 
@@ -183,8 +157,7 @@ public class LeitorFebrabanV3 {
 				fatura.setVersaoFormato(data.substring(164, 168));
 
 				/** Numero da Fatura */
-				faturaId.setNumFatura(Integer.parseInt(data.substring(168, 184)));
-				fatura.setId(faturaId);
+				fatura.setNumFatura(Integer.parseInt(data.substring(168, 184)));
 
 				/** Codigo de Barra */
 				fatura.setCodBarra(data.substring(184, 234));
@@ -230,13 +203,11 @@ public class LeitorFebrabanV3 {
 				 */
 
 				faturaArquivoDTO.setOperadora(operadora);
-				cliente.setId(clienteId);
 				cliente.setOperadora(operadora);
 				faturaArquivoDTO.setCliente(cliente);
 				fatura.setCliente(cliente);
-				fatura.setId(faturaId);
 				faturaArquivoDTO.setFatura(fatura);
-
+				
 				break;
 
 			case "10":
@@ -252,13 +223,13 @@ public class LeitorFebrabanV3 {
 				// resumo.setIdUnico(data.substring(14, 39));
 
 				/** Data da emissão da Fatura/conta */
-				resumoId = new ResumoId();
-				try {
-					resumoId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
+				resumo = new Resumo();
+				/*try {
+					resumo.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 
 				/**
 				 * Mês de Referência da fatura(cobrança) String
@@ -266,7 +237,6 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Identificador Único do Recurso */
-				resumo = new Resumo();
 				resumo.setIdUnico(data.substring(53, 78));
 
 				/**
@@ -276,7 +246,7 @@ public class LeitorFebrabanV3 {
 				resumo.setCnl(Integer.parseInt(data.substring(78, 83)));
 
 				/** Numero do Recurso */
-				resumoId.setNumRecurso(data.substring(83, 99));
+				resumo.setNumRecurso(data.substring(83, 99));
 
 				/** Modalidade de Serviço do recurso */
 				resumo.setModServ(Integer.parseInt(data.substring(99, 103)));
@@ -357,11 +327,7 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String resumoMarcaFim(data.substring(349,
 				 * 350);
 				 */
-				resumoId.setFaturaClienteCodCliente(faturaId.getClienteCodCliente());
-				resumoId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
-				resumoId.setFaturaNumFatura(faturaId.getNumFatura());
-				resumoId.setFaturaDataEmissao(faturaId.getDataEmissao());
-				resumo.setId(resumoId);
+				
 				resumo.setFatura(fatura);
 				resumoLista.add(resumo);
 				faturaArquivoDTO.setResumo(resumoLista);
@@ -375,7 +341,6 @@ public class LeitorFebrabanV3 {
 				 * Identificação dos endereçõs dos recursos cobrados na fatura
 				 */
 				enderecos = new Enderecos();
-				enderecosId = new EnderecosId();
 
 				/**
 				 * Controle de sequencia de gravação String
@@ -388,13 +353,13 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Data da emissão da Fatura/conta */
-				try {
+/*				try {
 					enderecosId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+*/
 				/**
 				 * Mês de Referência da fatura(cobrança) String
 				 * endMesRef(data.substring(47, 53));
@@ -406,7 +371,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Numero do Recurso */
-				enderecosId.setIdEnderecos(data.substring(78, 94));
+				enderecos.setIdEnderecos(data.substring(78, 94));
 
 				/** CLN do Recurso Endereço Ponta A */
 				enderecos.setCnlRecEnd(data.substring(94, 99));
@@ -481,10 +446,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Marcação de Fim String endMarcaFim(data.substring(349, 350);
 				 */
-				enderecosId.setFaturaClienteCodCliente(faturaId.getClienteCodCliente());
-				enderecosId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
-				enderecosId.setFaturaNumFatura(faturaId.getNumFatura());
-				enderecos.setId(enderecosId);
+				
+				enderecos.setFatura(fatura);
 				enderecosLista.add(enderecos);
 				faturaArquivoDTO.setEnderecos(enderecosLista);
 
@@ -497,7 +460,6 @@ public class LeitorFebrabanV3 {
 				 * de chamadas de VOZ cobradas na fatura
 				 */
 				chamadas = new Chamadas();
-				chamadasId = new ChamadasId();
 				categoriaChamada = new Categoriachamada();
 
 				/**
@@ -532,12 +494,12 @@ public class LeitorFebrabanV3 {
 				 */
 				chamadas.setCnlAreaLocalUso(Integer.parseInt(data.substring(78, 83)));
 
-				/** Numero do recurso */
-				chamadasId.setIdChamadas(data.substring(83, 99));
+/*	RECEBE DO RESUMO*//** Numero do recurso *//*
+				chamadas.setIdChamadas(data.substring(83, 99));*/
 
 				/** Data da ligação */
 				try {
-					chamadasId.setDataLigacao(sdf.parse(data.substring(99, 107)));
+					chamadas.setDataLigacao(sdf.parse(data.substring(99, 107)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -578,7 +540,7 @@ public class LeitorFebrabanV3 {
 				 * preencher o código do país de destino e número chamado
 				 */
 
-				chamadasId.setNumTelefoneChamado(data.substring(163, 180));
+				chamadas.setNumTelefoneChamado(data.substring(163, 180));
 
 				/**
 				 * Código da Operadora de Roaming **** Preencher com o código da
@@ -609,7 +571,6 @@ public class LeitorFebrabanV3 {
 				}
 
 				/** Código da Categoria Chamada**** */
-				chamadasId.setCategoriaChamadaCodCatChamada(Integer.parseInt(data.substring(195, 198)));
 				categoriaChamada.setCodCatChamada(Integer.parseInt(data.substring(195, 198)));
 
 				/** Sigla da Categoria Chamada */
@@ -620,7 +581,7 @@ public class LeitorFebrabanV3 {
 
 				/** Horário da ligação */
 				try {
-					chamadasId.setHoraLigacao(sdfh.parse(data.substring(226, 232)));
+					chamadas.setHoraLigacao(sdfh.parse(data.substring(226, 232)));
 				} catch (ParseException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -670,7 +631,6 @@ public class LeitorFebrabanV3 {
 				faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
 				chamadas.setCategoriachamada(categoriaChamada);
 				chamadas.setResumo(resumo);
-				chamadas.setId(chamadasId);
 				chamadasLista.add(chamadas);
 				faturaArquivoDTO.setChamadas(chamadasLista);
 
@@ -682,7 +642,6 @@ public class LeitorFebrabanV3 {
 				 * dos serviços faturados
 				 */
 				servicos = new Servicos();
-				servicosId = new ServicosId();
 				categoriaServico = new Categoriaservico();
 
 				/**
@@ -721,13 +680,13 @@ public class LeitorFebrabanV3 {
 				 * Numero do recurso
 				 */
 
-				servicosId.setIdServicos(data.substring(83, 99));
+				/*servicos.setIdServicos(data.substring(83, 99));*/
 
 				/**
 				 * Data do Serviço
 				 */
 				try {
-					servicosId.setDataServico(sdf.parse(data.substring(99, 107)));
+					servicos.setDataServico(sdf.parse(data.substring(99, 107)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -768,7 +727,7 @@ public class LeitorFebrabanV3 {
 				 * Horario do Serviço
 				 */
 				try {
-					servicosId.setHoraServico(sdfh.parse(data.substring(142, 148)));
+					servicos.setHoraServico(sdfh.parse(data.substring(142, 148)));
 				} catch (ParseException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -777,7 +736,6 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Codigo da Categoria do Serviço
 				 */
-				servicosId.setCategoriaServicoCodCatServico(Integer.parseInt(data.substring(148, 151)));
 				categoriaServico.setCodCatServico(Integer.parseInt(data.substring(148, 151)));
 				/**
 				 * Sigla da Categoria do Serviço
@@ -826,7 +784,6 @@ public class LeitorFebrabanV3 {
 				categoriaServicoLista.add(categoriaServico);
 				servicos.setResumo(resumo);
 				servicos.setCategoriaservico(categoriaServico);
-				servicos.setId(servicosId);
 				servicosLista.add(servicos);
 				faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
 				faturaArquivoDTO.setServicos(servicosLista);
@@ -840,7 +797,6 @@ public class LeitorFebrabanV3 {
 				 */
 
 				descontos = new Descontos();
-				descontosId = new DescontosId();
 				categoriaDesconto = new Categoriadesconto();
 
 				/**
@@ -869,7 +825,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Numero do Telefone */
-				descontosId.setIdDescontos(data.substring(78, 94));
+				/*descontos.setIdDescontos(data.substring(78, 94));*/
 
 				/**
 				 * Tipo do Desconto
@@ -880,7 +836,6 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Codigo da Categoria Descontos
 				 */
-				descontosId.setCategoriaDescontoCodCatDesconto(Integer.parseInt(data.substring(95, 98)));
 				categoriaDesconto.setCodCatDesconto(Integer.parseInt(data.substring(95, 98)));
 				/**
 				 * Sigla da Categoria Descontos
@@ -935,7 +890,7 @@ public class LeitorFebrabanV3 {
 				 * 
 				 */
 				try {
-					descontosId.setDataInicio(sdf.parse(data.substring(171, 179)));
+					descontos.setDataInicio(sdf.parse(data.substring(171, 179)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -946,7 +901,7 @@ public class LeitorFebrabanV3 {
 				 * 
 				 */
 				try {
-					descontosId.setHoraInicio(sdfh.parse(data.substring(179, 185)));
+					descontos.setHoraInicio(sdfh.parse(data.substring(179, 185)));
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -988,7 +943,6 @@ public class LeitorFebrabanV3 {
 				descontos.setCategoriadesconto(categoriaDesconto);
 				categoriaDescontoLista.add(categoriaDesconto);
 				descontos.setResumo(resumo);
-				descontos.setId(descontosId);
 				descontosLista.add(descontos);
 				faturaArquivoDTO.setCategoriaDescontos(categoriaDescontoLista);
 				faturaArquivoDTO.setDescontos(descontosLista);
@@ -1000,12 +954,11 @@ public class LeitorFebrabanV3 {
 				 * 60_PLANOS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
 				 * dos planos faturados
 				 */
-				planosId = new PlanosId();
 				planos = new Planos();
 				categoriaPlano = new Categoriaplano();
 
 				/** Controle de sequencia de gravação */
-				planosId.setIdPlanos(Integer.parseInt(data.substring(2, 14)));
+				/*planosId.setIdPlanos(Integer.parseInt(data.substring(2, 14)));*/
 
 				/**
 				 * Identificador de Conta Unica ou Numero da conta String
@@ -1013,13 +966,13 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Data da emissão da Fatura/conta */
-				try {
+/*				try {
 					planosId.setResumoFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+*/
 				/**
 				 * Mês de Referência da fatura(cobrança) String
 				 * planosMesRef(data.substring(47, 53);
@@ -1029,8 +982,8 @@ public class LeitorFebrabanV3 {
 				// planosId.setResumoNumRecurso(data.substring(53, 78));
 
 				/** Numero do Telefone */
-				planosId.setResumoNumRecurso(data.substring(78, 94));
-
+/*				planosId.setResumoNumRecurso(data.substring(78, 94));
+*/
 				/**
 				 * Tipo do Plano
 				 */
@@ -1041,7 +994,7 @@ public class LeitorFebrabanV3 {
 				 *
 				 */
 				try {
-					planosId.setDataIniCiclo(sdf.parse(data.substring(95, 103)));
+					planos.setDataIniCiclo(sdf.parse(data.substring(95, 103)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1062,7 +1015,7 @@ public class LeitorFebrabanV3 {
 				 * Codigo da Operadora
 				 *
 				 */
-				planosId.setResumoFaturaClienteOperadoraCodOperadora(Integer.parseInt(data.substring(111, 114)));
+				/*planosId.setResumoFaturaClienteOperadoraCodOperadora(Integer.parseInt(data.substring(111, 114)));*/
 
 				/**
 				 * Nome da Operadora String planoNomeOp(data.substring(114,
@@ -1088,7 +1041,6 @@ public class LeitorFebrabanV3 {
 
 				/** Codigo da Categoria do Plano */
 				categoriaPlano.setCodCatPlano(Integer.parseInt(data.substring(155, 158)));
-				planosId.setCategoriaPlanoCodCatPlano(categoriaPlano.getCodCatPlano());
 
 				/** Sigla da Categoria do Plano */
 				categoriaPlano.setSigla(data.substring(158, 161));
@@ -1147,17 +1099,10 @@ public class LeitorFebrabanV3 {
 				 */
 
 				for (Resumo r : resumoLista) {
-					if (r.getId().getNumRecurso().equals(planosId.getResumoNumRecurso())) {
-						planosId.setResumoId(r.getId().getId());
-						planosId.setResumoNumRecurso(r.getId().getNumRecurso());
-						planosId.setResumoFaturaNumFatura(r.getId().getFaturaNumFatura());
-						planosId.setResumoFaturaClienteCodCliente(r.getId().getFaturaClienteCodCliente());
-						planosId.setResumoFaturaClienteOperadoraCodOperadora(
-								r.getId().getFaturaClienteOperadoraCodOperadora());
-						planosId.setResumoFaturaDataEmissao(r.getId().getFaturaDataEmissao());
+					if (r.getNumRecurso().equals(data.substring(78, 94))) {
+						planos.setResumo(r);
 						planos.setCategoriaplano(categoriaPlano);
 						planos.setResumo(r);
-						planos.setId(planosId);
 						planosLista.add(planos);
 						categoriaPlanoLista.add(categoriaPlano);
 						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
@@ -1269,9 +1214,9 @@ public class LeitorFebrabanV3 {
 				 * ajustesMarcaFim(data.substring(349,350);
 				 */
 				for (Resumo r : resumoLista) {
-					if (r.getId().getNumRecurso().equals(ajustes.getNumRecurso())) {
+					if (r.getNumRecurso().equals(ajustes.getNumRecurso())) {
 						ajustes.setResumo(r);
-					} else if (r.getId().getNumRecurso().equals("")) {
+					} else if (r.getNumRecurso().equals("")) {
 						ajustes.setResumo(null);
 					}
 				}
@@ -1290,8 +1235,7 @@ public class LeitorFebrabanV3 {
 				 * nota fiscal apresentada
 				 */
 				notaFiscal = new Notafiscal();
-				notaFiscalId = new NotafiscalId();
-
+				
 				/*
 				 * Controle de sequencia de gravação String nfControlSeqGrav =
 				 * data.substring(2, 14);
@@ -1308,12 +1252,12 @@ public class LeitorFebrabanV3 {
 				 *
 				 * Data de Vencimento da Nota Fiscal NF
 				 */
-				try {
+		/*		try {
 					notaFiscal.setDataVencimento(sdf.parse(data.substring(53, 61)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 
 				/*
 				 * Codigo da Operadora String nfCodOp(data.substring(61, 64);
@@ -1331,7 +1275,7 @@ public class LeitorFebrabanV3 {
 				notaFiscal.setTipoNf(data.substring(107, 108));
 
 				/** Numero da Nota Fiscal NF */
-				notaFiscalId.setNumNf(data.substring(108, 120));
+				notaFiscal.setNumNf(data.substring(108, 120));
 
 				/**
 				 * Filler String nfFiller(data.substring(201, 324);
@@ -1344,12 +1288,8 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String nfMarcaFim(data.substring(349, 350);
 				 */
 
-				notaFiscalId.setFaturaNumFatura(faturaId.getNumFatura());
-				notaFiscalId.setFaturaClienteCodCliente(clienteId.getCodCliente());
-				notaFiscalId.setFaturaClienteOperadoraCodOperadora(operadora.getCodOperadora());
-				notaFiscalId.setFaturaDataEmissao(faturaId.getDataEmissao());
+				
 				notaFiscal.setFatura(fatura);
-				notaFiscal.setId(notaFiscalId);
 				notaFiscalLista.add(notaFiscal);
 				faturaArquivoDTO.setNotaFiscal(notaFiscalLista);
 				break;
@@ -1366,7 +1306,6 @@ public class LeitorFebrabanV3 {
 				 * <<<
 				 */
 
-				traillerId = new TraillerId();
 				trailler = new Trailler();
 				/**
 				 * Controle de sequencia de gravação String
@@ -1378,12 +1317,12 @@ public class LeitorFebrabanV3 {
 
 				/** Data da emissão da Fatura/conta */
 
-				try {
+				/*try {
 					traillerId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 
 				/**
 				 * Mês de Referência da fatura(cobrança) String traillerMesRef =
@@ -1394,7 +1333,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Codigo do Cliente */
-				traillerId.setFaturaClienteCodCliente(data.substring(61, 76));
+				/*traillerId.setFaturaClienteCodCliente(data.substring(61, 76));*/
 
 				/**
 				 * Valor Total
@@ -1502,9 +1441,7 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String traillerMarcaFim(data.substring(349,
 				 * 350);
 				 */
-				traillerId.setFaturaNumFatura(faturaId.getNumFatura());
-				traillerId.setFaturaClienteOperadoraCodOperadora(faturaId.getClienteOperadoraCodOperadora());
-				trailler.setId(traillerId);
+				trailler.setFatura(fatura);
 				traillerLista.add(trailler);
 				faturaArquivoDTO.setTrailler(traillerLista);
 				break;
