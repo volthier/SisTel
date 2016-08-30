@@ -9,7 +9,7 @@
 
 <section layout:fragment="conteudo">
 	<form class="form-horizontal" method="POST" th:action="@{/alocacoes}"
-		th:object="${filtro}" th:autocomplete="on">
+		th:object="${alocacao}" th:autocomplete="on">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
@@ -17,7 +17,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Fornecimento de Dispositivos</h1>
+					<h1 class="panel-title dt-dispositivo-panel">Fornecimento de
+						Dispositivos</h1>
 					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar</a>
 				</div>
 			</div>
@@ -26,30 +27,34 @@
 
 
 
-<!-- 				<div class="form-group">
-					<label id="pessoa" for="status" class="col-sm-2 control-label">Nome</label>
+				<div class="col-sm-4 form-group">
+					<label class="col-sm-2 control-label">Nome</label> 
+					<select	th:id="pessoa" class="form-control" name="tipo" th:field="*{usuario}">
+						<option value="">----Select----</option>
+						<option th:each="usuario, cpf : ${usuarios}" th:value="${usuario}"
+							th:valuetype="usuario" th:text="${usuario.nomeUsuario}"></option>
+					</select> 
 					<div class="col-sm-2">
-						<select class="form-control" th:field="*{usuario.idUsuario}">
-							<option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}"
-								th:text="${usuario.nomeUsuario}" />
-						</select>
+					<label th:for="pessoa" th:valuetype="usuario" th:text="${cpfUsuario}"> </label>
 					</div>
-
-				</div> -->
-
-
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Salvar</button>
+					
 				</div>
-
-
-
+				
 			</div>
 
 
 		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Salvar</button>
+			</div>
+
+
+
+		</div>
+
+
+
 	</form>
 
 </section>

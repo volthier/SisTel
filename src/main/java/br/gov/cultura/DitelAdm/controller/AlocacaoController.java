@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,8 @@ public class AlocacaoController {
 		mv.addObject(new Alocacao());
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		mv.addObject("dispositivos", todosDispositivos);
-		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		List<Usuario> todosUsuarios = new ArrayList<>();
+		todosUsuarios.addAll(cadastroUsuarioService.getIdUsuario());
 		mv.addObject("usuarios", todosUsuarios);
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
