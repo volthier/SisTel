@@ -5,32 +5,39 @@
    max-width: 100%;
 } 
 
-/*Ajustes da Aplica��o SisTel*/
+/*Ajustes da Aplicaï¿½ï¿½o SisTel*/
 
 /* .modal-backdrop {
   z-index: -1;
 } */
 
+.modal-backgdrop fade in{
+	background-color: red;
+}
+
+
 .navbar-brand {
-	width: 160px;
+	width: 100%;
 	height: 70px;
 	margin-right: 0px;
 	right: 2px;
-	align-left:0px;
 }
 .navbar{
 	background-color: #0f4098;
 }
-.navbar-brand img {
-	position: absolute;
-	top: 0px;
-	right: 2px;
+.navbar-brand > img {
+    position: absolute;
+    top: 0px;
+    width: 35%;
+    margin-left: 60%;
+    margin-top: 5%;
 }
 
 .panel-default {
 	margin-left: 0px;
 	margin-right: 0px;
 	margin-bottom:0px;
+	
 }
 
 .alert {
@@ -44,8 +51,13 @@
 	panding-top: 0px;
 }
 
+.dropdown-menu{
+	width: 100%;
+}
+
 .dt-link-menu {
-	float: left;
+	width: 95%;
+	text-align: left; 
 }
 
 .dt-dispositivo-panel {
@@ -58,6 +70,7 @@
 	margin: 0px;
 	padding: 0px;
 	bording: 0px;
+	
 }
 
 #espaco {
@@ -81,6 +94,14 @@
 	margin:0;
 	padding:0;
 	width: 100%;
+
+}
+
+#Menu > div > ul{
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
 
 /* Ajustes menu responsivo  */
@@ -89,7 +110,7 @@
     padding: 0;
 }
 
-/* Isto � necess�rio para n�o haver rolagens horizontais quando movermos os elementos */
+/* Isto ï¿½ necessï¿½rio para nï¿½o haver rolagens horizontais quando movermos os elementos */
 html, body {
   	overflow-x: hidden;
 	width: 100%;
@@ -102,7 +123,7 @@ html, body {
 
 header {
 
-    padding: 30px;
+    padding: 0px;
     overflow: hidden;
 }
 
@@ -141,7 +162,6 @@ header input {
     overflow: hidden;
     cursor: pointer;
     background: #0f4098;
-    margin-left: 0px;
 }
 
 .menu-anchor:before {
@@ -165,27 +185,28 @@ menu {
     height: 100%;
     padding-top: 10px;
     background: #1659bf;
-    box-shadow: inset -5px -10px 10px 0 rgba(0,0,0,.3)
+    box-shadow: inset -5px -10px 10px 0 rgba(255,0,0,.3)
 }
 
 menu li a {
     display: block;
-    border-bottom: 1px solid rgba(255,255,255,.3);
-    margin: 0 10px;
-    padding: 10px;
+    border-bottom: 2px solid rgba(255,255,255,.3);
+    margin: 0 0px;
+    padding:0px;
     color: #FFF;
     text-decoration: none;
+    width: 100%;
 }
 
 menu li a:hover {
     background: #FFF;
     color: #1659bf;
+    width: 96%;
 }
 
-
 /*
-    Aqui voc� esconde o menu para fora da tela 
-    O valor � exatamente a largura da sidebar
+    Aqui vocï¿½ esconde o menu para fora da tela 
+    O valor ï¿½ exatamente a largura da sidebar
 */
 menu {
     -webkit-transform: translateX(-220px);
@@ -199,7 +220,7 @@ menu {
 }
 
 /*
-    Essa � a posi��o original do HEADER e do MAIN
+    Essa ï¿½ a posiï¿½ï¿½o original do HEADER e do MAIN
 */
 header, .main {
     -webkit-transform: translateX(0);
