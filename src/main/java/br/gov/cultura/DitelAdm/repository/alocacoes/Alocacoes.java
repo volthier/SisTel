@@ -8,6 +8,6 @@ import br.gov.cultura.DitelAdm.model.Alocacao;
 
 public interface Alocacoes extends JpaRepository<Alocacao, Integer>{
 	
-	public List<Alocacao> findById(Integer id);
+	public List<Alocacao> findById (Integer id);
 
 }

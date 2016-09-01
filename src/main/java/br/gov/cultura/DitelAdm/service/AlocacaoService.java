@@ -28,7 +28,11 @@ public class AlocacaoService {
 	private static AlocacoesUsuariosLinhas alocacoesUsuariosLinhas;
 
 	public static void salvar(Alocacao alocacao) {
-		alocacoes.save(alocacao);
+		try {alocacoes.save(alocacao);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	public void excluir(Integer id) {
@@ -36,7 +40,7 @@ public class AlocacaoService {
 		alocacoesLinhasChips.delete(id);
 		alocacoesLinhasDispositivos.delete(id);
 		alocacoesUsuariosLinhas.delete(id);
-	}
+	}	
 	
 	public static void salvar(AlocacaoLinhaChip alocacaoLinhaChip) {
 		alocacoesLinhasChips.save(alocacaoLinhaChip);

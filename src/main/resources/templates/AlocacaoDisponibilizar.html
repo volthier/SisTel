@@ -9,7 +9,7 @@
 
 <section layout:fragment="conteudo">
 	<form class="form-horizontal" method="POST" th:action="@{/alocacoes}"
-		th:object="${alocacao}" th:autocomplete="on">
+		th:object="${alocacao}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
@@ -25,36 +25,80 @@
 			<br></br>
 			<div class="painel-body">
 
-
-
-				<div class="col-sm-4 form-group">
-					<label class="col-sm-2 control-label">Nome</label> 
-					<select	th:id="pessoa" class="form-control" name="tipo" th:field="*{usuario}">
-						<option value="">----Select----</option>
-						<option th:each="usuario, cpf : ${usuarios}" th:value="${usuario}"
-							th:valuetype="usuario" th:text="${usuario.nomeUsuario}"></option>
-					</select> 
-					<div class="col-sm-2">
-					<label th:for="pessoa" th:valuetype="usuario" th:text="${cpfUsuario}"> </label>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Nome</label>
+					<div class="col-sm-4">
+						<select th:id="pessoa" class="col-sm-4 form-control"
+							th:field="*{usuario}">
+							<option value="">----Select----</option>
+							<option th:each="usuario : ${usuarios}"
+								th:value="${usuario.idUsuario}" th:valuetype="usuario"
+								th:text="${usuario.nomeUsuario}"></option>
+						</select>
 					</div>
-					
 				</div>
 				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Dispositivo</label>
+					<div class="col-sm-4">
+						<select th:id="pessoa" class="col-sm-4 form-control"
+							th:field="*{dispositivo}">
+							<option value="">----Select----</option>
+							<option th:each="dispositivo : ${dispositivos}"
+								th:value="${dispositivo.idDispositivo}"
+								th:valuetype="dispositivo"
+								th:text="${dispositivo.modeloDispositivo}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Chip</label>
+					<div class="col-sm-4">
+						<select th:id="chip" class="form-control" th:field="*{chip}">
+							<option value="">----Select----</option>
+							<option th:each="chip : ${chips}" th:value="${chip.idChip}"
+								th:valuetype="chip" th:text="${chip.tipoChip}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Linha</label>
+					<div class="col-sm-4">
+						<select th:id="linha" class="col-sm-4 form-control"
+							th:field="*{linha}">
+							<option value="">----Select----</option>
+							<option th:each="linha : ${linhas}" th:value="${linha.idLinha}"
+								th:valuetype="linha" th:text="${linha.numeroLinha}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('dataRecebido')} ? has-error">
+					<label for="dataVencimento" class="col-sm-2 control-label">Data
+						do fornecimento</label>
+						
+					<div class="col-sm-4 input-group date">
+						<input type="text" class="col-sm-2 form-control" th:fiels="*{dataRecebido}"/><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		
+					</div>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+
+
+
 			</div>
 
 
 		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">Salvar</button>
-			</div>
-
-
-
-		</div>
-
-
-
 	</form>
 
 </section>

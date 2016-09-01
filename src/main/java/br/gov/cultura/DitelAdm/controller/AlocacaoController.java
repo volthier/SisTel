@@ -1,7 +1,9 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
 import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
-/*import br.gov.cultura.DitelAdm.model.Alocacao;*/
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
@@ -57,8 +58,7 @@ public class AlocacaoController {
 		mv.addObject(new Alocacao());
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		mv.addObject("dispositivos", todosDispositivos);
-		List<Usuario> todosUsuarios = new ArrayList<>();
-		todosUsuarios.addAll(cadastroUsuarioService.getIdUsuario());
+		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
@@ -69,18 +69,19 @@ public class AlocacaoController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Alocacao alocacao, Errors errors, RedirectAttributes attributes) {
+	public String salvar(@Validated Alocacao alocacao, Errors errors, RedirectAttributes attributes, HttpServletRequest servletRequest,HttpServletResponse servletResponse) {
 		if (errors.hasErrors()) {
 			return CADASTRO_VIEW;
 		}
 		try {
+			
 
 			AlocacaoService.salvar(alocacao);
 			attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
 			return "redirect:/alocacao/disponibilizar";
 		} catch (IllegalArgumentException e) {
 
-			errors.rejectValue("dataVencimento", null, e.getMessage());
+			errors.rejectValue("dataRecebido", null, e.getMessage());
 			return CADASTRO_VIEW;
 		}
 	}

@@ -1,3 +1,16 @@
+/*Script caledario input*/
+$('.input-group.date').datepicker({
+    format: "dd/mm/yyyy",
+    todayBtn: true,
+    clearBtn: true,
+    language: "pt-BR",
+    daysOfWeekDisabled: "0",
+    daysOfWeekHighlighted: "0",
+    autoclose: true,
+    todayHighlight: true
+});
+
+/*Script de exclusao(Botão)*/
 $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	var button = $(event.relatedTarget);
@@ -69,7 +82,7 @@ $(function () {
     })
 });
 
-//Menu Anchor
+/*Script do Menu (Anchor)*/
 $('.menu-anchor').on('click touchstart', function(e){
 	$('html').toggleClass('menu-active');
   	e.preventDefault();
