@@ -212,10 +212,10 @@ menu {
     Essa ï¿½ a posiï¿½ï¿½o original do HEADER e do MAIN
 */
 header, .main {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(1);
+    -moz-transform: translateX(1);
+    -ms-transform: translateX(1);
+    transform: translateX(1);
     -webkit-transition: all .25s linear;
     -moz-transition: all .25s linear;
     -ms-transition: all .25s linear;
