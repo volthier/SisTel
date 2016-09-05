@@ -1102,7 +1102,6 @@ public class LeitorFebrabanV3 {
 					if (r.getNumRecurso().equals(data.substring(78, 94))) {
 						planos.setResumo(r);
 						planos.setCategoriaplano(categoriaPlano);
-						planos.setResumo(r);
 						planosLista.add(planos);
 						categoriaPlanoLista.add(categoriaPlano);
 						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);

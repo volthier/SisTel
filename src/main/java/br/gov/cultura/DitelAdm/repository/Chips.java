@@ -10,6 +10,6 @@ import br.gov.cultura.DitelAdm.model.Chip;
 
 public interface Chips extends JpaRepository<Chip, Integer>{
 	
-	public List<Chip> findByidChip(Integer idChip);
+	public List<Chip> findByIdChip(Integer idChip);
 
 }

@@ -32,17 +32,17 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 	public AlocacaoUsuarioLinha() {
 	}
 
-	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtRecebido) {
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtRecebimento) {
 		this.linha = linha;
 		this.usuario = usuario;
-		this.dtRecebimento = dtRecebido;
+		this.dtRecebimento = dtRecebimento;
 	}
 
-	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebido) {
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebimento) {
 		this.linha = linha;
 		this.usuario = usuario;
 		this.dtDevolucao = dtDevolucao;
-		this.dtRecebimento = dtRecebido;
+		this.dtRecebimento = dtRecebimento;
 	}
 
 	@Id
@@ -89,12 +89,12 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_recebido", nullable = false, length = 19)
-	public Date getDtRecebido() {
+	public Date getDtRecebimento() {
 		return this.dtRecebimento;
 	}
 
-	public void setDtRecebido(Date dtRecebido) {
-		this.dtRecebimento = dtRecebido;
+	public void setDtRecebimento(Date dtRecebimento) {
+		this.dtRecebimento = dtRecebimento;
 	}
 
 }
