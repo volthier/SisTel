@@ -8,6 +8,9 @@
 	background-color: red;
 }
 
+.glyphicon{
+	padding: 8%;
+}
 
 .navbar-brand {
 	width: 100%;
@@ -30,7 +33,6 @@
 	margin-left: 0px;
 	margin-right: 0px;
 	margin-bottom:0px;
-	
 }
 
 .alert {
@@ -44,9 +46,14 @@
 	panding-top: 0px;
 }
 
+#dropdown-menupage{
+	width: 100%;
+}
+
 .dt-link-menu {
 	width: 95%;
 	text-align: left; 
+	font-family: Arial;
 }
 
 .dt-dispositivo-panel {
@@ -91,6 +98,18 @@
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 	margin-top: 0px;
+}
+
+.tableusuario{
+	border-collapse: collapse;
+	width: 80%;
+	margin-left:10%;
+	margin-right:10%;
+}
+
+
+.tdusuaio{
+	font-family: Arial;
 }
 
 /* Ajustes menu responsivo  */
@@ -139,6 +158,10 @@ header input {
     font-size: .9em;
     line-height: 1.2em;
     margin-bottom: 20px;
+}
+
+#botaodisp {
+	margin: 0px 0px 0px 0px;
 }
 
 .menu-anchor {
