@@ -39,7 +39,7 @@ public class UsuarioMenuDispositivosController {
 	private CadastroLinhaService cadastroLinhaService;
 		
 	@RequestMapping("/dispositivo")
-	public ModelAndView pesquisar(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView dispositivo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		ModelAndView mv = new ModelAndView("UsuarioMenuDispositivo");
 		 
@@ -66,5 +66,34 @@ public class UsuarioMenuDispositivosController {
 		
 		return mv;
 	}	
+	@RequestMapping("/agenda")
+	public ModelAndView agenda(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		ModelAndView mv = new ModelAndView("UsuarioMenuAgenda");
+		 
+		
+		mv.addObject("dispositivos", todosDispositivos);
+		
+		
+		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		
+		mv.addObject("usuarios", todosUsuarios);
+		
+		
+		List<Chip> todosChips = cadastroChipService.getIdChip();
+		
+		mv.addObject("chips", todosChips);
+		
+		
+		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
+		
+		mv.addObject("linhas", todasLinhas);
+		
+				
+		
+		
+		return mv;
+	}	
+	
 	
 }
