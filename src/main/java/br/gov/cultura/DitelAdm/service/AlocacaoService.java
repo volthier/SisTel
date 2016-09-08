@@ -1,5 +1,7 @@
 package br.gov.cultura.DitelAdm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +51,27 @@ public class AlocacaoService {
 		alocacoesLinhasDispositivos.delete(id);
 		alocacoesUsuariosLinhas.delete(id);
 	}
+	public List<AlocacaoLinhaCategoria> getIdAlocacaoLinhaCategoria() {
+		return alocacoesLinhasCategorias.findAll();
+	}	public List<AlocacaoLinhaChip> getIdAlocacaoLinhaChip() {
+		return alocacoesLinhasChips.findAll();
+	}	public List<AlocacaoLinhaDispositivo> getIdAlocacaoLinhaDispositivo() {
+		return alocacoesLinhasDispositivos.findAll();
+	}	public List<AlocacaoUsuarioLinha> getIdAlocacaoUsuarioLinha() {
+		return alocacoesUsuariosLinhas.findAll();
+	}
+	public AlocacaoLinhaCategoria getAlocacaoLinhaCategoria(Integer idAlocacaoLinhaCategoria) {
+		return alocacoesLinhasCategorias.findByIdAlocacaoLinhaCategoria(idAlocacaoLinhaCategoria);
+	}
+	public AlocacaoLinhaChip getAlocacaoLinhaChip(Integer idAlocacaoLinhaChip) {
+		return alocacoesLinhasChips.findByIdAlocacaoLinhaChip(idAlocacaoLinhaChip);
+	}
+	public AlocacaoLinhaDispositivo getAlocacaoLinhaDispositivo(Integer idAlocacaoLinhaDispositivo) {
+		return alocacoesLinhasDispositivos.findByIdAlocacaoLinhaDispositivo(idAlocacaoLinhaDispositivo);
+	}
+	public AlocacaoUsuarioLinha getAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha) {
+		return alocacoesUsuariosLinhas.findByIdAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
+	}
+	
 
 }

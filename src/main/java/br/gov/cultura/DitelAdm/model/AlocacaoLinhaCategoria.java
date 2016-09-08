@@ -47,7 +47,6 @@ public class AlocacaoLinhaCategoria implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id_alocacao_linha_categoria", unique = true, nullable = false)
 	public Integer getIdAlocacaoLinhaCategoria() {
 		return this.idAlocacaoLinhaCategoria;

@@ -1106,10 +1106,8 @@ public class LeitorFebrabanV3 {
 						categoriaPlanoLista.add(categoriaPlano);
 						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
 						faturaArquivoDTO.setPlanos(planosLista);
-
 					}
 					;
-
 				}
 				;
 
