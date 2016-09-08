@@ -8,14 +8,13 @@
 
 	<div>
 		<ul class="dropdown">
-			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}">&nbsp;Consultar
-			</a></li>
+			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
 
 			<li class="dropdown-toggle" data-toggle="dropdown"><a
-				class="glyphicon glyphicon-list-alt">&nbsp;Alocação&nbsp;<span
+				class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Alocação&nbsp;</b><span
 					class="caret"></span></a></li>
 
-			<ul class="dropdown-menu">
+			<ul class="dropdown-menu" id="dropdown-menupage">
 				<li><a class="btn btn-link dt-link-menu"
 					th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/devolver}">Devolução</a></li>
@@ -29,16 +28,16 @@
 	<div>
 
 		<ul>
-			<li><a class="glyphicon glyphicon-list" href="#">&nbsp;Pedências</a></li>
+			<li><a class="glyphicon glyphicon-list" href="#"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
 
 
 			<ul class="dropdown">
 
 				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-list-alt">&nbsp;Registrar&nbsp;<span
+					class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Registrar&nbsp;</b><span
 						class="caret"></span></a></li>
 
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" id="dropdown-menupage">
 					<li><a class="btn btn-link dt-link-menu"
 						th:href="@{/dispositivos/novo}">Dispositivos</a></li>
 					<li><a class="btn btn-link dt-link-menu"
@@ -57,19 +56,19 @@
 
 	<div>
 		<ul>
-			<li><a class="glyphicon glyphicon-signal" href="#">&nbsp;Relatórios&nbsp;</a></li>
+			<li><a class="glyphicon glyphicon-signal" href="#"><b style="font-family: Arial">&nbsp;Relatórios&nbsp;</b></a></li>
 
 			<ul class="dropdown">
 
 				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-user">&nbsp;Usuários <span
+					class="glyphicon glyphicon-user"><b style="font-family: Arial">&nbsp;Usuários&nbsp;</b><span
 						class="caret"></span></a></li>
 
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" id="dropdown-menupage">
 					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/dispositivos/novo}">Agenda</a></li>
+						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
 					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/usuarios/novo}">Dispositivos</a></li>
+						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
 				</ul>
 			</ul>
 		</ul>
@@ -77,8 +76,8 @@
 
 	<div>
 		<ul>
-			<li><a class="glyphicon glyphicon-warning-sign" href="#">&nbsp;Alertas</a></li>
-			<li><a class="glyphicon glyphicon-info-sign" href="#">&nbsp;Manuais</a></li>
+			<li><a class="glyphicon glyphicon-warning-sign" href="#"><b style="font-family: Arial">&nbsp;Alertas</b></a></li>
+			<li><a class="glyphicon glyphicon-info-sign" href="#"><b style="font-family: Arial">&nbsp;Manuais</b></a></li>
 
 		</ul>
 	</div>
