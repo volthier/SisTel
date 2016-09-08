@@ -101,10 +101,10 @@ public class AlocacaoController {
 			alocacaoLinhaDispositivo.setDtDevolucao(null);
 		 Integer idAlocacoesBaixa = 0;
 		/*	do{	++idAlocacoesBaixa;
-				.getIdAlocacaoLinhaDispositivo(idAlocacoesBaixa); 
+				alocacaoLinhaDispositivo.getIdAlocacaoLinhaDispositivo(idAlocacoesBaixa); 
 			}
-				while(alocacaoLinhaDispositivo.getLinha().getNumeroLinha()!= numeroLinhaBaixa &
-						alocacaoLinhaDispositivo.getDtRecebimento()!= dtRecebimentoBaixa); 
+				while(alocacaoLinhaDispositivo.getLinha().getNumeroLinha()== numeroLinhaBaixa &
+						alocacaoLinhaDispositivo.getDtRecebimento()== dtRecebimentoBaixa); 
 				
 			
 			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);*/
