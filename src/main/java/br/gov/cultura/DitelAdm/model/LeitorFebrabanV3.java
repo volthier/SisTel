@@ -272,10 +272,9 @@ public class LeitorFebrabanV3 {
 					}
 				}
 				i = "";
-				/**
-				 * Quantidade de Registro de Chamada String
-				 * resumoQuantRegChamada(data.substring(119, 128);
-				 */
+				/** Quantidade de Registro de Chamada String */
+				 resumo.setQuantRegCham(Integer.parseInt(data.substring(119, 128)));
+				 
 
 				/** Valor Total dos Registros de Chamada com Impostos */
 				convert=((data.substring(128,139)).concat(".").concat(data.substring(139,141)));
@@ -284,10 +283,10 @@ public class LeitorFebrabanV3 {
 				/** Quantidade de Registros de Serviços */
 				resumo.setQuantRegServ(Integer.parseInt(data.substring(141, 150)));
 
-				/**
-				 * Valor Total dos Registros de Serviços com Impostos] String
-				 * resumoValorTotalRegServImp(data.substring(150, 165));
-				 */
+				/** Valor Total dos Registros de Serviços com Impostos String */
+				  convert=((data.substring(150, 163).concat(".").concat(data.substring(163, 165))));
+				  resumo.setValorTotalRegServImp(Float.parseFloat(convert));
+				 
 
 				/** Valor Total de Impostos */
 				convert=((data.substring(165,176)).concat(".").concat(data.substring(176,178)));
@@ -591,11 +590,11 @@ public class LeitorFebrabanV3 {
 				chamadas.setIcms(Integer.parseInt(data.substring(232, 237)));
 
 				/** Valor da ligação com imposto */
-				convert=((data.substring(237,247)).concat(".").concat(data.substring(247,250)));
+				convert=((data.substring(237,248)).concat(".").concat(data.substring(248,250)));
 				chamadas.setValLigImp(Float.parseFloat(convert));
 
 				/** Valor da Ligação sem Imposto */
-				convert=((data.substring(250,260)).concat(".").concat(data.substring(260,265)));
+				convert=((data.substring(250,262)).concat(".").concat(data.substring(262,265)));
 				chamadas.setValLigSemImp(Float.parseFloat(convert));
 
 				/** Tipo NF */
