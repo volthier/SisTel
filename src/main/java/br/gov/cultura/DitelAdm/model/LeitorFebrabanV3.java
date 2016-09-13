@@ -1164,7 +1164,8 @@ public class LeitorFebrabanV3 {
 				ajustes.setSinal(data.substring(159, 160));
 
 				/** Valor do Ajuste */
-				ajustes.setValor(Float.parseFloat(data.substring(160, 173)));
+				convert=(data.substring(160,171).concat(".").concat(data.substring(171,173)));
+				ajustes.setValor(Float.parseFloat(convert));
 
 				/** Data Inicio do Acerto */
 				try {
@@ -1334,7 +1335,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total
 				 */
-				trailler.setValTotal(Float.parseFloat(data.substring(76, 89)));
+				convert=(data.substring(76,87).concat(".").concat(data.substring(87,89)));
+				trailler.setValTotal(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Total de Registros
@@ -1344,7 +1346,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 10
 				 */
-				trailler.setValTotal10(Float.parseFloat(data.substring(101, 114)));
+				convert=(data.substring(101,112).concat(".").concat(data.substring(112,114)));
+				trailler.setValTotal10(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 10
@@ -1359,7 +1362,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 30
 				 */
-				trailler.setValTotal30(Float.parseFloat(data.substring(132, 145)));
+				convert=(data.substring(132,142).concat(".").concat(data.substring(142,145)));
+				trailler.setValTotal30(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 30
@@ -1369,7 +1373,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 40
 				 */
-				trailler.setValTotal40(Float.parseFloat(data.substring(154, 167)));
+				convert=(data.substring(154,165).concat(".").concat(data.substring(165,167)));
+				trailler.setValTotal40(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 40
@@ -1384,7 +1389,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 50
 				 */
-				trailler.setValTotal50(Float.parseFloat(data.substring(177, 190)));
+				convert=(data.substring(177,187).concat(".").concat(data.substring(187,190)));
+				trailler.setValTotal50(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 50
@@ -1394,7 +1400,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 60
 				 */
-				trailler.setValTotal60(Float.parseFloat(data.substring(199, 212)));
+				convert=(data.substring(199,210).concat(".").concat(data.substring(210,212)));
+				trailler.setValTotal60(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 60
@@ -1409,7 +1416,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 70
 				 */
-				trailler.setValTotal70(Float.parseFloat(data.substring(222, 235)));
+				convert=(data.substring(222,233).concat(".").concat(data.substring(233,235)));
+				trailler.setValTotal70(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 70
@@ -1419,7 +1427,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 80
 				 */
-				trailler.setValTotal80(Float.parseFloat(data.substring(244, 257)));
+				convert=(data.substring(244,255).concat(".").concat(data.substring(255,257)));
+				trailler.setValTotal80(Float.parseFloat(convert));
 
 				/**
 				 * Quantidade de Registros 80
