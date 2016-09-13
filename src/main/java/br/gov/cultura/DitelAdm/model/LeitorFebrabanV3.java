@@ -594,7 +594,7 @@ public class LeitorFebrabanV3 {
 				chamadas.setValLigImp(Float.parseFloat(convert));
 
 				/** Valor da Ligação sem Imposto */
-				convert=((data.substring(250,262)).concat(".").concat(data.substring(262,265)));
+				convert=((data.substring(250,261)).concat(".").concat(data.substring(261,265)));
 				chamadas.setValLigSemImp(Float.parseFloat(convert));
 
 				/** Tipo NF */
@@ -1063,14 +1063,14 @@ public class LeitorFebrabanV3 {
 				 * Valor do Plano com Imposto
 				 *
 				 */
-				convert=((data.substring(216,226)).concat(".").concat(data.substring(226,229)));
+				convert=((data.substring(216,227)).concat(".").concat(data.substring(227,229)));
 				planos.setValComImp(Float.parseFloat(convert));
 
 				/**
 				 * Valor do Plano sem Imposto
 				 *
 				 */
-				convert=((data.substring(229,239)).concat(".").concat(data.substring(239,244)));
+				convert=((data.substring(229,240)).concat(".").concat(data.substring(240,244)));
 				planos.setValSemImp(Float.parseFloat(convert));
 
 				/**
@@ -1265,7 +1265,7 @@ public class LeitorFebrabanV3 {
 
 				/** Valor da Nota Fiscal NF com Impostos */
 				convert=((data.substring(94, 105)).concat(".").concat(data.substring(105,107)));
-				notaFiscal.setValorNfimp(Float.parseFloat(data.substring(94, 107)));
+				notaFiscal.setValorNfimp(Float.parseFloat(convert));
 
 				/** Tipo de Nota Fiscal NF */
 				notaFiscal.setTipoNf(data.substring(107, 108));
