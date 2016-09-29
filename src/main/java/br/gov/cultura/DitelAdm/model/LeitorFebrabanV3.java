@@ -41,7 +41,7 @@ public class LeitorFebrabanV3 {
 
 	public FaturaArquivoDTO read(File file) throws IOException {
 		String convert;
-		
+
 		FaturaArquivoDTO faturaArquivoDTO = new FaturaArquivoDTO();
 		FileReader fileReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(fileReader);
@@ -97,7 +97,7 @@ public class LeitorFebrabanV3 {
 				fatura = new Fatura();
 				cliente = new Cliente();
 				operadora = new Operadora();
-				
+
 				/** Identificador de Conta Unica ou Numero da conta */
 				fatura.setIndConta(data.substring(14, 39));
 				// fatura.setIndConta(recuperaTextoCampo(data,PosicaoCamposEnum.CAMPO_HEADER_FATURA_INDCONTA));
@@ -143,7 +143,7 @@ public class LeitorFebrabanV3 {
 
 				/** Codigo do Cliente */
 				cliente.setCodCliente(data.substring(104, 119));
-							
+
 				/** Nome do Cliente */
 				cliente.setNome(data.substring(119, 149));
 
@@ -207,7 +207,7 @@ public class LeitorFebrabanV3 {
 				faturaArquivoDTO.setCliente(cliente);
 				fatura.setCliente(cliente);
 				faturaArquivoDTO.setFatura(fatura);
-				
+
 				break;
 
 			case "10":
@@ -224,12 +224,12 @@ public class LeitorFebrabanV3 {
 
 				/** Data da emissão da Fatura/conta */
 				resumo = new Resumo();
-				/*try {
-					resumo.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+				/*
+				 * try {
+				 * resumo.setFaturaDataEmissao(sdf.parse(data.substring(39,
+				 * 47))); } catch (ParseException e) { // TODO Auto-generated
+				 * catch block e.printStackTrace(); }
+				 */
 
 				/**
 				 * Mês de Referência da fatura(cobrança) String
@@ -273,27 +273,25 @@ public class LeitorFebrabanV3 {
 				}
 				i = "";
 				/** Quantidade de Registro de Chamada String */
-				 resumo.setQuantRegCham(Integer.parseInt(data.substring(119, 128)));
-				 
+				resumo.setQuantRegCham(Integer.parseInt(data.substring(119, 128)));
 
 				/** Valor Total dos Registros de Chamada com Impostos */
-				convert=((data.substring(128,139)).concat(".").concat(data.substring(139,141)));
+				convert = ((data.substring(128, 139)).concat(".").concat(data.substring(139, 141)));
 				resumo.setValorTotalRegChamadaImp(Float.parseFloat(convert));
 
 				/** Quantidade de Registros de Serviços */
 				resumo.setQuantRegServ(Integer.parseInt(data.substring(141, 150)));
 
 				/** Valor Total dos Registros de Serviços com Impostos String */
-				  convert=((data.substring(150, 163).concat(".").concat(data.substring(163, 165))));
-				  resumo.setValorTotalRegServImp(Float.parseFloat(convert));
-				 
+				convert = ((data.substring(150, 163).concat(".").concat(data.substring(163, 165))));
+				resumo.setValorTotalRegServImp(Float.parseFloat(convert));
 
 				/** Valor Total de Impostos */
-				convert=((data.substring(165,176)).concat(".").concat(data.substring(176,178)));
+				convert = ((data.substring(165, 176)).concat(".").concat(data.substring(176, 178)));
 				resumo.setValorTotalImp(Float.parseFloat(convert));
 
 				/** Valor Total da Conta do Recurso Com Impostos */
-				convert=((data.substring(178,189)).concat(".").concat(data.substring(189,191)));
+				convert = ((data.substring(178, 189)).concat(".").concat(data.substring(189, 191)));
 				resumo.setValorTotalContaRecursoImp(Float.parseFloat(convert));
 
 				/** Degrau do Recurso */
@@ -326,7 +324,7 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String resumoMarcaFim(data.substring(349,
 				 * 350);
 				 */
-				
+
 				resumo.setFatura(fatura);
 				resumoLista.add(resumo);
 				faturaArquivoDTO.setResumo(resumoLista);
@@ -352,13 +350,12 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Data da emissão da Fatura/conta */
-/*				try {
-					enderecosId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-*/
+				/*
+				 * try {
+				 * enderecosId.setFaturaDataEmissao(sdf.parse(data.substring(39,
+				 * 47))); } catch (ParseException e) { // TODO Auto-generated
+				 * catch block e.printStackTrace(); }
+				 */
 				/**
 				 * Mês de Referência da fatura(cobrança) String
 				 * endMesRef(data.substring(47, 53));
@@ -445,7 +442,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Marcação de Fim String endMarcaFim(data.substring(349, 350);
 				 */
-				
+
 				enderecos.setFatura(fatura);
 				enderecosLista.add(enderecos);
 				faturaArquivoDTO.setEnderecos(enderecosLista);
@@ -493,8 +490,13 @@ public class LeitorFebrabanV3 {
 				 */
 				chamadas.setCnlAreaLocalUso(Integer.parseInt(data.substring(78, 83)));
 
-/*	RECEBE DO RESUMO*//** Numero do recurso *//*
-				chamadas.setIdChamadas(data.substring(83, 99));*/
+				/* RECEBE DO RESUMO *//** Numero do recurso *//*
+																 * chamadas.
+																 * setIdChamadas
+																 * (data.
+																 * substring(83,
+																 * 99));
+																 */
 
 				/** Data da ligação */
 				try {
@@ -590,11 +592,11 @@ public class LeitorFebrabanV3 {
 				chamadas.setIcms(Integer.parseInt(data.substring(232, 237)));
 
 				/** Valor da ligação com imposto */
-				convert=((data.substring(237,248)).concat(".").concat(data.substring(248,250)));
+				convert = ((data.substring(237, 248)).concat(".").concat(data.substring(248, 250)));
 				chamadas.setValLigImp(Float.parseFloat(convert));
 
 				/** Valor da Ligação sem Imposto */
-				convert=((data.substring(250,261)).concat(".").concat(data.substring(261,265)));
+				convert = ((data.substring(250, 261)).concat(".").concat(data.substring(261, 265)));
 				chamadas.setValLigSemImp(Float.parseFloat(convert));
 
 				/** Tipo NF */
@@ -626,13 +628,46 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String chamaMarcaFim(data.substring(349,
 				 * 350);
 				 */
-				categoriaChamadaLista.add(categoriaChamada);
-				faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
-				chamadas.setCategoriachamada(categoriaChamada);
-				chamadas.setResumo(resumo);
-				chamadasLista.add(chamadas);
-				faturaArquivoDTO.setChamadas(chamadasLista);
+				for (Resumo r : resumoLista) {
+					if (r.getNumRecurso().equals(data.substring(83, 99))) {
+						chamadas.setResumo(r);
+						if (categoriaChamadaLista.isEmpty()) {
+							categoriaChamadaLista.add(categoriaChamada);
+							faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
+							chamadas.setCategoriachamada(categoriaChamada);
+							chamadasLista.add(chamadas);
+							faturaArquivoDTO.setChamadas(chamadasLista);
+						} else {
 
+							String verificaCategoria = data.substring(201, 226);
+
+							try {
+								Categoriachamada chama = categoriaChamadaLista.stream()
+										.filter(x -> x != null && x.getDescricao().equals(verificaCategoria))
+										.findFirst().orElse(null);
+
+								if (chama != null) {
+									chamadas.setCategoriachamada(chama);
+									chamadasLista.add(chamadas);
+									faturaArquivoDTO.setChamadas(chamadasLista);
+								} else {
+									chamadas.setCategoriachamada(categoriaChamada);
+									categoriaChamadaLista.add(categoriaChamada);
+									faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
+									chamadasLista.add(chamadas);
+									faturaArquivoDTO.setChamadas(chamadasLista);
+								}
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							;
+						}
+						;
+					}
+					;
+				}
+				;
 				break;
 
 			case "40":
@@ -679,7 +714,7 @@ public class LeitorFebrabanV3 {
 				 * Numero do recurso
 				 */
 
-				/*servicos.setIdServicos(data.substring(83, 99));*/
+				/* servicos.setIdServicos(data.substring(83, 99)); */
 
 				/**
 				 * Data do Serviço
@@ -749,14 +784,14 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor do Serviço com Impostos
 				 */
-				convert=((data.substring(179, 190)).concat(".").concat(data.substring(190,192)));
+				convert = ((data.substring(179, 190)).concat(".").concat(data.substring(190, 192)));
 				servicos.setValServImp(Float.parseFloat(convert));
 
 				/**
 				 * Valor do Serviço Sem Impostos
 				 */
-				
-				convert=((data.substring(192, 203)).concat(".").concat(data.substring(203,207)));
+
+				convert = ((data.substring(192, 203)).concat(".").concat(data.substring(203, 207)));
 				servicos.setValServ(Float.parseFloat(convert));
 
 				/**
@@ -780,13 +815,48 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String servMarcaFim(data.substring(349, 350);
 				 */
 
-				categoriaServicoLista.add(categoriaServico);
-				servicos.setResumo(resumo);
-				servicos.setCategoriaservico(categoriaServico);
-				servicosLista.add(servicos);
-				faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
-				faturaArquivoDTO.setServicos(servicosLista);
+			
+				for (Resumo r : resumoLista) {
+					if (r.getNumRecurso().equals(data.substring(83, 99))) {
+						servicos.setResumo(r);
+						if (categoriaServicoLista.isEmpty()) {
+							categoriaServicoLista.add(categoriaServico);
+							servicos.setCategoriaservico(categoriaServico);
+							servicosLista.add(servicos);
+							faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+							faturaArquivoDTO.setServicos(servicosLista);
+							
+						} else {
 
+							String verificaCategoria = data.substring(154, 179);
+
+							try {
+								Categoriaservico serve = categoriaServicoLista.stream()
+										.filter(x -> x != null && x.getDescricao().equals(verificaCategoria))
+										.findFirst().orElse(null);
+
+								if (serve != null) {
+									servicos.setCategoriaservico(serve);
+									servicosLista.add(servicos);
+									faturaArquivoDTO.setServicos(servicosLista);
+								} else {
+									categoriaServicoLista.add(categoriaServico);
+									servicos.setCategoriaservico(categoriaServico);
+									servicosLista.add(servicos);
+									faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+									faturaArquivoDTO.setServicos(servicosLista);
+								}
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							;
+						}
+						;
+					}
+					;
+				}
+				;
 				break;
 
 			case "50":
@@ -824,7 +894,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Numero do Telefone */
-				/*descontos.setIdDescontos(data.substring(78, 94));*/
+				/* descontos.setIdDescontos(data.substring(78, 94)); */
 
 				/**
 				 * Tipo do Desconto
@@ -881,7 +951,7 @@ public class LeitorFebrabanV3 {
 				 * Valor do Desconto
 				 * 
 				 */
-				convert=((data.substring(158,169)).concat(".").concat(data.substring(169,171)));
+				convert = ((data.substring(158, 169)).concat(".").concat(data.substring(169, 171)));
 				descontos.setValor(Float.parseFloat(convert));
 
 				/**
@@ -945,6 +1015,51 @@ public class LeitorFebrabanV3 {
 				descontosLista.add(descontos);
 				faturaArquivoDTO.setCategoriaDescontos(categoriaDescontoLista);
 				faturaArquivoDTO.setDescontos(descontosLista);
+				
+/*				
+ * 	DESCONTO A SER IMPLEMENTADO POR FALTA DE INFORMATIVOS PARA TESTE 
+ * 
+ * 
+ * if (r.getNumRecurso().equals(data.substring(83, 99))) {
+					servicos.setResumo(r);
+					if (categoriaChamadaLista.isEmpty()) {
+						categoriaServicoLista.add(categoriaServico);
+						servicos.setCategoriaservico(categoriaServico);
+						servicosLista.add(servicos);
+						faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+						faturaArquivoDTO.setServicos(servicosLista);
+						
+					} else {
+
+						String verificaCategoria = data.substring(154, 179);
+
+						try {
+							Categoriaservico serve = categoriaServicoLista.stream()
+									.filter(x -> x != null && x.getDescricao().equals(verificaCategoria))
+									.findFirst().orElse(null);
+
+							if (serve != null) {
+								servicos.setCategoriaservico(categoriaServico);
+								servicosLista.add(servicos);
+								faturaArquivoDTO.setServicos(servicosLista);
+							} else {
+								categoriaServicoLista.add(categoriaServico);
+								servicos.setCategoriaservico(categoriaServico);
+								servicosLista.add(servicos);
+								faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+								faturaArquivoDTO.setServicos(servicosLista);
+							}
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						;
+					}
+					;
+				}
+				;
+			}
+			;*/
 
 				break;
 
@@ -957,7 +1072,10 @@ public class LeitorFebrabanV3 {
 				categoriaPlano = new Categoriaplano();
 
 				/** Controle de sequencia de gravação */
-				/*planosId.setIdPlanos(Integer.parseInt(data.substring(2, 14)));*/
+				/*
+				 * planosId.setIdPlanos(Integer.parseInt(data.substring(2,
+				 * 14)));
+				 */
 
 				/**
 				 * Identificador de Conta Unica ou Numero da conta String
@@ -965,13 +1083,12 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Data da emissão da Fatura/conta */
-/*				try {
-					planosId.setResumoFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-*/
+				/*
+				 * try {
+				 * planosId.setResumoFaturaDataEmissao(sdf.parse(data.substring(
+				 * 39, 47))); } catch (ParseException e) { // TODO
+				 * Auto-generated catch block e.printStackTrace(); }
+				 */
 				/**
 				 * Mês de Referência da fatura(cobrança) String
 				 * planosMesRef(data.substring(47, 53);
@@ -981,8 +1098,9 @@ public class LeitorFebrabanV3 {
 				// planosId.setResumoNumRecurso(data.substring(53, 78));
 
 				/** Numero do Telefone */
-/*				planosId.setResumoNumRecurso(data.substring(78, 94));
-*/
+				/*
+				 * planosId.setResumoNumRecurso(data.substring(78, 94));
+				 */
 				/**
 				 * Tipo do Plano
 				 */
@@ -1014,7 +1132,10 @@ public class LeitorFebrabanV3 {
 				 * Codigo da Operadora
 				 *
 				 */
-				/*planosId.setResumoFaturaClienteOperadoraCodOperadora(Integer.parseInt(data.substring(111, 114)));*/
+				/*
+				 * planosId.setResumoFaturaClienteOperadoraCodOperadora(Integer.
+				 * parseInt(data.substring(111, 114)));
+				 */
 
 				/**
 				 * Nome da Operadora String planoNomeOp(data.substring(114,
@@ -1055,22 +1176,20 @@ public class LeitorFebrabanV3 {
 
 				/**
 				 * Descrição do plano
-				 *
 				 */
 				planos.setDescricaoPlano(data.substring(191, 216));
 
 				/**
 				 * Valor do Plano com Imposto
-				 *
 				 */
-				convert=((data.substring(216,227)).concat(".").concat(data.substring(227,229)));
+				convert = ((data.substring(216, 227)).concat(".").concat(data.substring(227, 229)));
 				planos.setValComImp(Float.parseFloat(convert));
 
 				/**
 				 * Valor do Plano sem Imposto
 				 *
 				 */
-				convert=((data.substring(229,240)).concat(".").concat(data.substring(240,244)));
+				convert = ((data.substring(229, 240)).concat(".").concat(data.substring(240, 244)));
 				planos.setValSemImp(Float.parseFloat(convert));
 
 				/**
@@ -1100,16 +1219,46 @@ public class LeitorFebrabanV3 {
 				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(78, 94))) {
 						planos.setResumo(r);
-						planos.setCategoriaplano(categoriaPlano);
-						planosLista.add(planos);
-						categoriaPlanoLista.add(categoriaPlano);
-						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
-						faturaArquivoDTO.setPlanos(planosLista);
+						if (categoriaPlanoLista.isEmpty()) {
+							planos.setCategoriaplano(categoriaPlano);
+							planosLista.add(planos);
+							categoriaPlanoLista.add(categoriaPlano);
+							faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+							faturaArquivoDTO.setPlanos(planosLista);
+						} else {
+
+							String verificaCategoriaPlano = data.substring(161, 186);
+
+							try {
+								Categoriaplano plano = categoriaPlanoLista.stream()
+										.filter(catPlan -> catPlan != null
+												&& catPlan.getDescricao().equals(verificaCategoriaPlano))
+										.findFirst().orElse(null);
+
+								if (plano != null) {
+									planos.setCategoriaplano(plano);
+									planosLista.add(planos);
+									faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+									faturaArquivoDTO.setPlanos(planosLista);
+								} else {
+									planos.setCategoriaplano(categoriaPlano);
+									planosLista.add(planos);
+									categoriaPlanoLista.add(categoriaPlano);
+									faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+									faturaArquivoDTO.setPlanos(planosLista);
+								}
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							;
+
+						}
+						;
 					}
 					;
 				}
 				;
-
 				break;
 
 			case "70":
@@ -1164,7 +1313,7 @@ public class LeitorFebrabanV3 {
 				ajustes.setSinal(data.substring(159, 160));
 
 				/** Valor do Ajuste */
-				convert=(data.substring(160,171).concat(".").concat(data.substring(171,173)));
+				convert = (data.substring(160, 171).concat(".").concat(data.substring(171, 173)));
 				ajustes.setValor(Float.parseFloat(convert));
 
 				/** Data Inicio do Acerto */
@@ -1210,19 +1359,53 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String
 				 * ajustesMarcaFim(data.substring(349,350);
 				 */
+
+								
 				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(ajustes.getNumRecurso())) {
 						ajustes.setResumo(r);
-					} else if (r.getNumRecurso().equals("")) {
+					} else {
 						ajustes.setResumo(null);
 					}
 				}
-				categoriaAjustesLista.add(categoriaAjustes);
-				faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+					if (categoriaAjustesLista.isEmpty()) {
+						categoriaAjustesLista.add(categoriaAjustes);
+						faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+						ajustes.setCategoriaajuste(categoriaAjustes);
+						ajustesLista.add(ajustes);
+						faturaArquivoDTO.setAjustes(ajustesLista);
 
-				ajustes.setCategoriaajuste(categoriaAjustes);
-				ajustesLista.add(ajustes);
-				faturaArquivoDTO.setAjustes(ajustesLista);
+					} else {
+
+						String verificaCategoriaPlano = data.substring(101, 141);
+
+						try {
+							Categoriaajuste ajuste = categoriaAjustesLista.stream()
+									.filter(catPlan -> catPlan != null
+											&& catPlan.getDescricao().equals(verificaCategoriaPlano))
+									.findFirst().orElse(null);
+
+							if (ajuste != null) {
+								ajustes.setCategoriaajuste(ajuste);
+								ajustesLista.add(ajustes);
+								faturaArquivoDTO.setAjustes(ajustesLista);
+							} else {
+								categoriaAjustesLista.add(categoriaAjustes);
+								faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+								ajustes.setCategoriaajuste(categoriaAjustes);
+								ajustesLista.add(ajustes);
+								faturaArquivoDTO.setAjustes(ajustesLista);
+							}
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						;
+
+					}
+					;
+					
+
 
 				break;
 
@@ -1232,7 +1415,7 @@ public class LeitorFebrabanV3 {
 				 * nota fiscal apresentada
 				 */
 				notaFiscal = new Notafiscal();
-				
+
 				/*
 				 * Controle de sequencia de gravação String nfControlSeqGrav =
 				 * data.substring(2, 14);
@@ -1249,12 +1432,12 @@ public class LeitorFebrabanV3 {
 				 *
 				 * Data de Vencimento da Nota Fiscal NF
 				 */
-		/*		try {
-					notaFiscal.setDataVencimento(sdf.parse(data.substring(53, 61)));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+				/*
+				 * try {
+				 * notaFiscal.setDataVencimento(sdf.parse(data.substring(53,
+				 * 61))); } catch (ParseException e) { // TODO Auto-generated
+				 * catch block e.printStackTrace(); }
+				 */
 
 				/*
 				 * Codigo da Operadora String nfCodOp(data.substring(61, 64);
@@ -1265,7 +1448,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Valor da Nota Fiscal NF com Impostos */
-				convert=((data.substring(94, 105)).concat(".").concat(data.substring(105,107)));
+				convert = ((data.substring(94, 105)).concat(".").concat(data.substring(105, 107)));
 				notaFiscal.setValorNfimp(Float.parseFloat(convert));
 
 				/** Tipo de Nota Fiscal NF */
@@ -1285,7 +1468,6 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String nfMarcaFim(data.substring(349, 350);
 				 */
 
-				
 				notaFiscal.setFatura(fatura);
 				notaFiscalLista.add(notaFiscal);
 				faturaArquivoDTO.setNotaFiscal(notaFiscalLista);
@@ -1314,12 +1496,12 @@ public class LeitorFebrabanV3 {
 
 				/** Data da emissão da Fatura/conta */
 
-				/*try {
-					traillerId.setFaturaDataEmissao(sdf.parse(data.substring(39, 47)));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+				/*
+				 * try {
+				 * traillerId.setFaturaDataEmissao(sdf.parse(data.substring(39,
+				 * 47))); } catch (ParseException e) { // TODO Auto-generated
+				 * catch block e.printStackTrace(); }
+				 */
 
 				/**
 				 * Mês de Referência da fatura(cobrança) String traillerMesRef =
@@ -1330,12 +1512,14 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Codigo do Cliente */
-				/*traillerId.setFaturaClienteCodCliente(data.substring(61, 76));*/
+				/*
+				 * traillerId.setFaturaClienteCodCliente(data.substring(61,76));
+				 */
 
 				/**
 				 * Valor Total
 				 */
-				convert=(data.substring(76,87).concat(".").concat(data.substring(87,89)));
+				convert = (data.substring(76, 87).concat(".").concat(data.substring(87, 89)));
 				trailler.setValTotal(Float.parseFloat(convert));
 
 				/**
@@ -1346,7 +1530,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 10
 				 */
-				convert=(data.substring(101,112).concat(".").concat(data.substring(112,114)));
+				convert = (data.substring(101, 112).concat(".").concat(data.substring(112, 114)));
 				trailler.setValTotal10(Float.parseFloat(convert));
 
 				/**
@@ -1362,7 +1546,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 30
 				 */
-				convert=(data.substring(132,142).concat(".").concat(data.substring(142,145)));
+				convert = (data.substring(132, 142).concat(".").concat(data.substring(142, 145)));
 				trailler.setValTotal30(Float.parseFloat(convert));
 
 				/**
@@ -1373,7 +1557,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 40
 				 */
-				convert=(data.substring(154,165).concat(".").concat(data.substring(165,167)));
+				convert = (data.substring(154, 165).concat(".").concat(data.substring(165, 167)));
 				trailler.setValTotal40(Float.parseFloat(convert));
 
 				/**
@@ -1389,7 +1573,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 50
 				 */
-				convert=(data.substring(177,187).concat(".").concat(data.substring(187,190)));
+				convert = (data.substring(177, 187).concat(".").concat(data.substring(187, 190)));
 				trailler.setValTotal50(Float.parseFloat(convert));
 
 				/**
@@ -1400,7 +1584,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 60
 				 */
-				convert=(data.substring(199,210).concat(".").concat(data.substring(210,212)));
+				convert = (data.substring(199, 210).concat(".").concat(data.substring(210, 212)));
 				trailler.setValTotal60(Float.parseFloat(convert));
 
 				/**
@@ -1416,7 +1600,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 70
 				 */
-				convert=(data.substring(222,233).concat(".").concat(data.substring(233,235)));
+				convert = (data.substring(222, 233).concat(".").concat(data.substring(233, 235)));
 				trailler.setValTotal70(Float.parseFloat(convert));
 
 				/**
@@ -1427,7 +1611,7 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Valor Total Registro 80
 				 */
-				convert=(data.substring(244,255).concat(".").concat(data.substring(255,257)));
+				convert = (data.substring(244, 255).concat(".").concat(data.substring(255, 257)));
 				trailler.setValTotal80(Float.parseFloat(convert));
 
 				/**
