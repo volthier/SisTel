@@ -57,18 +57,21 @@ public class AlocacaoController {
 	private CadastroCategoriaService cadastroCategoriaService;
 
 	@RequestMapping("/disponibilizar")
-	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.obterDispositivosDisponiveis();
 		mv.addObject("dispositivos", todosDispositivos);
+		
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
-		List<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas = alocacaoService.getIdAlocacaoUsuarioLinha();
 		mv.addObject("usuarios", todosUsuarios);
+		
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
-		List<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos = alocacaoService.getIdAlocacaoLinhaDispositivo();
 		mv.addObject("linhas", todasLinhas);
+		
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
+		
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias", todasCategorias);
 
@@ -100,14 +103,14 @@ public class AlocacaoController {
 			String numeroLinhaBaixa = alocacaoUsuarioLinha.getLinha().getNumeroLinha();
 			alocacaoLinhaDispositivo.setDtDevolucao(null);
 		 Integer idAlocacoesBaixa = 0;
-		/*	do{	++idAlocacoesBaixa;
+		
+		 /*	do{	++idAlocacoesBaixa;
 				alocacaoLinhaDispositivo.getIdAlocacaoLinhaDispositivo(idAlocacoesBaixa); 
 			}
 				while(alocacaoLinhaDispositivo.getLinha().getNumeroLinha()== numeroLinhaBaixa &
 						alocacaoLinhaDispositivo.getDtRecebimento()== dtRecebimentoBaixa); 
-				
-			
 			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);*/
+		 
 			alocacaoUsuarioLinha.setDtDevolucao(dtDevolucao);
 			alocacaoService.salvar(alocacaoUsuarioLinha);
 			attributes.addFlashAttribute("mensagem", "Registrada devolução de dispositivo do usuario!");

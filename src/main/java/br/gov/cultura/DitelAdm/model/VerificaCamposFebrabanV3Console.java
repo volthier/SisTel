@@ -11,7 +11,8 @@ public class VerificaCamposFebrabanV3Console {
 			// "C:\\Users\\Administrador\\Desktop\\Projetos de
 			// ProgramaÃ§Ã£o\\Arquivos DITEL\\Faturas para o Projeto
 			// ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
-			"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\Arquivos DITEL\\Faturas para o Projeto ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
+//			"C:\\Users\\72381817115\\Desktop\\Projetos de Programação\\Arquivos DITEL\\Faturas para o Projeto ditel\\711725423_919441395_14_02_2016_FebrabanV3.txt");
+"C:\\Claro-711725423_919441395_14_07_2016_FebrabanV3.txt");
 
 	private static final void read(File file) throws IOException {
 		FileReader fileReader = new FileReader(file);
@@ -383,8 +384,11 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(endMarcaFim);
 				break;*/
 
-/*			case "30":
-				*//**
+			case "30":
+			
+				System.out.println(data.substring(0,350));
+				break;
+				/*//**
 				 * 30_CHAMADAS do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * de cham,adas de VOZ cobradas na fatura
 				 *//*
@@ -562,133 +566,133 @@ public class VerificaCamposFebrabanV3Console {
 
 				break;*/
 
-			case "40":
+	/*		case "40":
 
-				/**
+				*//**
 				 * 40_SERVIÃ‡OS do guia Telecom padrÃ£o FEBRABAN-V3R0 Detalhamento
 				 * dos serviÃ§os faturados
-				 */
+				 *//*
 
-				/** Controle de sequencia de gravaÃ§Ã£o */
+				*//** Controle de sequencia de gravaÃ§Ã£o *//*
 				String servControlSeqGrav = data.substring(2, 14);
 
-				/** Identificador de Conta Unica ou Numero da conta */
+				*//** Identificador de Conta Unica ou Numero da conta *//*
 				String servIndConta = data.substring(14, 39);
 
-				/** Data da emissÃ£o da Fatura/conta */
+				*//** Data da emissÃ£o da Fatura/conta *//*
 				String servDataEmiFatura = data.substring(39, 47);
 
-				/** MÃªs de ReferÃªncia da fatura(cobranÃ§a) */
+				*//** MÃªs de ReferÃªncia da fatura(cobranÃ§a) *//*
 				String servMesRef = data.substring(47, 53);
 
-				/** Identificador Ãšnico do Recurso */
+				*//** Identificador Ãšnico do Recurso *//*
 				String servIdUnicoRecurso = data.substring(53, 78);
 
-				/**
+				*//**
 				 * CNL da Ã�rea local onde o terminal estava em uso durante a
 				 * chamada **** CÃ³digo Nacional de localidade: Fixo - definido
 				 * pela ANATEL; MÃ³vel definido pela ABR Telecom
-				 */
+				 *//*
 				String servClnAreaLocalUsochamada = data.substring(78, 83);
 
-				/** Numero do recurso */
+				*//** Numero do recurso *//*
 				String servNumRecurso = data.substring(83, 99);
 
-				/** Data do ServiÃ§o */
+				*//** Data do ServiÃ§o *//*
 				String servDataServico = data.substring(99, 107);
 
-				/**
+				*//**
 				 * Codigo Nacional / Internacional
 				 * 
-				 */
+				 *//*
 				String servCodNacInt = data.substring(107, 109);
 
-				/**
+				*//**
 				 * NÃºmero Telefone Destino
 				 * 
-				 */
+				 *//*
 				String servNumTelefoneDestino = data.substring(109, 126);
 
-				/**
+				*//**
 				 * Codigo operadora de Roaming
 				 * 
-				 */
+				 *//*
 				String servCodOpRoaming = data.substring(126, 131);
 
-				/**
+				*//**
 				 * Operadora a qual o terminal de destino esta
 				 * vinculado(portabilidade)
 				 * 
-				 */
+				 *//*
 				String servOpTerminalDestVincPortabilidade = data.substring(131, 134);
 
-				/**
+				*//**
 				 * Quantidade Utilizada
 				 * 
-				 */
+				 *//*
 				String servQuantUtil = data.substring(134, 140);
 
-				/**
+				*//**
 				 * Unidade do ServiÃ§o
 				 * 
-				 */
+				 *//*
 				String servUniServico = data.substring(140, 142);
 
-				/**
+				*//**
 				 * Horario do ServiÃ§o
 				 * 
-				 */
+				 *//*
 				String servHorServico = data.substring(142, 148);
 
-				/**
+				*//**
 				 * Codigo da Categoria do ServiÃ§o
 				 * 
-				 */
+				 *//*
 				String servCodCatServico = data.substring(148, 151);
 
-				/**
+				*//**
 				 * Sigla da Categoria do ServiÃ§o
 				 * 
-				 */
+				 *//*
 				String servSigCatServico = data.substring(151, 154);
 
-				/**
+				*//**
 				 * DecriÃ§Ã£o da Categoria ServiÃ§o
 				 * 
-				 */
+				 *//*
 				String servDesCatServico = data.substring(154, 179);
 
-				/**
+				*//**
 				 * Valor do ServiÃ§o com Impostos
 				 * 
-				 */
+				 *//*
 				String servValServImp = data.substring(179, 192);
 
-				/**
+				*//**
 				 * Valor do ServiÃ§o Sem Impostos
 				 * 
-				 */
+				 *//*
 				String servValServSemImp = data.substring(192, 207);
 
-				/**
+				*//**
 				 * Tipo Nota Fiscal NF
 				 * 
-				 */
+				 *//*
 				String servTipoNf = data.substring(207, 208);
 
-				/**
+				*//**
 				 * Numero da nota Fiscal
 				 * 
-				 */
+				 *//*
 				String servNumNf = data.substring(208, 220);
 
-				/** Filler */
+				*//** Filler *//*
 				String servFiller = data.substring(220, 324);
 
-				/** Campo livre para Operadora */
+				*//** Campo livre para Operadora *//*
 				String servCampoLivreOp = data.substring(324, 349);
 				
-				/** MarcaÃ§Ã£o de Fim */
+				*//** MarcaÃ§Ã£o de Fim *//*
 				String servMarcaFim = data.substring(349, 350);
 
 				System.out.println(TipoReg);
@@ -719,7 +723,7 @@ public class VerificaCamposFebrabanV3Console {
 				System.out.println(servMarcaFim);
 
 				break;
-
+*/
 		/*	case "50":
 				*//**
 				 * 50_DESCONTOS do guia Telecom padrÃ£o FEBRABAN-V3R0

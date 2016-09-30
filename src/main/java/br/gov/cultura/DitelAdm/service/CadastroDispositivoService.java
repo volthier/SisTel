@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
@@ -29,5 +30,10 @@ public class CadastroDispositivoService {
 	
 	public List<Dispositivo> getIdDispositivo() {
 		return dispositivos.findAll();
+	}
+	
+	public List<Dispositivo> obterDispositivosDisponiveis() {
+		
+		return dispositivos.obterDispositivosDisponiveis();
 	}
 }
