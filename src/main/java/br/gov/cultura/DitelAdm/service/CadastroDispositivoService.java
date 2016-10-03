@@ -32,8 +32,8 @@ public class CadastroDispositivoService {
 		return dispositivos.findAll();
 	}
 	
-	public List<Dispositivo> obterDispositivosDisponiveis() {
+/*	public List<Dispositivo> obterDispositivosDisponiveis() {
 		
 		return dispositivos.obterDispositivosDisponiveis();
-	}
+	}*/
 }

@@ -26,4 +26,7 @@ public class CadastroLinhaService {
 	public List<Linha> getIdLinha() {
 		return linhas.findAll();
 	}
+	public List<Linha> listarLinhaDisponivel(){
+		return linhas.findByNumeroLinha();
+	}
 }

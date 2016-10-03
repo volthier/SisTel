@@ -59,16 +59,17 @@ public class AlocacaoController {
 	@RequestMapping("/disponibilizar")
 	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.obterDispositivosDisponiveis();
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		//List<Dispositivo> todosDispositivos = cadastroDispositivoService.obterDispositivosDisponiveis();
 		mv.addObject("dispositivos", todosDispositivos);
 		
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
 		
-		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
-		mv.addObject("linhas", todasLinhas);
-		
+//		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
+//		mv.addObject("linhas", todasLinhas);
+		List<Linha> todasLinhasDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
+		mv.addObject("linhas", todasLinhasDisponiveis);
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
 		
@@ -99,10 +100,10 @@ public class AlocacaoController {
 			alocacaoUsuarioLinha = alocacaoService.getAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
 			Date dtDevolucao = new SimpleDateFormat().parse(servletRequest.getParameter("dtDevolucao"));
 			
-			Date dtRecebimentoBaixa = alocacaoUsuarioLinha.getDtRecebimento();
+/*			Date dtRecebimentoBaixa = alocacaoUsuarioLinha.getDtRecebimento();
 			String numeroLinhaBaixa = alocacaoUsuarioLinha.getLinha().getNumeroLinha();
 			alocacaoLinhaDispositivo.setDtDevolucao(null);
-		 Integer idAlocacoesBaixa = 0;
+		 Integer idAlocacoesBaixa = 0;*/
 		
 		 /*	do{	++idAlocacoesBaixa;
 				alocacaoLinhaDispositivo.getIdAlocacaoLinhaDispositivo(idAlocacoesBaixa); 
