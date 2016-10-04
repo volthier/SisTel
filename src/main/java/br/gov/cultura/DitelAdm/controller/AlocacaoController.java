@@ -2,6 +2,7 @@ package br.gov.cultura.DitelAdm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,8 @@ import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaplano;
+import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
@@ -38,6 +41,7 @@ import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
 @RequestMapping("/alocacoes")
@@ -69,6 +73,7 @@ public class AlocacaoController {
 //		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 //		mv.addObject("linhas", todasLinhas);
 		List<Linha> todasLinhasDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
+		
 		mv.addObject("linhas", todasLinhasDisponiveis);
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
@@ -99,27 +104,31 @@ public class AlocacaoController {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacaoUsuarioLinha"));
 			alocacaoUsuarioLinha = alocacaoService.getAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
 			Date dtDevolucao = new SimpleDateFormat().parse(servletRequest.getParameter("dtDevolucao"));
+			Date dtRecebimentoReplicador = alocacaoUsuarioLinha.getDtRecebimento();
+			Linha idReciver = alocacaoUsuarioLinha.getLinha();
 			
-/*			Date dtRecebimentoBaixa = alocacaoUsuarioLinha.getDtRecebimento();
-			String numeroLinhaBaixa = alocacaoUsuarioLinha.getLinha().getNumeroLinha();
-			alocacaoLinhaDispositivo.setDtDevolucao(null);
-		 Integer idAlocacoesBaixa = 0;*/
-		
-		 /*	do{	++idAlocacoesBaixa;
-				alocacaoLinhaDispositivo.getIdAlocacaoLinhaDispositivo(idAlocacoesBaixa); 
-			}
-				while(alocacaoLinhaDispositivo.getLinha().getNumeroLinha()== numeroLinhaBaixa &
-						alocacaoLinhaDispositivo.getDtRecebimento()== dtRecebimentoBaixa); 
-			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);*/
-		 
+			List<AlocacaoLinhaDispositivo> linhaDispo = alocacaoService.getIdAlocacaoLinhaDispositivo();
+	    	AlocacaoLinhaDispositivo dispo = linhaDispo.stream()
+						.filter(ld -> ld != null
+								&& ld.getLinha().equals(idReciver) && ld.getDtRecebimento().equals(dtRecebimentoReplicador))
+						.findFirst().orElse(null);
+				if (dispo == null){System.out.println("Error acquiring Info Linha-Dispositivo!");
+				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");
+						return "redirect:/alocacoes/devolver";
+				}else if(dispo != null){
+					dispo.setDtDevolucao(dtDevolucao);
+					alocacaoService.salvar(dispo);	
+				}
 			alocacaoUsuarioLinha.setDtDevolucao(dtDevolucao);
+			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);
 			alocacaoService.salvar(alocacaoUsuarioLinha);
 			attributes.addFlashAttribute("mensagem", "Registrada devolução de dispositivo do usuario!");
 			return "redirect:/alocacoes/devolver";
 		} else if (servletRequest.getParameter("dtRecebimento") != null) {
+			alocacaoService.salvar(alocacaoUsuarioLinha);
+			
 			alocacaoService.salvar(alocacaoLinhaChip);
 			alocacaoService.salvar(alocacaoLinhaDispositivo);
-			alocacaoService.salvar(alocacaoUsuarioLinha);
 			alocacaoService.salvar(alocacaoLinhaCategoria);
 			attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
 			return "redirect:/alocacoes/disponibilizar";
