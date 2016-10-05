@@ -60,17 +60,18 @@ public class AlocacaoController {
 	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		// List<Dispositivo> todosDispositivos =
-		// cadastroDispositivoService.obterDispositivosDisponiveis();
+		//List<Dispositivo> todosDispositivos = cadastroDispositivoService.obterDispositivosDisponiveis();
+		
 		mv.addObject("dispositivos", todosDispositivos);
 
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
 
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
+		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
+		todasLinhas.removeAll(todasLinhasNaoDisponiveis);
 		mv.addObject("linhas", todasLinhas);
-//		List<Linha> todasLinhasDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
-//		mv.addObject("linhas", todasLinhasDisponiveis);
+		
 
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
