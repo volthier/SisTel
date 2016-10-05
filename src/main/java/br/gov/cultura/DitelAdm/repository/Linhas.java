@@ -11,7 +11,7 @@ public interface Linhas extends JpaRepository<Linha, Integer>{
 	
 	public List<Linha> findByIdLinha(Integer idLinha);
 	
-	@Query("select l.numeroLinha from Linha l inner join l.alocacaoUsuarioLinhas al WHERE al.dtDevolucao IS NOT NULL")
+	@Query("select l.idLinha,l.numeroLinha from Linha l inner join l.alocacaoUsuarioLinhas al WHERE al.dtDevolucao IS NOT NULL")
 	public List<Linha> findByNumeroLinha();
 
 }

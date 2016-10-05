@@ -42,9 +42,9 @@
 						<select name="dispositivo" class="col-sm-4 form-control">
 							<option value="">----Select----</option>
 							<option th:each="dispositivo : ${dispositivos}"
-								th:value="${dispositivo}"
+								th:value="${dispositivo.idDispositivo}"
 								th:valuetype="dispositivo"
-								th:text="${dispositivo}"></option>
+								th:text="${dispositivo.modeloDispositivo}"></option>
 						</select>
 					</div>
 				</div>
@@ -65,8 +65,8 @@
 					<div class="col-sm-4">
 						<select name="linha" class="col-sm-4 form-control">
 							<option value="">----Select----</option>
-							<option th:each="linha : ${linhas}" th:value="${linha}"
-								th:valuetype="linha" th:text="${linha}"></option>
+							<option th:each="linha : ${linhas}" th:value="${linha.idLinha}"
+								th:valuetype="linha" th:text="${linha.numeroLinha}"></option>
 						</select>
 					</div>
 				</div>
