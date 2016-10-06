@@ -11,9 +11,6 @@ public interface Dispositivos extends JpaRepository<Dispositivo, Integer> {
 	
 	public List<Dispositivo> findByIdDispositivo(Integer idDispositivo); 
 	
-//	@Query("select d.modeloDispositivo from Dispositivo d inner join d.alocacaoLinhaDispositivos al where al.iddispositivo = :idDispositivo and al.dtDevolucao NOT NULL")
-//	public Dispositivo findByModeloDispositivo (Integer idDispositivo);
-	
-//	@Query("select al.alocacaoLinhaDispositivos from AlocacaoLinhaDispositivo al inner join al.dispositivo d where d.idDispositivo = :idDispositivo")
-//	public List<Dispositivo> obterDispositivosDisponiveis();
+	@Query("select l from Dispositivo l inner join l.alocacaoLinhaDispositivos al WHERE al.dtDevolucao IS NULL")
+	public List<Dispositivo> findByNumeroSerieDispositivo();
 }

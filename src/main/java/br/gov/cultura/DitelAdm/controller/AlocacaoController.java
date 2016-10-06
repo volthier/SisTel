@@ -59,21 +59,23 @@ public class AlocacaoController {
 	@RequestMapping("/disponibilizar")
 	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		//List<Dispositivo> todosDispositivos = cadastroDispositivoService.obterDispositivosDisponiveis();
-		
-		mv.addObject("dispositivos", todosDispositivos);
 
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
+
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
+		mv.addObject("dispositivos", todosDispositivos);
 
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
 		todasLinhas.removeAll(todasLinhasNaoDisponiveis);
 		mv.addObject("linhas", todasLinhas);
-		
 
 		List<Chip> todosChips = cadastroChipService.getIdChip();
+		List<Chip> todosChipsNaoDisponiveis = cadastroChipService.listarChipDisponivel();
+		todosChips.removeAll(todosChipsNaoDisponiveis);
 		mv.addObject("chips", todosChips);
 
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
@@ -100,7 +102,9 @@ public class AlocacaoController {
 
 		if (servletRequest.getParameter("idAlocacaoUsuarioLinha") != null) {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacaoUsuarioLinha"));
+
 			alocacaoUsuarioLinha = alocacaoService.getAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
+
 			Date dtDevolucao = new SimpleDateFormat().parse(servletRequest.getParameter("dtDevolucao"));
 			Date dtRecebimentoReplicador = alocacaoUsuarioLinha.getDtRecebimento();
 			Linha idReciver = alocacaoUsuarioLinha.getLinha();

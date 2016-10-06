@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.repository.Dispositivos;
 
 @Service
@@ -32,8 +33,7 @@ public class CadastroDispositivoService {
 		return dispositivos.findAll();
 	}
 	
-/*	public List<Dispositivo> obterDispositivosDisponiveis() {
-		
-		return dispositivos.obterDispositivosDisponiveis();
-	}*/
+	public List<Dispositivo> listarDispositivoDisponivel(){
+		return dispositivos.findByNumeroSerieDispositivo();
+	}
 }
