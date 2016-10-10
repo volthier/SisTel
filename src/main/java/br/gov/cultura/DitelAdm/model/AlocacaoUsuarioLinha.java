@@ -45,6 +45,14 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 		this.dtRecebimento = dtRecebimento;
 	}
 
+	@Override
+	public String toString() {
+	   return "[Id: " + idAlocacaoUsuarioLinha +", Linha: " + linha.getNumeroLinha() + ","
+	   		+ " Plano da Linha: " + linha.getPlanoLinha() + ", Usuario: "+ usuario.getNomeUsuario() +", CPF: "+ usuario.getCpfUsuario() +
+	   		",Cargo: "+ usuario.getCargoUsuario()+", DAS: "+usuario.getLimiteAtesto().getDasAtesto()+", Devolução: "+dtDevolucao+
+	   		", Recebido: "+dtRecebimento+" ]";
+	}
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

@@ -2,8 +2,10 @@ package br.gov.cultura.DitelAdm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
@@ -57,17 +62,24 @@ public class AlocacaoController {
 	private CadastroCategoriaService cadastroCategoriaService;
 
 	@RequestMapping("/disponibilizar")
-	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	public @ResponseBody ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
+		GsonBuilder builder = new GsonBuilder();
+		builder.setPrettyPrinting().serializeNulls();
 
-		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		Gson gson = builder.create();
+		Collection<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		//String listString = todosUsuarios.stream().filter(listJson -> listJson.getClass() = gson.toJson(listJson)).map(Object::toString).collect(Collectors.joining());
 		mv.addObject("usuarios", todosUsuarios);
-
+		String json = gson.toJson(todosUsuarios.getClass().getFields());
+		
+		System.out.print(gson.toJson(json));
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
 		mv.addObject("dispositivos", todosDispositivos);
-
+		
+		
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
 		todasLinhas.removeAll(todasLinhasNaoDisponiveis);

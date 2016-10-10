@@ -71,6 +71,14 @@ public class Dispositivo implements java.io.Serializable {
 		this.valorDispositivo = valorDispositivo;
 		this.alocacaoLinhaDispositivos = alocacaoLinhaDispositivos;
 	}
+	
+	@Override
+	public String toString() {
+	   return "{Id: " + idDispositivo +", Imei: " + imeiDispositivo + ","
+	   		+ " End. MAC: " + macDispositivo + ", Marca: "+ marcaDispositivo +", Modelo: "+ modeloDispositivo +
+	   		",NumSerie: "+ numeroSerieDispositivo+", Patrimonio: "+patrimonioDispositivo+", Tipo: "+tipoDispositivo+
+	   		", Valor: R$ "+valorDispositivo+" }";
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
