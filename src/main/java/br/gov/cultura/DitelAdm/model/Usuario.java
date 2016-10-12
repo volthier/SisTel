@@ -29,33 +29,33 @@ import org.hibernate.validator.constraints.br.CPF;
 public class Usuario implements java.io.Serializable {
 
 	private Integer idUsuario;
-	private LimiteAtesto limiteAtesto;
+	private String nomeUsuario;
 	private String cargoUsuario;
 	private String cpfUsuario;
 	private String lotacaoUsuario;
-	private String nomeUsuario;
+	private LimiteAtesto limiteAtesto;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas = new HashSet(0);
 
 	public Usuario() {
 	}
 
-	public Usuario(LimiteAtesto limiteAtesto, String cargoUsuario, String cpfUsuario, String lotacaoUsuario,
-			String nomeUsuario) {
-		this.limiteAtesto = limiteAtesto;
+	public Usuario(String nomeUsuario, String cargoUsuario, String cpfUsuario, String lotacaoUsuario
+			,LimiteAtesto limiteAtesto) {
+		this.nomeUsuario = nomeUsuario;
 		this.cargoUsuario = cargoUsuario;
 		this.cpfUsuario = cpfUsuario;
 		this.lotacaoUsuario = lotacaoUsuario;
-		this.nomeUsuario = nomeUsuario;
+		this.limiteAtesto = limiteAtesto;
 	}
 
-	public Usuario(LimiteAtesto limiteAtesto, String cargoUsuario, String cpfUsuario, String lotacaoUsuario,
-			String nomeUsuario, Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas) {
-		this.limiteAtesto = limiteAtesto;
+	public Usuario(String nomeUsuario, String cargoUsuario, String cpfUsuario, String lotacaoUsuario,
+			LimiteAtesto limiteAtesto, Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas) {
+		this.nomeUsuario = nomeUsuario;
 		this.cargoUsuario = cargoUsuario;
 		this.cpfUsuario = cpfUsuario;
 		this.lotacaoUsuario = lotacaoUsuario;
-		this.nomeUsuario = nomeUsuario;
+		this.limiteAtesto = limiteAtesto;
 		this.alocacaoUsuarioLinhas = alocacaoUsuarioLinhas;
 	}
 
@@ -71,14 +71,15 @@ public class Usuario implements java.io.Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "limite_atesto_id_limite_atesto", nullable = false)
-	public LimiteAtesto getLimiteAtesto() {
-		return this.limiteAtesto;
+	@Column(name = "nome_usuario", nullable = false, length = 255)
+	@NotEmpty(message="Nome e obrigat�rio!")
+	@Size(max = 100, message = "Maximo de 100 caracteres para nome!")
+	public String getNomeUsuario() {
+		return this.nomeUsuario;
 	}
 
-	public void setLimiteAtesto(LimiteAtesto limiteAtesto) {
-		this.limiteAtesto = limiteAtesto;
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 
 	@Column(name = "cargo_usuario", nullable = false)
@@ -113,17 +114,16 @@ public class Usuario implements java.io.Serializable {
 		this.lotacaoUsuario = lotacaoUsuario;
 	}
 
-	@Column(name = "nome_usuario", nullable = false, length = 255)
-	@NotEmpty(message="Nome e obrigat�rio!")
-	@Size(max = 100, message = "Maximo de 100 caracteres para nome!")
-	public String getNomeUsuario() {
-		return this.nomeUsuario;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "limite_atesto_id_limite_atesto", nullable = false)
+	public LimiteAtesto getLimiteAtesto() {
+		return this.limiteAtesto;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setLimiteAtesto(LimiteAtesto limiteAtesto) {
+		this.limiteAtesto = limiteAtesto;
 	}
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	public Set<AlocacaoUsuarioLinha> getAlocacaoUsuarioLinhas() {
 		return this.alocacaoUsuarioLinhas;
