@@ -1,10 +1,11 @@
 package br.gov.cultura.DitelAdm.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.Chip;
@@ -17,7 +18,7 @@ import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
-@Controller
+@RestController
 @RequestMapping("/consulta")
 public class ConsultaController {
 

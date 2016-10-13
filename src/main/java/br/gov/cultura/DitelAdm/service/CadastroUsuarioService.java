@@ -25,6 +25,14 @@ public class CadastroUsuarioService {
 	public List<Usuario> getIdUsuario() {
 		return usuarios.findAll();
 	}
+	
+	public Usuario getId() {
+		return usuarios.findOne();
+	}
+	public Usuario getId(Integer id) {
+		return usuarios.findOne(id);
+	}
+	
 /*	public List<Usuario> filtrar(CadastroFiltroPesquisa filtro) {
 		String id = filtro.getId() == null ? "%" : filtro.getId();
 		return usuarios.findByIdUsuarioOrderByNomeUsuarioAsc (Integer.parseInt(id));

@@ -1,12 +1,13 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
 @RestController
@@ -15,13 +16,13 @@ public class RelatorioController {
 
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
+	@Autowired
+	private AlocacaoService alocacaoService;
 	
-	@RequestMapping(value="/usuarios")
-	public ResponseEntity<Usuario> get(){
-		Usuario user = cadastroUsuarioService.getId();
-		return new ResponseEntity<Usuario>(user,HttpStatus.OK); 
+	@RequestMapping(value="/usuarios",headers = "Accept=application/json")
+	public List<Usuario> getAllUsuarios(){
+		return cadastroUsuarioService.getIdUsuario();
 	}
-
 
 /*	@RequestMapping(value="/usuarios", method = RequestMethod.POST)
 	public ResponseEntity<List<Usuario>> update(@RequestBody List<Usuario> users) {

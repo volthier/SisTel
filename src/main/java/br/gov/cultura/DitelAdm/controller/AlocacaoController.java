@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,11 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
@@ -44,7 +40,7 @@ import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
-@Controller
+@RestController
 @RequestMapping("/alocacoes")
 public class AlocacaoController {
 
@@ -61,35 +57,23 @@ public class AlocacaoController {
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
 
-	@RequestMapping("/disponibilizar")
-	public @ResponseBody ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	@RequestMapping(value="/disponibilizar", produces ="aplication/json; charset=utf-8")
+	public ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		GsonBuilder builder = new GsonBuilder();
-		builder.setPrettyPrinting().serializeNulls();
-
-		Gson gson = builder.create();
 		Collection<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
-		//String listString = todosUsuarios.stream().filter(listJson -> listJson.getClass() = gson.toJson(listJson)).map(Object::toString).collect(Collectors.joining());
 		mv.addObject("usuarios", todosUsuarios);
-		String json = gson.toJson(todosUsuarios.getClass().getFields());
-		
-		System.out.print(gson.toJson(json));
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
 		mv.addObject("dispositivos", todosDispositivos);
-		
-		
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
 		todasLinhas.removeAll(todasLinhasNaoDisponiveis);
 		mv.addObject("linhas", todasLinhas);
-
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		List<Chip> todosChipsNaoDisponiveis = cadastroChipService.listarChipDisponivel();
 		todosChips.removeAll(todosChipsNaoDisponiveis);
 		mv.addObject("chips", todosChips);
-
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias", todasCategorias);
 
