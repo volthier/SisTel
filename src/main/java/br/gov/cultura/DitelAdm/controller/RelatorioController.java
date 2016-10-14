@@ -21,7 +21,7 @@ public class RelatorioController {
 	
 	@RequestMapping(value="/usuarios",headers = "Accept=application/json")
 	public List<Usuario> getAllUsuarios(){
-		return cadastroUsuarioService.getIdUsuario();
+		return cadastroUsuarioService.getId();
 	}
 
 /*	@RequestMapping(value="/usuarios", method = RequestMethod.POST)

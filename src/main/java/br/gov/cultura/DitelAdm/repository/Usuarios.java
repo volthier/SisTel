@@ -11,9 +11,8 @@ public interface Usuarios extends JpaRepository<Usuario, Integer>{
 	
 	public List<Usuario> findByIdUsuario(Integer idUsuario);
 
-	@Query("select u from Usuario u")
-	public Usuario findOne();
-
-	@Query("select u from Usuario u")
-	public Usuario findOne(Integer id);
+	@Query("select u.idUsuario, u.nomeUsuario,u.cargoUsuario,"
+			+ "u.cpfUsuario,u.lotacaoUsuario, u.limiteAtesto.dasAtesto,"
+			+ "u.limiteAtesto.valorLimite from Usuario u")
+	public List<Usuario> findOne();
 }

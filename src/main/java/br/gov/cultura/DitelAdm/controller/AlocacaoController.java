@@ -146,7 +146,6 @@ public class AlocacaoController {
 			return "redirect:/alocacoes/devolver";
 		} else if (servletRequest.getParameter("dtRecebimento") != null) {
 			alocacaoService.salvar(alocacaoUsuarioLinha);
-
 			alocacaoService.salvar(alocacaoLinhaChip);
 			alocacaoService.salvar(alocacaoLinhaDispositivo);
 			alocacaoService.salvar(alocacaoLinhaCategoria);
