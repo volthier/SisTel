@@ -2,7 +2,6 @@ package br.gov.cultura.DitelAdm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,7 +39,7 @@ import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
-@RestController
+@Controller
 @RequestMapping("/alocacoes")
 public class AlocacaoController {
 
@@ -57,10 +56,10 @@ public class AlocacaoController {
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
 
-	@RequestMapping(value="/disponibilizar", produces ="aplication/json; charset=utf-8")
+	@RequestMapping("/disponibilizar")
 	public ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		Collection<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
@@ -153,7 +152,7 @@ public class AlocacaoController {
 			return "redirect:/alocacoes/disponibilizar";
 		}
 
-		return "CADASTRO_VIEW1";
+		return "redirect:/alocacoes/disponibilizar";
 
 	}
 
