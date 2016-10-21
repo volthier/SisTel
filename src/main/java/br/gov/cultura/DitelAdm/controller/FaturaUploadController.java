@@ -74,8 +74,8 @@ public class FaturaUploadController {
 		if (!file.isEmpty()) {
 			try {
 				Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
-				redirectAttributes.addFlashAttribute("message",
-						"You successfully uploaded " + file.getOriginalFilename() + "!");
+				redirectAttributes.addFlashAttribute("messageSucesso",
+						"Fatura carregada com sucesso: " + file.getOriginalFilename() + "!");
 				
 				File tmpFile = new File(System.getProperty("java.io.tmpdir")+System.getProperty("file.separator")+file.getOriginalFilename());
 			        
@@ -102,10 +102,10 @@ public class FaturaUploadController {
 				faturaService.salvarTrailler(faturaArquivoDTO);				
 				
 			} catch (IOException|RuntimeException e) {
-				redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+				redirectAttributes.addFlashAttribute("messageErro", "Falha ao carregar fatura! Erro:" + file.getOriginalFilename() + " => " + e.getMessage());
 			}
 		} else {
-			redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+			redirectAttributes.addFlashAttribute("messageErro", "Falha ao carregar fatura! Erro: " + file.getOriginalFilename() + " because it was empty");
 		}
 		return "redirect:/faturas/nova";
 	}
