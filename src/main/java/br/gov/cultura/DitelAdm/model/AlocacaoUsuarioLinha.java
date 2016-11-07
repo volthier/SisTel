@@ -4,6 +4,8 @@ package br.gov.cultura.DitelAdm.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +36,8 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 	private Usuario usuario;
 	private Date dtDevolucao;
 	private Date dtRecebimento;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private Set<AlocacaoSei> alocacaoSeis = new HashSet(0);
 
 	public AlocacaoUsuarioLinha() {
 	}
@@ -43,11 +48,12 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 		this.dtRecebimento = dtRecebimento;
 	}
 
-	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebimento) {
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebimento,Set<AlocacaoSei> alocacaoSeis) {
 		this.linha = linha;
 		this.usuario = usuario;
 		this.dtDevolucao = dtDevolucao;
 		this.dtRecebimento = dtRecebimento;
+		this.alocacaoSeis = alocacaoSeis;
 	}
 
 	@Override
@@ -107,5 +113,13 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 
 	public void setDtRecebimento(Date dtRecebimento) {
 		this.dtRecebimento = dtRecebimento;
+	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alocacaoUsuarioLinha")
+	public Set<AlocacaoSei> getAlocacaoSeis() {
+		return this.alocacaoSeis;
+	}
+
+	public void setAlocacaoSeis(Set<AlocacaoSei> alocacaoSeis) {
+		this.alocacaoSeis = alocacaoSeis;
 	}
 }
