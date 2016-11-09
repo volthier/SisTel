@@ -14,9 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
 
 
 /**
@@ -42,7 +42,9 @@ public class Linha implements java.io.Serializable {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@JsonManagedReference
 	private Set<AlocacaoLinhaChip> alocacaoLinhaChips = new HashSet(0);
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@JsonManagedReference
+	private Set<Resumo> resumos = new HashSet(0);
 	public Linha() {
 	}
 
@@ -51,13 +53,14 @@ public class Linha implements java.io.Serializable {
 	}
 
 	public Linha(String numeroLinha, String planoLinha, Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos, Set<AlocacaoLinhaCategoria> alocacaoLinhaCategorias,
-			Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas, Set<AlocacaoLinhaChip> alocacaoLinhaChips) {
+			Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas, Set<AlocacaoLinhaChip> alocacaoLinhaChips, Set<Resumo> resumos) {
 		this.numeroLinha = numeroLinha;
 		this.planoLinha = planoLinha;
 		this.alocacaoLinhaDispositivos = alocacaoLinhaDispositivos;
 		this.alocacaoLinhaCategorias = alocacaoLinhaCategorias;
 		this.alocacaoUsuarioLinhas = alocacaoUsuarioLinhas;
 		this.alocacaoLinhaChips = alocacaoLinhaChips;
+		this.resumos = resumos;
 	}
 
 	@Id
@@ -124,6 +127,15 @@ public class Linha implements java.io.Serializable {
 
 	public void setAlocacaoLinhaChips(Set<AlocacaoLinhaChip> alocacaoLinhaChips) {
 		this.alocacaoLinhaChips = alocacaoLinhaChips;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linha")
+	public Set<Resumo> getResumos() {
+		return this.resumos;
+	}
+
+	public void setResumos(Set<Resumo> resumos) {
+		this.resumos = resumos;
 	}
 
 }

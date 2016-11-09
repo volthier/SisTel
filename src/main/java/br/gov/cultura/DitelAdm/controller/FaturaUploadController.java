@@ -22,22 +22,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.LeitorFebrabanV3;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.service.FaturaService;
-
+import br.gov.cultura.DitelAdm.service.LeitorFebrabanV3;
 
 @Controller
 public class FaturaUploadController {
 
-	/*private static final Logger log = LoggerFactory.getLogger(FaturaUploadController.class);*/
+	/*
+	 * private static final Logger log =
+	 * LoggerFactory.getLogger(FaturaUploadController.class);
+	 */
 
 	public static final String ROOT = "upload-dir";
 
 	private final ResourceLoader resourceLoader;
-	
+
 	@Autowired
 	private FaturaService faturaService;
+
+	@Autowired
+	private LeitorFebrabanV3 leitorFebrabanV3;
 
 	@Autowired
 	public FaturaUploadController(ResourceLoader resourceLoader) {
@@ -47,11 +52,12 @@ public class FaturaUploadController {
 	@RequestMapping(method = RequestMethod.GET, value = "/faturas/nova")
 	public String provideUploadInfo(Model model) throws IOException {
 
-		model.addAttribute("files", Files.walk(Paths.get(ROOT))
-				.filter(path -> !path.equals(Paths.get(ROOT)))
-				.map(path -> Paths.get(ROOT).relativize(path))
-				.map(path -> linkTo(methodOn(FaturaUploadController.class).getFile(path.toString())).withRel(path.toString()))
-				.collect(Collectors.toList()));
+		model.addAttribute("files",
+				Files.walk(Paths.get(ROOT)).filter(path -> !path.equals(Paths.get(ROOT)))
+						.map(path -> Paths.get(ROOT).relativize(path))
+						.map(path -> linkTo(methodOn(FaturaUploadController.class).getFile(path.toString()))
+								.withRel(path.toString()))
+						.collect(Collectors.toList()));
 
 		return "CadastroFaturas";
 	}
@@ -68,21 +74,21 @@ public class FaturaUploadController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/faturas/nova")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-								   RedirectAttributes redirectAttributes) throws IOException {
-				
+	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes)
+			throws IOException {
+
 		if (!file.isEmpty()) {
 			try {
 				Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
 				redirectAttributes.addFlashAttribute("messageSucesso",
 						"Fatura carregada com sucesso: " + file.getOriginalFilename() + "!");
-				
-				File tmpFile = new File(System.getProperty("java.io.tmpdir")+System.getProperty("file.separator")+file.getOriginalFilename());
-			        
-			        file.transferTo(tmpFile);
-				
-				LeitorFebrabanV3 leitor = new LeitorFebrabanV3();
-				FaturaArquivoDTO faturaArquivoDTO = leitor.read(tmpFile);
+
+				File tmpFile = new File(System.getProperty("java.io.tmpdir") + System.getProperty("file.separator")
+						+ file.getOriginalFilename());
+
+				file.transferTo(tmpFile);
+
+				FaturaArquivoDTO faturaArquivoDTO = leitorFebrabanV3.read(tmpFile);
 				faturaService.salvarOperadora(faturaArquivoDTO);
 				faturaService.salvarCliente(faturaArquivoDTO);
 				faturaService.salvarFatura(faturaArquivoDTO);
@@ -97,15 +103,17 @@ public class FaturaUploadController {
 				faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
 				faturaService.SalvarPlanos(faturaArquivoDTO);
 				faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
-				faturaService.salvarAjustes(faturaArquivoDTO);	
+				faturaService.salvarAjustes(faturaArquivoDTO);
 				faturaService.salvarNotaFiscal(faturaArquivoDTO);
-				faturaService.salvarTrailler(faturaArquivoDTO);				
-				
-			} catch (IOException|RuntimeException e) {
-				redirectAttributes.addFlashAttribute("messageErro", "Falha ao carregar fatura! Erro:" + file.getOriginalFilename() + " => " + e.getMessage());
+				faturaService.salvarTrailler(faturaArquivoDTO);
+
+			} catch (IOException | RuntimeException e) {
+				redirectAttributes.addFlashAttribute("messageErro",
+						"Falha ao carregar fatura! Erro:" + file.getOriginalFilename() + " => " + e.getMessage());
 			}
 		} else {
-			redirectAttributes.addFlashAttribute("messageErro", "Falha ao carregar fatura! Erro: " + file.getOriginalFilename() + " because it was empty");
+			redirectAttributes.addFlashAttribute("messageErro",
+					"Falha ao carregar fatura! Erro: " + file.getOriginalFilename() + " because it was empty");
 		}
 		return "redirect:/faturas/nova";
 	}

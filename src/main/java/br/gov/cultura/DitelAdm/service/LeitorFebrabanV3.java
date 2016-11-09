@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.model;
+package br.gov.cultura.DitelAdm.service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.model.faturasV3.Ajustes;
 import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaajuste;
@@ -28,25 +32,22 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
 import br.gov.cultura.DitelAdm.model.faturasV3.Servicos;
 import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 
+@Service
 public class LeitorFebrabanV3 {
+
+	@Autowired
+	private CadastroLinhaService cadastroLinhaService;
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private SimpleDateFormat sdfh = new SimpleDateFormat("HHmmss");
 
-	/*
-	 * private String recuperaTextoCampo(String linha, PosicaoCamposEnum
-	 * posicao) { return linha.substring(posicao.getPosicaoInicial(),
-	 * posicao.getPosicaoFinal()); }
-	 */
-
 	public FaturaArquivoDTO read(File file) throws IOException {
-		String convert;
 
+		String convert;
 		FaturaArquivoDTO faturaArquivoDTO = new FaturaArquivoDTO();
 		FileReader fileReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(fileReader);
 		String data = null;
-
 		Fatura fatura = new Fatura();
 		Cliente cliente = new Cliente();
 		Operadora operadora = new Operadora();
@@ -246,7 +247,40 @@ public class LeitorFebrabanV3 {
 				resumo.setCnl(Integer.parseInt(data.substring(78, 83)));
 
 				/** Numero do Recurso */
-				resumo.setNumRecurso(data.substring(83, 99));
+				String numero = data.substring(83, 99);
+				resumo.setNumRecurso(numero);
+				int a = 0;
+				try {
+
+					Linha linha = cadastroLinhaService.getLinhaRegistrada(numero);
+					System.out.println("Linha encontrada: " + linha.getNumeroLinha());
+					if (linha != null) {
+						resumo.setLinha(linha);
+						a = 1;
+					}
+
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.err.println("Erro na verificação de linha registrada na fatura: " + numero+" - "+ e);
+				}
+
+				try {
+					if (a == 0) {
+						System.err.println(" Acrescentando 9º digito ao numero: ");
+						numero = data.substring(83, 85).concat("9").concat(data.substring(85, 99));
+						System.out.print("numero modificado para: " + numero);
+						Linha linha = cadastroLinhaService.getLinhaRegistrada(numero);
+						if (linha != null) {
+							resumo.setLinha(linha);
+						} else {
+							resumo.setLinha(null);
+							System.err.println("Numero não vinculado ao Sistema! - " + numero);
+						}
+
+					}
+				} catch (Exception e) {
+					System.err.println(e + " Linha inexistente no base de dados!");
+				}
 
 				/** Modalidade de Serviço do recurso */
 				resumo.setModServ(Integer.parseInt(data.substring(99, 103)));
@@ -815,7 +849,6 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String servMarcaFim(data.substring(349, 350);
 				 */
 
-			
 				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(83, 99))) {
 						servicos.setResumo(r);
@@ -825,7 +858,7 @@ public class LeitorFebrabanV3 {
 							servicosLista.add(servicos);
 							faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
 							faturaArquivoDTO.setServicos(servicosLista);
-							
+
 						} else {
 
 							String verificaCategoria = data.substring(154, 179);
@@ -1015,51 +1048,41 @@ public class LeitorFebrabanV3 {
 				descontosLista.add(descontos);
 				faturaArquivoDTO.setCategoriaDescontos(categoriaDescontoLista);
 				faturaArquivoDTO.setDescontos(descontosLista);
-				
-/*				
- * 	DESCONTO A SER IMPLEMENTADO POR FALTA DE INFORMATIVOS PARA TESTE 
- * 
- * 
- * if (r.getNumRecurso().equals(data.substring(83, 99))) {
-					servicos.setResumo(r);
-					if (categoriaChamadaLista.isEmpty()) {
-						categoriaServicoLista.add(categoriaServico);
-						servicos.setCategoriaservico(categoriaServico);
-						servicosLista.add(servicos);
-						faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
-						faturaArquivoDTO.setServicos(servicosLista);
-						
-					} else {
 
-						String verificaCategoria = data.substring(154, 179);
-
-						try {
-							Categoriaservico serve = categoriaServicoLista.stream()
-									.filter(x -> x != null && x.getDescricao().equals(verificaCategoria))
-									.findFirst().orElse(null);
-
-							if (serve != null) {
-								servicos.setCategoriaservico(categoriaServico);
-								servicosLista.add(servicos);
-								faturaArquivoDTO.setServicos(servicosLista);
-							} else {
-								categoriaServicoLista.add(categoriaServico);
-								servicos.setCategoriaservico(categoriaServico);
-								servicosLista.add(servicos);
-								faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
-								faturaArquivoDTO.setServicos(servicosLista);
-							}
-
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						;
-					}
-					;
-				}
-				;
-			}
-			;*/
+				/*
+				 * DESCONTO A SER IMPLEMENTADO POR FALTA DE INFORMATIVOS PARA
+				 * TESTE
+				 * 
+				 * 
+				 * if (r.getNumRecurso().equals(data.substring(83, 99))) {
+				 * servicos.setResumo(r); if (categoriaChamadaLista.isEmpty()) {
+				 * categoriaServicoLista.add(categoriaServico);
+				 * servicos.setCategoriaservico(categoriaServico);
+				 * servicosLista.add(servicos);
+				 * faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+				 * faturaArquivoDTO.setServicos(servicosLista);
+				 * 
+				 * } else {
+				 * 
+				 * String verificaCategoria = data.substring(154, 179);
+				 * 
+				 * try { Categoriaservico serve = categoriaServicoLista.stream()
+				 * .filter(x -> x != null &&
+				 * x.getDescricao().equals(verificaCategoria))
+				 * .findFirst().orElse(null);
+				 * 
+				 * if (serve != null) {
+				 * servicos.setCategoriaservico(categoriaServico);
+				 * servicosLista.add(servicos);
+				 * faturaArquivoDTO.setServicos(servicosLista); } else {
+				 * categoriaServicoLista.add(categoriaServico);
+				 * servicos.setCategoriaservico(categoriaServico);
+				 * servicosLista.add(servicos);
+				 * faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+				 * faturaArquivoDTO.setServicos(servicosLista); }
+				 * 
+				 * } catch (Exception e) { e.printStackTrace(); } ; } ; } ; } ;
+				 */
 
 				break;
 
@@ -1360,7 +1383,6 @@ public class LeitorFebrabanV3 {
 				 * ajustesMarcaFim(data.substring(349,350);
 				 */
 
-								
 				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(ajustes.getNumRecurso())) {
 						ajustes.setResumo(r);
@@ -1368,44 +1390,41 @@ public class LeitorFebrabanV3 {
 						ajustes.setResumo(null);
 					}
 				}
-					if (categoriaAjustesLista.isEmpty()) {
-						categoriaAjustesLista.add(categoriaAjustes);
-						faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
-						ajustes.setCategoriaajuste(categoriaAjustes);
-						ajustesLista.add(ajustes);
-						faturaArquivoDTO.setAjustes(ajustesLista);
+				if (categoriaAjustesLista.isEmpty()) {
+					categoriaAjustesLista.add(categoriaAjustes);
+					faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+					ajustes.setCategoriaajuste(categoriaAjustes);
+					ajustesLista.add(ajustes);
+					faturaArquivoDTO.setAjustes(ajustesLista);
 
-					} else {
+				} else {
 
-						String verificaCategoriaPlano = data.substring(101, 141);
+					String verificaCategoriaPlano = data.substring(101, 141);
 
-						try {
-							Categoriaajuste ajuste = categoriaAjustesLista.stream()
-									.filter(catPlan -> catPlan != null
-											&& catPlan.getDescricao().equals(verificaCategoriaPlano))
-									.findFirst().orElse(null);
+					try {
+						Categoriaajuste ajuste = categoriaAjustesLista.stream().filter(
+								catPlan -> catPlan != null && catPlan.getDescricao().equals(verificaCategoriaPlano))
+								.findFirst().orElse(null);
 
-							if (ajuste != null) {
-								ajustes.setCategoriaajuste(ajuste);
-								ajustesLista.add(ajustes);
-								faturaArquivoDTO.setAjustes(ajustesLista);
-							} else {
-								categoriaAjustesLista.add(categoriaAjustes);
-								faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
-								ajustes.setCategoriaajuste(categoriaAjustes);
-								ajustesLista.add(ajustes);
-								faturaArquivoDTO.setAjustes(ajustesLista);
-							}
-
-						} catch (Exception e) {
-							e.printStackTrace();
+						if (ajuste != null) {
+							ajustes.setCategoriaajuste(ajuste);
+							ajustesLista.add(ajustes);
+							faturaArquivoDTO.setAjustes(ajustesLista);
+						} else {
+							categoriaAjustesLista.add(categoriaAjustes);
+							faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+							ajustes.setCategoriaajuste(categoriaAjustes);
+							ajustesLista.add(ajustes);
+							faturaArquivoDTO.setAjustes(ajustesLista);
 						}
-						;
 
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 					;
-					
 
+				}
+				;
 
 				break;
 
