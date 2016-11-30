@@ -3,8 +3,10 @@ package br.gov.cultura.DitelAdm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
@@ -21,7 +23,7 @@ import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
-@RestController
+@Controller
 @RequestMapping("/relatorio")
 public class RelatorioController {
 
@@ -40,7 +42,7 @@ public class RelatorioController {
 	@Autowired
 	private AlocacaoService alocacaoservice;
 	
-	@RequestMapping
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView relatorios(){
 		ModelAndView mv = new ModelAndView("Relatorio");
 		return mv;
@@ -61,7 +63,8 @@ public class RelatorioController {
 		return cadastroDispositivoService.getIdDispositivo();
 	}
 	
-	@RequestMapping(value="/chips",headers = "Accept=application/json")
+	@RequestMapping(value="/chips",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Chip> getChips(){
 		return cadastroChipService.getIdChip();
 	}
