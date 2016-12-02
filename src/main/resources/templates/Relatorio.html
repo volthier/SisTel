@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width" />
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 
-<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js "></script>
-<script th:src="@{/js/relatorios/relatorios.js}"></script>
+<section layout:fragment="conteudo">
 
-</head>
-<body>
-	<div id="piechart_div" style="border:1px solid #ccc"></div>
-	<div id="barchart_div" style="border:1px solid #ccc"></div>
-</body>
+	<form class="form-horizontal">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title dt-dispositivo-panel">Relatórios
+						Gráficos</h1>
+					<a class="btn btn-link dt-link-panel" th:href="@{/consulta}">Voltar
+						para Lista de consultas</a>
+				</div>
+			</div>
+			<p></p>
+			<div class="painel-body">
+				<div class="form-group">
+					<div id="piechart_div" style="border: 1px solid #ccc"></div>
+					<div id="barchart_div" style="b	order: 1px solid #ccc"></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
 </html>

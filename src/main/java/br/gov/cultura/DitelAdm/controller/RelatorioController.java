@@ -48,17 +48,20 @@ public class RelatorioController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/usuarios",headers = "Accept=application/json")
+	@RequestMapping(value="/usuarios",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Usuario> getUsuarios(){
 		return cadastroUsuarioService.getIdUsuario();
 	}
 
-	@RequestMapping(value="/linhas",headers = "Accept=application/json")
+	@RequestMapping(value="/linhas",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Linha> getLinhas(){
 		return cadastroLinhaService.getIdLinha();
 	}
 	
-	@RequestMapping(value="/dispositivos",headers = "Accept=application/json")
+	@RequestMapping(value="/dispositivos",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Dispositivo> getDispositivos(){
 		return cadastroDispositivoService.getIdDispositivo();
 	}
@@ -69,21 +72,24 @@ public class RelatorioController {
 		return cadastroChipService.getIdChip();
 	}
 	
-	@RequestMapping("/alocacaoUsuarioLinha")
+	@RequestMapping(value="/alocacaoUsuarioLinha",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoUsuarioLinha> getAUL(){ 
 		return alocacaoservice.getIdAlocacaoUsuarioLinha();
 	}
-	@RequestMapping("/alocacaoLinhaDispositivo")
+	@RequestMapping(value="/alocacaoLinhaDispositivo",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoLinhaDispositivo> getALD(){ 
 		return alocacaoservice.getIdAlocacaoLinhaDispositivo();
 	}
-	@RequestMapping("/alocacaoLinhaChip")
+	@RequestMapping(value="/alocacaoLinhaChip",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoLinhaChip> getALC(){ 
 		return alocacaoservice.getIdAlocacaoLinhaChip();
 	}
-	@RequestMapping("/alocacaoLinhaCategoria")
+	@RequestMapping(value="/alocacaoLinhaCategoria",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoLinhaCategoria> getALCat(){ 
 		return alocacaoservice.getIdAlocacaoLinhaCategoria();
 	}
-
 }
