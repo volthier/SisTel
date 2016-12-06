@@ -82,19 +82,6 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	});
 
-$(function () {
-    $('#nome').autocomplete({
-        serviceUrl: '/inicio/autocomplete',
-        paramName: "searchfield",
-        params: {"id": "persons"},
-        minChars: 1,
-        maxHeight: 'none',
-        transformResult: function (response) {
-            // overwrite, maybe needed for reading additional information in response
-            return $.parseJSON(response);
-        }
-    })
-});
 
 /*Script do Menu (Anchor)*/
 $('.menu-anchor').on('click touchstart', function(e){
