@@ -59,26 +59,26 @@
 			<scope>provided</scope>
 		</dependency>
 
-		
+
 		<!-- Biblioteca de MicroServiços -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
-		<!-- Fim MicroServiços-->
-		
+		<!-- Fim MicroServiços -->
+
 		<!-- Biblioteca Security -->
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.directory.server</groupId>
 			<artifactId>apacheds-server-jndi</artifactId>
@@ -127,7 +127,7 @@
 		</dependency>
 		<!-- Fim PDF -->
 
-		<!-- Biblioteca de Conectores -->
+		<!-- Biblioteca de Conectores/BD -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
@@ -142,6 +142,17 @@
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-ejb_3.0_spec</artifactId>
 			<version>1.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>${liquibase.version}</version>
 		</dependency>
 		<!-- Fim Conectores -->
 
@@ -162,6 +173,7 @@
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -169,6 +181,34 @@
 					<fork>true</fork>
 				</configuration>
 			</plugin>
+
+			<!-- liquibase -->
+	        <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>${liquibase.version}</version>
+        <configuration>                 
+            <propertyFile>src/main/resources/application.properties</propertyFile>
+        </configuration>
+        <dependencies>
+            <dependency>
+                <groupId>org.liquibase.ext</groupId>
+                <artifactId>liquibase-hibernate4</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+        </dependencies>              
+    </plugin> 
+
 		</plugins>
 	</build>
 
