@@ -30,9 +30,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class AlocacaoUsuarioLinha implements java.io.Serializable {
 
 	private Integer idAlocacaoUsuarioLinha;
-	@JsonBackReference
 	private Linha linha;
-	@JsonBackReference
 	private Usuario usuario;
 	private Date dtDevolucao;
 	private Date dtRecebimento;

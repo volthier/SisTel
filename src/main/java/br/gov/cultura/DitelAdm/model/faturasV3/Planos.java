@@ -3,6 +3,7 @@ package br.gov.cultura.DitelAdm.model.faturasV3;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -227,6 +228,16 @@ public class Planos implements java.io.Serializable {
 
 	public void setCampoLivreOp(String campoLivreOp) {
 		this.campoLivreOp = campoLivreOp;
+	}
+	
+	public String dataIniCicloFormatada() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		return format.format(this.dataIniCiclo);
+	}
+	
+	public String dataFimCicloFormatada() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		return format.format(this.dataFimCiclo);
 	}
 
 }

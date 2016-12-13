@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
 import br.gov.cultura.DitelAdm.repository.Faturas.Ajustesas;
 import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasAjustes;
@@ -143,5 +144,21 @@ public class FaturaService {
 	}
 	public void salvarTrailler(FaturaArquivoDTO faturaArquivoDTO){
 		traillers.save(faturaArquivoDTO.getTrailler());
+	}
+	
+	public List<Fatura> getFaturas() {
+		return faturas.findAll();
+	}
+	
+	public Fatura getFatura(Integer id) {
+		return faturas.findByIdFatura(id);
+	}
+	
+	public List<Fatura> getFaturasNaoGeradas() {
+		return faturas.findFaturasGeradas(Boolean.FALSE);
+	}
+	
+	public List<Fatura> getFaturasGeradas() {
+		return faturas.findFaturasGeradas(Boolean.TRUE);
 	}
 }

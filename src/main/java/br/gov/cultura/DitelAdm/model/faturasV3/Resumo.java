@@ -34,7 +34,6 @@ public class Resumo implements java.io.Serializable {
 
 	private Integer idResumo;
 	private Fatura fatura;
-	@JsonBackReference
 	private Linha linha;
 	private String idUnico;
 	private int cnl;
@@ -138,7 +137,7 @@ public class Resumo implements java.io.Serializable {
 		this.fatura = fatura;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "linha_id_linha")
 	public Linha getLinha() {
 		return this.linha;
