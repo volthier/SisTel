@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
-	layout:decorator="LayoutPadrao">
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width" />
+
+<title>Ditel</title>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+	
 </head>
 
 <section layout:fragment="conteudo">

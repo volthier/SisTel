@@ -1,63 +1,30 @@
-<html>
-  <head>
-  <meta http-equiv="Content-Type" content="type=text/html; charset=utf-8"></meta>
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <!-- <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 
+<section layout:fragment="conteudo">
 
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-         ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-         ['2004/05',  165,      938,         522,             998,           450,      614.6],
-         ['2005/06',  135,      1120,        599,             1268,          288,      682],
-         ['2006/07',  157,      1167,        587,             807,           397,      623],
-         ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-         ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-      ]);
+	<form class="form-horizontal">
 
-    var options = {
-      title : 'Monthly Coffee Production by Country',
-      vAxis: {title: 'Cups'}, // eixo vertical titulo
-      hAxis: {title: 'Month'}, // eixo horizontal titulo
-      seriesType: 'bars', // define o tipo d apresentação do combo
-      series: {5: {type: 'line'}} // seleção de variação de apresentação multipla(coluna avarage estilo line)
-    };
-
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-    </script> -->
-    
-        <script type="text/javascript">
-        $(function ()
-        		{  
-        		   $.ajax(
-        		   {  
-        		      type: 'GET',
-        		      dataType: 'json',  
-        		      contentType: 'application/json',  
-        		      url: 'http://localhost:8080/relatorio/usuarios',  
-        		      data: '',  
-        		      success: function (response)
-        		      {  
-        		         drawchart(response.d); // calling method  
-        		      },          		  
-        		      error: function ()
-        		      {  
-        		         alert("Error loading data! Please try again.");  
-        		      }  
-        		   });  
-        		}) 
-        		
-        		
-    </script>
-    
-  </head>
-  <body>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
-  </body>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title dt-dispositivo-panel">Relatórios
+						Gráficos</h1>
+					<a class="btn btn-link dt-link-panel" th:href="@{/consulta}">Voltar
+						para Lista de consultas</a>
+				</div>
+			</div>
+			<p></p>
+			<div class="painel-body">
+				<div class="form-group">
+					<div id="piechart_div" style="border: 1px solid #ccc"></div>
+					<div id="barchart_div" style="b	order: 1px solid #ccc"></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
 </html>

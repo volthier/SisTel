@@ -3,8 +3,10 @@ package br.gov.cultura.DitelAdm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
@@ -21,7 +23,7 @@ import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
-@RestController
+@Controller
 @RequestMapping("/relatorio")
 public class RelatorioController {
 
@@ -40,47 +42,54 @@ public class RelatorioController {
 	@Autowired
 	private AlocacaoService alocacaoservice;
 	
-	@RequestMapping
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView relatorios(){
 		ModelAndView mv = new ModelAndView("Relatorio");
 		return mv;
 	}
 	
-	@RequestMapping(value="/usuarios",headers = "Accept=application/json")
+	@RequestMapping(value="/usuarios",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Usuario> getUsuarios(){
 		return cadastroUsuarioService.getIdUsuario();
 	}
 
-	@RequestMapping(value="/linhas",headers = "Accept=application/json")
+	@RequestMapping(value="/linhas",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Linha> getLinhas(){
 		return cadastroLinhaService.getIdLinha();
 	}
 	
-	@RequestMapping(value="/dispositivos",headers = "Accept=application/json")
+	@RequestMapping(value="/dispositivos",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Dispositivo> getDispositivos(){
 		return cadastroDispositivoService.getIdDispositivo();
 	}
 	
-	@RequestMapping(value="/chips",headers = "Accept=application/json")
+	@RequestMapping(value="/chips",method = RequestMethod.GET)
+	@ResponseBody
 	public List<Chip> getChips(){
 		return cadastroChipService.getIdChip();
 	}
 	
-	@RequestMapping("/alocacaoUsuarioLinha")
+	@RequestMapping(value="/alocacaoUsuarioLinha",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoUsuarioLinha> getAUL(){ 
 		return alocacaoservice.getIdAlocacaoUsuarioLinha();
 	}
-	@RequestMapping("/alocacaoLinhaDispositivo")
+	@RequestMapping(value="/alocacaoLinhaDispositivo",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoLinhaDispositivo> getALD(){ 
 		return alocacaoservice.getIdAlocacaoLinhaDispositivo();
 	}
-	@RequestMapping("/alocacaoLinhaChip")
+	@RequestMapping(value="/alocacaoLinhaChip",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoLinhaChip> getALC(){ 
 		return alocacaoservice.getIdAlocacaoLinhaChip();
 	}
-	@RequestMapping("/alocacaoLinhaCategoria")
+	@RequestMapping(value="/alocacaoLinhaCategoria",method = RequestMethod.GET)
+	@ResponseBody
 	public List<AlocacaoLinhaCategoria> getALCat(){ 
 		return alocacaoservice.getIdAlocacaoLinhaCategoria();
 	}
-
 }
