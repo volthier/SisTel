@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.Usuarios;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Service
 public class CadastroUsuarioService {
@@ -19,12 +18,11 @@ public class CadastroUsuarioService {
 		usuarios.save(usuario);
 	}
 
-	public void excluir(Long id) {
+	public void excluir(Integer id) {
 		usuarios.delete(id);
 	}
 
-	public List<Usuario> filtrar(CadastroFiltroPesquisa filtro) {
-		String nome = filtro.getNome() == null ? "%" : filtro.getNome();
-		return usuarios.findByNomeUsuarioContaining(nome);
+	public List<Usuario> getIdUsuario() {
+		return usuarios.findAll();
 	}
 }

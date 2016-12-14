@@ -49,7 +49,7 @@ public class LinhaController extends UrlController {
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long id, RedirectAttributes attributes){
+	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroLinhaService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Linha removida com sucesso!");
 		return "redirect:/inicio";

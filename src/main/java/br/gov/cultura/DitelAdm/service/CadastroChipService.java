@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.repository.Chips;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Service
 public class CadastroChipService {
@@ -19,13 +18,13 @@ public class CadastroChipService {
 		chips.save(chip);
 	}
 
-	public void excluir(Long id) {
+	public void excluir(Integer id) {
 		// TODO Auto-generated method stub
 		chips.delete(id);
 	}
 
-	public List<Chip> filtrar(CadastroFiltroPesquisa filtro){
-		String numeroSerieChip = filtro.getModelo() == null ? "%" : filtro.getModelo();
-		return chips.findByNumeroSerieChipContaining(numeroSerieChip);
+	
+	public List<Chip> getIdChip() {
+		return chips.findAll();
 	}
 }

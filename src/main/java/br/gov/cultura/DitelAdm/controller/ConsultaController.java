@@ -35,14 +35,14 @@ public class ConsultaController {
 
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		mv.addObject("dispositivos", todosDispositivos);
-		List<Usuario> todosUsuarios = cadastroUsuarioService.filtrar(filtro);
+		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
-		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
+		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
-		List<Linha> todasLinhas = cadastroLinhaService.filtrar(filtro);
+		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		mv.addObject("linhas", todasLinhas);
 		return mv;
 	}

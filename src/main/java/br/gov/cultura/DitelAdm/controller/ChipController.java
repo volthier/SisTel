@@ -57,7 +57,7 @@ public class ChipController extends UrlController {
 	}
 	
 	@RequestMapping(value="{idChip}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long idChip, RedirectAttributes attributes){
+	public String excluir(@PathVariable Integer idChip, RedirectAttributes attributes){
 		cadastroChipService.excluir(idChip);
 		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
 		return "redirect:/inicio";

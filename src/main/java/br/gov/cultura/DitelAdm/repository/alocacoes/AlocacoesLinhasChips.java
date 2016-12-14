@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
 
-public interface AlocacoesLinhasChips extends JpaRepository<AlocacaoLinhaChip, Long> { 
+public interface AlocacoesLinhasChips extends JpaRepository<AlocacaoLinhaChip, Integer> {
+	
+	public AlocacaoLinhaChip findByIdAlocacaoLinhaChip(Integer idAlocacaoLinhaChip);
 
 }

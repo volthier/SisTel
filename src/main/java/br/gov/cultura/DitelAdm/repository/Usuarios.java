@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.gov.cultura.DitelAdm.model.Usuario;
 
-public interface Usuarios extends JpaRepository<Usuario, Long>{
+public interface Usuarios extends JpaRepository<Usuario, Integer>{
 	
-	public List<Usuario> findByNomeUsuarioContaining(String nomeUsuario);
+	public List<Usuario> findByIdUsuario(Integer idUsuario);
 
 }

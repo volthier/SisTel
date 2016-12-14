@@ -39,29 +39,29 @@ public class UrlController {
 		
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro); 
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		ModelAndView mv = new ModelAndView("TelaInicio");
-		String json = new Gson().toJson(mv); 
-		json = new Gson().toJson(todosDispositivos);
+		 
+		
 		mv.addObject("dispositivos", todosDispositivos);
-		mv.addObject("sugestion", json);
-		System.out.println(json);
-		List<Usuario> todosUsuarios = cadastroUsuarioService.filtrar(filtro);
-		json = new Gson().toJson(todosUsuarios);
+		
+		
+		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		
 		mv.addObject("usuarios", todosUsuarios);
-		mv.addObject("sugestion", json);
-		System.out.println(json);
-		List<Chip> todosChips = cadastroChipService.filtrar(filtro);
-		json = new Gson().toJson(todosChips);
+		
+		
+		List<Chip> todosChips = cadastroChipService.getIdChip();
+		
 		mv.addObject("chips", todosChips);
-		mv.addObject("sugestion", json);
-		System.out.println(json);
-		List<Linha> todasLinhas = cadastroLinhaService.filtrar(filtro);
-		json = new Gson().toJson(todasLinhas);
+		
+		
+		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
+		
 		mv.addObject("linhas", todasLinhas);
-		mv.addObject("sugestion", json);
-		System.out.println(json);		
-		DasLimitesBase dasLimitesBase = new DasLimitesBase();
+		
+				
+		
 		
 		return mv;
 	}	

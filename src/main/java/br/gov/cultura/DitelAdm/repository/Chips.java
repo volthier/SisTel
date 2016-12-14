@@ -8,8 +8,8 @@ import br.gov.cultura.DitelAdm.model.Chip;
 
 
 
-public interface Chips extends JpaRepository<Chip, Long>{
+public interface Chips extends JpaRepository<Chip, Integer>{
 	
-	public List<Chip> findByNumeroSerieChipContaining(String numeroSerieChip);
+	public List<Chip> findByIdChip(Integer idChip);
 
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.repository.Dispositivos;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 
 @Service
 public class CadastroDispositivoService {
@@ -24,13 +23,11 @@ public class CadastroDispositivoService {
 		}
 	}
 
-	public void excluir(Long id){
-		dispositivos.delete(id);
+	public void excluir(Integer idDispositivo){
+		dispositivos.delete(idDispositivo);
 	}
 	
-	public List<Dispositivo> filtrar(CadastroFiltroPesquisa filtro){
-		String modelo = filtro.getModelo() == null ? "%" : filtro.getModelo();
-		return dispositivos.findByModeloDispositivoContaining(modelo);
+	public List<Dispositivo> getIdDispositivo() {
+		return dispositivos.findAll();
 	}
-
 }

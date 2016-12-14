@@ -1,5 +1,5 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
-// Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
+// Generated 13/09/2016 10:38:25 by Hibernate Tools 4.3.4.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -28,19 +28,21 @@ public class Resumo implements java.io.Serializable {
 
 	private Integer idResumo;
 	private Fatura fatura;
-	private String numRecurso;
 	private String idUnico;
 	private int cnl;
-	private int modServ;
+	private String numRecurso;
 	private Date dataAtiv;
 	private Date dataDesativ;
-	private int quantRegServ;
+	private int quantRegCham;
 	private float valorTotalRegChamadaImp;
-	private float valorTotalImp;
-	private float valorTotalContaRecursoImp;
+	private int quantRegServ;
+	private float valorTotalRegServImp;
 	private String degrau;
-	private String velocidade;
+	private int modServ;
 	private String uniVelocidade;
+	private float valorTotalContaRecursoImp;
+	private float valorTotalImp;
+	private String velocidade;
 	private Date dataVenc;
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Ajustes> ajusteses = new HashSet(0);
@@ -56,44 +58,50 @@ public class Resumo implements java.io.Serializable {
 	public Resumo() {
 	}
 
-	public Resumo(Fatura fatura, String numRecurso, String idUnico, int cnl, int modServ, int quantRegServ,
-			float valorTotalRegChamadaImp, float valorTotalImp, float valorTotalContaRecursoImp, Date dataVenc) {
+	public Resumo(Fatura fatura, String idUnico, int cnl, String numRecurso, int quantRegCham,
+			float valorTotalRegChamadaImp, int quantRegServ, float valorTotalRegServImp, int modServ,
+			float valorTotalContaRecursoImp, float valorTotalImp, Date dataVenc) {
 		this.fatura = fatura;
-		this.numRecurso = numRecurso;
 		this.idUnico = idUnico;
 		this.cnl = cnl;
-		this.modServ = modServ;
-		this.quantRegServ = quantRegServ;
+		this.numRecurso = numRecurso;
+		this.quantRegCham = quantRegCham;
 		this.valorTotalRegChamadaImp = valorTotalRegChamadaImp;
-		this.valorTotalImp = valorTotalImp;
+		this.quantRegServ = quantRegServ;
+		this.valorTotalRegServImp = valorTotalRegServImp;
+		this.modServ = modServ;
 		this.valorTotalContaRecursoImp = valorTotalContaRecursoImp;
+		this.valorTotalImp = valorTotalImp;
 		this.dataVenc = dataVenc;
 	}
 
-	public Resumo(Fatura fatura, String numRecurso, String idUnico, int cnl, int modServ, Date dataAtiv,
-			Date dataDesativ, int quantRegServ, float valorTotalRegChamadaImp, float valorTotalImp,
-			float valorTotalContaRecursoImp, String degrau, String velocidade, String uniVelocidade, Date dataVenc,
-			Set<Ajustes> ajusteses, Set<Descontos> descontoses, Set<Planos> planoses, Set<Chamadas> chamadases, Set<Servicos> servicoses) {
+	public Resumo(Fatura fatura, String idUnico, int cnl, String numRecurso, Date dataAtiv, Date dataDesativ,
+			int quantRegCham, float valorTotalRegChamadaImp, int quantRegServ, float valorTotalRegServImp,
+			String degrau, int modServ, String uniVelocidade, float valorTotalContaRecursoImp, float valorTotalImp,
+			String velocidade, Date dataVenc, Set<Servicos> servicoses, Set<Chamadas> chamadases, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
+			Set<Planos> planoses) {
 		this.fatura = fatura;
-		this.numRecurso = numRecurso;
 		this.idUnico = idUnico;
 		this.cnl = cnl;
-		this.modServ = modServ;
+		this.numRecurso = numRecurso;
 		this.dataAtiv = dataAtiv;
 		this.dataDesativ = dataDesativ;
-		this.quantRegServ = quantRegServ;
+		this.quantRegCham = quantRegCham;
 		this.valorTotalRegChamadaImp = valorTotalRegChamadaImp;
-		this.valorTotalImp = valorTotalImp;
-		this.valorTotalContaRecursoImp = valorTotalContaRecursoImp;
+		this.quantRegServ = quantRegServ;
+		this.valorTotalRegServImp = valorTotalRegServImp;
 		this.degrau = degrau;
-		this.velocidade = velocidade;
+		this.modServ = modServ;
 		this.uniVelocidade = uniVelocidade;
+		this.valorTotalContaRecursoImp = valorTotalContaRecursoImp;
+		this.valorTotalImp = valorTotalImp;
+		this.velocidade = velocidade;
 		this.dataVenc = dataVenc;
+		this.servicoses = servicoses;
+		this.chamadases = chamadases;
 		this.ajusteses = ajusteses;
 		this.descontoses = descontoses;
 		this.planoses = planoses;
-		this.chamadases = chamadases;
-		this.servicoses = servicoses;
 	}
 
 	@Id
@@ -118,16 +126,7 @@ public class Resumo implements java.io.Serializable {
 		this.fatura = fatura;
 	}
 
-	@Column(name = "numRecurso", nullable = false, length = 20)
-	public String getNumRecurso() {
-		return this.numRecurso;
-	}
-
-	public void setNumRecurso(String numRecurso) {
-		this.numRecurso = numRecurso;
-	}
-
-	@Column(name = "idUnico", nullable = false, length = 25)
+	@Column(name = "id_unico", nullable = false, length = 25)
 	public String getIdUnico() {
 		return this.idUnico;
 	}
@@ -145,17 +144,17 @@ public class Resumo implements java.io.Serializable {
 		this.cnl = cnl;
 	}
 
-	@Column(name = "modServ", nullable = false)
-	public int getModServ() {
-		return this.modServ;
+	@Column(name = "num_recurso", nullable = false, length = 20)
+	public String getNumRecurso() {
+		return this.numRecurso;
 	}
 
-	public void setModServ(int modServ) {
-		this.modServ = modServ;
+	public void setNumRecurso(String numRecurso) {
+		this.numRecurso = numRecurso;
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataAtiv", length = 10)
+	@Column(name = "data_ativ", length = 10)
 	public Date getDataAtiv() {
 		return this.dataAtiv;
 	}
@@ -165,7 +164,7 @@ public class Resumo implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataDesativ", length = 10)
+	@Column(name = "data_desativ", length = 10)
 	public Date getDataDesativ() {
 		return this.dataDesativ;
 	}
@@ -174,16 +173,16 @@ public class Resumo implements java.io.Serializable {
 		this.dataDesativ = dataDesativ;
 	}
 
-	@Column(name = "quantRegServ", nullable = false)
-	public int getQuantRegServ() {
-		return this.quantRegServ;
+	@Column(name = "quant_reg_cham", nullable = false)
+	public int getQuantRegCham() {
+		return this.quantRegCham;
 	}
 
-	public void setQuantRegServ(int quantRegServ) {
-		this.quantRegServ = quantRegServ;
+	public void setQuantRegCham(int quantRegCham) {
+		this.quantRegCham = quantRegCham;
 	}
 
-	@Column(name = "valorTotalRegChamadaImp", nullable = false, precision = 12, scale = 0)
+	@Column(name = "valor_total_reg_chamada_imp", nullable = false, precision = 12, scale = 0)
 	public float getValorTotalRegChamadaImp() {
 		return this.valorTotalRegChamadaImp;
 	}
@@ -192,22 +191,22 @@ public class Resumo implements java.io.Serializable {
 		this.valorTotalRegChamadaImp = valorTotalRegChamadaImp;
 	}
 
-	@Column(name = "valorTotalImp", nullable = false, precision = 12, scale = 0)
-	public float getValorTotalImp() {
-		return this.valorTotalImp;
+	@Column(name = "quant_reg_serv", nullable = false)
+	public int getQuantRegServ() {
+		return this.quantRegServ;
 	}
 
-	public void setValorTotalImp(float valorTotalImp) {
-		this.valorTotalImp = valorTotalImp;
+	public void setQuantRegServ(int quantRegServ) {
+		this.quantRegServ = quantRegServ;
 	}
 
-	@Column(name = "valorTotalContaRecursoImp", nullable = false, precision = 12, scale = 0)
-	public float getValorTotalContaRecursoImp() {
-		return this.valorTotalContaRecursoImp;
+	@Column(name = "valor_total_reg_serv_imp", nullable = false, precision = 12, scale = 0)
+	public float getValorTotalRegServImp() {
+		return this.valorTotalRegServImp;
 	}
 
-	public void setValorTotalContaRecursoImp(float valorTotalContaRecursoImp) {
-		this.valorTotalContaRecursoImp = valorTotalContaRecursoImp;
+	public void setValorTotalRegServImp(float valorTotalRegServImp) {
+		this.valorTotalRegServImp = valorTotalRegServImp;
 	}
 
 	@Column(name = "degrau", length = 2)
@@ -219,6 +218,42 @@ public class Resumo implements java.io.Serializable {
 		this.degrau = degrau;
 	}
 
+	@Column(name = "mod_serv", nullable = false)
+	public int getModServ() {
+		return this.modServ;
+	}
+
+	public void setModServ(int modServ) {
+		this.modServ = modServ;
+	}
+
+	@Column(name = "uni_velocidade", length = 4)
+	public String getUniVelocidade() {
+		return this.uniVelocidade;
+	}
+
+	public void setUniVelocidade(String uniVelocidade) {
+		this.uniVelocidade = uniVelocidade;
+	}
+
+	@Column(name = "valor_total_conta_recurso_imp", nullable = false, precision = 12, scale = 0)
+	public float getValorTotalContaRecursoImp() {
+		return this.valorTotalContaRecursoImp;
+	}
+
+	public void setValorTotalContaRecursoImp(float valorTotalContaRecursoImp) {
+		this.valorTotalContaRecursoImp = valorTotalContaRecursoImp;
+	}
+
+	@Column(name = "valor_total_imp", nullable = false, precision = 12, scale = 0)
+	public float getValorTotalImp() {
+		return this.valorTotalImp;
+	}
+
+	public void setValorTotalImp(float valorTotalImp) {
+		this.valorTotalImp = valorTotalImp;
+	}
+
 	@Column(name = "velocidade", length = 5)
 	public String getVelocidade() {
 		return this.velocidade;
@@ -228,23 +263,32 @@ public class Resumo implements java.io.Serializable {
 		this.velocidade = velocidade;
 	}
 
-	@Column(name = "uniVelocidade", length = 4)
-	public String getUniVelocidade() {
-		return this.uniVelocidade;
-	}
-
-	public void setUniVelocidade(String uniVelocidade) {
-		this.uniVelocidade = uniVelocidade;
-	}
-
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataVenc", nullable = false, length = 10)
+	@Column(name = "data_venc", nullable = false, length = 10)
 	public Date getDataVenc() {
 		return this.dataVenc;
 	}
 
 	public void setDataVenc(Date dataVenc) {
 		this.dataVenc = dataVenc;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
+	public Set<Servicos> getServicoses() {
+		return this.servicoses;
+	}
+
+	public void setServicoses(Set<Servicos> servicoses) {
+		this.servicoses = servicoses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
+	public Set<Chamadas> getChamadases() {
+		return this.chamadases;
+	}
+
+	public void setChamadases(Set<Chamadas> chamadases) {
+		this.chamadases = chamadases;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
@@ -272,24 +316,6 @@ public class Resumo implements java.io.Serializable {
 
 	public void setPlanoses(Set<Planos> planoses) {
 		this.planoses = planoses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Chamadas> getChamadases() {
-		return this.chamadases;
-	}
-
-	public void setChamadases(Set<Chamadas> chamadases) {
-		this.chamadases = chamadases;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Servicos> getServicoses() {
-		return this.servicoses;
-	}
-
-	public void setServicoses(Set<Servicos> servicoses) {
-		this.servicoses = servicoses;
 	}
 
 }

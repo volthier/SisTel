@@ -12,8 +12,8 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/bootstrap-datepicker.standalone.min.css}" />
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+	
 </head>
 
 <body>
@@ -22,7 +22,8 @@
 	</header>
 
 
-	<menu layout:include="menu">
+	<menu layout:include="Menu">
+	
 	</menu>
 
 	<section class="main col-sm-11 post" id="conteudo" layout:fragment="conteudo">
@@ -34,12 +35,9 @@
 </body>
 <script th:src="@{/js/jquery-2.2.3.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
-<script th:src="@{/js/bootstrap-datepicker.pt-BR.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.pt-BR.js}"></script>
 <script th:src="@{/js/jquery.maskMoney.min.js}"></script>
 <script th:src="@{/js/exclusao.js}"></script>
 <script th:src="@{/js/guideTips.js}"></script>
-<script defer="defer" src="//barra.brasil.gov.br/barra.js"
-	type="text/javascript"></script>
-
 </html>

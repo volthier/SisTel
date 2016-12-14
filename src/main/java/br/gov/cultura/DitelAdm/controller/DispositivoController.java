@@ -39,7 +39,7 @@ public class DispositivoController {
 	@RequestMapping("/novo")
 	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtrar(filtro);
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("dispositivos", todosDispositivos);
 		mv.addObject("limiteAtesto", limiteAtesto);
@@ -65,7 +65,7 @@ public class DispositivoController {
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long id, RedirectAttributes attributes){
+	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroDispositivoService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
 		return "redirect:/inicio";

@@ -4,65 +4,84 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
+<section id="Menu" layout:fragment="Menu">
 
+	<div>
+		<ul class="dropdown">
+			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
 
-<section id="menu" layout:fragment="menu">
-	<!-- <aside class="btn-group-vertical" role="group">
-		
-		
-		<button type="button" class="glyphicon glyphicon-signal btn btn-default" style="text-align:left;">&nbsp;Relatórios
-		</button>
-		<button type="button" class="glyphicon glyphicon-user btn btn-default" style="text-align:left;">&nbsp;Usuário
-		</button>
-		<button type="button" class="glyphicon glyphicon-warning-sign btn btn-default" style="text-align:left;">&nbsp;Alertas
-		</button>
-		<button type="button" class="glyphicon glyphicon-info-sign btn btn-default" style="text-align:left;" >&nbsp;Manuais
-		</button>
-	</aside>
- -->
+			<li class="dropdown-toggle" data-toggle="dropdown"><a
+				class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Alocação&nbsp;</b><span
+					class="caret"></span></a></li>
 
-<menu>
-
-    <ul class="dropdown">
-        <li><a class="glyphicon glyphicon-search" th:href="@{/consulta}">&nbsp;Consultar
-		</a></li>
-		
-		<li class="dropdown-toggle glyphicon glyphicon-list-alt" data-toggle="dropdown">&nbsp;Alocação
-    		<span class="caret"></span></li>
-		<ul class="dropdown-menu">
-		    <li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Devolução</a></li>
+			<ul class="dropdown-menu" id="dropdown-menupage">
+				<li><a class="btn btn-link dt-link-menu"
+					th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
+				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/devolver}">Devolução</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
-		</ul>
-		
-        <li><a class="glyphicon glyphicon-list" href="#">&nbsp;Pedências</a></li>
-        </ul>
-       
-        <ul>
-        <li class="dropdown-toggle glyphicon glyphicon-book" data-toggle="dropdown" name="registrar">&nbsp;Registrar
-    		<span class="caret"></span></li>
-			<ul id="registrar" class="dropdown-menu">
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/dispositivos/novo}">Dispositivos</a></li>
- 				<li><a class="btn btn-link dt-link-menu" th:href="@{/usuarios/novo}">Pessoas</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/chips/novo}">Chip's</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/linhas/nova}">Linhas</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/faturas/nova}">Faturas</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li> 
 			</ul>
-		
-		
-</ul>
-				
-			
-			
-			
-			
+		</ul>
+
+	</div>
+
+	<div>
+
+		<ul>
+			<li><a class="glyphicon glyphicon-list" href="#"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
 
 
+			<ul class="dropdown">
 
-</menu>
+				<li class="dropdown-toggle" data-toggle="dropdown"><a
+					class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Registrar&nbsp;</b><span
+						class="caret"></span></a></li>
 
+				<ul class="dropdown-menu" id="dropdown-menupage">
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/dispositivos/novo}">Dispositivos</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/usuarios/novo}">Pessoas</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/chips/novo}">Chip's</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/linhas/nova}">Linhas</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/faturas/nova}">Faturas</a></li>
+					<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li>
+				</ul>
+			</ul>
+		</ul>
+	</div>
+
+	<div>
+		<ul>
+			<li><a class="glyphicon glyphicon-signal" href="#"><b style="font-family: Arial">&nbsp;Relatórios&nbsp;</b></a></li>
+
+			<ul class="dropdown">
+
+				<li class="dropdown-toggle" data-toggle="dropdown"><a
+					class="glyphicon glyphicon-user"><b style="font-family: Arial">&nbsp;Usuários&nbsp;</b><span
+						class="caret"></span></a></li>
+
+				<ul class="dropdown-menu" id="dropdown-menupage">
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
+				</ul>
+			</ul>
+		</ul>
+	</div>
+
+	<div>
+		<ul>
+			<li><a class="glyphicon glyphicon-warning-sign" href="#"><b style="font-family: Arial">&nbsp;Alertas</b></a></li>
+			<li><a class="glyphicon glyphicon-info-sign" href="#"><b style="font-family: Arial">&nbsp;Manuais</b></a></li>
+
+		</ul>
+	</div>
 
 </section>
 </html>
+
