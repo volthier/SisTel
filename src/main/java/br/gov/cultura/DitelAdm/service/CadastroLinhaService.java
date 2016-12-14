@@ -26,4 +26,12 @@ public class CadastroLinhaService {
 	public List<Linha> getIdLinha() {
 		return linhas.findAll();
 	}
+	
+	public Linha getLinhaRegistrada(String numero) {
+		return linhas.findByNumeroLinhaEquals(numero);
+	}
+	
+	public List<Linha> listarLinhaDisponivel(){
+		return linhas.findByNumeroLinha();
+	}
 }

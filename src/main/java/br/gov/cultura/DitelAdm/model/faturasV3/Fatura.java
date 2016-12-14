@@ -43,6 +43,7 @@ public class Fatura implements java.io.Serializable {
 	private Date dataGeraArquivo;
 	private String versaoFormato;
 	private String campoLivreOp;
+	private boolean gerada;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Trailler> traillers = new HashSet(0);
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -253,6 +254,15 @@ public class Fatura implements java.io.Serializable {
 
 	public void setCampoLivreOp(String campoLivreOp) {
 		this.campoLivreOp = campoLivreOp;
+	}
+	
+	@Column(name = "gerada", nullable = false, columnDefinition="boolean default false")
+	public boolean getGerada() {
+		return this.gerada;
+	}
+
+	public void setGerada(boolean gerada) {
+		this.gerada = gerada;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fatura")

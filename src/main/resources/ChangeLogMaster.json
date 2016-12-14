@@ -1,0 +1,14 @@
+{
+    "databaseChangeLog": [
+        {
+            "preConditions": [
+                {
+                    "runningAs": {
+                        "username": "root",
+                        "password": "root"
+                    }
+                }
+            ]
+        }
+     ]
+}

@@ -57,17 +57,21 @@ public class AlocacaoController {
 	private CadastroCategoriaService cadastroCategoriaService;
 
 	@RequestMapping("/disponibilizar")
-	public @ResponseBody ModelAndView alocar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	public ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		mv.addObject("dispositivos", todosDispositivos);
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
-		List<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas = alocacaoService.getIdAlocacaoUsuarioLinha();
 		mv.addObject("usuarios", todosUsuarios);
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
+		mv.addObject("dispositivos", todosDispositivos);
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
-		List<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos = alocacaoService.getIdAlocacaoLinhaDispositivo();
+		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
+		todasLinhas.removeAll(todasLinhasNaoDisponiveis);
 		mv.addObject("linhas", todasLinhas);
 		List<Chip> todosChips = cadastroChipService.getIdChip();
+		List<Chip> todosChipsNaoDisponiveis = cadastroChipService.listarChipDisponivel();
+		todosChips.removeAll(todosChipsNaoDisponiveis);
 		mv.addObject("chips", todosChips);
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias", todasCategorias);
@@ -95,33 +99,57 @@ public class AlocacaoController {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacaoUsuarioLinha"));
 			alocacaoUsuarioLinha = alocacaoService.getAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
 			Date dtDevolucao = new SimpleDateFormat().parse(servletRequest.getParameter("dtDevolucao"));
-			
-			Date dtRecebimentoBaixa = alocacaoUsuarioLinha.getDtRecebimento();
-			String numeroLinhaBaixa = alocacaoUsuarioLinha.getLinha().getNumeroLinha();
-			alocacaoLinhaDispositivo.setDtDevolucao(null);
-		 Integer idAlocacoesBaixa = 0;
-		/*	do{	++idAlocacoesBaixa;
-				alocacaoLinhaDispositivo.getIdAlocacaoLinhaDispositivo(idAlocacoesBaixa); 
+			Date dtRecebimentoReplicador = alocacaoUsuarioLinha.getDtRecebimento();
+			Linha idReciver = alocacaoUsuarioLinha.getLinha();
+			List<AlocacaoLinhaDispositivo> linhaDispo = alocacaoService.getIdAlocacaoLinhaDispositivo();
+			AlocacaoLinhaDispositivo dispo = linhaDispo.stream().filter(ld -> ld != null
+					&& ld.getLinha().equals(idReciver) && ld.getDtRecebimento().equals(dtRecebimentoReplicador))
+					.findFirst().orElse(null);
+			if (dispo == null) {
+				System.out.println("Error acquiring Info Linha-Dispositivo!");
+				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");
+				return "redirect:/alocacoes/devolver";
+			} else if (dispo != null) {
+				dispo.setDtDevolucao(dtDevolucao);
+				alocacaoService.salvar(dispo);
 			}
-				while(alocacaoLinhaDispositivo.getLinha().getNumeroLinha()== numeroLinhaBaixa &
-						alocacaoLinhaDispositivo.getDtRecebimento()== dtRecebimentoBaixa); 
-				
-			
-			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);*/
+			List<AlocacaoLinhaChip> linhaChip = alocacaoService.getIdAlocacaoLinhaChip();
+			AlocacaoLinhaChip chip = linhaChip.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
+					&& ld.getDtRecebimento().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
+			if (chip == null) {
+				System.out.println("Error acquiring Info Linha-Dispositivo!");
+				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");
+				return "redirect:/alocacoes/devolver";
+			} else if (chip != null) {
+				chip.setDtDevolucao(dtDevolucao);
+				alocacaoService.salvar(chip);
+			}
+			List<AlocacaoLinhaCategoria> linhaCat = alocacaoService.getIdAlocacaoLinhaCategoria();
+			AlocacaoLinhaCategoria cat = linhaCat.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
+					&& ld.getDtRecebimento().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
+			if (cat == null) {
+				System.out.println("Error acquiring Info Linha-Dispositivo!");
+				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");
+				return "redirect:/alocacoes/devolver";
+			} else if (cat != null) {
+				cat.setDtDevolucao(dtDevolucao);
+				alocacaoService.salvar(cat);
+			}
 			alocacaoUsuarioLinha.setDtDevolucao(dtDevolucao);
+			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);
 			alocacaoService.salvar(alocacaoUsuarioLinha);
 			attributes.addFlashAttribute("mensagem", "Registrada devolução de dispositivo do usuario!");
 			return "redirect:/alocacoes/devolver";
 		} else if (servletRequest.getParameter("dtRecebimento") != null) {
+			alocacaoService.salvar(alocacaoUsuarioLinha);
 			alocacaoService.salvar(alocacaoLinhaChip);
 			alocacaoService.salvar(alocacaoLinhaDispositivo);
-			alocacaoService.salvar(alocacaoUsuarioLinha);
 			alocacaoService.salvar(alocacaoLinhaCategoria);
 			attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
 			return "redirect:/alocacoes/disponibilizar";
 		}
 
-		return "CADASTRO_VIEW1";
+		return "redirect:/alocacoes/disponibilizar";
 
 	}
 

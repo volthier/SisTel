@@ -21,8 +21,11 @@ public class CadastroUsuarioService {
 	public void excluir(Integer id) {
 		usuarios.delete(id);
 	}
-
 	public List<Usuario> getIdUsuario() {
 		return usuarios.findAll();
+	}
+	
+	public List<Usuario> getId() {
+		return usuarios.findOne();
 	}
 }

@@ -27,4 +27,7 @@ public class CadastroChipService {
 	public List<Chip> getIdChip() {
 		return chips.findAll();
 	}
+	public List<Chip> listarChipDisponivel(){
+		return chips.findByNumeroSerieChip();
+	}
 }

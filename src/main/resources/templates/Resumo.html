@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Resumo</title>
+</head>
+	<section layout:fragment="conteudo">
+	<div class="container-fluid">
+		<b>Detalhamento de ligações e serviços do celular</b><span th:text="${resumo.numRecurso}"></span>
+			<div style="border: 1px solid black">
+				<b>Mensalidade e Pacotes Promocionais</b>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td style="width: 90%">Descrição</td>
+						<td>Total (R$)</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="plano : ${planos}">
+						<td th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
+						<td th:text="${plano.valComImp}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<b>Ligações Locais</b>
+			<div>
+				<table>
+					<thead style="padding: 10px;">
+						<tr>
+							<td style="width: 10%"><b>Data</b></td>
+							<td style="width: 8%"><b>Hora</b></td>
+							<td style="width: 35%"><b>Origem(UF)-Destino</b></td>
+							<td style="width: 10%"><b>Número</b></td>
+							<td style="width: 6%"><b>Duração</b></td>
+							<td style="width: 5%"><b>Tarifa (R$)</b></td>
+							<td style="width: 5%"><b>Valor Total (R$)</b></td>
+							<td style="width: 6%"><b>Valor Cobrado (R$)</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="chamada : ${chamadas}" style="border-bottom: 1px dashed black;">
+							<td th:text="${chamada.dataFormatada()}"></td>
+							<td th:text="${chamada.horaLigacao}"></td>
+							<td th:text="${chamada.nomeLocalDestino}"></td>
+							<td th:text="${chamada.numTelefoneChamado}"></td>
+							<td th:text="${chamada.duracaoLigacao}"></td>
+							<td th:text="${chamada.tarifa()}"></td>
+							<td th:text="${chamada.valLigImp}"></td>
+							<td th:text="${chamada.valLigImp}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<b>Serviços (Torpedos, Hits, Jogos, etc.)</b>
+			<div>
+				<table>
+					<thead style="padding: 10px;">
+						<tr>
+							<td style="width: 10%"><b>Descrição</b></td>
+							<td style="width: 8%"><b>Quantidade</b></td>
+							<td style="width: 5%"><b>Tarifa (R$)</b></td>
+							<td style="width: 5%"><b>Valor Total (R$)</b></td>
+							<td style="width: 6%"><b>Valor Cobrado (R$)</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="servico : ${servicos}" style="border-bottom: 1px dashed black;">
+							<td th:text="${servico.categoria.descricao}"></td>
+							<td th:text="${servico.quantidade}"></td>
+							<td th:text="${servico.tarifa}"></td>
+							<td th:text="${servico.valorTotal}"></td>
+							<td th:text="${servico.valorCobrado}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</div>
+	</section>
+</html>

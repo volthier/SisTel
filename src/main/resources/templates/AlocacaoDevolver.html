@@ -29,7 +29,7 @@
 							<option value="">----Select----</option>
 							<option th:each="devolucao : ${usuariosDispositivos}" th:if="${devolucao.dtDevolucao == null}"
 								th:value="${devolucao.idAlocacaoUsuarioLinha}"
-								th:utext="${devolucao.usuario.nomeUsuario+' '+devolucao.linha.numeroLinha}"></option>
+								th:utext="${devolucao.usuario.nomeUsuario+' | '+devolucao.linha.numeroLinha}"></option>
 						</select>
 					</div>
 				</div>

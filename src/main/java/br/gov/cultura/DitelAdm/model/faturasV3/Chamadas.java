@@ -3,6 +3,10 @@ package br.gov.cultura.DitelAdm.model.faturasV3;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -350,5 +354,21 @@ public class Chamadas implements java.io.Serializable {
 	public void setCampoLivreOp(String campoLivreOp) {
 		this.campoLivreOp = campoLivreOp;
 	}
+	
+	public String dataFormatada()
+	{
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+		return format.format(this.getDataLigacao());
+	}
+	
+	public String tarifa() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(this.getDuracaoLigacao());
+		Float retorno = ((this.getValLigImp() * 60) / ((calendar.get(Calendar.MINUTE) * 60) + calendar.get(Calendar.SECOND)));
+		
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		decimalFormat.setRoundingMode(RoundingMode.UP);
 
+		return decimalFormat.format(retorno);
+	}
 }

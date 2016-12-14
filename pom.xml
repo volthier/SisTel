@@ -24,6 +24,20 @@
 	</properties>
 
 	<dependencies>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -36,16 +50,16 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
 
 		<dependency>
@@ -54,6 +68,35 @@
 			<scope>provided</scope>
 		</dependency>
 
+
+		<!-- Biblioteca de MicroServiços -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
+		</dependency>
+		<!-- Fim MicroServiços -->
+
+		<!-- Biblioteca Security -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-ldap</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.directory.server</groupId>
+			<artifactId>apacheds-server-jndi</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		<!-- Fim Security -->
+
+		<!-- Biblioteca de test -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -61,10 +104,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
 		</dependency>
+		<!-- Fim test -->
 
+		<!-- Bibliotecas de suporte a PDF XPDF e Similares -->
 		<dependency>
 			<groupId>org.springframework.ws</groupId>
 			<artifactId>spring-ws-core</artifactId>
@@ -93,41 +139,37 @@
 			<artifactId>xmlworker</artifactId>
 			<version>5.5.8</version>
 		</dependency>
+		<!-- Fim PDF -->
+
+		<!-- Biblioteca de Conectores/BD -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<scope>compile</scope>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-ejb_3.0_spec</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jersey</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>org.apache.axis</groupId>
-			<artifactId>axis</artifactId>
-			<version>1.4</version>
-		</dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			</dependency>
+
 		<dependency>
-			<groupId>javax.xml</groupId>
-			<artifactId>jaxrpc-api</artifactId>
-			<version>1.1</version>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>${liquibase.version}</version>
 		</dependency>
+		<!-- Fim Conectores -->
+
 	</dependencies>
 
 	<repositories>
@@ -139,36 +181,48 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
 	</repositories>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.12.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
-					<schemaLanguage>WSDL</schemaLanguage>
-					<generatePackage>br.gov.cultura.DitelAdm.sei.wsdl</generatePackage>
-					<schemas>
-						<schema>
-							<url>http://seitreinamento.cultura.gov.br/sei/controlador_ws.php?servico=sei</url>
-						</schema>
-					</schemas>
+					<fork>true</fork>
 				</configuration>
 			</plugin>
+
+			<!-- liquibase -->
+	        <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>${liquibase.version}</version>
+        <configuration>                 
+            <propertyFile>src/main/resources/application.properties</propertyFile>
+        </configuration>
+        <dependencies>
+            <dependency>
+                <groupId>org.liquibase.ext</groupId>
+                <artifactId>liquibase-hibernate4</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+        </dependencies>              
+    </plugin> 
+
 		</plugins>
 	</build>
 

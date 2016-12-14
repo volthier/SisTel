@@ -9,24 +9,41 @@
 
 <section layout:fragment="conteudo">
 
-	<div th:if="${message}">
-		<h2 th:text="${message}"></h2>
-	</div>
+	<form class="form-horizontal" method="POST"
+		enctype="multipart/form-data" th:action="@{/faturas/nova}">
 
-	<div>
-		<form method="POST" enctype="multipart/form-data" action="/faturas/nova">
-			<table>
-				<tr><td>Fatura:</td><td  class="btn btn-alert btn-file"><input type="file" name="file"/></td></tr>
-				<tr><td></td><td><input class="btn btn-primary" type="submit" value="Upload" /></td></tr>
-			</table>
-		</form>
-	</div>
+		<div id="fatura" class="alert alert-success" th:if="${messageSucesso}">
+			<span th:text="${messageSucesso}"></span>
+		</div>
+		<div id="fatura" class="alert alert-danger" th:if="${messageErro}">
+			<span th:text="${messageErro}"></span>
+		</div>
 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
+						Faturas</h1>
+				</div>
+			</div>
+			<div class="painel-body">
+				<div class="form-group">
+
+					<label for="fatura" class="col-sm-2 control-label">Fatura:</label>
+					<input class="btn btn-alert btn-file" type="file" name="file" />
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button class="btn btn-primary" type="submit" value="Upload">Upload</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 	<div>
 		<ul>
-			<li th:each="file : ${files}">
-				<a th:href="${file.href}" th:text="${file.rel}"></a>
-			</li>
+			<li th:each="file : ${files}"><a th:href="${file.href}"
+				th:text="${file.rel}"></a></li>
 		</ul>
 	</div>
 

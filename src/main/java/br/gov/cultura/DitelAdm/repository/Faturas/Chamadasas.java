@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
+import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
 
 
 
 public interface Chamadasas extends JpaRepository<Chamadas, Long>{
 
 	public List<Chamadas> findByIdChamadas(Integer idChamadas);
+	
+	public List<Chamadas> findByResumo( Resumo resumo);
 }

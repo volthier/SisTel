@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Gerar Fatura</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2">
+				<h3 th:text="${fatura.numFatura} +  ' - ' + ${fatura.descriCobranca}">
+				</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<td>Usuario</td>
+								<td>Linha</td>
+								<td>Ressarcimento</td>
+								<td>Nº Processo SEI</td>
+								<td>Ações</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="alocacao : ${alocacoesSei}">
+								<td th:text="${alocacao.alocacaoUsuarioLinha.usuario.nomeUsuario}"></td>
+								<td th:text="${alocacao.alocacaoUsuarioLinha.linha.numeroLinha}"></td>
+								<td th:text="${alocacao.ressarcimento}"></td>
+								<td th:text="${alocacao.numeroProcessoSei}"></td>
+								<td><a class="btn btn-primary" th:href="@{'/fatura/resumo/' + ${fatura.idFatura} + '/' + ${alocacao.alocacaoUsuarioLinha.idAlocacaoUsuarioLinha}}" role="button">Resumo</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</html>

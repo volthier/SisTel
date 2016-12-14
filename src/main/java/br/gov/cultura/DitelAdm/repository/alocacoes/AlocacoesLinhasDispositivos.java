@@ -6,6 +6,6 @@ import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
 
 public interface AlocacoesLinhasDispositivos extends JpaRepository<AlocacaoLinhaDispositivo, Integer> {
 	
-	public AlocacaoLinhaDispositivo findByIdAlocacaoLinhaDispositivo(Integer idAlocacaoLinhaChip);
-
+	public AlocacaoLinhaDispositivo findByIdAlocacaoLinhaDispositivo(Integer idAlocacaoLinhaDispositivo);
+	
 }
