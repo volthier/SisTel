@@ -31,6 +31,7 @@ import br.gov.cultura.DitelAdm.service.PlanoService;
 import br.gov.cultura.DitelAdm.service.ResumoService;
 import br.gov.cultura.DitelAdm.service.ServicoService;
 import br.gov.cultura.DitelAdm.service.UsuarioService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
 
 @Controller
 @RequestMapping("/fatura")
@@ -61,6 +62,9 @@ public class FaturaController {
 	
 	@Autowired
 	private AlocacaoSeiService alocacaoSeiService;
+	
+	@Autowired
+	private SeiClient sei;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody ModelAndView executarFatura() {
