@@ -10,22 +10,8 @@ import br.gov.cultura.DitelAdm.ws.SeiClient;
 public class SeiConfiguration {
 	
 	@Bean
-	public Jaxb2Marshaller marshaller() {
-		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		
-		marshaller.setContextPath("br.gov.cultura.DitelAdm.sei.wsdl");
-		
-		return marshaller;
-	}
-	
-	@Bean
-	public SeiClient seiClient(Jaxb2Marshaller marshaller) {
-		SeiClient client = new SeiClient();
-		
-		client.setDefaultUri("");
-		client.setMarshaller(marshaller);
-		client.setUnmarshaller(marshaller);
-		
+	public SeiClient seiClient() {
+		SeiClient client = new SeiClient();		
 		return client;
 	}
 

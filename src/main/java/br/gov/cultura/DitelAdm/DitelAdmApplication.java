@@ -14,6 +14,8 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 
 import br.gov.cultura.DitelAdm.controller.FaturaUploadController;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @SpringBootApplication
 public class DitelAdmApplication {
@@ -23,8 +25,11 @@ public class DitelAdmApplication {
 	}
 	
 	@Bean
-	CommandLineRunner init() {
+	CommandLineRunner init(SeiClient client) {
 		return (args) -> {
+			for(Unidade a : client.getSeiWs().listarUnidades("INTRANET", "SISTEL", null, null)){
+				System.out.println(a.getIdUnidade() + " -- " + a.getSigla() + " -- " + a.getDescricao());
+			}
             FileSystemUtils.deleteRecursively(new File(FaturaUploadController.ROOT));
             Files.createDirectory(Paths.get(FaturaUploadController.ROOT));
 		};

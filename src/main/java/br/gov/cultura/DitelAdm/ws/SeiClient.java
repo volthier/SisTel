@@ -46,7 +46,10 @@ public class SeiClient {
 	public RetornoGeracaoProcedimento enviarFaturaSei(Procedimento proc, Documento doc) {
 		RetornoGeracaoProcedimento response;
 		try {
-			response = seiWs.gerarProcedimento(siglaSistema, idServico, null, proc, new Documento[] { doc }, null, null,
+			//Tipo de processo = 100000513 -- Projetos de TI
+			//Unidade = 110000073 -- DITEL -- Divisão de Telefonia e Serviços
+			proc.setIdTipoProcedimento("100000513");
+			response = seiWs.gerarProcedimento(siglaSistema, idServico, "110000073", proc, new Documento[] { doc }, null, null,
 					null, null, null, null, null);
 		} catch (RemoteException e) {
 			e.printStackTrace();
