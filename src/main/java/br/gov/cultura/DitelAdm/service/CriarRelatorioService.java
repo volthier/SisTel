@@ -39,13 +39,13 @@ public class CriarRelatorioService {
 		documentoPDF.add(new Paragraph("Teste segunda pagina"));
 		
 		// imagem do relatorio
-		Image imagem = Image.getInstance("C:\\Users\\72381817115\\Desktop\\OLHA ISSO AQUI.png");
+		//Image imagem = Image.getInstance("C:\\Users\\72381817115\\Desktop\\OLHAISSOAQUI.png");
 		
 		//setando o tamanho da imagem (tamanho abaixo esta em pixel)
-		imagem.scaleToFit(400,200);
+		//imagem.scaleToFit(400,200);
 		
 		//adicionando a imagam ao pdf
-		documentoPDF.add(imagem);
+		//documentoPDF.add(imagem);
 		
 	}catch(DocumentException de){
 		de.printStackTrace();

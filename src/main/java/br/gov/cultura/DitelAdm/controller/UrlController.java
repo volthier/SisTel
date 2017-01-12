@@ -6,13 +6,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/inicio")
+@RequestMapping
 public class UrlController {
 
-	@RequestMapping
+	@RequestMapping("/login")
+	public ModelAndView login(){
+		ModelAndView mv = new ModelAndView("Login");	
+		return mv;
+	}
+	
+	@RequestMapping("/inicio")
 	public ModelAndView inicio(){
 		ModelAndView mv = new ModelAndView("TelaInicio");	
 		return mv;
-	}	
+	}
+	
+	
 	
 }
