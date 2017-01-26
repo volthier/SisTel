@@ -64,13 +64,6 @@ public class Usuario implements java.io.Serializable {
 		this.limiteAtesto = limiteAtesto;
 		this.alocacaoUsuarioLinhas = alocacaoUsuarioLinhas;
 	}
-
-/*	@Override
-	public String toString() {
-	   return   "Usuario: [Id: "+idUsuario +", Nome: " + nomeUsuario + ","
-	   		+ " Cargo: " + cargoUsuario + ", CPF: "+ cpfUsuario +", Lotação: "+ lotacaoUsuario +
-	   		",Limite Atesto: "+ limiteAtesto.getDasAtesto()+" ]";
-	}*/
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

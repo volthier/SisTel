@@ -25,7 +25,7 @@
 
 	<dependencies>
 
-
+<!-- Spring Basico -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -58,7 +58,7 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+<!-- Fim Spring Basico -->
 
 		<!-- Biblioteca de MicroServiços -->
 		<dependency>
@@ -128,10 +128,6 @@
 		<!-- Fim PDF -->
 
 		<!-- Biblioteca de Conectores/BD -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -147,20 +143,20 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			</dependency>
-
+		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-maven-plugin</artifactId>
 			<version>${liquibase.version}</version>
 		</dependency>
-		<!-- Fim Conectores -->
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version><!-- $NO-MVN-MAN-VER$ -->
 		</dependency>
+		<!-- Fim Conectores -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -177,15 +173,15 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		
-	<repository>
-        <id>spring-snapshots</id>
-        <name>Spring Snapshots</name>
-        <url>https://repo.spring.io/libs-snapshot</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
+
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 
 	</repositories>
 
@@ -202,34 +198,33 @@
 			</plugin>
 
 			<!-- liquibase -->
-	        <plugin>
-        <groupId>org.liquibase</groupId>
-        <artifactId>liquibase-maven-plugin</artifactId>
-        <version>${liquibase.version}</version>
-        <configuration>                 
-            <propertyFile>src/main/resources/application.properties</propertyFile>
-        </configuration>
-        <dependencies>
-            <dependency>
-                <groupId>org.liquibase.ext</groupId>
-                <artifactId>liquibase-hibernate4</artifactId>
-                <version>${liquibase.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
-                <version>${liquibase.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
-                <version>${liquibase.version}</version>
-            </dependency>
-        </dependencies>              
-    </plugin> 
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase.version}</version>
+				<configuration>
+					<propertyFile>src/main/resources/application.properties</propertyFile>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.liquibase.ext</groupId>
+						<artifactId>liquibase-hibernate4</artifactId>
+						<version>${liquibase.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-beans</artifactId>
+						<version>${liquibase.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework.data</groupId>
+						<artifactId>spring-data-jpa</artifactId>
+						<version>${liquibase.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 
 		</plugins>
 	</build>
-
 
 </project>

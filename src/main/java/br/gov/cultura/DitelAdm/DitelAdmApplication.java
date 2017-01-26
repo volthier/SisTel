@@ -22,6 +22,7 @@ public class DitelAdmApplication {
 		SpringApplication.run(DitelAdmApplication.class, args);
 	}
 	
+	
 	@Bean
 	CommandLineRunner init() {
 		return (args) -> {

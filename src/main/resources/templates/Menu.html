@@ -28,7 +28,7 @@
 	<div>
 
 		<ul>
-			<li><a class="glyphicon glyphicon-list" href="#"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
+			<li><a class="glyphicon glyphicon-list" th:href="@{/pendencia}"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
 
 
 			<ul class="dropdown">
@@ -81,6 +81,9 @@
 
 		</ul>
 	</div>
+	<form th:action="@{/logout}" method="POST"><input class="glyphicon glyphicon-off" type="submit"/></form>
+	
+	
 
 </section>
 </html>

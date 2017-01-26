@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
+
 <head>
+
 <meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width" />
 
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	
 </head>
-
+<script th:src="@{/js/jquery-2.2.3.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
 <body>
 	<form class="form-horizontal" th:action="@{/login}" method="POST">
-
+	<h1>SisTel</h1>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
@@ -38,10 +41,10 @@
 									name="password" placeholder="Enter password" />
 							</div>
 							<div>
-							<button type="submit" class="btn btn-success">
-								<span class="glyphicon glyphicon-off"></span> Acessar
-							</button>
-</div>
+								<button type="submit" class="btn btn-success">
+									<span class="glyphicon glyphicon-off"></span> Acessar
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -49,7 +52,5 @@
 		</div>
 	</form>
 </body>
-<script th:src="@{/js/jquery-2.2.3.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/jquery-2.2.3.min.js}"></script>
+
 </html>

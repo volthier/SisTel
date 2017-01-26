@@ -10,5 +10,5 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Enderecos;
 
 public interface Enderecosas extends JpaRepository<Enderecos, Long>{
 
-	public List<Enderecos> findByIdEnderecos(Integer idEnderecos);
+	public List<Enderecos> findByIdEnderecos(String idEnderecos);
 }
