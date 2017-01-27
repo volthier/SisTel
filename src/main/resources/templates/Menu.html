@@ -7,7 +7,7 @@
 <section id="Menu" layout:fragment="Menu">
 
 	<div>
-	<a th:text="${#authentication.name}"></a>
+	<a id="identificacaoUsuarioMenu" th:text="${#authentication.name}"></a>
 		<ul class="dropdown">
 			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
 
@@ -82,7 +82,7 @@
 
 		</ul>
 	</div>
-	<form th:action="@{/logout}" method="POST"><input class="glyphicon glyphicon-off" type="submit"/></form>
+	<form th:action="@{/logout}" method="POST"><button class="btn btn-info glyphicon glyphicon-off" type="submit"> SAIR</button></form>
 	
 	
 

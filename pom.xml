@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.gov.cultura</groupId>
-	<artifactId>DitelAdm</artifactId>
+	<artifactId>Sistel</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>DitelAdm</name>
+	<name>Sistel</name>
 	<description></description>
 
 	<parent>

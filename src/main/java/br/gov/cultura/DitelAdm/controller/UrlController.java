@@ -11,12 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping
 public class UrlController {
 
-/*@RequestMapping("/login")
-public ModelAndView login(){
-	ModelAndView mv = new ModelAndView("Login");
-	return mv;
-}*/
-	
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
 @RequestParam(value = "/logout",	required = false) String logout,RedirectAttributes attributes) {

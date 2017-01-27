@@ -39,12 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		auth.ldapAuthentication()
 			.userSearchFilter("(sAMAccountName={0})")
-			.userSearchBase("XX=,XX=,XX=")
+			.userSearchBase("OU=CGTI,OU=Usuarios,OU=Sede")
 				.groupSearchFilter("(member={0})")
-				.groupSearchBase("XX=*****,XX=****,XX=*****")
+				.groupSearchBase("OU=Seguranca,OU=Grupos,OU=Sede")
 				.contextSource()
-				.url("ldap://000.000.000.000:389/XX=******,XX=******")
-				.managerDn("XX=********,XX=*****,XX=******,XX=*****,XX=****,XX=******")
-				.managerPassword("*******");
+				.url("ldap://10.0.0.173:389/DC=minc,DC=intra")
+				.managerDn("CN=72381817115,OU=CGTI,OU=Usuarios,OU=Sede,DC=minc,DC=intra")
+				.managerPassword("789456123");
 	}
 }
