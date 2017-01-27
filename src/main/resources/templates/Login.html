@@ -18,7 +18,10 @@
 <body>
 	<form class="form-horizontal" th:action="@{/login}" method="POST">
 	<h1>SisTel</h1>
-		<div class="panel panel-default">
+	
+		<div layout:include="MensagemSucesso"></div>
+		
+		<div id="loginPainel" class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
 					<div class="painel-body">
@@ -26,7 +29,7 @@
 							<label for="username" class="col-sm-2 control-label"> <span
 								class="glyphicon glyphicon-user"></span> Login
 							</label>
-							<div class="col-sm-4">
+							<div class="col-sm-5">
 								<input type="text" class="form-control" id="username"
 									name="username" placeholder="Id Usuário" />
 							</div>
@@ -36,14 +39,17 @@
 							<label for="password" class="col-sm-2 control-label"> <span
 								class="glyphicon glyphicon-eye-open"></span> Senha
 							</label>
-							<div class="col-sm-4">
+							<div class="col-sm-5">
 								<input type="password" class="form-control" id="password"
 									name="password" placeholder="Enter password" />
 							</div>
-							<div>
-								<button type="submit" class="btn btn-success">
+							</div>
+							<div class="form-group">
+							<div class="col-sm-offset-3">
+								<button type="submit" class="btn btn-primary btn-sm">
 									<span class="glyphicon glyphicon-off"></span> Acessar
 								</button>
+							
 							</div>
 						</div>
 					</div>

@@ -83,4 +83,8 @@ public class AlocacaoService {
 	public AlocacaoUsuarioLinha getAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha) {
 		return alocacoesUsuariosLinhas.findByIdAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
 	}
+	
+/*	public List<AlocacaoUsuarioLinha> getAlocacaoUsuarioLinhaList(){
+		return alocacoesUsuariosLinhas.findByIdAlocacaoUsuarioLinhaList();
+	}*/
 }

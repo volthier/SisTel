@@ -7,6 +7,7 @@
 <section id="Menu" layout:fragment="Menu">
 
 	<div>
+	<a th:text="${#authentication.name}"></a>
 		<ul class="dropdown">
 			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
 
@@ -16,7 +17,7 @@
 
 			<ul class="dropdown-menu" id="dropdown-menupage">
 				<li><a class="btn btn-link dt-link-menu"
-					th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
+					th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/devolver}">Devolução</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>

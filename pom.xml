@@ -25,7 +25,7 @@
 
 	<dependencies>
 
-<!-- Spring Basico -->
+		<!-- Spring Basico -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -58,7 +58,7 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-<!-- Fim Spring Basico -->
+		<!-- Fim Spring Basico -->
 
 		<!-- Biblioteca de MicroServiços -->
 		<dependency>
@@ -77,6 +77,11 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 
 		<dependency>
@@ -156,7 +161,7 @@
 			<version>${postgresql.version}</version><!-- $NO-MVN-MAN-VER$ -->
 		</dependency>
 		<!-- Fim Conectores -->
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>

@@ -7,4 +7,5 @@ import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
 public interface AlocacoesUsuariosLinhas extends JpaRepository<AlocacaoUsuarioLinha, Integer> {
 
 	public AlocacaoUsuarioLinha findByIdAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha);
+	
 }

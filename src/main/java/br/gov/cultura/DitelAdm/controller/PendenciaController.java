@@ -24,11 +24,14 @@ public class PendenciaController {
 	@RequestMapping("/pendencia")
 	public ModelAndView pendencia() {
 		ModelAndView mv = new ModelAndView("Pendencia");
-		List<AlocacaoLinhaDispositivo> linhaDispo = alocacaoService.getIdAlocacaoLinhaDispositivo();
+/*		List<AlocacaoLinhaDispositivo> linhaDispo = alocacaoService.getIdAlocacaoLinhaDispositivo();
 		List<AlocacaoUsuarioLinha> linhaUsuario = alocacaoService.getIdAlocacaoUsuarioLinha();
 		
 		mv.addObject("pendenciaLinhadispositivo",linhaDispo);
-		mv.addObject("pendenciaUsuarioLinha",linhaUsuario);
+		mv.addObject("pendenciaUsuarioLinha",linhaUsuario);*/
+		
+/*		List<AlocacaoUsuarioLinha> linhaDispo =  alocacaoService.getAlocacaoUsuarioLinhaList();
+		mv.addObject("pendencia",linhaDispo);*/
 		return mv;
 	}
 	

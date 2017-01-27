@@ -34,11 +34,11 @@
 						</tr>
 					</thead>
 
-					<tbody th:if="${linhas.alocacaoUsuarioLinhas.dtDevolucao==null}">
+					<tbody>
 
-						<tr th:each="linha : ${linhas}" >
-							<td class="text-center" th:text="${linha.idAlocacaoLinhaDispositivo}"></td>
-							<td th:text="${linha.numeroLinha}"></td>
+						<tr th:each="termo : ${pendencia}" >
+							<td class="text-center" th:text="${termo.idAlocacaoLinhaDispositivo}"></td>
+							<td th:text="${termo.dtDevolucao}"></td>
 							<!-- <td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" title="Editar"
 								rel="tooltip" data-placement="left"> <span
@@ -52,7 +52,7 @@
 
 						</tr>
 						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(linhas)}">Nenhuma
+							<td colspan="10" th:if="${#lists.isEmpty(pendencia)}">Nenhuma
 								Pessoa encontrada!!!</td>
 						</tr>
 					</tbody>
