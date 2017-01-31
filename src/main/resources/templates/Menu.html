@@ -82,7 +82,16 @@
 
 		</ul>
 	</div>
-	<form th:action="@{/logout}" method="POST"><button class="btn btn-info glyphicon glyphicon-off" type="submit"> SAIR</button></form>
+	
+	<div>
+		<ul>
+			<li><a class="glyphicon glyphicon-off" href="javascript: document.logoutForm.submit()"><b style="font-family: Arial">&nbsp;Sair</b></a></li>
+		</ul>
+	</div>
+	
+	<form name="logoutForm" th:action="@{/logout}" method="POST">
+	<!-- <button class="btn btn-info glyphicon glyphico@{/logout}n-off" type="submit"> SAIR</button> -->
+	</form>
 	
 	
 
