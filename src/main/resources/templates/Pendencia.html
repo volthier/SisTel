@@ -37,8 +37,8 @@
 					<tbody>
 
 						<tr th:each="termo : ${pendencia}" >
-							<td class="text-center" th:text="${termo.idAlocacaoLinhaDispositivo}"></td>
-							<td th:text="${termo.dtDevolucao}"></td>
+							<td class="text-center" th:text="${termo}"></td>
+						<!-- 	<td th:text="${termo.dtDevolucao}"></td> -->
 							<!-- <td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" title="Editar"
 								rel="tooltip" data-placement="left"> <span

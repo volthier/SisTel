@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +85,7 @@ public class AlocacaoService {
 		return alocacoesUsuariosLinhas.findByIdAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
 	}
 	
-/*	public List<AlocacaoUsuarioLinha> getAlocacaoUsuarioLinhaList(){
-		return alocacoesUsuariosLinhas.findByIdAlocacaoUsuarioLinhaList();
-	}*/
+	public List<Object[]> getAlocacaoUsuarioLinhaList(){
+		return alocacoesUsuariosLinhas.findByIdVinculada();
+	}
 }

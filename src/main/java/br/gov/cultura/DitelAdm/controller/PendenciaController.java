@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
-import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
+import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
 @Controller
 @RequestMapping
@@ -20,18 +22,26 @@ public class PendenciaController {
 	
 	@Autowired
 	private AlocacaoService alocacaoService;
+	
+	@Autowired
+	private CadastroDispositivoService cadastroDispositivoService;
+	
+	@Autowired
+	private CadastroUsuarioService cadastroUsuarioService; 
+	
 		
 	@RequestMapping("/pendencia")
 	public ModelAndView pendencia() {
 		ModelAndView mv = new ModelAndView("Pendencia");
-/*		List<AlocacaoLinhaDispositivo> linhaDispo = alocacaoService.getIdAlocacaoLinhaDispositivo();
-		List<AlocacaoUsuarioLinha> linhaUsuario = alocacaoService.getIdAlocacaoUsuarioLinha();
 		
-		mv.addObject("pendenciaLinhadispositivo",linhaDispo);
-		mv.addObject("pendenciaUsuarioLinha",linhaUsuario);*/
+	    List<Object[]> linhaDispo =  alocacaoService.getAlocacaoUsuarioLinhaList();
+/*		List<Dispositivo> dispositivo =  cadastroDispositivoService.getIdDispositivo();
+		List<Usuario> usuario = cadastroUsuarioService.getIdUsuario();*/
 		
-/*		List<AlocacaoUsuarioLinha> linhaDispo =  alocacaoService.getAlocacaoUsuarioLinhaList();
-		mv.addObject("pendencia",linhaDispo);*/
+
+		mv.addObject("pendencia",linhaDispo);
+		
+		
 		return mv;
 	}
 	
