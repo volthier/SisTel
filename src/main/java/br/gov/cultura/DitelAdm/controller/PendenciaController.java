@@ -35,6 +35,12 @@ public class PendenciaController {
 		ModelAndView mv = new ModelAndView("Pendencia");
 		
 	    List<Object[]> linhaDispo =  alocacaoService.getAlocacaoUsuarioLinhaList();
+	    
+	    
+	    for (Object item : linhaDispo) {
+	        System.out.println(item);
+	    }
+	    
 /*		List<Dispositivo> dispositivo =  cadastroDispositivoService.getIdDispositivo();
 		List<Usuario> usuario = cadastroUsuarioService.getIdUsuario();*/
 		
