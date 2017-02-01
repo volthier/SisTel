@@ -86,6 +86,6 @@ public class AlocacaoService {
 	}
 	
 	public List<Object[]> getAlocacaoUsuarioLinhaList(){
-		return alocacoesUsuariosLinhas.findByIdVinculada();
+		return alocacoesUsuariosLinhas.getAlocacoesUsuarios();
 	}
 }
