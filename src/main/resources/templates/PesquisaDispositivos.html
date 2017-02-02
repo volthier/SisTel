@@ -78,7 +78,7 @@
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='1',data-excludId=${dispositivo.idDispositivo}, data-exclude=${dispositivo.modeloDispositivo}"
+								th:attr="data-excludid=${dispositivo.idDispositivo}, data-flag='1', data-exclude=${dispositivo.modeloDispositivo}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>
@@ -126,7 +126,7 @@
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='2',data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
+								th:attr="data-flag='2', data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>
@@ -163,7 +163,7 @@
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='3',data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
+								th:attr="data-flag='3', data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>
@@ -198,7 +198,7 @@
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='4',data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
+								th:attr="data-flag='4', data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>
