@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.Dispositivo;
-import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.model.dtos.AlocacaoLinhaDispositivoUsuarioDTO;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
@@ -36,16 +36,20 @@ public class PendenciaController {
 		
 	    List<Object[]> linhaDispo =  alocacaoService.getAlocacaoUsuarioLinhaList();
 	    
-	    
-	    for (Object item : linhaDispo) {
-	        System.out.println(item);
+	    List<AlocacaoLinhaDispositivoUsuarioDTO> lista = new ArrayList<AlocacaoLinhaDispositivoUsuarioDTO>();
+	    for (Object[] item : linhaDispo) {
+	    	AlocacaoLinhaDispositivoUsuarioDTO alocacao = 
+	    			new AlocacaoLinhaDispositivoUsuarioDTO(item[0],item[1],item[2],item[3],item[4],item[5]);
+	    	lista.add(alocacao);
 	    }
+	    
+	    System.out.println(lista);
 	    
 /*		List<Dispositivo> dispositivo =  cadastroDispositivoService.getIdDispositivo();
 		List<Usuario> usuario = cadastroUsuarioService.getIdUsuario();*/
 		
 
-		mv.addObject("pendencia",linhaDispo);
+		mv.addObject("pendencia",lista);
 		
 		
 		return mv;
