@@ -25,35 +25,29 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th>Nome</th>
-							<th class="text-center col-md3">Dispositivo</th>
-							<th class="text-center col-md2">Linha</th>
-							<th class="text-center col-md1">Tipo</th>
-							<th class="col-md2"></th>
+							<th class="text-center col-md1">Id dispositivo</th>
+							<th class="text-center col-md3">Id alocacao</th>
+							<th class="text-center col-md2">Data devolucao</th>
+							<th class="text-center col-md1">Data recebimento</th>
+							<th class="text-center col-md1">Id linha</th>
+							<th class="text-center col-md1">Id Usuario</th>
 						</tr>
 					</thead>
 
 					<tbody>
 
-						<tr th:each="termo : ${pendencia}" >
-							<td class="text-center" th:text="${termo}"></td>
-						<!-- 	<td th:text="${termo.dtDevolucao}"></td> -->
-							<!-- <td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='2',data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
-							</a></td> -->
-
+						<tr th:each="dto : ${pendencia}" >
+							<td class="text-center" th:text="${dto.idDispositivo}"></td>
+							<td class="text-center" th:text="${dto.idAlocacaoUsuarioLinha}"></td>
+							<td class="text-center" th:text="${dto.dtDevolucao}"></td>
+							<td class="text-center" th:text="${dto.dtRecebido}"></td>
+							<td class="text-center" th:text="${dto.idLinha}"></td>
+							<td class="text-center" th:text="${dto.idUsuario}"></td>
 						</tr>
 						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(pendencia)}">Nenhuma
-								Pessoa encontrada!!!</td>
+							<td colspan="10" th:if="${#lists.isEmpty(pendencia)}">
+								Nenhuma Pessoa encontrada!!!
+							</td>
 						</tr>
 					</tbody>
 				</table>

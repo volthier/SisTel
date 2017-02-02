@@ -43,8 +43,6 @@ public class PendenciaController {
 	    	lista.add(alocacao);
 	    }
 	    
-	    System.out.println(lista);
-	    
 /*		List<Dispositivo> dispositivo =  cadastroDispositivoService.getIdDispositivo();
 		List<Usuario> usuario = cadastroUsuarioService.getIdUsuario();*/
 		

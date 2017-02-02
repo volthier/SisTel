@@ -1,7 +1,5 @@
 package br.gov.cultura.DitelAdm.model.dtos;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +8,7 @@ import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Usuario;
 
 public class AlocacaoLinhaDispositivoUsuarioDTO {
-
+	
 	private Integer idDispositivo;
 	private Integer idAlocacaoUsuarioLinha;
 	private Date dtDevolucao;
@@ -31,16 +29,16 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 		this.idDispositivo = Integer.parseInt(idDispositivo.toString());
 		this.idAlocacaoUsuarioLinha = Integer.parseInt(idAlocacaoUsuarioLinha.toString());
 		if(dtDevolucao != null){
-			this.dtDevolucao = new Date(Date.parse(dtDevolucao.toString()));
+			try {
+				this.dtDevolucao = df.parse(dtDevolucao.toString().substring(0, 19));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		if(dtRecebido != null){
-			//System.out.println(dtRecebido.toString());
-			//System.out.println(dtRecebido.toString().substring(0, 19));
-			
 			try {
 				this.dtRecebido = df.parse(dtRecebido.toString().substring(0, 19));
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -48,4 +46,76 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 		this.idUsuario = Integer.parseInt(idUsuario.toString());
 	}
 	
+	public Integer getIdDispositivo() {
+		return idDispositivo;
+	}
+
+	public void setIdDispositivo(Integer idDispositivo) {
+		this.idDispositivo = idDispositivo;
+	}
+
+	public Integer getIdAlocacaoUsuarioLinha() {
+		return idAlocacaoUsuarioLinha;
+	}
+
+	public void setIdAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha) {
+		this.idAlocacaoUsuarioLinha = idAlocacaoUsuarioLinha;
+	}
+
+	public Date getDtDevolucao() {
+		return dtDevolucao;
+	}
+
+	public void setDtDevolucao(Date dtDevolucao) {
+		this.dtDevolucao = dtDevolucao;
+	}
+
+	public Date getDtRecebido() {
+		return dtRecebido;
+	}
+
+	public void setDtRecebido(Date dtRecebido) {
+		this.dtRecebido = dtRecebido;
+	}
+
+	public Integer getIdLinha() {
+		return idLinha;
+	}
+
+	public void setIdLinha(Integer idLinha) {
+		this.idLinha = idLinha;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public Dispositivo getDispositivo() {
+		return dispositivo;
+	}
+
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public SimpleDateFormat getDf() {
+		return df;
+	}
+
+	public void setDf(SimpleDateFormat df) {
+		this.df = df;
+	}
+
 }
