@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.dtos.AlocacaoLinhaDispositivoUsuarioDTO;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 
 
 
@@ -24,7 +25,10 @@ public class UrlController {
 
 @Autowired
 private AlocacaoService alocacaoService;
-	
+
+@Autowired
+private CadastroDispositivoService dispositivoService;
+
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
 @RequestParam(value = "/logout",	required = false) String logout,RedirectAttributes attributes) {
@@ -76,6 +80,10 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 	    					Integer.parseInt(item[5].toString()));
 	    	lista.add(alocacao);
 	    }
+		
+		for (AlocacaoLinhaDispositivoUsuarioDTO dto : lista) {
+			dto.setDispositivo(dispositivoService.getDispositivoById(dto.getIdDispositivo()));
+		}
 		
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		mv.addObject("alocacao",lista);

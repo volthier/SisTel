@@ -25,7 +25,7 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center col-md1">Id dispositivo</th>
+							<th class="text-center col-md1">Modelo dispositivo</th>
 							<th class="text-center col-md3">Id alocacao</th>
 							<th class="text-center col-md2">Data devolucao</th>
 							<th class="text-center col-md1">Data recebimento</th>
@@ -37,7 +37,7 @@
 					<tbody>
 
 						<tr th:each="dto : ${alocacao}" >
-							<td class="text-center" th:text="${dto.idDispositivo}"></td>
+							<td class="text-center" th:text="${dto.dispositivo.modeloDispositivo}"></td>
 							<td class="text-center" th:text="${dto.idAlocacaoUsuarioLinha}"></td>
 							<td class="text-center" th:text="${dto.dtDevolucao}"></td>
 							<td class="text-center" th:text="${dto.dtRecebido}"></td>
