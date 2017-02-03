@@ -1,6 +1,9 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +40,39 @@ public class PendenciaController {
 	    List<Object[]> linhaDispo =  alocacaoService.getAlocacaoUsuarioLinhaList();
 	    
 	    List<AlocacaoLinhaDispositivoUsuarioDTO> lista = new ArrayList<AlocacaoLinhaDispositivoUsuarioDTO>();
+	    
+	    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    
 	    for (Object[] item : linhaDispo) {
+	    	Date dtDevolucao = null;
+	    	Date dtRecebido = null;
+	    	
+			if(item[2] != null){
+				try {
+					dtDevolucao = df.parse(item[2].toString().substring(0, 19));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			if(item[3] != null){
+				try {
+					dtRecebido = df.parse(item[3].toString().substring(0, 19));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+	    	
 	    	AlocacaoLinhaDispositivoUsuarioDTO alocacao = 
-	    			new AlocacaoLinhaDispositivoUsuarioDTO(item[0],item[1],item[2],item[3],item[4],item[5]);
+	    			new AlocacaoLinhaDispositivoUsuarioDTO(
+	    					Integer.parseInt(item[0].toString()),
+	    					Integer.parseInt(item[1].toString()),
+	    					dtDevolucao,
+	    					dtRecebido,
+	    					Integer.parseInt(item[4].toString()),
+	    					Integer.parseInt(item[5].toString()));
 	    	lista.add(alocacao);
 	    }
 	    
-/*		List<Dispositivo> dispositivo =  cadastroDispositivoService.getIdDispositivo();
-		List<Usuario> usuario = cadastroUsuarioService.getIdUsuario();*/
 		
 
 		mv.addObject("pendencia",lista);

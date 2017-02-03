@@ -1,7 +1,5 @@
 package br.gov.cultura.DitelAdm.model.dtos;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
@@ -17,33 +15,19 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 	private Integer idUsuario;
 	private Dispositivo dispositivo;
 	private Usuario usuario;
-	private SimpleDateFormat df;
 	
 	public AlocacaoLinhaDispositivoUsuarioDTO() {
 	}
 	
-	public AlocacaoLinhaDispositivoUsuarioDTO(Object idDispositivo, Object idAlocacaoUsuarioLinha, 
-			Object dtDevolucao, Object dtRecebido, Object idLinha, Object idUsuario){
+	public AlocacaoLinhaDispositivoUsuarioDTO(Integer idDispositivo, Integer idAlocacaoUsuarioLinha, 
+			Date dtDevolucao, Date dtRecebido, Integer idLinha, Integer idUsuario){
 		
-		df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		this.idDispositivo = Integer.parseInt(idDispositivo.toString());
-		this.idAlocacaoUsuarioLinha = Integer.parseInt(idAlocacaoUsuarioLinha.toString());
-		if(dtDevolucao != null){
-			try {
-				this.dtDevolucao = df.parse(dtDevolucao.toString().substring(0, 19));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
-		if(dtRecebido != null){
-			try {
-				this.dtRecebido = df.parse(dtRecebido.toString().substring(0, 19));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-		}
-		this.idLinha = Integer.parseInt(idLinha.toString());
-		this.idUsuario = Integer.parseInt(idUsuario.toString());
+		this.idDispositivo = idDispositivo;
+		this.idAlocacaoUsuarioLinha = idAlocacaoUsuarioLinha;
+		this.dtDevolucao = dtDevolucao;		
+		this.dtRecebido = dtRecebido;
+		this.idLinha = idLinha;
+		this.idUsuario = idUsuario;
 	}
 	
 	public Integer getIdDispositivo() {
@@ -108,14 +92,6 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public SimpleDateFormat getDf() {
-		return df;
-	}
-
-	public void setDf(SimpleDateFormat df) {
-		this.df = df;
 	}
 
 }
