@@ -4,6 +4,7 @@ import java.util.Date;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.model.Linha;
 
 public class AlocacaoLinhaDispositivoUsuarioDTO {
 	
@@ -15,6 +16,7 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 	private Integer idUsuario;
 	private Dispositivo dispositivo;
 	private Usuario usuario;
+	private Linha linha;
 	
 	public AlocacaoLinhaDispositivoUsuarioDTO() {
 	}
@@ -92,6 +94,14 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Linha getLinha() {
+		return linha;
+	}
+
+	public void setLinha(Linha linha) {
+		this.linha = linha;
 	}
 
 }
