@@ -44,7 +44,8 @@
 						<tr th:each="dto : ${alocacao}" >
 							<td class="text-center" th:text="${dto.dispositivo.modeloDispositivo}"></td>
 							<td class="text-center" th:text="${dto.idAlocacaoUsuarioLinha}"></td>
-							<td class="text-center" th:text="${dto.dtDevolucao}"></td>
+							<td class="text-center" th:if="${dto.dtDevolucao == null}">Não devolvida</td>
+							<td class="text-center" th:if="${dto.dtDevolucao != null}" th:text="${dto.dtDevolucao}"></td>
 							<td class="text-center" th:text="${dto.dtRecebido}"></td>
 							<td class="text-center" th:text="${dto.linha.numeroLinha}"></td>
 							<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
