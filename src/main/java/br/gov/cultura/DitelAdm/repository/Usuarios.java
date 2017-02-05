@@ -9,7 +9,7 @@ import br.gov.cultura.DitelAdm.model.Usuario;
 
 public interface Usuarios extends JpaRepository<Usuario, Integer>{
 	
-	public List<Usuario> findByIdUsuario(Integer idUsuario);
+	public Usuario findByIdUsuario(Integer idUsuario);
 
 	@Query("select u.idUsuario, u.nomeUsuario,u.cargoUsuario,"
 			+ "u.cpfUsuario,u.lotacaoUsuario, u.limiteAtesto.dasAtesto,"

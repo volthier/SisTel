@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.cultura.DitelAdm.model.dtos.AlocacaoLinhaDispositivoUsuarioDTO;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 
 
 
@@ -28,6 +29,9 @@ private AlocacaoService alocacaoService;
 
 @Autowired
 private CadastroDispositivoService dispositivoService;
+
+@Autowired
+private CadastroUsuarioService cadastroUsuarioService;
 
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
@@ -83,6 +87,7 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 		
 		for (AlocacaoLinhaDispositivoUsuarioDTO dto : lista) {
 			dto.setDispositivo(dispositivoService.getDispositivoById(dto.getIdDispositivo()));
+			dto.setUsuario(cadastroUsuarioService.getUsuarioById(dto.getIdUsuario()));
 		}
 		
 		ModelAndView mv = new ModelAndView("TelaInicio");

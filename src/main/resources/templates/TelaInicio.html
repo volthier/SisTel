@@ -30,7 +30,7 @@
 							<th class="text-center col-md2">Data devolucao</th>
 							<th class="text-center col-md1">Data recebimento</th>
 							<th class="text-center col-md1">Id linha</th>
-							<th class="text-center col-md1">Id Usuario</th>
+							<th class="text-center col-md1">Usuario</th>
 						</tr>
 					</thead>
 
@@ -42,7 +42,7 @@
 							<td class="text-center" th:text="${dto.dtDevolucao}"></td>
 							<td class="text-center" th:text="${dto.dtRecebido}"></td>
 							<td class="text-center" th:text="${dto.idLinha}"></td>
-							<td class="text-center" th:text="${dto.idUsuario}"></td>
+							<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
 						</tr>
 						<tr>
 							<td colspan="10" th:if="${#lists.isEmpty(alocacao)}">
