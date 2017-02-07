@@ -43,12 +43,12 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 	
 	ModelAndView mv = new ModelAndView("Login");
 	if (error != null) {
-		attributes.addFlashAttribute("error", " Credencial Inválida.");
+		attributes.addFlashAttribute("mensagem", " Credencial Inválida.");
 		mv.addObject(attributes);
 	}
 
 	if (logout != null) {
-		mv.addObject("message", "Logged out do SisTel concluido.");
+		attributes.addFlashAttribute("messagem", "Logged out do SisTel concluido.");
 	}
 	return mv;
 }

@@ -63,7 +63,7 @@ public class Operadora implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	@Column(name = "cnpj", nullable = false, length = 255)
+	@Column(name = "cnpj", nullable = false, length = 15)
 	public String getCnpj() {
 		return this.cnpj;
 	}
