@@ -75,7 +75,7 @@ public class Cliente implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	@Column(name = "cnpj", nullable = false, length = 16777215)
+	@Column(name = "cnpj", nullable = false, length = 255)
 	public String getCnpj() {
 		return this.cnpj;
 	}

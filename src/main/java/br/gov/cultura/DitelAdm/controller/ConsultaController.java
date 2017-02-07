@@ -49,5 +49,6 @@ public class ConsultaController {
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		mv.addObject("linhas", todasLinhas);
 		return mv;
-	}
+	}	
+	
 }

@@ -146,7 +146,7 @@ public class Fatura implements java.io.Serializable {
 		this.indConta = indConta;
 	}
 
-	@Column(name = "mesRef", nullable = false, length = 16777215)
+	@Column(name = "mesRef", nullable = false, length = 25)
 	public String getMesRef() {
 		return this.mesRef;
 	}
@@ -165,7 +165,7 @@ public class Fatura implements java.io.Serializable {
 		this.dataVenc = dataVenc;
 	}
 
-	@Column(name = "codBarra", length = 16777215)
+	@Column(name = "codBarra", length = 254)
 	public String getCodBarra() {
 		return this.codBarra;
 	}
@@ -174,7 +174,7 @@ public class Fatura implements java.io.Serializable {
 		this.codBarra = codBarra;
 	}
 
-	@Column(name = "codCobranca", nullable = false, length = 16777215)
+	@Column(name = "codCobranca", nullable = false, length = 254)
 	public String getCodCobranca() {
 		return this.codCobranca;
 	}
@@ -183,7 +183,7 @@ public class Fatura implements java.io.Serializable {
 		this.codCobranca = codCobranca;
 	}
 
-	@Column(name = "descriCobranca", nullable = false, length = 20)
+	@Column(name = "descriCobranca", nullable = false, length = 254)
 	public String getDescriCobranca() {
 		return this.descriCobranca;
 	}
@@ -192,7 +192,7 @@ public class Fatura implements java.io.Serializable {
 		this.descriCobranca = descriCobranca;
 	}
 
-	@Column(name = "bancoCobranca", length = 16777215)
+	@Column(name = "bancoCobranca", length = 254)
 	public String getBancoCobranca() {
 		return this.bancoCobranca;
 	}
@@ -201,7 +201,7 @@ public class Fatura implements java.io.Serializable {
 		this.bancoCobranca = bancoCobranca;
 	}
 
-	@Column(name = "agenciaCobranca", length = 16777215)
+	@Column(name = "agenciaCobranca", length = 254)
 	public String getAgenciaCobranca() {
 		return this.agenciaCobranca;
 	}
@@ -210,7 +210,7 @@ public class Fatura implements java.io.Serializable {
 		this.agenciaCobranca = agenciaCobranca;
 	}
 
-	@Column(name = "ccCobranca", length = 16777215)
+	@Column(name = "ccCobranca", length = 254)
 	public String getCcCobranca() {
 		return this.ccCobranca;
 	}

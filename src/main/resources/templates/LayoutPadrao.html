@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
 
 <head>
 
@@ -11,10 +11,12 @@
 
 <title>Ditel</title>
 
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-<link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
-	
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/css/bootstrap-datetimepicker.min.css}" />
+
 </head>
 
 <body>
@@ -22,13 +24,19 @@
 	<header class="post" layout:include="Cabecalho">
 		<p>Topo Pagina</p>
 	</header>
+	
+	
+	
+				<menu id="menu" layout:include="Menu" class="col-sm-2">
+				</menu>
 
-	<menu layout:include="Menu">
-	</menu>
-
-	<section class="main col-sm-11 post" id="conteudo" layout:fragment="conteudo">
-			<p>Principal</p>
-	</section>
+	
+	
+				<section class="main col-sm-10 post" id="conteudo"
+					layout:fragment="conteudo">
+					<p>Principal</p>
+				</section>
+	
 
 	<!-- <footer  id="rodape" layout:include="Rodape"></footer> -->
 

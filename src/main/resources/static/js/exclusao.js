@@ -34,7 +34,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	var flag = button.data('flag')
 	
 	var modal = $(this);
-	alert(id);
+	
 	var form = modal.find('form');
 	var action = form.data('url-consulta');
 	
@@ -49,7 +49,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 
 	}
 	else if(flag == 2){
-		action ='/pessoas';
+		action ='/usuarios';
 		if(!action.endsWith('/')){
 			action +='/' ;
 		}

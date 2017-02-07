@@ -89,8 +89,7 @@
 	margin-top: 0px;
 	padding-left: 0px; 
 	padding-right: 0px;
-	width: 100%;
-	height: 100vh;
+	height: 100%;
 }
 
 #cabecalho{
@@ -195,6 +194,7 @@ header input {
 
 .menu-active .menu-anchor {background: #357cff}
 
+
 menu {
     position: fixed;
     top: 0;
@@ -269,3 +269,38 @@ header, .main {
     -ms-transform: translateX(220px);
     transform: translateX(220px);
 }
+@media (max-width:999px){
+		#menu {
+	position: fixed;
+}
+}
+@media (min-width: 1000px) { 
+
+menu {
+    -webkit-transform: translateX( 0px);
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -ms-transition: all .25s linear;
+    transition: all .25s linear;
+}
+.main {
+    padding: 0px;
+}
+.menu-anchor {
+    display: none;
+
+}
+
+.menu-anchor:before {
+    display: none;
+}
+
+
+}
+
+
+
+

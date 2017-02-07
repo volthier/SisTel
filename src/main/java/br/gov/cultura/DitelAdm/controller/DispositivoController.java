@@ -64,12 +64,12 @@ public class DispositivoController {
  		}
 		
 	}
-	@CrossOrigin(origins = "http://localhost:8080")
+
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroDispositivoService.excluir(id);
-		attributes.addFlashAttribute("mensagem","Dispositivo removido com sucesso!");
-		return "redirect:/inicio";
+		attributes.addFlashAttribute("mensagem","Cadastro do dispositivo removido com sucesso!");
+		return "redirect:/consulta";
 		}	
 	
 	@RequestMapping("{id}")
