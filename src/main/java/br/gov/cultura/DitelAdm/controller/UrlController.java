@@ -97,7 +97,6 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 		
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		mv.addObject("alocacao",lista);
-		mv.addObject("quantidade",lista.size());
 		return mv;
 	}
 	

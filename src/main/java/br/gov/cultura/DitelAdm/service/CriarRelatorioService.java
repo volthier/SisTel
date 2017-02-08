@@ -1,4 +1,4 @@
-package br.gov.cultura.DitelAdm.service;
+/*package br.gov.cultura.DitelAdm.service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,3 +56,4 @@ public class CriarRelatorioService {
 	}
 }
 };
+*/
