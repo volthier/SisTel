@@ -5,8 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,8 +100,22 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 			dto.setLinha(cadastroLinhaService.getLinhaById(dto.getIdLinha()));
 		}
 		
+		/*Lista de alocados Devolvidos*/
+		Stream<AlocacaoLinhaDispositivoUsuarioDTO> dto = lista.stream().filter( p -> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido()!=null);
+		
+		/*Lista de alocados habilitados*/
+		Stream<AlocacaoLinhaDispositivoUsuarioDTO> dto1 = lista.stream().filter( p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao()==null);
+		
 		ModelAndView mv = new ModelAndView("TelaInicio");
-		mv.addObject("alocacao",lista);
+		//lista de total alocados
+		mv.addObject("alocacaoTotal",lista);
+		//lista de total alocados Habilitados
+		mv.addObject("devolvidosTotal",dto);
+		/*Lista de alocados habilitados*/
+		mv.addObject("habilitadosTotal",dto1);
+		
+		
+		
 		return mv;
 	}
 	

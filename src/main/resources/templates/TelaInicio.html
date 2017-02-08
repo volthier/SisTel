@@ -24,7 +24,12 @@
 		<div>
 		
 			<h3> </h3>
-			<h3>Total de alocações: <span th:text="${#lists.size(alocacao)}"></span></h3>
+			<h3>Total de alocações</h3> 
+			<p> Efetuadas:&nbsp; <span th:text="${#lists.size(alocacaoTotal)}"></span> 
+			    Devolvidos:&nbsp; <span th:text="${#lists.size(devolvidosTotal)}"></span>
+			    Habilitados:&nbsp; <span th:text="${#lists.size(habilitadosTotal)}"></span>
+		   </p>
+			
 			<h3> </h3>
 		</div>
 		
@@ -43,7 +48,7 @@
 
 					<tbody>
 
-						<tr th:each="dto : ${alocacao}" >
+						<tr th:each="dto : ${alocacaoTotal}" >
 							<td class="text-center" th:text="${dto.idAlocacaoUsuarioLinha}"></td>
 							<td class="text-center" th:text="${dto.dispositivo.modeloDispositivo}"></td>
 							<td class="text-center" th:if="${dto.dtDevolucao == null}">Não devolvida</td>
@@ -53,7 +58,7 @@
 							<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
 						</tr>
 						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(alocacao)}">
+							<td colspan="10" th:if="${#lists.isEmpty(alocacaoTotal)}">
 								Nenhuma alocação encontrada!!!
 							</td>
 						</tr>
