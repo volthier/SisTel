@@ -7,7 +7,21 @@
 <section id="Menu" layout:fragment="Menu">
 
 	<div>
-	 <a id="identificacaoUsuarioMenu" th:text="${#authentication.name}"></a>
+	
+	<ul class="dropdown">
+
+				<li class="dropdown-toggle" data-toggle="dropdown"><a
+					class="glyphicon glyphicon-user"><b style="font-family: Arial" th:utext="${#authentication.name}">&nbsp;Usuários&nbsp;</b><span
+						class="caret"></span></a></li>
+
+				<ul class="dropdown-menu" id="dropdown-menupage">
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
+				</ul>
+			</ul>
+	
 		<ul class="dropdown">
 			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
 
@@ -59,19 +73,6 @@
 		<ul>
 			<li><a class="glyphicon glyphicon-signal" th:href="@{/relatorio}"><b style="font-family: Arial">&nbsp;Relatórios&nbsp;</b></a></li>
 
-			<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-user"><b style="font-family: Arial">&nbsp;Usuários&nbsp;</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
-				</ul>
-			</ul>
 		</ul>
 	</div>
 
