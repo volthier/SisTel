@@ -207,6 +207,10 @@ menu {
     box-shadow: inset -5px -10px 10px 0 rgba(255,0,0,.3)
 }
 
+menu li {
+	list-style-type: none;
+}
+
 menu li a {
     display: block;
     border-bottom: 2px solid rgba(255,255,255,.3);
