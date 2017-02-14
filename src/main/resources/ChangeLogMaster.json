@@ -4,7 +4,7 @@
             "preConditions": [
                 {
                     "runningAs": {
-                        "username": "root",
+                        "username": "postgres",
                         "password": "root"
                     }
                 }

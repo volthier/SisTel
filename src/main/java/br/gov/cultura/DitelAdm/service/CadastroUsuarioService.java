@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.Usuarios;
 
@@ -27,5 +28,9 @@ public class CadastroUsuarioService {
 	
 	public List<Usuario> getId() {
 		return usuarios.findOne();
+	}
+	
+	public Usuario getUsuarioById(Integer idUsuario){
+		return usuarios.findByIdUsuario(idUsuario);
 	}
 }

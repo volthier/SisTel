@@ -28,7 +28,7 @@
 $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	var button = $(event.relatedTarget);
-	
+		
 	var id = button.data('excludid');
 	var item = button.data('exclude');
 	var flag = button.data('flag')
@@ -36,7 +36,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	var modal = $(this);
 	
 	var form = modal.find('form');
-	var action = form.data('url-inicio');
+	var action = form.data('url-consulta');
 	
 	if(flag == 1){
 		action ='/dispositivos';
@@ -49,7 +49,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 
 	}
 	else if(flag == 2){
-		action ='/pessoas';
+		action ='/usuarios';
 		if(!action.endsWith('/')){
 			action +='/' ;
 		}

@@ -7,6 +7,21 @@
 <section id="Menu" layout:fragment="Menu">
 
 	<div>
+	
+	<ul class="dropdown">
+
+				<li class="dropdown-toggle" data-toggle="dropdown"><a
+					class="glyphicon glyphicon-user"><b style="font-family: Arial" th:utext="${#authentication.name}">&nbsp;Usuários&nbsp;</b><span
+						class="caret"></span></a></li>
+
+				<ul class="dropdown-menu" id="dropdown-menupage">
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
+					<li><a class="btn btn-link dt-link-menu"
+						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
+				</ul>
+			</ul>
+	
 		<ul class="dropdown">
 			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
 
@@ -16,7 +31,7 @@
 
 			<ul class="dropdown-menu" id="dropdown-menupage">
 				<li><a class="btn btn-link dt-link-menu"
-					th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
+					th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
 				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/devolver}">Devolução</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
 				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
@@ -44,7 +59,7 @@
 	<div>
 
 		<ul>
-			<li><a class="glyphicon glyphicon-list" href="#"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
+			<li><a class="glyphicon glyphicon-list" th:href="@{/pendencia}"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
 
 
 			<ul class="dropdown">
@@ -74,19 +89,6 @@
 		<ul>
 			<li><a class="glyphicon glyphicon-signal" th:href="@{/relatorio}"><b style="font-family: Arial">&nbsp;Relatórios&nbsp;</b></a></li>
 
-			<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-user"><b style="font-family: Arial">&nbsp;Usuários&nbsp;</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
-				</ul>
-			</ul>
 		</ul>
 	</div>
 
@@ -97,6 +99,16 @@
 
 		</ul>
 	</div>
+	
+	<div>
+		<ul>
+			<li><a class="glyphicon glyphicon-off" href="javascript: document.logoutForm.submit()"><b style="font-family: Arial">&nbsp;Sair</b></a></li>
+		</ul>
+	</div>
+	
+	<form name="logoutForm" th:action="@{/logout}" method="POST">
+	<!-- <button class="btn btn-info glyphicon glyphico@{/logout}n-off" type="submit"> SAIR</button> -->
+	</form>
 
 </section>
 </html>

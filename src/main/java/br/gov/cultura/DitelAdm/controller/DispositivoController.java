@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,12 +64,12 @@ public class DispositivoController {
  		}
 		
 	}
-	
+
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroDispositivoService.excluir(id);
-		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
-		return "redirect:/inicio";
+		attributes.addFlashAttribute("mensagem","Cadastro do dispositivo removido com sucesso!");
+		return "redirect:/consulta";
 		}	
 	
 	@RequestMapping("{id}")

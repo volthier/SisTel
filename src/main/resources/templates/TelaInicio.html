@@ -6,190 +6,69 @@
 
 
 <head>
-<title>Pesquisa Inicio</title>
+<title>Inicio</title>
 
 </head>
 <section layout:fragment="conteudo">
-	<div>
-		<table>
-			<tr>
-				<td>
-					<table style="border-collapse: collapse;">
-						<thead>
-							<tr>
-								<th colspan="10"><strong>Tabela Teste</strong></th>
-							</tr>
-							<tr
-								style="background-color: B0B0B0; border-bottom: 3px solid black">
-								<th style="padding: 5px; width: 100px;">Head 1</th>
-								<th
-									style="padding: 5px; width: 100px; border-left: 1px solid black">Head
-									2</th>
-								<th
-									style="padding: 5px; width: 100px; border-left: 1px solid black">Head
-									3</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td style="padding: 5px;">Cell 1</td>
-								<td style="padding: 5px; border-left: 1px solid black">Cell
-									2</td>
-								<td style="padding: 5px; border-left: 1px solid black">Cell
-									3</td>
-							</tr>
-							<tr>
-								<td style="padding: 5px;">Cell 4</td>
-								<td style="padding: 5px; border-left: 1px solid black">Cell
-									5</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									6</td>
-							</tr>
-							<tr>
-								<td style="padding: 5px;">Cell 7</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									8</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									9</td>
-							</tr>
-							<tr>
-								<td style="padding: 5px;">Cell 10</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									11</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									12</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td>
-					<table style="border-collapse: collapse;">
-						<thead>
-							<tr>
-								<th colspan="10" style="padding: 5px;"><strong>Resumo</strong></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="10"
-									style="padding: 5px; border-bottom: 1px solid black;">Solicitacoes</td>
-							</tr>
-							<tr>
-								<td>Rec.</td>
-								<td>Dev.</td>
-								<td>Sub.</td>
-							</tr>
-							<tr>
-								<td style="width: 30px;"><img
-									style="width: 60%; height: 20px;"
-									src="https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_960_720.png" /></td>
-								<td style="width: 30px;"><img
-									style="width: 60%; height: 20px;"
-									src="https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_960_720.png" /></td>
-								<td style="width: 30px;"><img
-									style="width: 60%; height: 20px;"
-									src="https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_960_720.png" /></td>
-							</tr>
-							<tr>
-								<td>100</td>
-								<td>200</td>
-								<td>300</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
+	
+<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title dt-dispositivo-panel">Início</h1>
+			</div>
+		</div>
+		
+		
+		<div class="panel-body">			
+		
+		<div>
+		
+			<h3> </h3>
+			<h3>Total de alocações</h3> 
+			<p> Efetuadas:&nbsp; <span th:text="${#lists.size(alocacaoTotal)}"></span> 
+			    Devolvidos:&nbsp; <span th:text="${#lists.size(devolvidosTotal)}"></span>
+			    Habilitados:&nbsp; <span th:text="${#lists.size(habilitadosTotal)}"></span>
+		   </p>
+			
+			<h3> </h3>
+		</div>
+		
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id alocacao</th>
+							<th class="text-center col-md3">Modelo dispositivo</th>
+							<th class="text-center col-md2">Data devolucao</th>
+							<th class="text-center col-md1">Data recebimento</th>
+							<th class="text-center col-md1">Linha</th>
+							<th class="text-center col-md1">Usuario</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="dto : ${alocacaoTotal}" >
+							<td class="text-center" th:text="${dto.idAlocacaoUsuarioLinha}"></td>
+							<td class="text-center" th:text="${dto.dispositivo.modeloDispositivo}"></td>
+							<td class="text-center" th:if="${dto.dtDevolucao == null}">Não devolvida</td>
+							<td class="text-center" th:if="${dto.dtDevolucao != null}" th:text="${dto.dtDevolucao}"></td>
+							<td class="text-center" th:text="${dto.dtRecebido}"></td>
+							<td class="text-center" th:text="${dto.linha.numeroLinha}"></td>
+							<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
+						</tr>
+						<tr>
+							<td colspan="10" th:if="${#lists.isEmpty(alocacaoTotal)}">
+								Nenhuma alocação encontrada!!!
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
 
-			<tr>
-				<td>
-					<table style="border-collapse: collapse;">
-						<thead>
-							<tr>
-								<th colspan="10"><strong>Tabela Teste</strong></th>
-							</tr>
-							<tr
-								style="background-color: B0B0B0; border-bottom: 3px solid black">
-								<th style="padding: 5px; width: 100px;">Head 1</th>
-								<th
-									style="padding: 5px; width: 100px; border-left: 1px solid black">Head
-									2</th>
-								<th
-									style="padding: 5px; width: 100px; border-left: 1px solid black">Head
-									3</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td style="padding: 5px;">Cell 1</td>
-								<td style="padding: 5px; border-left: 1px solid black">Cell
-									2</td>
-								<td style="padding: 5px; border-left: 1px solid black">Cell
-									3</td>
-							</tr>
-							<tr>
-								<td style="padding: 5px;">Cell 4</td>
-								<td style="padding: 5px; border-left: 1px solid black">Cell
-									5</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									6</td>
-							</tr>
-							<tr>
-								<td style="padding: 5px;">Cell 7</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									8</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									9</td>
-							</tr>
-							<tr>
-								<td style="padding: 5px;">Cell 10</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									11</td>
-								<td style="padding: 5px; border-left: 1px solid black;">Cell
-									12</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td>
-					<table style="border-collapse: collapse;">
-						<thead>
-							<tr>
-								<th colspan="10" style="padding: 5px;"><strong>Resumo</strong></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="10"
-									style="padding: 5px; border-bottom: 1px solid black;">Solicitacoes</td>
-							</tr>
-							<tr>
-								<td>Rec.</td>
-								<td>Dev.</td>
-								<td>Sub.</td>
-							</tr>
-							<tr>
-								<td style="width: 30px;"><img
-									style="width: 60%; height: 20px;"
-									src="https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_960_720.png" /></td>
-								<td style="width: 30px;"><img
-									style="width: 60%; height: 20px;"
-									src="https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_960_720.png" /></td>
-								<td style="width: 30px;"><img
-									style="width: 60%; height: 20px;"
-									src="https://pixabay.com/static/uploads/photo/2012/04/26/19/43/profile-42914_960_720.png" /></td>
-							</tr>
-							<tr>
-								<td>100</td>
-								<td>200</td>
-								<td>300</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
-
-		</table>
+		</div>
 	</div>
+
 </section>
 </html>

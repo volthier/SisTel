@@ -34,4 +34,9 @@ public class CadastroDispositivoService {
 	public List<Dispositivo> listarDispositivoDisponivel(){
 		return dispositivos.findByNumeroSerieDispositivo();
 	}
+	
+	public Dispositivo getDispositivoById(Integer idDispositivo){
+		return dispositivos.findByIdDispositivo(idDispositivo);
+	}
+	
 }

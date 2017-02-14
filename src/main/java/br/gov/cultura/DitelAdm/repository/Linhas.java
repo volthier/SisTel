@@ -9,7 +9,7 @@ import br.gov.cultura.DitelAdm.model.Linha;
 
 public interface Linhas extends JpaRepository<Linha, Integer>{
 	
-	public List<Linha> findByIdLinha(Integer idLinha);
+	public Linha findByIdLinha(Integer idLinha);
 	
 	public Linha findByNumeroLinhaEquals (String numeroLinha);
 	

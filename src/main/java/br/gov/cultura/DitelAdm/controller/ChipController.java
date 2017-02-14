@@ -56,14 +56,14 @@ public class ChipController extends UrlController {
 		
 	}
 	
-	@RequestMapping(value="{idChip}", method = RequestMethod.DELETE)
+	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer idChip, RedirectAttributes attributes){
 		cadastroChipService.excluir(idChip);
-		attributes.addFlashAttribute("mensagem","Cadastrado removido com sucesso!");
-		return "redirect:/inicio";
+		attributes.addFlashAttribute("mensagem","Cadastrado do chip removido com sucesso!");
+		return "redirect:/consulta";
 		}	
 	
-	@RequestMapping("{idChip}")
+	@RequestMapping("{id}")
 	public ModelAndView edicao(@PathVariable("idChip") Chip chips){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(chips);

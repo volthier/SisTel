@@ -45,7 +45,6 @@ public class Operadora implements java.io.Serializable {
 	}
 
 	@Id
-
 	@Column(name = "codOperadora", unique = true, nullable = false)
 	public int getCodOperadora() {
 		return this.codOperadora;
@@ -64,7 +63,7 @@ public class Operadora implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	@Column(name = "cnpj", nullable = false, length = 16777215)
+	@Column(name = "cnpj", nullable = false, length = 15)
 	public String getCnpj() {
 		return this.cnpj;
 	}

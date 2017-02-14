@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.Linhas;
 
 @Service
@@ -34,4 +35,9 @@ public class CadastroLinhaService {
 	public List<Linha> listarLinhaDisponivel(){
 		return linhas.findByNumeroLinha();
 	}
+	
+	public Linha getLinhaById(Integer idLinha){
+		return linhas.findByIdLinha(idLinha);
+	}
+	
 }
