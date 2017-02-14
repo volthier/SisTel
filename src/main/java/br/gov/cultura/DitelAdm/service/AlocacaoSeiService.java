@@ -13,5 +13,13 @@ public class AlocacaoSeiService {
 
 	@Autowired
 	private AlocacoesSei alocacaoSeiRepository;
+	
+	public void salvar(List<AlocacaoSei> alocacoes){
+		alocacaoSeiRepository.save(alocacoes);
+	}
+	
+	public void salvar(AlocacaoSei alocacao){
+		alocacaoSeiRepository.save(alocacao);
+	}
 
 }

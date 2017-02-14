@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
+import br.gov.cultura.DitelAdm.model.Linha;
 
 public interface AlocacoesUsuariosLinhas extends JpaRepository<AlocacaoUsuarioLinha, Integer> {
 
@@ -17,4 +18,7 @@ public interface AlocacoesUsuariosLinhas extends JpaRepository<AlocacaoUsuarioLi
 			+ " 		 diteladmdev.alocacao_usuario_linha AS alocacaoUsuarioLinha "
 			+ " WHERE alocacaoLinhaDispositivo.id_alocacao_linha_dispositivo = alocacaoUsuarioLinha.id_alocacao_usuario_linha", nativeQuery = true)
 	public List<Object[]> getAlocacoesUsuarios ();
+	
+	@Query("select a from AlocacaoUsuarioLinha a where linha = ?1")
+	public List<AlocacaoUsuarioLinha> getAlocacaoByLinha(Linha linha);
 }

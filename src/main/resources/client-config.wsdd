@@ -1,0 +1,13 @@
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+    <globalConfiguration>
+    	<beanMapping qname="Sei:Remetente" xmlns:ns="Sei"
+    	languageSpecificType="java:br.gov.cultura.DitelAdm.wsdl.Remetente"/>
+    	<parameter name="sendMultiRefs" value="false"/>
+        <requestFlow>
+            <handler name="log" type="java:br.gov.cultura.DitelAdm.ws.SeiRequestHandler"/>
+        </requestFlow>
+    </globalConfiguration>
+    <transport name="http" pivot="java:org.apache.axis.transport.http.HTTPSender"/>
+</deployment>

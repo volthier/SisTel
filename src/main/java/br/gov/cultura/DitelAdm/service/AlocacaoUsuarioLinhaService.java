@@ -25,6 +25,6 @@ public class AlocacaoUsuarioLinhaService {
 	}
 	
 	public List<AlocacaoUsuarioLinha> getAlocacaoUsuarioLinha(Linha linha) {
-		return alocacaoUsuarioLinhaRepository.getAlocacaoByLinhda(linha);
+		return alocacaoUsuarioLinhaRepository.getAlocacaoByLinha(linha);
 	}
 }
