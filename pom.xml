@@ -161,6 +161,12 @@
 		</dependency>
 
 		<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>${postgresql.version}</version><!-- $NO-MVN-MAN-VER$ -->
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-ejb_3.0_spec</artifactId>
 			<version>1.0.1</version>
