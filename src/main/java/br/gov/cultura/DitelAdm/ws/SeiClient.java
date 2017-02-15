@@ -10,6 +10,7 @@ import java.util.Base64;
 import javax.xml.rpc.ServiceException;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import br.gov.cultura.DitelAdm.wsdl.Assunto;
 import br.gov.cultura.DitelAdm.wsdl.Destinatario;
@@ -22,6 +23,7 @@ import br.gov.cultura.DitelAdm.wsdl.SeiPortType;
 import br.gov.cultura.DitelAdm.wsdl.SeiServiceLocator;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
+@Component
 public class SeiClient {
 
 	private SeiPortType seiWs;
