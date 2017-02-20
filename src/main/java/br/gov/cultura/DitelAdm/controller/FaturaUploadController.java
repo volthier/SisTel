@@ -109,7 +109,8 @@ public class FaturaUploadController {
 
 			} catch (IOException | RuntimeException e) {
 				redirectAttributes.addFlashAttribute("messageErro",
-						"Falha ao carregar fatura! Erro:" + file.getOriginalFilename() + " => " + e.getMessage());
+						"Falha ao carregar fatura! Erro:" + file.getOriginalFilename() + " => " + e);
+				throw e;
 			}
 		} else {
 			redirectAttributes.addFlashAttribute("messageErro",

@@ -78,7 +78,7 @@ public class AlocacaoController {
 
 		return mv;
 	}
-
+	
 	@RequestMapping("/devolver")
 	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro,
 			HttpSession session) {

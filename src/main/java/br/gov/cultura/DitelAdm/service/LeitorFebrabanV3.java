@@ -247,7 +247,7 @@ public class LeitorFebrabanV3 {
 				resumo.setCnl(Integer.parseInt(data.substring(78, 83)));
 
 				/** Numero do Recurso */
-				String numero = data.substring(83, 99);
+				String numero = data.substring(83, 99).trim();
 				resumo.setNumRecurso(numero);
 				int a = 0;
 				try {
@@ -267,7 +267,7 @@ public class LeitorFebrabanV3 {
 				try {
 					if (a == 0) {
 						System.err.println(" Acrescentando 9º digito ao numero: ");
-						numero = data.substring(83, 85).concat("9").concat(data.substring(85, 99));
+						numero = data.substring(83, 85).concat("9").concat(data.substring(85, 99)).trim();
 						System.out.print("numero modificado para: " + numero);
 						Linha linha = cadastroLinhaService.getLinhaRegistrada(numero);
 						if (linha != null) {
@@ -663,7 +663,7 @@ public class LeitorFebrabanV3 {
 				 * 350);
 				 */
 				for (Resumo r : resumoLista) {
-					if (r.getNumRecurso().equals(data.substring(83, 99))) {
+					if (r.getNumRecurso().equals(data.substring(83, 99).trim())) {
 						chamadas.setResumo(r);
 						if (categoriaChamadaLista.isEmpty()) {
 							categoriaChamadaLista.add(categoriaChamada);
@@ -850,7 +850,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				for (Resumo r : resumoLista) {
-					if (r.getNumRecurso().equals(data.substring(83, 99))) {
+					if (r.getNumRecurso().equals(data.substring(83, 99).trim())) {
 						servicos.setResumo(r);
 						if (categoriaServicoLista.isEmpty()) {
 							categoriaServicoLista.add(categoriaServico);
@@ -1240,7 +1240,7 @@ public class LeitorFebrabanV3 {
 				 */
 
 				for (Resumo r : resumoLista) {
-					if (r.getNumRecurso().equals(data.substring(78, 94))) {
+					if (r.getNumRecurso().equals(data.substring(78, 94).trim())) {
 						planos.setResumo(r);
 						if (categoriaPlanoLista.isEmpty()) {
 							planos.setCategoriaplano(categoriaPlano);
@@ -1311,7 +1311,7 @@ public class LeitorFebrabanV3 {
 				 *
 				 * Numero do Telefone
 				 */
-				ajustes.setNumRecurso(data.substring(78, 94));
+				ajustes.setNumRecurso(data.substring(78, 94).trim());
 
 				/** Tipo do Plano */
 				ajustes.setTipo(data.substring(94, 95));
