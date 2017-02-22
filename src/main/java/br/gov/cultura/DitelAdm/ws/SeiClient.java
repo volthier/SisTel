@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 
 import javax.xml.rpc.ServiceException;
 
@@ -19,6 +21,7 @@ import br.gov.cultura.DitelAdm.wsdl.Interessado;
 import br.gov.cultura.DitelAdm.wsdl.Procedimento;
 import br.gov.cultura.DitelAdm.wsdl.Remetente;
 import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
+import br.gov.cultura.DitelAdm.wsdl.RetornoInclusaoDocumento;
 import br.gov.cultura.DitelAdm.wsdl.SeiPortType;
 import br.gov.cultura.DitelAdm.wsdl.SeiServiceLocator;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
@@ -53,43 +56,66 @@ public class SeiClient {
 		}
 		return unidades;
 	}
+	
+	public RetornoGeracaoProcedimento gerarProcedimentoAlocacao() throws RemoteException{
+		Procedimento p = new Procedimento();
+		p.setIdTipoProcedimento("100000513");
+		p.setAssuntos(new Assunto[0]);
+		p.setInteressados(new Interessado[0]);
+		p.setObservacao("");
+		p.setNivelAcesso("");
+		
+		//Unidade 110000073 -- DITEL -- Divisão de Telefonia e Serviços
+		//Unidade 110000069 -- COSIN -- Coordenação de Sistemas de Informação
+		RetornoGeracaoProcedimento retorno = seiWs.gerarProcedimento(siglaSistema, idServico, "110000073", p, new Documento[0], new String[0], new String[0], null, null, null, null, null);
+		return retorno;
+		
+	}
 
-	public RetornoGeracaoProcedimento enviarFaturaSei(Procedimento proc, Documento doc) throws IOException {
-		RetornoGeracaoProcedimento response;
-		try {
-			//Tipo de processo = 100000513 -- Projetos de TI
-			//Unidade = 110000073 -- DITEL -- Divisão de Telefonia e Serviços
-			//110000069 -- COSIN -- Coordenação de Sistemas de Informação
-			proc.setIdTipoProcedimento("100000513");
-			proc.setEspecificacao("Teste");
-			proc.setAssuntos(new Assunto[0]);
-			proc.setInteressados(new Interessado[0]);
-			proc.setObservacao("");
-			proc.setNivelAcesso("0");
+	public RetornoInclusaoDocumento enviarFatura(String processo, byte[] fatura) throws IOException {
+		byte[] encoded = Base64.getEncoder().encode(fatura);
+		String encodedFile = new String(encoded, "ISO-8859-1");
+		
+		Documento doc = new Documento();
+		doc.setTipo("R");
+		doc.setIdProcedimento(processo);
+		doc.setIdSerie("84");
+		doc.setNumero("");
+		doc.setData(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+		doc.setDescricao("Fatura telefônica");
+		doc.setRemetente(new Remetente("SISTEL","Sistema de Telefonia"));
+		doc.setInteressados(new Interessado[0]);
+		doc.setDestinatarios(new Destinatario[0]);
+		doc.setObservacao("");
+		doc.setNomeArquivo("fatura.pdf");
+		doc.setConteudo(encodedFile);
+		doc.setNivelAcesso("0");
 
-			Path memo = Paths.get("src/main/resources/templates/MemorandoFaturaTelefonica.html");
-			byte[] encoded = Base64.getEncoder().encode(Files.readAllBytes(memo));
-			String encodedFile = new String(encoded, "ISO-8859-1");
-			
-			doc.setTipo("G");
-			doc.setIdProcedimento("");
-			doc.setIdSerie("12");
-			doc.setNumero("");
-			doc.setData("");
-			doc.setDescricao("");
-			doc.setRemetente(new Remetente("",""));
-			doc.setInteressados(new Interessado[0]);
-			doc.setDestinatarios(new Destinatario[0]);
-			doc.setObservacao("");
-			doc.setNomeArquivo("");
-			doc.setConteudo(encodedFile);
-			doc.setNivelAcesso("0");
-			response = seiWs.gerarProcedimento(siglaSistema, idServico, "110000069", proc, new Documento[] { doc }, new String[0], new String[0],
-					"S", "N", null, null, "N");
-		} catch (RemoteException e) {
-//			e.printStackTrace();
-			return null;
-		}
+		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000069", doc);
+		return response;
+	}
+	
+	public RetornoInclusaoDocumento enviarMemorando(String processo) throws IOException {
+		Path memo = Paths.get("src/main/resources/templates/MemorandoFaturaTelefonica.html");
+		byte[] encoded = Base64.getEncoder().encode(Files.readAllBytes(memo));
+		String encodedFile = new String(encoded, "ISO-8859-1");
+		
+		Documento doc = new Documento();
+		doc.setTipo("G");
+		doc.setIdProcedimento(processo);
+		doc.setIdSerie("12");
+		doc.setNumero("");
+		doc.setData("");
+		doc.setDescricao("");
+		doc.setRemetente(new Remetente("",""));
+		doc.setInteressados(new Interessado[0]);
+		doc.setDestinatarios(new Destinatario[0]);
+		doc.setObservacao("");
+		doc.setNomeArquivo("");
+		doc.setConteudo(encodedFile);
+		doc.setNivelAcesso("0");
+		
+		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000069", doc);
 		return response;
 	}
 

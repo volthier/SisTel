@@ -1,9 +1,12 @@
 package br.gov.cultura.DitelAdm.model;
 // Generated 07/11/2016 17:41:47 by Hibernate Tools 4.3.5.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +25,6 @@ public class AlocacaoSei implements java.io.Serializable {
 	private int idAlocacaoSei;
 	private AlocacaoUsuarioLinha alocacaoUsuarioLinha;
 	private Resumo resumo;
-	private String numeroProcessoSei;
 	private boolean ressarcimento;
 
 	public AlocacaoSei() {
@@ -33,12 +35,11 @@ public class AlocacaoSei implements java.io.Serializable {
 		this.idAlocacaoSei = idAlocacaoSei;
 		this.alocacaoUsuarioLinha = alocacaoUsuarioLinha;
 		this.resumo = resumo;
-		this.numeroProcessoSei = numeroProcessoSei;
 		this.ressarcimento = ressarcimento;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id_alocacao_sei", unique = true, nullable = false)
 	public int getIdAlocacaoSei() {
 		return this.idAlocacaoSei;
@@ -66,15 +67,6 @@ public class AlocacaoSei implements java.io.Serializable {
 
 	public void setResumo(Resumo resumo) {
 		this.resumo = resumo;
-	}
-
-	@Column(name = "numero_processo_sei", nullable = false)
-	public String getNumeroProcessoSei() {
-		return this.numeroProcessoSei;
-	}
-
-	public void setNumeroProcessoSei(String numeroProcessoSei) {
-		this.numeroProcessoSei = numeroProcessoSei;
 	}
 
 	@Column(name = "ressarcimento", nullable = false)

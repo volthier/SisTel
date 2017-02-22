@@ -32,7 +32,6 @@ public class SeiRequestHandler extends BasicHandler{
 			DocumentSource ds = new DocumentSource(doc);
 			part.setContent(ds);
 			message.saveChanges();
-			System.out.println(context.getMessage().getSOAPPart().getEnvelope().toString());
 		} catch (SOAPException e) {
 			e.printStackTrace();
 			throw new AxisFault(e.getMessage(),e);

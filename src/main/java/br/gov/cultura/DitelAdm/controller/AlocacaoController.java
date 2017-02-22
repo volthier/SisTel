@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
 import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
+import br.gov.cultura.DitelAdm.model.AlocacaoSei;
 import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
 import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.model.Chip;
@@ -38,6 +40,8 @@ import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
 
 @Controller
 @RequestMapping("/alocacoes")
@@ -55,6 +59,8 @@ public class AlocacaoController {
 	private CadastroLinhaService cadastroLinhaService;
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
+	@Autowired
+	private SeiClient sei;
 
 	@RequestMapping("/disponibilizar")
 	public ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
@@ -93,7 +99,7 @@ public class AlocacaoController {
 	public String salvar(@Validated AlocacaoUsuarioLinha alocacaoUsuarioLinha,
 			@Validated AlocacaoLinhaCategoria alocacaoLinhaCategoria, @Validated AlocacaoLinhaChip alocacaoLinhaChip,
 			@Validated AlocacaoLinhaDispositivo alocacaoLinhaDispositivo, Errors errors, RedirectAttributes attributes,
-			HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ParseException {
+			HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ParseException, RemoteException {
 
 		if (servletRequest.getParameter("idAlocacaoUsuarioLinha") != null) {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacaoUsuarioLinha"));
@@ -141,6 +147,12 @@ public class AlocacaoController {
 			attributes.addFlashAttribute("mensagem", "Registrada devolução de dispositivo do usuario!");
 			return "redirect:/alocacoes/devolver";
 		} else if (servletRequest.getParameter("dtRecebimento") != null) {
+			RetornoGeracaoProcedimento processo = sei.gerarProcedimentoAlocacao();
+			
+			alocacaoUsuarioLinha.setNumeroProcessoSei(processo.getIdProcedimento());
+			alocacaoUsuarioLinha.setNumeroExternoProcessoSei(processo.getProcedimentoFormatado());
+			alocacaoUsuarioLinha.setLinkAcessoSei(processo.getLinkAcesso());
+
 			alocacaoService.salvar(alocacaoUsuarioLinha);
 			alocacaoService.salvar(alocacaoLinhaChip);
 			alocacaoService.salvar(alocacaoLinhaDispositivo);

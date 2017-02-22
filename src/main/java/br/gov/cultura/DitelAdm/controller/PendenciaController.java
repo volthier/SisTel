@@ -68,8 +68,8 @@ public class PendenciaController {
 	    					Integer.parseInt(item[1].toString()),
 	    					dtDevolucao,
 	    					dtRecebido,
-	    					Integer.parseInt(item[4].toString()),
-	    					Integer.parseInt(item[5].toString()));
+	    					Integer.parseInt(item[7].toString()),
+	    					Integer.parseInt(item[8].toString()));
 	    	lista.add(alocacao);
 	    }
 	    

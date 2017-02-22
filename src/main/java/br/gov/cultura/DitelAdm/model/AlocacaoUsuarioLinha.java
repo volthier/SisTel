@@ -34,23 +34,28 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 	private Usuario usuario;
 	private Date dtDevolucao;
 	private Date dtRecebimento;
+	private String numeroProcessoSei;
+	private String numeroExternoProcessoSei;
+	private String linkAcessoSei;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<AlocacaoSei> alocacaoSeis = new HashSet(0);
 
 	public AlocacaoUsuarioLinha() {
 	}
 
-	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtRecebimento) {
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtRecebimento, String numeroProcessoSei) {
 		this.linha = linha;
 		this.usuario = usuario;
 		this.dtRecebimento = dtRecebimento;
+		this.numeroProcessoSei = numeroProcessoSei;
 	}
 
-	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebimento,Set<AlocacaoSei> alocacaoSeis) {
+	public AlocacaoUsuarioLinha(Linha linha, Usuario usuario, Date dtDevolucao, Date dtRecebimento, String numeroProcessoSei, Set<AlocacaoSei> alocacaoSeis) {
 		this.linha = linha;
 		this.usuario = usuario;
 		this.dtDevolucao = dtDevolucao;
 		this.dtRecebimento = dtRecebimento;
+		this.numeroProcessoSei = numeroProcessoSei;
 		this.alocacaoSeis = alocacaoSeis;
 	}
 
@@ -112,6 +117,34 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 	public void setDtRecebimento(Date dtRecebimento) {
 		this.dtRecebimento = dtRecebimento;
 	}
+	
+	@Column(name = "numero_processo_sei", nullable = false)
+	public String getNumeroProcessoSei() {
+		return this.numeroProcessoSei;
+	}
+
+	public void setNumeroProcessoSei(String numeroProcessoSei) {
+		this.numeroProcessoSei = numeroProcessoSei;
+	}
+	
+	@Column(name = "numero_externo_processo_sei", nullable = false)
+	public String getNumeroExternoProcessoSei() {
+		return numeroExternoProcessoSei;
+	}
+
+	public void setNumeroExternoProcessoSei(String numeroExternoProcessoSei) {
+		this.numeroExternoProcessoSei = numeroExternoProcessoSei;
+	}
+
+	@Column(name = "link_acesso_sei", nullable = false)
+	public String getLinkAcessoSei() {
+		return linkAcessoSei;
+	}
+
+	public void setLinkAcessoSei(String linkAcessoSei) {
+		this.linkAcessoSei = linkAcessoSei;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alocacaoUsuarioLinha")
 	public Set<AlocacaoSei> getAlocacaoSeis() {
 		return this.alocacaoSeis;

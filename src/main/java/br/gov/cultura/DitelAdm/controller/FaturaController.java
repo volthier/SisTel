@@ -1,17 +1,29 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 
 import br.gov.cultura.DitelAdm.model.AlocacaoSei;
 import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
@@ -65,6 +77,9 @@ public class FaturaController {
 	
 	@Autowired
 	private SeiClient sei;
+	
+	@Autowired
+	private ViewResolver viewResolver;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody ModelAndView executarFatura() {
@@ -77,7 +92,7 @@ public class FaturaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody ModelAndView executarFatura(HttpServletRequest request) {
+	public @ResponseBody ModelAndView executarFatura(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mv = new ModelAndView("FaturaLinhas");
 		Integer idFatura = Integer.parseInt(request.getParameter("fatura"));
 		Fatura fatura = faturaService.getFatura(idFatura);
@@ -93,18 +108,27 @@ public class FaturaController {
 						List<Chamadas> chamadas = chamadaService.getChamadaResumo(resumo);
 						List<Planos> planos = planoService.getPlanoResumo(resumo);
 						List<Servicos> servicos = servicoService.getServicosResumo(resumo);
+						
 						float valorTotal = this.valorTotal(chamadas, servicos, planos);
+						
 						AlocacaoSei alocacaoSei = new AlocacaoSei();
-						alocacaoSei.setNumeroProcessoSei("123456");
-						alocacaoSei.setRessarcimento((valorTotal > Float.parseFloat(limiteAtesto.getValorLimite())) ? true : false);
+						if(valorTotal > Float.parseFloat(limiteAtesto.getValorLimite())){
+							alocacaoSei.setRessarcimento(true);
+							sei.enviarMemorando(alocacaoUsuarioLinha.getNumeroProcessoSei());
+							sei.enviarFatura(alocacaoUsuarioLinha.getNumeroProcessoSei(), gerarPdfFatura(request, fatura, alocacaoUsuarioLinha));
+						} else {
+							alocacaoSei.setRessarcimento(false);
+						}
 						alocacaoSei.setAlocacaoUsuarioLinha(alocacaoUsuarioLinha);
 						alocacaoSei.setResumo(resumo);
+						
+						alocacaoSeiService.salvar(alocacaoSei);
 						alocacoesSei.add(alocacaoSei);
 					}
 				}
 			}
 		}
-		
+
 		mv.addObject("alocacoesSei", alocacoesSei);
 		mv.addObject("fatura", fatura);
 		
@@ -150,7 +174,7 @@ public class FaturaController {
 		return mv;
 	}
 	
-	public float valorTotal(List<Chamadas> chamadas, List<Servicos> servicos, List<Planos> planos) {
+	private float valorTotal(List<Chamadas> chamadas, List<Servicos> servicos, List<Planos> planos) {
 		float valorTotal = 0;
 		if (!chamadas.isEmpty()) {
 			for (Chamadas chamada : chamadas) {
@@ -171,5 +195,25 @@ public class FaturaController {
 		}
 		
 		return valorTotal;
+	}
+	
+	private byte[] gerarPdfFatura(HttpServletRequest request, Fatura fatura, AlocacaoUsuarioLinha alocacaoUsuarioLinha) throws Exception{
+		View view = this.viewResolver.resolveViewName("FaturaLinhas", Locale.US);
+		MockHttpServletResponse mockResp = new MockHttpServletResponse();
+		ModelAndView mv = this.gerarResumo(fatura.getIdFatura(), alocacaoUsuarioLinha.getIdAlocacaoUsuarioLinha(), request);
+		
+		view = this.viewResolver.resolveViewName("Resumo", Locale.US);
+		view.render(mv.getModelMap(), request, mockResp);
+		
+		Document document = new Document(PageSize.A4,2,2,10,10);
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PdfWriter writer = PdfWriter.getInstance(document, baos);
+		
+		document.open();
+		XMLWorkerHelper.getInstance().parseXHtml(writer, document, new ByteArrayInputStream(mockResp.getContentAsByteArray()));
+		document.close();
+		
+		return baos.toByteArray();
 	}
 }

@@ -6,12 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,8 +94,8 @@ public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa
 	    					Integer.parseInt(item[1].toString()),
 	    					dtDevolucao,
 	    					dtRecebido,
-	    					Integer.parseInt(item[4].toString()),
-	    					Integer.parseInt(item[5].toString()));
+	    					Integer.parseInt(item[7].toString()),
+	    					Integer.parseInt(item[8].toString()));
 	    	lista.add(alocacao);
 	    }
 		
