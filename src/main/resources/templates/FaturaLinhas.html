@@ -33,7 +33,7 @@
 								<td th:text="${alocacao.alocacaoUsuarioLinha.usuario.nomeUsuario}"></td>
 								<td th:text="${alocacao.alocacaoUsuarioLinha.linha.numeroLinha}"></td>
 								<td th:text="${alocacao.ressarcimento}"></td>
-								<td th:text="${alocacao.ressarcimento}"></td>
+								<td th:text="${alocacao.alocacaoUsuarioLinha.numeroExternoProcessoSei}"></td>
 								<td><a class="btn btn-primary" th:href="@{'/fatura/resumo/' + ${fatura.idFatura} + '/' + ${alocacao.alocacaoUsuarioLinha.idAlocacaoUsuarioLinha}}" role="button">Resumo</a></td>
 							</tr>
 						</tbody>
