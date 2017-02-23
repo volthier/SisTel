@@ -29,7 +29,7 @@ import br.gov.cultura.DitelAdm.model.Linha;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "resumo", catalog = "diteladmdev")
+@Table(name = "resumo", catalog = "dbditel")
 public class Resumo implements java.io.Serializable {
 
 	private Integer idResumo;

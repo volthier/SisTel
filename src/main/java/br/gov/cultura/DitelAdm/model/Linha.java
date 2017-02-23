@@ -24,7 +24,7 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "linha", catalog = "diteladmdev")
+@Table(name = "linha", catalog = "dbditel")
 public class Linha implements java.io.Serializable {
 
 	private Integer idLinha;

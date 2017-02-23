@@ -39,7 +39,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	var action = form.data('url-consulta');
 	
 	if(flag == 1){
-		action ='/dispositivos';
+		action ='/Sistel/dispositivos';
 	if(!action.endsWith('/')){
 		action +='/' ;
 	}
@@ -49,7 +49,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 
 	}
 	else if(flag == 2){
-		action ='/usuarios';
+		action ='/Sistel/usuarios';
 		if(!action.endsWith('/')){
 			action +='/' ;
 		}
@@ -60,8 +60,8 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	
 	else if(flag == 3){
-		action ='/chips';
-		if(!action.endsWith('/')){
+		action ='/Sistel/chips';
+		if(!action.endsWith('')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -70,7 +70,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 				
 	}
 	else if(flag == 4){
-		action ='/linhas';
+		action ='/Sistel/linhas';
 		if(!action.endsWith('/')){
 			action +='/' ;
 		}

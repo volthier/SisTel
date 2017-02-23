@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "limite_atesto", catalog = "diteladmdev")
+@Table(name = "limite_atesto", catalog = "dbditel")
 public class LimiteAtesto implements java.io.Serializable {
 
 	private Integer idLimiteAtesto;

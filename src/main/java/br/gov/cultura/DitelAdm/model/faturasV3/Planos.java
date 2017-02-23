@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "planos", catalog = "diteladmdev")
+@Table(name = "planos", catalog = "dbditel")
 public class Planos implements java.io.Serializable {
 
 	private Integer idPlanos;
