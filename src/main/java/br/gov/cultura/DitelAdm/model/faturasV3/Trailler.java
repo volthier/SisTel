@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "trailler", catalog = "diteladmdev")
+@Table(name = "trailler", catalog = "dbditel")
 public class Trailler implements java.io.Serializable {
 
 	private Integer idTrailler;

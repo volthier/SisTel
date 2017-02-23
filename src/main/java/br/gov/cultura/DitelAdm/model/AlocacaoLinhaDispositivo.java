@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "alocacao_linha_dispositivo", catalog = "diteladmdev")
+@Table(name = "alocacao_linha_dispositivo", catalog = "dbditel")
 public class AlocacaoLinhaDispositivo implements java.io.Serializable {
 
 	private Integer idAlocacaoLinhaDispositivo;

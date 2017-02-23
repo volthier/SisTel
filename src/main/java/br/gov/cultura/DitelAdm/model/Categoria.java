@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "categoria", catalog = "diteladmdev", uniqueConstraints = @UniqueConstraint(columnNames = "descricao_categoria"))
+@Table(name = "categoria", catalog = "dbditel", uniqueConstraints = @UniqueConstraint(columnNames = "descricao_categoria"))
 public class Categoria implements java.io.Serializable {
 
 	private Integer idCategoria;

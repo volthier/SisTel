@@ -19,7 +19,7 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "alocacao_sei", catalog = "diteladmdev")
+@Table(name = "alocacao_sei", catalog = "dbditel")
 public class AlocacaoSei implements java.io.Serializable {
 
 	private int idAlocacaoSei;

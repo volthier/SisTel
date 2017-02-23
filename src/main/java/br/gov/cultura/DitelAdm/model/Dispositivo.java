@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "dispositivo", catalog = "diteladmdev")
+@Table(name = "dispositivo", catalog = "dbditel")
 public class Dispositivo implements java.io.Serializable {
 
 	private Integer idDispositivo;

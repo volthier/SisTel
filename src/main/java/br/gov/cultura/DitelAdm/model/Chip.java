@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "chip", catalog = "diteladmdev")
+@Table(name = "chip", catalog = "dbditel")
 public class Chip implements java.io.Serializable {
 
 	private Integer idChip;

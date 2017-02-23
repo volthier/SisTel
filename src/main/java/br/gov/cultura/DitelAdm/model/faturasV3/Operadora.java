@@ -16,7 +16,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "operadora", catalog = "diteladmdev")
+@Table(name = "operadora", catalog = "dbditel")
 public class Operadora implements java.io.Serializable {
 
 	private int codOperadora;
