@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.groupSearchBase("OU=Seguranca,OU=Grupos,OU=Sede")
 				.contextSource()
 				.url("ldap://10.0.0.173:389/DC=minc,DC=intra")
-				.managerDn("CN=72381817115,OU=CGTI,OU=Usuarios,OU=Sede,DC=minc,DC=intra")
-				.managerPassword("789456123");
+				.managerDn("CN="+System.getenv("USERLDAP")+",OU=CGTI,OU=Usuarios,OU=Sede,DC=minc,DC=intra")
+				.managerPassword(System.getenv("PASSLDAP"));
 	}
 }
