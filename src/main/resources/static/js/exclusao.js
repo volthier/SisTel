@@ -40,8 +40,8 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	if(flag == 1){
 		action ='/dispositivos';
-	if(!action.endsWith('/')){
-		action +='/' ;
+	if(!action.endsWith('/Sistel/')){
+		action +='/Sistel/' ;
 	}
 	form.attr('action', action + id); 
 	
@@ -50,8 +50,8 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 2){
 		action ='/usuarios';
-		if(!action.endsWith('/')){
-			action +='/' ;
+		if(!action.endsWith('/Sistel/')){
+			action +='/Sistel/' ;
 		}
 		form.attr('action', action + id); 
 		
@@ -61,8 +61,8 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	else if(flag == 3){
 		action ='/chips';
-		if(!action.endsWith('/')){
-			action +='/' ;
+		if(!action.endsWith('/Sistel/')){
+			action +='/Sistel/' ;
 		}
 		form.attr('action', action + id); 
 		
@@ -71,8 +71,8 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 4){
 		action ='/linhas';
-		if(!action.endsWith('/')){
-			action +='/' ;
+		if(!action.endsWith('/Sistel/')){
+			action +='/Sistel/' ;
 		}
 		form.attr('action', action + id); 
 		
