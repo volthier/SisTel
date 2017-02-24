@@ -114,7 +114,7 @@ public class FaturaController {
 						AlocacaoSei alocacaoSei = new AlocacaoSei();
 						if(valorTotal > Float.parseFloat(limiteAtesto.getValorLimite())){
 							alocacaoSei.setRessarcimento(true);
-							sei.enviarMemorando(alocacaoUsuarioLinha.getNumeroProcessoSei());
+							sei.enviarMemorando(alocacaoUsuarioLinha.getNumeroProcessoSei(), gerarMemorando(request));
 							sei.enviarFatura(alocacaoUsuarioLinha.getNumeroProcessoSei(), gerarPdfFatura(request, fatura, alocacaoUsuarioLinha));
 						} else {
 							alocacaoSei.setRessarcimento(false);
@@ -215,5 +215,13 @@ public class FaturaController {
 		document.close();
 		
 		return baos.toByteArray();
+	}
+	
+	private byte[] gerarMemorando(HttpServletRequest request) throws Exception {
+		View view = this.viewResolver.resolveViewName("MemorandoFaturaTelefonica", Locale.US);
+		MockHttpServletResponse mockResp = new MockHttpServletResponse();
+		view.render(new ModelAndView().getModelMap(), request, mockResp);
+		
+		return mockResp.getContentAsByteArray();
 	}
 }

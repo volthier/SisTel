@@ -8,11 +8,15 @@ import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.xml.rpc.ServiceException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
 
 import br.gov.cultura.DitelAdm.wsdl.Assunto;
 import br.gov.cultura.DitelAdm.wsdl.Destinatario;
@@ -36,6 +40,9 @@ public class SeiClient {
 
 	@Value("${sei.servico}")
 	private String idServico;
+	
+	@Autowired
+	private ViewResolver viewResolver;
 
 	public SeiClient() {
 		SeiServiceLocator locator = new SeiServiceLocator();
@@ -95,9 +102,8 @@ public class SeiClient {
 		return response;
 	}
 	
-	public RetornoInclusaoDocumento enviarMemorando(String processo) throws IOException {
-		Path memo = Paths.get("src/main/resources/templates/MemorandoFaturaTelefonica.html");
-		byte[] encoded = Base64.getEncoder().encode(Files.readAllBytes(memo));
+	public RetornoInclusaoDocumento enviarMemorando(String processo, byte[] memorando) throws IOException {
+		byte[] encoded = Base64.getEncoder().encode(memorando);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		
 		Documento doc = new Documento();
