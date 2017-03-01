@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Consulta</title>
+</head>
+<section layout:fragment="conteudo">
+
+	<div layout:include="MensagemSucesso"></div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title dt-dispositivo-panel">Dispositivos Cadastrados</h1>
+				<a class="btn btn-link dt-link-panel" th:href="@{/dispositivos/novo}">Novo Dispositivo</a> 
+				<a class="btn btn-link dt-link-panel" th:href="@{/usuarios/novo}">Nova Pessoa</a> 
+				<a class="btn btn-link dt-link-panel" th:href="@{/chips/novo}">Novo Chip</a> 
+				<a class="btn btn-link dt-link-panel" th:href="@{/linhas/nova}">Nova Linha</a>
+			</div>
+		</div>
+		
+		
+		<div class="panel-body">
+
+			<form method="GET" class="form-horizontal"
+				th:action="@{/dispositivos} or @{/pessoas} or @{/consulta} or @{/chips} or @{/linhas}"
+				th:object="${filtro}">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input class="form-control" placeholder="O que pesquisar?"
+								autofocus="autofocus"></input> <span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+
+						</div>
+					</div>
+				</div>
+			</form>
+			
+		
+			
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md2">Marca</th>
+							<th class="text-center col-md2">Modelo</th>
+							<th class="text-center col-md2">Número de Série</th>
+							<th class="text-center col-md2">IMEI</th>
+							<th class="text-center col-md2">Patrimonio</th>
+							<th class="text-center col-md2">Tipo</th>
+							<th class="text-right col-md2">Valor</th>
+							<th class="col-md2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="dispositivo : ${dispositivos}">
+							<td class="text-center" th:text="${dispositivo.idDispositivo}"></td>
+							<td class="text-center" th:text="${dispositivo.marcaDispositivo}"></td>
+							<td class="text-center" th:text="${dispositivo.modeloDispositivo}"></td>
+							<td class="text-center" th:text="${dispositivo.numeroSerieDispositivo}"></td>
+							<td class="text-center" th:text="${dispositivo.imeiDispositivo}"></td>
+							<td class="text-center" th:text="${dispositivo.patrimonioDispositivo}"></td>
+							<td class="text-center" th:text="${dispositivo.tipoDispositivo}"></td>
+							<td class="text-right" th:text="|R$ ${{dispositivo.valorDispositivo}}|"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/dispositivos/{id}(id=${dispositivo.idDispositivo})}"
+								title="Editar" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-excludid=${dispositivo.idDispositivo}, data-flag='1', data-exclude=${dispositivo.modeloDispositivo}"
+								title="Remover" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
+								Dispositivo econtrado!!!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th>Nome</th>
+							<th class="text-center col-md3">CPF</th>
+							<!-- <th class="text-center col-md2">Matricula</th>
+							<th class="text-center col-md2">Vinculo</th> -->
+							<th class="text-center col-md2">Setor</th>
+							<th class="text-center col-md2">Cargo</th>
+							 <th class="text-center col-md2">DAS</th>
+							<!--<th class="text-center col-md1">Email</th> -->
+							<th class="col-md2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="usuario : ${usuarios}">
+							<td class="text-center" th:text="${usuario.idUsuario}"></td>
+							<td th:text="${usuario.nomeUsuario}"></td>
+							<td class="text-center" th:text=" ${usuario.cpfUsuario}"></td>
+							<!-- <td class="text-right" th:text="  ${usuario.matricula}"></td>
+							<td class="text-center" th:text=" ${usuario.vinculo}"></td> -->
+							<td class="text-center" th:text=" ${usuario.lotacaoUsuario}"></td>
+							<td class="text-center" th:text=" ${usuario.cargoUsuario}"></td>
+							<td class="text-center" th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
+							<!--<td class="text-center" th:text=" ${usuario.email}"></td> -->
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-flag='2', data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
+								title="Remover" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td colspan="10" th:if="${#lists.isEmpty(usuarios)}">Nenhuma
+								Pessoa encontrada!!!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md3">Numero de Serie do Chip</th>
+							<th class="text-center col-md2">Tipo</th>
+							<th class="col-md2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="chip : ${chips}">
+							<td class="text-center" th:text="${chip.idChip}"></td>
+							<td th:text="${chip.numeroSerieChip}"></td>
+							<td class="text-center" th:text="${chip.tipoChip}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/chips/{id}(id=${chip.idChip})}" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-flag='3', data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
+								title="Remover" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td colspan="4" th:if="${#lists.isEmpty(chips)}">Nenhum Chip
+								encontrado!!!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md3">Linha</th>
+							<th class="col-md2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="linha : ${linhas}">
+							<td class="text-center" th:text="${linha.idLinha}"></td>
+							<td th:text="${linha.numeroLinha}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-flag='4', data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
+								title="Remover" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
+								Linha encontrada!!!</td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		<div layout:include="DialogoConfirmacaoExclusao"></div>
+	</div>
+</section>
+</html>

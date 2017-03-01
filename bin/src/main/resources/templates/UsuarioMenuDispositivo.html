@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Dispositivos</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<form class="form-horizontal" method="POST" th:action="@{/menu-usuario}">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title dt-dispositivo-panel">Dispositivos</h1>
+					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar
+						para Lista</a>
+				</div>
+			</div>
+
+			<div class="painel-body">
+				<div>
+					<table border="1" class="tableusuario" style="border-radius: 20px;">
+						<tr>
+							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden; padding: 10px;border-radius: 20px;">
+								Nome:<label>nome</label>
+							</td>
+							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden;">
+								CPF:<label>cpf</label>
+							</td>
+							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden;">
+								EMAIL:<label>email</label>
+							</td>
+							<td class="tdusuaio" style="border-bottom: hidden;">
+							</td>
+						</tr>
+						<tr>
+							<td class="tdusuaio" style="border-right: hidden; padding: 10px">
+								Gerência:<label>gerencia</label>
+							</td>
+							<td class="tdusuaio" style="border-right: hidden">
+								Cargo:<label>cargo</label>
+							</td>
+							<td class="tdusuaio" style="border-right: hidden">
+								Vinculo:<label>vinculo</label>
+							</td>
+							<td class="tdusuaio" style="border-top: hidden">
+								DAS:<label>das</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<br></br>
+				
+				<div id="botaodisp" class="form-group" style="width: 100%">
+				<div  id="botaodisp" class="col-sm-offset-2 col-sm-10" style="width: 100%">
+					<button id="botaodisp" type="submit" class="btn btn-primary" style="float: left">Solicitar Dispositivo</button>
+				
+					<button id="botaodisp" type="submit" class="btn btn-primary" style="float: right">Devolver Dispositivo</button>
+				</div>
+				</div>
+				
+				<br></br>
+				
+				<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md2">Numero</th>
+							<th class="text-center col-md2">Tipo</th>
+							<th class="text-center col-md2">Marca</th>
+							<th class="text-center col-md2">Modelo</th>
+							<th class="text-center col-md2">Fatura</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								title="Farura" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-list-alt"></span></a>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+				
+			</div>
+		</div>
+	</form>
+</section>
+</html>
