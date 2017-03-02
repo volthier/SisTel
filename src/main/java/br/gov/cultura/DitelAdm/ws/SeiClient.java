@@ -121,7 +121,7 @@ public class SeiClient {
 		doc.setConteudo(encodedFile);
 		doc.setNivelAcesso("0");
 		
-		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000069", doc);
+		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
 		return response;
 	}
 
