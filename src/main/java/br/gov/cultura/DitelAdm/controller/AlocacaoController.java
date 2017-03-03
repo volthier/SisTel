@@ -3,6 +3,9 @@ package br.gov.cultura.DitelAdm.controller;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -66,20 +69,25 @@ public class AlocacaoController {
 	public ModelAndView alocar(Usuario user,@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
+		todosUsuarios.sort((user1,user2)-> user1.getNomeUsuario().compareTo(user2.getNomeUsuario()));
 		mv.addObject("usuarios", todosUsuarios);
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
+		todosDispositivos.sort((d1,d2)-> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
 		mv.addObject("dispositivos", todosDispositivos);
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
 		todasLinhas.removeAll(todasLinhasNaoDisponiveis);
+		todasLinhas.sort((l1,l2) -> l1.getNumeroLinha().compareTo(l2.getNumeroLinha()));
 		mv.addObject("linhas", todasLinhas);
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		List<Chip> todosChipsNaoDisponiveis = cadastroChipService.listarChipDisponivel();
 		todosChips.removeAll(todosChipsNaoDisponiveis);
+		todosChips.sort((c1,c2)->c1.getNumeroSerieChip().compareTo(c2.getNumeroSerieChip()));
 		mv.addObject("chips", todosChips);
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
+		todasCategorias.sort((cat1,cat2)-> cat1.getDescricaoCategoria().compareTo(cat2.getDescricaoCategoria()));
 		mv.addObject("categorias", todasCategorias);
 
 		return mv;
@@ -90,6 +98,7 @@ public class AlocacaoController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
 		List<AlocacaoUsuarioLinha> todosUsuarioLinha = alocacaoService.getIdAlocacaoUsuarioLinha();
+		todosUsuarioLinha.sort((ul1,ul2)-> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
 		mv.addObject("usuariosDispositivos", todosUsuarioLinha);
 
 		return mv;

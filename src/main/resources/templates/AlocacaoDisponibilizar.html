@@ -29,7 +29,7 @@
 					<label class="col-sm-2 control-label">Nome</label>
 					<div class="col-sm-4">
 						<select name="usuario" class="col-sm-4 form-control">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="usuario : ${usuarios}"
 								th:value="${usuario.idUsuario}" th:valuetype="usuario"
 								th:text="${usuario.nomeUsuario}"></option>
@@ -41,7 +41,7 @@
 					<label class="col-sm-2 control-label">Dispositivo</label>
 					<div class="col-sm-4">
 						<select name="dispositivo" class="col-sm-4 form-control">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="dispositivo : ${dispositivos}"
 								th:value="${dispositivo.idDispositivo}"
 								th:valuetype="dispositivo"
@@ -54,7 +54,7 @@
 					<label class="col-sm-2 control-label">Chip</label>
 					<div class="col-sm-4">
 						<select name="chip" class="form-control">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="chip : ${chips}" th:value="${chip.idChip}"
 								th:valuetype="chip" th:text="${chip.tipoChip+' | '+chip.numeroSerieChip}"></option>
 						</select>
@@ -65,7 +65,7 @@
 					<label class="col-sm-2 control-label">Linha</label>
 					<div class="col-sm-4">
 						<select name="linha" class="col-sm-4 form-control">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="linha : ${linhas}" th:value="${linha.idLinha}"
 								th:valuetype="linha" th:text="${linha.numeroLinha}"></option>
 						</select>
@@ -76,7 +76,7 @@
 					<label for="status" class="col-sm-2 control-label">Plano da linha</label>
 					<div class="col-sm-2">
 						<select name="categoria" class="form-control">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="categoria : ${categorias}"	th:value="${categoria.idCategoria}" 
 							th:valuetype="categoria" th:text="${categoria.descricaoCategoria}" />
 						</select>
@@ -84,9 +84,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="dataVencimento" class="col-sm-2 control-label">Data
-						do fornecimento</label>
-						
+					<label for="dataVencimento" class="col-sm-2 control-label">Data	do fornecimento</label>
 					<div id="datetimepicker" class="col-sm-4 input-group input-append date">
 						<input type="text" name="dtRecebimento" class="col-sm-2 form-control"/>
 						<span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
@@ -102,6 +100,8 @@
 
 			</div>
 		</div>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 	</form>
 	
 </section>

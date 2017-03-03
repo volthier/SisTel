@@ -26,7 +26,7 @@
 					<label class="col-sm-2 control-label">Nome</label>
 					<div class="col-sm-4">
 						<select name="idAlocacaoUsuarioLinha" class="col-sm-4 form-control">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="devolucao : ${usuariosDispositivos}" th:if="${devolucao.dtDevolucao == null}"
 								th:value="${devolucao.idAlocacaoUsuarioLinha}"
 								th:utext="${devolucao.usuario.nomeUsuario+' | '+devolucao.linha.numeroLinha}"></option>
@@ -49,6 +49,8 @@
 				</div>
 			</div>
 		</div>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 	</form>
 
 </section>

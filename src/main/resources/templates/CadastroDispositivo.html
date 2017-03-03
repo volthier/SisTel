@@ -99,7 +99,7 @@
 					<label for="status" class="col-sm-2 control-label">Tipo</label>
 					<div class="col-sm-2">
 						<select class="form-control" th:field="*{tipoDispositivo}">
-							<option value="">----Select----</option>
+							<option value="">----Selecione----</option>
 							<option th:each="tipo : ${tipoDispositivoMap.entrySet()}"
 								th:value="${tipo.key}" th:text="${tipo.value}" />
 						</select>

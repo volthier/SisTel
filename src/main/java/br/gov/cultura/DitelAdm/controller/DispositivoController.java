@@ -88,7 +88,7 @@ public class DispositivoController {
 	    tipoDispositivoMap.put("Celular","Celular");
 	    tipoDispositivoMap.put("Tablet","Tablet");
 	    tipoDispositivoMap.put("Modem","Modem");
-	    tipoDispositivoMap.put("NoteBook","NoteBook");
+//	    tipoDispositivoMap.put("NoteBook","NoteBook");
 	    return tipoDispositivoMap;
 	   
 	}
