@@ -29,7 +29,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="alocacao : ${#lists.sort(alocacoesSei)}">
+							<tr th:each="alocacao : ${alocacoesSei}">
 								<td th:text="${alocacao.alocacaoUsuarioLinha.usuario.nomeUsuario}"></td>
 								<td th:text="${alocacao.alocacaoUsuarioLinha.linha.numeroLinha}"></td>
 								<td th:text="${alocacao.ressarcimento}"></td>
