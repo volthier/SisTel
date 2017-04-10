@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<div id="confirmacaoEmailModal" class="modal fade" tabindex="-1" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<form th:attr="data-url-pendencia=@{/pendencia}" method="POST">
+			<input type="hidden" name="_method" value="POST"/>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Autorização de Alocação</h4>
+				</div>
+				<div class="modal-body">
+					<span>Enviar processo e email?</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+					<button type="submit" id="autorizacaoProcessoEmail" class="btn btn-primary">Autorizar</button>
+
+				</div>
+			</div>
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		</form>
+	</div>
+</div>
+</html>
