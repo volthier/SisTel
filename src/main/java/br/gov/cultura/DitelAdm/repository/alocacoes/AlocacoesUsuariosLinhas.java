@@ -1,6 +1,5 @@
 package br.gov.cultura.DitelAdm.repository.alocacoes;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,10 +12,15 @@ public interface AlocacoesUsuariosLinhas extends JpaRepository<AlocacaoUsuarioLi
 
 	public AlocacaoUsuarioLinha findByIdAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha);
 	
-	@Query(value="SELECT alocacaoLinhaDispositivo.dispositivo_id_dispositivo, alocacaoUsuarioLinha.* "
-			+ "     FROM dbditel.alocacao_linha_dispositivo AS alocacaoLinhaDispositivo ,"
-			+ " 		 dbditel.alocacao_usuario_linha AS alocacaoUsuarioLinha "
-			+ " WHERE alocacaoLinhaDispositivo.id_alocacao_linha_dispositivo = alocacaoUsuarioLinha.id_alocacao_usuario_linha", nativeQuery = true)
+	@Query(value="SELECT "
+						+ "alocacaoLinhaDispositivo.dispositivo_id_dispositivo,"
+						+ " alocacaoUsuarioLinha.*,"
+						+ " alocacaoLinhaCategoria.categoria_id_categoria "
+			   + "FROM dbditel.alocacao_linha_dispositivo AS alocacaoLinhaDispositivo,"
+			   + "     dbditel.alocacao_usuario_linha AS alocacaoUsuarioLinha,"
+			   + "     dbditel.alocacao_linha_categoria AS alocacaoLinhaCategoria "
+			   + "WHERE alocacaoLinhaDispositivo.id_alocacao_linha_dispositivo = alocacaoUsuarioLinha.id_alocacao_usuario_linha"
+			   + " AND  alocacaoLinhaDispositivo.id_alocacao_linha_dispositivo = alocacaoLinhaCategoria.id_alocacao_linha_categoria", nativeQuery = true)
 	public List<Object[]> getAlocacoesUsuarios ();
 	
 	@Query("select a from AlocacaoUsuarioLinha a where linha = ?1")

@@ -34,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	// @ConfigurationProperties(prefix = "ldap")
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.ldapAuthentication()

@@ -19,12 +19,14 @@ public class CadastroCategoriaService {
 	}
 
 	public void excluir(Integer id) {
-		// TODO Auto-generated method stub
 		categorias.delete(id);
 	}
-
 	
 	public List<Categoria> getIdCategoria() {
 		return categorias.findAll();
+	}
+	
+	public  Categoria getCadastroById(Integer idCategoria) {
+		return categorias.findByIdCategoria(idCategoria);
 	}
 }

@@ -8,6 +8,10 @@
 <meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width" />
+	<meta name="_csrf" content="${_csrf.token}"/>
+	
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+	
 
 <title>Ditel</title>
 
@@ -47,9 +51,10 @@
 <script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
 <script th:src="@{/js/bootstrap-datetimepicker.pt-BR.js}"></script>
 <script th:src="@{/js/jquery.maskMoney.min.js}"></script>
+<script th:src="@{/js/email.js}"></script>
 <script th:src="@{/js/exclusao.js}"></script>
+<script th:src="@{/js/calendario.js}"></script>
 <script th:src="@{/js/guideTips.js}"></script>
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js "></script>
+ <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js "></script> -->
  <script th:src="@{/js/relatorios/relatorios.js}"></script>
- <script th:src="@{/js/passoApasso.js}"></script>
 </html>

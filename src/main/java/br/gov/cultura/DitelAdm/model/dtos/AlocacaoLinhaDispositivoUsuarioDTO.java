@@ -2,9 +2,10 @@ package br.gov.cultura.DitelAdm.model.dtos;
 
 import java.util.Date;
 
+import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
-import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.Usuario;
 
 public class AlocacaoLinhaDispositivoUsuarioDTO {
 	
@@ -14,15 +15,19 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 	private Date dtRecebido;
 	private Integer idLinha;
 	private Integer idUsuario;
+	private Integer idCategoria;
+	private String numeroProcessoSei;
+	private String seiLink;
 	private Dispositivo dispositivo;
 	private Usuario usuario;
 	private Linha linha;
+	private Categoria categoria;
 	
 	public AlocacaoLinhaDispositivoUsuarioDTO() {
 	}
 	
 	public AlocacaoLinhaDispositivoUsuarioDTO(Integer idDispositivo, Integer idAlocacaoUsuarioLinha, 
-			Date dtDevolucao, Date dtRecebido, Integer idLinha, Integer idUsuario){
+			Date dtDevolucao, Date dtRecebido, String seiLink, String numeroProcessoSei, Integer idLinha, Integer idUsuario, Integer idCategoria ){
 		
 		this.idDispositivo = idDispositivo;
 		this.idAlocacaoUsuarioLinha = idAlocacaoUsuarioLinha;
@@ -30,6 +35,9 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 		this.dtRecebido = dtRecebido;
 		this.idLinha = idLinha;
 		this.idUsuario = idUsuario;
+		this.idCategoria = idCategoria;
+		this.numeroProcessoSei = numeroProcessoSei;
+		this.seiLink = seiLink;
 	}
 	
 	public Integer getIdDispositivo() {
@@ -80,6 +88,30 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 		this.idUsuario = idUsuario;
 	}
 
+	public Integer getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	public String getNumeroProcessoSei() {
+		return numeroProcessoSei;
+	}
+
+	public void setNumeroProcessoSei(String numeroProcessoSei) {
+		this.numeroProcessoSei = numeroProcessoSei;
+	}
+
+	public String getSeiLink() {
+		return seiLink;
+	}
+
+	public void setSeiLink(String seiLink) {
+		this.seiLink = seiLink;
+	}
+
 	public Dispositivo getDispositivo() {
 		return dispositivo;
 	}
@@ -102,6 +134,14 @@ public class AlocacaoLinhaDispositivoUsuarioDTO {
 
 	public void setLinha(Linha linha) {
 		this.linha = linha;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
