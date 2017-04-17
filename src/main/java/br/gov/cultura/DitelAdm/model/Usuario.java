@@ -34,9 +34,14 @@ public class Usuario implements java.io.Serializable {
 
 	private Integer idUsuario;
 	private String nomeUsuario;
+	private String nomePrimeiro;
+	private String nomeSobrenome;
 	private String cargoUsuario;
 	private String cpfUsuario;
 	private String lotacaoUsuario;
+	private String emailUsuario;
+	private String descricaoUsuario;
+	private String lotacaoIdUsuario;
 	@JsonBackReference
 	private LimiteAtesto limiteAtesto;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -46,21 +51,31 @@ public class Usuario implements java.io.Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(String nomeUsuario, String cargoUsuario, String cpfUsuario, String lotacaoUsuario
-			,LimiteAtesto limiteAtesto) {
+	public Usuario(String nomeUsuario, String nomePrimeiro, String nomeSobrenome, String cargoUsuario, 
+			String cpfUsuario, String lotacaoUsuario, String emailUsuario, String descricaoUsuario, String lotacaoIdUsuario, LimiteAtesto limiteAtesto) {
 		this.nomeUsuario = nomeUsuario;
+		this.nomePrimeiro = nomePrimeiro;
+		this.nomeSobrenome = nomeSobrenome;
 		this.cargoUsuario = cargoUsuario;
 		this.cpfUsuario = cpfUsuario;
 		this.lotacaoUsuario = lotacaoUsuario;
+		this.emailUsuario = emailUsuario;
+		this.descricaoUsuario = descricaoUsuario;
+		this.lotacaoIdUsuario = lotacaoIdUsuario;
 		this.limiteAtesto = limiteAtesto;
 	}
 
-	public Usuario(String nomeUsuario, String cargoUsuario, String cpfUsuario, String lotacaoUsuario,
-			LimiteAtesto limiteAtesto, Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas) {
+	public Usuario(String nomeUsuario, String nomePrimeiro, String nomeSobrenome, String cargoUsuario, 
+			String cpfUsuario, String lotacaoUsuario, String emailUsuario, String descricaoUsuario, String lotacaoIdUsuario, LimiteAtesto limiteAtesto, Set<AlocacaoUsuarioLinha> alocacaoUsuarioLinhas) {
 		this.nomeUsuario = nomeUsuario;
+		this.nomePrimeiro = nomePrimeiro;
+		this.nomeSobrenome = nomeSobrenome;
 		this.cargoUsuario = cargoUsuario;
 		this.cpfUsuario = cpfUsuario;
 		this.lotacaoUsuario = lotacaoUsuario;
+		this.emailUsuario = emailUsuario;
+		this.descricaoUsuario = descricaoUsuario;
+		this.lotacaoIdUsuario = lotacaoIdUsuario;
 		this.limiteAtesto = limiteAtesto;
 		this.alocacaoUsuarioLinhas = alocacaoUsuarioLinhas;
 	}
@@ -118,6 +133,55 @@ public class Usuario implements java.io.Serializable {
 
 	public void setLotacaoUsuario(String lotacaoUsuario) {
 		this.lotacaoUsuario = lotacaoUsuario;
+	}
+	
+	@Column(name = "primeiro_nome_usuario", length = 255)
+	//@NotEmpty(message="Sobrenome e obrigat�rio!")
+	@Size(max = 100, message = "Maximo de 100 caracteres para sobrenome!")
+	public String getNomePrimeiro() {
+		return nomePrimeiro;
+	}
+
+	public void setNomePrimeiro(String nomePrimeiro) {
+		this.nomePrimeiro = nomePrimeiro;
+	}
+
+	@Column(name = "sobrenome_usuario", length = 255)
+	//@NotEmpty(message="Sobrenome e obrigat�rio!")
+	@Size(max = 200, message = "Maximo de 200 caracteres para sobrenome!")
+	public String getNomeSobrenome() {
+		return nomeSobrenome;
+	}
+
+	public void setNomeSobrenome(String nomeSobrenome) {
+		this.nomeSobrenome = nomeSobrenome;
+	}
+	@Column(name = "email_usuario", length = 255)
+	//@NotEmpty(message="Email e obrigatório!")
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
+
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
+	}
+	@Column(name = "descricao_usuario", length = 255)
+	@Size(max = 250, message = "Maximo de 250 caracteres para descrição!")
+	public String getDescricaoUsuario() {
+		return descricaoUsuario;
+	}
+
+	public void setDescricaoUsuario(String descricaoUsuario) {
+		this.descricaoUsuario = descricaoUsuario;
+	}
+
+	@Column(name = "lotacao_id_usuario")	
+	public String getLotacaoIdUsuario() {
+		return lotacaoIdUsuario;
+	}
+
+	public void setLotacaoIdUsuario(String lotacaoIdUsuario) {
+		this.lotacaoIdUsuario = lotacaoIdUsuario;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

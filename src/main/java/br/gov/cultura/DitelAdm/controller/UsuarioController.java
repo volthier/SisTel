@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -27,12 +30,17 @@ public class UsuarioController extends UrlController {
 	private CadastroUsuarioService cadastroUsuarioService;
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
+	@Autowired
+	private SeiClient sei;
 
 	@RequestMapping("/novo")
 	public ModelAndView nova() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limiteAtesto", limiteAtesto);
+		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
+		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
+		mv.addObject("listaUnidadeSei", uni);
 		mv.addObject(new Usuario());
 		return mv;
 	}

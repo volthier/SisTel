@@ -77,8 +77,9 @@ public class ChipController extends UrlController {
 
 	    Map<String,String> tipoChipMap = new HashMap<String,String> ();
 	    tipoChipMap.put("SimCard","SimCard");
-	    tipoChipMap.put("MicroSim","MicroSim");
-	    tipoChipMap.put("NanoSim","NanoSim");
+	    tipoChipMap.put("MicroSimCard","MicroSimCard");
+	    tipoChipMap.put("NanoSimcard","NanoSimCard");
+	    tipoChipMap.put("FlexSimCard","FlexSimCard");
 	    return tipoChipMap;
 	}
 }

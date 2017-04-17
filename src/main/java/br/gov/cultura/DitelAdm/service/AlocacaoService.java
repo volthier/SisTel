@@ -42,7 +42,7 @@ public class AlocacaoService {
 	}
 
 	public void salvar(AlocacaoUsuarioLinha alocacaoUsuarioLinha) {
-		alocacoesUsuariosLinhas.save(alocacaoUsuarioLinha);
+		alocacoesUsuariosLinhas.saveAndFlush(alocacaoUsuarioLinha);
 	}
 
 	public void excluir(Integer id) {

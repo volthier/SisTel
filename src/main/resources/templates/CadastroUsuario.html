@@ -85,7 +85,7 @@
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">DAS/FCPE</label>
 					<div class="col-sm-3">
-						<select class="form-control" name="tipo" th:field="*{limiteAtesto}">
+						<select class="form-control" name="limiteDasAtesto" th:field="*{limiteAtesto}">
 						<option value="">----Selecione----</option>
 							<option th:each="limite : ${limiteAtesto}"
 								th:value="${limite.idLimiteAtesto}" th:valuetype="limiteAtesto" th:text="${limite.dasAtesto}"></option>
