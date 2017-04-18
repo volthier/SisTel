@@ -118,7 +118,7 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 		this.dtRecebimento = dtRecebimento;
 	}
 	
-	@Column(name = "numero_processo_sei", nullable = false)
+	@Column(name = "numero_processo_sei")
 	public String getNumeroProcessoSei() {
 		return this.numeroProcessoSei;
 	}
@@ -127,7 +127,7 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 		this.numeroProcessoSei = numeroProcessoSei;
 	}
 	
-	@Column(name = "numero_externo_processo_sei", nullable = false)
+	@Column(name = "numero_externo_processo_sei")
 	public String getNumeroExternoProcessoSei() {
 		return numeroExternoProcessoSei;
 	}
@@ -136,7 +136,7 @@ public class AlocacaoUsuarioLinha implements java.io.Serializable {
 		this.numeroExternoProcessoSei = numeroExternoProcessoSei;
 	}
 
-	@Column(name = "link_acesso_sei", nullable = false)
+	@Column(name = "link_acesso_sei")
 	public String getLinkAcessoSei() {
 		return linkAcessoSei;
 	}

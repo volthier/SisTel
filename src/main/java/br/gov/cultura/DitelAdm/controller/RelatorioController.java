@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,15 @@ import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
 @RequestMapping("/relatorio")
 public class RelatorioController {
+	
+	@Autowired
+	private SeiClient sei;
 
 	@Autowired
 	private CadastroDispositivoService cadastroDispositivoService;
@@ -42,9 +48,11 @@ public class RelatorioController {
 	@Autowired
 	private AlocacaoService alocacaoservice;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping
 	public ModelAndView relatorios(){
 		ModelAndView mv = new ModelAndView("Relatorio");
+		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
+		mv.addObject("lista",uni);	
 		return mv;
 	}
 	
@@ -92,4 +100,5 @@ public class RelatorioController {
 	public List<AlocacaoLinhaCategoria> getALCat(){ 
 		return alocacaoservice.getIdAlocacaoLinhaCategoria();
 	}
+	
 }

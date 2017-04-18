@@ -51,6 +51,10 @@ public class PendenciaService {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
+				if(item[4]==null && item[5]==null){
+					item[4] = "null";
+					item[5] = "null";	
+				}
 			}
 	    	
 	    	AlocacaoLinhaDispositivoUsuarioDTO alocacao = 

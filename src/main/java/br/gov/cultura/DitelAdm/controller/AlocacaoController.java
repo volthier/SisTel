@@ -45,7 +45,7 @@ import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
-import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
+
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
@@ -220,6 +220,28 @@ public class AlocacaoController {
 				cadastroUsuarioService.salvar(usuario);
 			} else if (usuarioCad != null) {
 				usuario = usuarioCad;
+				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
+				
+				if(usuario.getEmailUsuario()==null){
+					usuario.setEmailUsuario(usuarioLdap.getEmail());	
+				}
+				
+				if(!usuario.getEmailUsuario().contains(usuarioLdap.getEmail())){
+					usuario.setEmailUsuario(usuarioLdap.getEmail());
+				}
+				
+				if(usuario.getNomePrimeiro()==null){
+					usuario.setNomePrimeiro(usuarioCad.getNomePrimeiro());	
+				}
+				if(!usuario.getNomePrimeiro().contains(usuarioLdap.getFirstName())){
+					usuario.setNomePrimeiro(usuarioLdap.getFirstName());
+				}
+				if(usuario.getNomeSobrenome()==null){
+					usuario.setNomeSobrenome(usuarioCad.getNomeSobrenome());	
+				}
+				if(!usuario.getNomeSobrenome().contains(usuarioLdap.getLastName())){
+					usuario.setNomeSobrenome(usuarioLdap.getLastName());
+				}		
 				usuario.setCargoUsuario(servletRequest.getParameter("cargoUsuario"));
 				usuario.setLimiteAtesto(limiteAtestoService
 						.getLimiteAtestoId(Integer.parseInt(servletRequest.getParameter("limiteDasAtesto"))));
@@ -233,14 +255,12 @@ public class AlocacaoController {
 					}
 
 				}
+				
 				cadastroUsuarioService.salvar(usuario);
 			}
 
-			RetornoGeracaoProcedimento processo = sei.gerarProcedimentoAlocacao();
+			
 			alocacaoUsuarioLinha.setUsuario(usuario);
-			alocacaoUsuarioLinha.setNumeroProcessoSei(processo.getIdProcedimento());
-			alocacaoUsuarioLinha.setNumeroExternoProcessoSei(processo.getProcedimentoFormatado());
-			alocacaoUsuarioLinha.setLinkAcessoSei(processo.getLinkAcesso());
 			alocacaoService.salvar(alocacaoUsuarioLinha);
 			alocacaoService.salvar(alocacaoLinhaChip);
 
