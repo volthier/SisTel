@@ -327,7 +327,7 @@
 				<version>1.4</version>
 				<configuration>
 					<urls>
-						<url>http://seihomolog.cultura.gov.br/sei/controlador_ws.php?servico=sei</url>
+						<url>http://seitreinamento.cultura.gov.br/sei/controlador_ws.php?servico=sei</url>
 					</urls>
 					<packageSpace>br.gov.cultura.DitelAdm.wsdl</packageSpace>
 				</configuration>
