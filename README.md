@@ -16,4 +16,4 @@ docker run --name db-postgres -p 5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES
 
 3. Subir o container do nosso repositorio docker-sistel - https://github.com/culturagovbr/docker-sistel
 
-4. Efetuar os passo-a-passo do Docker-Sistel.
+4. Efetuar os passo-a-passo do repositorio [docker sistel](https://github.com/culturagovbr/docker-sistel).
