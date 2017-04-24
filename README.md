@@ -8,7 +8,7 @@ Sistema de telefonia
 Caso queira um banco rapido, sugerimos o container de postgres usado no salic :D
 
 ```
-docker run --name db-postgres -p 5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_USER=postgres -e PGDATA=/var/lib/postgresql/data -v /home/chris/postgres-container/db/postgresql/data:/var/www/project/db/data -d culturagovbr/salic-db
+docker run --name db-postgres -p 5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_USER=postgres -e PGDATA=/var/lib/postgresql/data -v [pasta data local]:[pasta data container] -d culturagovbr/salic-db
 
 ```
 
