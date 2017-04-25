@@ -28,9 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.defaultSuccessUrl("/inicio",true)
 			.and()
 		.logout()
-			.logoutSuccessUrl("/login");
-			
-			 
+			.logoutSuccessUrl("/login"); 
 	}
 
 	@Autowired

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
@@ -51,6 +52,9 @@ public class FaturaController {
 
 	private final String CADASTRO_VIEW = "ExecutarFatura";
 
+	@Autowired
+	private LocaleResolver locale;
+	
 	@Autowired
 	private UsuarioService usuarioService;
 	
@@ -108,6 +112,8 @@ public class FaturaController {
 						List<Chamadas> chamadas = chamadaService.getChamadaResumo(resumo);
 						List<Planos> planos = planoService.getPlanoResumo(resumo);
 						List<Servicos> servicos = servicoService.getServicosResumo(resumo);
+						
+						/**ADICIONAR AQUI TRATATIVA PARA DATA ALOCADA DA LINHA*/
 						
 						float valorTotal = this.valorTotal(chamadas, servicos, planos);
 						
@@ -198,11 +204,11 @@ public class FaturaController {
 	}
 	
 	private byte[] gerarPdfFatura(HttpServletRequest request, Fatura fatura, AlocacaoUsuarioLinha alocacaoUsuarioLinha) throws Exception{
-		View view = this.viewResolver.resolveViewName("FaturaLinhas", Locale.US);
+		View view = this.viewResolver.resolveViewName("FaturaLinhas", locale.resolveLocale(request));
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
 		ModelAndView mv = this.gerarResumo(fatura.getIdFatura(), alocacaoUsuarioLinha.getIdAlocacaoUsuarioLinha(), request);
 		
-		view = this.viewResolver.resolveViewName("Resumo", Locale.US);
+		view = this.viewResolver.resolveViewName("Resumo", locale.resolveLocale(request));
 		view.render(mv.getModelMap(), request, mockResp);
 		
 		Document document = new Document(PageSize.A4,2,2,10,10);
@@ -218,7 +224,7 @@ public class FaturaController {
 	}
 	
 	private byte[] gerarMemorando(HttpServletRequest request) throws Exception {
-		View view = this.viewResolver.resolveViewName("MemorandoFaturaTelefonica", Locale.US);
+		View view = this.viewResolver.resolveViewName("MemorandoFaturaTelefonica", locale.resolveLocale(request));
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
 		view.render(new ModelAndView().getModelMap(), request, mockResp);
 		
