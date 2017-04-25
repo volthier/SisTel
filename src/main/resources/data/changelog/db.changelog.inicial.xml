@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="chris (generated)" id="1493148705954-1">
+        <createTable catalogName="dbditel" tableName="ajustes">
+            <column autoIncrement="true" name="id_ajustes" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="ajustes_pkey"/>
+            </column>
+            <column name="base_calculo" type="FLOAT4"/>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="data_fim" type="date"/>
+            <column name="data_inicio" type="date"/>
+            <column name="hora_fim" type="time"/>
+            <column name="hora_inicio" type="time"/>
+            <column name="num_recurso" type="VARCHAR(17)"/>
+            <column name="percentual" type="FLOAT4"/>
+            <column name="sinal" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoria_ajuste_id_cat_ajuste" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo_id_resumo" type="INT4"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-2">
+        <createTable catalogName="dbditel" tableName="alocacao_linha_categoria">
+            <column autoIncrement="true" name="id_alocacao_linha_categoria" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="alocacao_linha_categoria_pkey"/>
+            </column>
+            <column name="dt_devolucao" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="dt_recebimento" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoria_id_categoria" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="linha_id_linha" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-3">
+        <createTable catalogName="dbditel" tableName="alocacao_linha_chip">
+            <column autoIncrement="true" name="id_alocacao_linha_chip" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="alocacao_linha_chip_pkey"/>
+            </column>
+            <column name="dt_devolucao" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="dt_recebimento" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_chip" type="INT4"/>
+            <column name="id_linha" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-4">
+        <createTable catalogName="dbditel" tableName="alocacao_linha_dispositivo">
+            <column autoIncrement="true" name="id_alocacao_linha_dispositivo" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="alocacao_linha_dispositivo_pkey"/>
+            </column>
+            <column name="dt_devolucao" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="dt_recebimento" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dispositivo_id_dispositivo" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="linha_idlinha" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-5">
+        <createTable catalogName="dbditel" tableName="alocacao_sei">
+            <column autoIncrement="true" name="id_alocacao_sei" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="alocacao_sei_pkey"/>
+            </column>
+            <column name="ressarcimento" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alocacao_usuario_linha_id_alocacao_usuario_linha" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo_id_resumo" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-6">
+        <createTable catalogName="dbditel" tableName="alocacao_usuario_linha">
+            <column autoIncrement="true" name="id_alocacao_usuario_linha" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="alocacao_usuario_linha_pkey"/>
+            </column>
+            <column name="dt_devolucao" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="dt_recebido" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link_acesso_sei" type="VARCHAR(255)"/>
+            <column name="numero_externo_processo_sei" type="VARCHAR(255)"/>
+            <column name="numero_processo_sei" type="VARCHAR(255)"/>
+            <column name="id_linha" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_usuario" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-7">
+        <createTable catalogName="dbditel" tableName="categoria">
+            <column autoIncrement="true" name="id_categoria" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="categoria_pkey"/>
+            </column>
+            <column name="descricao_categoria" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-8">
+        <createTable catalogName="dbditel" tableName="categoriaajuste">
+            <column autoIncrement="true" name="id_cat_ajuste" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="categoriaajuste_pkey"/>
+            </column>
+            <column name="cod_cat_ajuste" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sigla" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-9">
+        <createTable catalogName="dbditel" tableName="categoriachamada">
+            <column autoIncrement="true" name="id_categoria_chamada" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="categoriachamada_pkey"/>
+            </column>
+            <column name="cod_cat_chamada" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sigla" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-10">
+        <createTable catalogName="dbditel" tableName="categoriadesconto">
+            <column name="id_cat_desconto" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cod_cat_desconto" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sigla" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-11">
+        <createTable catalogName="dbditel" tableName="categoriaplano">
+            <column autoIncrement="true" name="id_cat_plano" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="categoriaplano_pkey"/>
+            </column>
+            <column name="cod_cat_plano" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sigla" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-12">
+        <createTable catalogName="dbditel" tableName="categoriaservico">
+            <column autoIncrement="true" name="id_cat_servico" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="categoriaservico_pkey"/>
+            </column>
+            <column name="cod_cat_servico" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sigla" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-13">
+        <createTable catalogName="dbditel" tableName="chamadas">
+            <column autoIncrement="true" name="id_chamadas" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="chamadas_pkey"/>
+            </column>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="cnl_area_local_uso" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cnl_local_destino" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cod_csp" type="VARCHAR(2)"/>
+            <column name="cod_nac_int" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cod_op_roaming" type="INT4"/>
+            <column name="data_ligacao" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="degrau_ligacao" type="INT4"/>
+            <column name="des_hora_tarif" type="VARCHAR(15)"/>
+            <column name="duracao_ligacao" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="grupo_hora_tarif" type="VARCHAR(1)"/>
+            <column name="hora_ligacao" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="icms" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome_local_destino" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome_op_csp" type="VARCHAR(20)"/>
+            <column name="numnf" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_telefone_chamado" type="VARCHAR(17)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="op_terminal_vinc_destino" type="VARCHAR(3)"/>
+            <column name="tipo_chamada" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tiponf" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uf_tel_destino" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_lig_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_lig_sem_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoria_chamada_id_categoria_chamada" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo_id_resumo" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-14">
+        <createTable catalogName="dbditel" tableName="chip">
+            <column autoIncrement="true" name="id_chip" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="chip_pkey"/>
+            </column>
+            <column name="numero_serie_chip" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo_chip" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-15">
+        <createTable catalogName="dbditel" tableName="cliente">
+            <column name="cod_cliente" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cnpj" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operadora_cod_operadora" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-16">
+        <createTable catalogName="dbditel" tableName="descontos">
+            <column autoIncrement="true" name="id_descontos" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="descontos_pkey"/>
+            </column>
+            <column name="base_cal" type="FLOAT4"/>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="data_fim" type="date"/>
+            <column name="data_inicio" type="date"/>
+            <column name="hora_fim" type="time"/>
+            <column name="hora_inicio" type="time"/>
+            <column name="numnf" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="percentual" type="FLOAT4"/>
+            <column name="sinal" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tiponf" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoria_desconto_id_cat_desconto" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo_id_resumo" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-17">
+        <createTable catalogName="dbditel" tableName="dispositivo">
+            <column autoIncrement="true" name="id_dispositivo" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="dispositivo_pkey"/>
+            </column>
+            <column name="imei_dispositivo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mac_dispositivo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="marca_dispositivo" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modelo_dispositivo" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero_serie_dispositivo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patrimonio_dispositivo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo_dispositivo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_dispositivo" type="INT8">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-18">
+        <createTable catalogName="dbditel" tableName="enderecos">
+            <column name="id_enderecos" type="VARCHAR(18)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bairro" type="VARCHAR(10)"/>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="cnl_rec_end" type="VARCHAR(5)"/>
+            <column name="complemento" type="VARCHAR(8)"/>
+            <column name="endereco" type="VARCHAR(30)"/>
+            <column name="nome_local_end" type="VARCHAR(15)"/>
+            <column name="numero" type="VARCHAR(5)"/>
+            <column name="tipo_endereco" type="VARCHAR(5)"/>
+            <column name="uf_local" type="VARCHAR(2)"/>
+            <column name="fatura_id_fatura" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-19">
+        <createTable catalogName="dbditel" tableName="fatura">
+            <column autoIncrement="true" name="id_fatura" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="fatura_pkey"/>
+            </column>
+            <column name="agencia_cobranca" type="VARCHAR(4)"/>
+            <column name="banco_cobranca" type="VARCHAR(4)"/>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="cc_cobranca" type="VARCHAR(10)"/>
+            <column name="cod_barra" type="VARCHAR(50)"/>
+            <column name="cod_cobranca" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_emissao" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_gera_arquivo" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_venc" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descri_cobranca" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fisco" type="VARCHAR(35)"/>
+            <column defaultValueBoolean="false" name="gerada" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ind_conta" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mes_ref" type="VARCHAR(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_fatura" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="versao_formato" type="VARCHAR(4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cliente_cod_cliente" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-20">
+        <createTable catalogName="dbditel" tableName="limite_atesto">
+            <column autoIncrement="true" name="id_limite_atesto" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="limite_atesto_pkey"/>
+            </column>
+            <column name="das_atesto" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_limite" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-21">
+        <createTable catalogName="dbditel" tableName="linha">
+            <column autoIncrement="true" name="id_linha" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="linha_pkey"/>
+            </column>
+            <column name="numero_linha" type="VARCHAR(17)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="plano_linha" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-22">
+        <createTable catalogName="dbditel" tableName="notafiscal">
+            <column name="numnf" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="tiponf" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valornfimp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fatura_id_fatura" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-23">
+        <createTable catalogName="dbditel" tableName="operadora">
+            <column name="cod_operadora" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cnpj" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uf" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-24">
+        <createTable catalogName="dbditel" tableName="planos">
+            <column autoIncrement="true" name="id_planos" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="planos_pkey"/>
+            </column>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="cod_plano" type="VARCHAR(5)"/>
+            <column name="consumo_franqueado" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="consumo_medido" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_fim_ciclo" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_ini_ciclo" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao_plano" type="VARCHAR(25)"/>
+            <column name="numnf" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="planoscol" type="VARCHAR(45)"/>
+            <column name="tipo" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tiponf" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_com_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_sem_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoria_plano_id_cat_plano" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo_id_resumo" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-25">
+        <createTable catalogName="dbditel" tableName="resumo">
+            <column autoIncrement="true" name="id_resumo" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="resumo_pkey"/>
+            </column>
+            <column name="cnl" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_ativ" type="date"/>
+            <column name="data_desativ" type="date"/>
+            <column name="data_venc" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="degrau" type="VARCHAR(2)"/>
+            <column name="id_unico" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mod_serv" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_recurso" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quant_reg_cham" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quant_reg_serv" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uni_velocidade" type="VARCHAR(4)"/>
+            <column name="valor_total_conta_recurso_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_total_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_total_reg_chamada_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valor_total_reg_serv_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="velocidade" type="VARCHAR(5)"/>
+            <column name="fatura_id_fatura" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="linha_id_linha" type="INT4"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-26">
+        <createTable catalogName="dbditel" tableName="servicos">
+            <column autoIncrement="true" name="id_servicos" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="servicos_pkey"/>
+            </column>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="cnl_area_local_uso" type="INT4"/>
+            <column name="cod_nac_int" type="VARCHAR(2)"/>
+            <column name="cod_op_roaming" type="INT4"/>
+            <column name="data_servico" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hora_servico" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numnf" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_tel_destino" type="VARCHAR(17)"/>
+            <column name="op_terminal_vinc_destino" type="VARCHAR(3)"/>
+            <column name="quant_util" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tiponf" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unidade_servico" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_serv" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_serv_imp" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoria_servico_id_cat_servico" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo_id_resumo" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-27">
+        <createTable catalogName="dbditel" tableName="trailler">
+            <column autoIncrement="true" name="id_trailler" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="trailler_pkey"/>
+            </column>
+            <column name="campo_livre_op" type="VARCHAR(25)"/>
+            <column name="quan_reg10" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg20" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg30" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg40" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg50" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg60" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg70" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_reg80" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quan_total_reg" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sin_total_reg50" type="BPCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sin_total_reg70" type="BPCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total10" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total30" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total40" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total50" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total60" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total70" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="val_total80" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fatura_id_fatura" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-28">
+        <createTable catalogName="dbditel" tableName="usuario">
+            <column autoIncrement="true" name="id_usuario" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="usuario_pkey"/>
+            </column>
+            <column name="cargo_usuario" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cpf_usuario" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao_usuario" type="VARCHAR(250)"/>
+            <column name="email_usuario" type="VARCHAR(255)"/>
+            <column name="lotacao_id_usuario" type="VARCHAR(255)"/>
+            <column name="lotacao_usuario" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="primeiro_nome_usuario" type="VARCHAR(100)"/>
+            <column name="sobrenome_usuario" type="VARCHAR(200)"/>
+            <column name="nome_usuario" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="limite_atesto_id_limite_atesto" type="INT4">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-29">
+        <addPrimaryKey catalogName="dbditel" columnNames="id_cat_desconto" constraintName="categoriadesconto_pkey" tableName="categoriadesconto"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-30">
+        <addPrimaryKey catalogName="dbditel" columnNames="cod_cliente" constraintName="cliente_pkey" tableName="cliente"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-31">
+        <addPrimaryKey catalogName="dbditel" columnNames="id_enderecos" constraintName="enderecos_pkey" tableName="enderecos"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-32">
+        <addPrimaryKey catalogName="dbditel" columnNames="numnf" constraintName="notafiscal_pkey" tableName="notafiscal"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-33">
+        <addPrimaryKey catalogName="dbditel" columnNames="cod_operadora" constraintName="operadora_pkey" tableName="operadora"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-34">
+        <addForeignKeyConstraint baseColumnNames="linha_idlinha" baseTableCatalogName="dbditel" baseTableName="alocacao_linha_dispositivo" constraintName="fk_39tsmbl0of3pbuhflboo43iox" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_linha" referencedTableCatalogName="dbditel" referencedTableName="linha"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-35">
+        <addForeignKeyConstraint baseColumnNames="resumo_id_resumo" baseTableCatalogName="dbditel" baseTableName="planos" constraintName="fk_6sryslup1c9xwa1gnrojh54pb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_resumo" referencedTableCatalogName="dbditel" referencedTableName="resumo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-36">
+        <addForeignKeyConstraint baseColumnNames="id_linha" baseTableCatalogName="dbditel" baseTableName="alocacao_linha_chip" constraintName="fk_6tkfi1coyb99dankuf5mayclo" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_linha" referencedTableCatalogName="dbditel" referencedTableName="linha"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-37">
+        <addForeignKeyConstraint baseColumnNames="categoria_desconto_id_cat_desconto" baseTableCatalogName="dbditel" baseTableName="descontos" constraintName="fk_6x2a63varmg5qxv8b751pplll" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cat_desconto" referencedTableCatalogName="dbditel" referencedTableName="categoriadesconto"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-38">
+        <addForeignKeyConstraint baseColumnNames="fatura_id_fatura" baseTableCatalogName="dbditel" baseTableName="resumo" constraintName="fk_750i7vi74q5mqlkc6fk2g0xj3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_fatura" referencedTableCatalogName="dbditel" referencedTableName="fatura"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-39">
+        <addForeignKeyConstraint baseColumnNames="fatura_id_fatura" baseTableCatalogName="dbditel" baseTableName="trailler" constraintName="fk_7dqiln97ppvilfwcrmbo70rx1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_fatura" referencedTableCatalogName="dbditel" referencedTableName="fatura"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-40">
+        <addForeignKeyConstraint baseColumnNames="categoria_ajuste_id_cat_ajuste" baseTableCatalogName="dbditel" baseTableName="ajustes" constraintName="fk_8faew61pv4kchko2n2umde9yq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cat_ajuste" referencedTableCatalogName="dbditel" referencedTableName="categoriaajuste"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-41">
+        <addForeignKeyConstraint baseColumnNames="linha_id_linha" baseTableCatalogName="dbditel" baseTableName="resumo" constraintName="fk_b3x62222xhexv937ri50npiyt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_linha" referencedTableCatalogName="dbditel" referencedTableName="linha"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-42">
+        <addForeignKeyConstraint baseColumnNames="resumo_id_resumo" baseTableCatalogName="dbditel" baseTableName="ajustes" constraintName="fk_ba7f6tu1i6oetqsw3y8g3xi97" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_resumo" referencedTableCatalogName="dbditel" referencedTableName="resumo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-43">
+        <addForeignKeyConstraint baseColumnNames="categoria_chamada_id_categoria_chamada" baseTableCatalogName="dbditel" baseTableName="chamadas" constraintName="fk_bs0vdrnh2qt0blcgfupjqgr0r" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_categoria_chamada" referencedTableCatalogName="dbditel" referencedTableName="categoriachamada"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-44">
+        <addForeignKeyConstraint baseColumnNames="categoria_servico_id_cat_servico" baseTableCatalogName="dbditel" baseTableName="servicos" constraintName="fk_co1gpkkq3vjn5wju06k3epfh8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cat_servico" referencedTableCatalogName="dbditel" referencedTableName="categoriaservico"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-45">
+        <addForeignKeyConstraint baseColumnNames="categoria_id_categoria" baseTableCatalogName="dbditel" baseTableName="alocacao_linha_categoria" constraintName="fk_ecvs4pdfild1qfrept4ore3m7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_categoria" referencedTableCatalogName="dbditel" referencedTableName="categoria"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-46">
+        <addForeignKeyConstraint baseColumnNames="alocacao_usuario_linha_id_alocacao_usuario_linha" baseTableCatalogName="dbditel" baseTableName="alocacao_sei" constraintName="fk_g8afvudq1u3ge7d4m2tel7393" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_alocacao_usuario_linha" referencedTableCatalogName="dbditel" referencedTableName="alocacao_usuario_linha"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-47">
+        <addForeignKeyConstraint baseColumnNames="resumo_id_resumo" baseTableCatalogName="dbditel" baseTableName="descontos" constraintName="fk_g9bijdjsoteityq469gpuakkr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_resumo" referencedTableCatalogName="dbditel" referencedTableName="resumo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-48">
+        <addForeignKeyConstraint baseColumnNames="resumo_id_resumo" baseTableCatalogName="dbditel" baseTableName="servicos" constraintName="fk_h233w8d370lqr2tt3oj5gvqvf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_resumo" referencedTableCatalogName="dbditel" referencedTableName="resumo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-49">
+        <addForeignKeyConstraint baseColumnNames="dispositivo_id_dispositivo" baseTableCatalogName="dbditel" baseTableName="alocacao_linha_dispositivo" constraintName="fk_h640vxs8qrd8ytfipn5ii1ys0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_dispositivo" referencedTableCatalogName="dbditel" referencedTableName="dispositivo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-50">
+        <addForeignKeyConstraint baseColumnNames="fatura_id_fatura" baseTableCatalogName="dbditel" baseTableName="enderecos" constraintName="fk_hpw9mrkmskmva2r5s3l051evh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_fatura" referencedTableCatalogName="dbditel" referencedTableName="fatura"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-51">
+        <addForeignKeyConstraint baseColumnNames="limite_atesto_id_limite_atesto" baseTableCatalogName="dbditel" baseTableName="usuario" constraintName="fk_k6xb6xdy4ycj0mao2so887ydt" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_limite_atesto" referencedTableCatalogName="dbditel" referencedTableName="limite_atesto"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-52">
+        <addForeignKeyConstraint baseColumnNames="resumo_id_resumo" baseTableCatalogName="dbditel" baseTableName="alocacao_sei" constraintName="fk_ktxlkqdv0on6xdmmfqcdk5x7y" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_resumo" referencedTableCatalogName="dbditel" referencedTableName="resumo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-53">
+        <addForeignKeyConstraint baseColumnNames="categoria_plano_id_cat_plano" baseTableCatalogName="dbditel" baseTableName="planos" constraintName="fk_l1pqh4jmwel13je9d2cm610il" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_cat_plano" referencedTableCatalogName="dbditel" referencedTableName="categoriaplano"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-54">
+        <addForeignKeyConstraint baseColumnNames="id_linha" baseTableCatalogName="dbditel" baseTableName="alocacao_usuario_linha" constraintName="fk_lslfor6epopfx3t25pixj5lhp" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_linha" referencedTableCatalogName="dbditel" referencedTableName="linha"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-55">
+        <addForeignKeyConstraint baseColumnNames="linha_id_linha" baseTableCatalogName="dbditel" baseTableName="alocacao_linha_categoria" constraintName="fk_mx5rnvm95uu5tvwbvsokaim5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_linha" referencedTableCatalogName="dbditel" referencedTableName="linha"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-56">
+        <addForeignKeyConstraint baseColumnNames="operadora_cod_operadora" baseTableCatalogName="dbditel" baseTableName="cliente" constraintName="fk_ntn04dh2c7jq1gk35xw4101ol" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="cod_operadora" referencedTableCatalogName="dbditel" referencedTableName="operadora"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-57">
+        <addForeignKeyConstraint baseColumnNames="id_chip" baseTableCatalogName="dbditel" baseTableName="alocacao_linha_chip" constraintName="fk_ogp2h84xt7yf4ix8cbuq74l4b" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_chip" referencedTableCatalogName="dbditel" referencedTableName="chip"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-58">
+        <addForeignKeyConstraint baseColumnNames="id_usuario" baseTableCatalogName="dbditel" baseTableName="alocacao_usuario_linha" constraintName="fk_oo84geeejay0duu4d2qpk98c3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_usuario" referencedTableCatalogName="dbditel" referencedTableName="usuario"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-59">
+        <addForeignKeyConstraint baseColumnNames="resumo_id_resumo" baseTableCatalogName="dbditel" baseTableName="chamadas" constraintName="fk_r5b2h8u1b3xckd8s9ve2tgna5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_resumo" referencedTableCatalogName="dbditel" referencedTableName="resumo"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-60">
+        <addForeignKeyConstraint baseColumnNames="cliente_cod_cliente" baseTableCatalogName="dbditel" baseTableName="fatura" constraintName="fk_sf6s3jdi5st0xom7bm52v0fq6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="cod_cliente" referencedTableCatalogName="dbditel" referencedTableName="cliente"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-61">
+        <addForeignKeyConstraint baseColumnNames="fatura_id_fatura" baseTableCatalogName="dbditel" baseTableName="notafiscal" constraintName="fk_sp6jungmuvm7yw0y1mpiyrxxr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_fatura" referencedTableCatalogName="dbditel" referencedTableName="fatura"/>
+    </changeSet>
+    <changeSet author="chris (generated)" id="1493148705954-62">
+        <addUniqueConstraint catalogName="dbditel" columnNames="descricao_categoria" constraintName="uk_9fn3gn021wfhw1otj9aym7str" deferrable="false" disabled="false" initiallyDeferred="false" tableName="categoria"/>
+    </changeSet>
+</databaseChangeLog>
