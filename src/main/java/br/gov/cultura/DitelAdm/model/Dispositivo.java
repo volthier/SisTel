@@ -40,7 +40,7 @@ public class Dispositivo implements java.io.Serializable {
 	private String numeroSerieDispositivo;
 	private String patrimonioDispositivo;
 	private String tipoDispositivo;
-	private long valorDispositivo;
+	private float valorDispositivo;
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@JsonManagedReference
 	private Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos = new HashSet(0);
@@ -51,7 +51,7 @@ public class Dispositivo implements java.io.Serializable {
 
 	public Dispositivo(String imeiDispositivo, String macDispositivo, String marcaDispositivo, String modeloDispositivo,
 			String numeroSerieDispositivo, String patrimonioDispositivo, String tipoDispositivo,
-			long valorDispositivo) {
+			float valorDispositivo) {
 		this.imeiDispositivo = imeiDispositivo;
 		this.macDispositivo = macDispositivo;
 		this.marcaDispositivo = marcaDispositivo;
@@ -63,7 +63,7 @@ public class Dispositivo implements java.io.Serializable {
 	}
 
 	public Dispositivo(String imeiDispositivo, String macDispositivo, String marcaDispositivo, String modeloDispositivo,
-			String numeroSerieDispositivo, String patrimonioDispositivo, String tipoDispositivo, long valorDispositivo,
+			String numeroSerieDispositivo, String patrimonioDispositivo, String tipoDispositivo, float valorDispositivo,
 			Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos) {
 		this.imeiDispositivo = imeiDispositivo;
 		this.macDispositivo = macDispositivo;
@@ -177,11 +177,11 @@ public class Dispositivo implements java.io.Serializable {
 	@DecimalMin(value = "0.01", message = "Valor minimo de R$0,01!" )
 	@DecimalMax(value = "9999999.99", message ="Valor ultrapassa valor maximo!")
 	@NumberFormat(pattern="#,##0.00")
-	public long getValorDispositivo() {
+	public float getValorDispositivo() {
 		return this.valorDispositivo;
 	}
 
-	public void setValorDispositivo(long valorDispositivo) {
+	public void setValorDispositivo(float valorDispositivo) {
 		this.valorDispositivo = valorDispositivo;
 	}
 
