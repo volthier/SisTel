@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<java.mail>1.5.6</java.mail>
+		
 	</properties>
 
 	<dependencies>
@@ -44,7 +45,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -115,18 +116,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.ldap</groupId>
 			<artifactId>spring-ldap-core</artifactId>
 			<version>2.3.1.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.ldap</groupId>
-			<artifactId>spring-ldap-core</artifactId>
-			<version>2.0.2.RELEASE</version>
-		</dependency>
-		 
+		<!-- <dependency> <groupId>org.springframework.ldap</groupId>
+		 <artifactId>spring-ldap-core</artifactId> 
+			<version>2.0.2.RELEASE</version> </dependency> -->
+
 		<!-- Fim LDAP -->
 
 
@@ -136,7 +135,7 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.5.8</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.itextpdf.tool</groupId>
 			<artifactId>xmlworker</artifactId>
@@ -181,6 +180,7 @@
 			<version>1.0.1</version>
 		</dependency>
 
+		<!-- LIQUIBASE -->
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
@@ -190,6 +190,12 @@
 			<artifactId>liquibase-maven-plugin</artifactId>
 			<version>${liquibase.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.12</version>
+		</dependency>
+		<!-- FIM LIQUIBASE -->
 		<!-- Fim Conectores -->
 
 		<!-- axis2 -->
@@ -197,6 +203,7 @@
 			<groupId>axis</groupId>
 			<artifactId>axis-wsdl4j</artifactId>
 			<version>1.5.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- Fim Conectores -->
 
@@ -226,12 +233,12 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<!-- end axis2 -->
-		
-		<!--  EMAIL -->
-				<dependency>
+
+		<!-- EMAIL -->
+		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
-			<version>${java.mail}</version><!--$NO-MVN-MAN-VER$-->
+			<version>${java.mail}</version><!--$NO-MVN-MAN-VER$ -->
 			<scope>compile</scope>
 		</dependency>
 
@@ -245,7 +252,7 @@
 			<artifactId>spring-boot-starter-artemis</artifactId>
 		</dependency>
 		<!-- Fim EMAIL -->
-		
+
 		<!-- GSON Google -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
