@@ -1,10 +1,6 @@
 $(function(){
 	$('[rel="tooltip"]').tooltip();
-<<<<<<< HEAD
 	$('.js-valorCss').maskMoney({decimal: "," , thousands: "." , allowZero:true});
-=======
-	$('.js-valorCss').maskMoney({decimal: ',' ,thousands: '.', allowZero:false});
->>>>>>> bbe8904dc6588e274c9abbdf067e2380b3efddae
 	$('.js-statusReceber').on('click', function(event){
 		event.preventDefault();
 			
