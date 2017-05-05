@@ -40,6 +40,8 @@
 
 						<tr th:each="dto : ${pendencia}">
 							<td class="text-center" th:text="${dto.linha.numeroLinha}"></td>
+							<td class="text-center" th:if="${dto.alocacaoSei == null}">Sem Processo</td>
+							<td class="text-center" th:if="${dto.alocacaoSei != null}" th:text="${dto.alocacaoSei.idAlocacaoSei}"></td>
 							<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
 							<td class="text-center"	th:text="${dto.dispositivo.marcaDispositivo}"></td>
 							<td class="text-center"	th:text="${dto.dispositivo.modeloDispositivo}"></td>
@@ -49,17 +51,29 @@
 							<td class="text-center" th:if="${dto.dtDevolucao != null}" th:text="${dto.dtDevolucao}"></td>
 							<td class="text-center">
 								
- 						<a 
+  						<a th:if="${dto.alocacaoSei == null}"
 								class="btn btn-link btn-xs" 
 								data-toggle="modal"
 								data-target="#confirmacaoEmailModal"
-								th:attr="data-emailid=${dto.idAlocacaoUsuarioLinha}, data-processo=${dto.numeroProcessoSei}"
+								th:attr="data-emailid=${dto.idAlocacao},data-processo=${dto.alocacaoSei}"
 								title="Autorização" 
 								rel="tooltip" 
 								data-placement="left">
 								<span class="glyphicon glyphicon-envelope"></span>
 								
-							</a>	 
+							</a>
+							
+							<a th:if="${dto.alocacaoSei != null}"
+								class="btn btn-link btn-xs" 
+								data-toggle="modal"
+								data-target="#confirmacaoEmailModal"
+								th:attr="data-emailid=${dto.idAlocacao},data-processo=${dto.alocacaoSei.numeroExternoProcessoSei}"
+								title="Autorização" 
+								rel="tooltip" 
+								data-placement="left">
+								<span class="glyphicon glyphicon-envelope"></span>
+								
+							</a>
 							</td>
 							
 						</tr>

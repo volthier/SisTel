@@ -13,7 +13,7 @@ public interface Chips extends JpaRepository<Chip, Integer>{
 	
 	public List<Chip> findByIdChip(Integer idChip);
 	
-	@Query("select l from Chip l inner join l.alocacaoLinhaChips al WHERE al.dtDevolucao IS NULL")
+	@Query("select l from Chip l inner join l.alocacaos al WHERE al.dtDevolucao IS NULL")
 	public List<Chip> findByNumeroSerieChip();
 
 }

@@ -4,14 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,8 +25,8 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
-import br.gov.cultura.DitelAdm.model.AlocacaoSei;
-import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
+import br.gov.cultura.DitelAdm.model.Alocacao;
+import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.dtos.ServicosCategoria;
@@ -36,14 +35,12 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
 import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
 import br.gov.cultura.DitelAdm.model.faturasV3.Servicos;
-import br.gov.cultura.DitelAdm.service.AlocacaoSeiService;
-import br.gov.cultura.DitelAdm.service.AlocacaoUsuarioLinhaService;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.ChamadasService;
 import br.gov.cultura.DitelAdm.service.FaturaService;
 import br.gov.cultura.DitelAdm.service.PlanoService;
 import br.gov.cultura.DitelAdm.service.ResumoService;
 import br.gov.cultura.DitelAdm.service.ServicoService;
-import br.gov.cultura.DitelAdm.service.UsuarioService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 
 @Controller
@@ -56,10 +53,7 @@ public class FaturaController {
 	private LocaleResolver locale;
 	
 	@Autowired
-	private UsuarioService usuarioService;
-	
-	@Autowired
-	private AlocacaoUsuarioLinhaService alocacaoUsuarioLinhaService;
+	private AlocacaoService alocacaoService;
 	
 	@Autowired
 	private FaturaService faturaService;
@@ -77,9 +71,6 @@ public class FaturaController {
 	private ServicoService servicoService;
 	
 	@Autowired
-	private AlocacaoSeiService alocacaoSeiService;
-	
-	@Autowired
 	private SeiClient sei;
 	
 	@Autowired
@@ -88,6 +79,8 @@ public class FaturaController {
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody ModelAndView executarFatura() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		
+		/**Correção de medida de vizualização**/
 		List<Fatura> faturasNaoGeradas = faturaService.getFaturasNaoGeradas();
 		List<Fatura> faturasGeradas = faturaService.getFaturasGeradas();
 		mv.addObject("faturasNaoGeradas", faturasNaoGeradas);
@@ -98,17 +91,21 @@ public class FaturaController {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody ModelAndView executarFatura(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mv = new ModelAndView("FaturaLinhas");
+		
 		Integer idFatura = Integer.parseInt(request.getParameter("fatura"));
+		
 		Fatura fatura = faturaService.getFatura(idFatura);
+		
 		List<Resumo> resumos = resumoService.getResumoFatura(fatura);
-		List<AlocacaoSei> alocacoesSei = new ArrayList<AlocacaoSei>();
+		List<AlocacaoFatura> alocacoesFaturas = new ArrayList<AlocacaoFatura>();
+		
 		for (Resumo resumo : resumos) {
 			Linha linha = resumo.getLinha();
 			if (linha != null) {
-				List<AlocacaoUsuarioLinha> alocacoesUsuarioLinha = alocacaoUsuarioLinhaService.getAlocacaoUsuarioLinha(linha);
+				List<Alocacao> alocacoesUsuarioLinha = alocacaoService.getAlocacaoUsuarioLinha(linha);
 				if (!alocacoesUsuarioLinha.isEmpty()) {
-					for (AlocacaoUsuarioLinha alocacaoUsuarioLinha : alocacoesUsuarioLinha) {
-						LimiteAtesto limiteAtesto = alocacaoUsuarioLinha.getUsuario().getLimiteAtesto();
+					for (Alocacao alocacao : alocacoesUsuarioLinha) {
+						LimiteAtesto limiteAtesto = alocacao.getUsuario().getLimiteAtesto();
 						List<Chamadas> chamadas = chamadaService.getChamadaResumo(resumo);
 						List<Planos> planos = planoService.getPlanoResumo(resumo);
 						List<Servicos> servicos = servicoService.getServicosResumo(resumo);
@@ -117,36 +114,40 @@ public class FaturaController {
 						
 						float valorTotal = this.valorTotal(chamadas, servicos, planos);
 						
-						AlocacaoSei alocacaoSei = new AlocacaoSei();
+						AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
 						if(valorTotal > Float.parseFloat(limiteAtesto.getValorLimite())){
-							alocacaoSei.setRessarcimento(true);
-							sei.enviarMemorando(alocacaoUsuarioLinha.getNumeroProcessoSei(), gerarMemorando(request));
-							sei.enviarFatura(alocacaoUsuarioLinha.getNumeroProcessoSei(), gerarPdfFatura(request, fatura, alocacaoUsuarioLinha));
+							alocacaoFatura.setRessarcimento(true);
+							sei.enviarMemorando(alocacao.getAlocacaoSei().getNumeroProcessoSei(), gerarMemorando(request));
+							sei.enviarFatura(alocacao.getAlocacaoSei().getNumeroProcessoSei(), gerarPdfFatura(request, fatura, alocacao));
 						} else {
-							alocacaoSei.setRessarcimento(false);
+							alocacaoFatura.setRessarcimento(false);
 						}
-						alocacaoSei.setAlocacaoUsuarioLinha(alocacaoUsuarioLinha);
-						alocacaoSei.setResumo(resumo);
 						
-						alocacaoSeiService.salvar(alocacaoSei);
-						alocacoesSei.add(alocacaoSei);
+						alocacaoFatura.setAlocacao(alocacao);
+						alocacaoFatura.setResumo(resumo);
+						
+						alocacaoService.salvar(alocacaoFatura);
+						alocacoesFaturas.add(alocacaoFatura);
 					}
 				}
 			}
 		}
 
-		mv.addObject("alocacoesSei", alocacoesSei);
+		mv.addObject("alocacoesSei", alocacoesFaturas);
 		mv.addObject("fatura", fatura);
 		
 		return mv;
 	}
 	
 	@RequestMapping("/resumo/{fatura}/{alocacao}")
-	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura, @PathVariable("alocacao") int idAlocacaoUsuarioLinha, HttpServletRequest request) {
+	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura, @PathVariable("alocacao") int idAlocacao, HttpServletRequest request) {
+	
 		ModelAndView mv = new ModelAndView("Resumo");
+		
 		Fatura fatura = faturaService.getFatura(idFatura);
-		AlocacaoUsuarioLinha alocacaoUsuarioLinha = alocacaoUsuarioLinhaService.getAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
-		List<Resumo> resumos = resumoService.getResumoFaturaLinha(fatura, alocacaoUsuarioLinha.getLinha());
+		Alocacao alocacao = alocacaoService.getAlocacao(idAlocacao);
+		
+		List<Resumo> resumos = resumoService.getResumoFaturaLinha(fatura, alocacao.getLinha());
 		List<Chamadas> chamadas = chamadaService.getChamadaResumo(resumos.get(0));
 		List<Planos> planos = planoService.getPlanoResumo(resumos.get(0));
 		List<Servicos> servicos = servicoService.getServicosResumo(resumos.get(0));
@@ -203,10 +204,10 @@ public class FaturaController {
 		return valorTotal;
 	}
 	
-	private byte[] gerarPdfFatura(HttpServletRequest request, Fatura fatura, AlocacaoUsuarioLinha alocacaoUsuarioLinha) throws Exception{
+	private byte[] gerarPdfFatura(HttpServletRequest request, Fatura fatura, Alocacao alocacao) throws Exception{
 		View view = this.viewResolver.resolveViewName("FaturaLinhas", locale.resolveLocale(request));
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
-		ModelAndView mv = this.gerarResumo(fatura.getIdFatura(), alocacaoUsuarioLinha.getIdAlocacaoUsuarioLinha(), request);
+		ModelAndView mv = this.gerarResumo(fatura.getIdFatura(), alocacao.getIdAlocacao(), request);
 		
 		view = this.viewResolver.resolveViewName("Resumo", locale.resolveLocale(request));
 		view.render(mv.getModelMap(), request, mockResp);

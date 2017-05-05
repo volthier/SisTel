@@ -10,15 +10,18 @@ $('#confirmacaoEmailModal').on(
 
 			var form = modal.find('form');
 			var action = form.data('url-pendencia');
-
+			var teste;
 			action = '/email/';
 
 			form.attr('action', action + id);
-			
-			modal.find('.modal-body span').html(
-					'Gerar processo nº ' + item
-							+ ' e enviar e-mail? </strong>?');
-			
+			if(!item){
+				modal.find('.modal-body span').html(
+				'Vincular processo e enviar e-mail? </strong>');
+			}else{
+				modal.find('.modal-body span').html(
+						'Enviar email de notificação do processo nº <strong>' + item
+								+ '</strong> ?');
+			}
 			var redirect_url = "/pendencia"
 			$.ajax({ 
 			    url: "/email",    

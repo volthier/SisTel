@@ -12,9 +12,9 @@
 <br></br>
 <h1 style="font-size=20px" th:text="|Olá ${dto.usuario.nomeUsuario}"> Olá Maria</h1>
 
-<p> Estamos enviando essa notificação de abertura de processo nº <span th:text="${dto.numeroProcessoSei}"> numero </span> no sistema SEI com link abaixo!</p>
+<p> Estamos enviando essa notificação de abertura de processo nº <span th:text="${dto.alocacaoSei.numeroExternoProcessoSei}"> numero </span> no sistema SEI com link abaixo!</p>
 
-<a th:href="${dto.seiLink}">Link para acesso ao SEI</a>
+<a href="http://seitreinamento.cultura.gov.br/">Link para acesso ao SEI</a>
 
 
 <p><b>Divisão de Telefonia - CGTEC</b></p>

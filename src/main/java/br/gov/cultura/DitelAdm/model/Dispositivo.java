@@ -43,7 +43,7 @@ public class Dispositivo implements java.io.Serializable {
 	private float valorDispositivo;
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@JsonManagedReference
-	private Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos = new HashSet(0);
+	private Set<Alocacao> alocacaos = new HashSet(0);
 
 
 	public Dispositivo() {
@@ -64,7 +64,7 @@ public class Dispositivo implements java.io.Serializable {
 
 	public Dispositivo(String imeiDispositivo, String macDispositivo, String marcaDispositivo, String modeloDispositivo,
 			String numeroSerieDispositivo, String patrimonioDispositivo, String tipoDispositivo, float valorDispositivo,
-			Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos) {
+			Set<Alocacao> alocacao) {
 		this.imeiDispositivo = imeiDispositivo;
 		this.macDispositivo = macDispositivo;
 		this.marcaDispositivo = marcaDispositivo;
@@ -73,7 +73,7 @@ public class Dispositivo implements java.io.Serializable {
 		this.patrimonioDispositivo = patrimonioDispositivo;
 		this.tipoDispositivo = tipoDispositivo;
 		this.valorDispositivo = valorDispositivo;
-		this.alocacaoLinhaDispositivos = alocacaoLinhaDispositivos;
+		this.alocacaos = alocacao;
 	}
 	
 	@Override
@@ -86,7 +86,6 @@ public class Dispositivo implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id_dispositivo", unique = true, nullable = false)
 	public Integer getIdDispositivo() {
 		return this.idDispositivo;
@@ -186,12 +185,12 @@ public class Dispositivo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dispositivo")
-	public Set<AlocacaoLinhaDispositivo> getAlocacaoLinhaDispositivos() {
-		return this.alocacaoLinhaDispositivos;
+	public Set<Alocacao> getAlocacao() {
+		return this.alocacaos;
 	}
 
-	public void setAlocacaoLinhaDispositivos(Set<AlocacaoLinhaDispositivo> alocacaoLinhaDispositivos) {
-		this.alocacaoLinhaDispositivos = alocacaoLinhaDispositivos;
+	public void setAlocacao(Set<Alocacao> alocacao) {
+		this.alocacaos = alocacao;
 	}
 
 }

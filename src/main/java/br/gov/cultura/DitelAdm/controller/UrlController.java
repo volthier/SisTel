@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.dtos.AlocacaoLinhaDispositivoUsuarioDTO;
+import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
-import br.gov.cultura.DitelAdm.service.PendenciaService;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
 
 
 
@@ -23,7 +23,7 @@ import br.gov.cultura.DitelAdm.service.PendenciaService;
 public class UrlController {
 
 @Autowired
-private PendenciaService pendenciaService;
+private AlocacaoService alocacaoService;
 
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
@@ -52,13 +52,14 @@ public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa
 
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		
-		List<AlocacaoLinhaDispositivoUsuarioDTO> lista =  pendenciaService.listaPendencia();
-		
+		List<Alocacao> lista = alocacaoService.getIdAlocacao();
+	
 		/*Lista de alocados Devolvidos*/
-		Stream<AlocacaoLinhaDispositivoUsuarioDTO> dto = lista.stream().filter( p -> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido()!=null);
+		Stream<Alocacao> dto = lista.stream().filter(p-> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido() !=null);
+	
 		
 		/*Lista de alocados habilitados*/
-		Stream<AlocacaoLinhaDispositivoUsuarioDTO> dto1 = lista.stream().filter( p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao()==null);
+		Stream<Alocacao> dto1 = lista.stream().filter( p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao()==null);
 		
 		//lista de total alocados
 		mv.addObject("alocacaoTotal",lista);

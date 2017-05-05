@@ -190,11 +190,7 @@
 			<artifactId>liquibase-maven-plugin</artifactId>
 			<version>${liquibase.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.12</version>
-		</dependency>
+
 		<!-- FIM LIQUIBASE -->
 		<!-- Fim Conectores -->
 

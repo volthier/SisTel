@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
-import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
+import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
@@ -80,25 +77,10 @@ public class RelatorioController {
 		return cadastroChipService.getIdChip();
 	}
 	
-	@RequestMapping(value="/alocacaoUsuarioLinha",method = RequestMethod.GET)
+	@RequestMapping(value="/alocacao",method = RequestMethod.GET)
 	@ResponseBody
-	public List<AlocacaoUsuarioLinha> getAUL(){ 
-		return alocacaoservice.getIdAlocacaoUsuarioLinha();
-	}
-	@RequestMapping(value="/alocacaoLinhaDispositivo",method = RequestMethod.GET)
-	@ResponseBody
-	public List<AlocacaoLinhaDispositivo> getALD(){ 
-		return alocacaoservice.getIdAlocacaoLinhaDispositivo();
-	}
-	@RequestMapping(value="/alocacaoLinhaChip",method = RequestMethod.GET)
-	@ResponseBody
-	public List<AlocacaoLinhaChip> getALC(){ 
-		return alocacaoservice.getIdAlocacaoLinhaChip();
-	}
-	@RequestMapping(value="/alocacaoLinhaCategoria",method = RequestMethod.GET)
-	@ResponseBody
-	public List<AlocacaoLinhaCategoria> getALCat(){ 
-		return alocacaoservice.getIdAlocacaoLinhaCategoria();
+	public List<Alocacao> getAlocacao(){ 
+		return alocacaoservice.getIdAlocacao();
 	}
 	
 }

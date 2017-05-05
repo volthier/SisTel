@@ -5,86 +5,94 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
-import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
-import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesLinhasCategorias;
-import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesLinhasChips;
-import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesLinhasDispositivos;
-import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesUsuariosLinhas;
+import br.gov.cultura.DitelAdm.model.Alocacao;
+import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
+import br.gov.cultura.DitelAdm.model.AlocacaoSei;
+import br.gov.cultura.DitelAdm.model.DocumentoSei;
+import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.repository.alocacoes.Alocacoes;
+import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesFaturas;
+import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesSei;
+//import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesUsuariosLinhas;
+import br.gov.cultura.DitelAdm.repository.alocacoes.DocumentosSei;
 
 @Service
 public class AlocacaoService {
+	
+	@Autowired
+	private Alocacoes alocacoes;
 
 	@Autowired
-	private AlocacoesLinhasCategorias alocacoesLinhasCategorias;
-
+	private AlocacoesFaturas alocacoesFaturas;
+	
 	@Autowired
-	private AlocacoesLinhasChips alocacoesLinhasChips;
-
+	private DocumentosSei documentosSei;
+	
 	@Autowired
-	private AlocacoesLinhasDispositivos alocacoesLinhasDispositivos;
-
-	@Autowired
-	private AlocacoesUsuariosLinhas alocacoesUsuariosLinhas;
-
-	public void salvar(AlocacaoLinhaCategoria alocacaoLinhaCategoria) {
-		alocacoesLinhasCategorias.save(alocacaoLinhaCategoria);
-	}
-
-	public void salvar(AlocacaoLinhaChip alocacaoLinhaChip) {
-		alocacoesLinhasChips.save(alocacaoLinhaChip);
-	}
-
-	public void salvar(AlocacaoLinhaDispositivo alocacaoLinhaDispositivo) {
-		alocacoesLinhasDispositivos.save(alocacaoLinhaDispositivo);
-	}
-
-	public void salvar(AlocacaoUsuarioLinha alocacaoUsuarioLinha) {
-		alocacoesUsuariosLinhas.saveAndFlush(alocacaoUsuarioLinha);
-	}
-
-	public void excluir(Integer id) {
-		alocacoesLinhasCategorias.delete(id);
-		alocacoesLinhasChips.delete(id);
-		alocacoesLinhasDispositivos.delete(id);
-		alocacoesUsuariosLinhas.delete(id);
-	}
-
-	public List<AlocacaoLinhaCategoria> getIdAlocacaoLinhaCategoria() {
-		return alocacoesLinhasCategorias.findAll();
-	}
-
-	public List<AlocacaoLinhaChip> getIdAlocacaoLinhaChip() {
-		return alocacoesLinhasChips.findAll();
-	}
-
-	public List<AlocacaoLinhaDispositivo> getIdAlocacaoLinhaDispositivo() {
-		return alocacoesLinhasDispositivos.findAll();
-	}
-
-	public List<AlocacaoUsuarioLinha> getIdAlocacaoUsuarioLinha() {
-		return alocacoesUsuariosLinhas.findAll();
-	}
-
-	public AlocacaoLinhaCategoria getAlocacaoLinhaCategoria(Integer idAlocacaoLinhaCategoria) {
-		return alocacoesLinhasCategorias.findByIdAlocacaoLinhaCategoria(idAlocacaoLinhaCategoria);
-	}
-
-	public AlocacaoLinhaChip getAlocacaoLinhaChip(Integer idAlocacaoLinhaChip) {
-		return alocacoesLinhasChips.findByIdAlocacaoLinhaChip(idAlocacaoLinhaChip);
-	}
-
-	public AlocacaoLinhaDispositivo getAlocacaoLinhaDispositivo(Integer idAlocacaoLinhaDispositivo) {
-		return alocacoesLinhasDispositivos.findByIdAlocacaoLinhaDispositivo(idAlocacaoLinhaDispositivo);
-	}
-
-	public AlocacaoUsuarioLinha getAlocacaoUsuarioLinha(Integer idAlocacaoUsuarioLinha) {
-		return alocacoesUsuariosLinhas.findByIdAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
+	private AlocacoesSei alocacaoSeis;
+	
+	public void salvar(List<AlocacaoSei> alocacoes){
+		alocacaoSeis.save(alocacoes);
 	}
 	
-	public List<Object[]> getAlocacaoUsuarioLinhaList(){
-		return alocacoesUsuariosLinhas.getAlocacoesUsuarios();
+	public void salvar(AlocacaoSei alocacao){
+		alocacaoSeis.saveAndFlush(alocacao);
 	}
+
+	public void salvar(Alocacao alocacao){
+		alocacoes.saveAndFlush(alocacao);
+	}
+	
+	public void salvar(AlocacaoFatura alocacaoFatura){
+		alocacoesFaturas.saveAndFlush(alocacaoFatura);
+	}
+
+	public void salvar(DocumentoSei documentoSei){
+		documentosSei.saveAndFlush(documentoSei);
+	}
+	
+	public void excluir(Integer id) {
+		alocacoes.delete(id);
+		alocacoesFaturas.delete(id);
+		documentosSei.delete(id);
+	}
+
+	public List<AlocacaoSei> getAlocacaoSei(){
+		return alocacaoSeis.findAll();
+	}
+	
+	public List<Alocacao> getIdAlocacao(){
+		return alocacoes.findAll();
+	}
+	
+	public List<AlocacaoFatura> getIdAlocacaoFatura(){
+		return alocacoesFaturas.findAll();
+	}
+	
+	public List<DocumentoSei> getIdDocumentoSei(){
+		return documentosSei.findAll(); 
+	}
+	
+	public AlocacaoSei getAlocacaoSei(Integer idAlocacaoSei){
+		return alocacaoSeis.findOne(idAlocacaoSei);
+	}
+	
+	public Alocacao getAlocacao(Integer idAlocacao){
+		return alocacoes.findOne(idAlocacao);
+	}
+
+	public AlocacaoFatura getAlocacaoFatura(Integer idAlocacaoFatura){
+		return alocacoesFaturas.findOne(idAlocacaoFatura);
+	}
+	
+	public DocumentoSei getDocumentoSei(Integer idDocumento){
+		return documentosSei.findOne(idDocumento);
+	}
+
+	public List<Alocacao> getAlocacaoUsuarioLinha(Linha linha) {
+		return alocacoes.getAlocacaoByLinha(linha);
+	}
+	
+
+	
 }

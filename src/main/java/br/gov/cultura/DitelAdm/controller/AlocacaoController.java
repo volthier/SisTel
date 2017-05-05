@@ -15,7 +15,6 @@ import javax.ws.rs.core.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaCategoria;
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaChip;
-import br.gov.cultura.DitelAdm.model.AlocacaoLinhaDispositivo;
-import br.gov.cultura.DitelAdm.model.AlocacaoUsuarioLinha;
+import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
@@ -45,7 +41,6 @@ import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
-
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
@@ -115,18 +110,16 @@ public class AlocacaoController {
 	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
-		List<AlocacaoUsuarioLinha> todosUsuarioLinha = alocacaoService.getIdAlocacaoUsuarioLinha();
-		todosUsuarioLinha
+		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
+		todosUsuario
 				.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
-		mv.addObject("usuariosDispositivos", todosUsuarioLinha);
+		mv.addObject("usuariosDispositivos", todosUsuario);
 
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(Usuario usuario, @Validated AlocacaoUsuarioLinha alocacaoUsuarioLinha,
-			@Validated AlocacaoLinhaCategoria alocacaoLinhaCategoria, @Validated AlocacaoLinhaChip alocacaoLinhaChip,
-			@Validated AlocacaoLinhaDispositivo alocacaoLinhaDispositivo, Errors errors, RedirectAttributes attributes,
+	public String salvar(Alocacao alocacao, Usuario usuario, Errors errors, RedirectAttributes attributes,
 			HttpServletRequest servletRequest, HttpServletResponse servletResponse)
 			throws ParseException, RemoteException {
 
@@ -134,14 +127,14 @@ public class AlocacaoController {
 
 		if (servletRequest.getParameter("idAlocacaoUsuarioLinha") != null) {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacaoUsuarioLinha"));
-			alocacaoUsuarioLinha = alocacaoService.getAlocacaoUsuarioLinha(idAlocacaoUsuarioLinha);
+			alocacao = alocacaoService.getAlocacao(idAlocacaoUsuarioLinha);
 			Date dtDevolucao = new SimpleDateFormat("yyyy/MM/dd HH:mm")
 					.parse(servletRequest.getParameter("dtDevolucao"));
-			Date dtRecebimentoReplicador = alocacaoUsuarioLinha.getDtRecebimento();
-			Linha idReciver = alocacaoUsuarioLinha.getLinha();
-			List<AlocacaoLinhaDispositivo> linhaDispo = alocacaoService.getIdAlocacaoLinhaDispositivo();
-			AlocacaoLinhaDispositivo dispo = linhaDispo.stream().filter(ld -> ld != null
-					&& ld.getLinha().equals(idReciver) && ld.getDtRecebimento().equals(dtRecebimentoReplicador))
+			Date dtRecebimentoReplicador = alocacao.getDtRecebido();
+			Linha idReciver = alocacao.getLinha();
+			List<Alocacao> linhaDispo = alocacaoService.getIdAlocacao();
+			Alocacao dispo = linhaDispo.stream().filter(ld -> ld != null
+					&& ld.getLinha().equals(idReciver) && ld.getDtRecebido().equals(dtRecebimentoReplicador))
 					.findFirst().orElse(null);
 
 			/**
@@ -161,9 +154,9 @@ public class AlocacaoController {
 			 * (Codigo acima)
 			 */
 
-			List<AlocacaoLinhaChip> linhaChip = alocacaoService.getIdAlocacaoLinhaChip();
-			AlocacaoLinhaChip chip = linhaChip.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
-					&& ld.getDtRecebimento().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
+			List<Alocacao> linhaChip = alocacaoService.getIdAlocacao();
+			Alocacao chip = linhaChip.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
+					&& ld.getDtRecebido().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
 			if (chip == null) {
 				System.out.println("Error acquiring Info Linha-Dispositivo!");
 				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");
@@ -173,9 +166,9 @@ public class AlocacaoController {
 				alocacaoService.salvar(chip);
 			}
 
-			List<AlocacaoLinhaCategoria> linhaCat = alocacaoService.getIdAlocacaoLinhaCategoria();
-			AlocacaoLinhaCategoria cat = linhaCat.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
-					&& ld.getDtRecebimento().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
+			List<Alocacao> linhaCat = alocacaoService.getIdAlocacao();
+			Alocacao cat = linhaCat.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
+					&& ld.getDtRecebido().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
 			if (cat == null) {
 				System.out.println("Error acquiring Info Linha-Dispositivo!");
 				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");
@@ -185,9 +178,8 @@ public class AlocacaoController {
 				alocacaoService.salvar(cat);
 			}
 
-			alocacaoUsuarioLinha.setDtDevolucao(dtDevolucao);
-			alocacaoLinhaDispositivo.setDtDevolucao(dtDevolucao);
-			alocacaoService.salvar(alocacaoUsuarioLinha);
+			alocacao.setDtDevolucao(dtDevolucao);
+			alocacaoService.salvar(alocacao);
 			attributes.addFlashAttribute("mensagem", "Registrada devolução de dispositivo do usuario!");
 			return "redirect:/alocacoes/devolver";
 
@@ -196,15 +188,15 @@ public class AlocacaoController {
 		}
 
 		/* Inicio da Disponibilização de itens (Codigo Abaixo) */
-		else if (servletRequest.getParameter("dtRecebimento") != null) {
+		else if (servletRequest.getParameter("dtRecebido") != null) {
 			String cpf = servletRequest.getParameter("nomeUsuario");
 			Usuario usuarioCad = cadastroUsuarioService.getByCpf(cpf);
 			if (usuarioCad == null) {
 				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
 				usuario.setCpfUsuario(usuarioLdap.getCpf());
 				usuario.setNomeUsuario(usuarioLdap.getFullName());
-				usuario.setNomePrimeiro(usuarioLdap.getFirstName());
-				usuario.setNomeSobrenome(usuarioLdap.getLastName());
+				usuario.setPrimeiroNomeUsuario(usuarioLdap.getFirstName());
+				usuario.setSobrenomeUsuario(usuarioLdap.getLastName());
 				usuario.setEmailUsuario(usuarioLdap.getEmail());
 				usuario.setCargoUsuario(servletRequest.getParameter("cargoUsuario"));
 				usuario.setLimiteAtesto(limiteAtestoService
@@ -230,17 +222,17 @@ public class AlocacaoController {
 					usuario.setEmailUsuario(usuarioLdap.getEmail());
 				}
 				
-				if(usuario.getNomePrimeiro()==null){
-					usuario.setNomePrimeiro(usuarioCad.getNomePrimeiro());	
+				if(usuario.getPrimeiroNomeUsuario()==null){
+					usuario.setPrimeiroNomeUsuario(usuarioCad.getPrimeiroNomeUsuario());	
 				}
-				if(!usuario.getNomePrimeiro().contains(usuarioLdap.getFirstName())){
-					usuario.setNomePrimeiro(usuarioLdap.getFirstName());
+				if(!usuario.getPrimeiroNomeUsuario().contains(usuarioLdap.getFirstName())){
+					usuario.setPrimeiroNomeUsuario(usuarioLdap.getFirstName());
 				}
-				if(usuario.getNomeSobrenome()==null){
-					usuario.setNomeSobrenome(usuarioCad.getNomeSobrenome());	
+				if(usuario.getSobrenomeUsuario()==null){
+					usuario.setSobrenomeUsuario(usuarioCad.getSobrenomeUsuario());	
 				}
-				if(!usuario.getNomeSobrenome().contains(usuarioLdap.getLastName())){
-					usuario.setNomeSobrenome(usuarioLdap.getLastName());
+				if(!usuario.getSobrenomeUsuario().contains(usuarioLdap.getLastName())){
+					usuario.setSobrenomeUsuario(usuarioLdap.getLastName());
 				}		
 				usuario.setCargoUsuario(servletRequest.getParameter("cargoUsuario"));
 				usuario.setLimiteAtesto(limiteAtestoService
@@ -260,20 +252,11 @@ public class AlocacaoController {
 			}
 
 			
-			alocacaoUsuarioLinha.setUsuario(usuario);
-			alocacaoService.salvar(alocacaoUsuarioLinha);
-			alocacaoService.salvar(alocacaoLinhaChip);
-
-			// Retrabalho Tratativa para quando não houver dispositivo
-			// fornecido(Somente Chip)
-			alocacaoService.salvar(alocacaoLinhaDispositivo);
-			// Retrabalho Tratativa para quando não houver dispositivo
-			// fornecido(Somente Chip)
-
-			alocacaoService.salvar(alocacaoLinhaCategoria);
+			alocacao.setUsuario(usuario);
+			alocacaoService.salvar(alocacao);
 
 			attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
-			return "redirect:/alocacoes/disponibilizar";
+			
 		}
 		/* FIM da disponibilização de itens(Codigo Acima) */
 

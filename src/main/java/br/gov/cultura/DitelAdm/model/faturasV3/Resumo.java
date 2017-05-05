@@ -19,9 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import br.gov.cultura.DitelAdm.model.AlocacaoSei;
+import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 import br.gov.cultura.DitelAdm.model.Linha;
 
 /**
@@ -62,7 +60,7 @@ public class Resumo implements java.io.Serializable {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Servicos> servicoses = new HashSet(0);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<AlocacaoSei> alocacaoSeis = new HashSet(0);
+	private Set<AlocacaoFatura> alocacaoFaturas = new HashSet(0);
 
 	public Resumo() {
 	}
@@ -88,7 +86,7 @@ public class Resumo implements java.io.Serializable {
 			int quantRegCham, float valorTotalRegChamadaImp, int quantRegServ, float valorTotalRegServImp,
 			String degrau, int modServ, String uniVelocidade, float valorTotalContaRecursoImp, float valorTotalImp,
 			String velocidade, Date dataVenc, Set<Servicos> servicoses, Set<Chamadas> chamadases, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
-			Set<Planos> planoses,Set<AlocacaoSei> alocacaoSeis) {
+			Set<Planos> planoses,Set<AlocacaoFatura> alocacaoFaturas) {
 		this.fatura = fatura;
 		this.linha = linha;
 		this.idUnico = idUnico;
@@ -112,7 +110,7 @@ public class Resumo implements java.io.Serializable {
 		this.ajusteses = ajusteses;
 		this.descontoses = descontoses;
 		this.planoses = planoses;
-		this.alocacaoSeis = alocacaoSeis;
+		this.alocacaoFaturas = alocacaoFaturas;
 	}
 
 	@Id
@@ -339,12 +337,12 @@ public class Resumo implements java.io.Serializable {
 		this.planoses = planoses;
 	}
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<AlocacaoSei> getAlocacaoSeis() {
-		return this.alocacaoSeis;
+	public Set<AlocacaoFatura> getAlocacaoFaturas() {
+		return this.alocacaoFaturas;
 	}
 
-	public void setAlocacaoSeis(Set<AlocacaoSei> alocacaoSeis) {
-		this.alocacaoSeis = alocacaoSeis;
+	public void setAlocacaoFaturas(Set<AlocacaoFatura> alocacaoFaturas) {
+		this.alocacaoFaturas = alocacaoFaturas;
 	}
 
 }
