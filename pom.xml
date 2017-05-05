@@ -199,7 +199,6 @@
 			<groupId>axis</groupId>
 			<artifactId>axis-wsdl4j</artifactId>
 			<version>1.5.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<!-- Fim Conectores -->
 

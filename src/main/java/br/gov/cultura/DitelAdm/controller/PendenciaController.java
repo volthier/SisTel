@@ -1,7 +1,11 @@
 package br.gov.cultura.DitelAdm.controller;
 
 import java.rmi.RemoteException;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,13 +59,16 @@ public class PendenciaController {
 		
 		RetornoGeracaoProcedimento processo = sei.gerarProcedimentoAlocacao();
 		
-		RetornoConsultaProcedimento consulta = sei.consutaProcessoSei(processo.getIdProcedimento());
-		
-		
+		RetornoConsultaProcedimento consulta = sei.consutaProcessoSei(processo.getProcedimentoFormatado());
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		alocacaoSei.setNumeroProcessoSei(processo.getIdProcedimento());
 		alocacaoSei.setNumeroExternoProcessoSei(processo.getProcedimentoFormatado());
 		alocacaoSei.setLinkAcessoSei(processo.getLinkAcesso());
-		alocacaoSei.setDtAberturaProcesso();
+		try {
+			alocacaoSei.setDtAberturaProcesso(sdf.parse(consulta.getAndamentoGeracao().getDataHora()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		alocacaoService.salvar(alocacaoSei);
 		alocacao.setAlocacaoSei(alocacaoSei);
