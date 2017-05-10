@@ -26,7 +26,7 @@
 							<div class="col-sm-6">
 								<select class="form-control" name="fatura">
 									<option th:each="fatura : ${faturasNaoGeradas}" th:value="${fatura.idFatura}"
-										th:text="${fatura.numFatura} +  ' - ' + ${fatura.descriCobranca}" />
+										th:text="${fatura.numFatura} +  ' - ' + ${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)} + ' - '+ ${fatura.cliente.operadora.nome}" />
 								</select>
 							</div>
 			
@@ -52,8 +52,8 @@
 						</thead>
 						<tbody>
 							<tr th:each="fatura : ${faturasGeradas}">
-								<td th:text="${fatura.numFatura} +  ' - ' + ${fatura.descriCobranca}"></td>
-								<td><a class="btn btn-primary" th:href="@{/fatura/resumo} + '?fatura=' + ${fatura.idFatura}" role="button">Resumo</a></td>
+								<td th:text="${fatura.resumo.fatura.numFatura} + ' - ' + ${#strings.substring(fatura.resumo.fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.resumo.fatura.mesRef,0,4)} + ' - '+${fatura.alocacao.usuario.nomeUsuario}+' - '+${fatura.alocacao.linha.numeroLinha}"></td>
+								<td><a class="btn btn-primary" th:href="@{/fatura/resumo} + '/' + ${fatura.resumo.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}" role="button">Resumo</a></td>
 							</tr>
 						</tbody>
 					</table>

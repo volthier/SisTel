@@ -56,7 +56,7 @@ public class Cliente implements java.io.Serializable {
 		this.codCliente = codCliente;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "operadora_codOperadora", nullable = false)
 	public Operadora getOperadora() {
 		return this.operadora;

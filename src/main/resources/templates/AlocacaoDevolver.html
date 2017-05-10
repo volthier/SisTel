@@ -25,10 +25,10 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Nome</label>
 					<div class="col-sm-4">
-						<select name="idAlocacaoUsuarioLinha" class="col-sm-4 form-control">
+						<select name="idAlocacao" class="col-sm-4 form-control">
 							<option value="">----Selecione----</option>
 							<option th:each="devolucao : ${usuariosDispositivos}" th:if="${devolucao.dtDevolucao == null}"
-								th:value="${devolucao.idAlocacaoUsuarioLinha}"
+								th:value="${devolucao.idAlocacao}"
 								th:utext="${devolucao.usuario.nomeUsuario+' | '+devolucao.linha.numeroLinha}"></option>
 						</select>
 					</div>

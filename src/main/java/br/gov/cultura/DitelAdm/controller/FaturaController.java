@@ -82,7 +82,7 @@ public class FaturaController {
 		
 		/**Correção de medida de vizualização**/
 		List<Fatura> faturasNaoGeradas = faturaService.getFaturasNaoGeradas();
-		List<Fatura> faturasGeradas = faturaService.getFaturasGeradas();
+		List<AlocacaoFatura> faturasGeradas = alocacaoService.getIdAlocacaoFatura();
 		mv.addObject("faturasNaoGeradas", faturasNaoGeradas);
 		mv.addObject("faturasGeradas", faturasGeradas);
 		return mv;
@@ -106,6 +106,9 @@ public class FaturaController {
 				if (!alocacoesUsuarioLinha.isEmpty()) {
 					for (Alocacao alocacao : alocacoesUsuarioLinha) {
 						LimiteAtesto limiteAtesto = alocacao.getUsuario().getLimiteAtesto();
+						
+						/**ADICIONAR AQUI TRATATIVA PARA DATA ALOCADA DA LINHA*/
+						
 						List<Chamadas> chamadas = chamadaService.getChamadaResumo(resumo);
 						List<Planos> planos = planoService.getPlanoResumo(resumo);
 						List<Servicos> servicos = servicoService.getServicosResumo(resumo);
@@ -115,6 +118,7 @@ public class FaturaController {
 						float valorTotal = this.valorTotal(chamadas, servicos, planos);
 						
 						AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
+						
 						if(valorTotal > Float.parseFloat(limiteAtesto.getValorLimite())){
 							alocacaoFatura.setRessarcimento(true);
 							sei.enviarMemorando(alocacao.getAlocacaoSei().getNumeroProcessoSei(), gerarMemorando(request));
@@ -132,7 +136,7 @@ public class FaturaController {
 				}
 			}
 		}
-
+		
 		mv.addObject("alocacoesSei", alocacoesFaturas);
 		mv.addObject("fatura", fatura);
 		

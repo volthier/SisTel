@@ -109,7 +109,7 @@ public class Fatura implements java.io.Serializable {
 		this.idFatura = idFatura;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cliente_codCliente", nullable = false)
 	public Cliente getCliente() {
 		return this.cliente;

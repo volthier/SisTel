@@ -41,6 +41,7 @@ import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
@@ -111,8 +112,7 @@ public class AlocacaoController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
 		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
-		todosUsuario
-				.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
+		todosUsuario.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
 		mv.addObject("usuariosDispositivos", todosUsuario);
 
 		return mv;
@@ -125,17 +125,16 @@ public class AlocacaoController {
 
 		/* Inicio da Devolução de itens */
 
-		if (servletRequest.getParameter("idAlocacaoUsuarioLinha") != null) {
-			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacaoUsuarioLinha"));
+		if (servletRequest.getParameter("idAlocacao") != null) {
+			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacao"));
 			alocacao = alocacaoService.getAlocacao(idAlocacaoUsuarioLinha);
 			Date dtDevolucao = new SimpleDateFormat("yyyy/MM/dd HH:mm")
 					.parse(servletRequest.getParameter("dtDevolucao"));
 			Date dtRecebimentoReplicador = alocacao.getDtRecebido();
 			Linha idReciver = alocacao.getLinha();
 			List<Alocacao> linhaDispo = alocacaoService.getIdAlocacao();
-			Alocacao dispo = linhaDispo.stream().filter(ld -> ld != null
-					&& ld.getLinha().equals(idReciver) && ld.getDtRecebido().equals(dtRecebimentoReplicador))
-					.findFirst().orElse(null);
+			Alocacao dispo = linhaDispo.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
+					&& ld.getDtRecebido().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
 
 			/**
 			 * Retrabalho de alocação dispositivo para casos de somente chip
@@ -213,27 +212,27 @@ public class AlocacaoController {
 			} else if (usuarioCad != null) {
 				usuario = usuarioCad;
 				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
-				
-				if(usuario.getEmailUsuario()==null){
-					usuario.setEmailUsuario(usuarioLdap.getEmail());	
-				}
-				
-				if(!usuario.getEmailUsuario().contains(usuarioLdap.getEmail())){
+
+				if (usuario.getEmailUsuario() == null) {
 					usuario.setEmailUsuario(usuarioLdap.getEmail());
 				}
-				
-				if(usuario.getPrimeiroNomeUsuario()==null){
-					usuario.setPrimeiroNomeUsuario(usuarioCad.getPrimeiroNomeUsuario());	
+
+				if (!usuario.getEmailUsuario().contains(usuarioLdap.getEmail())) {
+					usuario.setEmailUsuario(usuarioLdap.getEmail());
 				}
-				if(!usuario.getPrimeiroNomeUsuario().contains(usuarioLdap.getFirstName())){
+
+				if (usuario.getPrimeiroNomeUsuario() == null) {
+					usuario.setPrimeiroNomeUsuario(usuarioCad.getPrimeiroNomeUsuario());
+				}
+				if (!usuario.getPrimeiroNomeUsuario().contains(usuarioLdap.getFirstName())) {
 					usuario.setPrimeiroNomeUsuario(usuarioLdap.getFirstName());
 				}
-				if(usuario.getSobrenomeUsuario()==null){
-					usuario.setSobrenomeUsuario(usuarioCad.getSobrenomeUsuario());	
+				if (usuario.getSobrenomeUsuario() == null) {
+					usuario.setSobrenomeUsuario(usuarioCad.getSobrenomeUsuario());
 				}
-				if(!usuario.getSobrenomeUsuario().contains(usuarioLdap.getLastName())){
+				if (!usuario.getSobrenomeUsuario().contains(usuarioLdap.getLastName())) {
 					usuario.setSobrenomeUsuario(usuarioLdap.getLastName());
-				}		
+				}
 				usuario.setCargoUsuario(servletRequest.getParameter("cargoUsuario"));
 				usuario.setLimiteAtesto(limiteAtestoService
 						.getLimiteAtestoId(Integer.parseInt(servletRequest.getParameter("limiteDasAtesto"))));
@@ -247,19 +246,54 @@ public class AlocacaoController {
 					}
 
 				}
-				
+
 				cadastroUsuarioService.salvar(usuario);
 			}
 
-			
 			alocacao.setUsuario(usuario);
-			alocacaoService.salvar(alocacao);
 
-			attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
-			
+			List<Alocacao> listaConferencia = alocacaoService.getIdAlocacao();
+			listaConferencia.remove(alocacao);
+
+			int i = 0;
+			while (i == 0) {
+
+				Alocacao alocacaoVerificaProcesso = listaConferencia.stream()
+						.filter(lc -> lc != null && lc.getUsuario().getCpfUsuario().equals(cpf)
+								&& lc.getAlocacaoSei().getDtEncerramentoProcesso() == null)
+						.findFirst().orElse(null);
+
+				if (alocacaoVerificaProcesso != null) {
+
+					RetornoConsultaProcedimento processo = sei.consutaProcessoSei(
+							alocacaoVerificaProcesso.getAlocacaoSei().getNumeroExternoProcessoSei());
+
+					if (processo != null) {
+
+						if (processo.getAndamentoConclusao() == null) {
+							alocacao.setAlocacaoSei(alocacaoVerificaProcesso.getAlocacaoSei());
+							alocacaoService.salvar(alocacao);
+							attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
+							i = 1;
+						}
+
+						else if (processo.getAndamentoConclusao() != null) {
+							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+							alocacaoVerificaProcesso.getAlocacaoSei().setDtEncerramentoProcesso(
+									sdf.parse(processo.getAndamentoConclusao().getDataHora()));
+							alocacaoService.salvar(alocacaoVerificaProcesso);
+						}
+
+					}
+
+				} else if (alocacaoVerificaProcesso == null) {
+					alocacaoService.salvar(alocacao);
+					attributes.addFlashAttribute("mensagem", "Registrado vinculo!");
+					i = 1;
+				}
+				/* FIM da disponibilização de itens(Codigo Acima) */
+			}
 		}
-		/* FIM da disponibilização de itens(Codigo Acima) */
-
 		return "redirect:/alocacoes/disponibilizar";
 
 	}

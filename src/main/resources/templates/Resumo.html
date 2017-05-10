@@ -14,14 +14,17 @@
 			<table>
 				<thead>
 					<tr>
-						<td style="width: 60%">Descrição</td>
-						<td>Total (R$)</td>
+						<td style="width: 80%"><b>Descrição</b></td>
+						<td style="margin-left: 5%"><b>Total (R$)</b></td>
+					</tr>
+					<tr>
+					<td><span th:text="${#numbers.formatDecimal(#aggregates.sum(chamadas.![valLigImp]),0,2)}"></span></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="plano : ${planos}">
-						<td th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
-						<td th:text="${plano.valComImp}"></td>
+						<td style="width: 80%" th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
+						<td style="margin-left: 5%" th:text="${#numbers.formatDecimal(plano.valComImp,1,2)}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -38,22 +41,25 @@
 							<td><b>Tarifa (R$)</b></td>
 							<td><b>Valor Total (R$)</b></td>
 							<td><b>Valor Cobrado (R$)</b></td>
+							
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="chamada : ${chamadas}" style="border-bottom: 1px dashed black !important;">
-							<td style="width: 8%" th:text="${chamada.dataFormatada()}"></td>
+							<td style="width: 10%" th:text="${chamada.dataFormatada()}"></td>
 							<td style="width: 10%" th:text="${chamada.horaLigacao}"></td>
-							<td style="width: 35%" th:text="${chamada.nomeLocalDestino}"></td>
-							<td style="width: 13%" th:text="${chamada.numTelefoneChamado}"></td>
-							<td style="width: 10%" th:text="${chamada.duracaoLigacao}"></td>
+							<td style="width: 28%" th:text="${chamada.nomeLocalDestino}"></td>
+							<td style="width: 15%" th:text="${chamada.numTelefoneChamado}"></td>
+							<td style="width: 14%" th:text="${chamada.duracaoLigacao}"></td>
 							<td style="width: 8%" th:text="${chamada.tarifa()}"></td>
-							<td style="width: 8%" th:text="${chamada.valLigImp}"></td>
-							<td style="width: 8%" th:text="${chamada.valLigImp}"></td>
+							<td style="width: 10%" th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
+							<td style="width: 10%" th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+			<b>Valor Total </b>
 			<b>Serviços (Torpedos, Hits, Jogos, etc.)</b>
 			<div>
 				<table style="border-collapse: collapse;">
@@ -68,11 +74,11 @@
 					</thead>
 					<tbody>
 						<tr th:each="servico : ${servicos}" style="border-bottom: 1px dashed black !important;">
-							<td th:text="${servico.categoria.descricao}"></td>
-							<td th:text="${servico.quantidade}"></td>
-							<td th:text="${servico.tarifa}"></td>
-							<td th:text="${servico.valorTotal}"></td>
-							<td th:text="${servico.valorCobrado}"></td>
+							<td style="text-align: center;" th:text="${servico.categoria.descricao}"></td>
+							<td style="text-align: center;" th:text="${servico.quantidade}"></td>
+							<td th:text="${#numbers.formatDecimal(servico.tarifa,1,2)}"></td>
+							<td th:text="${#numbers.formatDecimal(servico.valorTotal,1,2)}"></td>
+							<td th:text="${#numbers.formatDecimal(servico.valorCobrado,1,2)}"></td>
 						</tr>
 					</tbody>
 				</table>

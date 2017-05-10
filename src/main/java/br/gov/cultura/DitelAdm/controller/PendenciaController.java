@@ -1,11 +1,8 @@
 package br.gov.cultura.DitelAdm.controller;
 
 import java.rmi.RemoteException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,36 +44,45 @@ public class PendenciaController {
 	}
 		
 	@RequestMapping(value="/email/{id}", method = RequestMethod.POST)
-	public String enviarEmailProcesso(@PathVariable("id") @RequestBody String id, Alocacao alocacao, AlocacaoSei alocacaoSei, RedirectAttributes attributes) throws RemoteException {
-
+	public String enviarEmailProcesso(@PathVariable("id") @RequestBody String id, Alocacao alocacao, AlocacaoSei alocacaoSei, RedirectAttributes attributes) throws RemoteException, ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		alocacao = alocacaoService.getAlocacao(Integer.parseInt(id)); 
+		
 		if(alocacao.getAlocacaoSei()!=null){
+			RetornoConsultaProcedimento processo= sei.consutaProcessoSei(alocacao.getAlocacaoSei().getNumeroExternoProcessoSei());
+					
+			if(processo.getAndamentoConclusao()==null){
 			mailer.enviar(Integer.parseInt(id));
 			attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
-		    return "redirect:/pendencia";
+		    
+			return "redirect:/pendencia";
+		 
+			}
+		 
+		    	alocacao.getAlocacaoSei().setDtEncerramentoProcesso(sdf.parse(processo.getAndamentoConclusao().getDataHora()));
+		    	alocacaoService.salvar(alocacao);
+		    	alocacao.setAlocacaoSei(null);
+		    
 		}
 		if(alocacao.getAlocacaoSei()==null){
-		
-		RetornoGeracaoProcedimento processo = sei.gerarProcedimentoAlocacao();
-		
-		RetornoConsultaProcedimento consulta = sei.consutaProcessoSei(processo.getProcedimentoFormatado());
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		alocacaoSei.setNumeroProcessoSei(processo.getIdProcedimento());
-		alocacaoSei.setNumeroExternoProcessoSei(processo.getProcedimentoFormatado());
-		alocacaoSei.setLinkAcessoSei(processo.getLinkAcesso());
-		try {
-			alocacaoSei.setDtAberturaProcesso(sdf.parse(consulta.getAndamentoGeracao().getDataHora()));
-		} catch (ParseException e) {
-			e.printStackTrace();
+
+		    	
+		    	RetornoGeracaoProcedimento processoNovo = sei.gerarProcedimentoAlocacao();
+				RetornoConsultaProcedimento consulta = sei.consutaProcessoSei(processoNovo.getProcedimentoFormatado());
+				
+				alocacaoSei.setNumeroProcessoSei(processoNovo.getIdProcedimento());
+				alocacaoSei.setNumeroExternoProcessoSei(processoNovo.getProcedimentoFormatado());
+				alocacaoSei.setLinkAcessoSei(processoNovo.getLinkAcesso());
+				alocacaoSei.setDtAberturaProcesso(sdf.parse(consulta.getAndamentoGeracao().getDataHora()));
+
+				alocacaoService.salvar(alocacaoSei);
+				alocacao.setAlocacaoSei(alocacaoSei);
+				
+				alocacaoService.salvar(alocacao);
+				mailer.enviar(Integer.parseInt(id));
+				attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 		}
-		
-		alocacaoService.salvar(alocacaoSei);
-		alocacao.setAlocacaoSei(alocacaoSei);
-		
-		alocacaoService.salvar(alocacao);
-		mailer.enviar(Integer.parseInt(id));
-		attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
-	}
 		return "redirect:/pendencia";
 }
 }
