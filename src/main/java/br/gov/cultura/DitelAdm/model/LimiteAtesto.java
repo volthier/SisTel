@@ -13,6 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -58,6 +65,8 @@ public class LimiteAtesto implements java.io.Serializable {
 	}
 
 	@Column(name = "das_atesto", nullable = false)
+	@Size(max=200,message="Maximo de caracteres para DAS Atesto excedido!")
+	@NotEmpty(message="Das Atesto e obrigat�rio!")
 	public String getDasAtesto() {
 		return this.dasAtesto;
 	}
@@ -67,6 +76,10 @@ public class LimiteAtesto implements java.io.Serializable {
 	}
 
 	@Column(name = "valor_limite", nullable = false)
+	@NotNull(message="Valor e obrigatorio!")
+	@DecimalMin(value = "0.01", message = "Valor minimo de R$0,01!" )
+	@DecimalMax(value = "9999999.99", message ="Valor ultrapassa valor maximo!")
+	@NumberFormat(pattern="#,##0.00")
 	public float getValorLimite() {
 		return this.valorLimite;
 	}

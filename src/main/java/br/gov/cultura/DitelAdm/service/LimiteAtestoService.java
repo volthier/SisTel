@@ -24,4 +24,7 @@ public class LimiteAtestoService {
 		public LimiteAtesto getLimiteAtestoId(Integer id){
 			return limitesAtestos.findOne(id);
 		}
+		public void excluir(Integer idLimiteAtesto){
+			limitesAtestos.delete(idLimiteAtesto);
+		}
 }

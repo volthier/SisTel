@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,37 +38,31 @@ public class LimiteAtestoController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated LimiteAtesto limiteAtesto, Errors errors, RedirectAttributes attributes){
-		limiteAtestoService.salvar(limiteAtesto);
-		attributes.addFlashAttribute("mensagem","Limite atesto cadastrado com sucesso!");
-		return "redirect:/limite-atesto/novo";		
+		if(errors.hasErrors()){
+	 		return CADASTRO_VIEW;
+	 	}
+		try{
+			limiteAtestoService.salvar(limiteAtesto);
+			attributes.addFlashAttribute("mensagem","Limite atesto cadastrado com sucesso!");
+			return "redirect:/limite-atesto/novo";		
+		}catch(IllegalArgumentException e) {
+			errors.rejectValue("dataVencimento", null, e.getMessage());
+			return CADASTRO_VIEW;
+		}
 	}
 
-//	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
-//	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
-//		cadastroDispositivoService.excluir(id);
-//		attributes.addFlashAttribute("mensagem","Cadastro do dispositivo removido com sucesso!");
-//		return "redirect:/consulta";
-//		}	
-//	
-//	@RequestMapping("{id}")
-//	public ModelAndView edicao(@PathVariable("id") Dispositivo dispositivos){
-//		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-//		mv.addObject(dispositivos);
-//				return mv;
-//	}
-//	
-//	//DropDownMenu Atributos
-//	@ModelAttribute("tipoDispositivoMap")
-//	public Map<String,String> populateTipoDispositivoMap() throws MalformedURLException, IOException 
-//	{
-//
-//	    Map<String,String> tipoDispositivoMap = new HashMap<String,String> ();
-//	    tipoDispositivoMap.put("Fixo","Fixo");
-//	    tipoDispositivoMap.put("Celular","Celular");
-//	    tipoDispositivoMap.put("Tablet","Tablet");
-//	    tipoDispositivoMap.put("Modem","Modem");
-////	    tipoDispositivoMap.put("NoteBook","NoteBook");
-//	    return tipoDispositivoMap;
-//	   
-//	}
+	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
+		limiteAtestoService.excluir(id);
+		attributes.addFlashAttribute("mensagem","Cadastro do limite atesto removido com sucesso!");
+		return "redirect:/consulta";
+		}	
+	
+	@RequestMapping("{id}")
+	public ModelAndView edicao(@PathVariable("id") LimiteAtesto limiteAtesto){
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject(limiteAtesto);
+		return mv;
+	}
+	
 }

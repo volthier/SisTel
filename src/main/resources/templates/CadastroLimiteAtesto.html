@@ -28,7 +28,8 @@
 			<div class="painel-body">
  				<input type="hidden" th:field="*{idLimiteAtesto}" />
 				
-				<div class="form-group">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('idLimiteAtesto')} ? has-error">
 					<label for="atesto" class="col-sm-2 control-label">DAS Atesto</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="atesto"
@@ -36,7 +37,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('valorLimite')} ? has-error">
 					<label for="valor" class="col-sm-2 control-label">Valor Limite</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control js-valorCss" id="valor"
