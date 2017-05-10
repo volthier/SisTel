@@ -119,7 +119,7 @@ public class FaturaController {
 						
 						AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
 						
-						if(valorTotal > Float.parseFloat(limiteAtesto.getValorLimite())){
+						if(valorTotal > limiteAtesto.getValorLimite()){
 							alocacaoFatura.setRessarcimento(true);
 							sei.enviarMemorando(alocacao.getAlocacaoSei().getNumeroProcessoSei(), gerarMemorando(request));
 							sei.enviarFatura(alocacao.getAlocacaoSei().getNumeroProcessoSei(), gerarPdfFatura(request, fatura, alocacao));

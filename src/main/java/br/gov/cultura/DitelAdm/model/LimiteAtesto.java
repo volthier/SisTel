@@ -26,20 +26,20 @@ public class LimiteAtesto implements java.io.Serializable {
 
 	private Integer idLimiteAtesto;
 	private String dasAtesto;
-	private String valorLimite;
+	private float valorLimite;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@JsonManagedReference
 	private Set<Usuario> usuarios = new HashSet(0);
 	public LimiteAtesto() {
 	}
 
-	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, String valorLimite) {
+	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, float valorLimite) {
 		this.idLimiteAtesto = idLimiteAtesto;
 		this.dasAtesto = dasAtesto;
 		this.valorLimite = valorLimite;
 	}
 
-	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, String valorLimite, Set<Usuario> usuarios) {
+	public LimiteAtesto(Integer idLimiteAtesto, String dasAtesto, float valorLimite, Set<Usuario> usuarios) {
 		this.idLimiteAtesto = idLimiteAtesto;
 		this.dasAtesto = dasAtesto;
 		this.valorLimite = valorLimite;
@@ -48,7 +48,6 @@ public class LimiteAtesto implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id_limite_atesto", unique = true, nullable = false)
 	public Integer getIdLimiteAtesto() {
 		return this.idLimiteAtesto;
@@ -68,11 +67,11 @@ public class LimiteAtesto implements java.io.Serializable {
 	}
 
 	@Column(name = "valor_limite", nullable = false)
-	public String getValorLimite() {
+	public float getValorLimite() {
 		return this.valorLimite;
 	}
 
-	public void setValorLimite(String valorLimite) {
+	public void setValorLimite(float valorLimite) {
 		this.valorLimite = valorLimite;
 	}
 
