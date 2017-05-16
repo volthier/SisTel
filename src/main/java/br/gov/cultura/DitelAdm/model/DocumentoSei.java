@@ -31,17 +31,19 @@ public class DocumentoSei implements java.io.Serializable {
 	private AlocacaoSei alocacaoSei;
 	private String documentosTipo;
 	private String documentosLink;
+	private String documentoIdSei;
 	private String documentosNumero;
 	private Date documentosDataGerado;
 
 	public DocumentoSei() {
 	}
 
-	public DocumentoSei(AlocacaoSei alocacaoSei, String documentosTipo, String documentosLink, String documentosNumero,
+	public DocumentoSei(AlocacaoSei alocacaoSei, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
 			Date documentosDataGerado) {
 		this.alocacaoSei = alocacaoSei;
 		this.documentosTipo = documentosTipo;
 		this.documentosLink = documentosLink;
+		this.documentoIdSei = documentoIdSei;
 		this.documentosNumero = documentosNumero;
 		this.documentosDataGerado = documentosDataGerado;
 	}
@@ -81,6 +83,16 @@ public class DocumentoSei implements java.io.Serializable {
 	public void setDocumentosLink(String documentosLink) {
 		this.documentosLink = documentosLink;
 	}
+	
+	@Column(name = "documentos_id_sei")
+	public String getDocumentoIdSei() {
+		return documentoIdSei;
+	}
+
+	public void setDocumentoIdSei(String documentoIdSei) {
+		this.documentoIdSei = documentoIdSei;
+	}
+
 	@Column(name = "documentos_numero")
 	public String getDocumentosNumero() {
 		return this.documentosNumero;

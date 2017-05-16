@@ -59,9 +59,10 @@ public class UsuarioController extends UrlController {
 		try {
 			List<Unidade> uni = Arrays.asList(sei.listarUnidades());
 			for (Unidade item : uni) {
-				if (item.getIdUnidade().equals(usuario.getLotacaoUsuario())) {
-					usuario.setLotacaoIdUsuario(item.getIdUnidade());
+				if (item.getIdUnidade().equals(usuario.getLotacaoIdUsuario())) {
+					
 					usuario.setDescricaoUsuario(item.getDescricao());
+					usuario.setLotacaoUsuario(item.getSigla());
 				}
 			}
 			cadastroUsuarioService.salvar(usuario);

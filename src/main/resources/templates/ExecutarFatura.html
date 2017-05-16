@@ -20,6 +20,16 @@
 						</div>
 					</div>
 					<br></br>
+					<div class="alert alert-warning col-md-12" th:if="${erroUnidade}!=null" role="alert">
+					<div th:each="user : ${erroUnidade}" class="row">
+					<a class="alert-link col-md-offset-2" th:text="|Unidade de registro estão diferentes: ${user.nomeUsuario}" th:href="@{/usuarios/{id}(id=${user.idUsuario})}" title="Editar" rel="tooltip" data-placement="auto"></a>
+					 
+					</div>
+					
+					</div>
+					<br></br>
+					
+					
 					<div class="painel-body">
 						<div class="form-group">
 							<label id="fatura" for="status" class="col-sm-2 control-label">Fatura</label>

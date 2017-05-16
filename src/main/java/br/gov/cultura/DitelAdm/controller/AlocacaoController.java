@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -148,10 +149,6 @@ public class AlocacaoController {
 				dispo.setDtDevolucao(dtDevolucao);
 				alocacaoService.salvar(dispo);
 			}
-			/**
-			 * Retrabalho de alocação dispositivo para casos de somente chip
-			 * (Codigo acima)
-			 */
 
 			List<Alocacao> linhaChip = alocacaoService.getIdAlocacao();
 			Alocacao chip = linhaChip.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
@@ -260,7 +257,7 @@ public class AlocacaoController {
 
 				Alocacao alocacaoVerificaProcesso = listaConferencia.stream()
 						.filter(lc -> lc != null && lc.getUsuario().getCpfUsuario().equals(cpf)
-								&& lc.getAlocacaoSei().getDtEncerramentoProcesso() == null)
+								&& lc.getAlocacaoSei() != null)
 						.findFirst().orElse(null);
 
 				if (alocacaoVerificaProcesso != null) {

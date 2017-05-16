@@ -120,11 +120,20 @@
 							<td class="text-center" th:text=" ${usuario.cargoUsuario}"></td>
 							<td class="text-center" th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
 							<!--<td class="text-center" th:text=" ${usuario.email}"></td> -->
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+							
+							<td class="text-center">
+							
+							<a class="btn btn-link btn-xs"
+							   th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" 
+							   title="Editar"
+							   rel="tooltip" 
+							   data-placement="left"> 
+							   <span
+							   class="glyphicon glyphicon-pencil">
+							   </span>
+							</a> 
+							
+							<a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-flag='2', data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
 								title="Remover" rel="tooltip" data-placement="left"> <span

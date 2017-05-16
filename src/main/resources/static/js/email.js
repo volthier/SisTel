@@ -16,7 +16,7 @@ $('#confirmacaoEmailModal').on(
 			form.attr('action', action + id);
 			if(!item){
 				modal.find('.modal-body span').html(
-				'Vincular processo e enviar e-mail? </strong>');
+				'Gerar processo e enviar e-mail? </strong>');
 			}else{
 				modal.find('.modal-body span').html(
 						'Enviar email de notificação do processo nº <strong>' + item

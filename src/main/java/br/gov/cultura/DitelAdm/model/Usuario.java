@@ -142,7 +142,6 @@ public class Usuario implements java.io.Serializable {
 		this.lotacaoIdUsuario = lotacaoIdUsuario;
 	}
 	@Column(name = "lotacao_usuario", nullable = false)
-	@NotNull(message = "Campo lota��o e obrigat�rio!")
 	public String getLotacaoUsuario() {
 		return this.lotacaoUsuario;
 	}
