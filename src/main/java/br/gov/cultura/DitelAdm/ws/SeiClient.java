@@ -14,11 +14,11 @@ import javax.xml.rpc.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ViewResolver;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.wsdl.Assinatura;
 import br.gov.cultura.DitelAdm.wsdl.Assunto;
 import br.gov.cultura.DitelAdm.wsdl.Destinatario;
 import br.gov.cultura.DitelAdm.wsdl.Documento;
@@ -44,12 +44,9 @@ public class SeiClient {
 
 	@Value("${sei.servico}")
 	private String idServico;
-	
+
 	@Autowired
 	AlocacaoService alocacaoService;
-	
-	@Autowired
-	private ViewResolver viewResolver;
 
 	public SeiClient() {
 		SeiServiceLocator locator = new SeiServiceLocator();
@@ -70,34 +67,38 @@ public class SeiClient {
 		}
 		return unidades;
 	}
-	
-	public RetornoGeracaoProcedimento gerarProcedimentoAlocacao() throws RemoteException{
+
+	public RetornoGeracaoProcedimento gerarProcedimentoAlocacao() throws RemoteException {
 		Procedimento p = new Procedimento();
 		p.setIdTipoProcedimento("100000513");
 		p.setAssuntos(new Assunto[0]);
 		p.setInteressados(new Interessado[0]);
 		p.setObservacao("");
 		p.setNivelAcesso("");
-		
-		//Unidade 110000073 -- DITEL -- Divisão de Telefonia e Serviços
-		//Unidade 110000069 -- COSIN -- Coordenação de Sistemas de Informação
-		RetornoGeracaoProcedimento retorno = seiWs.gerarProcedimento(siglaSistema, idServico, "110000073", p, new Documento[0], new String[0], new String[0], null, null, null, null, null);
+
+		// Unidade 110000073 -- DITEL -- Divisão de Telefonia e Serviços
+		// Unidade 110000069 -- COSIN -- Coordenação de Sistemas de Informação
+		RetornoGeracaoProcedimento retorno = seiWs.gerarProcedimento(siglaSistema, idServico, "110000073", p,
+				new Documento[0], new String[0], new String[0], null, null, null, null, null);
 		return retorno;
-		
-	}
-	public RetornoConsultaProcedimento consutaProcessoSei(String protocoloProcedimento) throws RemoteException{
-		
-		String sin, nin;
-		sin="S";
-		nin="N";
-		return seiWs.consultarProcedimento(siglaSistema, idServico, "110000073", protocoloProcedimento, sin, nin, sin, sin, sin, nin, nin, nin, nin);
+
 	}
 
-	public RetornoInclusaoDocumento enviarFatura(Integer idAlocacao, String processo, byte[] fatura) throws IOException, ParseException {
+	public RetornoConsultaProcedimento consutaProcessoSei(String protocoloProcedimento) throws RemoteException {
+
+		String sin, nin;
+		sin = "S";
+		nin = "N";
+		return seiWs.consultarProcedimento(siglaSistema, idServico, "110000073", protocoloProcedimento, sin, nin, sin,
+				sin, sin, nin, nin, nin, nin);
+	}
+
+	public RetornoInclusaoDocumento enviarFatura(Integer idAlocacao, String processo, byte[] fatura)
+			throws IOException, ParseException {
 		byte[] encoded = Base64.getEncoder().encode(fatura);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		
+
 		Documento doc = new Documento();
 		doc.setTipo("R");
 		doc.setIdProcedimento(processo);
@@ -105,7 +106,7 @@ public class SeiClient {
 		doc.setNumero("");
 		doc.setData(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 		doc.setDescricao("");
-		doc.setRemetente(new Remetente("SISTEL","Sistema de Telefonia"));
+		doc.setRemetente(new Remetente("SISTEL", "Sistema de Telefonia"));
 		doc.setInteressados(new Interessado[0]);
 		doc.setDestinatarios(new Destinatario[0]);
 		doc.setObservacao("");
@@ -121,25 +122,31 @@ public class SeiClient {
 		documento.setDocumentosNumero(response.getDocumentoFormatado());
 		documento.setDocumentosTipo("Fatura");
 		documento.setAlocacaoSei(alocacao.getAlocacaoSei());
+		documento.setAlocacao(alocacao);
 		String sin, nin;
-		sin="S";
-		nin="N";
-		
-		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073", response.getDocumentoFormatado(), sin, nin, nin);
+		sin = "S";
+		nin = "N";
+
+		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
+				response.getDocumentoFormatado(), sin, nin, nin);
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
 
 		alocacaoService.salvar(documento);
-		
+
 		return response;
 	}
-	
-	public Usuario ValidaUsuarioUnidade(Alocacao alocacao) throws RemoteException{
-		List<Usuario> usuarioSeiLista = Arrays.asList(seiWs.listarUsuarios(siglaSistema, idServico, alocacao.getUsuario().getLotacaoIdUsuario(),null));
-		Usuario usuarioSei = usuarioSeiLista.stream().filter(u -> u.getNome().equalsIgnoreCase(alocacao.getUsuario().getNomeUsuario())).findFirst().orElse(null);
+
+	public Usuario ValidaUsuarioUnidade(Alocacao alocacao) throws RemoteException {
+		List<Usuario> usuarioSeiLista = Arrays.asList(
+				seiWs.listarUsuarios(siglaSistema, idServico, alocacao.getUsuario().getLotacaoIdUsuario(), null));
+		Usuario usuarioSei = usuarioSeiLista.stream()
+				.filter(u -> u.getNome().equalsIgnoreCase(alocacao.getUsuario().getNomeUsuario())).findFirst()
+				.orElse(null);
 		return usuarioSei;
 	}
-	
-	public RetornoInclusaoDocumento enviarMemorando(Alocacao alocacao , byte[] memorando) throws IOException, ParseException {
+
+	public RetornoInclusaoDocumento enviarMemorando(Alocacao alocacao, byte[] memorando)
+			throws IOException, ParseException {
 		byte[] encoded = Base64.getEncoder().encode(memorando);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -151,47 +158,46 @@ public class SeiClient {
 		doc.setNumero("");
 		doc.setData("");
 		doc.setDescricao("");
-		doc.setRemetente(new Remetente("",""));
+		doc.setRemetente(new Remetente("", ""));
 		doc.setInteressados(new Interessado[0]);
 		doc.setDestinatarios(new Destinatario[0]);
 		doc.setObservacao("");
 		doc.setNomeArquivo("");
 		doc.setConteudo(encodedFile);
 		doc.setNivelAcesso("0");
-		
+
 		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
-		
+
 		DocumentoSei documento = new DocumentoSei();
 		documento.setDocumentosLink(response.getLinkAcesso());
 		documento.setDocumentoIdSei(response.getIdDocumento());
 		documento.setDocumentosNumero(response.getDocumentoFormatado());
 		documento.setDocumentosTipo("Memorando de Atesto");
 		documento.setAlocacaoSei(alocacao.getAlocacaoSei());
+		documento.setAlocacao(alocacao);
 		String sin, nin;
-		sin="S";
-		nin="N";
-		
-		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073", response.getDocumentoFormatado(), sin, nin, nin);
+		sin = "S";
+		nin = "N";
+
+		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
+				response.getDocumentoFormatado(), sin, nin, nin);
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
-		
+
 		alocacaoService.salvar(documento);
 		return response;
 	}
-/*	
-	public RetornoConsultaDocumento consultarDocumento(){
-		return 
-	}*/
-	
-	public RetornoInclusaoDocumento enviarTermoResponsabilidade(Alocacao alocacao , byte[] termo) throws IOException, ParseException {
+
+	public RetornoInclusaoDocumento enviarTermoResponsabilidade(Alocacao alocacao, byte[] termo)
+			throws IOException, ParseException {
 		byte[] encoded = Base64.getEncoder().encode(termo);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		
-		String sin,nin,assinatura,descricaoBloco;
-		sin="S";
-		nin="N";
-		assinatura="A";
-				
+
+		String sin, nin, assinatura, descricaoBloco;
+		sin = "S";
+		nin = "N";
+		assinatura = "A";
+
 		Documento doc = new Documento();
 		doc.setTipo("G");
 		doc.setIdProcedimento(alocacao.getAlocacaoSei().getNumeroProcessoSei());
@@ -199,38 +205,96 @@ public class SeiClient {
 		doc.setNumero("");
 		doc.setData("");
 		doc.setDescricao("");
-		doc.setRemetente(new Remetente("",""));
+		doc.setRemetente(new Remetente("", ""));
 		doc.setInteressados(new Interessado[0]);
 		doc.setDestinatarios(new Destinatario[0]);
 		doc.setObservacao("");
 		doc.setNomeArquivo("");
 		doc.setConteudo(encodedFile);
 		doc.setNivelAcesso("0");
-		
+
 		String[] uni = new String[1];
-		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();  
-		
+		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();
+
 		descricaoBloco = alocacao.getUsuario().getNomeUsuario();
-		
+
 		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
-		
+
 		DocumentoSei documento = new DocumentoSei();
 		documento.setDocumentosLink(response.getLinkAcesso());
 		documento.setDocumentoIdSei(response.getIdDocumento());
 		documento.setDocumentosNumero(response.getDocumentoFormatado());
 		documento.setDocumentosTipo("Termo Responsabilidade");
 		documento.setAlocacaoSei(alocacao.getAlocacaoSei());
-		
+		documento.setAlocacao(alocacao);
+
 		String[] dc = new String[1];
 		dc[0] = documento.getDocumentosNumero();
-		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073", response.getDocumentoFormatado(), sin, nin, nin);
-					
+		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
+				response.getDocumentoFormatado(), sin, nin, nin);
+
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
-		
-		String response1 = seiWs.gerarBloco(siglaSistema, idServico, "110000073", assinatura, descricaoBloco,uni,dc, sin);
-		
+
+		if (!alocacao.getUsuario().getLotacaoIdUsuario().equals("110000073")) {
+			String response1 = seiWs.gerarBloco(siglaSistema, idServico, "110000073", assinatura, descricaoBloco, uni,
+					dc, sin);
+			documento.setBlocoId(response1);
+		} else {
+			documento.setBlocoId("interno");
+		}
 		alocacaoService.salvar(documento);
 		return response;
+	}
+
+	public void consultarAssinatura(DocumentoSei documento) throws RemoteException, ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+		String sin, nin;
+		sin = "S";
+		nin = "N";
+
+		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
+				documento.getDocumentosNumero(), nin, sin, nin);
+
+		consultarDocumento.getAssinaturas();
+
+		if (consultarDocumento.getAssinaturas() != null) {
+			for (Assinatura a : consultarDocumento.getAssinaturas()) {
+				if (consultarDocumento.getAssinaturas().length == 1) {
+					if (a.getNome().equalsIgnoreCase(documento.getAlocacao().getUsuario().getNomeUsuario())) {
+						documento.setAssinaturaValida(true);
+						documento.setAssinaturaNome(a.getNome());
+						documento.setAssinaturaHora(sdf.parse(a.getDataHora()));
+						documento.setAssinaturaCargo(a.getCargoFuncao());
+					} else {
+						documento.setAssinaturaNome(a.getNome());
+						documento.setAssinaturaHora(sdf.parse(a.getDataHora()));
+						documento.setAssinaturaCargo(a.getCargoFuncao());
+					}
+				}
+				if (consultarDocumento.getAssinaturas().length > 1) {
+					if (a.getNome().equalsIgnoreCase(documento.getAlocacao().getUsuario().getNomeUsuario())) {
+						documento.setAssinaturaNome(a.getNome());
+						documento.setAssinaturaHora(sdf.parse(a.getDataHora()));
+						documento.setAssinaturaCargo(a.getCargoFuncao());
+						break;
+					} else {
+						documento.setAssinaturaNome(a.getNome());
+						documento.setAssinaturaHora(sdf.parse(a.getDataHora()));
+						documento.setAssinaturaCargo(a.getCargoFuncao());
+					}
+				}
+			}
+		}
+		if (documento.getAssinaturaHora() != null) {
+			alocacaoService.salvar(documento);
+			if (!documento.getBlocoId().equals("interno")) {
+				if (documento.getBlocoId() != null) {
+					String fecharBloco = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
+							documento.getBlocoId());
+				}
+			}
+		}
 	}
 
 	public SeiPortType getSeiWs() {

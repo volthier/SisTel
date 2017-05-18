@@ -29,23 +29,36 @@ public class DocumentoSei implements java.io.Serializable {
 	private Integer idDocumentosSei;
 	@JsonBackReference
 	private AlocacaoSei alocacaoSei;
+	@JsonBackReference
+	private Alocacao alocacao;
 	private String documentosTipo;
 	private String documentosLink;
 	private String documentoIdSei;
 	private String documentosNumero;
 	private Date documentosDataGerado;
-
+	private String blocoId;
+	private String assinaturaNome;
+	private String assinaturaCargo;
+	private Date assinaturaHora;
+	boolean assinaturaValida;
+	
 	public DocumentoSei() {
 	}
 
-	public DocumentoSei(AlocacaoSei alocacaoSei, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
-			Date documentosDataGerado) {
+	public DocumentoSei(AlocacaoSei alocacaoSei, Alocacao alocacao, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
+			Date documentosDataGerado, String blocoId, String assinaturaNome, String assinaturaCargo, Date assinaturaHora, boolean assinaturaValida) {
 		this.alocacaoSei = alocacaoSei;
+		this.alocacao = alocacao;
 		this.documentosTipo = documentosTipo;
 		this.documentosLink = documentosLink;
 		this.documentoIdSei = documentoIdSei;
 		this.documentosNumero = documentosNumero;
 		this.documentosDataGerado = documentosDataGerado;
+		this.blocoId = blocoId;
+		this.assinaturaNome = assinaturaNome;
+		this.assinaturaCargo = assinaturaCargo;
+		this.assinaturaHora = assinaturaHora;
+		this.assinaturaValida = assinaturaValida;
 	}
 
 	@Id
@@ -63,10 +76,19 @@ public class DocumentoSei implements java.io.Serializable {
 	public AlocacaoSei getAlocacaoSei() {
 		return this.alocacaoSei;
 	}
-
 	public void setAlocacaoSei(AlocacaoSei alocacaoSei) {
 		this.alocacaoSei = alocacaoSei;
 	}
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_alocacao", nullable = false)
+	public Alocacao getAlocacao() {
+		return alocacao;
+	}
+
+	public void setAlocacao(Alocacao alocacao) {
+		this.alocacao = alocacao;
+	}
+
 	@Column(name = "documentos_tipo")
 	public String getDocumentosTipo() {
 		return this.documentosTipo;
@@ -109,6 +131,46 @@ public class DocumentoSei implements java.io.Serializable {
 
 	public void setDocumentosDataGerado(Date documentosDataGerado) {
 		this.documentosDataGerado = documentosDataGerado;
+	}
+	@Column(name = "id_bloco_assinatura")
+	public String getBlocoId() {
+		return blocoId;
+	}
+
+	public void setBlocoId(String blocoId) {
+		this.blocoId = blocoId;
+	}
+	@Column(name = "assinatura_usuario_sei")
+	public String getAssinaturaNome() {
+		return assinaturaNome;
+	}
+
+	public void setAssinaturaNome(String assinaturaNome) {
+		this.assinaturaNome = assinaturaNome;
+	}
+	@Column(name = "assinatura_usuario_cargo_sei")
+	public String getAssinaturaCargo() {
+		return assinaturaCargo;
+	}
+
+	public void setAssinaturaCargo(String assinaturaCargo) {
+		this.assinaturaCargo = assinaturaCargo;
+	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dt_assinatura")
+	public Date getAssinaturaHora() {
+		return assinaturaHora;
+	}
+
+	public void setAssinaturaHora(Date assinaturaHora) {
+		this.assinaturaHora = assinaturaHora;
+	}
+	@Column(name = "assinatura_validador_flag")
+	public boolean isAssinaturaValida() {
+		return assinaturaValida;
+	}
+	public void setAssinaturaValida(boolean assinaturaValida) {
+		this.assinaturaValida = assinaturaValida;
 	}
 
 }

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"/>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
 <body style="margin-left: 2.5% px; margin-right: 25px">
 
 
@@ -16,7 +15,8 @@
 
 					<p align="justify">
 						<ol>
-						AQUI E NOIS !! TI RULZ!!!
+						    <li th:text="${dto.usuario.nomeUsuario}">aqui foi error</li>
+							
 							<li>Encaminhamos fatura de serviços de telefonia móvel e/ou internet, prestados a este Ministério pelas Empresas Claro S.A e Embratel S.A, .</li> <br/><br/>
 						
 							<li>Importante destacar que a referida Norma estabelece em seu artigo 10, parágrafo 4º que os valores excedentes aos limites estabelecidos, bem como as ligações efetuadas em caráter particular, deverão ser objeto de ressarcimento pelo usuário em até (cinco) dias, contados a partir da apresentação da conta telefônica.</li> <br/><br/>

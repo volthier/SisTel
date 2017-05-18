@@ -10,9 +10,8 @@
 <section layout:fragment="conteudo">
 
 	<div layout:include="MensagemSucesso"></div>
-	
-	<div class="alert alert-warning col-md-12"
-			th:if="${erroUnidade}!=null" role="alert">
+	<div th:if="${erroUnidade}!=null">
+	<div class="alert alert-warning col-md-12" role="alert">
 			<div th:if="${erroUnidade}!=null" th:each="user : ${erroUnidade}" class="row">
 				<a class="alert-link col-md-offset-2"
 					th:text="|Unidade de registro estão diferentes: ${user.nomeUsuario}"
@@ -22,7 +21,7 @@
 
 			</div>
 	</div>
-
+</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">

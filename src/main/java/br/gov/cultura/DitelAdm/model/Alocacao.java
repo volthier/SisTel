@@ -46,6 +46,8 @@ public class Alocacao implements java.io.Serializable {
 	private Date dtDevolucao;
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<AlocacaoFatura> alocacaoFaturas = new HashSet(0);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private Set<DocumentoSei> documentoSeis = new HashSet(0);
 
 	public Alocacao() {
 	}
@@ -60,7 +62,7 @@ public class Alocacao implements java.io.Serializable {
 
 	public Alocacao(Integer idAlocacao, Dispositivo dispositivo, Linha linha, Categoria categoria, Chip chip,
 			AlocacaoSei alocacaoSei, Usuario usuario, Date dtRecebido, Date dtDevolucao,
-			Set<AlocacaoFatura> alocacaoFaturas) {
+			Set<AlocacaoFatura> alocacaoFaturas,Set<DocumentoSei> documentoSeis) {
 		super();
 		this.idAlocacao = idAlocacao;
 		this.dispositivo = dispositivo;
@@ -72,6 +74,7 @@ public class Alocacao implements java.io.Serializable {
 		this.dtRecebido = dtRecebido;
 		this.dtDevolucao = dtDevolucao;
 		this.alocacaoFaturas = alocacaoFaturas;
+		this.documentoSeis = documentoSeis;
 	}
 
 	@Id
@@ -164,6 +167,14 @@ public class Alocacao implements java.io.Serializable {
 
 	public void setAlocacaoFaturas(Set<AlocacaoFatura> alocacaoFaturas) {
 		this.alocacaoFaturas = alocacaoFaturas;
+	}
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "alocacao")
+	public Set<DocumentoSei> getDocumentoSeis() {
+		return documentoSeis;
+	}
+
+	public void setDocumentoSeis(Set<DocumentoSei> documentoSeis) {
+		this.documentoSeis = documentoSeis;
 	}
 	
 }

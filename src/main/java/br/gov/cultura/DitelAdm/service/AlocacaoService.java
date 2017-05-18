@@ -89,6 +89,9 @@ public class AlocacaoService {
 		return documentosSei.findOne(idDocumento);
 	}
 
+	public List<DocumentoSei> getDocumentoSeiListaAlocacao(Alocacao alocacao){
+		return documentosSei.findByAlocacao(alocacao);
+	}
 	public List<Alocacao> getAlocacaoUsuarioLinha(Linha linha) {
 		return alocacoes.getAlocacaoByLinha(linha);
 	}

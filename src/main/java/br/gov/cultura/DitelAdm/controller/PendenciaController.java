@@ -21,10 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import br.gov.cultura.DitelAdm.email.Mailer;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoSei;
+import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
@@ -50,8 +54,13 @@ public class PendenciaController {
 	private ViewResolver viewResolver;
 	
 	@Autowired
+	private TemplateEngine tempEngine;
+	
+	@Autowired
+	private ThymeleafViewResolver thResolver;
+	
+	@Autowired
 	private LocaleResolver locale;
-
 	
 	@RequestMapping("/pendencia")
 	public ModelAndView pendencia() throws RemoteException {
@@ -61,6 +70,18 @@ public class PendenciaController {
 		List<br.gov.cultura.DitelAdm.model.Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
 
 		for (Alocacao alocacao : lista) {
+			
+			List<DocumentoSei> documento = alocacaoService.getDocumentoSeiListaAlocacao(alocacao);
+			documento.forEach(doc -> {
+				try {
+					sei.consultarAssinatura(doc);
+				} catch (RemoteException | ParseException e) {
+
+					System.out.println(e + "Essa parada aqui mano!!!");
+					e.printStackTrace();
+				}
+			});
+			
 			if (alocacao.getDtDevolucao() == null) {
 				Usuario usuarioSei = sei.ValidaUsuarioUnidade(alocacao);
 				if (usuarioSei == null) {
@@ -71,6 +92,7 @@ public class PendenciaController {
 				}
 			}
 		}
+		
 		mv.addObject("erroUnidade", usuarioErrorSei);
 		mv.addObject("pendencia", lista);
 		return mv;
@@ -83,6 +105,7 @@ public class PendenciaController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		alocacao = alocacaoService.getAlocacao(Integer.parseInt(id));
 		String cpf = alocacao.getUsuario().getCpfUsuario();
+		
 
 		if (alocacao.getAlocacaoSei() != null) {
 			RetornoConsultaProcedimento processo = sei
@@ -90,8 +113,8 @@ public class PendenciaController {
 
 			if (processo.getAndamentoConclusao() == null) {
 				mailer.enviar(Integer.parseInt(id));
-				mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request));
-				
+				mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request,alocacao));
+				alocacao.getDocumentoSeis();
 				attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 
 				return "redirect:/pendencia";
@@ -124,7 +147,7 @@ public class PendenciaController {
 							alocacao.setAlocacaoSei(alocacaoVerificaProcesso.getAlocacaoSei());
 							alocacaoService.salvar(alocacao);
 							mailer.enviar(Integer.parseInt(id));
-							mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request));
+							mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request,alocacao));
 							attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 							i = 1;
 						} else if (processo.getAndamentoConclusao() != null) {
@@ -146,18 +169,26 @@ public class PendenciaController {
 					alocacao.setAlocacaoSei(alocacaoSei);
 					alocacaoService.salvar(alocacao);
 					mailer.enviar(Integer.parseInt(id));
-					mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request));
+					mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request,alocacao));
 					attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 				}
 			}
 		}
 		return "redirect:/pendencia";
 	}
-	private byte[] gerarTermoResponsabilidade(HttpServletRequest request) throws Exception {
-		View view = this.viewResolver.resolveViewName("/documentos/termos/TermoResponsabilidadeCelular", locale.resolveLocale(request));
+	private byte[] gerarTermoResponsabilidade(HttpServletRequest request,Alocacao alocacao) throws Exception {
+		
+		Context context = new Context();
+		context.setVariable("dto",alocacao);
+		context.setLocale(locale.resolveLocale(request));
+		String template = tempEngine.process("/documentos/TermoResponsabilidadeCelular", context);
+		
+		/*View view = viewResolver.resolveViewName(template, locale.resolveLocale(request));
+		
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
 		view.render(new ModelAndView().getModelMap(), request, mockResp);
-
-		return mockResp.getContentAsByteArray();
+		return mockResp.getContentAsByteArray();*/
+		byte[] b = template.getBytes();
+		return b;
 	}	
 }

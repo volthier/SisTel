@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	   
+<body>
+
+<p style="text-align: right">
+
+<img src="../../static/images/XXXX"/>
+</p>
+<p>Este e um e-mail automático do SisTel</p>
+<br></br>
+<h1 style="font-size=20px" th:inline="text"> Olá [[${dto.usuario.nomeUsuario}]]</h1>
+
+<p th:inline="text"> Estamos enviando essa notificação de abertura de processo nº <b> [[${dto.alocacaoSei.numeroExternoProcessoSei}]]</b> yes numero  no sistema SEI com link abaixo!</p>
+
+<a href="http://seitreinamento.cultura.gov.br/">Link para acesso ao SEI</a>
+
+
+<p><b>Divisão de Telefonia - CGTEC</b></p>
+
+</body>
+
+
+</html>
