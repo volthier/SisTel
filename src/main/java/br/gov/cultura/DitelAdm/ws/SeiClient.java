@@ -13,6 +13,7 @@ import javax.xml.rpc.ServiceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
@@ -94,7 +95,7 @@ public class SeiClient {
 	}
 
 	public RetornoInclusaoDocumento enviarFatura(Integer idAlocacao, String processo, byte[] fatura)
-			throws IOException, ParseException {
+			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(fatura);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -127,6 +128,8 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
+		Thread.sleep(1000);
+
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
@@ -136,6 +139,7 @@ public class SeiClient {
 		return response;
 	}
 
+	@Async
 	public Usuario ValidaUsuarioUnidade(Alocacao alocacao) throws RemoteException {
 		List<Usuario> usuarioSeiLista = Arrays.asList(
 				seiWs.listarUsuarios(siglaSistema, idServico, alocacao.getUsuario().getLotacaoIdUsuario(), null));
@@ -146,7 +150,7 @@ public class SeiClient {
 	}
 
 	public RetornoInclusaoDocumento enviarMemorando(Alocacao alocacao, byte[] memorando)
-			throws IOException, ParseException {
+			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(memorando);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -179,6 +183,8 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
+		Thread.sleep(1000);
+
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
@@ -188,7 +194,7 @@ public class SeiClient {
 	}
 
 	public RetornoInclusaoDocumento enviarTermoResponsabilidade(Alocacao alocacao, byte[] termo)
-			throws IOException, ParseException {
+			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(termo);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -213,11 +219,6 @@ public class SeiClient {
 		doc.setConteudo(encodedFile);
 		doc.setNivelAcesso("0");
 
-		String[] uni = new String[1];
-		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();
-
-		descricaoBloco = alocacao.getUsuario().getNomeUsuario();
-
 		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
 
 		DocumentoSei documento = new DocumentoSei();
@@ -228,8 +229,16 @@ public class SeiClient {
 		documento.setAlocacaoSei(alocacao.getAlocacaoSei());
 		documento.setAlocacao(alocacao);
 
+		descricaoBloco = alocacao.getUsuario().getNomeUsuario();
+
 		String[] dc = new String[1];
 		dc[0] = documento.getDocumentosNumero();
+
+		String[] uni = new String[1];
+		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();
+
+		Thread.sleep(1000);
+
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
 
@@ -239,6 +248,7 @@ public class SeiClient {
 			String response1 = seiWs.gerarBloco(siglaSistema, idServico, "110000073", assinatura, descricaoBloco, uni,
 					dc, sin);
 			documento.setBlocoId(response1);
+			documento.setBlocoDisponibilizado(true);
 		} else {
 			documento.setBlocoId("interno");
 		}
@@ -246,13 +256,15 @@ public class SeiClient {
 		return response;
 	}
 
-	public void consultarAssinatura(DocumentoSei documento) throws RemoteException, ParseException {
+	@Async
+	public void consultarAssinatura(DocumentoSei documento)
+			throws RemoteException, ParseException, InterruptedException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 		String sin, nin;
 		sin = "S";
 		nin = "N";
-
+		Thread.sleep(1000);
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				documento.getDocumentosNumero(), nin, sin, nin);
 
@@ -286,13 +298,53 @@ public class SeiClient {
 				}
 			}
 		}
+		Thread.sleep(5000);
 		if (documento.getAssinaturaHora() != null) {
+			String cancelar, remover, fechar;
+			cancelar = null;
+			remover = null;
 			alocacaoService.salvar(documento);
 			if (!documento.getBlocoId().equals("interno")) {
+
 				if (documento.getBlocoId() != null) {
-					String fecharBloco = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
-							documento.getBlocoId());
+					if (documento.isBlocoDisponibilizado() == true) {
+						cancelar = seiWs.cancelarDisponibilizacaoBloco(siglaSistema, idServico, "110000073",
+								documento.getBlocoId());
+						Thread.sleep(2000);
+						if (cancelar.equalsIgnoreCase("1")) {
+							documento.setBlocoDisponibilizado(false);
+							alocacaoService.salvar(documento);
+							Thread.sleep(2000);
+							remover = seiWs.retirarDocumentoBloco(siglaSistema, idServico, "110000073",
+									documento.getBlocoId(), documento.getDocumentosNumero());
+							cancelar = null;
+							if (remover.equalsIgnoreCase("1")) {
+
+								Thread.sleep(2000);
+								fechar = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
+										documento.getBlocoId());
+								remover = null;
+								documento.setBlocoFinalizado(true);
+								alocacaoService.salvar(documento);
+							}
+						}
+					}
+					if (documento.isBlocoDisponibilizado() == false) {
+						if (documento.isBlocoFinalizado() == false) {
+							remover = seiWs.retirarDocumentoBloco(siglaSistema, idServico, "110000073",
+									documento.getBlocoId(), documento.getDocumentosNumero());
+							if (remover.equalsIgnoreCase("1")) {
+								Thread.sleep(2000);
+								fechar = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
+										documento.getBlocoId());
+								remover = null;
+								documento.setBlocoFinalizado(true);
+								alocacaoService.salvar(documento);
+							}
+						}
+					}
 				}
+
 			}
 		}
 	}

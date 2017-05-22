@@ -37,6 +37,8 @@ public class DocumentoSei implements java.io.Serializable {
 	private String documentosNumero;
 	private Date documentosDataGerado;
 	private String blocoId;
+	private boolean blocoDisponibilizado;
+	private boolean blocoFinalizado;
 	private String assinaturaNome;
 	private String assinaturaCargo;
 	private Date assinaturaHora;
@@ -46,7 +48,7 @@ public class DocumentoSei implements java.io.Serializable {
 	}
 
 	public DocumentoSei(AlocacaoSei alocacaoSei, Alocacao alocacao, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
-			Date documentosDataGerado, String blocoId, String assinaturaNome, String assinaturaCargo, Date assinaturaHora, boolean assinaturaValida) {
+			Date documentosDataGerado, String blocoId, Boolean blocoDisponibilizado, Boolean blocoFinalizado, String assinaturaNome, String assinaturaCargo, Date assinaturaHora, boolean assinaturaValida) {
 		this.alocacaoSei = alocacaoSei;
 		this.alocacao = alocacao;
 		this.documentosTipo = documentosTipo;
@@ -55,6 +57,8 @@ public class DocumentoSei implements java.io.Serializable {
 		this.documentosNumero = documentosNumero;
 		this.documentosDataGerado = documentosDataGerado;
 		this.blocoId = blocoId;
+		this.blocoDisponibilizado = blocoDisponibilizado;
+		this.blocoFinalizado = blocoFinalizado;
 		this.assinaturaNome = assinaturaNome;
 		this.assinaturaCargo = assinaturaCargo;
 		this.assinaturaHora = assinaturaHora;
@@ -140,6 +144,24 @@ public class DocumentoSei implements java.io.Serializable {
 	public void setBlocoId(String blocoId) {
 		this.blocoId = blocoId;
 	}
+	
+	@Column(name = "bloco_assinatura_disponibilizado")
+	public boolean isBlocoDisponibilizado() {
+		return blocoDisponibilizado;
+	}
+
+	public void setBlocoDisponibilizado(boolean blocoDisponibilizado) {
+		this.blocoDisponibilizado = blocoDisponibilizado;
+	}
+	@Column(name = "bloco_assinatura_finalizado")
+	public boolean isBlocoFinalizado() {
+		return blocoFinalizado;
+	}
+
+	public void setBlocoFinalizado(boolean blocoFinalizado) {
+		this.blocoFinalizado = blocoFinalizado;
+	}
+
 	@Column(name = "assinatura_usuario_sei")
 	public String getAssinaturaNome() {
 		return assinaturaNome;

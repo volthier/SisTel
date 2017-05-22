@@ -51,13 +51,7 @@ public class PendenciaController {
 	private SeiClient sei;
 
 	@Autowired
-	private ViewResolver viewResolver;
-	
-	@Autowired
 	private TemplateEngine tempEngine;
-	
-	@Autowired
-	private ThymeleafViewResolver thResolver;
 	
 	@Autowired
 	private LocaleResolver locale;
@@ -77,7 +71,10 @@ public class PendenciaController {
 					sei.consultarAssinatura(doc);
 				} catch (RemoteException | ParseException e) {
 
-					System.out.println(e + "Essa parada aqui mano!!!");
+					System.out.println(e + "Essa parada aqui mano aferição dos documentos!!!");
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					System.out.println(e + "Essa parada aqui mano espera error!!!");// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			});

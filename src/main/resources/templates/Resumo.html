@@ -18,7 +18,7 @@
 						<td style="margin-left: 5%"><b>Total (R$)</b></td>
 					</tr>
 					<tr>
-					<td><span th:text="${#numbers.formatDecimal(#aggregates.sum(chamadas.![valLigImp]),0,2)}"></span></td>
+					<td><span th:text="{#numbers.formatDecimal(#aggregates.sum(chamadas.![valLigImp]),0,2)}"></span></td>
 					</tr>
 				</thead>
 				<tbody>
