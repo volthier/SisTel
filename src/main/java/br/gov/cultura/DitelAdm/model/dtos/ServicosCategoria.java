@@ -14,6 +14,8 @@ public class ServicosCategoria {
 	
 	private Float dados;
 	
+	private Float valorProporcional;
+	
 	private Categoriaservico categoria;
 	
 	public ServicosCategoria() {
@@ -22,6 +24,7 @@ public class ServicosCategoria {
 		this.setTarifa(new Float(0));
 		this.setValorCobrado(new Float(0));
 		this.setValorTotal(new Float(0));
+		this.setValorProporcional(new Float(0));
 	}
 	
 
@@ -69,7 +72,16 @@ public class ServicosCategoria {
 		this.dados = dados;
 		return this;
 	}
-	
+			
+	public Float getValorProporcional() {
+		return valorProporcional;
+	}
+
+	public void setValorProporcional(Float valorProporcional) {
+		this.valorProporcional = valorProporcional;
+	}
+
+
 	public Categoriaservico getCategoria() {
 		return this.categoria;
 	}

@@ -10,7 +10,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,12 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import br.gov.cultura.DitelAdm.email.Mailer;
 import br.gov.cultura.DitelAdm.model.Alocacao;
@@ -109,8 +105,7 @@ public class PendenciaController {
 					.consutaProcessoSei(alocacao.getAlocacaoSei().getNumeroExternoProcessoSei());
 
 			if (processo.getAndamentoConclusao() == null) {
-				mailer.enviar(Integer.parseInt(id));
-				mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request,alocacao));
+				mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 				alocacao.getDocumentoSeis();
 				attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 
@@ -143,8 +138,7 @@ public class PendenciaController {
 						if (processo.getAndamentoConclusao() == null) {
 							alocacao.setAlocacaoSei(alocacaoVerificaProcesso.getAlocacaoSei());
 							alocacaoService.salvar(alocacao);
-							mailer.enviar(Integer.parseInt(id));
-							mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request,alocacao));
+							mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 							attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 							i = 1;
 						} else if (processo.getAndamentoConclusao() != null) {
@@ -164,28 +158,31 @@ public class PendenciaController {
 					alocacaoSei.setDtAberturaProcesso(sdf.parse(consulta.getAndamentoGeracao().getDataHora()));
 					alocacaoService.salvar(alocacaoSei);
 					alocacao.setAlocacaoSei(alocacaoSei);
-					alocacaoService.salvar(alocacao);
-					mailer.enviar(Integer.parseInt(id));
-					mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(request,alocacao));
+					alocacaoService.salvar(alocacao);					
+					mailer.enviarTermo(Integer.parseInt(id),gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 					attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 				}
 			}
 		}
 		return "redirect:/pendencia";
 	}
-	private byte[] gerarTermoResponsabilidade(HttpServletRequest request,Alocacao alocacao) throws Exception {
+	private DocumentoSei gerarTermoResponsabilidade(DocumentoSei documento, HttpServletRequest request,Alocacao alocacao) throws Exception {
 		
 		Context context = new Context();
 		context.setVariable("dto",alocacao);
 		context.setLocale(locale.resolveLocale(request));
 		String template = tempEngine.process("/documentos/TermoResponsabilidadeCelular", context);
 		
+		
+		
 		/*View view = viewResolver.resolveViewName(template, locale.resolveLocale(request));
 		
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
 		view.render(new ModelAndView().getModelMap(), request, mockResp);
 		return mockResp.getContentAsByteArray();*/
-		byte[] b = template.getBytes();
-		return b;
+		byte[] termo = template.getBytes();
+		documento = sei.enviarTermoResponsabilidade(alocacao, termo);
+		
+		return documento;
 	}	
 }

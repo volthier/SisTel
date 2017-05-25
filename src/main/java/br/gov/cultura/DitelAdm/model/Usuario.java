@@ -42,6 +42,7 @@ public class Usuario implements java.io.Serializable {
 	private String primeiroNomeUsuario;
 	private String sobrenomeUsuario;
 	private String nomeUsuario;
+	private String usuarioSigla;
 	@JsonBackReference
 	private LimiteAtesto limiteAtesto;
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -62,7 +63,7 @@ public class Usuario implements java.io.Serializable {
 
 	public Usuario(LimiteAtesto limiteAtesto, String cargoUsuario, String cpfUsuario, String descricaoUsuario,
 			String emailUsuario, String lotacaoIdUsuario, String lotacaoUsuario, String primeiroNomeUsuario,
-			String sobrenomeUsuario, String nomeUsuario, Set<Alocacao> alocacaos) {
+			String sobrenomeUsuario, String nomeUsuario, String usuarioSigla, Set<Alocacao> alocacaos) {
 		this.limiteAtesto = limiteAtesto;
 		this.cargoUsuario = cargoUsuario;
 		this.cpfUsuario = cpfUsuario;
@@ -73,6 +74,7 @@ public class Usuario implements java.io.Serializable {
 		this.primeiroNomeUsuario = primeiroNomeUsuario;
 		this.sobrenomeUsuario = sobrenomeUsuario;
 		this.nomeUsuario = nomeUsuario;
+		this.usuarioSigla = usuarioSigla;
 		this.alocacaos = alocacaos;
 	}
 	@Id
@@ -170,7 +172,7 @@ public class Usuario implements java.io.Serializable {
 		this.sobrenomeUsuario = sobrenomeUsuario;
 	}
 	@Column(name = "nome_usuario", nullable = false, length = 255)
-	@NotEmpty(message="Nome e obrigat�rio!")
+	@NotEmpty(message="Nome e obrigatorio!")
 	@Size(max = 100, message = "Maximo de 100 caracteres para nome!")
 	public String getNomeUsuario() {
 		return this.nomeUsuario;
@@ -187,5 +189,14 @@ public class Usuario implements java.io.Serializable {
 	public void setAlocacaos(Set<Alocacao> alocacaos) {
 		this.alocacaos = alocacaos;
 	}
+	@Column(name="usuario_sigla_sei")
+	public String getUsuarioSigla() {
+		return usuarioSigla;
+	}
+
+	public void setUsuarioSigla(String usuarioSigla) {
+		this.usuarioSigla = usuarioSigla;
+	}
+	
 
 }

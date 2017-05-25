@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.wsdl.Assinatura;
 import br.gov.cultura.DitelAdm.wsdl.Assunto;
 import br.gov.cultura.DitelAdm.wsdl.Destinatario;
@@ -38,6 +39,9 @@ import br.gov.cultura.DitelAdm.wsdl.Usuario;
 @Component
 public class SeiClient {
 
+	@Autowired
+	private CadastroUsuarioService cadastroUsuarioService;
+	
 	private SeiPortType seiWs;
 
 	@Value("${sei.sistema}")
@@ -128,7 +132,7 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
@@ -146,6 +150,13 @@ public class SeiClient {
 		Usuario usuarioSei = usuarioSeiLista.stream()
 				.filter(u -> u.getNome().equalsIgnoreCase(alocacao.getUsuario().getNomeUsuario())).findFirst()
 				.orElse(null);
+		if(usuarioSei!=null){
+			br.gov.cultura.DitelAdm.model.Usuario us = cadastroUsuarioService.getByNome(usuarioSei.getNome());
+			if(us!=null){
+				us.setUsuarioSigla(usuarioSei.getSigla());
+				cadastroUsuarioService.salvar(us);
+			}
+		}
 		return usuarioSei;
 	}
 
@@ -154,6 +165,14 @@ public class SeiClient {
 		byte[] encoded = Base64.getEncoder().encode(memorando);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
+		Destinatario[] destinatario = new Destinatario[1];
+		Destinatario dest = new Destinatario();
+		dest.setNome(alocacao.getUsuario().getNomeUsuario());
+		dest.setSigla(alocacao.getUsuario().getCpfUsuario());
+		destinatario[0] = dest;
+		
+		
 
 		Documento doc = new Documento();
 		doc.setTipo("G");
@@ -164,7 +183,7 @@ public class SeiClient {
 		doc.setDescricao("");
 		doc.setRemetente(new Remetente("", ""));
 		doc.setInteressados(new Interessado[0]);
-		doc.setDestinatarios(new Destinatario[0]);
+		doc.setDestinatarios(destinatario);
 		doc.setObservacao("");
 		doc.setNomeArquivo("");
 		doc.setConteudo(encodedFile);
@@ -193,7 +212,7 @@ public class SeiClient {
 		return response;
 	}
 
-	public RetornoInclusaoDocumento enviarTermoResponsabilidade(Alocacao alocacao, byte[] termo)
+	public DocumentoSei enviarTermoResponsabilidade(Alocacao alocacao, byte[] termo)
 			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(termo);
 		String encodedFile = new String(encoded, "ISO-8859-1");
@@ -225,7 +244,7 @@ public class SeiClient {
 		documento.setDocumentosLink(response.getLinkAcesso());
 		documento.setDocumentoIdSei(response.getIdDocumento());
 		documento.setDocumentosNumero(response.getDocumentoFormatado());
-		documento.setDocumentosTipo("Termo Responsabilidade");
+		documento.setDocumentosTipo("Termo de Responsabilidade");
 		documento.setAlocacaoSei(alocacao.getAlocacaoSei());
 		documento.setAlocacao(alocacao);
 
@@ -253,7 +272,7 @@ public class SeiClient {
 			documento.setBlocoId("interno");
 		}
 		alocacaoService.salvar(documento);
-		return response;
+		return documento;
 	}
 
 	@Async

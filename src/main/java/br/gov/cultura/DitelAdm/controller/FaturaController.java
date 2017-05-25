@@ -3,6 +3,8 @@ package br.gov.cultura.DitelAdm.controller;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +22,21 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
+import br.gov.cultura.DitelAdm.email.Mailer;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.dtos.CalculadorDTO;
 import br.gov.cultura.DitelAdm.model.dtos.ServicosCategoria;
 import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
@@ -50,10 +57,16 @@ import br.gov.cultura.DitelAdm.wsdl.Usuario;
 public class FaturaController {
 
 	private final String CADASTRO_VIEW = "ExecutarFatura";
+	
+	@Autowired
+	private Mailer mailer;
 
 	@Autowired
 	private LocaleResolver locale;
-
+	
+	@Autowired
+	private TemplateEngine tempEngine;
+	
 	@Autowired
 	private AlocacaoService alocacaoService;
 
@@ -107,6 +120,9 @@ public class FaturaController {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody ModelAndView executarFatura(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mv = new ModelAndView("FaturaLinhas");
+		CalculadorDTO cal = new CalculadorDTO();
+		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
+		ServicosCategoria servicoCategoria = null;
 
 		Integer idFatura = Integer.parseInt(request.getParameter("fatura"));
 
@@ -136,7 +152,69 @@ public class FaturaController {
 						 */
 						/** adicionar a tabela ajustes ao faturamento */
 
-						float valorTotal = this.valorTotal(chamadas, servicos, planos);
+						for (Servicos servico : servicos) {
+
+							/*
+							 * String tempDate = servico.getDataServico() + " "
+							 * + servico.getHoraServico(); Date datePeriodo =
+							 * sdf.parse(tempDate);
+							 * 
+							 * if((datePeriodo.compareTo(alocacao.getDtRecebido(
+							 * )) > 0 &&
+							 * datePeriodo.compareTo(alocacao.getDtDevolucao())
+							 * <0 )||
+							 * (datePeriodo.compareTo(alocacao.getDtDevolucao())
+							 * ==0 ||
+							 * datePeriodo.compareTo(alocacao.getDtDevolucao())=
+							 * =0))
+							 */
+
+							if (servicoCategoria == null) {
+								servicoCategoria = new ServicosCategoria();
+							} else if (servicoCategoria.getCategoria().getCodCatServico() != servico
+									.getCategoriaservico().getCodCatServico()) {
+								servicosPorCategoria.add(servicoCategoria);
+								servicoCategoria = new ServicosCategoria();
+							}
+							servicoCategoria.setCategoria(servico.getCategoriaservico());
+							if (servico.getUnidadeServico().equals("MB") || servico.getUnidadeServico().equals("KB"))
+								servicoCategoria.setQuantidade(
+										(servico.getUnidadeServico().equals("KB") ? servico.getQuantUtil() / 1000
+												: servico.getQuantUtil()) + servicoCategoria.getQuantidade());
+							else
+								servicoCategoria.setQuantidade(servicoCategoria.getQuantidade() + 1);
+							servicoCategoria.setTarifa(servico.getValServImp());
+							servicoCategoria
+									.setValorCobrado(servico.getValServImp() + servicoCategoria.getValorCobrado());
+							servicoCategoria.setValorTotal(servico.getValServImp() + servicoCategoria.getValorTotal());
+						}
+
+						servicosPorCategoria.add(servicoCategoria);
+
+						Planos plano = planos.get(0);
+
+						if (resumo.getDataDesativ() != null) {
+							long diasTotal = ((plano.getDataFimCiclo().getTime() - plano.getDataIniCiclo().getTime()
+									+ 3600000) / 86400000L);
+							long diasUtilizado = ((resumo.getDataDesativ().getTime() - plano.getDataIniCiclo().getTime()
+									+ 3600000) / 86400000L);
+							float valor = 4.9f;
+
+							cal.setResultadoF((valor / diasTotal) * diasUtilizado);
+							System.out.println("Aqui :" + cal.getResultadoF());
+
+						} else {
+							cal.setResultadoF(4.9f);
+							System.out.println("Aqui :" + cal.getResultadoF());
+
+						}
+
+						float valorTotal = this.valorTotal(chamadas, servicos, planos) + cal.getResultadoF();
+
+						// Troca de campos para enviar para o Template Resumo
+
+						cal.setFloatA(cal.getResultadoF());
+						cal.setFloatB(valorTotal);
 
 						AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
 
@@ -145,10 +223,15 @@ public class FaturaController {
 							sei.enviarMemorando(alocacao, gerarMemorando(request));
 
 							sei.enviarFatura(alocacao.getIdAlocacao(), alocacao.getAlocacaoSei().getNumeroProcessoSei(),
-									gerarPdfFatura(request, fatura, alocacao));
-
+									gerarPdfFatura(fatura, alocacao, cal, chamadas, planos, servicosPorCategoria,
+											resumo, request));
+							mailer.enviarAtestoFatura(alocacao, fatura);
 						} else {
 							alocacaoFatura.setRessarcimento(false);
+							sei.enviarFatura(alocacao.getIdAlocacao(), alocacao.getAlocacaoSei().getNumeroProcessoSei(),
+									gerarPdfFatura(fatura, alocacao, cal, chamadas, planos, servicosPorCategoria,
+											resumo, request));
+							mailer.enviarAtestoFatura(alocacao, fatura);
 						}
 
 						alocacaoFatura.setAlocacao(alocacao);
@@ -169,9 +252,10 @@ public class FaturaController {
 
 	@RequestMapping("/resumo/{fatura}/{alocacao}")
 	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura,
-			@PathVariable("alocacao") int idAlocacao, HttpServletRequest request) {
-
+			@PathVariable("alocacao") int idAlocacao, HttpServletRequest request) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		ModelAndView mv = new ModelAndView("Resumo");
+		CalculadorDTO cal = new CalculadorDTO();
 
 		Fatura fatura = faturaService.getFatura(idFatura);
 		Alocacao alocacao = alocacaoService.getAlocacao(idAlocacao);
@@ -183,7 +267,41 @@ public class FaturaController {
 		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
 		ServicosCategoria servicoCategoria = null;
 
+		//
+
+		Planos plano = planos.get(0);
+
+		if (resumos.get(0).getDataDesativ() != null) {
+			long diasTotal = ((plano.getDataFimCiclo().getTime() - plano.getDataIniCiclo().getTime() + 3600000)
+					/ 86400000L);
+			long diasUtilizado = ((resumos.get(0).getDataDesativ().getTime() - plano.getDataIniCiclo().getTime()
+					+ 3600000) / 86400000L);
+			float valor = 4.9f;
+
+			cal.setResultadoF((valor / diasTotal) * diasUtilizado);
+
+		} else {
+			cal.setResultadoF(4.9f);
+
+		}
+
+		float valorTotal = this.valorTotal(chamadas, servicos, planos) + cal.getResultadoF();
+		cal.setFloatA(cal.getResultadoF());
+		cal.setFloatB(valorTotal);
+		//
+
 		for (Servicos servico : servicos) {
+
+			/*
+			 * String tempDate = servico.getDataServico() + " " +
+			 * servico.getHoraServico(); Date datePeriodo = sdf.parse(tempDate);
+			 * 
+			 * if((datePeriodo.compareTo(alocacao.getDtRecebido()) > 0 &&
+			 * datePeriodo.compareTo(alocacao.getDtDevolucao()) <0 )||
+			 * (datePeriodo.compareTo(alocacao.getDtDevolucao())==0 ||
+			 * datePeriodo.compareTo(alocacao.getDtDevolucao())==0))
+			 */
+
 			if (servicoCategoria == null) {
 				servicoCategoria = new ServicosCategoria();
 			} else if (servicoCategoria.getCategoria().getCodCatServico() != servico.getCategoriaservico()
@@ -204,10 +322,13 @@ public class FaturaController {
 
 		servicosPorCategoria.add(servicoCategoria);
 
+		mv.addObject("alocacao", alocacao);
 		mv.addObject("resumo", resumos.get(0));
+		mv.addObject("fatura", fatura);
 		mv.addObject("chamadas", chamadas);
 		mv.addObject("planos", planos);
 		mv.addObject("servicos", servicosPorCategoria);
+		mv.addObject("pacote", cal);
 
 		return mv;
 	}
@@ -235,25 +356,30 @@ public class FaturaController {
 		return valorTotal;
 	}
 
-	private byte[] gerarPdfFatura(HttpServletRequest request, Fatura fatura, Alocacao alocacao) throws Exception {
-		View view = this.viewResolver.resolveViewName("FaturaLinhas", locale.resolveLocale(request));
-		MockHttpServletResponse mockResp = new MockHttpServletResponse();
-		ModelAndView mv = this.gerarResumo(fatura.getIdFatura(), alocacao.getIdAlocacao(), request);
+	private byte[] gerarPdfFatura(Fatura fatura, Alocacao alocacao, CalculadorDTO cal, List<Chamadas> chamadas,
+			List<Planos> planos, List<ServicosCategoria> servicosPorCategoria, Resumo resumo,
+			HttpServletRequest request) throws Exception {
 
-		view = this.viewResolver.resolveViewName("Resumo", locale.resolveLocale(request));
-		view.render(mv.getModelMap(), request, mockResp);
+		Context context = new Context();
+		context.setVariable("alocacao", alocacao);
+		context.setVariable("fatura", fatura);
+		context.setVariable("pacote", cal);
+		context.setVariable("resumo", resumo);
+		context.setVariable("chamadas", chamadas);
+		context.setVariable("planos", planos);
+		context.setVariable("servicos", servicosPorCategoria);
 
-		Document document = new Document(PageSize.A4, 2, 2, 10, 10);
+		context.setLocale(locale.resolveLocale(request));
+		String template = tempEngine.process("Resumo", context);
 
+		ITextRenderer renderer = new ITextRenderer();
+		renderer.setDocumentFromString(template);
+		renderer.layout();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		PdfWriter writer = PdfWriter.getInstance(document, baos);
-
-		document.open();
-		XMLWorkerHelper.getInstance().parseXHtml(writer, document,
-				new ByteArrayInputStream(mockResp.getContentAsByteArray()));
-		document.close();
+		renderer.createPDF(baos);
 
 		return baos.toByteArray();
+
 	}
 
 	private byte[] gerarMemorando(HttpServletRequest request) throws Exception {

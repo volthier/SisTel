@@ -36,5 +36,7 @@ public class CadastroUsuarioService {
 	public Usuario getByCpf(String cpf){
 		return usuarios.findByCpfUsuario(cpf);
 	}
-	
+	public Usuario getByNome(String nomeUsuario){
+		return usuarios.findByNomeUsuario(nomeUsuario);
+	}
 }

@@ -17,14 +17,20 @@
 						<td style="width: 80%"><b>Descrição</b></td>
 						<td style="margin-left: 5%"><b>Total (R$)</b></td>
 					</tr>
-					<tr>
-					<td><span th:text="{#numbers.formatDecimal(#aggregates.sum(chamadas.![valLigImp]),0,2)}"></span></td>
-					</tr>
 				</thead>
 				<tbody>
+				<tr>
+				<td> GESTOR ONLINE - CONTROLE COMPLETO</td>
+				<td><span th:text="${#numbers.formatDecimal(pacote.floatA,0,2,'COMMA')}">Valor 0</span></td>
+				</tr>
 					<tr th:each="plano : ${planos}">
 						<td style="width: 80%" th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
 						<td style="margin-left: 5%" th:text="${#numbers.formatDecimal(plano.valComImp,1,2)}"></td>
+					</tr>
+					
+					<tr>
+					<td> <b>Valor Total </b> </td>
+					<td><b><span th:text="${#numbers.formatDecimal(pacote.floatB,0,2,'COMMA')}">Error 0</span></b></td>
 					</tr>
 				</tbody>
 			</table>
@@ -59,7 +65,7 @@
 					</tbody>
 				</table>
 			</div>
-			<b>Valor Total </b>
+			
 			<b>Serviços (Torpedos, Hits, Jogos, etc.)</b>
 			<div>
 				<table style="border-collapse: collapse;">
