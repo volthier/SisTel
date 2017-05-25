@@ -29,6 +29,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.logout()
 			.logoutSuccessUrl("/login"); 
+		
+		http
+		.authorizeRequests()
+			.antMatchers("/login").anonymous()
+			.anyRequest().authenticated()
+			.and()
+		.exceptionHandling()
+			.accessDeniedPage("/inicio");
+		
 	}
 
 	@Autowired
