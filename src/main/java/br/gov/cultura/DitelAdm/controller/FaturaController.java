@@ -3,9 +3,11 @@ package br.gov.cultura.DitelAdm.controller;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,16 +59,16 @@ import br.gov.cultura.DitelAdm.wsdl.Usuario;
 public class FaturaController {
 
 	private final String CADASTRO_VIEW = "ExecutarFatura";
-	
+
 	@Autowired
 	private Mailer mailer;
 
 	@Autowired
 	private LocaleResolver locale;
-	
+
 	@Autowired
 	private TemplateEngine tempEngine;
-	
+
 	@Autowired
 	private AlocacaoService alocacaoService;
 
@@ -120,6 +122,8 @@ public class FaturaController {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody ModelAndView executarFatura(HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mv = new ModelAndView("FaturaLinhas");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
 		CalculadorDTO cal = new CalculadorDTO();
 		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
 		ServicosCategoria servicoCategoria = null;
@@ -201,11 +205,11 @@ public class FaturaController {
 							float valor = 4.9f;
 
 							cal.setResultadoF((valor / diasTotal) * diasUtilizado);
-							System.out.println("Aqui :" + cal.getResultadoF());
+							
 
 						} else {
 							cal.setResultadoF(4.9f);
-							System.out.println("Aqui :" + cal.getResultadoF());
+							
 
 						}
 
@@ -215,6 +219,18 @@ public class FaturaController {
 
 						cal.setFloatA(cal.getResultadoF());
 						cal.setFloatB(valorTotal);
+
+						cal.setResultadoF(0);
+						for(Chamadas chamada :chamadas){
+							if(cal.getDataA()==null){
+								cal.setResultadoF(chamada.getDuracaoLigacao().getTime());
+								cal.setDataA(sdt.parse(sdt.format(cal.getResultadoF())));
+							}else{
+							cal.setResultadoF((cal.getDataA().getTime()+chamada.getDuracaoLigacao().getTime()));
+										
+							cal.setDataA(sdt.parse(sdt.format(cal.getResultadoF())));
+						}
+						}
 
 						AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
 
@@ -254,7 +270,9 @@ public class FaturaController {
 	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura,
 			@PathVariable("alocacao") int idAlocacao, HttpServletRequest request) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		ModelAndView mv = new ModelAndView("Resumo");
+
+		SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
+		ModelAndView mv = new ModelAndView("ResumoTeste");
 		CalculadorDTO cal = new CalculadorDTO();
 
 		Fatura fatura = faturaService.getFatura(idFatura);
@@ -289,6 +307,17 @@ public class FaturaController {
 		cal.setFloatA(cal.getResultadoF());
 		cal.setFloatB(valorTotal);
 		//
+		cal.setResultadoF(0);
+		for(Chamadas chamada :chamadas){
+			if(cal.getDataA()==null){
+				cal.setResultadoF(chamada.getDuracaoLigacao().getTime());
+				cal.setDataA(sdt.parse(sdt.format(cal.getResultadoF())));
+			}else{
+			cal.setResultadoF((cal.getDataA().getTime()+chamada.getDuracaoLigacao().getTime()));
+						
+			cal.setDataA(sdt.parse(sdt.format(cal.getResultadoF())));
+		}
+		}
 
 		for (Servicos servico : servicos) {
 
@@ -321,7 +350,10 @@ public class FaturaController {
 		}
 
 		servicosPorCategoria.add(servicoCategoria);
-
+		Planos planoDatas = new Planos();
+		planoDatas.setDataIniCiclo(planos.get(0).getDataIniCiclo());
+		planoDatas.setDataFimCiclo(planos.get(0).getDataFimCiclo());
+		mv.addObject("planoData", planoDatas);
 		mv.addObject("alocacao", alocacao);
 		mv.addObject("resumo", resumos.get(0));
 		mv.addObject("fatura", fatura);
@@ -359,18 +391,21 @@ public class FaturaController {
 	private byte[] gerarPdfFatura(Fatura fatura, Alocacao alocacao, CalculadorDTO cal, List<Chamadas> chamadas,
 			List<Planos> planos, List<ServicosCategoria> servicosPorCategoria, Resumo resumo,
 			HttpServletRequest request) throws Exception {
-
+		Planos planoDatas = new Planos();
+		planoDatas.setDataIniCiclo(planos.get(0).getDataIniCiclo());
+		planoDatas.setDataFimCiclo(planos.get(0).getDataFimCiclo());
 		Context context = new Context();
 		context.setVariable("alocacao", alocacao);
 		context.setVariable("fatura", fatura);
 		context.setVariable("pacote", cal);
 		context.setVariable("resumo", resumo);
 		context.setVariable("chamadas", chamadas);
-		context.setVariable("planos", planos);
+		context.setVariable("plano", planos);
+		context.setVariable("planoData", planoDatas);
 		context.setVariable("servicos", servicosPorCategoria);
 
 		context.setLocale(locale.resolveLocale(request));
-		String template = tempEngine.process("Resumo", context);
+		String template = tempEngine.process("ResumoTeste", context);
 
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocumentFromString(template);
@@ -383,7 +418,8 @@ public class FaturaController {
 	}
 
 	private byte[] gerarMemorando(HttpServletRequest request) throws Exception {
-		View view = this.viewResolver.resolveViewName("MemorandoFaturaTelefonica", locale.resolveLocale(request));
+		View view = this.viewResolver.resolveViewName("/documentos/memorandos/MemorandoFaturaTelefonica",
+				locale.resolveLocale(request));
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
 		view.render(new ModelAndView().getModelMap(), request, mockResp);
 

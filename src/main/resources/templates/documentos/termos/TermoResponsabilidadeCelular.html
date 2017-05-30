@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body style="margin: 40px 80px 60px 140px">
+
+	<h4 style="font-size: 140%" align="center">
+		<b>TERMO DE RESPONSABILIDADE</b>
+	</h4>
+	<p th:inline="text" align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eu,
+		[[${dto.usuario.nomeUsuario}]], ocupante do cargo
+		[[${dto.usuario.cargoUsuario}]] do Ministério da Cultura, CPF
+		[[${dto.usuario.cpfUsuario}]], DAS
+		[[${dto.usuario.limiteAtesto.dasAtesto}]], declaro para os devidos
+		fins que sou responsável pelo bem patrimonial comodatado abaixo
+		relacionado, que se encontra em perfeitas condições de uso e
+		funcionamento, e comprometo-me a zelar pela sua boa utilização e
+		conservação, ciente de que:</p>
+
+	<ol type="a" style="margin-left: 5%">
+
+		<li style="text-align: justify">Arcarei com as despesas por danos
+			ocorridos por uso indevido, comprometendo-me a registrar ocorrência e
+			comunicar imediatamente à Coordenação-Geral de Tecnologia da
+			Informação, caso ocorra avaria, roubo ou extravio do bem;</li>
+		<br></br>
+
+		<li style="text-align: justify">Declaro conhecer as normas do
+			Ministério da Cultura referentes aos valores-limites para custeio de
+			despesas de telefonia móvel, bem como acompanhar eventuais
+			alterações, responsabilizando-me integralmente pelos valores
+			excedentes a esses limites (disponível na intranet no link Boletins
+			administrativos);</li>
+		<br></br>
+
+		<li style="text-align: justify">Comprometo-me a promover a
+			devolução do bem objeto do presente TR, ao ser destituído do referido
+			cardo ou quando for solicitado pela Coordenação-Geral de Tecnologia
+			da Informação;</li>
+		<br></br>
+
+		<li style="text-align: justify" th:if="${dto.dispositivo !=null and dto.chip!=null}">Assumo ainda, que tenho ciência
+			da tecnologia do aparelho cedido(<i>GSM - Global System for
+				Mobile communications, ou sistema Global para Comunicações Móveis</i>),
+			e que para realizar chamadas interubanas deverei utilizar o código de
+			área da operadora vencedora do processo licitatório realizado pelo
+			MinC.
+		</li>
+		<br></br>
+	</ol>
+
+	<p style="margin-left: 7%">
+		<b>ESPECIFICAÇÂO/DESCRIÇÃO DO BEM:</b>
+	</p>
+	<span th:if="${dto.dispositivo !=null and dto.chip!=null}">
+		<p style="margin-left: 7%" align="justify">
+			<b>1 aparelho telefônico marca: <span
+				th:text="${dto.dispositivo.marcaDispositivo}">XXXXX</span>, modelo:
+				<span th:text="${dto.dispositivo.modeloDispositivo}">XXXX</span>,
+				IMEI <span th:text="${dto.dispositivo.imeiDispositivo}">0000000000000000</span>,
+				1 carregador, 1 cabo USB, 1 fone de ouvido. 1 Chip tipo <span
+				th:text="${dto.chip.tipoChip}"> simcard</span>, numero de serie <span
+				th:text="${dto.chip.numeroSerieChip}">9809</span> Linha: <span
+				th:text="${dto.linha.numeroLinha}">0000000000000000</span>.
+			</b>
+		</p>
+
+		<p style="margin-left: 7%">
+			<b>VALOR DO BEM: R$ <span
+				th:text="${#numbers.formatDecimal(dto.dispositivo.valorDispositivo,0,2,'COMMA')}">000,0(XXXXXXXXXXXXXXXXXXXXXX)</span>.
+			</b>
+		</p> <br></br>
+
+		<p style="border: solid" align="justify">
+			DECLARO QUE CONFERI O APARELHO ACIMA ESPECIFICADO E O MESMO
+			ENCONTRA-SE EM PERFEITAS CONDIÇÕES DE USO, NÃO APRESENTANDO DEFEITOS
+			OU AVARIAS DE QUALQUER NATUREZA.<br></br>
+		</p> <br></br>
+	</span>
+
+	<span th:if="${dto.dispositivo == null and dto.chip != null}">
+		<p style="margin-left: 7%" align="justify">
+			<b> Chip tipo: <span th:text="${dto.chip.tipoChip}">
+					simcard</span> Número de serie: <span
+				th:text="${dto.chip.numeroSerieChip}">numerooserie</span> Linha: <span
+				th:text="${dto.linha.numeroLinha}">0000000000000000</span>.
+			</b>
+		</p> <br></br>
+
+		<p style="border: solid" align="justify">
+			DECLARO QUE CONFERI O BEM ACIMA ESPECIFICADO E O MESMO ENCONTRA-SE EM
+			PERFEITAS CONDIÇÕES DE USO, NÃO APRESENTANDO DEFEITOS OU AVARIAS DE
+			QUALQUER NATUREZA.<br></br> <br></br>
+
+		</p>
+
+	</span>
+	
+</body>
+</html>

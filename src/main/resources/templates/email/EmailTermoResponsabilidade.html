@@ -13,23 +13,20 @@
 <h1 style="font-size=20px" th:inline="text"> Olá [[${dto.usuario.nomeUsuario}]]</h1>
 
 <p th:inline="text"> Estamos enviando essa notificação que inferece ao processo nº <b> [[${dto.alocacaoSei.numeroExternoProcessoSei}]]</b>, onde foi acrescentado o [[${doc.documentosTipo}]], registrado no SEI sob a numeração <b>[[${doc.documentosNumero}]]</b>. </p>
-<p th:inline="text"> Referenciando-se ao [[${dto.dispositivo.tipoDispositivo}]], de marca [[${dto.dispositivo.marcaDispositivo}]], modelo [[${dto.dispositivo.modeloDispositivo}]] e linha nº [[${dto.linha.numeroLinha}]]. </p> 
-
+<p th:inline="text" th:if="${dto.dispositivo != null and dto.chip != null}"> Referenciando-se ao [[${dto.dispositivo.tipoDispositivo}]], de marca [[${dto.dispositivo.marcaDispositivo}]], modelo [[${dto.dispositivo.modeloDispositivo}]] e linha nº [[${dto.linha.numeroLinha}]]. </p> 
+<p th:inline="text" th:if="${dto.dispositivo == null and dto.chip != null}"> Referenciando-se ao chip [[${dto.chip.numeroSerieChip}]], e linha nº [[${dto.linha.numeroLinha}]]. </p>
 <a href="http://seitreinamento.cultura.gov.br/">Link para acesso ao SEI</a>
 
-<p> Para conhecimento de utilização clique no link para conhecimento da NORMA OPERCIONAL vigente disponibilizada na intranet!</p>
-<a href="http://intranet.cultura.gov.br/as-novas-regras-de-telefonia-do-minc-ja-estao-valendo/">NORMA OPERCIONAL na intranet!</a>
+<p> Para conhecimento de utilização disponibilizados na intranet clique nos links: </p>
 
-<p>Conheça a Norma Operacional Nº 001 na íntegra</p>
-<a href="http://intranet.cultura.gov.br/wp-content/uploads/sites/4/2013/07/2013-NO-001_2013-de-18jun2013-Telefonia-Fixa-e-Movel-publ-BA-extra-62-2013smallpdf-com.pdf">Norma Operacional Nº 001/18/Junho/2013</a>
+<p> Para conhecimento da <b><u><a href="http://intranet.cultura.gov.br/as-novas-regras-de-telefonia-do-minc-ja-estao-valendo/">NORMA OPERCIONAL</a></u></b> na intranet!</p>
 
-<p>Regras para utilização da telefonia móvel funcional!</p>
-<a href="http://intranet.cultura.gov.br/novas-regras-para-utilizacao-da-telefonia-movel-funcional/">Regras para utilização</a>
+<p> Conheça a <b><u><a href="http://intranet.cultura.gov.br/wp-content/uploads/sites/4/2013/07/2013-NO-001_2013-de-18jun2013-Telefonia-Fixa-e-Movel-publ-BA-extra-62-2013smallpdf-com.pdf">Norma Operacional Nº 001</a></u></b> na íntegra</p>
 
-<p>  Memorando -Circular n° 11 SEMinC PDF!</p>
-<a href="http://intranet.cultura.gov.br/wp-content/uploads/sites/4/2013/03/Memorando-Circular-n%C2%B0-11-SEMinC2.pdf">Memorando -Circular n° 11 SEMinC</a>
+<p> <b><u><a href="http://intranet.cultura.gov.br/novas-regras-para-utilizacao-da-telefonia-movel-funcional/">Regras para utilização da telefonia móvel funcional!</a></u></b></p>
+
+<p> <b><u><a href="http://intranet.cultura.gov.br/wp-content/uploads/sites/4/2013/03/Memorando-Circular-n%C2%B0-11-SEMinC2.pdf">Memorando -Circular n° 11 SEMinC</a></u></b> PDF!</p>
 
 <p><b>Divisão de Telefonia - CGTEC</b></p>
-
 </body>
 </html>

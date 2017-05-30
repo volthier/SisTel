@@ -23,40 +23,7 @@
 					<div id="piechart_div" style="border: 1px solid #ccc"></div>
 					<div id="barchart_div" style="b	order: 1px solid #ccc"></div>
 				</div>
-			</div>
-			
-			
-			
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md2">Marca</th>
-							<th class="text-center col-md2">Modelo</th>
-							<th class="text-center col-md2">Número de Série</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="dispositivo : ${lista}">
-							<td class="text-center" th:text="${dispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.idUnidade}"></td>
-							<td class="text-center" th:text="${dispositivo.descricao}"></td>
-							<td class="text-center" th:text="${dispositivo.sigla}"></td>
-					
-						</tr>
-						<tr>
-							<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-								Dispositivo econtrado!!!</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			
-			
+			</div>			
 		</div>
 	</form>
 </section>

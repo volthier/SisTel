@@ -44,6 +44,7 @@ public class Alocacao implements java.io.Serializable {
 	private Usuario usuario;
 	private Date dtRecebido;
 	private Date dtDevolucao;
+	private String autorizar;
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<AlocacaoFatura> alocacaoFaturas = new HashSet(0);
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -62,7 +63,7 @@ public class Alocacao implements java.io.Serializable {
 
 	public Alocacao(Integer idAlocacao, Dispositivo dispositivo, Linha linha, Categoria categoria, Chip chip,
 			AlocacaoSei alocacaoSei, Usuario usuario, Date dtRecebido, Date dtDevolucao,
-			Set<AlocacaoFatura> alocacaoFaturas,Set<DocumentoSei> documentoSeis) {
+			Set<AlocacaoFatura> alocacaoFaturas,Set<DocumentoSei> documentoSeis, String autorizar) {
 		super();
 		this.idAlocacao = idAlocacao;
 		this.dispositivo = dispositivo;
@@ -75,6 +76,7 @@ public class Alocacao implements java.io.Serializable {
 		this.dtDevolucao = dtDevolucao;
 		this.alocacaoFaturas = alocacaoFaturas;
 		this.documentoSeis = documentoSeis;
+		this.autorizar = autorizar;
 	}
 
 	@Id
@@ -176,5 +178,12 @@ public class Alocacao implements java.io.Serializable {
 	public void setDocumentoSeis(Set<DocumentoSei> documentoSeis) {
 		this.documentoSeis = documentoSeis;
 	}
-	
+	@Column(name = "autorizado")
+	public String getAutorizar() {
+		return autorizar;
+	}
+
+	public void setAutorizar(String autorizar) {
+		this.autorizar = autorizar;
+	}
 }

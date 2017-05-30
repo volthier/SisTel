@@ -19,9 +19,7 @@ import org.thymeleaf.context.Context;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
-import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.ws.SeiClient;
 
 @Component
 public class Mailer {
@@ -36,8 +34,6 @@ public class Mailer {
 
 	@Autowired
 	private AlocacaoService alocacaoService;
-	@Autowired
-	private SeiClient sei;
 
 	@Async
 	public void enviar(Integer id) {
@@ -77,7 +73,7 @@ public class Mailer {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom("ditel@cultura.gov.br");
 			helper.setTo(alocacao.getUsuario().getEmailUsuario());
-			helper.setSubject("Telefonia - Processo no SEI");
+			helper.setSubject("Telefonia - Termo de Responsabilidade");
 			helper.setText(email, true);
 
 			mailSender.send(mimeMessage);
@@ -100,7 +96,7 @@ public class Mailer {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom("ditel@cultura.gov.br");
 			helper.setTo(alocacao.getUsuario().getEmailUsuario());
-			helper.setSubject("Telefonia - Processo no SEI");
+			helper.setSubject("Telefonia - Fatura Telefônica para Atesto!");
 			helper.setText(email, true);
 
 			mailSender.send(mimeMessage);
