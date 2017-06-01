@@ -174,7 +174,7 @@
 		</dependency>
 
 		<!-- LIQUIBASE -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
@@ -182,7 +182,7 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-maven-plugin</artifactId>
 			<version>${liquibase.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- FIM LIQUIBASE -->
 		<!-- Fim Conectores -->
@@ -291,7 +291,7 @@
 			</plugin>
 
 			<!-- liquibase -->
-			<plugin>
+		<!-- 	<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.version}</version>
@@ -315,7 +315,9 @@
 						<version>${liquibase.version}</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin> -->
+			
+			<!-- AXIS -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>axistools-maven-plugin</artifactId>
