@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -295,11 +294,18 @@ public class AlocacaoController {
 
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/disponibilizar/{id}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes) {
 		alocacaoService.excluir(id);
 		attributes.addFlashAttribute("mensagem", "Fornecimento CANCELADO com sucesso!");
-		return "redirect:/inicio";
+		return "redirect:/pendencia";
+	}
+	
+	@RequestMapping("/disponibilizar/{id}")
+	public ModelAndView edicao(@PathVariable("id") Alocacao alocacao){
+		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");		
+		mv.addObject(alocacao);
+				return mv;
 	}
 
 }

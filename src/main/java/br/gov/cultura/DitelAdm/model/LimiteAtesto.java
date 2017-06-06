@@ -66,7 +66,7 @@ public class LimiteAtesto implements java.io.Serializable {
 
 	@Column(name = "das_atesto", nullable = false)
 	@Size(max=200,message="Maximo de caracteres para DAS Atesto excedido!")
-	@NotEmpty(message="Das Atesto e obrigat�rio!")
+	@NotEmpty(message="Das Atesto e obrigatório!")
 	public String getDasAtesto() {
 		return this.dasAtesto;
 	}
@@ -75,7 +75,7 @@ public class LimiteAtesto implements java.io.Serializable {
 		this.dasAtesto = dasAtesto;
 	}
 
-	@Column(name = "valor_limite", nullable = false)
+	@Column(name = "valor_limite", nullable = false, precision = 10, scale = 0)
 	@NotNull(message="Valor e obrigatorio!")
 	@DecimalMin(value = "0.01", message = "Valor minimo de R$0,01!" )
 	@DecimalMax(value = "9999999.99", message ="Valor ultrapassa valor maximo!")

@@ -80,7 +80,7 @@
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-excludid=${dispositivo.idDispositivo}, data-flag='1', data-exclude=${dispositivo.modeloDispositivo}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
+									class="glyphicon glyphicon-remove text-danger text-danger"></span>
 							</a></td>
 
 						</tr>
@@ -98,12 +98,10 @@
 							<th class="text-center col-md1">Id</th>
 							<th>Nome</th>
 							<th class="text-center col-md3">CPF</th>
-							<!-- <th class="text-center col-md2">Matricula</th>
-							<th class="text-center col-md2">Vinculo</th> -->
 							<th class="text-center col-md2">Setor</th>
 							<th class="text-center col-md2">Cargo</th>
 							 <th class="text-center col-md2">DAS/FCPE</th>
-							<!--<th class="text-center col-md1">Email</th> -->
+							<th class="text-center col-md1">Email</th>
 							<th class="col-md2"></th>
 						</tr>
 					</thead>
@@ -114,12 +112,10 @@
 							<td class="text-center" th:text="${usuario.idUsuario}"></td>
 							<td th:text="${usuario.nomeUsuario}"></td>
 							<td class="text-center" th:text=" ${usuario.cpfUsuario}"></td>
-							<!-- <td class="text-right" th:text="  ${usuario.matricula}"></td>
-							<td class="text-center" th:text=" ${usuario.vinculo}"></td> -->
 							<td class="text-center" th:text=" ${usuario.lotacaoUsuario}"></td>
 							<td class="text-center" th:text=" ${usuario.cargoUsuario}"></td>
 							<td class="text-center" th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
-							<!--<td class="text-center" th:text=" ${usuario.email}"></td> -->
+							<td class="text-center" th:text=" ${usuario.emailUsuario}"></td>
 							
 							<td class="text-center">
 							
@@ -137,7 +133,7 @@
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-flag='2', data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
+									class="glyphicon glyphicon-remove text-danger"></span>
 							</a></td>
 
 						</tr>
@@ -164,7 +160,7 @@
 
 						<tr th:each="chip : ${chips}">
 							<td class="text-center" th:text="${chip.idChip}"></td>
-							<td th:text="${chip.numeroSerieChip}"></td>
+							<td class="text-center" th:text="${chip.numeroSerieChip}"></td>
 							<td class="text-center" th:text="${chip.tipoChip}"></td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/chips/{id}(id=${chip.idChip})}" title="Editar"
@@ -174,7 +170,7 @@
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-flag='3', data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
+									class="glyphicon glyphicon-remove text-danger"></span>
 							</a></td>
 
 						</tr>
@@ -209,7 +205,85 @@
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-flag='4', data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove"></span>
+									class="glyphicon glyphicon-remove text-danger"></span>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
+								Linha encontrada!!!</td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
+			</div>
+			
+				<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md3">Categoria de Serviço</th>
+							<th class="col-md2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="categoria : ${categorias}">
+							<td class="text-center" th:text="${categoria.idCategoria}"></td>
+							<td th:text="${categoria.descricaoCategoria}"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/categorias/{id}(id=${categoria.idCategoria})}" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-flag='6', data-excludId=${categoria.idCategoria}, data-exclude=${categoria.descricaoCategoria}"
+								title="Remover" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove text-danger"></span>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
+								Linha encontrada!!!</td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
+			</div>
+			
+							<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md3">Categoria de Serviço</th>
+							<th class="text-center col-md1">Limite</th>
+							<th class="col-md2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						<tr th:each="limite : ${limites}">
+							<td class="text-center" th:text="${limite.idLimiteAtesto}"></td>
+							<td class="text-center" th:text="${limite.dasAtesto}"></td>
+							<td class="text-right" th:text="|R$ ${{limite.valorLimite}}|"></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								th:href="@{/limite-atesto/{id}(id=${limite.idLimiteAtesto})}" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-flag='7', data-excludId=${limite.idLimiteAtesto}, data-exclude=${limite.dasAtesto}"
+								title="Remover" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove text-danger"></span>
 							</a></td>
 
 						</tr>

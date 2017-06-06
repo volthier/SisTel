@@ -53,8 +53,6 @@ public class AlocacaoService {
 	
 	public void excluir(Integer id) {
 		alocacoes.delete(id);
-		alocacoesFaturas.delete(id);
-		documentosSei.delete(id);
 	}
 
 	public List<AlocacaoSei> getAlocacaoSei(){
@@ -96,6 +94,9 @@ public class AlocacaoService {
 		return alocacoes.getAlocacaoByLinha(linha);
 	}
 	
+	public List<Alocacao> getDevolucao(){
+		return alocacoes.getAlocacaoDevolucao();
+	}
 
 	
 }

@@ -69,10 +69,10 @@ public class PendenciaController {
 					sei.consultarAssinatura(doc);
 				} catch (RemoteException | ParseException e) {
 
-					System.out.println(e + "Essa parada aqui mano aferição dos documentos!!!");
+					System.out.println(e + "Erro de tempo de espera da conexão da verificação de documentos!!!");
 					e.printStackTrace();
 				} catch (InterruptedException e) {
-					System.out.println(e + "Essa parada aqui mano espera error!!!");// TODO Auto-generated catch block
+					System.out.println(e + " Erro de interrupção de conexão da verificação de documentos");// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			});
@@ -87,7 +87,8 @@ public class PendenciaController {
 				}
 			}
 		}
-		
+		List<Alocacao> devolvidos = alocacaoService.getDevolucao();
+		lista.removeAll(devolvidos);
 		mv.addObject("erroUnidade", usuarioErrorSei);
 		mv.addObject("pendencia", lista);
 		return mv;
@@ -107,6 +108,10 @@ public class PendenciaController {
 					.consutaProcessoSei(alocacao.getAlocacaoSei().getNumeroExternoProcessoSei());
 
 			if (processo.getAndamentoConclusao() == null) {
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			    String name = auth.getName(); //get logged in username
+			    alocacao.setAutorizar(name);
+				alocacaoService.salvar(alocacao);				
 				mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 				alocacao.getDocumentoSeis();
 				attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
@@ -142,11 +147,10 @@ public class PendenciaController {
 
 						if (processo.getAndamentoConclusao() == null) {
 							alocacao.setAlocacaoSei(alocacaoVerificaProcesso.getAlocacaoSei());
-							
 							Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-						      String name = auth.getName(); //get logged in username
-						      alocacao.setAutorizar(name);
-							alocacaoService.salvar(alocacao);
+						    String name = auth.getName(); //get logged in username
+						    alocacao.setAutorizar(name);
+							alocacaoService.salvar(alocacao);		
 							mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 							attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 							i = 1;
@@ -171,7 +175,7 @@ public class PendenciaController {
 					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 				    String name = auth.getName(); //get logged in username
 				    alocacao.setAutorizar(name);
-					alocacaoService.salvar(alocacao);					
+					alocacaoService.salvar(alocacao);						
 		
 					mailer.enviarTermo(Integer.parseInt(id),gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 					attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
@@ -190,6 +194,5 @@ public class PendenciaController {
 		byte[] termo = template.getBytes();
 		documento = sei.enviarTermoResponsabilidade(alocacao, termo);
 		return documento;	
-	}
-	
+	}	
 }

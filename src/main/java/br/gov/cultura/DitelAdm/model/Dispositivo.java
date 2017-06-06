@@ -97,7 +97,7 @@ public class Dispositivo implements java.io.Serializable {
 
 	@Column(name = "imei_dispositivo", nullable = false)
 	@Size(min=5,message="Verifique o numero IMEI!")
-	@NotEmpty(message="Numero IMEI e obrigat�rio!")
+	@NotEmpty(message="Numero IMEI e obrigatório!")
 	public String getImeiDispositivo() {
 		return this.imeiDispositivo;
 	}
@@ -108,7 +108,7 @@ public class Dispositivo implements java.io.Serializable {
 
 	@Column(name = "mac_dispositivo", nullable = false)
 	@Size(min=5,message="Verifique o numero MAC!")
-	@NotEmpty(message="Numero MAC e obrigat�rio!")
+	@NotEmpty(message="Numero MAC e obrigatório!")
 	public String getMacDispositivo() {
 		return this.macDispositivo;
 	}
@@ -141,7 +141,7 @@ public class Dispositivo implements java.io.Serializable {
 
 	@Column(name = "numero_serie_dispositivo", nullable = false)
 	@Size(min=5,message="Verifique o numero de serie!")
-	@NotEmpty(message="Numero de serie e obrigat�rio!")
+	@NotEmpty(message="Numero de serie e obrigatório!")
 	public String getNumeroSerieDispositivo() {
 		return this.numeroSerieDispositivo;
 	}
@@ -152,7 +152,7 @@ public class Dispositivo implements java.io.Serializable {
 
 	@Column(name = "patrimonio_dispositivo", nullable = false)
 	@Size(min=5,message="Verifique o numero do Patrimonio!")
-	@NotEmpty(message="Numero do Patrimonio e obrigat�rio!")
+	@NotEmpty(message="Numero do Patrimonio e obrigatório!")
 	public String getPatrimonioDispositivo() {
 		return this.patrimonioDispositivo;
 	}

@@ -117,8 +117,6 @@ public class FaturaController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
 		CalculadorDTO cal = new CalculadorDTO();
-		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
-		ServicosCategoria servicoCategoria = null;
 
 		Integer idFatura = Integer.parseInt(request.getParameter("fatura"));
 
@@ -142,6 +140,8 @@ public class FaturaController {
 						List<Chamadas> chamadas = chamadaService.getChamadaResumo(resumo);
 						List<Planos> planos = planoService.getPlanoResumo(resumo);
 						List<Servicos> servicos = servicoService.getServicosResumo(resumo);
+						List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
+						ServicosCategoria servicoCategoria = null;
 
 						/**
 						 * ADICIONAR AQUI TRATATIVA PARA DATA ALOCADA DA LINHA
@@ -151,37 +151,30 @@ public class FaturaController {
 						for (Servicos servico : servicos) {
 
 							/*
-							 * String tempDate = servico.getDataServico() + " "
-							 * + servico.getHoraServico(); Date datePeriodo =
-							 * sdf.parse(tempDate);
+							 * String tempDate = servico.getDataServico() + " " +
+							 * servico.getHoraServico(); Date datePeriodo = sdf.parse(tempDate);
 							 * 
-							 * if((datePeriodo.compareTo(alocacao.getDtRecebido(
-							 * )) > 0 &&
-							 * datePeriodo.compareTo(alocacao.getDtDevolucao())
-							 * <0 )||
-							 * (datePeriodo.compareTo(alocacao.getDtDevolucao())
-							 * ==0 ||
-							 * datePeriodo.compareTo(alocacao.getDtDevolucao())=
-							 * =0))
+							 * if((datePeriodo.compareTo(alocacao.getDtRecebido()) > 0 &&
+							 * datePeriodo.compareTo(alocacao.getDtDevolucao()) <0 )||
+							 * (datePeriodo.compareTo(alocacao.getDtDevolucao())==0 ||
+							 * datePeriodo.compareTo(alocacao.getDtDevolucao())==0))
 							 */
 
 							if (servicoCategoria == null) {
 								servicoCategoria = new ServicosCategoria();
-							} else if (servicoCategoria.getCategoria().getCodCatServico() != servico
-									.getCategoriaservico().getCodCatServico()) {
+							} else if (servicoCategoria.getCategoria().getCodCatServico() != servico.getCategoriaservico()
+									.getCodCatServico()) {
 								servicosPorCategoria.add(servicoCategoria);
 								servicoCategoria = new ServicosCategoria();
 							}
 							servicoCategoria.setCategoria(servico.getCategoriaservico());
 							if (servico.getUnidadeServico().equals("MB") || servico.getUnidadeServico().equals("KB"))
-								servicoCategoria.setQuantidade(
-										(servico.getUnidadeServico().equals("KB") ? servico.getQuantUtil() / 1000
-												: servico.getQuantUtil()) + servicoCategoria.getQuantidade());
+								servicoCategoria.setQuantidade((servico.getUnidadeServico().equals("KB") ? servico.getQuantUtil() / 1000
+										: servico.getQuantUtil()) + servicoCategoria.getQuantidade());
 							else
 								servicoCategoria.setQuantidade(servicoCategoria.getQuantidade() + 1);
 							servicoCategoria.setTarifa(servico.getValServImp());
-							servicoCategoria
-									.setValorCobrado(servico.getValServImp() + servicoCategoria.getValorCobrado());
+							servicoCategoria.setValorCobrado(servico.getValServImp() + servicoCategoria.getValorCobrado());
 							servicoCategoria.setValorTotal(servico.getValServImp() + servicoCategoria.getValorTotal());
 						}
 
@@ -264,7 +257,7 @@ public class FaturaController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 		SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
-		ModelAndView mv = new ModelAndView("ResumoTeste");
+		ModelAndView mv = new ModelAndView("Resumo");
 		CalculadorDTO cal = new CalculadorDTO();
 
 		Fatura fatura = faturaService.getFatura(idFatura);
@@ -392,12 +385,12 @@ public class FaturaController {
 		context.setVariable("pacote", cal);
 		context.setVariable("resumo", resumo);
 		context.setVariable("chamadas", chamadas);
-		context.setVariable("plano", planos);
+		context.setVariable("planos", planos);
 		context.setVariable("planoData", planoDatas);
 		context.setVariable("servicos", servicosPorCategoria);
 
 		context.setLocale(locale.resolveLocale(request));
-		String template = tempEngine.process("ResumoTeste", context);
+		String template = tempEngine.process("Resumo", context);
 
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocumentFromString(template);

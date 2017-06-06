@@ -248,7 +248,7 @@ public class SeiClient {
 		documento.setAlocacaoSei(alocacao.getAlocacaoSei());
 		documento.setAlocacao(alocacao);
 
-		descricaoBloco = alocacao.getUsuario().getNomeUsuario();
+		descricaoBloco = "Termo de responsabilidade para assinatura de "+alocacao.getUsuario().getNomeUsuario();
 
 		String[] dc = new String[1];
 		dc[0] = documento.getDocumentosNumero();

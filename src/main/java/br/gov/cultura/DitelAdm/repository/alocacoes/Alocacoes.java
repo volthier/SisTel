@@ -12,4 +12,7 @@ public interface Alocacoes extends JpaRepository<Alocacao, Integer> {
 	
 	@Query("select a from Alocacao a where linha = ?1")
 	public List<Alocacao> getAlocacaoByLinha(Linha linha);	
+	
+	@Query("select l from Alocacao l WHERE l.dtDevolucao IS NOT NULL")
+	public List<Alocacao> getAlocacaoDevolucao();
 }

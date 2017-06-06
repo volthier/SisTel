@@ -53,6 +53,36 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 		modal.find('.modal-body span').html('Confirma a exclusão do registro<strong> '+ item +' </strong>?' );
 				
 	}
+	else if(flag == 5){
+		action ='/alocacoes/disponibilizar';
+		if(!action.endsWith('/')){
+			action +='/' ;
+		}
+		form.attr('action', action + id); 
+		
+		modal.find('.modal-body span').html('Confirma a exclusão do registro de vinculo de serviço telecom a <strong> '+ item +' </strong>?' );
+				
+	}
+	else if(flag == 6){
+		action ='/categorias';
+		if(!action.endsWith('/')){
+			action +='/' ;
+		}
+		form.attr('action', action + id); 
+		
+		modal.find('.modal-body span').html('Confirma a exclusão da categoria de serviço: <strong> '+ item +' </strong>?' );
+				
+	}
+	else if(flag == 7){
+		action ='/limite-atesto';
+		if(!action.endsWith('/')){
+			action +='/' ;
+		}
+		form.attr('action', action + id); 
+		
+		modal.find('.modal-body span').html('Confirma a exclusão do limite descrito à: <strong> '+ item +' </strong>?' );
+				
+	}
 	
 	});
 

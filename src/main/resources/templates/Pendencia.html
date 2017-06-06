@@ -89,8 +89,20 @@
 								title="Autorização" rel="tooltip"> <span
 									class="glyphicon glyphicon-ok text-success"></span>
 
-							</a> <a class="btn btn-link btn-xs" title="Cancelar" rel="tooltip"><span
-									class="glyphicon glyphicon-remove text-danger"></span> </a></td>
+							</a> 
+									
+							<a th:if="${dto.autorizar == null}" class="btn btn-link btn-xs"
+								th:href="@{/alocacoes/disponibilizar/{id}(id=${dto.idAlocacao})}"
+								title="Editar" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-pencil"></span>
+							</a> 
+							
+							<a th:if="${dto.autorizar == null}" class="btn btn-link btn-xs" data-toggle="modal"
+								data-target="#confirmacaoExclusaoModal"
+								th:attr="data-excludid=${dto.idAlocacao}, data-flag='5', data-exclude=${dto.usuario.nomeUsuario}"
+								title="Cancelar" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-remove"></span>
+							</a></td>
 
 						</tr>
 						<tr>
@@ -103,6 +115,9 @@
 
 		</div>
 		<div layout:include="ConfirmarEnvioEmail"></div>
+		<div layout:include="DialogoConfirmacaoExclusao"></div>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 	</div>
 </section>
 </html>
