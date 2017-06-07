@@ -28,6 +28,8 @@ public class Planos implements java.io.Serializable {
 	private Integer idPlanos;
 	private Categoriaplano categoriaplano;
 	private Resumo resumo;
+	private String idUnicoPlanos;
+	private String numRecursoPlanos; 
 	private Date dataIniCiclo;
 	private Date dataFimCiclo;
 	private String tipo;
@@ -46,7 +48,7 @@ public class Planos implements java.io.Serializable {
 	}
 
 	public Planos(Categoriaplano categoriaplano, Resumo resumo, Date dataIniCiclo, Date dataFimCiclo, String tipo,
-			float consumoMedido, float consumoFranqueado, float valComImp, float valSemImp, int tipoNf, String numNf) {
+			float consumoMedido, float consumoFranqueado, float valComImp, float valSemImp, int tipoNf, String numNf, String idUnicoPlanos, String numRecursoPlanos ) {
 		this.categoriaplano = categoriaplano;
 		this.resumo = resumo;
 		this.dataIniCiclo = dataIniCiclo;
@@ -58,13 +60,17 @@ public class Planos implements java.io.Serializable {
 		this.valSemImp = valSemImp;
 		this.tipoNf = tipoNf;
 		this.numNf = numNf;
+		this.idUnicoPlanos = idUnicoPlanos;
+		this.numRecursoPlanos = numRecursoPlanos;
 	}
 
 	public Planos(Categoriaplano categoriaplano, Resumo resumo, Date dataIniCiclo, Date dataFimCiclo, String tipo,
 			float consumoMedido, float consumoFranqueado, String codPlano, String descricaoPlano, String planoscol,
-			float valComImp, float valSemImp, int tipoNf, String numNf, String campoLivreOp) {
+			float valComImp, float valSemImp, int tipoNf, String numNf, String campoLivreOp, String idUnicoPlanos, String numRecursoPlanos) {
 		this.categoriaplano = categoriaplano;
 		this.resumo = resumo;
+		this.idUnicoPlanos = idUnicoPlanos;
+		this.numRecursoPlanos = numRecursoPlanos;
 		this.dataIniCiclo = dataIniCiclo;
 		this.dataFimCiclo = dataFimCiclo;
 		this.tipo = tipo;
@@ -240,5 +246,23 @@ public class Planos implements java.io.Serializable {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		return format.format(this.dataFimCiclo);
 	}
+
+	public String getIdUnicoPlanos() {
+		return idUnicoPlanos;
+	}
+
+	public void setIdUnicoPlanos(String idUnicoPlanos) {
+		this.idUnicoPlanos = idUnicoPlanos;
+	}
+
+	public String getNumRecursoPlanos() {
+		return numRecursoPlanos;
+	}
+
+	public void setNumRecursoPlanos(String numRecursoPlanos) {
+		this.numRecursoPlanos = numRecursoPlanos;
+	}
+	
+	
 
 }

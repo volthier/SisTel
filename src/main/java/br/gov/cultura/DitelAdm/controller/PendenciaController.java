@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 
 import br.gov.cultura.DitelAdm.email.Mailer;
 import br.gov.cultura.DitelAdm.model.Alocacao;
@@ -49,7 +50,7 @@ public class PendenciaController {
 	private SeiClient sei;
 
 	@Autowired
-	private TemplateEngine tempEngine;
+	private ViewResolver viewResolver;
 	
 	@Autowired
 	private LocaleResolver locale;
@@ -187,12 +188,12 @@ public class PendenciaController {
 	}
 	private DocumentoSei gerarTermoResponsabilidade(DocumentoSei documento, HttpServletRequest request,Alocacao alocacao) throws Exception {
 		
-		Context context = new Context();
-		context.setVariable("dto",alocacao);
-		context.setLocale(locale.resolveLocale(request));
-		String template = tempEngine.process("/documentos/termos/TermoResponsabilidadeCelular", context);
-		byte[] termo = template.getBytes();
-		documento = sei.enviarTermoResponsabilidade(alocacao, termo);
+		View view = this.viewResolver.resolveViewName("/documentos/termos/TermoResponsabilidadeCelular",
+				locale.resolveLocale(request));
+		MockHttpServletResponse mockResp = new MockHttpServletResponse();
+		view.render(new ModelAndView().getModelMap().addAttribute("dto", alocacao), request, mockResp);
+		
+		documento = sei.enviarTermoResponsabilidade(alocacao, mockResp.getContentAsByteArray());
 		return documento;	
 	}	
 }

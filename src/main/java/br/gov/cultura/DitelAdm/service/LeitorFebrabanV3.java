@@ -1118,12 +1118,12 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Identificador Único do Recurso */
-				// planosId.setResumoNumRecurso(data.substring(53, 78));
+				planos.setIdUnicoPlanos(data.substring(53, 78));
 
 				/** Numero do Telefone */
-				/*
-				 * planosId.setResumoNumRecurso(data.substring(78, 94));
-				 */
+				
+				 planos.setNumRecursoPlanos(data.substring(78, 94));
+				 
 				/**
 				 * Tipo do Plano
 				 */

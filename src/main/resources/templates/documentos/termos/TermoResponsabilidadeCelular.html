@@ -2,6 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
+<head>
+<meta charset="UTF-8"/>
+</head>
+
 <body style="margin: 40px 80px 60px 140px">
 
 	<h4 style="font-size: 140%" align="center">
@@ -39,12 +43,13 @@
 			da Informação;</li>
 		<br></br>
 
-		<li style="text-align: justify" th:if="${dto.dispositivo !=null and dto.chip!=null}">Assumo ainda, que tenho ciência
-			da tecnologia do aparelho cedido(<i>GSM - Global System for
-				Mobile communications, ou sistema Global para Comunicações Móveis</i>),
-			e que para realizar chamadas interubanas deverei utilizar o código de
-			área da operadora vencedora do processo licitatório realizado pelo
-			MinC.
+		<li style="text-align: justify"
+			th:if="${dto.dispositivo !=null and dto.chip!=null}">Assumo
+			ainda, que tenho ciência da tecnologia do aparelho cedido(<i>GSM
+				- Global System for Mobile communications, ou sistema Global para
+				Comunicações Móveis</i>), e que para realizar chamadas interubanas
+			deverei utilizar o código de área da operadora vencedora do processo
+			licitatório realizado pelo MinC.
 		</li>
 		<br></br>
 	</ol>
@@ -95,6 +100,6 @@
 		</p>
 
 	</span>
-	
+
 </body>
 </html>
