@@ -271,7 +271,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				<td>Total a Pagar</td>
 			</tr>
 			<tr>
-				<td th:text="${resumo.numRecurso}">61 99999 9999&nbsp;</td>
+				<td th:text="${alocacao.linha.numeroLinha}">61 99999 9999&nbsp;</td>
 				<td
 					th:text="${planoData.dataIniCicloFormatada()} + ' a ' + ${planoData.dataFimCicloFormatada()}">
 					22/01/2017</td>
@@ -312,14 +312,14 @@ table td[class*="col-"], table th[class*="col-"] {
 	</table>
 
 
-	<table>
+	<table th:if="${chamadas[0].idChamadas}!=null">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Liga&ccedil;&otilde;es</td>
 			</tr>
 		</tbody>
 	</table>
-	<table border="0" cellpadding="10" cellspacing="10" class="table">
+	<table th:if="${chamadas[0].idChamadas}!=null" border="0" cellpadding="10" cellspacing="10" class="table">
 		<thead>
 			<tr>
 				<th>Data</th>
@@ -335,7 +335,7 @@ table td[class*="col-"], table th[class*="col-"] {
 		<tbody>
 			<tr th:each="chamada : ${chamadas}"
 				style="border-bottom: 1px dashed black !important;">
-				<td th:text="${chamada.dataFormatada()}"></td>
+				<td th:if="${chamada.dataFormatada() != null}" th:text="${chamada.dataFormatada()}"></td>
 				<td style="text-align: center;" th:text="${chamada.horaLigacao}"></td>
 				<td style="text-align: center;"
 					th:text="${chamada.nomeLocalDestino}"></td>
@@ -350,7 +350,7 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	<table class="borda-redonda-foot">
+	<table th:if="${chamadas[0].idChamadas != null}" class="borda-redonda-foot">
 		<tbody>
 			<tr>
 				<td colspan="4"><b>Sub Total</b></td>
@@ -361,11 +361,11 @@ table td[class*="col-"], table th[class*="col-"] {
 		</tbody>
 	</table>
 
-	<p>
+	<p th:if="${servicos[0].categoria != null}">
 		<b>Servi&ccedil;os (Torpedos, Hits, Jogos, etc.)</b>
 	</p>
 	<div>
-		<table class="table table-bordered">
+		<table class="table table-bordered" th:if="${servicos[0].categoria != null}">
 			<thead>
 				<tr>
 					<td><b>Descri&ccedil;&atilde;o</b></td>

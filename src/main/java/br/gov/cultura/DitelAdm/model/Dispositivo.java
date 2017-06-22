@@ -106,9 +106,8 @@ public class Dispositivo implements java.io.Serializable {
 		this.imeiDispositivo = imeiDispositivo;
 	}
 
-	@Column(name = "mac_dispositivo", nullable = false)
+	@Column(name = "mac_dispositivo")
 	@Size(min=5,message="Verifique o numero MAC!")
-	@NotEmpty(message="Numero MAC e obrigatório!")
 	public String getMacDispositivo() {
 		return this.macDispositivo;
 	}

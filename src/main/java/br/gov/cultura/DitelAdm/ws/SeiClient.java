@@ -98,7 +98,7 @@ public class SeiClient {
 				sin, sin, nin, nin, nin, nin);
 	}
 
-	public RetornoInclusaoDocumento enviarFatura(Integer idAlocacao, String processo, byte[] fatura)
+	public DocumentoSei enviarFatura(Integer idAlocacao, String processo, byte[] fatura)
 			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(fatura);
 		String encodedFile = new String(encoded, "ISO-8859-1");
@@ -140,7 +140,7 @@ public class SeiClient {
 
 		alocacaoService.salvar(documento);
 
-		return response;
+		return documento;
 	}
 
 	@Async

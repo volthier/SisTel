@@ -62,8 +62,8 @@
 						</thead>
 						<tbody>
 							<tr th:each="fatura : ${faturasGeradas}">
-								<td th:text="${fatura.resumo.fatura.numFatura} + ' - ' + ${#strings.substring(fatura.resumo.fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.resumo.fatura.mesRef,0,4)} + ' - '+${fatura.alocacao.usuario.nomeUsuario}+' - '+${fatura.alocacao.linha.numeroLinha}"></td>
-								<td><a class="btn btn-primary" th:href="@{/fatura/resumo} + '/' + ${fatura.resumo.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}" role="button">Resumo</a></td>
+								<td th:text="${fatura.fatura.numFatura} + ' - ' + ${#strings.substring(fatura.fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.fatura.mesRef,0,4)} + ' - '+${fatura.alocacao.usuario.nomeUsuario}+' - '+${fatura.alocacao.linha.numeroLinha}"></td>
+								<td><a class="btn btn-primary" th:href="@{/fatura/resumo} + '/' + ${fatura.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}" role="button">Resumo</a></td>
 							</tr>
 						</tbody>
 					</table>

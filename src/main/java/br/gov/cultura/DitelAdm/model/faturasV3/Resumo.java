@@ -49,18 +49,6 @@ public class Resumo implements java.io.Serializable {
 	private float valorTotalImp;
 	private String velocidade;
 	private Date dataVenc;
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<Ajustes> ajusteses = new HashSet(0);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<Descontos> descontoses = new HashSet(0);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<Planos> planoses = new HashSet(0);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<Chamadas> chamadases = new HashSet(0);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<Servicos> servicoses = new HashSet(0);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Set<AlocacaoFatura> alocacaoFaturas = new HashSet(0);
 
 	public Resumo() {
 	}
@@ -85,8 +73,7 @@ public class Resumo implements java.io.Serializable {
 	public Resumo(Fatura fatura, Linha linha,String idUnico, int cnl, String numRecurso, Date dataAtiv, Date dataDesativ,
 			int quantRegCham, float valorTotalRegChamadaImp, int quantRegServ, float valorTotalRegServImp,
 			String degrau, int modServ, String uniVelocidade, float valorTotalContaRecursoImp, float valorTotalImp,
-			String velocidade, Date dataVenc, Set<Servicos> servicoses, Set<Chamadas> chamadases, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
-			Set<Planos> planoses,Set<AlocacaoFatura> alocacaoFaturas) {
+			String velocidade, Date dataVenc) {
 		this.fatura = fatura;
 		this.linha = linha;
 		this.idUnico = idUnico;
@@ -105,12 +92,6 @@ public class Resumo implements java.io.Serializable {
 		this.valorTotalImp = valorTotalImp;
 		this.velocidade = velocidade;
 		this.dataVenc = dataVenc;
-		this.servicoses = servicoses;
-		this.chamadases = chamadases;
-		this.ajusteses = ajusteses;
-		this.descontoses = descontoses;
-		this.planoses = planoses;
-		this.alocacaoFaturas = alocacaoFaturas;
 	}
 
 	@Id
@@ -126,7 +107,7 @@ public class Resumo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fatura_id_fatura", nullable = false)
+	@JoinColumn(name = "id_fatura", nullable = false)
 	public Fatura getFatura() {
 		return this.fatura;
 	}
@@ -136,7 +117,7 @@ public class Resumo implements java.io.Serializable {
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "linha_id_linha")
+	@JoinColumn(name = "id_linha")
 	public Linha getLinha() {
 		return this.linha;
 	}
@@ -290,59 +271,6 @@ public class Resumo implements java.io.Serializable {
 
 	public void setDataVenc(Date dataVenc) {
 		this.dataVenc = dataVenc;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Servicos> getServicoses() {
-		return this.servicoses;
-	}
-
-	public void setServicoses(Set<Servicos> servicoses) {
-		this.servicoses = servicoses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Chamadas> getChamadases() {
-		return this.chamadases;
-	}
-
-	public void setChamadases(Set<Chamadas> chamadases) {
-		this.chamadases = chamadases;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Ajustes> getAjusteses() {
-		return this.ajusteses;
-	}
-
-	public void setAjusteses(Set<Ajustes> ajusteses) {
-		this.ajusteses = ajusteses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Descontos> getDescontoses() {
-		return this.descontoses;
-	}
-
-	public void setDescontoses(Set<Descontos> descontoses) {
-		this.descontoses = descontoses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<Planos> getPlanoses() {
-		return this.planoses;
-	}
-
-	public void setPlanoses(Set<Planos> planoses) {
-		this.planoses = planoses;
-	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "resumo")
-	public Set<AlocacaoFatura> getAlocacaoFaturas() {
-		return this.alocacaoFaturas;
-	}
-
-	public void setAlocacaoFaturas(Set<AlocacaoFatura> alocacaoFaturas) {
-		this.alocacaoFaturas = alocacaoFaturas;
 	}
 
 }

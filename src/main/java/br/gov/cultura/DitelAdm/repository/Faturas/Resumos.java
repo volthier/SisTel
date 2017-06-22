@@ -17,6 +17,8 @@ public interface Resumos extends JpaRepository<Resumo, Long>{
 	
 	public List<Resumo> findByFatura(Fatura fatura);
 	
+	public Resumo findByLinha(Linha linha);
+	
 	@Query("select r from Resumo r where fatura = ?1 and linha = ?2")
 	public List<Resumo> findResumoFaturaLinha(Fatura fatura, Linha linha);
 }

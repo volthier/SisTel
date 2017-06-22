@@ -75,7 +75,7 @@
 							<option th:each="dispositivo : ${dispositivos}"
 								th:value="${dispositivo.idDispositivo}"
 								th:valuetype="dispositivo"
-								th:text="${dispositivo.modeloDispositivo+' - '+dispositivo.marcaDispositivo+' | '+ dispositivo.imeiDispositivo}"></option>
+								th:text="${dispositivo.numeroSerieDispositivo+' - '+dispositivo.marcaDispositivo+' | '+ dispositivo.modeloDispositivo}"></option>
 						</select>
 					</div>
 				</div>
@@ -87,7 +87,7 @@
 							<option value="">----Selecione----</option>
 							<option th:each="chip : ${chips}" th:value="${chip.idChip}"
 								th:valuetype="chip"
-								th:text="${chip.tipoChip+' | '+chip.numeroSerieChip}"></option>
+								th:text="${chip.numeroSerieChip+' | '+chip.tipoChip}"></option>
 						</select>
 					</div>
 				</div>

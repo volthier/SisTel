@@ -31,6 +31,8 @@ public class DocumentoSei implements java.io.Serializable {
 	private AlocacaoSei alocacaoSei;
 	@JsonBackReference
 	private Alocacao alocacao;
+	@JsonBackReference
+	private AlocacaoFatura alocacaoFatura;
 	private String documentosTipo;
 	private String documentosLink;
 	private String documentoIdSei;
@@ -47,10 +49,11 @@ public class DocumentoSei implements java.io.Serializable {
 	public DocumentoSei() {
 	}
 
-	public DocumentoSei(AlocacaoSei alocacaoSei, Alocacao alocacao, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
+	public DocumentoSei(AlocacaoSei alocacaoSei, Alocacao alocacao, AlocacaoFatura alocacaoFatura, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
 			Date documentosDataGerado, String blocoId, Boolean blocoDisponibilizado, Boolean blocoFinalizado, String assinaturaNome, String assinaturaCargo, Date assinaturaHora, boolean assinaturaValida) {
 		this.alocacaoSei = alocacaoSei;
 		this.alocacao = alocacao;
+		this.alocacaoFatura = alocacaoFatura;
 		this.documentosTipo = documentosTipo;
 		this.documentosLink = documentosLink;
 		this.documentoIdSei = documentoIdSei;
@@ -91,6 +94,16 @@ public class DocumentoSei implements java.io.Serializable {
 
 	public void setAlocacao(Alocacao alocacao) {
 		this.alocacao = alocacao;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_alocacao_fatura")
+	public AlocacaoFatura getAlocacaoFatura() {
+		return alocacaoFatura;
+	}
+
+	public void setAlocacaoFatura(AlocacaoFatura alocacaoFatura) {
+		this.alocacaoFatura = alocacaoFatura;
 	}
 
 	@Column(name = "documentos_tipo")

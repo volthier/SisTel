@@ -149,7 +149,7 @@ public class FaturaService {
 	public List<Fatura> getFaturas() {
 		return faturas.findAll();
 	}
-	
+		
 	public Fatura getFatura(Integer id) {
 		return faturas.findByIdFatura(id);
 	}
