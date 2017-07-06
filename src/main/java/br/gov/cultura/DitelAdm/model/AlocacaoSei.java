@@ -20,7 +20,8 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
- * AlocacaoSei: Alocações documentadas no SEI
+ * AlocacaoSei MODEL: Alocações documentadas no SEI
+ * 
  */
 @SuppressWarnings("serial")
 @Entity

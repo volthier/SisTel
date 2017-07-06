@@ -1,7 +1,7 @@
 package br.gov.cultura.DitelAdm.model.dtos;
 
 import java.util.Date;
-
+/** CalculadorDTO e uma classe para utilizar em casos de transição de informações e calculos*/
 public class CalculadorDTO {
 
 	int inteiroA;

@@ -19,7 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
-
+/**
+ * Contrato MODEL
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "contrato", catalog = "dbditel")
