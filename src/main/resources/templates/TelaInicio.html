@@ -3,77 +3,203 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
+    
+<section id="telaInicio" layout:fragment="conteudo">
 
+    
+                <!--CONTEUDO TOTAL-->
+                <div class="col-md-12 sem_sombra padding20"> 
+                    <div class="col-md-12 padding-0 sem_sombra">
+                        <div class="col-md-6 padding-0 sem_sombra intro">
+                            <h3 class="text-left">Dispositivos em estoque</h3>
+                        </div>
+                    <div class="col-md-6 padding-0 sem_sombra intro">
+                        <h5 class="text-right data">Exibindo Janeiro de 2017 <span class="icons icon-arrow-down setinha"> </span></h5>
+                        
+                    </div>
+                            
+                        
+                        
+                            <!--CARDS TOPO-->
+                            <div class="col-md-12 padding-0"> 
+                                <!--CARD 1-->
+                                <div class="col-md-3 padding-7">
+                                    <div class="panel box-v1 card_topo">
+                                      <div class="panel-heading cinza border-none">
+                                        
+                                      </div>
+                                      <div class="text-center col-md-12 padding-0">
+                                      
+                                        <img src="../miminium/img/smartphone.svg" class="icones_card img-fluid"/>    
+                                        
+                                      </div>    
+                                      <div class="panel-body text-right top10">
+                                        <h2 class="texto_card">2</h2>  
+                                        <h5 class="texto_card">CELULAR</h5>
+                                        
+                                      </div>
+                                    </div>
+                                </div>
+                                <!--CARD 2-->
+                                <div class="col-md-3 padding-7">
+                                    <div class="panel box-v1 card_topo">
+                                      <div class="panel-heading cinza border-none">
+                                        
+                                      </div>
+                                      <div class="text-center col-md-12 padding-0">
+                                        <img src="../miminium/img/tablet.svg" class="icones_card img-fluid"/>    
+                                        
+                                      </div>    
+                                      <div class="panel-body text-right top10">
+                                        <h2 class="texto_card ">1</h2>  
+                                        <h5 class="texto_card">TABLET</h5>
+                                        
+                                      </div>
+                                    </div>
+                                </div>
+                                    <!--CARD 3-->
+                                    <div class="col-md-3 padding-7">
+                                        
+                                        <div class="panel box-v1 card_topo">
+                                          <div class="panel-heading cinza border-none">
+                                            
+                                          </div>
+                                          <div class="text-center col-md-12 padding-0">
+                                            <img src="../miminium/img/usb-modem.svg" class="icones_card img-fluid"/>    
+                                        
+                                          </div>    
+                                          <div class="panel-body text-right top10">
+                                            <h2 class="texto_card ">0</h2>  
+                                            <h5 class="texto_card">MODEM</h5>
 
-<head>
-<title>Inicio</title>
-</head>
-<link rel="stylesheet" type="text/css" href="/home/leonardo/git/SisTel/src/main/resources/static/css/bootstrap.min.css"  th:href="@{/css/style.css}" />
-<link rel="stylesheet" type="text/css" href="/home/leonardo/git/SisTel/src/main/resources/static/css/style.css"  th:href="@{/css/style.css}" />
+                                          </div>
+                                        </div>
+                                </div>
+                                <!--CARD 4-->
+                                <div class="col-md-3 padding-7">
+                                        <div class="panel box-v1 card_topo">
+                                          <div class="panel-heading border-none cinza">
+                                            
+                                          </div>
+                                          <div class="text-center col-md-12 padding-0">
+                                            <img src="../miminium/img/telephone.svg" class="icones_card img-fluid"/>    
+                                        
+                                          </div>    
+                                          <div class="panel-body text-right top10">
+                                            <h2 class="texto_card">3</h2>
+                                            <h5 class="texto_card">FIXO</h5>
 
-<section layout:fragment="conteudo">
+                                          </div>
+                                        </div>
+                                </div>    
+                            </div> <!--FIM CARDS TOPO-->
+                            
+                            <!--GRÁFICO-->
+                            <div class="col-md-8 padding-7">
+                                <div class="panel tamanho_centro">
+                                   <div class="panel-heading-white text-center panel-heading altura_titulo titulo">
+                                      <h4>Evolução do Consumo com telefonia 2017</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12">
+                                          <canvas class="line-chart grafico"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--FIM GRÁFICO-->
+                        
+                            <!--CARD CENTRO DIREITA-->
+                                <div class="col-md-4 padding-7">
+                                        <div class="panel box-v1 card_topo tamanho_centro ">
+                                          <div class="panel-heading border-none">
+                                              
+                                            <div class="col-md-12 col-sm-6 col-xs-12 text-left padding-0 borda_inf">
+                                              <h4 class="text-center">Cota Mensal</h4>
+                                            </div>
+                                            
+                                          </div>
+                                                                         
+                                            
+                                          <div class="panel-body text-center top">
+                                            <h1>80%</h1>  
+                                            <h4 class="texto_card bold">R$ 120,00</h4>
+                                            <h5 class="texto_card ">Voz/Dados</h5>
 
-
-<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="clearfix">
-				<h1 class="panel-title dt-dispositivo-panel">Início</h1>
-			</div>
-		</div>
+                                          </div>
+                                        </div>
+                                </div> 
+                        
+                        
+                                <!--CARDS INFERIOR-->
+                                <div class="col-md-12 padding-0"> 
+                                <!--CARD 1-->
+                                <div class="col-md-4 padding-7">
+                                    <div class="panel box-v1 card_inf">
+                                        
+                                      <div class="panel-heading cinza border-none">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center padding-0 borda_inf">
+                                          <h4 class="text-center">Telefonia Fixa</h4>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="panel-body text-center">
+                                            <h4 class="texto_card center_card bold">R$ 120,00</h4>
+                                            <h5 class="texto_card ">Voz</h5>
+                                            
+                                      </div>    
+                                        
+                                    </div>
+                                </div>
+                                <!--CARD 2-->
+                                <div class="col-md-4 padding-7">
+                                    <div class="panel box-v1 card_inf">
+                                      <div class="panel-heading cinza border-none">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center padding-0 borda_inf">
+                                          <h4 class="text-center">Telefonia Móvel</h4>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="col-md-6 col-sm-6 col-xs-6 text-center padding-0">
+                                          <div class="panel-body text-center">
+                                            <h4 class="texto_card bold">R$ 200,00</h4>
+                                            <h5 class="texto_card ">Voz</h5>
+                                            
+                                          </div>    
+                                      </div>
+                                        
+                                      <div class="col-md-6 col-sm-6 col-xs-6 text-center padding-0">
+                                          <div class="panel-body text-center">
+                                            <h4 class="texto_card bold">R$ 120,00</h4>
+                                            <h5 class="texto_card ">Dados</h5>
+                                            
+                                          </div>    
+                                      </div> 
+                                    </div>
+                                </div>
+                                <!--CARD 3-->
+                                <div class="col-md-4 padding-7">
+                                        <div class="panel box-v1 card_inf">
+                                          <div class="panel-heading border-none">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 text-center padding-0 borda_inf">
+                                              <h4 class="text-center center">Consumo Total</h4>
+                                            </div>
+                                            
+                                          </div>
+                                          <div class="panel-body text-center">
+                                            <h4 class="texto_card center_card bold">R$ 120,00</h4>
+                                            <h5 class="texto_card ">Voz/Dados</h5>
+                                            
+                                          </div>
+                                        </div>
+                                </div>
+                                    
+                            </div> <!--FIM CARDS INFERIOR-->
+                        
+                    </div>
+                    </div> <!--FIM CONTEÚDO TOTAL-->
 		
-		
-		<div class="panel-body">			
-		
-		<div>
-		
-			<h3> </h3>
-			<h3>Total de alocações</h3> 
-			<p> Efetuadas:&nbsp; <span th:text="${#lists.size(alocacaoTotal)}">10</span> 
-			    Devolvidos:&nbsp; <span th:text="${#lists.size(devolvidosTotal)}">21</span>
-			    Habilitados:&nbsp; <span th:text="${#lists.size(habilitadosTotal)}">1</span>
-		   </p>
-			
-			<h3> </h3>
-		</div>
-		
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id alocacao</th>
-							<th class="text-center col-md3">Modelo dispositivo</th>
-							<th class="text-center col-md2">Data devolucao</th>
-							<th class="text-center col-md1">Data recebimento</th>
-							<th class="text-center col-md1">Linha</th>
-							<th class="text-center col-md1">Usuario</th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="dto : ${alocacaoTotal}" >
-							<td class="text-center" th:text="${dto.idAlocacao}"></td>
-							<td class="text-center" th:if="${dto.dispositivo == null}">Sem dispositivo</td>
-							<td class="text-center" th:if="${dto.dispositivo != null}" th:text="${dto.dispositivo.modeloDispositivo}">aqui tem algo</td>
-							<td class="text-center" th:if="${dto.dtDevolucao == null}">Não devolvida</td>
-							<td class="text-center" th:if="${dto.dtDevolucao != null}" th:text="${dto.dtDevolucao}">aqui tem algo</td>
-							<td class="text-center" th:text="${dto.dtRecebido}">aqui tem algo</td>
-							<td class="text-center" th:text="${dto.linha.numeroLinha}">aqui tem algo</td>
-							<td class="text-center" th:text="${dto.usuario.nomeUsuario}">aqui tem algo</td>
-						</tr>
-						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(alocacaoTotal)}">
-								Nenhuma alocação encontrada!!!
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-
-		</div>
-	</div>
-<script src="/home/leonardo/git/SisTel/src/main/resources/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-<script src="/home/leonardo/git/SisTel/src/main/resources/static/js/jquery-2.2.3.min.js" th:src="@{/js/jquery-2.2.3.min.js}"></script>
-</section>
+      		  
+              <!--FIM CONTAINER-->
+</section>    
 </html>

@@ -4,117 +4,189 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
-<section id="Menu" layout:fragment="Menu">
 
-	<div>
-	
-	<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-user"><b style="font-family: Arial" th:utext="${#authentication.name}">&nbsp;Usuários&nbsp;</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
-				</ul>
-			</ul>
-	
-		<ul class="dropdown">
-			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
-
-			<li class="dropdown-toggle" data-toggle="dropdown"><a
-				class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Alocação&nbsp;</b><span
-					class="caret"></span></a></li>
-
-			<ul class="dropdown-menu" id="dropdown-menupage">
-				<li><a class="btn btn-link dt-link-menu"
-					th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/devolver}">Devolução</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
-			</ul>
-		</ul>
-
-	</div>
-	
-	<div>
-		<ul>
-			<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-list-alt"><b style="font-family: Arial"> Fatura</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/fatura}">Gerar</a></li>
-				</ul>
-			</ul>
-		</ul>
-	</div>
-
-	<div>
-
-		<ul>
-			<li><a class="glyphicon glyphicon-list" th:href="@{/pendencia}"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
-
-
-			<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Registrar&nbsp;</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/dispositivos/novo}">Dispositivos</a></li>
-<!-- 					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/usuarios/novo}">Pessoas</a></li> -->
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/chips/novo}">Chip's</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/linhas/nova}">Linhas</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/categorias/nova}">Categoria de serviço</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/faturas/nova}">Faturas</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/limite-atesto/novo}">Limites Atesto</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/contrato/novo}">Contratos</a></li>
-					<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li>
-				</ul>
-			</ul>
-		</ul>
-	</div>
-
-	<div>
-		<ul>
-			<li><a class="glyphicon glyphicon-signal" th:href="@{/relatorio}"><b style="font-family: Arial">&nbsp;Relatórios&nbsp;</b></a></li>
-
-		</ul>
-	</div>
-
-	<div>
-		<ul>
-			<li><a class="glyphicon glyphicon-warning-sign" href="#"><b style="font-family: Arial">&nbsp;Alertas</b></a></li>
-			<li><a class="glyphicon glyphicon-info-sign" href="#"><b style="font-family: Arial">&nbsp;Manuais</b></a></li>
-
-		</ul>
-	</div>
-	
-	<div>
-		<ul>
-			<li><a class="glyphicon glyphicon-off" href="javascript: document.logoutForm.submit()"><b style="font-family: Arial">&nbsp;Sair</b></a></li>
-		</ul>
-	</div>
-	
-	<form name="logoutForm" th:action="@{/logout}" method="POST">
-	</form>
-
-</section>
+   
+    <div id="left-menu">
+              <div class="sub-left-menu scroll">
+                <ul class="nav nav-list">
+                    
+                    <li class="ripple bg_inicio" >
+                        <a href="/inicio" class="tree-toggle nav-header texto" th:href="@{/inicio}" ><span class="fa-home fa"></span> Início
+                        </a>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto" th:href="@{/consulta}"><span class="fa fa-search"></span> Consultas
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
+                          <li><a th:href="@{/usuarios/novo}">Pessoas</a></li>
+                          <li><a th:href="@{/chips/novo}">Chips</a></li>
+                          <li><a th:href="@{/linhas/nova}">Linhas</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto">
+                        <span class="fa fa-exclamation-triangle" th:href="@{/pendencia}"></span> Pendências
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Alocação</a></li>
+                        <li><a href="#">Notificação</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto">
+                        <span class="fa fa-book"></span>Alocações
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Consultar Documentos</a></li>
+                        <li><a th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
+                        <li><a th:href="@{/alocacoes/devolver}">Devolver</a></li>
+                        <li><a href="#">Substituir</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto"><span class="icons icon-globe"></span> Roaming
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="#">Roaming1</a></li>
+                          <li><a href="#">Roaming2</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto">
+                    <img class="icone_menu" src="../miminium/img/invoice%20(1).svg"/>Faturas<span class="fa-angle-right fa right-arrow text-right"></span></a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Listar</a></li>
+                        <li><a th:href="@{/fatura}">Gerar</a></li>
+                        <li><a href="#">Resumos</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-bar-chart" th:href="@{/relatorio}"></span>Relatórios  
+                    <span class="fa-angle-right fa right-arrow text-right"> </span></a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Listar</a></li>
+                        <li><a href="#">Gerar</a></li>
+                        <li><a href="#">Resumos</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-chain"></span> Links  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Link1</a></li>
+                        <li><a href="#">Link2</a></li>
+                        <li><a href="#">Link3</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                  </ul>
+                </div>
+            </div>
+          <!-- end: Left Menu -->
+          
+	<!-- start: Mobile -->
+      <div id="mimin-mobile" class="reverse">
+        <div class="mimin-mobile-menu-list">
+            <div class="col-md-12 sub-mimin-mobile-menu-list animated" id="largura_menu_mobile">
+                <ul class="nav nav-list" id="menu_nav_mobile">
+                    <li class="ripple bg_inicio">
+                        <a class="tree-toggle nav-header texto"><span class="fa-home fa"></span> Início
+                        </a>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto"><span class="fa-search fa"></span> Consultas
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="#">Dispositivos</a></li>
+                          <li><a href="#">Pessoas</a></li>
+                          <li><a href="#">Chips</a></li>
+                          <li><a href="#">Linhas</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto">
+                        <span class="fa fa-exclamation-triangle"></span> Pendências
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Alocação</a></li>
+                        <li><a href="#">Notificação</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto">
+                        <span class="fa-book fa"></span>Alocações
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Consultar Documentos</a></li>
+                        <li><a href="#">Disponibilizar</a></li>
+                        <li><a href="#">Devolver</a></li>
+                        <li><a href="#">Substituir</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto"><span class="icons icon-globe"> </span>Roaming
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="#">Roaming1</a></li>
+                          <li><a href="#">Roaming2</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto">
+                    <img class="icone_menu" src="asset/img/invoice.svg"/>Faturas <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Listar</a></li>
+                        <li><a href="#">Gerar</a></li>
+                        <li><a href="#">Resumos</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-check-square-o"></span>Relatórios  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Listar</a></li>
+                        <li><a href="#">Gerar</a></li>
+                        <li><a href="#">Resumos</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-chain"></span> Links  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Link1</a></li>
+                        <li><a href="#">Link2</a></li>
+                        <li><a href="#">Link3</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>       
+      </div>
+      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars" id="btn_mobile"></span>
+      </button>
+       <!-- end: Mobile -->
 </html>
-
