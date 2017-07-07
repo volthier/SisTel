@@ -8,46 +8,51 @@
 </head>
 
 <section layout:fragment="conteudo">
+<div class=" panel padding20">
+<h3 class="text-left esquerda">Agenda</h3>
 
-	<form class="form-horizontal" method="POST" th:action="@{/menu-usuario}">
-
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Agenda</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar
+<div class="clearfix">
+					
+					<a class="btn btn-link dt-link-panel direita texto_td" th:href="@{/inicio}">Voltar
 						para Lista</a>
 				</div>
+
+	
+	<form class="form-horizontal" method="POST" th:action="@{/menu-usuario}">
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				
 			</div>
 
 			<div class="painel-body">
 				<div>
 					<table border="1" class="tableusuario" style="border-radius: 20px;">
 						<tr>
-							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden; padding: 10px;border-radius: 20px;">
-								Nome:<label>nome</label>
+							<td class="tdusuaio largura_td texto_td" style="border-bottom: hidden;border-right: hidden; padding: 10px;border-radius: 20px;">
+								Nome: <label class="b"> Nome Exemplo</label>
 							</td>
-							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden;">
-								CPF:<label>cpf</label>
+							<td class="tdusuaio largura_td texto_td" style="border-bottom: hidden;border-right: hidden;">
+								CPF: <label class="b"> 99999999999</label>
 							</td>
-							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden;">
-								EMAIL:<label>email</label>
+							<td class="tdusuaio largura_td texto_td" style="border-bottom: hidden;border-right: hidden;">
+								EMAIL: <label class="b"> nome.exemplo@exemplo.com</label>
 							</td>
-							<td class="tdusuaio" style="border-bottom: hidden;">
+							<td class="tdusuaio largura_td texto_td" style="border-bottom: hidden;">
 							</td>
 						</tr>
 						<tr>
-							<td class="tdusuaio" style="border-right: hidden; padding: 10px">
-								Gerência:<label>gerencia</label>
+							<td class="tdusuaio texto_td" style="border-right: hidden; padding: 10px">
+								Gerência: <label class="b"> X</label>
 							</td>
-							<td class="tdusuaio" style="border-right: hidden">
-								Cargo:<label>cargo</label>
+							<td class="tdusuaio texto_td" style="border-right: hidden">
+								Cargo: <label class="b"> Secretária</label>
 							</td>
-							<td class="tdusuaio" style="border-right: hidden">
-								Vinculo:<label>vinculo</label>
+							<td class="tdusuaio texto_td" style="border-right: hidden">
+								Vinculo: <label class="b"> Y</label>
 							</td>
-							<td class="tdusuaio" style="border-top: hidden">
-								DAS:<label>das</label>
+							<td class="tdusuaio texto_td" style="border-top: hidden">
+								DAS: <label class="b"> Z</label>
 							</td>
 						</tr>
 					</table>
@@ -55,11 +60,11 @@
 				
 				<br></br>
 				
-				<div id="botaodisp" class="form-group" style="width: 100%">
-				<div  id="botaodisp" class="col-sm-offset-2 col-sm-10" style="width: 100%">
-					<button id="botaodisp" type="submit" class="btn btn-primary" style="float: left">Adicionar Novo Número</button>
+				<div class="form-group" style="width: 100%">
+				<div class="col-sm-12 padding-0 linha_btn" style="width: 100%">
+					<button id="botaodisp" type="submit" class="btn btn-primary texto_td" style="float: left">Adicionar Novo Número</button>
 				
-					<p align="right">*Números corporativos do orgão ja são considerados a trabalho</p>
+					
 				</div>
 				</div>
 				
@@ -69,11 +74,11 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center col-md2">Número</th>
-							<th class="text-center col-md2">Nome</th>
-							<th class="text-center col-md2">Orgão</th>
-							<th class="text-center col-md2">A trabalho?</th>
-							<th class="text-center col-md2">Excluir</th>
+							<th class="text-center col-md2 texto_td">Número</th>
+							<th class="text-center col-md2 texto_td">Nome</th>
+							<th class="text-center col-md2 texto_td">Orgão</th>
+							<th class="text-center col-md2 texto_td">A trabalho?</th>
+							<th class="text-center col-md2 texto_td">Excluir</th>
 						</tr>
 					</thead>
 
@@ -95,16 +100,20 @@
 						
 					</tbody>
 				</table>
+				
+				<div style="width: 100%">
+				<div class="col-sm-12 padding-0 linha_btn" style="width: 100%">
+					<button id="botaodisp" type="submit" class="btn btn-primary texto_td a" style="float: left">Adicionar Novo Número</button>
+				</div>
 				</div>
 				
-				<div id="botaodisp" class="form-group" style="width: 100%">
-				<div  id="botaodisp" class="col-sm-offset-2 col-sm-10" style="width: 100%">
-					<button id="botaodisp" type="submit" class="btn btn-primary" style="float: left">Adicionar Novo Número</button>
 				</div>
-				</div>
+				
+				
 				
 			</div>
 		</div>
 	</form>
+</div>
 </section>
 </html>

@@ -126,7 +126,11 @@
 
 
 /*MEDIA QUERIES*/
-
+@media screen and (min-width: 2000px) { 
+	#periodic-login {
+		margin-top:-10% important!;
+	}
+}
 @media screen and (max-width: 1920px) { 
     .alturaLogo {
         margin-top: 45%;
@@ -152,9 +156,10 @@
         
     }
     .logo-login {
-        width: 100%;
-        max-width: 100%;
+        width: 110%;
+        max-width: 110%;
         margin: 0 auto;
+        margin-left:-5px;
     }
     .grid_input {
        margin-top: -5px;
@@ -166,6 +171,7 @@
     }
     #periodic-login {
         margin-left: -25px;
+        margin-top:-100px;
     }
     .validate {
         margin-top: 2px;
@@ -173,6 +179,7 @@
     .icones {
         top: 3px;
     }
+    
 }
 
 
@@ -344,7 +351,7 @@
 }
 
 .ripple ul {
-    font-family: Open Sans;
+    font-family: 'open_sansregular';
 }
 /*FIM HEADER*/
 
@@ -536,17 +543,23 @@ h5 {
 
 
 /*MEDIA QUERIES*/
+@media screen and (min-width: 2200px) {
+	.logo {
+		width:56% !important;
+	}
+	
+}
 
 @media screen and (min-width: 1441px) {
     .logo {
         max-width: 100%;
         height: auto;
-        width: 50%;
+        width: 60%;
         display: block;
         margin-top: 7px;
     }
     .botao_fechar {
-        margin-left: -225px;
+        margin-left: -40px;
     }
     #mimin {
         background-repeat: no-repeat;
@@ -559,7 +572,9 @@ h5 {
         height: 85px !important;
         width: 74px !important;
         margin-top: 7px;
-        margin-left: 200px;
+        margin-left: 0px;
+        text-align:center;
+        
         
     }
 }
@@ -568,7 +583,7 @@ h5 {
     .logo {
         max-width: 100%;
         height: auto;
-        width: 98%;
+        width: 92%;
         display: block;
         margin-top: 7px;
     }
@@ -605,9 +620,17 @@ h5 {
     .text-left {
         width: 280px;
     }
-    h2,h5 {
+    h2 {
         text-align: center;
         margin-left: 70px;
+    }
+    h5{
+        text-align: center;
+        margin-left: 0px;
+    }
+    .superior {
+    	text-align: center;
+    	margin-left:70px;
     }
     .data {
         margin-top:-35px;
@@ -836,11 +859,74 @@ h5 {
 /*FIM HOME*/
 
 
+/* MENU-USUARIO/AGENDA */
+	.largura_td {
+		width: 244px;
+	}
+	.direita {
+		margin-top:12px;
+		float:right;
+		
+	}
+	.b {
+		color: #0b4159;
+	}
+	.c {
+		margin-left:-30px !important;
+	}
+	.esquerda {
+		margin-top:12px;
+		float:left;
+	}
+	.clearfix {
+		height: 50px;
+	}
+	.linha_btn{
+		padding:5px;
+	}
+	#botaodisp {
+		margin-left:20px;
+	}
+	.texto_td {
+		font-family:'open_sansregular';
+		font-size:13px;
+		font-weight: bold;
+		color: #0b4159;
+	}
+	.a {
+		margin-left:5px !important;
+	}
+	
+	.tableusuario {
+		box-shadow: 0px 0px 2px #0b4159;
+		margin: 0 auto;
+		width: 99%;
+		border-radius: 0px !important;
+	}
 
 
 
 
+/* FIM MENU-USUARIO/AGENDA */
 
+
+/* MENU-USUARIO/DISPOSITIVOS */
+	thead,tbody {
+		height: 35px;
+	}
+	.largura_td_menor {
+		width: 50px;
+	}
+	.largura_td2 {
+		width: 244px;
+	}
+	.padding-1 {
+		padding 1px;
+	}
+
+
+
+/* FIM MENU-USUARIO/DISPOSITIVOS */
 
 
 

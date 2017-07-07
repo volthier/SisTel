@@ -82,23 +82,6 @@
         
         // end: Chart =============
 
-      })(jQuery);
-
-// FIM JS HOME
-
-
-// JS LOGIN
-// $(document).ready(function() {
-//	if (hasClass = "#login") {
-//		$('input').iCheck({
-//			checkboxClass : 'icheckbox_flat-aero',
-//			radioClass : 'iradio_flat-aero'
-//		});
-//	}
-//});
-// FIM JS LOGIN
-
-(function ($) {
 
     $.fn.ripple = function () {
         $(this).click(function (e) {
@@ -134,35 +117,7 @@
         });
     };
 
-    /*$.fn.carouselAnimate = function()
-    {
-        function doAnimations(elems)
-        {
-          var animEndEv = 'webkitAnimationEnd animationend';
-
-          elems.each(function () {
-            var $this = $(this),
-            $animationType = $this.data('animation');
-            $this.addClass($animationType).one(animEndEv, function () {
-              $this.removeClass($animationType);
-            });
-          });
-        }
-
-        var $myCarousel          = this;
-        var $firstAnimatingElems = $myCarousel.find('.item:first')
-                                              .find('[data-animation ^= "animated"]');
-
-        doAnimations($firstAnimatingElems);
-        $myCarousel.carousel('pause');
-        $myCarousel.on('slide.bs.carousel', function (e) {
-          var $animatingElems = $(e.relatedTarget)
-          .find("[data-animation ^= 'animated']");
-          doAnimations($animatingElems);
-        });
-    };*/
-
-
+  
     this.hide = function()
     {
         $(".tree").hide();
@@ -312,8 +267,10 @@
         $(".carousel-thumb-img li").removeClass("active");
         $(this).addClass("active");
     });
-
+    
+    
     $("#mimin-mobile-menu-opener").on("click",function(e){
+    	
         $("#mimin-mobile").toggleClass("reverse");
         var rippler = $("#mimin-mobile");
         if(!rippler.hasClass("reverse"))
@@ -393,7 +350,6 @@
     $('.mail-wrapper').find('.mail-left').css('height', $('.mail-wrapper').innerHeight());
     $("#left-menu ul li a").ripple();
     $(".ripple div").ripple();
-//    $("#carousel-example3").carouselAnimate();
     $("#left-menu .sub-left-menu").niceScroll();
      $(".sub-mimin-mobile-menu-list").niceScroll({
             touchbehavior:true,

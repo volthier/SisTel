@@ -4,11 +4,12 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
-
-   
-    <div id="left-menu">
-              <div class="sub-left-menu scroll">
-                <ul class="nav nav-list">
+<div id="botao_mob">
+	<div id="mimin-mobile" class="reverse">
+		<div class="mimin-mobile-menu-list">
+			<div class="col-md-12 sub-mimin-mobile-menu-list animated"
+				id="largura_menu_mobile">
+				<ul class="nav nav-list">
                     
                     <li class="ripple bg_inicio" >
                         <a onClick="location.href='/inicio'" class="tree-toggle nav-header texto"><span class="fa-home fa"></span> Início
@@ -63,7 +64,7 @@
                     </li>
                     
                     <li class="ripple"><a class="tree-toggle nav-header texto">
-                    <img class="icone_menu" src="../miminium/img/invoice%20(1).svg"/>Faturas<span class="fa-angle-right fa right-arrow text-right"></span></a>
+                    <img class="icone_menu" src="../miminium/img/invoice.svg"/> Faturas<span class="fa-angle-right fa right-arrow text-right"></span></a>
                       <ul class="nav nav-list tree">
                         <li><a href="#">Listar</a></li>
                         <li><a onClick="location.href='/fatura'">Gerar</a></li>
@@ -92,8 +93,12 @@
                     </li>
                     
                   </ul>
-                </div>
-            </div>
-          <!-- end: Left Menu -->
-          
+			</div>
+		</div>
+	</div>
+	<button id="mimin-mobile-menu-opener"
+		class="animated rubberBand btn btn-circle btn-danger">
+		<span class="fa fa-bars" id="btn_mobile"></span>
+	</button>
+</div>
 </html>
