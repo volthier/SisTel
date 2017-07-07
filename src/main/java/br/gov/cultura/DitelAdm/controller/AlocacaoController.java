@@ -136,10 +136,6 @@ public class AlocacaoController {
 			Alocacao dispo = linhaDispo.stream().filter(ld -> ld != null && ld.getLinha().equals(idReciver)
 					&& ld.getDtRecebido().equals(dtRecebimentoReplicador)).findFirst().orElse(null);
 
-			/**
-			 * Retrabalho de alocação dispositivo para casos de somente chip
-			 * (Codigo Abaixo)
-			 */
 			if (dispo == null) {
 				System.out.println("Error acquiring Info Linha-Dispositivo!");
 				attributes.addFlashAttribute("mensagem", "Devolução CANCELADA!");

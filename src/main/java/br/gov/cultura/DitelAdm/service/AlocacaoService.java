@@ -10,6 +10,7 @@ import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 import br.gov.cultura.DitelAdm.model.AlocacaoSei;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.alocacoes.Alocacoes;
 import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesFaturas;
 import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesSei;
@@ -98,5 +99,8 @@ public class AlocacaoService {
 		return alocacoes.getAlocacaoDevolucao();
 	}
 
+	public List<Alocacao> getAlocacoesUsuario(Usuario usuario){
+		return alocacoes.getAlocacoesUsuario(usuario);
+	}
 	
 }

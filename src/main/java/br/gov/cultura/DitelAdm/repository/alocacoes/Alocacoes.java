@@ -7,12 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.Linha;
+import br.gov.cultura.DitelAdm.model.Usuario;
 
 public interface Alocacoes extends JpaRepository<Alocacao, Integer> {
 	
 	@Query("select a from Alocacao a where linha = ?1")
 	public List<Alocacao> getAlocacaoByLinha(Linha linha);	
 	
-	@Query("select l from Alocacao l WHERE l.dtDevolucao IS NOT NULL")
+	@Query("select a from Alocacao a WHERE a.dtDevolucao IS NOT NULL")
 	public List<Alocacao> getAlocacaoDevolucao();
+	
+	@Query("select a from Alocacao a where usuario = ?1")
+	public List<Alocacao> getAlocacoesUsuario(Usuario usuario);
 }

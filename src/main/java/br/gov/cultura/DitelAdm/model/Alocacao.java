@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
- * Alocação: tabela de registro de movimentação dos Serviços de telefonia
+ * Alocação MODEL: Tabela de registro de movimentação dos Serviços de telefonia
  */
 @SuppressWarnings("serial")
 @Entity
