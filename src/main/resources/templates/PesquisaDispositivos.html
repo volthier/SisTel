@@ -1,305 +1,249 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
-	layout:decorator="LayoutPadrao">
 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:td="http://www.tdymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/tdymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 <head>
-<title>Consulta</title>
+<title>Dispositivos</title>
 </head>
+
 <section layout:fragment="conteudo">
 
-	<div layout:include="MensagemSucesso"></div>
+	<form class="form-horizontal" method="POST"
+		td:action="@{/menu-usuario}">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
+		<div class="col-md-12  panel sem_sombra padding20 bg">
+
 			<div class="clearfix">
-				<h1 class="panel-title dt-dispositivo-panel">Dispositivos Cadastrados</h1>
-				<a class="btn btn-link dt-link-panel" th:href="@{/dispositivos/novo}">Novo Dispositivo</a> 
-				<a class="btn btn-link dt-link-panel" th:href="@{/usuarios/novo}">Nova Pessoa</a> 
-				<a class="btn btn-link dt-link-panel" th:href="@{/chips/novo}">Novo Chip</a> 
-				<a class="btn btn-link dt-link-panel" th:href="@{/linhas/nova}">Nova Linha</a>
+				<h3 class="text-left esquerda">Dispositivos</h3>
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					td:href="@{/inicio}">Voltar para Lista</a>
 			</div>
-		</div>
-		
-		
-		<div class="panel-body">
 
-			<form method="GET" class="form-horizontal"
-				th:action="@{/dispositivos} or @{/pessoas} or @{/consulta} or @{/chips} or @{/linhas}"
-				th:object="${filtro}">
-				<div class="form-group">
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input class="form-control" placeholder="O que pesquisar?"
-								autofocus="autofocus"></input> <span class="input-group-btn">
-								<button type="submit" class="btn btn-default">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</span>
 
-						</div>
+			<div class="painel-body">
+
+				<div id="botaodisp" class="form-group" style="widtd: 100%">
+					<div id="botaodisp" class="col-sm-offset-2 col-sm-10 c"
+						style="widtd: 100%">
+						<button id="botaodisp" type="submit" class="btn btn-primary"
+							style="float: left">Solicitar Dispositivo</button>
+
+						<button id="botaodisp" type="submit" class="btn btn-primary"
+							style="float: right">Devolver Dispositivo</button>
 					</div>
 				</div>
-			</form>
-			
-		
-			
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md2">Marca</th>
-							<th class="text-center col-md2">Modelo</th>
-							<th class="text-center col-md2">Número de Série</th>
-							<th class="text-center col-md2">IMEI</th>
-							<th class="text-center col-md2">Patrimonio</th>
-							<th class="text-center col-md2">Tipo</th>
-							<th class="text-right col-md2">Valor</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="dispositivo : ${dispositivos}">
-							<td class="text-center" th:text="${dispositivo.idDispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.marcaDispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.modeloDispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.numeroSerieDispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.imeiDispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.patrimonioDispositivo}"></td>
-							<td class="text-center" th:text="${dispositivo.tipoDispositivo}"></td>
-							<td class="text-right" th:text="|R$ ${{dispositivo.valorDispositivo}}|"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/dispositivos/{id}(id=${dispositivo.idDispositivo})}"
-								title="Editar" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-excludid=${dispositivo.idDispositivo}, data-flag='1', data-exclude=${dispositivo.modeloDispositivo}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger text-danger"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-								Dispositivo econtrado!!!</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th>Nome</th>
-							<th class="text-center col-md3">CPF</th>
-							<th class="text-center col-md2">Setor</th>
-							<th class="text-center col-md2">Cargo</th>
-							 <th class="text-center col-md2">DAS/FCPE</th>
-							<th class="text-center col-md1">Email</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="usuario : ${usuarios}">
-							<td class="text-center" th:text="${usuario.idUsuario}"></td>
-							<td th:text="${usuario.nomeUsuario}"></td>
-							<td class="text-center" th:text=" ${usuario.cpfUsuario}"></td>
-							<td class="text-center" th:text=" ${usuario.lotacaoUsuario}"></td>
-							<td class="text-center" th:text=" ${usuario.cargoUsuario}"></td>
-							<td class="text-center" th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
-							<td class="text-center" th:text=" ${usuario.emailUsuario}"></td>
-							
-							<td class="text-center">
-							
-							<a class="btn btn-link btn-xs"
-							   th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}" 
-							   title="Editar"
-							   rel="tooltip" 
-							   data-placement="left"> 
-							   <span
-							   class="glyphicon glyphicon-pencil">
-							   </span>
-							</a> 
-							
-							<a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='2', data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(usuarios)}">Nenhuma
-								Pessoa encontrada!!!</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md3">Numero de Serie do Chip</th>
-							<th class="text-center col-md2">Tipo</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="chip : ${chips}">
-							<td class="text-center" th:text="${chip.idChip}"></td>
-							<td class="text-center" th:text="${chip.numeroSerieChip}"></td>
-							<td class="text-center" th:text="${chip.tipoChip}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/chips/{id}(id=${chip.idChip})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='3', data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="4" th:if="${#lists.isEmpty(chips)}">Nenhum Chip
-								encontrado!!!</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md3">Linha</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="linha : ${linhas}">
-							<td class="text-center" th:text="${linha.idLinha}"></td>
-							<td th:text="${linha.numeroLinha}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
-								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='4', data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
-								Linha encontrada!!!</td>
-						</tr>
-
-
-
-					</tbody>
-				</table>
-			</div>
-			
+			<div class="painel-body bg-panel padding-7">
 				<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<td class=" col-sm1 bold">Id</td>
+								<td class=" col-sm1 bold">Marca</td>
+								<td class=" col-sm1 bold">Modelo</td>
+								<td class=" col-sm1 bold">Numero de Série</td>
+								<td class=" col-sm1 bold">IMEI</td>
+								<td class=" col-sm1 bold">Patrimonio</td>
+								<td class=" col-sm1 bold">Tipo</td>
+								<td class=" col-sm1 bold">Valor</td>
+								<td class=" col-sm1 bold"></td>
+
+							</tr>
+						</thead>
+
+
+
 						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md3">Categoria de Serviço</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
+							<td>1</td>
+							<td>Apple</td>
+							<td>5s</td>
+							<td>123456789</td>
+							<td>987654321</td>
+							<td>comodato</td>
+							<td>Celular</td>
+							<td>R$ 2.000,00</td>
 
-					<tbody>
-
-						<tr th:each="categoria : ${categorias}">
-							<td class="text-center" th:text="${categoria.idCategoria}"></td>
-							<td th:text="${categoria.descricaoCategoria}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/categorias/{id}(id=${categoria.idCategoria})}" title="Editar"
+							<td class="center"><a class="icone_tabela" title="Editar"
 								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='6', data-excludId=${categoria.idCategoria}, data-exclude=${categoria.descricaoCategoria}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger"></span>
-							</a></td>
-
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
 						</tr>
+
+
+
 						<tr>
-							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
-								Linha encontrada!!!</td>
-						</tr>
-
-
-
-					</tbody>
-				</table>
-			</div>
-			
-							<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id</th>
-							<th class="text-center col-md3">Categoria de Serviço</th>
-							<th class="text-center col-md1">Limite</th>
-							<th class="col-md2"></th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="limite : ${limites}">
-							<td class="text-center" th:text="${limite.idLimiteAtesto}"></td>
-							<td class="text-center" th:text="${limite.dasAtesto}"></td>
-							<td class="text-right" th:text="|R$ ${{limite.valorLimite}}|"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/limite-atesto/{id}(id=${limite.idLimiteAtesto})}" title="Editar"
+							<td>2</td>
+							<td>Samsung</td>
+							<td>S5</td>
+							<td>1238922224</td>
+							<td>12498765</td>
+							<td>comodato</td>
+							<td>Celular</td>
+							<td>R$ 11.111,11</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
 								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
-								data-target="#confirmacaoExclusaoModal"
-								th:attr="data-flag='7', data-excludId=${limite.idLimiteAtesto}, data-exclude=${limite.dasAtesto}"
-								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger"></span>
-							</a></td>
-
-						</tr>
-						<tr>
-							<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
-								Linha encontrada!!!</td>
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
 						</tr>
 
-
-
-					</tbody>
-				</table>
+					</table>
+				</div>
 			</div>
 
+			<div class="painel-body bg-panel padding-7">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<td class=" col-sm1 largura_td2 bold">Id</td>
+								<td class=" col-sm2 largura_td2 bold">Nome</td>
+								<td class=" col-sm1 largura_td2 bold">CPF</td>
+								<td class=" col-sm1 largura_td2 bold">Setor</td>
+								<td class=" col-sm1 largura_td2 bold">Cargo</td>
+								<td class=" col-sm1 largura_td_menor bold">DAS/FCPE</td>
+								<td class=" col-sm1 largura_td2 bold">Email</td>
+								<td>Configurações</td>
+
+
+							</tr>
+						</thead>
+
+
+
+						<tr>
+							<td>1</td>
+							<td>Paulo Henrique de Carvalho Moreira</td>
+							<td>99999999999</td>
+							<td>CGOVE</td>
+							<td>Coordenador</td>
+							<td>3</td>
+							<td>paulo.moreira@cultura.gov.br</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+						<tr>
+							<td>2</td>
+							<td>Paulo Henrique de Carvalho Moreira</td>
+							<td>99999999999</td>
+							<td>CGOVE</td>
+							<td>Coordenador</td>
+							<td>3</td>
+							<td>paulo.moreira@cultura.gov.br</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+						<tr>
+							<td>3</td>
+							<td>Paulo Henrique de Carvalho Moreira</td>
+							<td>99999999999</td>
+							<td>CGOVE</td>
+							<td>Coordenador</td>
+							<td>3</td>
+							<td>paulo.moreira@cultura.gov.br</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+						<tr>
+							<td>3</td>
+							<td>Paulo Henrique de Carvalho Moreira</td>
+							<td>99999999999</td>
+							<td>CGOVE</td>
+							<td>Coordenador</td>
+							<td>3</td>
+							<td>paulo.moreira@cultura.gov.br</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+
+			<div class="painel-body bg-panel padding-7">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<td class=" col-sm1 largura_td2 text-center bold">Id</td>
+								<td class=" col-sm2 largura_td2 text-center bold">Número de
+									Série do Chip</td>
+								<td class=" col-sm1 largura_td2 text-center bold">Tipo</td>
+								<td></td>
+
+
+							</tr>
+						</thead>
+
+
+
+						<tr>
+							<td class="text-center">1</td>
+							<td class="text-center">020202020202</td>
+							<td class="text-center">FlexSimCard</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+						<tr>
+							<td class="text-center">2</td>
+							<td class="text-center">MicroSimCard</td>
+							<td class="text-center">0303030303</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+						<tr>
+							<td class="text-center">3</td>
+							<td class="text-center">0404040404</td>
+							<td class="text-center">MicroSimCard</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+						<tr>
+							<td class="text-center">4</td>
+							<td class="text-center">0505050505</td>
+							<td class="text-center">MicroSimCard</td>
+							<td class="center"><a class="icone_tabela" title="Editar"
+								rel="tooltip" data-placement="left"> <span
+									class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+								title="Excluir" rel="tooltip" data-placement="left"> <span
+									class="fa fa-close"></span></a></td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
 		</div>
-		<div layout:include="DialogoConfirmacaoExclusao"></div>
-	</div>
+
+	</form>
 </section>
 </html>

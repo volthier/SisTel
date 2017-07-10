@@ -898,15 +898,49 @@ h5 {
 	}
 	
 	.tableusuario {
-		box-shadow: 0px 0px 2px #0b4159;
 		margin: 0 auto;
 		width: 99%;
 		border-radius: 0px !important;
 	}
-
-
-
-
+	.tdusuaio {
+		border-bottom: hidden;
+		border-right: hidden;
+		
+	}
+	.icone_tabela {
+		padding: 5px;
+    	margin-left: 3px;
+	}
+	.icone_tabela:hover {
+	    text-shadow: 1px 0px 2px gray;
+	    
+	}
+	.icone_tabela :hover {
+	    text-shadow: 1px 0px 2px gray;
+	    
+	}
+	
+	.center {
+		text-align: center;
+	}
+	.red {
+		color: #960000;
+	}
+	.red:hover {
+		color: #960000 !important;
+	}
+	
+	.bg {
+		background-color: #f2f2f2;
+	}
+	.bg-panel {
+		background-color: white;
+	}
+	.pesquisa {
+		padding-left: 0px;
+		
+	}
+	
 /* FIM MENU-USUARIO/AGENDA */
 
 
@@ -923,7 +957,7 @@ h5 {
 	.padding-1 {
 		padding 1px;
 	}
-
+	
 
 
 /* FIM MENU-USUARIO/DISPOSITIVOS */

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:td="http://www.tdymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/tdymeleaf/layout"
+	xmlns:td="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
 <title>Dispositivos</title>
@@ -9,252 +9,122 @@
 
 <section layout:fragment="conteudo">
 
-	<form class="form-horizontal" method="POST" td:action="@{/menu-usuario}">
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="clearfix">
-					<h3 class="text-left esquerda">Agenda</h3>
-					<a class="btn btn-link dt-link-panel direita texto_td" td:href="@{/inicio}">Voltar
-						para Lista</a>
+
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Dispositivos</h3>
+			</div>
+
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					td:href="@{/menu-usuario}">Voltar para Lista</a>
+			</div>
+
+			<div class="col-md-12 padding-7 pesquisa">
+
+				<div class="col-md-4 input-group">
+					<input type="text" class="form-control"
+						placeholder="Digite aqui sua pesquisa" /> <span
+						class="input-group-btn">
+						<button class="btn btn-secondary" type="button">
+							<span class="fa fa-search text-center b"> </span>
+						</button>
+					</span>
 				</div>
+
 			</div>
 
-			<div class="painel-body">
-				<div>
-					<table border="1" class="tableusuario" style="border-radius: 20px;">
-						<tr>
-							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden; padding: 10px;border-radius: 20px;">
-								Nome:<label>nome</label>
-							</td>
-							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden;">
-								CPF:<label>cpf</label>
-							</td>
-							<td class="tdusuaio" style="border-bottom: hidden;border-right: hidden;">
-								EMAIL:<label>email</label>
-							</td>
-							<td class="tdusuaio" style="border-bottom: hidden;">
-							</td>
-						</tr>
-						<tr>
-							<td class="tdusuaio" style="border-right: hidden; padding: 10px">
-								Gerência:<label>gerencia</label>
-							</td>
-							<td class="tdusuaio" style="border-right: hidden">
-								Cargo:<label>cargo</label>
-							</td>
-							<td class="tdusuaio" style="border-right: hidden">
-								Vinculo:<label>vinculo</label>
-							</td>
-							<td class="tdusuaio" style="border-top: hidden">
-								DAS:<label>das</label>
-							</td>
-						</tr>
-					</table>
+			<form class="form-horizontal" method="POST" td:action="@{/chips}">
+
+				<div class="col-md-12 padding-0">
+					<div class="painel-body bg-panel padding-7">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<td class=" col-sm1 bold">Id</td>
+										<td class=" col-sm1 bold">Marca</td>
+										<td class=" col-sm1 bold">Modelo</td>
+										<td class=" col-sm1 bold">Numero de Série</td>
+										<td class=" col-sm1 bold">IMEI</td>
+										<td class=" col-sm1 bold">Patrimonio</td>
+										<td class=" col-sm1 bold">Tipo</td>
+										<td class=" col-sm1 bold">Valor</td>
+										<td class=" col-sm1 bold"></td>
+
+									</tr>
+								</thead>
+
+
+
+								<tr>
+									<td>1</td>
+									<td>Apple</td>
+									<td>5s</td>
+									<td>123456789</td>
+									<td>987654321</td>
+									<td>comodato</td>
+									<td>Celular</td>
+									<td>R$ 2.000,00</td>
+
+									<td class="center"><a class="icone_tabela" title="Editar"
+										rel="tooltip" data-placement="left"> <span
+											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+										title="Excluir" rel="tooltip" data-placement="left"> <span
+											class="fa fa-close"></span></a></td>
+								</tr>
+
+
+
+								<tr>
+									<td>2</td>
+									<td>Samsung</td>
+									<td>S5</td>
+									<td>1238922224</td>
+									<td>12498765</td>
+									<td>comodato</td>
+									<td>Celular</td>
+									<td>R$ 11.111,11</td>
+									<td class="center"><a class="icone_tabela" title="Editar"
+										rel="tooltip" data-placement="left"> <span
+											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+										title="Excluir" rel="tooltip" data-placement="left"> <span
+											class="fa fa-close"></span></a></td>
+								</tr>
+
+							</table>
+						</div>
+					</div>
 				</div>
-				
-				<br></br>
-				
-				<div id="botaodisp" class="form-group" style="widtd: 100%">
-				<div  id="botaodisp" class="col-sm-offset-2 col-sm-10 c" style="widtd: 100%">
-					<button id="botaodisp" type="submit" class="btn btn-primary" style="float: left">Solicitar Dispositivo</button>
-				
-					<button id="botaodisp" type="submit" class="btn btn-primary" style="float: right">Devolver Dispositivo</button>
+
+				<div class="col-md-12 padding-7 pesquisa">
+
+					<div id="botaodisp" class="form-group" style="widtd: 100%">
+						<div id="botaodisp" class="col-sm-offset-2 col-sm-10 c"
+							style="widtd: 100%">
+							<button id="botaodisp" type="submit" class="btn btn-primary"
+								style="float: left">Solicitar Dispositivo</button>
+
+							<button id="botaodisp" type="submit" class="btn btn-primary"
+								style="float: left">Devolver Dispositivo</button>
+						</div>
+					</div>
 				</div>
-				</div>
-				
-				<br></br>
-				
-				<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<td class=" col-sm1">Id</td>
-							<td class=" col-sm1">Marca</td>
-							<td class=" col-sm1">Modelo</td>
-							<td class=" col-sm1">Numero de Série</td>
-							<td class=" col-sm1">IMEI</td>
-							<td class=" col-sm1">Patrimonio</td>
-							<td class=" col-sm1">Tipo</td>
-							<td class=" col-sm1">Valor</td>
-							<td class=" col-sm1"></td>
-							
-						</tr>
-					</thead>
 
-					
 
-						<tr>
-							<td  >1</td>
-							<td  >Apple</td>
-							<td  >5s</td>
-							<td  >123456789</td>
-							<td  >987654321</td>
-							<td  >comodato</td>
-							<td  >Celular</td>
-							<td  >R$ 2.000,00</td>				
-							
-							<td ><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-					
-					
-						<tr>
-							<td  >2</td>
-							<td  >Samsung</td>
-							<td  >S5</td>
-							<td  >1238922224</td>
-							<td  >12498765</td>
-							<td  >comodato</td>
-							<td  >Celular</td>
-							<td  >R$ 11.111,11</td>
-							<td  ></td>
-						</tr>
-					
-				</table>
-			</div>
-			
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>	
-						<tr>
-							<td class=" col-sm1 largura_td2">Id</td>
-							<td class=" col-sm2 largura_td2">Nome</td>
-							<td class=" col-sm1 largura_td2">CPF</td>
-							<td class=" col-sm1 largura_td2">Setor</td>
-							<td class=" col-sm1 largura_td2">Cargo</td>
-							<td class=" col-sm1 largura_td_menor">DAS/FCPE</td>
-							<td class=" col-sm1 largura_td2">Email</td>
-							<td  ></td>
-							
-							
-						</tr>
-					</thead>
-
-					
-
-						<tr>
-							<td  >1</td>
-							<td  >Paulo Henrique de Carvalho Moreira</td>
-							<td  >99999999999</td>
-							<td  >CGOVE</td>
-							<td  >Coordenador</td>
-							<td  >3</td>
-							<td  >paulo.moreira@cultura.gov.br</td>
-							<td ><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-						<tr>
-							<td  >2</td>
-							<td  >Paulo Henrique de Carvalho Moreira</td>
-							<td  >99999999999</td>
-							<td  >CGOVE</td>
-							<td  >Coordenador</td>
-							<td  >3</td>
-							<td  >paulo.moreira@cultura.gov.br</td>
-							<td ><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-						<tr>
-							<td  >3</td>
-							<td  >Paulo Henrique de Carvalho Moreira</td>
-							<td  >99999999999</td>
-							<td  >CGOVE</td>
-							<td  >Coordenador</td>
-							<td  >3</td>
-							<td  >paulo.moreira@cultura.gov.br</td>
-							<td ><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-						<tr>
-							<td  >3</td>
-							<td  >Paulo Henrique de Carvalho Moreira</td>
-							<td  >99999999999</td>
-							<td  >CGOVE</td>
-							<td  >Coordenador</td>
-							<td  >3</td>
-							<td  >paulo.moreira@cultura.gov.br</td>
-							<td ><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-					
-				</table>
-			</div>
-				
-				<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>	
-						<tr>
-							<td class=" col-sm1 largura_td2 text-center">Id</td>
-							<td class=" col-sm2 largura_td2 text-center">Número de Série do Chip</td>
-							<td class=" col-sm1 largura_td2 text-center">Tipo</td>
-							<td  ></td>
-							
-							
-						</tr>
-					</thead>
-
-					
-
-						<tr>
-							<td  class="text-center">1</td>
-							<td  class="text-center">020202020202</td>
-							<td  class="text-center">FlexSimCard</td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-						<tr>
-							<td  class="text-center">2</td>
-							<td class="text-center" >MicroSimCard</td>
-							<td  class="text-center">0303030303</td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-						<tr>
-							<td  class="text-center">3</td>
-							<td  class="text-center">0404040404</td>
-							<td  class="text-center">MicroSimCard</td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-						
-						<tr>
-							<td  class="text-center">4</td>
-							<td class="text-center" >0505050505</td>
-							<td  class="text-center">MicroSimCard</td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-								title="Fatura" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-list-alt"></span></a>
-							</td>
-						</tr>
-					
-				</table>
-			</div>
-				
-			</div>
+			</form>
 		</div>
-	</form>
+	</div>
+
+
+
+
+
+
+
 </section>
 </html>
