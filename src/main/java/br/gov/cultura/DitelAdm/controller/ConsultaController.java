@@ -23,7 +23,7 @@ import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 @RestController
-@RequestMapping("/consulta")
+@RequestMapping("/consultas")
 public class ConsultaController {
 
 	@Autowired
@@ -37,29 +37,59 @@ public class ConsultaController {
 
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
-	
+
 	@Autowired
 	private CadastroCategoriaService CadastroCategoriaService;
-	
+
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
 
-	@RequestMapping
-	public ModelAndView pesquisar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+	@RequestMapping("/dispositivos")
+	public ModelAndView consultarDispositivo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		mv.addObject("dispositivos", todosDispositivos);
+		return mv;
+		}
+	
+	@RequestMapping("/usuarios")
+	public ModelAndView consultarUsuario(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
+		return mv;
+		}
+	
+	@RequestMapping("/chips")
+	public ModelAndView consultarChip(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
+		return mv;
+		}
+	
+	@RequestMapping("/linhas")
+	public ModelAndView consultarLinha(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		mv.addObject("linhas", todasLinhas);
+		return mv;
+		}
+	
+	@RequestMapping("/categorias")
+	public ModelAndView consultarCategoria(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		List<Categoria> todasCategorias = CadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias",todasCategorias);
-		List<LimiteAtesto> todosOsLimites = limiteAtestoService.getLimitesAtesto();
-		mv.addObject("limites",todosOsLimites);
 		return mv;
-	}	
+		}
 	
+	@RequestMapping("/limites-atesto")
+	public ModelAndView consultarLimiteAtesto(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		List<LimiteAtesto> todosOsLimites = limiteAtestoService.getLimitesAtesto();
+		mv.addObject("limites", todosOsLimites);
+		return mv;
+	}
+
 }
