@@ -21,27 +21,53 @@
 			<div class="clearfix">
 
 				<a class="btn btn-link dt-link-panel direita texto_td"
-					td:href="@{/menu-usuario}">Voltar para Lista</a>
+					td:href="@{/menu-usuario}">Voltar para Home</a>
 			</div>
 
-			<div class="col-md-12 padding-7 pesquisa">
 
-				<div class="col-md-4 input-group">
-					<input type="text" class="form-control"
-						placeholder="Digite aqui sua pesquisa" /> <span
-						class="input-group-btn">
-						<button class="btn btn-secondary" type="button">
-							<span class="fa fa-search text-center b"> </span>
-						</button>
-					</span>
-				</div>
-
-			</div>
 
 			<form class="form-horizontal" method="POST" td:action="@{/chips}">
 
-				<div class="col-md-12 padding-0">
-					<div class="painel-body bg-panel padding-7">
+				<div class="col-md-12 padding-0 cinza">
+					<div class="panel-body bg-panel padding-7">
+
+						<table border="1" class="tableusuario"
+							style="border-radius: 20px;">
+							<tr>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden; border-right: hidden; padding: 10px; border-radius: 20px;">
+									Nome: <label class="b"> Nome Exemplo</label>
+								</td>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden; border-right: hidden;">CPF:
+									<label class="b"> 99999999999</label>
+								</td>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden; border-right: hidden;">
+									EMAIL: <label class="b"> nome.exemplo@exemplo.com</label>
+								</td>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden;"></td>
+							</tr>
+							<tr>
+								<td class="tdusuaio texto_td"
+									style="border-right: hidden; padding: 10px">Gerência: <label
+									class="b"> X</label>
+								</td>
+								<td class="tdusuaio texto_td" style="border-right: hidden">
+									Cargo: <label class="b"> Secretária</label>
+								</td>
+								<td class="tdusuaio texto_td" style="border-right: hidden">
+									Vinculo: <label class="b"> Y</label>
+								</td>
+								<td class="tdusuaio texto_td" style="border-top: hidden">
+									DAS: <label class="b"> Z</label>
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					<div class="painel-body bg-panel padding-7" id="disp">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped">
 								<thead>
@@ -54,7 +80,7 @@
 										<td class=" col-sm1 bold">Patrimonio</td>
 										<td class=" col-sm1 bold">Tipo</td>
 										<td class=" col-sm1 bold">Valor</td>
-										<td class=" col-sm1 bold"></td>
+										
 
 									</tr>
 								</thead>
@@ -71,11 +97,7 @@
 									<td>Celular</td>
 									<td>R$ 2.000,00</td>
 
-									<td class="center"><a class="icone_tabela" title="Editar"
-										rel="tooltip" data-placement="left"> <span
-											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
-										title="Excluir" rel="tooltip" data-placement="left"> <span
-											class="fa fa-close"></span></a></td>
+									
 								</tr>
 
 
@@ -89,11 +111,7 @@
 									<td>comodato</td>
 									<td>Celular</td>
 									<td>R$ 11.111,11</td>
-									<td class="center"><a class="icone_tabela" title="Editar"
-										rel="tooltip" data-placement="left"> <span
-											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
-										title="Excluir" rel="tooltip" data-placement="left"> <span
-											class="fa fa-close"></span></a></td>
+									
 								</tr>
 
 							</table>
@@ -101,19 +119,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-12 padding-7 pesquisa">
 
-					<div id="botaodisp" class="form-group" style="widtd: 100%">
-						<div id="botaodisp" class="col-sm-offset-2 col-sm-10 c"
-							style="widtd: 100%">
-							<button id="botaodisp" type="submit" class="btn btn-primary"
-								style="float: left">Solicitar Dispositivo</button>
-
-							<button id="botaodisp" type="submit" class="btn btn-primary"
-								style="float: left">Devolver Dispositivo</button>
-						</div>
-					</div>
-				</div>
 
 
 			</form>

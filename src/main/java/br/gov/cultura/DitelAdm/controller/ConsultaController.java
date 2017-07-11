@@ -44,22 +44,52 @@ public class ConsultaController {
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
 
-	@RequestMapping
-	public ModelAndView pesquisar(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	@RequestMapping("/dispositivos")
+	public ModelAndView consultarDispositivo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDispositivo");
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
 		mv.addObject("dispositivos", todosDispositivos);
+		return mv;
+		}
+	
+	@RequestMapping("/usuarios")
+	public ModelAndView consultarUsuario(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaPessoa");
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
+		return mv;
+		}
+	
+	@RequestMapping("/chips")
+	public ModelAndView consultarChip(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaChip");
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
+		return mv;
+		}
+	
+	@RequestMapping("/linhas")
+	public ModelAndView consultarLinha(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaLinha");
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		mv.addObject("linhas", todasLinhas);
+		return mv;
+		}
+	
+	@RequestMapping("/categorias")
+	public ModelAndView consultarCategoria(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaServico");
 		List<Categoria> todasCategorias = CadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias",todasCategorias);
-		List<LimiteAtesto> todosOsLimites = limiteAtestoService.getLimitesAtesto();
-		mv.addObject("limites",todosOsLimites);
 		return mv;
-	}	
+		}
 	
+	@RequestMapping("/limites-atesto")
+	public ModelAndView consultarLimiteAtesto(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaLimiteAtesto");
+		List<LimiteAtesto> todosOsLimites = limiteAtestoService.getLimitesAtesto();
+		mv.addObject("limites", todosOsLimites);
+		return mv;
+	}
+
 }
