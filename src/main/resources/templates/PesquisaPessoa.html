@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Usuários</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Usuários</h3>
+			</div>
+
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}">
+					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar para Home
+				</a>
+			</div>
+
+			<div class="col-md-12 padding-7 pesquisa">
+
+				<div class="col-md-8 pesquisa">
+
+					
+				</div>
+
+				<div class="col-md-4 input-group" id="input_pesquisa">
+					<input type="text" class="form-control"
+						placeholder="Digite aqui sua pesquisa" /> <span
+						class="input-group-btn">
+						<button class="btn btn-secondary" type="button">
+							<span class="fa fa-search text-center b"> </span>
+						</button>
+					</span>
+				</div>
+
+			</div>
+
+			<form class="form-horizontal" method="POST" td:action="@{/usuarios}">
+
+				<div class="col-md-12 padding-0">
+					<div class="painel-body bg-panel padding-7">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">Id</th>
+										<th>Nome</th>
+										<th class="text-center col-md3">CPF</th>
+										<!-- <th class="text-center col-md2">Matricula</th>
+							<th class="text-center col-md2">Vinculo</th> -->
+										<th class="text-center col-md2">Setor</th>
+										<th class="text-center col-md2">Cargo</th>
+										<th class="text-center col-md2">DAS</th>
+										<!--<th class="text-center col-md1">Email</th> -->
+										<th class="col-md2"></th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr th:each="usuario : ${usuarios}">
+										<td class="text-center" th:text="${usuario.idUsuario}"></td>
+										<td th:text="${usuario.nomeUsuario}"></td>
+										<td class="text-center" th:text=" ${usuario.cpfUsuario}"></td>
+										<!-- <td class="text-right" th:text="  ${usuario.matricula}"></td>
+							<td class="text-center" th:text=" ${usuario.vinculo}"></td> -->
+										<td class="text-center" th:text=" ${usuario.lotacaoUsuario}"></td>
+										<td class="text-center" th:text=" ${usuario.cargoUsuario}"></td>
+										<td class="text-center"
+											th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
+										<!--<td class="text-center" th:text=" ${usuario.email}"></td> -->
+										<td class="text-center"><a class="btn btn-link btn-xs"
+											th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}"
+											title="Editar" rel="tooltip" data-placement="left"> <span
+												class="fa fa-pencil"></span>
+										</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+											data-target="#confirmacaoExclusaoModal"
+											th:attr="data-flag='2',data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
+											title="Remover" rel="tooltip" data-placement="left"> <span
+												class="fa fa-remove"></span>
+										</a></td>
+
+									</tr>
+									<tr>
+										<td colspan="10" th:if="${#lists.isEmpty(usuarios)}">Nenhuma
+											Pessoa encontrada!!!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</form>
+		</div>
+	</div>
+
+
+</section>
+</html>

@@ -5,7 +5,11 @@
 
         Chart.defaults.global.pointHitDetectionRadius = 1;
         Chart.defaults.global.customTooltips = function(tooltip) {
-
+        	
+        	
+        		
+        		
+        	
             var tooltipEl = $('#chartjs-tooltip');
 
             if (!tooltip) {
@@ -43,6 +47,9 @@
         var randomScalingFactor = function() {
             return Math.round(Math.random() * 100);
         };
+        
+        
+        
         var lineChartData = {
             labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
             datasets: [{
@@ -124,7 +131,12 @@
         $(".sub-tree").hide();
     };
 
+    $(document).ready(function(){
+    	  $('.mask-phone').mask('(00)00000-0000');
+    	});
     
+    	
+    	
 //    CONFIG MENUS
     this.treeMenu = function()
     {

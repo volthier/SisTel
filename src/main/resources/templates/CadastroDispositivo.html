@@ -17,14 +17,16 @@
 		<div class=" col-md-12  panel sem_sombra padding20 bg">
 			<div class=" col-md-12 sem_sombra padding-0">
 				<div class="col-md-6 padding-0 sem_sombra intro">
-					<h3 class="text-left">Novo Dispositivo</h3>
+					<h3 class="text-left">Cadastro de Dispositivos</h3>
 				</div>
 
 
 				<div class="clearfix">
 
 					<a class="btn btn-link dt-link-panel direita texto_td"
-						th:href="@{/inicio}">Voltar para Home</a>
+					th:href="@{/inicio}">
+					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar para Home
+					</a>
 				</div>
 
 
@@ -52,7 +54,7 @@
 								th:classappend="${#fields.hasErrors('modeloDispositivo')} ? has-error">
 								<label for="modelo" class="col-sm-2 control-label">Modelo</label>
 								<div class="col-sm-4">
-									<input list="modelos" class="form-control" id="modelo"
+									<input list="modelos" class="form-control form-text mask-sp_celphones" id="modelo"
 										th:field="*{modeloDispositivo}" />
 									<datalist id="modelos">
 										<option th:each="dispositivo : ${dispositivos}"
@@ -124,7 +126,7 @@
 
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-primary">Salvar</button>
+									<button type="submit" class="btn btn-primary texto_td">Salvar</button>
 								</div>
 							</div>
 						</div>

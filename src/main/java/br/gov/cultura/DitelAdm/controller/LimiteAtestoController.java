@@ -18,7 +18,7 @@ import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 @Controller
-@RequestMapping("/limite-atesto")
+@RequestMapping("/limites-atesto")
 public class LimiteAtestoController {
 	
 	private static final String CADASTRO_VIEW = "CadastroLimiteAtesto";

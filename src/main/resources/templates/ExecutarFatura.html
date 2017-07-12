@@ -8,49 +8,67 @@
 </head>
 
 <section layout:fragment="conteudo">
-	<div class="container-fluid">
-		<div class="row">
+	<div class="alert alert-warning col-md-12" th:if="${erroUnidade}!=null"
+		role="alert">
+		<div th:each="user : ${erroUnidade}" class="row">
+			<a class="alert-link col-md-offset-2"
+				th:text="|Unidade de registro estão diferentes: ${user.nomeUsuario}"
+				th:href="@{/usuarios/{id}(id=${user.idUsuario})}" title="Editar"
+				rel="tooltip" data-placement="auto"></a>
+
+		</div>
+
+	</div>
+
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Faturas</h3>
+			</div>
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+					style="margin-right: 5px;"></span>Voltar para Home
+				</a>
+			</div>
+
 			<form class="form-horizontal" method="POST" th:action="@{/fatura}">
-	
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="clearfix">
-							<h1 class="panel-title dt-dispositivo-panel">Faturas</h1>
-							<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar</a>
-						</div>
-					</div>
-					<br></br>
-					<div class="alert alert-warning col-md-12" th:if="${erroUnidade}!=null" role="alert">
-					<div th:each="user : ${erroUnidade}" class="row">
-					<a class="alert-link col-md-offset-2" th:text="|Unidade de registro estão diferentes: ${user.nomeUsuario}" th:href="@{/usuarios/{id}(id=${user.idUsuario})}" title="Editar" rel="tooltip" data-placement="auto"></a>
-					 
-					</div>
-					
-					</div>
-					<br></br>
-					
-					
-					<div class="painel-body">
+
+				<div class="col-md-12 padding-0 cinza">
+
+
+
+
+
+
+					<div class="painel-body bg-panel padding-7">
 						<div class="form-group">
 							<label id="fatura" for="status" class="col-sm-2 control-label">Fatura</label>
 							<div class="col-sm-6">
 								<select class="form-control" name="fatura">
-									<option th:each="fatura : ${faturasNaoGeradas}" th:value="${fatura.idFatura}"
+									<option th:each="fatura : ${faturasNaoGeradas}"
+										th:value="${fatura.idFatura}"
 										th:text="${fatura.numFatura} +  ' - ' + ${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)} + ' - '+ ${fatura.cliente.operadora.nome}" />
 								</select>
 							</div>
-			
+
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary">Executar</button>
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-primary">Executar</button>
-						</div>
-					</div>
+
 				</div>
 			</form>
 		</div>
-		<div class="row">
+	</div>
+	<!-- <div class="row">
 			<div class="col-xs-12 col-md-8 col-md-offset-2">
 				<div class="table-responsive">
 					<table class="table table-bordered">
@@ -62,14 +80,17 @@
 						</thead>
 						<tbody>
 							<tr th:each="fatura : ${faturasGeradas}">
-								<td th:text="${fatura.fatura.numFatura} + ' - ' + ${#strings.substring(fatura.fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.fatura.mesRef,0,4)} + ' - '+${fatura.alocacao.usuario.nomeUsuario}+' - '+${fatura.alocacao.linha.numeroLinha}"></td>
-								<td><a class="btn btn-primary" th:href="@{/fatura/resumo} + '/' + ${fatura.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}" role="button">Resumo</a></td>
+								<td
+									th:text="${fatura.fatura.numFatura} + ' - ' + ${#strings.substring(fatura.fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.fatura.mesRef,0,4)} + ' - '+${fatura.alocacao.usuario.nomeUsuario}+' - '+${fatura.alocacao.linha.numeroLinha}"></td>
+								<td><a class="btn btn-primary"
+									th:href="@{/fatura/resumo} + '/' + ${fatura.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}"
+									role="button">Resumo</a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </section>
 </html>

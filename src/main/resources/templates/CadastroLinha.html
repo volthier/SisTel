@@ -8,40 +8,59 @@
 </head>
 
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST"
-		th:action="@{/linhas}" th:object="${linha}">
 
-		<div layout:include="MensagemSucesso"></div>
-		<div layout:include="MensagemErro"></div>
-
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						Números de Linhas</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar
-						para Lista</a>
-				</div>
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Cadastro de Linhas</h3>
 			</div>
 
-			<div class="painel-body">
-				<input type="hidden" th:field="*{idLinha}" />
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('numeroLinha')} ? has-error">
-					<label for="nlinha" class="col-sm-2 control-label">Numero da Linha</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="nlinha"
-							th:field="*{numeroLinha}" />
-					</div>
-				</div>
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}">
+					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar para Home
+				</a>
+			</div>
+
+
+			<form class="form-horizontal" method="POST" th:action="@{/linhas}"
+				th:object="${linha}">
+
+				<div layout:include="MensagemSucesso"></div>
+				<div layout:include="MensagemErro"></div>
+
+				<div class="col-md-12 padding-0">
 				
+					<div class="panel-body bg-panel padding-7">
+					
+						<input type="hidden" th:field="*{idLinha}" />
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('numeroLinha')} ? has-error">
+							<label for="nlinha" class="col-sm-2 control-label tabela">Numero
+								da Linha</label>
+							<div class="col-sm-4 form-animate-text">
+								<input type="text" class="form-control mask-phone tabela" id="nlinha"
+									th:field="*{numeroLinha}" />
+							</div>
+						</div>
+
 						<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Salvar</button>
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary texto_td">Salvar</button>
+							</div>
+						</div>
 					</div>
+					
 				</div>
-			</div>
+			</form>
+
 		</div>
-	</form>
+	</div>
+
+
+
+
 </section>
 </html>
