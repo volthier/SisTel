@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * Categoriaajuste MODEL: Padrão FEBRABAN v3
  */
 @Entity
-@Table(name = "categoriaajuste", catalog = "dbditel")
+@Table(name = "categoria_ajuste", catalog = "dbditel")
 public class Categoriaajuste implements java.io.Serializable {
 
 	private Integer idCatAjuste;

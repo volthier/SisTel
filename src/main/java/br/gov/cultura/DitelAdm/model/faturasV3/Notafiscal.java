@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "notafiscal", catalog = "dbditel")
+@Table(name = "nota_fiscal", catalog = "dbditel")
 public class Notafiscal implements java.io.Serializable {
 
 	private String numNf;

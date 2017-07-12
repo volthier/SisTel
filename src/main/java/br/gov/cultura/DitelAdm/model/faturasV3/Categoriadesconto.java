@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * Categoriadesconto MODEL: Padrão FEBRABAN v3
  */
 @Entity
-@Table(name = "categoriadesconto", catalog = "dbditel")
+@Table(name = "categoria_desconto", catalog = "dbditel")
 public class Categoriadesconto implements java.io.Serializable {
 
 	private int idCatDesconto;

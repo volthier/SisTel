@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * Categoriaservico MODEL: Padrão FEBRABAN v3
  */
 @Entity
-@Table(name = "categoriaservico", catalog = "dbditel")
+@Table(name = "categoria_servico", catalog = "dbditel")
 public class Categoriaservico implements java.io.Serializable {
 
 	private Integer idCatServico;

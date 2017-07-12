@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +40,8 @@ public class LeitorFebrabanV3 {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private SimpleDateFormat sdfh = new SimpleDateFormat("HHmmss");
-
+	private SimpleDateFormat sdfs = new SimpleDateFormat("ss");
+	
 	public FaturaArquivoDTO read(File file) throws IOException {
 
 		String convert;
@@ -623,7 +622,7 @@ public class LeitorFebrabanV3 {
 
 				/** Duração Ligação**** */
 				try {
-					chamadas.setDuracaoLigacao(sdfh.parse(data.substring(188, 195)));
+					chamadas.setDuracaoLigacao(sdfs.parse(data.substring(188, 195)));
 				} catch (ParseException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();

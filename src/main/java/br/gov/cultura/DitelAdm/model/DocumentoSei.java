@@ -4,13 +4,17 @@ package br.gov.cultura.DitelAdm.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,7 +34,7 @@ public class DocumentoSei implements java.io.Serializable {
 	@JsonBackReference
 	private AlocacaoSei alocacaoSei;
 	@JsonBackReference
-	private Alocacao alocacao;
+	private Set<Alocacao> alocacao;
 	@JsonBackReference
 	private AlocacaoFatura alocacaoFatura;
 	private String documentosTipo;
@@ -49,7 +53,7 @@ public class DocumentoSei implements java.io.Serializable {
 	public DocumentoSei() {
 	}
 
-	public DocumentoSei(AlocacaoSei alocacaoSei, Alocacao alocacao, AlocacaoFatura alocacaoFatura, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
+	public DocumentoSei(AlocacaoSei alocacaoSei, Set<Alocacao> alocacao, AlocacaoFatura alocacaoFatura, String documentosTipo, String documentosLink, String documentoIdSei, String documentosNumero,
 			Date documentosDataGerado, String blocoId, Boolean blocoDisponibilizado, Boolean blocoFinalizado, String assinaturaNome, String assinaturaCargo, Date assinaturaHora, boolean assinaturaValida) {
 		this.alocacaoSei = alocacaoSei;
 		this.alocacao = alocacao;
@@ -86,13 +90,17 @@ public class DocumentoSei implements java.io.Serializable {
 	public void setAlocacaoSei(AlocacaoSei alocacaoSei) {
 		this.alocacaoSei = alocacaoSei;
 	}
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_alocacao", nullable = false)
-	public Alocacao getAlocacao() {
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	@JoinTable(name="documento_sei_alocacao", catalog = "dbditel", joinColumns = {
+			@JoinColumn(name = "id_documentos_sei", nullable = false)}, inverseJoinColumns={
+					@JoinColumn(name = "id_alocacao", nullable = false)
+	})
+	public Set<Alocacao> getAlocacao() {
 		return alocacao;
 	}
 
-	public void setAlocacao(Alocacao alocacao) {
+	public void setAlocacao(Set<Alocacao> alocacao) {
 		this.alocacao = alocacao;
 	}
 	

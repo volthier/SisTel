@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -401,13 +402,18 @@ public class Chamadas implements java.io.Serializable {
 	}
 	
 	public String tarifa() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(this.getDuracaoLigacao());
-		float retorno = ((this.getValLigImp() * 60) / ( (calendar.get(Calendar.HOUR)*3600) + (calendar.get(Calendar.MINUTE) * 60) + calendar.get(Calendar.SECOND) )  );
 		
-		DecimalFormat decimalFormat = new DecimalFormat("##.##");
-		decimalFormat.setRoundingMode(RoundingMode.UP);
+		DecimalFormat decimalFormatFinal = new DecimalFormat("##.##");
+		decimalFormatFinal.setRoundingMode(RoundingMode.HALF_EVEN);
+		float hora,minuto,segundo;
+		
+		hora = ((float)this.getDuracaoLigacao().getHours())*60;
+		minuto = (float)this.getDuracaoLigacao().getMinutes();
+		segundo = ((float)this.getDuracaoLigacao().getSeconds())/60;
 
-		return decimalFormat.format(retorno);
+		float result = hora+minuto+segundo;
+		float retorno = (this.getValLigImp() / (hora+minuto+segundo));
+	
+		return decimalFormatFinal.format(retorno);
 	}
 }

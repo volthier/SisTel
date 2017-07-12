@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -170,7 +171,7 @@ public class Alocacao implements java.io.Serializable {
 	public void setAlocacaoFaturas(Set<AlocacaoFatura> alocacaoFaturas) {
 		this.alocacaoFaturas = alocacaoFaturas;
 	}
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "alocacao")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy="alocacao")
 	public Set<DocumentoSei> getDocumentoSeis() {
 		return documentoSeis;
 	}
