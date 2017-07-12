@@ -4,48 +4,60 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Cadastro de Faturas</title>
+<title>Carregar Faturas</title>
 </head>
 
 <section layout:fragment="conteudo">
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Carregar Fatura</h3>
+			</div>
 
-	<form class="form-horizontal" method="POST"
-		enctype="multipart/form-data" th:action="@{/faturas/nova}">
 
-		<div id="fatura" class="alert alert-success" th:if="${messageSucesso}">
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+					style="margin-right: 5px;"></span>Voltar para Home
+				</a>
+			</div>
+
+
+			<form class="form-horizontal" method="POST"
+				enctype="multipart/form-data" th:action="@{/faturas/nova}">
+
+				<!-- <div id="fatura" class="alert alert-success" th:if="${messageSucesso}">
 			<span th:text="${messageSucesso}"></span>
 		</div>
 		<div id="fatura" class="alert alert-danger" th:if="${messageErro}">
 			<span th:text="${messageErro}"></span>
-		</div>
+		</div> -->
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						Faturas</h1>
-				</div>
-			</div>
-			<div class="painel-body">
-				<div class="form-group">
+				<div class="col-md-12 padding-0">
+					<div class="panel-body bg-panel padding-7">
+					
+						<div class="col-md-6 form-group">
 
-					<label for="fatura" class="col-sm-2 control-label">Fatura:</label>
-					<input class="btn btn-alert btn-file" type="file" name="file" />
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button class="btn btn-primary" type="submit" value="Upload">Upload</button>
+							<label for="fatura" class="col-sm-2 control-label tabela">Fatura:</label>
+							<input class="btn btn-alert btn-file" type="file" name="file" />
+						</div>
+						<div class=" col-md-6 form-group">
+							<div class="col-sm-12" style="padding-left:0px; margin-top: 3px;">
+								<button class="btn btn-primary texto_td" type="submit" value="Upload">Upload</button>
+							</div>
+						</div>
 					</div>
+					
 				</div>
+			</form>
+			<div>
+				<ul>
+					<li th:each="file : ${files}"><a th:href="${file.href}"
+						th:text="${file.rel}"></a></li>
+				</ul>
 			</div>
 		</div>
-	</form>
-	<div>
-		<ul>
-			<li th:each="file : ${files}"><a th:href="${file.href}"
-				th:text="${file.rel}"></a></li>
-		</ul>
 	</div>
-
 </section>
 </html>

@@ -49,7 +49,7 @@ public class FaturaUploadController {
 		this.resourceLoader = resourceLoader;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/faturas/nova")
+	@RequestMapping(method = RequestMethod.GET, value = "/fatura/upload")
 	public String provideUploadInfo(Model model) throws IOException {
 
 		model.addAttribute("files",
@@ -62,7 +62,7 @@ public class FaturaUploadController {
 		return "CadastroFaturas";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/faturas/nova/{filename:.+}")
+	@RequestMapping(method = RequestMethod.GET, value = "/fatura/upload{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<?> getFile(@PathVariable String filename) {
 
@@ -73,7 +73,7 @@ public class FaturaUploadController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/faturas/nova")
+	@RequestMapping(method = RequestMethod.POST, value = "/fatura/upload")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes)
 			throws IOException {
 
@@ -116,6 +116,6 @@ public class FaturaUploadController {
 			redirectAttributes.addFlashAttribute("messageErro",
 					"Falha ao carregar fatura! Erro: " + file.getOriginalFilename() + " because it was empty");
 		}
-		return "redirect:/faturas/nova";
+		return "redirect:/fatura/upload";
 	}
 }

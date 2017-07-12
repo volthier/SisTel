@@ -8,22 +8,28 @@
 </head>
 
 <section layout:fragment="conteudo">
-	<div class="container-fluid">
-		<div class="row">
+
+
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Lista de Faturas</h3>
+			</div>
+
+
 			<div class="col-xs-12 col-md-8 col-md-offset-2">
-				<h3 th:text="${fatura.numFatura} +  ' - ' + ${fatura.descriCobranca}">
+				<h3
+					th:text="${fatura.numFatura} +  ' - ' + ${fatura.descriCobranca}">
 				</h3>
 			</div>
+
+
 		</div>
-		
-		
-		<div class="row">
-		
-		
-		
-		
-			<div class="col-xs-12 col-md-8 col-md-offset-2">
-			
+
+
+		<div class="col-md-12 padding-0">
+			<div class="painel-body bg-panel padding-7">
+
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<thead>
@@ -39,15 +45,23 @@
 							<tr th:each="alocacao : ${alocacoesSei}">
 								<td th:text="${alocacao.alocacao.usuario.nomeUsuario}"></td>
 								<td th:text="${alocacao.alocacao.linha.numeroLinha}"></td>
-								<td class="text-danger" th:if="${alocacao.ressarcimento == true}" th:text="Sim"></td>
-								<td class="text-success" th:if="${alocacao.ressarcimento == false}" th:text="Não"></td>
-								<td th:text="${alocacao.alocacao.alocacaoSei.numeroExternoProcessoSei}"></td>
+								<td class="text-danger"
+									th:if="${alocacao.ressarcimento == true}" th:text="Sim"></td>
+								<td class="text-success"
+									th:if="${alocacao.ressarcimento == false}" th:text="Não"></td>
+								<td
+									th:text="${alocacao.alocacao.alocacaoSei.numeroExternoProcessoSei}"></td>
 								<td th:text="${alocacao.documentoSei.documentosNumero}"></td>
-								<td><a class="btn btn-primary" th:href="@{'/fatura/resumo/' + ${fatura.idFatura} + '/' + ${alocacao.alocacao.idAlocacao}}" role="button">Resumo</a></td>
+								<td><a class="btn btn-primary"
+									th:href="@{'/fatura/resumo/' + ${fatura.idFatura} + '/' + ${alocacao.alocacao.idAlocacao}}"
+									role="button">Resumo</a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+
+
+
 			</div>
 		</div>
 	</div>

@@ -35,9 +35,9 @@
 					<div class="panel-body bg-panel padding-7">
 
 						<div class="form-group">
-							<label class="col-sm-2 control-label" >Nome</label>
+							<label class="col-sm-2 control-label tabela">Nome</label>
 							<div class="col-sm-4" style="padding-left: 0px;">
-								<select name="idAlocacao" class="col-sm-4 form-control" >
+								<select name="idAlocacao" class="col-sm-4 form-control">
 									<option value="">----Selecione----</option>
 									<option th:each="devolucao : ${usuariosDispositivos}"
 										th:if="${devolucao.dtDevolucao == null}"
@@ -48,7 +48,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="dtDevolucao" class="col-sm-2 control-label">Data
+							<label for="dtDevolucao" class="col-sm-2 control-label tabela">Data
 								da devolução</label>
 							<div id="datetimepicker"
 								class="col-sm-4 input-group input-append date">
@@ -58,11 +58,12 @@
 									class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-primary">Salvar</button>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10" style="padding-left:0px">
+								<button type="submit" class="btn btn-primary tabela">Salvar</button>
+							</div>
 						</div>
 					</div>
 				</div>

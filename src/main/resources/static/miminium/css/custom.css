@@ -148,7 +148,7 @@
 	}
 	.alturaLogo {
 		margin: 0 auto;
-		margin-top: 50%;
+		margin-top: 38%;
 	}
 	.logo-login {
 		width: 110%;
@@ -226,6 +226,7 @@
 */
 
 /*FIM LOGIN*/
+
 
 /*HOME*/
 
@@ -803,6 +804,9 @@ h5 {
 	}
 	h3 {
 		font-size: 20px;
+	}
+	h4 {
+		font-size:16px;
 	}
 	#logo {
 		margin-top: 10px;
