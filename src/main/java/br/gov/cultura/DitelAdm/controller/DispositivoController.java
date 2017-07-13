@@ -68,7 +68,7 @@ public class DispositivoController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroDispositivoService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastro do dispositivo removido com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/dispositivos";
 		}	
 	
 	@RequestMapping("{id}")

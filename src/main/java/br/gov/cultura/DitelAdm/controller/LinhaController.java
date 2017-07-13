@@ -52,7 +52,7 @@ public class LinhaController extends UrlController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroLinhaService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastro da linha removida com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/linhas";
 		}	
 
 	@RequestMapping("{id}")

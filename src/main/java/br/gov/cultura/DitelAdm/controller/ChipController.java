@@ -60,7 +60,7 @@ public class ChipController extends UrlController {
 	public String excluir(@PathVariable Integer idChip, RedirectAttributes attributes){
 		cadastroChipService.excluir(idChip);
 		attributes.addFlashAttribute("mensagem","Cadastrado do chip removido com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/chips";
 		}	
 	
 	@RequestMapping("{id}")

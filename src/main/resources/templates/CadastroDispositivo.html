@@ -15,113 +15,129 @@
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+
+
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Dispositivo</h3>
+				</div>
+
 				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						Dispositivos</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar
-						para Lista de Dispositivos</a>
-				</div>
-			</div>
-			<p></p>
-			<div class="painel-body">
-				<input type="hidden" th:field="*{idDispositivo}" />
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('marcaDispositivo')} ? has-error">
-					<label for="marca" class="col-sm-2 control-label">Marca</label>
-					<div class="col-sm-4">
-						<input list="marcas" class="form-control" id="marca"
-							th:field="*{marcaDispositivo}" />
-						<datalist id="marcas">
-							<option th:each="dispositivo : ${dispositivos}"
-								th:value="${dispositivo.marcaDispositivo}"
-								th:text="${dispositivo.getMarcaDispositivo()}"></option>
-						</datalist>
-					</div>
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/consultas/dispositivos}"> <span class="fa fa-angle-double-left"
+						style="margin-right: 5px;"></span>Voltar para Dispositivos
+					</a>
 				</div>
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('modeloDispositivo')} ? has-error">
-					<label for="modelo" class="col-sm-2 control-label">Modelo</label>
-					<div class="col-sm-4">
-						<input list="modelos" class="form-control" id="modelo"
-							th:field="*{modeloDispositivo}" />
-						<datalist id="modelos">
-							<option th:each="dispositivo : ${dispositivos}"
-								th:value="${dispositivo.modeloDispositivo}"
-								th:text="${dispositivo.getModeloDispositivo()}"></option>
-						</datalist>
-					</div>
-				</div>
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('numeroSerieDispositivo')} ? has-error">
-					<label for="nrserie" class="col-sm-2 control-label">Número
-						de Série</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="nrserie"
-							th:field="*{numeroSerieDispositivo}" />
-					</div>
-				</div>
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('imeiDispositivo')} ? has-error">
-					<label for="imei" class="col-sm-2 control-label">Número de
-						IMEI</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="imei"
-							th:field="*{imeiDispositivo}" />
-					</div>
-				</div>
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('macDispositivo')} ? has-error">
-					<label for="imei" class="col-sm-2 control-label">Número MAC
-						(Endereço MAC)</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="imei"
-							th:field="*{macDispositivo}" />
-					</div>
-				</div>
+				<div class="col-md-12 panel padding-0">
+					<div class="panel-body bg-panel padding-7 tabela">
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('patrimonioDispositivo')} ? has-error">
-					<label for="patrimonio" class="col-sm-2 control-label">Número
-						de Patrimonio</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="patrimonio"
-							th:field="*{patrimonioDispositivo}" />
-					</div>
-				</div>
 
-				<div class="form-group">
-					<label for="status" class="col-sm-2 control-label">Tipo</label>
-					<div class="col-sm-2">
-						<select class="form-control" th:field="*{tipoDispositivo}">
-							<option value="">----Selecione----</option>
-							<option th:each="tipo : ${tipoDispositivoMap.entrySet()}"
-								th:value="${tipo.key}" th:text="${tipo.value}" />
-						</select>
-					</div>
-				</div>
+						<input type="hidden" th:field="*{idDispositivo}" />
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('marcaDispositivo')} ? has-error">
+							<label for="marca" class="col-sm-2 control-label">Marca</label>
+							<div class="col-sm-4">
+								<input list="marcas" class="form-control" id="marca"
+									th:field="*{marcaDispositivo}" />
+								<datalist id="marcas">
+									<option th:each="dispositivo : ${dispositivos}"
+										th:value="${dispositivo.marcaDispositivo}"
+										th:text="${dispositivo.getMarcaDispositivo()}"></option>
+								</datalist>
+							</div>
+						</div>
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('valorDispositivo')} ? has-error">
-					<label for="valor" class="col-sm-2 control-label">Valor</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control js-valorCss" id="valor"
-							th:field="*{valorDispositivo}" />
-					</div>
-				</div>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('modeloDispositivo')} ? has-error">
+							<label for="modelo" class="col-sm-2 control-label">Modelo</label>
+							<div class="col-sm-4">
+								<input list="modelos" class="form-control" id="modelo"
+									th:field="*{modeloDispositivo}" />
+								<datalist id="modelos">
+									<option th:each="dispositivo : ${dispositivos}"
+										th:value="${dispositivo.modeloDispositivo}"
+										th:text="${dispositivo.getModeloDispositivo()}"></option>
+								</datalist>
+							</div>
+						</div>
 
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Salvar</button>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('numeroSerieDispositivo')} ? has-error">
+							<label for="nrserie" class="col-sm-2 control-label">Número
+								de Série</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="nrserie"
+									th:field="*{numeroSerieDispositivo}" />
+							</div>
+						</div>
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('imeiDispositivo')} ? has-error">
+							<label for="imei" class="col-sm-2 control-label">Número
+								de IMEI</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="imei"
+									th:field="*{imeiDispositivo}" />
+							</div>
+						</div>
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('macDispositivo')} ? has-error">
+							<label for="imei" class="col-sm-2 control-label">Número
+								MAC (Endereço MAC)</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="imei"
+									th:field="*{macDispositivo}" />
+							</div>
+						</div>
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('patrimonioDispositivo')} ? has-error">
+							<label for="patrimonio" class="col-sm-2 control-label">Número
+								de Patrimonio</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="patrimonio"
+									th:field="*{patrimonioDispositivo}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="status" class="col-sm-2 control-label">Tipo</label>
+							<div class="col-sm-2">
+								<select class="form-control" th:field="*{tipoDispositivo}">
+									<option value="">----Selecione----</option>
+									<option th:each="tipo : ${tipoDispositivoMap.entrySet()}"
+										th:value="${tipo.key}" th:text="${tipo.value}" />
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('valorDispositivo')} ? has-error">
+							<label for="valor" class="col-sm-2 control-label">Valor</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control js-valorCss" id="valor"
+									th:field="*{valorDispositivo}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary texto_td">Salvar</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
 	</form>
 </section>
 </html>

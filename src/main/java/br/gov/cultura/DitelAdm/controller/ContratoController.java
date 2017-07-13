@@ -39,7 +39,7 @@ public class ContratoController {
 		try{
 			contratoService.salvar(contrato);
 			attributes.addFlashAttribute("mensagem","Contrato cadastrado com sucesso!");
-			return "redirect:/contrato/novo";		
+			return "redirect:/contratos/novo";		
 		}catch(IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;

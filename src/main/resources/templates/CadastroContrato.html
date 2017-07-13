@@ -4,96 +4,123 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Cadastro de Contrato</title>
+<title>Novo Contrato</title>
 </head>
 
 <section layout:fragment="conteudo">
 
-	<form class="form-horizontal" method="POST" 
-	      th:action="@{/contrato}" th:object="${contrato}">
+	<form class="form-horizontal" method="POST" th:action="@{/contratos}"
+		th:object="${contrato}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+
+
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Contrato</h3>
+				</div>
+
 				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de Contrato</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar</a>
-				</div>
-			</div>
-			<br></br>
-			<div class="painel-body">
 
-				<input type="hidden" th:field="*{idContrato}" />
-				
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('nroContrato')} ? has-error">
-					<label for="contrato" class="col-sm-2 control-label">Número do Contrato</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="contrato"
-							th:field="*{nroContrato}" />
-					</div>
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/consultas/contratos}"> <span
+						class="fa fa-angle-double-left" style="margin-right: 5px;"></span>Voltar
+						para Contratos
+					</a>
 				</div>
-				
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('nroConta')} ? has-error">
-					<label for="conta" class="col-sm-2 control-label">Número da Conta</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="conta"
-							th:field="*{nroConta}" />
-					</div>
-				</div>
-				
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
-					<label for="razaoSocial" class="col-sm-2 control-label">Junto Operadora</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="razaoSocial"
-							th:field="*{razaoSocial}" />
-					</div>
-				</div>
-				
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('nomeServico')} ? has-error">
-					<label for="servico" class="col-sm-2 control-label">Serviço</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="servico"
-							th:field="*{nomeServico}" />
-					</div>
-				</div>
-				
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('valorCobrado')} ? has-error">
-					<label for="valor" class="col-sm-2 control-label">Valor Cobrado</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control js-valorCss" id="valor"
-							th:field="*{valorCobrado}" />
-					</div>
-				</div>
-				
- 				<div class="form-group">
-					<label for="dtInicio" class="col-sm-2 control-label">Data Início do Contrato</label>	
-					<div id="datetimepicker" class="col-sm-4 input-group input-append date">
-						<input type="text" name="dtInicio" class="col-sm-2 form-control"/>
-						<span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
-					</div>
-				</div>	
-				
-				<div class="form-group">
-					<label for="dtFim" class="col-sm-2 control-label">Data Fim do Contrato</label>	
-					<div id="datetimepicker" class="col-sm-4 input-group input-append date">
-						<input type="text" name="dtFim" class="col-sm-2 form-control"/>
-						<span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
-					</div>
-				</div>
+
 			</div>
 
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Salvar</button>
+
+			<div class="col-md-12 panel padding-0">
+				<div class="panel-body bg-panel padding-7 tabela">
+
+					<input type="hidden" th:field="*{idContrato}" />
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('nroContrato')} ? has-error">
+						<label for="contrato" class="col-sm-2 control-label">Número
+							do Contrato</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="contrato"
+								th:field="*{nroContrato}" />
+						</div>
+					</div>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('nroConta')} ? has-error">
+						<label for="conta" class="col-sm-2 control-label">Número
+							da Conta</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="conta"
+								th:field="*{nroConta}" />
+						</div>
+					</div>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
+						<label for="razaoSocial" class="col-sm-2 control-label">Junto
+							Operadora</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="razaoSocial"
+								th:field="*{razaoSocial}" />
+						</div>
+					</div>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('nomeServico')} ? has-error">
+						<label for="servico" class="col-sm-2 control-label">Serviço</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="servico"
+								th:field="*{nomeServico}" />
+						</div>
+					</div>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('valorCobrado')} ? has-error">
+						<label for="valor" class="col-sm-2 control-label">Valor
+							Cobrado</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control js-valorCss" id="valor"
+								th:field="*{valorCobrado}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="dtInicio" class="col-sm-2 control-label">Data
+							Início do Contrato</label>
+						<div id="datetimepicker"
+							class="col-sm-4 input-group input-append date dt">
+							<input type="text" name="dtInicio" class="col-sm-2 form-control" />
+							<span class="input-group-addon"> <i
+								class="glyphicon glyphicon-calendar"></i></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="dtFim" class="col-sm-2 control-label">Data Fim
+							do Contrato</label>
+						<div id="datetimepicker"
+							class="col-sm-4 input-group input-append date dt">
+							<input type="text" name="dtFim" class="col-sm-2 form-control" />
+							<span class="input-group-addon"> <i
+								class="glyphicon glyphicon-calendar"></i></span>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary texto_td disabled">Salvar</button>
+						</div>
+					</div>
+					
 				</div>
 			</div>
+
 		</div>
 
 	</form>

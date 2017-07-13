@@ -31,7 +31,7 @@
 
 				<div class="col-md-8 pesquisa">
 
-					<div class="btn btn-link icone_add text-center"	th:href="@{/linhas/nova}" 
+					<div class="btn btn-link texto_td text-center"	th:href="@{/linhas/nova}" 
 					onClick="location.href='/linhas/nova'" style="float: left"> 
 							<span class="fa fa-plus-circle" id="add">
 								<span class="tabela"> Nova Linha</span>
@@ -55,9 +55,9 @@
 
 			<form class="form-horizontal" method="POST" td:action="@{/linhas}">
 
-				<div class="col-md-12 padding-0 cinza">
+				<div class="col-md-12 panel padding-0 cinza">
 
-					<div class="painel-body bg-panel padding-7">
+					<div class="painel-body bg-panel padding-7 tabela">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped tabela">
 								<thead>
@@ -73,15 +73,17 @@
 									<tr th:each="linha : ${linhas}">
 										<td class="text-center" th:text="${linha.idLinha}"></td>
 										<td th:text="${linha.numeroLinha}"></td>
-										<td class="text-center"><a class="btn btn-link btn-xs"
+										<td class="text-center">
+										<a class="icone_tabela"
 											th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
 											rel="tooltip" data-placement="left"> <span
-												class="glyphicon glyphicon-pencil"></span>
-										</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+												class="fa fa-pencil"></span>
+										</a> 
+										<a class="icone_tabela" data-toggle="modal"
 											data-target="#confirmacaoExclusaoModal"
 											th:attr="data-flag='4',data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
 											title="Remover" rel="tooltip" data-placement="left"> <span
-												class="glyphicon glyphicon-remove"></span>
+												class="fa fa-remove text-danger"></span>
 										</a></td>
 
 									</tr>
@@ -102,6 +104,6 @@
 			</form>
 		</div>
 	</div>
-
+<div layout:include="DialogoConfirmacaoExclusao"></div>
 </section>
 </html>

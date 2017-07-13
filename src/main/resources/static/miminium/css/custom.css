@@ -938,6 +938,7 @@ h5 {
 	}
 	.pesquisa {
 		padding-left: 0px;
+		padding-right:0px;
 		
 	}
 	
@@ -963,7 +964,14 @@ h5 {
 /* FIM MENU-USUARIO/DISPOSITIVOS */
 
 
+.tabela {
+	font-family:'open_sansregular';
+	font-size:12px;
+	color:#3c5460;
+}
 
-
+.dt {
+	padding-left:15px !important;
+}
 
 

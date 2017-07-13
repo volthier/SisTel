@@ -5,7 +5,7 @@
 	layout:decorator="LayoutPadrao">
 
 <head>
-<title>Consulta</title>
+<title>Dispositivos</title>
 </head>
 <section layout:fragment="conteudo">
 
@@ -24,7 +24,8 @@
 
 				<a class="btn btn-link dt-link-panel direita texto_td"
 					th:href="@{/inicio}">
-					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar para Home
+					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>
+						<span>Voltar para Home</span>
 				</a>
 			</div>
 
@@ -35,7 +36,7 @@
 					
 
 
-						<div class="btn btn-link icone_add text-center"	th:href="@{/dispositivos/novo}" 
+						<div class="btn btn-link texto_td text-center"	th:href="@{/dispositivos/novo}" 
 						onClick="location.href='/dispositivos/novo'" style="float: left">
 							<span class="fa fa-plus-circle" id="add"> 
 								<span class="tabela"> Novo Dispositivo</span>
@@ -47,7 +48,7 @@
 				</div>
 
 				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input type="text" class="form-control"
+					<input type="text" class="form-control panel"
 						placeholder="Digite aqui sua pesquisa" /> <span
 						class="input-group-btn">
 						<button class="btn btn-secondary" type="button">
@@ -61,8 +62,9 @@
 			<form class="form-horizontal" method="POST"
 				td:action="@{/dispositivos}">
 
-				<div class="col-md-12 padding-0">
-					<div class="painel-body bg-panel padding-7">
+				<div class="col-md-12 panel padding-0">
+				
+					<div class="painel-body bg-panel padding-7 tabela">
 
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped tabela">
@@ -98,21 +100,23 @@
 											th:text="${dispositivo.tipoDispositivo}"></td>
 										<td class="text-right"
 											th:text="|R$ ${{dispositivo.valorDispositivo}}|"></td>
-										<td class="text-center"><a class="btn btn-link btn-xs"
+										<td class="text-center">
+											<a class="icone_tabela"
 											th:href="@{/dispositivos/{id}(id=${dispositivo.idDispositivo})}"
 											title="Editar" rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
-										</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+											</a> 
+											<a class="icone_tabela" data-toggle="modal"
 											data-target="#confirmacaoExclusaoModal"
 											th:attr="data-flag='1',data-excludId=${dispositivo.idDispositivo}, data-exclude=${dispositivo.modeloDispositivo}"
 											title="Remover" rel="tooltip" data-placement="left"> <span
-												class="fa fa-remove"></span>
+												class="fa fa-remove text-danger"></span>
 										</a></td>
 
 									</tr>
 									<tr>
 										<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-											Dispositivo econtrado!!!</td>
+											Dispositivo encontrado!!!</td>
 									</tr>
 								</tbody>
 							</table>
@@ -129,6 +133,7 @@
 	</div>
 
 
+	<div layout:include="DialogoConfirmacaoExclusao"></div>
 
 
 

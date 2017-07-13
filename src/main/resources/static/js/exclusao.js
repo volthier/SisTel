@@ -74,7 +74,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 				
 	}
 	else if(flag == 7){
-		action ='/limite-atesto';
+		action ='/limites-atesto';
 		if(!action.endsWith('/')){
 			action +='/' ;
 		}

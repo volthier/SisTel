@@ -4,46 +4,62 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Cadastro de Pessoas</title>
+<title>Cadastro de Categorias</title>
 </head>
 
 <section layout:fragment="conteudo">
-	<div>
-	<form class="form-horizontal" method="POST"
-		th:action="@{/categorias}" th:object="${categoria}">
+
+	<form class="form-horizontal" method="POST" th:action="@{/categorias}"
+		th:object="${categoria}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+
+
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Categoria</h3>
+				</div>
+
 				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						categorias de serviços</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/consultas/categorias}">Voltar
-						para Lista</a>
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/consultas/categorias}"> <span
+						class="fa fa-angle-double-left" style="margin-right: 5px;"></span>Voltar
+						para Categorias
+					</a>
+				</div>
+
+			</div>
+
+			<div class="col-md-12 panel padding-0">
+				<div class="panel-body bg-panel padding-7 tabela">
+
+					<input type="hidden" th:field="*{idCategoria}" />
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('descricaoCategoria')} ? has-error">
+
+						<label for="descricaoCategorias" class="col-sm-2 control-label">Descrição</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="descricaoCategorias"
+								th:field="*{descricaoCategoria}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary texto_td">Salvar</button>
+						</div>
+					</div>
+
 				</div>
 			</div>
 
-			<div class="painel-body">
-				<input type="hidden" th:field="*{idCategoria}" />
-				<div class="form-group"	th:classappend="${#fields.hasErrors('descricaoCategoria')} ? has-error">
-				
-					<label for="descricaoCategorias" class="col-sm-2 control-label">Descrição</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="descricaoCategorias"
-							th:field="*{descricaoCategoria}" />
-					</div>
-				</div>
-			
-				<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-primary">Salvar</button>
-							</div>
-						</div>
 
-					</div>
-				</div></form>
-				</div>
+		</div>
+	</form>
+
 </section>
 </html>

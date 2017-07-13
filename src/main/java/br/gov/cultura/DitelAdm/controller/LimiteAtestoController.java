@@ -18,7 +18,7 @@ import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 @Controller
-@RequestMapping("/limite-atesto")
+@RequestMapping("/limites-atesto")
 public class LimiteAtestoController {
 	
 	private static final String CADASTRO_VIEW = "CadastroLimiteAtesto";
@@ -44,7 +44,7 @@ public class LimiteAtestoController {
 		try{
 			limiteAtestoService.salvar(limiteAtesto);
 			attributes.addFlashAttribute("mensagem","Limite atesto cadastrado com sucesso!");
-			return "redirect:/limite-atesto/novo";		
+			return "redirect:/limites-atesto/novo";		
 		}catch(IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;
@@ -55,7 +55,7 @@ public class LimiteAtestoController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		limiteAtestoService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastro do limite atesto removido com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/limites-atesto";
 		}	
 	
 	@RequestMapping("{id}")

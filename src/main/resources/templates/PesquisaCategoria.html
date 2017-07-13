@@ -31,7 +31,7 @@
 
 				<div class="col-md-8 pesquisa">
 
-					<div class="btn btn-link icone_add text-center" th:href="@{/categorias/nova}"
+					<div class="btn btn-link texto_td icone_add text-center" th:href="@{/categorias/nova}"
 					onClick="location.href='/categorias/nova'" style="float: left">
 							<span class="fa fa-plus-circle" id="add"> 
 								<span class="tabela"> Nova Categoria</span>
@@ -41,7 +41,7 @@
 				</div>
 
 				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input type="text" class="form-control"
+					<input type="text" class="form-control panel"
 						placeholder="Digite aqui sua pesquisa" /> <span
 						class="input-group-btn">
 						<button class="btn btn-secondary" type="button">
@@ -54,11 +54,11 @@
 
 			<form class="form-horizontal" method="POST" th:action="@{/consultas}">
 
-				<div class="col-md-12 padding-0">
-					<div class="panel-body bg-panel padding-7">
+				<div class="col-md-12 panel padding-0">
+					<div class="panel-body bg-panel padding-7 tabela">
 
 						<div class="table-responsive">
-				<table class="table table-bordered table-striped">
+				<table class="table table-bordered table-striped tabela">
 					<thead>
 						<tr>
 							<th class="text-center col-md1">Id</th>
@@ -72,15 +72,15 @@
 						<tr th:each="categoria : ${categorias}">
 							<td class="text-center" th:text="${categoria.idCategoria}"></td>
 							<td th:text="${categoria.descricaoCategoria}"></td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
+							<td class="text-center"><a class="icone_tabela"
 								th:href="@{/categorias/{id}(id=${categoria.idCategoria})}" title="Editar"
 								rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+									class="fa fa-pencil"></span>
+							</a> <a class="icone_tabela" data-toggle="modal"
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-flag='6', data-excludId=${categoria.idCategoria}, data-exclude=${categoria.descricaoCategoria}"
 								title="Remover" rel="tooltip" data-placement="left"> <span
-									class="glyphicon glyphicon-remove text-danger"></span>
+									class="fa fa-remove text-danger"></span>
 							</a></td>
 
 						</tr>
@@ -107,6 +107,6 @@
 	</div>
 
 
-
+<div layout:include="DialogoConfirmacaoExclusao"></div>
 </section>
 </html>

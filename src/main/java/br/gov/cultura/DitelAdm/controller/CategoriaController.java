@@ -51,7 +51,7 @@ public class CategoriaController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroCategoriaService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Categoria removida com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/categorias";
 		}	
 	
 	@RequestMapping("{id}")

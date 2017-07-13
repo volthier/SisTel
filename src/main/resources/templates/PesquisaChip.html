@@ -9,7 +9,7 @@
 
 <section layout:fragment="conteudo">
 
-
+<div layout:include="MensagemSucesso"></div>
 
 
 	<div class=" col-md-12  panel sem_sombra padding20 bg">
@@ -31,7 +31,7 @@
 
 				<div class="col-md-8 pesquisa">
 
-					<div class="btn btn-link icone_add text-center" th:href="@{/chips/novo}"
+					<div class="btn btn-link icone_add texto_td text-center" th:href="@{/chips/novo}"
 					onClick="location.href='/chips/novo'" style="float: left">
 							<span class="fa fa-plus-circle" id="add"> 
 								<span class="tabela"> Novo Chip</span>
@@ -41,7 +41,7 @@
 				</div>
 
 				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input type="text" class="form-control"
+					<input type="text" class="form-control panel"
 						placeholder="Digite aqui sua pesquisa" /> <span
 						class="input-group-btn">
 						<button class="btn btn-secondary" type="button">
@@ -54,8 +54,8 @@
 
 			<form class="form-horizontal" method="POST" th:action="@{/chips}">
 
-				<div class="col-md-12 padding-0">
-					<div class="panel-body bg-panel padding-7">
+				<div class="col-md-12 panel padding-0">
+					<div class="panel-body bg-panel padding-7 tabela">
 
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped tabela">
@@ -74,16 +74,18 @@
 										<td class="text-center" th:text="${chip.idChip}"></td>
 										<td th:text="${chip.numeroSerieChip}"></td>
 										<td class="text-center" th:text="${chip.tipoChip}"></td>
-										<td class="text-center"><a class="btn btn-link btn-xs"
-											th:href="@{/chips/{id}(id=${chip.idChip})}" title="Editar"
+										<td class="text-center">
+											<a class="icone_tabela"	th:href="@{/chips/{id}(id=${chip.idChip})}" title="Editar"
 											rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
-										</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+											</a> 
+											<a class="icone_tabela" data-toggle="modal"
 											data-target="#confirmacaoExclusaoModal"
 											th:attr="data-flag='3',data-excludId=${chip.idChip}, data-exclude=${chip.numeroSerieChip}"
 											title="Remover" rel="tooltip" data-placement="left"> <span
-												class="fa fa-remove"></span>
-										</a></td>
+												class="fa fa-remove text-danger"></span>
+											</a>
+										</td>
 
 									</tr>
 									<tr>
@@ -105,6 +107,6 @@
 	</div>
 
 
-
+<div layout:include="DialogoConfirmacaoExclusao"></div>
 </section>
 </html>
