@@ -435,7 +435,7 @@ public class FaturaController {
 					
 // Condessar fatura aqui
  
-					alocacaoFatura.setDocumentoSei(
+			/*		alocacaoFatura.setDocumentoSei(
 							sei.enviarFaturasCompostas(alocacaoRepasse,								
 									gerarPdfFaturaComposta(
 												   fatura,
@@ -447,7 +447,7 @@ public class FaturaController {
 												   resumoVinculados,
 												   request)
 									)
-							);
+							);*/
 					
 					//mailer.enviarAtestoFatura(alocacao, fatura);
 					

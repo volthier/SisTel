@@ -24,80 +24,82 @@
 					td:href="@{/menu-usuario}">Voltar para Lista</a>
 			</div>
 
-			<div class="col-md-12 padding-7 pesquisa">
+			<form class="form-horizontal">
 
-				<div class="col-md-4 input-group">
-					<input type="text" class="form-control"
-						placeholder="Digite aqui sua pesquisa" /> <span
-						class="input-group-btn">
-						<button class="btn btn-secondary" type="button">
-							<span class="fa fa-search text-center b"> </span>
-						</button>
-					</span>
+	<div class="col-md-12 padding-0">
+					<div class="panel-body bg-panel padding-7">
+
+						<table border="1" class="tableusuario"
+							style="border-radius: 20px;">
+							<tr>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden; border-right: hidden; padding: 10px; border-radius: 20px;">
+									Nome: <label class="b"> Nome Exemplo</label>
+								</td>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden; border-right: hidden;">CPF:
+									<label class="b"> 99999999999</label>
+								</td>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden; border-right: hidden;">
+									EMAIL: <label class="b"> nome.exemplo@exemplo.com</label>
+								</td>
+								<td class="tdusuaio largura_td texto_td"
+									style="border-bottom: hidden;"></td>
+							</tr>
+							<tr>
+								<td class="tdusuaio texto_td"
+									style="border-right: hidden; padding: 10px">Gerência: <label
+									class="b"> X</label>
+								</td>
+								<td class="tdusuaio texto_td" style="border-right: hidden">
+									Cargo: <label class="b"> Secretária</label>
+								</td>
+								<td class="tdusuaio texto_td" style="border-right: hidden">
+									Vinculo: <label class="b"> Y</label>
+								</td>
+								<td class="tdusuaio texto_td" style="border-top: hidden">
+									DAS: <label class="b"> Z</label>
+								</td>
+							</tr>
+						</table>
+
+					</div>
 				</div>
 
-			</div>
-
-			<form class="form-horizontal" method="POST" td:action="@{/chips}">
 
 				<div class="col-md-12 padding-0">
 					<div class="painel-body bg-panel padding-7">
 						<div class="table-responsive">
-							<table class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<td class=" col-sm1 bold">Id</td>
-										<td class=" col-sm1 bold">Marca</td>
-										<td class=" col-sm1 bold">Modelo</td>
-										<td class=" col-sm1 bold">Numero de Série</td>
-										<td class=" col-sm1 bold">IMEI</td>
-										<td class=" col-sm1 bold">Patrimonio</td>
-										<td class=" col-sm1 bold">Tipo</td>
-										<td class=" col-sm1 bold">Valor</td>
-										<td class=" col-sm1 bold"></td>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md1">Id</th>
+							<th class="text-center col-md2">Numero</th>
+							<th class="text-center col-md2">Tipo</th>
+							<th class="text-center col-md2">Marca</th>
+							<th class="text-center col-md2">Modelo</th>
+							<th class="text-center col-md2">Fatura</th>
+						</tr>
+					</thead>
 
-									</tr>
-								</thead>
+					<tbody>
 
-
-
-								<tr>
-									<td>1</td>
-									<td>Apple</td>
-									<td>5s</td>
-									<td>123456789</td>
-									<td>987654321</td>
-									<td>comodato</td>
-									<td>Celular</td>
-									<td>R$ 2.000,00</td>
-
-									<td class="center"><a class="icone_tabela" title="Editar"
-										rel="tooltip" data-placement="left"> <span
-											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
-										title="Excluir" rel="tooltip" data-placement="left"> <span
-											class="fa fa-close"></span></a></td>
-								</tr>
-
-
-
-								<tr>
-									<td>2</td>
-									<td>Samsung</td>
-									<td>S5</td>
-									<td>1238922224</td>
-									<td>12498765</td>
-									<td>comodato</td>
-									<td>Celular</td>
-									<td>R$ 11.111,11</td>
-									<td class="center"><a class="icone_tabela" title="Editar"
-										rel="tooltip" data-placement="left"> <span
-											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
-										title="Excluir" rel="tooltip" data-placement="left"> <span
-											class="fa fa-close"></span></a></td>
-								</tr>
-
-							</table>
-						</div>
+						<tr>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center" ></td>
+							<td class="text-center"><a class="btn btn-link btn-xs"
+								title="Farura" rel="tooltip" data-placement="left"> <span
+									class="glyphicon glyphicon-list-alt"></span></a>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
 					</div>
 				</div>
 

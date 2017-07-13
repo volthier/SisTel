@@ -46,7 +46,7 @@ public class ConsultaController {
 
 	@RequestMapping("/dispositivos")
 	public ModelAndView consultarDispositivo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		ModelAndView mv = new ModelAndView("PesquisaDispositivo");
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		mv.addObject("dispositivos", todosDispositivos);
 		return mv;
@@ -54,7 +54,7 @@ public class ConsultaController {
 	
 	@RequestMapping("/usuarios")
 	public ModelAndView consultarUsuario(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		ModelAndView mv = new ModelAndView("PesquisaUsuario");
 		List<Usuario> todosUsuarios = cadastroUsuarioService.getIdUsuario();
 		mv.addObject("usuarios", todosUsuarios);
 		return mv;
@@ -62,7 +62,7 @@ public class ConsultaController {
 	
 	@RequestMapping("/chips")
 	public ModelAndView consultarChip(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		ModelAndView mv = new ModelAndView("PesquisaChip");
 		List<Chip> todosChips = cadastroChipService.getIdChip();
 		mv.addObject("chips", todosChips);
 		return mv;
@@ -70,7 +70,7 @@ public class ConsultaController {
 	
 	@RequestMapping("/linhas")
 	public ModelAndView consultarLinha(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		ModelAndView mv = new ModelAndView("PesquisaLinha");
 		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
 		mv.addObject("linhas", todasLinhas);
 		return mv;
@@ -78,7 +78,7 @@ public class ConsultaController {
 	
 	@RequestMapping("/categorias")
 	public ModelAndView consultarCategoria(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		ModelAndView mv = new ModelAndView("PesquisaCategoria");
 		List<Categoria> todasCategorias = CadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias",todasCategorias);
 		return mv;
@@ -86,9 +86,15 @@ public class ConsultaController {
 	
 	@RequestMapping("/limites-atesto")
 	public ModelAndView consultarLimiteAtesto(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDispositivos");
+		ModelAndView mv = new ModelAndView("PesquisaLimiteAtesto");
 		List<LimiteAtesto> todosOsLimites = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limites", todosOsLimites);
+		return mv;
+	}
+	
+	@RequestMapping("/contratos")
+	public ModelAndView consultarContrato(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaContrato");
 		return mv;
 	}
 

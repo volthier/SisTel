@@ -16,7 +16,7 @@ import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.ContratoService;
 
 @Controller
-@RequestMapping("/contrato")
+@RequestMapping("/contratos")
 public class ContratoController {
 	
 	private static final String CADASTRO_VIEW = "CadastroContrato";
