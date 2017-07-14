@@ -40,6 +40,9 @@
                 fontStyle: tooltip.fontStyle
             });
         };
+        
+        $('.mask-phone').mask("(00) 000000000");
+        
         var randomScalingFactor = function() {
             return Math.round(Math.random() * 100);
         };
