@@ -35,7 +35,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	else if(flag == 3){
 		action ='/chips';
-		if(!action.endsWith('')){
+		if(!action.endsWith('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
