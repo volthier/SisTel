@@ -15,15 +15,11 @@
 			</div>
 
 
-			<div class="clearfix">
-
-				<a class="btn btn-link dt-link-panel direita texto_td"
-					th:href="@{/inicio}">Voltar para Lista</a>
-			</div>
 			<div class="col-md-12 padding-7 pesquisa">
 
-				<div class="col-md-4 input-group">
-					<input type="text" class="form-control"
+
+				<div class="col-md-offset-8 col-md-4 input-group" id="input_pesquisa">
+					<input type="text" class="form-control panel"
 						placeholder="Digite aqui sua pesquisa" /> <span
 						class="input-group-btn">
 						<button class="btn btn-secondary" type="button">
@@ -36,8 +32,8 @@
 
 			<form class="form-horizontal" method="POST"	th:action="@{/menu-usuario}">
 			
-			<div class="col-md-12 padding-0">
-					<div class="panel-body bg-panel padding-7">
+			<div class="col-md-12 panel padding-0">
+					<div class="panel-body bg-panel padding-7 tabela">
 
 						<table border="1" class="tableusuario"
 							style="border-radius: 20px;">
@@ -77,17 +73,8 @@
 					</div>
 				</div>
 
-				<div class="form-group" style="width: 100%">
-					<div class="col-sm-12 padding-0 linha_btn" style="width: 100%">
-						<button id="botaodisp" type="submit"
-							class="btn btn-primary texto_td" style="float: left">Adicionar
-							Novo Número</button>
 
-
-					</div>
-				</div>
-
-				<div class="col-md-12 padding-0">
+				<div class="col-md-12 panel padding-0">
 					<div class="panel-body bg-panel padding-7">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped">
@@ -124,7 +111,7 @@
 				<div style="width: 100%">
 					<div class="col-sm-12 padding-0 linha_btn" style="width: 100%">
 						<button id="botaodisp" type="submit"
-							class="btn btn-primary texto_td a" style="float: left">Adicionar
+							class="btn btn-primary texto_td" style="float:left; margin-left: -5px;" >Adicionar
 							Novo Número</button>
 					</div>
 				</div>
