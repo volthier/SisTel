@@ -489,6 +489,22 @@ public class FaturaController {
 
 				servicosPorCategoria = new ArrayList<ServicosCategoria>();
 
+			}else{
+				for (AlocacaoFatura alocacaoFaturaRessarcimento : alocacoesFaturas) {
+					alocacaoFaturaRessarcimento.setRessarcimento(false);
+					alocacaoService.salvar(alocacaoFaturaRessarcimento);
+					cal = new CalculadorDTO();
+				}
+				sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
+
+				// Condessar fatura aqui
+
+				alocacaoFatura.setDocumentoSei(
+						sei.enviarFaturasCompostas(alocacaoRepasse, gerarPdfFaturaComposta(faturaDTOLista, request)));
+
+				// mailer.enviarAtestoFatura(alocacao, fatura);
+
+				servicosPorCategoria = new ArrayList<ServicosCategoria>();
 			}
 
 		}
