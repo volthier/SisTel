@@ -73,15 +73,15 @@
 										<td class="text-center"
 											th:text=" ${usuario.limiteAtesto.dasAtesto}"></td>
 										<!--<td class="text-center" th:text=" ${usuario.email}"></td> -->
-										<td class="text-center"><a class="btn btn-link btn-xs"
+										<td class="text-center"><a class="icone_tabela"
 											th:href="@{/usuarios/{id}(id=${usuario.idUsuario})}"
 											title="Editar" rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
-										</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+										</a> <a class="icone_tabela" data-toggle="modal"
 											data-target="#confirmacaoExclusaoModal"
-											th:attr="data-flag='2',data-excludId=${usuario.idUsuario}, data-exclude=${usuario.nomeUsuario}"
+											th:attr="data-flag='2',data-excludId=${usuario.idUsuario}, data-exclude=${usuario.idUsuario}"
 											title="Remover" rel="tooltip" data-placement="left"> <span
-												class="fa fa-remove"></span>
+												class="fa fa-remove text-danger"></span>
 										</a></td>
 
 									</tr>
