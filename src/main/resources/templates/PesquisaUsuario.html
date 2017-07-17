@@ -18,27 +18,28 @@
 			<div class="clearfix">
 
 				<a class="btn btn-link dt-link-panel direita texto_td"
-					th:href="@{/consultas/usuarios}">
-					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar</a>
+					th:href="@{/consultas/usuarios}"> <span
+					class="fa fa-angle-double-left" style="margin-right: 5px;"></span>Voltar
+				</a>
 			</div>
 
-			<div class="col-md-12 padding-7 pesquisa">
-				<div class="col-md-8 pesquisa">
 
-					
-				</div>
+
+			<div class="col-md-12 padding-7 pesquisa">
+				<div class="col-md-8 pesquisa"></div>
 
 				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input type="text" class="form-control panel"
+					<input class="form-control"
 						placeholder="Digite aqui sua pesquisa" /> <span
 						class="input-group-btn">
-						<button class="btn btn-secondary" type="button">
+						<button class="btn btn-secondary" type="submit">
 							<span class="fa fa-search text-center b"> </span>
 						</button>
 					</span>
 				</div>
 
 			</div>
+
 
 			<form class="form-horizontal" method="POST" td:action="@{/usuarios}">
 
@@ -51,8 +52,6 @@
 										<th class="text-center col-md1">Id</th>
 										<th>Nome</th>
 										<th class="text-center col-md3">CPF</th>
-										<!-- <th class="text-center col-md2">Matricula</th>
-							<th class="text-center col-md2">Vinculo</th> -->
 										<th class="text-center col-md2">Setor</th>
 										<th class="text-center col-md2">Cargo</th>
 										<th class="text-center col-md2">DAS</th>

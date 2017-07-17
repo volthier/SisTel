@@ -41,38 +41,21 @@
 				</div>
 
 
-				<!-- <form method="GET" class="form-horizontal" th:action="@{/consultas/categorias}"
-					th:object="${filtro}">
-					
-						
-							<div class="col-md-4 input-group" id="input_pesquisa">
-								<input type="text" class="form-control panel"
-									placeholder="Digite aqui sua pesquisa" /> <span
-									class="input-group-btn">
-									<button class="btn btn-secondary form-control" type="submit">
-										<span class="fa fa-search text-center b"> </span>
-									</button>
-								</span>
-							</div>
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input class="form-control"
+								placeholder="Faça sua pesquisa aqui" autofocus="autofocus"></input>
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="fa fa-search text-center b"></i>
+								</button>
+							</span>
 
-				</form> -->
-
-				<form method="GET" class="form-horizontal"
-					th:action="@{/consultas/categorias}" th:object="${filtro}">
-					<div class="form-group">
-						<div class="col-sm-4">
-							<div class="input-group">
-								<input class="form-control panel" placeholder="Faça sua pesquisa aqui"
-									autofocus="autofocus"></input> <span class="input-group-btn">
-									<button type="submit" class="btn btn-default">
-										<i class="fa fa-search text-center b"></i>
-									</button>
-								</span>
-
-							</div>
 						</div>
 					</div>
-				</form>
+				</div>
+
 
 
 

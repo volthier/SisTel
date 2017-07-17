@@ -23,9 +23,8 @@
 			<div class="clearfix">
 
 				<a class="btn btn-link dt-link-panel direita texto_td"
-					th:href="@{/inicio}">
-					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>
-						<span>Voltar</span>
+					th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+					style="margin-right: 5px;"></span> <span>Voltar</span>
 				</a>
 			</div>
 
@@ -33,37 +32,38 @@
 
 				<div class="col-md-8 pesquisa">
 
-					
 
-
-						<div class="btn btn-link texto_td text-center"	th:href="@{/dispositivos/novo}" 
+					<div class="btn btn-link texto_td text-center"
+						th:href="@{/dispositivos/novo}"
 						onClick="location.href='/dispositivos/novo'" style="float: left">
-							<span class="fa fa-plus-circle" id="add"> 
-								<span class="tabela"> Novo Dispositivo</span>
-							</span>
+						<span class="fa fa-plus-circle" id="add"> <span
+							class="tabela"> Novo Dispositivo</span>
+						</span>
 
-						</div>
+					</div>
 
-					
+
 				</div>
 
+
+
 				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input type="text" class="form-control panel"
+					<input class="form-control"
 						placeholder="Digite aqui sua pesquisa" /> <span
 						class="input-group-btn">
-						<button class="btn btn-secondary" type="button">
+						<button class="btn btn-secondary" type="submit">
 							<span class="fa fa-search text-center b"> </span>
 						</button>
 					</span>
 				</div>
 
+
 			</div>
 
-			<form class="form-horizontal" method="POST"
-				td:action="@{/dispositivos}">
+			<form method="POST" th:action="@{/dispositivos}">
 
 				<div class="col-md-12 panel padding-0">
-				
+
 					<div class="painel-body bg-panel padding-7 tabela">
 
 						<div class="table-responsive">
@@ -100,13 +100,11 @@
 											th:text="${dispositivo.tipoDispositivo}"></td>
 										<td class="text-right"
 											th:text="|R$ ${{dispositivo.valorDispositivo}}|"></td>
-										<td class="text-center">
-											<a class="icone_tabela"
+										<td class="text-center"><a class="icone_tabela"
 											th:href="@{/dispositivos/{id}(id=${dispositivo.idDispositivo})}"
 											title="Editar" rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
-											</a> 
-											<a class="icone_tabela" data-toggle="modal"
+										</a> <a class="icone_tabela" data-toggle="modal"
 											data-target="#confirmacaoExclusaoModal"
 											th:attr="data-flag='1',data-excludId=${dispositivo.idDispositivo}, data-exclude=${dispositivo.modeloDispositivo}"
 											title="Remover" rel="tooltip" data-placement="left"> <span
