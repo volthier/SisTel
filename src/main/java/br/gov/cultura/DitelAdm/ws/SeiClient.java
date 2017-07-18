@@ -229,12 +229,6 @@ public class SeiClient {
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		
-		Destinatario[] destinatario = new Destinatario[1];
-		Destinatario dest = new Destinatario();
-		dest.setNome(alocacaoLista.get(0).getUsuario().getNomeUsuario());
-		dest.setSigla(alocacaoLista.get(0).getUsuario().getCpfUsuario());
-		destinatario[0] = dest;
-		
 		int ponteiro = 0;
 		for(Alocacao aloc : alocacaoLista){
 			for(Alocacao aloca : alocacaoLista){
@@ -245,6 +239,12 @@ public class SeiClient {
 				}
 			}
 		}
+		
+		Destinatario[] destinatario = new Destinatario[1];
+		Destinatario dest = new Destinatario();
+		dest.setNome(alocacaoLista.get(ponteiro).getUsuario().getNomeUsuario());
+		dest.setSigla(alocacaoLista.get(ponteiro).getUsuario().getCpfUsuario());
+		destinatario[0] = dest;
 
 		Documento doc = new Documento();
 		doc.setTipo("G");
