@@ -24,13 +24,14 @@ public class LdapConfiguration {
         return contextSource;
     }
 
-	@Bean
+/*	@Bean
 	public PoolingContextSource poolContext(){
 		PoolingContextSource poolContext = new PoolingContextSource();
 		poolContext.setTestOnBorrow(true);
 		poolContext.setTestWhileIdle(true);
 		return poolContext;
 	}
+	*/
     @Bean
     public LdapTemplate ldapTemplate() {
         LdapTemplate ldapTemplate = new LdapTemplate(contextSource());
