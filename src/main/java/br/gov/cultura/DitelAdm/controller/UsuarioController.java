@@ -78,7 +78,7 @@ public class UsuarioController extends UrlController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes) {
 		cadastroUsuarioService.excluir(id);
 		attributes.addFlashAttribute("mensagem", "Cadastrado do usuário removido com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/usuarios";
 	}
 
 	@RequestMapping("{id}")

@@ -8,6 +8,9 @@
 </head>
 
 <section layout:fragment="conteudo">
+
+	<div layout:include="DialogoConfirmacaoExclusao"></div>
+
 	<div class=" col-md-12  panel sem_sombra padding20 bg">
 		<div class=" col-md-12 sem_sombra padding-0">
 			<div class="col-md-6 padding-0 sem_sombra intro">
@@ -29,9 +32,8 @@
 				<div class="col-md-8 pesquisa"></div>
 
 				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input class="form-control"
-						placeholder="Digite aqui sua pesquisa" /> <span
-						class="input-group-btn">
+					<input class="form-control" placeholder="Digite aqui sua pesquisa" />
+					<span class="input-group-btn">
 						<button class="btn btn-secondary" type="submit">
 							<span class="fa fa-search text-center b"> </span>
 						</button>
@@ -101,7 +103,6 @@
 			</form>
 		</div>
 	</div>
-
-
+<div layout:include="DialogoConfirmacaoExclusao"></div>
 </section>
 </html>
