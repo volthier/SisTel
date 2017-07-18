@@ -1,7 +1,9 @@
 package br.gov.cultura.DitelAdm.model.dtos;
 
+import java.util.Date;
 import java.util.List;
 
+import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.faturasV3.Ajustes;
 import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaajuste;
 import br.gov.cultura.DitelAdm.model.faturasV3.Categoriachamada;
@@ -22,6 +24,7 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 
 public class FaturaArquivoDTO {
 
+	private Alocacao alocacao;
 	private Operadora operadora;
 	private Cliente cliente;
 	private Fatura fatura;
@@ -39,6 +42,43 @@ public class FaturaArquivoDTO {
 	private List<Categoriaajuste> categoriaAjuste;
 	private List<Notafiscal> notaFiscal;
 	private List<Trailler> trailler;
+	private List<ServicosCategoria> servicosCategoria;
+	private float valorTotal;
+	private float valorContratoPlano;
+	private Date totalHorasChamadas;
+	
+		
+	public Date getTotalHorasChamadas() {
+		return totalHorasChamadas;
+	}
+
+	public void setTotalHorasChamadas(Date totalHorasChamadas) {
+		this.totalHorasChamadas = totalHorasChamadas;
+	}
+
+	public float getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(float valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public float getValorContratoPlano() {
+		return valorContratoPlano;
+	}
+
+	public void setValorContratoPlano(float valorContratoPlano) {
+		this.valorContratoPlano = valorContratoPlano;
+	}
+
+	public Alocacao getAlocacao() {
+		return alocacao;
+	}
+
+	public void setAlocacao(Alocacao alocacao) {
+		this.alocacao = alocacao;
+	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -176,4 +216,13 @@ public class FaturaArquivoDTO {
 		this.trailler = trailler;
 	}
 
+	public List<ServicosCategoria> getServicosCategoria() {
+		return servicosCategoria;
+	}
+
+	public void setServicosCategoria(List<ServicosCategoria> servicosCategoria) {
+		this.servicosCategoria = servicosCategoria;
+	}
+	
+	
 }

@@ -253,7 +253,7 @@ table td[class*="col-"], table th[class*="col-"] {
 			<tr>
 				<td>&nbsp;</td>
 				<td>
-					<h1 th:text="${alocacao.usuario.nomeUsuario}">LEONARDO
+					<h1 th:text="${fatura[0].alocacao.usuario.nomeUsuario}">LEONARDO
 						VOLTHIER BARBOSA GOMES LEONARDO</h1>
 				</td>
 				<td><img alt=""
@@ -270,18 +270,21 @@ table td[class*="col-"], table th[class*="col-"] {
 				<td>Per&iacute;odo de Uso</td>
 				<td>Total a Pagar</td>
 			</tr>
-			<tr>
-				<td th:text="${alocacao.linha.numeroLinha}">61 99999 9999&nbsp;</td>
+			<tr th:each="fat : ${fatura}" >
+				<td th:text="${fat.alocacao.linha.numeroLinha}">61 99999 9999&nbsp;</td>
 				<td
-					th:text="${planoData.dataIniCicloFormatada()} + ' a ' + ${planoData.dataFimCicloFormatada()}">
+					th:text="${fat.planos[1].dataIniCicloFormatada()} + ' a ' + ${fat.planos[1].dataFimCicloFormatada()}">
 					22/01/2017</td>
 				<td
-					th:text="| R$ ${#numbers.formatDecimal(pacote.floatB,0,2,'COMMA')}">R$
+					th:text="| R$ ${#numbers.formatDecimal(fat.valorTotal,0,2,'COMMA')}">R$
 					&nbsp; 411,89</td>
 			</tr>
 		</tbody>
 	</table>
-	<table>
+	<br/>
+	 <div th:each="fat : ${fatura}">
+	 <h4 th:text="| Detalhamento da linha ${fat.alocacao.linha.numeroLinha}"></h4>
+	 <table>
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
@@ -298,11 +301,11 @@ table td[class*="col-"], table th[class*="col-"] {
 		<tbody>
 			<tr>
 				<td>GESTOR ONLINE - CONTROLE COMPLETO</td>
-				<td style="text-align: center;"
-					th:text="${#numbers.formatDecimal(pacote.floatA,0,2,'COMMA')}">Valor
+				<td th:if="${fat.valorContratoPlano != null }" style="text-align: center;"
+					th:text="${#numbers.formatDecimal(fat.valorContratoPlano,0,2,'COMMA')}">Valor
 					0</td>
 			</tr>
-			<tr th:each="plano : ${planos}">
+			<tr th:each="plano : ${fat.planos}">
 				<td
 					th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
 				<td style="text-align: center;"
@@ -311,15 +314,14 @@ table td[class*="col-"], table th[class*="col-"] {
 		</tbody>
 	</table>
 
-
-	<table th:if="${chamadas[0].idChamadas}!=null">
+	<table th:if="${fat.chamadas[0].idChamadas}!=null">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Liga&ccedil;&otilde;es</td>
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${chamadas[0].idChamadas}!=null" border="0" cellpadding="10" cellspacing="10" class="table">
+	<table th:if="${fat.chamadas[0].idChamadas}!=null" border="0" cellpadding="10" cellspacing="10" class="table">
 		<thead>
 			<tr>
 				<th>Data</th>
@@ -333,7 +335,7 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="chamada : ${chamadas}"
+			<tr th:each="chamada : ${fat.chamadas}"
 				style="border-bottom: 1px dashed black !important;">
 				<td th:if="${chamada.dataFormatada() != null}" th:text="${chamada.dataFormatada()}"></td>
 				<td style="text-align: center;" th:text="${chamada.horaLigacao}"></td>
@@ -350,22 +352,22 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${chamadas[0].idChamadas != null}" class="borda-redonda-foot">
+	<table th:if="${fat.chamadas[0].idChamadas != null}" class="borda-redonda-foot">
 		<tbody>
 			<tr>
 				<td colspan="4"><b>Sub Total</b></td>
-				<td style="text-align: center;"> <b><span th:text="${#dates.format(pacote.dataA, 'HH:mm:ss')}">aqui</span></b></td>
+				<td style="text-align: center;"> <b><span th:text="${#dates.format(fat.totalHorasChamadas, 'HH:mm:ss')}">aqui</span></b></td>
 				<td colspan="2"></td>
-				<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(chamadas.![valLigImp]),0,2)}">ali</span></b></td>
+				<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(fat.chamadas.![valLigImp]),0,2)}">ali</span></b></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<p th:if="${servicos[0].categoria != null}">
+	<p th:if="${fat.servicosCategoria[0].categoria != null}">
 		<b>Servi&ccedil;os (Torpedos, Hits, Jogos, etc.)</b>
 	</p>
 	<div>
-		<table class="table table-bordered" th:if="${servicos[0].categoria != null}">
+		<table class="table table-bordered" th:if="${fat.servicosCategoria[0].categoria != null}">
 			<thead>
 				<tr>
 					<td><b>Descri&ccedil;&atilde;o</b></td>
@@ -376,7 +378,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="servico : ${servicos}">
+				<tr th:each="servico : ${fat.servicosCategoria}">
 					<td th:text="${servico.categoria.descricao}"></td>
 					<td style="text-align: center;" th:text="${servico.quantidade}"></td>
 					<td style="text-align: center;"
@@ -389,8 +391,10 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tbody>
 		</table>
 	</div>
+	
+	</div>
 	<p>&nbsp;</p>
-	</page>
+	</page> 
 
 </body>
 </html>

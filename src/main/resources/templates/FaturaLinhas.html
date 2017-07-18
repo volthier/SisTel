@@ -35,7 +35,7 @@
 								<td class="text-danger" th:if="${alocacao.ressarcimento == true}" th:text="Sim"></td>
 								<td class="text-success" th:if="${alocacao.ressarcimento == false}" th:text="Não"></td>
 								<td th:text="${alocacao.alocacao.alocacaoSei.numeroExternoProcessoSei}"></td>
-								<td th:text="${alocacao.documentoSei.documentosNumero}"></td>
+								<!-- <td th:text="${alocacao.documentoSei.documentosNumero}"></td> -->
 								<td><a class="btn btn-primary" th:href="@{'/fatura/resumo/' + ${fatura.idFatura} + '/' + ${alocacao.alocacao.idAlocacao}}" role="button">Resumo</a></td>
 							</tr>
 						</tbody>
