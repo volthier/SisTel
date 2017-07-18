@@ -684,8 +684,56 @@ h5 {
     h3 {
         font-size: 22px;
     }
+    
+    
 }
 
+@media screen and (max-width: 768px){
+	#input_pesquisa {
+    	margin-left: 50px;
+    	width: 255px;
+    	right: -93px;
+    }
+    .table {
+    	width: 130%;
+    	max-width:130%;
+    }
+    .icone_tabela {
+    	margin-right: 9px;
+    	font-size: 16px;
+    }
+    .col-sm-4 {
+    	width: 60%;
+    }
+    .col-sm-2 {
+    	width: 30%;
+    }
+    .texto_td {
+    	margin-left:17%;
+    }
+    
+}
+
+@media screen and (max-width: 425px){
+	#input_pesquisa {
+    	margin-left: 50px;
+    	width: 220px;
+    	margin-top: -2px;
+    	right: -13px;
+    }
+    
+    .col-sm-4 {
+    	width: 80%;
+    }
+    .col-sm-2 {
+    	width: 60%;
+    }
+    .texto_td {
+    	margin-left:0px;
+    }
+    
+    
+}
 
 
 @media screen and (max-width: 479px) {
@@ -796,6 +844,10 @@ h5 {
     margin-top: -3px;
     margin-left: -10px;
     }
+    
+    h4 {
+    	font-size:17px;
+    }
 }
 
 @media screen and (max-width: 375px){
@@ -818,6 +870,15 @@ h5 {
     .borda_inf{
         width: 321px;
         margin-left: -20px;
+    }
+	#input_pesquisa {
+    	margin-left: 115px;
+    	width: 172px;
+    	margin-top: -1px;
+    	right: -13px;
+    }
+    .texto_td {
+    	margin-left:0px;
     }
 }
 
@@ -855,6 +916,19 @@ h5 {
         margin-right: 5px;
     }
     
+    #add {
+    margin-left: -8px;
+    }
+    #input_pesquisa {
+        margin-left: 142px;
+    	width: 125px;
+    }
+    #btn_novo {
+    	width: 130px;
+    }
+    .texto_td {
+    	margin-left:0px;
+    }
 }
 
 /*FIM HOME*/

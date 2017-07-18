@@ -9,90 +9,101 @@
 		<div class="mimin-mobile-menu-list">
 			<div class="col-md-12 sub-mimin-mobile-menu-list animated"
 				id="largura_menu_mobile">
+
 				<ul class="nav nav-list">
-                    
-                    <li class="ripple bg_inicio" >
-                        <a onClick="location.href='/inicio'" class="tree-toggle nav-header texto"><span class="fa-home fa"></span> Início
-                        </a>
-                    </li>
-                    
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header texto"><span class="fa fa-search"></span> Consultas
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a onClick="location.href='/menu-usuario/dispositivo'">Dispositivos</a></li>
-                          <li><a onClick="location.href='/usuarios/novo'">Pessoas</a></li>
-                          <li><a onClick="location.href='/chips/novo'">Chips</a></li>
-                          <li><a onClick="location.href='linhas/nova'">Linhas</a></li>
-                      </ul>
-                    </li>
-                    
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header texto">
-                        <span class="fa fa-exclamation-triangle" onClick="location.href='/pendencia'"></span> Pendências
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="#">Alocação</a></li>
-                        <li><a href="#">Notificação</a></li>
-                      </ul>
-                    </li>
-                    
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header texto">
-                        <span class="fa fa-book"></span>Alocações
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="#">Consultar Documentos</a></li>
-                        <li><a onClick="location.href='/alocacoes/disponibilizar'" >Disponibilizar</a></li>
-                        <li><a onClick="location.href='/alocacoes/devolver'">Devolver</a></li>
-                        <li><a href="#">Substituir</a></li>
-                        
-                      </ul>
-                    </li>
-                    
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header texto"><span class="icons icon-globe"></span> Roaming
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="#">Roaming1</a></li>
-                          <li><a href="#">Roaming2</a></li>
-                      </ul>
-                    </li>
-                    
-                    <li class="ripple"><a class="tree-toggle nav-header texto">
-                    <img class="icone_menu" src="../miminium/img/invoice.svg"/> Faturas<span class="fa-angle-right fa right-arrow text-right"></span></a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="#">Listar</a></li>
-                        <li><a onClick="location.href='/fatura'">Gerar</a></li>
-                        <li><a href="#">Resumos</a></li>
-                        
-                      </ul>
-                    </li>
-                    
-                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-bar-chart" onClick="location.href='relatorio'"></span>Relatórios  
-                    <span class="fa-angle-right fa right-arrow text-right"> </span></a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="#">Listar</a></li>
-                        <li><a href="#">Gerar</a></li>
-                        <li><a href="#">Resumos</a></li>
-                        
-                      </ul>
-                    </li>
-                    
-                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-chain"></span> Links  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
-                      <ul class="nav nav-list tree">
-                        <li><a href="#">Link1</a></li>
-                        <li><a href="#">Link2</a></li>
-                        <li><a href="#">Link3</a></li>
-                        
-                      </ul>
-                    </li>
-                    
-                  </ul>
+
+					<li class="ripple bg_inicio"><a
+						onClick="location.href='/inicio'"
+						class="tree-toggle nav-header texto"><span class="fa-home fa"></span>
+							Início </a></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto"><span
+							class="fa fa-search"></span> Consultas <span
+							class="fa-angle-right fa right-arrow text-right"></span> </a>
+						<ul class="nav nav-list tree">
+							<li><a onClick="location.href='/consultas/dispositivos'">Dispositivos</a></li>
+							<li><a onClick="location.href='/consultas/usuarios'">Pessoas</a></li>
+							<li><a onClick="location.href='/consultas/chips'">Chips</a></li>
+							<li><a onClick="location.href='/consultas/linhas'">Linhas</a></li>
+							<li><a onClick="location.href='/consultas/categorias'">Categorias</a></li>
+							<li><a onClick="location.href='/consultas/limites-atesto'">Limites
+									Atesto</a></li>
+							<li><a onClick="location.href='/consultas/contratos'">Contratos</a></li>
+						</ul></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto">
+							<span class="fa fa-exclamation-triangle"></span> Pendências <span
+							class="fa-angle-right fa right-arrow text-right"></span>
+					</a>
+						<ul class="nav nav-list tree">
+							<li><a href="#" onClick="location.href='/pendencia'">Alocação</a></li>
+							<li ><a href="#" 
+								>Notificação</a></li>
+						</ul></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto">
+							<span class="fa fa-book"></span>Alocações <span
+							class="fa-angle-right fa right-arrow text-right"></span>
+					</a>
+						<ul class="nav nav-list tree">
+							<li ><a href="#" 
+								>Consultar Documentos</a></li>
+							<li><a onClick="location.href='/alocacoes/disponibilizar'">Disponibilizar</a></li>
+							<li><a onClick="location.href='/alocacoes/devolver'">Devolver</a></li>
+							<li ><a href="#" 
+								>Substituir</a></li>
+
+						</ul></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto"><span
+							class="icons icon-globe"></span> Roaming <span
+							class="fa-angle-right fa right-arrow text-right"></span> </a>
+						<ul class="nav nav-list tree">
+							<li ><a href="#" 
+								>Listar</a></li>
+							<li ><a href="#" 
+								>Consultar</a></li>
+						</ul></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto">
+							<img class="icone_menu" src="../miminium/img/invoice.svg" />Faturas<span
+							class="fa-angle-right fa right-arrow text-right"></span>
+					</a>
+						<ul class="nav nav-list tree">
+							<li ><a href="#" 
+								>Listar</a></li>
+							<li><a onClick="location.href='/fatura'">Gerar</a></li>
+							<li><a href="#" onClick="location.href='/faturas/nova'">Carregar</a></li>
+
+						</ul></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto"><span
+							class="fa fa-bar-chart" onClick="location.href='relatorio'"></span>Relatórios
+							<span class="fa-angle-right fa right-arrow text-right"> </span></a>
+						<ul class="nav nav-list tree">
+							<li ><a href="#" 
+								>Listar</a></li>
+							<li ><a href="#" 
+								>Gerar</a></li>
+							<li ><a href="#" 
+								>Resumos</a></li>
+
+						</ul></li>
+
+					<li class="ripple"><a class="tree-toggle nav-header texto"><span
+							class="fa fa-chain"></span> Links <span
+							class="fa-angle-right fa right-arrow text-right"></span> </a>
+						<ul class="nav nav-list tree">
+							<li ><a href="#" 
+								>Link1</a></li>
+							<li ><a href="#" 
+								>Link2</a></li>
+							<li ><a href="#" 
+								>Link3</a></li>
+
+						</ul></li>
+
+				</ul>
 			</div>
 		</div>
 	</div>
