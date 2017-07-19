@@ -155,7 +155,7 @@ public class FaturaController {
 				for (Usuario usuario : usuarioLista) {
 					faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
 					AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
-					;
+					
 
 					cal.setValorTotalAtesto(0);
 					List<Alocacao> alocacaoRepasse = new ArrayList<Alocacao>();
@@ -468,7 +468,7 @@ public class FaturaController {
 					servicosPorCategoria = new ArrayList<ServicosCategoria>();
 					servicosVinculados = new ArrayList<Servicos>();
 				}
-
+System.out.println("Lista de alocação tamaho de :" + alocacaoRepasse.size());
 			/* ATESTOS E ENVIO PARA O SEI FATURA GERADA */
 			if (cal.getValorTotalAtesto() > limiteAtesto.getValorLimite()) {
 				for (AlocacaoFatura alocacaoFaturaRessarcimento : alocacoesFaturas) {
