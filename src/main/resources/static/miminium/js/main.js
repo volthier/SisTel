@@ -41,7 +41,7 @@
             });
         };
         
-        var SPMaskBehavior = function (val) {
+        /*var SPMaskBehavior = function (val) {
         	  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
         	},
         	spOptions = {
@@ -50,7 +50,7 @@
         	    }
         	};
 
-        	$('.sp_celphones').mask(SPMaskBehavior, spOptions);
+        	$('.sp_celphones').mask(SPMaskBehavior, spOptions);*/
         
         var randomScalingFactor = function() {
             return Math.round(Math.random() * 100);
