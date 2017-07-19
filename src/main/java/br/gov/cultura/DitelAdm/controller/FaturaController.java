@@ -223,9 +223,12 @@ public class FaturaController {
 								}
 							}
 
+							
 							/* CHAMADAS */
 							if (planosVinculados.size() != 0) {
 								alocacaoRepasse.add(alocacao);
+								System.out.println(alocacaoRepasse.size() + alocacao.getIdAlocacao() +" Adicionou essa na lista");
+								
 								faturaDTO.setPlanos(planosVinculados);
 								faturaDTO.setAlocacao(alocacao);
 								i = 0;
@@ -468,7 +471,9 @@ public class FaturaController {
 					servicosPorCategoria = new ArrayList<ServicosCategoria>();
 					servicosVinculados = new ArrayList<Servicos>();
 				}
+						
 System.out.println("Lista de alocação tamaho de :" + alocacaoRepasse.size());
+
 			/* ATESTOS E ENVIO PARA O SEI FATURA GERADA */
 			if (cal.getValorTotalAtesto() > limiteAtesto.getValorLimite()) {
 				for (AlocacaoFatura alocacaoFaturaRessarcimento : alocacoesFaturas) {
