@@ -5,9 +5,7 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -691,7 +689,7 @@ public class FaturaController {
 		return valorTotal;
 	}
 
-	// GERA PDF FATURA
+	/*// GERA PDF FATURA
 	private byte[] gerarPdfFatura(Fatura fatura, Alocacao alocacao, CalculadorDTO cal, List<Chamadas> chamadas,
 			List<Planos> planos, List<ServicosCategoria> servicosPorCategoria, List<Resumo> resumo,
 			HttpServletRequest request) throws Exception {
@@ -719,7 +717,7 @@ public class FaturaController {
 
 		return baos.toByteArray();
 
-	}
+	}*/
 
 	// FATURA COMPOSTA E AGREGADAS
 	private byte[] gerarPdfFaturaComposta(List<FaturaArquivoDTO> faturaDTO, HttpServletRequest request)
