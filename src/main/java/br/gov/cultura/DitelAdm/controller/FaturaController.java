@@ -149,17 +149,21 @@ public class FaturaController {
 		FaturaArquivoDTO faturaDTO = new FaturaArquivoDTO();
 
 		int i;
-
+System.out.println("Usuarios : "+ usuarioLista.size());
 		while (usuarioLista.size() != 0) {
 			if (usuarioLista.size() != 0)
 				for (Usuario usuario : usuarioLista) {
 					faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
 					AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
 					
+System.out.println("Passei aqui com usuarios");
 
 					cal.setValorTotalAtesto(0);
 					List<Alocacao> alocacaoRepasse = new ArrayList<Alocacao>();
 					alocacaoListaUsuario = alocacaoService.getAlocacoesUsuario(usuario);
+					
+System.out.println("Peguei lista de alocação: " + alocacaoListaUsuario.size());
+
 					usuarioLista.remove(usuario);
 					if (!alocacaoListaUsuario.isEmpty()) {
 
