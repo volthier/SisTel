@@ -149,22 +149,19 @@ public class FaturaController {
 		FaturaArquivoDTO faturaDTO = new FaturaArquivoDTO();
 
 		int i;
-System.out.println("Usuarios : "+ usuarioLista.size());
+
 		while (usuarioLista.size() != 0) {
 			if (usuarioLista.size() != 0)
 				for (Usuario usuario : usuarioLista) {
+					
 					faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
 					AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
-					
-System.out.println("Passei aqui com usuarios");
-
 					cal.setValorTotalAtesto(0);
+
 					List<Alocacao> alocacaoRepasse = new ArrayList<Alocacao>();
 					alocacaoListaUsuario = alocacaoService.getAlocacoesUsuario(usuario);
-					
-System.out.println("Peguei lista de alocação: " + alocacaoListaUsuario.size());
-
 					usuarioLista.remove(usuario);
+
 					if (!alocacaoListaUsuario.isEmpty()) {
 
 						LimiteAtesto limiteAtesto = usuario.getLimiteAtesto();
@@ -230,12 +227,13 @@ System.out.println("Peguei lista de alocação: " + alocacaoListaUsuario.size())
 							
 							/* CHAMADAS */
 							if (planosVinculados.size() != 0) {
-								alocacaoRepasse.add(alocacao);
-								System.out.println(alocacaoRepasse.size() + alocacao.getIdAlocacao() +" Adicionou essa na lista");
 								
+								alocacaoRepasse.add(alocacao);
 								faturaDTO.setPlanos(planosVinculados);
 								faturaDTO.setAlocacao(alocacao);
+								faturaDTO.setFatura(fatura);
 								i = 0;
+								
 								for (Chamadas chamada : chamadasLista) {
 									++i;
 									if (alocacao.getLinha().equals(chamada.getLinha())) {
@@ -475,8 +473,6 @@ System.out.println("Peguei lista de alocação: " + alocacaoListaUsuario.size())
 					servicosPorCategoria = new ArrayList<ServicosCategoria>();
 					servicosVinculados = new ArrayList<Servicos>();
 				}
-						
-System.out.println("Lista de alocação tamaho de :" + alocacaoRepasse.size());
 
 			/* ATESTOS E ENVIO PARA O SEI FATURA GERADA */
 			if (cal.getValorTotalAtesto() > limiteAtesto.getValorLimite()) {
@@ -487,12 +483,10 @@ System.out.println("Lista de alocação tamaho de :" + alocacaoRepasse.size());
 				}
 				sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
 
-				// Condessar fatura aqui
-
 				alocacaoFatura.setDocumentoSei(
 						sei.enviarFaturasCompostas(alocacaoRepasse, gerarPdfFaturaComposta(faturaDTOLista, request)));
 
-				// mailer.enviarAtestoFatura(alocacao, fatura);
+				 mailer.enviarAtestoFatura(faturaDTOLista);
 
 				servicosPorCategoria = new ArrayList<ServicosCategoria>();
 
@@ -504,12 +498,10 @@ System.out.println("Lista de alocação tamaho de :" + alocacaoRepasse.size());
 				}
 				sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
 
-				// Condessar fatura aqui
-
 				alocacaoFatura.setDocumentoSei(
 						sei.enviarFaturasCompostas(alocacaoRepasse, gerarPdfFaturaComposta(faturaDTOLista, request)));
 
-				// mailer.enviarAtestoFatura(alocacao, fatura);
+				mailer.enviarAtestoFatura(faturaDTOLista);
 
 				servicosPorCategoria = new ArrayList<ServicosCategoria>();
 			}

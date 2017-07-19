@@ -2,6 +2,7 @@ package br.gov.cultura.DitelAdm.email;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -18,6 +19,7 @@ import org.thymeleaf.context.Context;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
+import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 
@@ -83,19 +85,18 @@ public class Mailer {
 
 	}
 	@Async
-	public void enviarAtestoFatura(Alocacao alocacao,Fatura fatura) throws IOException, ParseException, Exception {
+	public void enviarAtestoFatura(List<FaturaArquivoDTO> fatura ) throws IOException, ParseException, Exception {
 
 			
 		Context context = new Context();
-		context.setVariable("dto", alocacao);
-		context.setVariable("fatura", fatura);
+		context.setVariable("faturas", fatura);
 
 		try {
 			String email = thymeleaf.process("email/EmailAtestoFatura", context);
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom("ditel@cultura.gov.br");
-			helper.setTo(alocacao.getUsuario().getEmailUsuario());
+			helper.setTo(fatura.get(0).getAlocacao().getUsuario().getEmailUsuario());
 			helper.setSubject("Telefonia - Fatura Telefônica para Atesto!");
 			helper.setText(email, true);
 

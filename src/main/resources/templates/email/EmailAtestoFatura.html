@@ -10,11 +10,11 @@
 </p>
 <p>Este e um e-mail automático do SisTel</p>
 <br></br>
-<h1 style="font-size=20px" th:text="|Olá ${dto.usuario.nomeUsuario}"> Olá Maria</h1>
+<h1 style="font-size=20px" th:text="|Olá ${faturas[0].alocacao.usuario.nomeUsuario}"> Olá Maria</h1>
 
-<p> Estamos enviando essa notificação de inclusao da fatura referente ao mês <span th:text="${fatura.mesRef}"></span> da linha <span th:text="${dto.linha.numeroLinha}">numero</span> para atesto!</p>
+<p> Estamos enviando essa notificação de inclusao da fatura referente ao mês <span th:text="${faturas[0].fatura.mesRef}"> </span> <!-- da linha <span th:text="${dto.linha.numeroLinha}">numero</span>--> para atesto!</p> 
 
-<p> Número do processo no sistema SEI: <span th:text="${dto.alocacaoSei.numeroExternoProcessoSei}"></span> </p>
+<p> Número do processo no sistema SEI: <span th:text="${faturas[0].alocacao.alocacaoSei.numeroExternoProcessoSei}"></span> </p>
 
 <a href="http://seitreinamento.cultura.gov.br/">Link para acesso ao SEI</a>
 
