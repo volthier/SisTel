@@ -65,7 +65,7 @@
 
 							<tbody>
 
-								<tr th:each="dto : ${pendencia}">
+								<tr th:each="dto : ${pendencia}" th:if="${dto.autorizar == null}">
 									<td class="text-center" th:text="${dto.linha.numeroLinha}"></td>
 									<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
 									<td class="text-center"
@@ -115,7 +115,6 @@
 										title="Cancelar" rel="tooltip" data-placement="left"> <span
 											class="glyphicon glyphicon-remove"></span>
 									</a></td>
-
 								</tr>
 								<tr>
 									<td colspan="10" th:if="${#lists.isEmpty(pendencia)}">

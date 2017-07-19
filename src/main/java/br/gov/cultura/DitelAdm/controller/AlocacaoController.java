@@ -3,6 +3,7 @@ package br.gov.cultura.DitelAdm.controller;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -112,8 +113,19 @@ public class AlocacaoController {
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
 		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
-		todosUsuario.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
-		mv.addObject("usuariosDispositivos", todosUsuario);
+		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
+		
+		for(Alocacao aloca : todosUsuario){
+			if(aloca.getAutorizar()!=null){
+				possivelDevolver.add(aloca);
+			}
+		}
+		
+		if(possivelDevolver.size()>1){
+		possivelDevolver.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
+		}
+		
+		mv.addObject("usuariosDispositivos", possivelDevolver);
 
 		return mv;
 	}
