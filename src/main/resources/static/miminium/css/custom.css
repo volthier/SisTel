@@ -512,8 +512,8 @@ h5 {
     
 }
 .bg_inicio {
-    background-color: #d7d7d7;
-}
+    background-color: #cccccc;
+    }
 .icone {
     height: 16px;
     width: 16px;
@@ -557,7 +557,9 @@ opacity: 0;
 }
 /*FIM DIVS GRID*/
 
-
+.desativo {
+	opacity: 0.3;
+}
 
 
 /*MEDIA QUERIES*/
@@ -748,7 +750,9 @@ opacity: 0;
     .texto_td {
     	margin-left:0px;
     }
-    
+    .bg_inicio {
+    background-color: #3a8da0;
+	}
     
 }
 
@@ -779,9 +783,7 @@ opacity: 0;
         
     }
     
-    .bg_inicio {
-    background-color: #086b98;
-    }
+    
     #fundo_logo {
         height: 68.5px;
         width: 103%;
@@ -820,13 +822,16 @@ opacity: 0;
     }
     #largura_menu_mobile{
         height: 600px;
-        background: #0676a7;
+        background: -moz-linear-gradient(top, #57a2ad 0%, #026487 100%); /* FF3.6-15 */
+    	background: -webkit-linear-gradient(top, #57a2ad 0%,#026487 100%); /* Chrome10-25,Safari5.1-6 */
+    	background: linear-gradient(to bottom, #57a2ad 0%,#026487 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='57a2ad', endColorstr='#026487',GradientType=0 ); /* IE6-9 */
         
         
     }
     
     #mimin-mobile .tree {
-        background-color: rgba(6, 118, 167, 0.57);
+        background-color: rgb(58, 141, 160);
     }
     
     .grafico {
