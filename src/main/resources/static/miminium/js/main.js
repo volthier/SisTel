@@ -41,7 +41,20 @@
             });
         };
         
-        /*var SPMaskBehavior = function (val) {
+        $(document).ready(function () {
+            $(".mask_input_on").change(
+                 function () {
+                    var exp = /[^\w]/g;
+                    var commascara = $(".mask_input_on").val();
+                    var semmascara = commascara.replace(exp,"");
+                    $(".mask_input_off").val(semmascara);
+                    
+                 	}
+                 );
+        });
+
+        
+        var SPMaskBehavior = function (val) {
         	  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
         	},
         	spOptions = {
@@ -50,7 +63,7 @@
         	    }
         	};
 
-        	$('.sp_celphones').mask(SPMaskBehavior, spOptions);*/
+        	$('.sp_celphones').mask(SPMaskBehavior, spOptions);
         
         var randomScalingFactor = function() {
             return Math.round(Math.random() * 100);
