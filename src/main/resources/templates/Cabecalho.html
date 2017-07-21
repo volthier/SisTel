@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	layout:decorator="LayoutPadrao">
     
     <section layout:fragment="cabecalho">
@@ -24,7 +25,7 @@
               
 
               <ul id="menu_usuario" class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name nome_usuario"><span  th:utext="${#authentication.name}"> Moisés Rabelo</span></li>
+                <li class="user-name nome_usuario"><span sec:authentication="principal.username"> Moisés Rabelo</span></li>
                   <li class="dropdown avatar-dropdown" id="li_user">
                     <span class="fa fa-user li_nav" id="icone_usuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
 

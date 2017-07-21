@@ -1,6 +1,8 @@
 package br.gov.cultura.DitelAdm.controller;
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -17,6 +19,7 @@ import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 
 
 @Controller
+@Transactional
 @RequestMapping("/linhas")
 public class LinhaController extends UrlController {
 	

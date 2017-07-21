@@ -3,6 +3,8 @@ package br.gov.cultura.DitelAdm.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -19,6 +21,7 @@ import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
 
 @Controller
+@Transactional
 @RequestMapping("/categorias")
 public class CategoriaController {
 	

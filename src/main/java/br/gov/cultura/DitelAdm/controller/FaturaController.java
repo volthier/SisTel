@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -53,6 +54,7 @@ import br.gov.cultura.DitelAdm.ws.SeiClient;
  * registrado na base de dados através do FaturaUploadController
  */
 @Controller
+@Transactional
 @RequestMapping("/fatura")
 public class FaturaController {
 
