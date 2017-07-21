@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.model.Chip;
-import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
@@ -47,8 +46,7 @@ public class ConsultaController {
 	@RequestMapping("/dispositivos")
 	public ModelAndView consultarDispositivo(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("PesquisaDispositivo");
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		mv.addObject("dispositivos", todosDispositivos);
+		mv.addObject("dispositivos", cadastroDispositivoService.getIdDispositivo());
 		return mv;
 		}
 	

@@ -1,6 +1,7 @@
 package br.gov.cultura.DitelAdm.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+    Environment env;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -44,12 +48,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.ldapAuthentication()
-			.userSearchFilter("(sAMAccountName={0})")
-			.userSearchBase("OU=CGTI,OU=Usuarios,OU=Sede")
+		.userSearchFilter(System.getenv("USERSEARCHFILTERLDAP"))
+			.userSearchBase(System.getenv("USERSEARCHBASELDAP"))
 				.groupSearchFilter("(member={0})")
-				.groupSearchBase("OU=Seguranca,OU=Grupos,OU=Sede")
+				.groupSearchBase("ou=groups")
 				.contextSource()
-				.url("ldap://10.0.0.173:389/DC=minc,DC=intra")
+				.url(System.getenv("URLLDAP"))
 				.managerDn(System.getenv("USERLDAPDN"))
 				.managerPassword(System.getenv("PASSLDAP"));
 	}

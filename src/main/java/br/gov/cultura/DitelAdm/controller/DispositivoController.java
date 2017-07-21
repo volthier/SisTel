@@ -94,6 +94,5 @@ public class DispositivoController {
 //	    tipoDispositivoMap.put("NoteBook","NoteBook");
 	    return tipoDispositivoMap;
 	   
-	}
-	
+	}	
 }
