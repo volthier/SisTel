@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.userSearchFilter(System.getenv("USERSEARCHFILTERLDAP"))
 			.userSearchBase(System.getenv("USERSEARCHBASELDAP"))
 				.groupSearchFilter("(member={0})")
-				.groupSearchBase("ou=groups")
+				.groupSearchBase("USERSEARCHBASELDAP")
 				.contextSource()
 				.url(System.getenv("URLLDAP"))
 				.managerDn(System.getenv("USERLDAPDN"))
