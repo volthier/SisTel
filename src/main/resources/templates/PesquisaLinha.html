@@ -71,7 +71,7 @@
 
 									<tr th:each="linha : ${linhas}">
 										<td class="text-center" th:text="${linha.idLinha}"></td>
-										<td th:text="${linha.numeroLinha}"></td>
+										<td class="sp_celphones" th:text="${linha.numeroLinha}"></td>
 										<td class="text-center">
 										<a class="icone_tabela"
 											th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
