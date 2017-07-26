@@ -109,7 +109,22 @@ public class AlocacaoController {
 
 		return mv;
 	}
-
+	
+	@RequestMapping("/extrato-documentos")
+	public ModelAndView consultar(Usuario user, @ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+		ModelAndView mv = new ModelAndView("PesquisaDocumento");
+		
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
+		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
+		mv.addObject("dispositivos", todosDispositivos);
+		
+		return mv;
+		
+	
+	}
+	
 	@RequestMapping("/devolver")
 	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro,
 			HttpSession session) {

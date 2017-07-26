@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:td="http://www.thymeleaf.org"
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
@@ -52,7 +52,7 @@
 
 			</div>
 
-			<form class="form-horizontal" method="POST" td:action="@{/linhas}">
+			<form class="form-horizontal" method="POST" th:action="@{/linhas}" >
 
 				<div class="col-md-12 panel padding-0 cinza">
 
@@ -71,10 +71,9 @@
 
 									<tr th:each="linha : ${linhas}">
 										<td class="text-center" th:text="${linha.idLinha}"></td>
-										<td class="sp_celphones" th:text="${linha.numeroLinha}"></td>
+										<td class="num" th:text="${linha.numeroLinha}"></td>
 										<td class="text-center">
-										<a class="icone_tabela"
-											th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
+										<a class="icone_tabela"	th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
 											rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
 										</a> 

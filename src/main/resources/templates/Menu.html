@@ -10,8 +10,7 @@
 	<div class="sub-left-menu scroll">
 		<ul class="nav nav-list">
 
-			<li class="ripple"><a
-				onClick="location.href='/inicio'"
+			<li class="ripple"><a onClick="location.href='/inicio'"
 				class="tree-toggle nav-header texto"><span class="fa-home fa"></span>
 					Início </a></li>
 
@@ -20,16 +19,17 @@
 					class="fa-angle-right fa right-arrow text-right"></span> </a>
 				<ul class="nav nav-list tree">
 
-<li><a onClick="location.href='/consultas/usuarios'">Usuários</a></li>
-				
-		 		<li class="ripple"><a class="sub-tree-toggle nav-header"> Inventário <span
-					class="fa-angle-right fa right-arrow text-right"></span> </a>
-				<ul class="nav nav-list sub-tree">
-					<li><a onClick="location.href='/consultas/dispositivos'">Dispositivos</a></li>
-					<li><a onClick="location.href='/consultas/chips'">Chips</a></li>
-					<li><a onClick="location.href='/consultas/linhas'">Linhas</a></li>
-				</ul></li>	
-					
+					<li><a onClick="location.href='/consultas/usuarios'">Usuários</a></li>
+
+					<li class="ripple"><a class="sub-tree-toggle nav-header">
+							Inventário <span class="fa-angle-right fa right-arrow text-right"></span>
+					</a>
+						<ul class="nav nav-list sub-tree">
+							<li><a onClick="location.href='/consultas/chips'">Chips</a></li>
+							<li><a onClick="location.href='/consultas/dispositivos'">Dispositivos</a></li>
+							<li><a onClick="location.href='/consultas/linhas'">Linhas</a></li>
+						</ul></li>
+
 				</ul></li>
 
 			<li class="ripple"><a class="tree-toggle nav-header texto">
@@ -37,14 +37,14 @@
 					class="fa-angle-right fa right-arrow text-right"></span>
 			</a>
 				<ul class="nav nav-list tree">
-					
+					<li><a onClick="location.href='/alocacoes/extrato-documentos'">Consultar Documentos</a></li>
 					<li><a onClick="location.href='/alocacoes/disponibilizar'">Disponibilizar</a></li>
 					<li><a onClick="location.href='/alocacoes/devolver'">Devolver</a></li>
-					<li><a href="#" >Extrato de Documentos</a></li>
+					<li><a href="#">Extrato de Documentos</a></li>
 					<li><a href="#" onClick="location.href='/pendencia'">Pendências</a></li>
 					<!-- <li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Substituir</a></li> -->
-					
-			<!-- 3º Entrega
+
+					<!-- 3º Entrega
 					
 			 		<li class="ripple"><a class="sub-tree-toggle nav-header"> Roaming <span
 					class="fa-angle-right fa right-arrow text-right"></span> </a>
@@ -55,20 +55,22 @@
  -->
 				</ul></li>
 
-			
+
 
 			<li class="ripple"><a class="tree-toggle nav-header texto">
-					<img class="icone_menu" th:src="@{/miminium/img/invoice%20(1).svg}" src="../miminium/img/invoice%20(1).svg"  />Faturas<span
+					<img class="icone_menu" th:src="@{/miminium/img/invoice%20(1).svg}"
+					src="../miminium/img/invoice%20(1).svg" />Faturas<span
 					class="fa-angle-right fa right-arrow text-right"></span>
 			</a>
 				<ul class="nav nav-list tree">
-<!-- 					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Listar</a></li> -->
-					<li><a onClick="location.href='/fatura'">Enviar para usuários</a></li>
+					<!-- 				<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Listar</a></li> -->
+					<li><a onClick="location.href='/fatura'">Enviar para
+							usuários</a></li>
 					<li><a href="#" onClick="location.href='/faturas/nova'">Inserir</a></li>
 
 				</ul></li>
 
-<!-- 			2º Entrega
+			<!-- 			2º Entrega
 
 				<li class="ripple"><a class="tree-toggle nav-header texto"><span
 					class="fa fa-bar-chart" onClick="location.href='relatorio'"></span>Extrato de Documentos
@@ -80,7 +82,7 @@
 
 				</ul></li> -->
 
-<!-- 			3º Entrega
+			<!-- 			3º Entrega
 
 				<li class="ripple"><a class="tree-toggle nav-header texto"><span
 					class="fa fa-chain"></span> Links <span
@@ -91,14 +93,17 @@
 					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Link3</a></li>
 
 				</ul></li> -->
-				
-				<li class="ripple"><a class="tree-toggle nav-header texto"><span
+
+			<li class="ripple"><a class="tree-toggle nav-header texto"><span
 					class="fa fa-cog"></span> Configurações <span
 					class="fa-angle-right fa right-arrow text-right"></span> </a>
 				<ul class="nav nav-list tree">
 					<li><a onClick="location.href='/consultas/categorias'">Categorias</a></li>
-					<li><a onClick="location.href='/consultas/limites-atesto'">Limites Atesto</a></li>
-					<li><a onClick="location.href='/consultas/contratos'">Empresas Telefônicas</a></li>
+					<li><a onClick="location.href='/consultas/contratos'">Empresas
+							Telefônicas</a></li>
+					<li><a onClick="location.href='/consultas/limites-atesto'">Limites
+							Atesto</a></li>
+					
 				</ul></li>
 
 		</ul>
