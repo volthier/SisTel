@@ -11,20 +11,6 @@
 
 	<div layout:include="MensagemSucesso"></div>
 
-	<!-- <div th:if="${erroUnidade}!=null">
-		<div class="alert alert-warning col-md-12" role="alert">
-			<div th:if="${erroUnidade}!=null" th:each="user : ${erroUnidade}"
-				class="row">
-				<a class="alert-link col-md-offset-2"
-					th:text="|Unidade de registro estão diferentes: ${user.nomeUsuario}"
-					th:href="@{/usuarios/{id}(id=${user.idUsuario})}" title="Editar"
-					rel="tooltip" data-placement="auto"> </a>
-
-			</div>
-		</div>
-	</div> -->
-
-
 	<div class=" col-md-12  panel sem_sombra padding20 bg">
 		<div class=" col-md-12 sem_sombra padding-0">
 
@@ -97,23 +83,23 @@
 											class="glyphicon glyphicon-ok text-success"></span>
 
 									</a> <a th:if="${dto.alocacaoSei != null}"
-										class="btn btn-link btn-xs" data-toggle="modal"
+										class="icone_tabela" data-toggle="modal"
 										data-target="#confirmacaoEmailModal"
 										th:attr="data-emailid=${dto.idAlocacao},data-processo=${dto.alocacaoSei.numeroExternoProcessoSei}"
 										title="Autorização" rel="tooltip"> <span
 											class="glyphicon glyphicon-ok text-success"></span>
 
-									</a> <a th:if="${dto.autorizar == null}"
-										class="btn btn-link btn-xs"
+									</a><!--  <a th:if="${dto.autorizar == null}"
+										class="icone_tabela"
 										th:href="@{/alocacoes/disponibilizar/{id}(id=${dto.idAlocacao})}"
 										title="Editar" rel="tooltip" data-placement="left"> <span
 											class="glyphicon glyphicon-pencil"></span>
-									</a> <a th:if="${dto.autorizar == null}"
-										class="btn btn-link btn-xs" data-toggle="modal"
+									</a> --> <a th:if="${dto.autorizar == null}"
+										class="icone_tabela" data-toggle="modal"
 										data-target="#confirmacaoExclusaoModal"
 										th:attr="data-excludid=${dto.idAlocacao}, data-flag='5', data-exclude=${dto.usuario.nomeUsuario}"
 										title="Cancelar" rel="tooltip" data-placement="left"> <span
-											class="glyphicon glyphicon-remove"></span>
+											class="glyphicon glyphicon-remove text-danger"></span>
 									</a></td>
 								</tr>
 								<tr>

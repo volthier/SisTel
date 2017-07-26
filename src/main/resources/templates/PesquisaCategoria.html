@@ -82,11 +82,15 @@
 									<tr th:each="categoria : ${categorias}">
 										<td class="text-center" th:text="${categoria.idCategoria}"></td>
 										<td th:text="${categoria.descricaoCategoria}"></td>
-										<td class="text-center"><a class="icone_tabela"
+										<td class="text-center">
+										
+										<a class="icone_tabela"
 											th:href="@{/categorias/{id}(id=${categoria.idCategoria})}"
 											title="Editar" rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
-										</a> <a class="icone_tabela" data-toggle="modal"
+										</a>
+										
+										 <a class="icone_tabela" data-toggle="modal"
 											data-target="#confirmacaoExclusaoModal"
 											th:attr="data-flag='6', data-excludId=${categoria.idCategoria}, data-exclude=${categoria.descricaoCategoria}"
 											title="Remover" rel="tooltip" data-placement="left"> <span

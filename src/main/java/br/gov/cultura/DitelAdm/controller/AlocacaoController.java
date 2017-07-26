@@ -314,7 +314,42 @@ public class AlocacaoController {
 	@RequestMapping("/disponibilizar/{id}")
 	public ModelAndView edicao(@PathVariable("id") Alocacao alocacao){
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");		
+		
+		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
+		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
+		mv.addObject("listaUnidadeSei", uni);
+
+		List<UsuarioLdap> todosUsuarios = consultaLdapService.findAll();
+		todosUsuarios.sort((user1, user2) -> user1.getFullName().compareTo(user2.getFullName()));
+		mv.addObject("usuarios", todosUsuarios);
+
+		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
+		mv.addObject("limiteAtesto", limiteAtesto);
+
+		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
+		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
+		mv.addObject("dispositivos", todosDispositivos);
+
+		List<Linha> todasLinhas = cadastroLinhaService.getIdLinha();
+		List<Linha> todasLinhasNaoDisponiveis = cadastroLinhaService.listarLinhaDisponivel();
+		todasLinhas.removeAll(todasLinhasNaoDisponiveis);
+		todasLinhas.sort((l1, l2) -> l1.getNumeroLinha().compareTo(l2.getNumeroLinha()));
+		mv.addObject("linhas", todasLinhas);
+
+		List<Chip> todosChips = cadastroChipService.getIdChip();
+		List<Chip> todosChipsNaoDisponiveis = cadastroChipService.listarChipDisponivel();
+		todosChips.removeAll(todosChipsNaoDisponiveis);
+		todosChips.sort((c1, c2) -> c1.getNumeroSerieChip().compareTo(c2.getNumeroSerieChip()));
+		mv.addObject("chips", todosChips);
+
+		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
+		todasCategorias.sort((cat1, cat2) -> cat1.getDescricaoCategoria().compareTo(cat2.getDescricaoCategoria()));
+		mv.addObject("categorias", todasCategorias);
+		 
 		mv.addObject(alocacao);
+		
 				return mv;
 	}
 

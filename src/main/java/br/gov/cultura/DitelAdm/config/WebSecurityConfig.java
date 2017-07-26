@@ -48,13 +48,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.ldapAuthentication()
-		.userSearchFilter(System.getenv("USERSEARCHFILTERLDAP"))
-			.userSearchBase(System.getenv("USERSEARCHBASELDAP"))
+		.userSearchFilter(env.getRequiredProperty("ldap.user.search.filter"))
+			.userSearchBase(env.getRequiredProperty("ldap.user.search.base"))
 				.groupSearchFilter("(member={0})")
-				.groupSearchBase(System.getenv("USERSEARCHBASELDAP"))
+				.groupSearchBase(env.getRequiredProperty("ldap.user.search.base"))
 				.contextSource()
-				.url(System.getenv("URLLDAP"))
-				.managerDn(System.getenv("USERLDAPDN"))
-				.managerPassword(System.getenv("PASSLDAP"));
+				.url(env.getRequiredProperty("ldap.url"))
+				.managerDn(env.getRequiredProperty("ldap.userDn"))
+				.managerPassword(env.getRequiredProperty("ldap.passDn"));
 	}
 }

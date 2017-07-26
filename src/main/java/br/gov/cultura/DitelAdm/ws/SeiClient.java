@@ -230,13 +230,12 @@ public class SeiClient {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		
 		if(alocacaoLista.isEmpty()){
-			System.out.println("LISTA TA VINDO VAZIA !!!!!!!!!");
+		
 		}
+		
 		int ponteiro = 0;
 		for(Alocacao aloc : alocacaoLista){
-			System.out.println("Laço 1 : "+aloc.getUsuario().getCpfUsuario());
 			for(Alocacao aloca : alocacaoLista){
-				System.out.println("laço 2 : "+aloca.getUsuario().getCpfUsuario());
 				if(aloc.getDtRecebido().compareTo(aloca.getDtRecebido())>0){
 					ponteiro = alocacaoLista.indexOf(aloc);
 				}else if(aloc.getDtRecebido().compareTo(aloca.getDtRecebido())<0){
@@ -244,8 +243,6 @@ public class SeiClient {
 				}
 			}
 		}
-		
-		System.out.println("PONTEIRO DE INDEX IGUAL A :" + ponteiro );
 		
 		Destinatario[] destinatario = new Destinatario[1];
 		Destinatario dest = new Destinatario();
