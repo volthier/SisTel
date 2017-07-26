@@ -49,15 +49,14 @@
 						</button>
 					</span>
 				</div>
-
 			</div>
 
 			<form class="form-horizontal" method="POST" th:action="@{/linhas}">
 
 				<div class="col-md-12 panel padding-0 cinza">
-
 					<div class="painel-body bg-panel padding-7 tabela">
 						<div class="table-responsive">
+							
 							<table class="table table-bordered table-striped tabela">
 								<thead>
 									<tr>
@@ -71,10 +70,9 @@
 
 									<tr th:each="linha : ${linhas}">
 										<td class="text-center" th:text="${linha.idLinha}"></td>
-										<td class="sp_celphones" th:text="${linha.numeroLinha}"></td>
+										<td class="num" th:text="${linha.numeroLinha}"></td>
 										<td class="text-center">
-										<a class="icone_tabela"
-											th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
+										<a class="icone_tabela"	th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
 											rel="tooltip" data-placement="left"> <span
 												class="fa fa-pencil"></span>
 										</a> 

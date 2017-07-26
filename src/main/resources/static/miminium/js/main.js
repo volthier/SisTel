@@ -53,20 +53,30 @@
 	});
 
 	var SPMaskBehavior = function(val) {
-		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000'	: '(00) 0000-00009';
+		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000'
+				: '(00) 0000-00009';
 	}, spOptions = {
 		onKeyPress : function(val, e, field, options) {
 			field.mask(SPMaskBehavior.apply({}, arguments), options);
 		}
 	};
-	
+
 	$('.sp_celphones').mask(SPMaskBehavior, spOptions);
-	
-	
-	
-	
-//	[0-9]{4,5}\-[0-9]{4}
-	
+
+	$('.num').focusout(function(){
+	    var phone, element;
+	    element = $(this);
+	    element.unmask();
+	    phone = element.text().replace(/\D/g, '');
+	    if(phone.length > 10) {
+	        element.mask("(99) 99999-9999");
+	        console.log(phone.length);
+	    } else {
+	    	console.log(phone.length + 'else');
+	    	element.mask("(99) 9999-9999");
+	    }
+	}).trigger('focusout');
+
 	var randomScalingFactor = function() {
 		return Math.round(Math.random() * 100);
 	};

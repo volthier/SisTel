@@ -1073,4 +1073,31 @@ opacity: 0;
 	padding-left:15px !important;
 }
 
-
+.nav-tabs.nav-tabs-v3 {
+	padding-top:0px;
+}
+.tabs-area {
+	margin-top: 0px;
+}
+.tab-docs {
+	width: 200px;
+}
+#tabs-demo4 {
+	border-bottom: transparent;
+}
+.nav-tabs.nav-tabs-v3 > li.active > a, .nav-tabs.nav-tabs-v3 > li > a:hover {
+    border: none;
+    color: #3c5460 !important;
+    background: transparent;
+    
+}
+.nav-tabs.nav-tabs-v3 > li > a::after {
+	    background: #529eab;
+}
+#modalInfos {
+	color: #868686 !important;
+}
+#linha-info > tr:hover {
+	background-color: #efefef;	
+}
+}
