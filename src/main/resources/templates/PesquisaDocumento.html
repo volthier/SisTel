@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Extrato de Documentos</title>
+</head>
+<section layout:fragment="conteudo">
+	<div layout:include="MensagemSucesso"></div>
+
+	<form method="POST" th:action="@{/dispositivos}">
+
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Extrato de Documentos</h3>
+				</div>
+
+
+				<div class="clearfix">
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+						style="margin-right: 5px;"></span> <span>Voltar</span>
+					</a>
+				</div>
+
+
+
+
+
+				<div class="col-md-12 panel padding-0">
+
+					<div class="painel-body bg-panel padding-7 tabela">
+						<div class="col-md-12 tabs-area">
+							<ul id="tabs-demo4"
+								class="nav nav-tabs nav-tabs-v3 panel-body row" role="tablist">
+								<li role="presentation" class="active text-center tab-docs"><a
+									href="#tabs-demo4-area1" id="tabs-demo4-1" role="tab"
+									data-toggle="tab" aria-expanded="true">ATIVAS</a></li>
+								<li role="presentation" class="text-center tab-docs"><a
+									href="#tabs-demo4-area2" role="tab" id="tabs-demo4-2"
+									data-toggle="tab" aria-expanded="false">TODOS</a></li>
+								<li style="float: right;">
+
+									<div class="col-md-4 input-group" id="input_pesquisa"
+										style="width: 300px; margin-top: 3px;">
+										<input class="form-control panel"
+											placeholder="Digite aqui sua pesquisa" /> <span
+											class="input-group-btn">
+											<button class="btn btn-secondary" type="submit">
+												<span class="fa fa-search text-center b"> </span>
+											</button>
+										</span>
+									</div>
+
+								</li>
+
+							</ul>
+							<div id="tabsDemo4Content" class="tab-content tab-content-v3">
+								<div role="tabpanel" class="tab-pane fade active in"
+									id="tabs-demo4-area1" aria-labelledby="tabs-demo4-area1">
+
+									<span
+										style="font-size: 14px; font-family: 'open_sansregular'; color: #c1c1c1;">
+										EXIBINDO AS LINHAS NO PERÍODO</span>
+
+									<div class="table-responsive" style="margin-top: 10px;">
+										<table class="table table-bordered table-striped tabela">
+											<thead>
+												<tr>
+													<th class="text-center col-md1">Alocação</th>
+													<th class="text-center col-md2">Data</th>
+													<th class="text-center col-md2">Nome</th>
+													<th class="text-center col-md2">CPF</th>
+													<th class="text-center col-md2">Área</th>
+													<th class="text-center col-md2">Linha</th>
+													<th class="text-center col-md2">Tipo</th>
+													<th class="text-center col-md2">Documentos</th>
+
+												</tr>
+											</thead>
+
+											<tbody id="linha-info">
+
+												<tr data-toggle="modal"	data-target="#infoDocumentosModal">
+													<td class="text-center">#15</td>
+													<td class="text-center">10/10/2010</td>
+													<td class="text-center">João Ipsum</td>
+													<td class="text-center">9563481276</td>
+													<td class="text-center">Ditel</td>
+													<td class="text-center">61993696554</td>
+													<td class="text-center">Tablet</td>
+													<td class="text-center">Lista de Documentos</td>
+
+												</tr>
+												<!-- <tr>
+													<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
+														Dispositivo encontrado!!!</td>
+												</tr> -->
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+								<div role="tabpanel" class="tab-pane fade" id="tabs-demo4-area2"
+									aria-labelledby="tabs-demo4-area2">
+									<span
+										style="font-size: 14px; font-family: 'open_sansregular'; color: #c1c1c1;">
+										EXIBINDO AS LINHAS NO PERÍODO</span>
+
+									<div class="table-responsive" style="margin-top: 10px;">
+										<table class="table table-bordered table-striped tabela">
+											<thead>
+												<tr>
+													<th class="text-center col-md1">Alocação</th>
+													<th class="text-center col-md2">Data</th>
+													<th class="text-center col-md2">Nome</th>
+													<th class="text-center col-md2">CPF</th>
+													<th class="text-center col-md2">Área</th>
+													<th class="text-center col-md2">Linha</th>
+													<th class="text-center col-md2">Tipo</th>
+													<th class="text-center col-md2">Documentos</th>
+
+												</tr>
+											</thead>
+
+											<tbody id="linha-info">
+
+												<tr data-toggle="modal"	data-target="#infoDocumentosModal">
+													<td class="text-center">#16</td>
+													<td class="text-center">10/10/2010</td>
+													<td class="text-center">Roberto Ipsum</td>
+													<td class="text-center">9563481276</td>
+													<td class="text-center">Ditel</td>
+													<td class="text-center">61993696554</td>
+													<td class="text-center">Tablet</td>
+													<td class="text-center">Lista de Documentos</td>
+
+												</tr>
+												<!-- <tr>
+													<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
+														Dispositivo encontrado!!!</td>
+												</tr> -->
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</form>
+
+	<div layout:include="DialogoConfirmacaoExclusao"></div>
+	<div layout:include="InfoDocumentos"></div>
+</section>
+</html>

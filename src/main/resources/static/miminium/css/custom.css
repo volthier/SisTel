@@ -1094,4 +1094,10 @@ opacity: 0;
 .nav-tabs.nav-tabs-v3 > li > a::after {
 	    background: #529eab;
 }
-
+#modalInfos {
+	color: #868686 !important;
+}
+#linha-info > tr:hover {
+	background-color: #efefef;	
+}
+}
