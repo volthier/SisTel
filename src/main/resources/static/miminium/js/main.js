@@ -42,6 +42,13 @@
 		});
 	};
 
+/*	VISUALIZAR*/
+	$(".mask_visualizar").ready(function() {
+		var semmascara = $(".mask_input_off").val();
+		$(".mask_input_on").val(semmascara);
+	});
+
+/*ARMAZENA*/	
 	$(document).ready(function() {
 		$(".mask_input_on").change(function() {
 			var exp = /[^\w]/g;
@@ -52,6 +59,7 @@
 		});
 	});
 
+/*APLICA A MÁSCARA NO CADASTRO*/	
 	var SPMaskBehavior = function(val) {
 		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000'
 				: '(00) 0000-00009';
@@ -63,18 +71,32 @@
 
 	$('.sp_celphones').mask(SPMaskBehavior, spOptions);
 
-	$('.num').focusout(function(){
-	    var phone, element;
-	    element = $(this);
-	    element.unmask();
-	    phone = element.text().replace(/\D/g, '');
-	    if(phone.length > 10) {
-	        element.mask("(99) 99999-9999");
-	        console.log(phone.length);
-	    } else {
-	    	console.log(phone.length + 'else');
-	    	element.mask("(99) 9999-9999");
-	    }
+	$('.numTable').focusout(function() {
+		var phone, element;
+		element = $(this);
+		element.unmask();
+		phone = element.text().replace(/\D/g, '');
+		if (phone.length > 10) {
+			element.mask("(99) 99999-9999");
+			console.log(phone.length);
+		} else {
+			console.log(phone.length + 'else');
+			element.mask("(99) 9999-9999");
+		}
+	}).trigger('focusout');
+
+	$('.numInput').focusout(function() {
+		var phone, element;
+		element = $(this);
+		element.unmask();
+		phone = element.val().replace(/\D/g, '');
+		if (phone.length > 10) {
+			element.mask("(99) 99999-9999");
+			console.log(phone.length);
+		} else {
+			console.log(phone.length + 'else');
+			element.mask("(99) 9999-9999");
+		}
 	}).trigger('focusout');
 
 	var randomScalingFactor = function() {

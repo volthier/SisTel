@@ -70,7 +70,7 @@
 
 									<tr th:each="linha : ${linhas}">
 										<td class="text-center" th:text="${linha.idLinha}"></td>
-										<td class="num" th:text="${linha.numeroLinha}"></td>
+										<td class="numTable" th:text="${linha.numeroLinha}"></td>
 										<td class="text-center">
 										<a class="icone_tabela"	th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
 											rel="tooltip" data-placement="left"> <span
