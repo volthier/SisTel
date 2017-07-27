@@ -496,13 +496,27 @@ h5 {
 }
 .n_dispositivos {
 	font-weight: normal;
+	color: #63dea0;
 }
 
 #filtro_data {
 	float: right;
-	right: 7px;
+	margin-right: 6px;
+	width: 158px;
+	margin-top: 13px;
+	border-radius: 8px !important;
+	height: 30px;
+	border: 0;
+    box-shadow: none;
+	
+	
 }
 
+.tablet {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
 /*FIM CARDS*/
 
 
@@ -520,7 +534,7 @@ h5 {
 	color: #3c5460;
 	opacity: 0.8;
 	padding-right: 0px;
-	margin-left: 5px;
+	margin-left: 2px;
 }
 .texto {
     margin-left: 10px;
@@ -635,7 +649,7 @@ opacity: 0;
 }
 @media screen and (max-width: 1240px) {
     .icones_card {
-        margin-left: -22px;
+        margin-left: -25px;
     }
 
 }
