@@ -110,9 +110,9 @@ public class AlocacaoController {
 		return mv;
 	}
 	
-	@RequestMapping("/extrato-documentos")
+	@RequestMapping("/lista-alocacoes")
 	public ModelAndView consultar(Usuario user, @ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
-		ModelAndView mv = new ModelAndView("PesquisaDocumento");
+		ModelAndView mv = new ModelAndView("AlocacaoListar");
 		
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
