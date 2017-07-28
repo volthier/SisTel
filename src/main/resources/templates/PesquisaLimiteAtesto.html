@@ -30,25 +30,29 @@
 
 				<div class="col-md-8 pesquisa">
 
-					<div class="btn btn-link texto_td icone_add text-center" style="float: left"
-						th:href="@{/limites-atesto/novo}"
-						onClick="location.href='/limites-atesto/novo'">
+
+					<div class="btn btn-link texto_td text-center" th:href="@{/limites-atesto/novo}"
+						onClick="location.href='/limites-atesto/novo'" id="btn_novo" style="float: left;">
 						<span class="fa fa-plus-circle" id="add"> <span
-							class="tabela"> Novo Limite</span>
+							class="tabela"> Novo Limite Atesto</span>
 						</span>
 
 					</div>
+
+
 				</div>
 
-				<div class="col-md-4 input-group" id="input_pesquisa">
-					<input type="text" class="form-control"
-						placeholder="Digite aqui sua pesquisa" /> <span
-						class="input-group-btn">
-						<button class="btn btn-secondary" type="button">
-							<span class="fa fa-search text-center b"> </span>
-						</button>
-					</span>
-				</div>
+
+				<form method="get">
+					<div class="col-md-4 input-group" id="input_pesquisa">
+						<input class="form-control" placeholder="Digite aqui sua pesquisa" />
+						<span class="input-group-btn">
+							<button class="btn btn-secondary" type="submit">
+								<span class="fa fa-search text-center b"> </span>
+							</button>
+						</span>
+					</div>
+				</form>
 
 			</div>
 

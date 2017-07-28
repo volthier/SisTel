@@ -386,6 +386,8 @@ sem_sombra {
 	background-color: #eaeaea !important;
 }
 
+
+
 .header_card {
 	background: -moz-linear-gradient(top, #57a2ad 0%, #026487 100%);
 	/* FF3.6-15 */
@@ -593,6 +595,8 @@ a:hover {
 	opacity: 0.3;
 }
 
+
+
 /*MEDIA QUERIES*/
 @media screen and (min-width: 2200px) {
 	.logo {
@@ -646,6 +650,11 @@ a:hover {
 	}
 	.qtd {
 		margin-top: 31px;
+	}
+	#input_pesquisa{
+		float:right;
+		padding:7px;
+		padding-right: 0px;
 	}
 	
 }
@@ -754,7 +763,8 @@ a:hover {
 	#input_pesquisa {
 		margin-left: 50px;
 		width: 255px;
-		right: -93px;
+		right: -39%;
+    	float: none;
 	}
 	.table {
 		width: 130%;
@@ -790,10 +800,10 @@ a:hover {
 
 @media screen and (max-width: 425px) {
 	#input_pesquisa {
-		margin-left: 50px;
-		width: 220px;
+		margin-left: 24%;
+		width: 243px;
 		margin-top: -2px;
-		right: -13px;
+		right: -51px;
 	}
 	.col-sm-4 {
 		width: 80%;
@@ -811,7 +821,12 @@ a:hover {
 		margin-left: 12%;
 		
 	}
-	
+	.icone_tabela{
+		padding: 11px !important;
+	}
+	.tab-docs {
+		width: 180px !important;
+	}
 }
 
 @media screen and (max-width: 479px) {
@@ -936,8 +951,8 @@ a:hover {
 		margin-left: -20px;
 	}
 	#input_pesquisa {
-		margin-left: 115px;
-		width: 172px;
+		margin-left: 80px;
+    	width: 243px;
 		margin-top: -1px;
 		right: -13px;
 	}
@@ -955,6 +970,15 @@ a:hover {
 	.qtd {
 		margin-left: 45px;
 	}
+	.usu {
+		width: 86% !important;
+		padding:5px;
+	}
+	
+	.tab-docs {
+		width: 180px !important;
+	}
+	
 }
 
 @media screen and (max-width: 320px) {
@@ -966,14 +990,10 @@ a:hover {
 	h5 {
 		font-size: 13px;
 	} 
-	/* .superior {
-		float: right;
-		margin-right: -2%;
-		font-size: 17px;
-		margin-top: -2px;
-	} */
+	
 	p {
 		margin-left: -13% !important;
+		width: 200px !important;
 	}
 	h3 {
 		font-size: 20px;
@@ -1003,8 +1023,8 @@ a:hover {
 		margin-left: -8px;
 	}
 	#input_pesquisa {
-		margin-left: 142px;
-		width: 125px;
+		    margin-left: 10%;
+    		width: 49%;
 	}
 	#btn_novo {
 		width: 130px;
@@ -1023,6 +1043,9 @@ a:hover {
 	}
 	.qtd {
 		margin-left: 0px;
+	}
+	.tab-docs {
+	width: 130px !important;
 	}
 }
 
