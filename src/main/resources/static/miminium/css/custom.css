@@ -474,7 +474,7 @@ h5 {
     font-size: 18px;
     font-family: "open_sansregular";
     color: #3c5460;
-/*    font-weight:bold;*/
+
     
 }
 
@@ -517,6 +517,12 @@ h5 {
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
     transform: rotate(90deg);
 }
+
+a:hover {
+	color: #6fe0a7;
+	
+}
+
 /*FIM CARDS*/
 
 

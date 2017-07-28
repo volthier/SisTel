@@ -12,98 +12,67 @@
 
 				<ul class="nav nav-list">
 
-					<li class="ripple bg_inicio"><a
-						onClick="location.href='/inicio'"
+					<li class="ripple"><a onClick="location.href='/inicio'"
 						class="tree-toggle nav-header texto"><span class="fa-home fa"></span>
 							Início </a></li>
 
 					<li class="ripple"><a class="tree-toggle nav-header texto"><span
-							class="fa fa-search"></span> Consultas <span
+							class="fa fa-dropbox"></span>Inventário <span
 							class="fa-angle-right fa right-arrow text-right"></span> </a>
+
 						<ul class="nav nav-list tree">
-							<li><a onClick="location.href='/consultas/dispositivos'">Dispositivos</a></li>
-							<li><a onClick="location.href='/consultas/usuarios'">Pessoas</a></li>
 							<li><a onClick="location.href='/consultas/chips'">Chips</a></li>
+							<li><a onClick="location.href='/consultas/dispositivos'">Dispositivos</a></li>
 							<li><a onClick="location.href='/consultas/linhas'">Linhas</a></li>
-							<li><a onClick="location.href='/consultas/categorias'">Categorias</a></li>
-							<li><a onClick="location.href='/consultas/limites-atesto'">Limites
-									Atesto</a></li>
-							<li><a onClick="location.href='/consultas/contratos'">Contratos</a></li>
 						</ul></li>
 
-					<li class="ripple"><a class="tree-toggle nav-header texto">
-							<span class="fa fa-exclamation-triangle"></span> Pendências <span
-							class="fa-angle-right fa right-arrow text-right"></span>
-					</a>
-						<ul class="nav nav-list tree">
-							<li ><a href="#" onClick="location.href='/pendencia'">Alocação</a></li>
-							<li class="desativo"><a href="#" 
-								>Notificação</a></li>
-						</ul></li>
+					<li class="ripple"><a
+						onClick="location.href='/consultas/usuarios'"
+						class="sub-tree-toggle nav-header texto"><span
+							class="fa fa-users"></span>Usuários</a></li>
+
 
 					<li class="ripple"><a class="tree-toggle nav-header texto">
 							<span class="fa fa-book"></span>Alocações <span
 							class="fa-angle-right fa right-arrow text-right"></span>
 					</a>
 						<ul class="nav nav-list tree">
-							<li class="desativo" ><a href="#" 
-								>Consultar Documentos</a></li>
 							<li><a onClick="location.href='/alocacoes/disponibilizar'">Disponibilizar</a></li>
 							<li><a onClick="location.href='/alocacoes/devolver'">Devolver</a></li>
-							<li class="desativo"><a href="#" 
-								>Substituir</a></li>
-
-						</ul></li>
-
-					<li class="ripple"><a class="tree-toggle nav-header texto"><span
-							class="icons icon-globe"></span> Roaming <span
-							class="fa-angle-right fa right-arrow text-right"></span> </a>
-						<ul class="nav nav-list tree">
-							<li class="desativo"><a href="#" 
-								>Listar</a></li>
-							<li class="desativo"><a href="#" 
-								>Consultar</a></li>
+							<li><a onClick="location.href='/alocacoes/lista-alocacoes'">Listar</a></li>
+							<li><a href="#" onClick="location.href='/pendencia'">Pendências</a></li>
 						</ul></li>
 
 					<li class="ripple"><a class="tree-toggle nav-header texto">
-							<img class="icone_menu" src="../miminium/img/invoice.svg" />Faturas<span
+							<img class="icone_menu"
+							th:src="@{/miminium/img/invoice%20(1).svg}"
+							src="../miminium/img/invoice%20(1).svg" width="34px"
+							height="16px" />Faturas<span
 							class="fa-angle-right fa right-arrow text-right"></span>
 					</a>
 						<ul class="nav nav-list tree">
-							<li class="desativo"><a href="#" 
-								>Listar</a></li>
-							<li><a onClick="location.href='/fatura'">Gerar</a></li>
-							<li><a href="#" onClick="location.href='/faturas/nova'">Carregar</a></li>
+							<!-- 				<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Listar</a></li> -->
+							<li><a onClick="location.href='/fatura'">Enviar para
+									usuários</a></li>
+							<li><a href="#" onClick="location.href='/faturas/nova'">Inserir</a></li>
 
 						</ul></li>
 
-					<li class="ripple"><a class="tree-toggle nav-header texto"><span
-							class="fa fa-bar-chart" onClick="location.href='relatorio'"></span>Relatórios
-							<span class="fa-angle-right fa right-arrow text-right"> </span></a>
-						<ul class="nav nav-list tree">
-							<li class="desativo"><a href="#" 
-								>Listar</a></li>
-							<li class="desativo"><a href="#" 
-								>Gerar</a></li>
-							<li class="desativo"><a href="#" 
-								>Resumos</a></li>
-
-						</ul></li>
 
 					<li class="ripple"><a class="tree-toggle nav-header texto"><span
-							class="fa fa-chain"></span> Links <span
+							class="fa fa-cog"></span> Configurações <span
 							class="fa-angle-right fa right-arrow text-right"></span> </a>
 						<ul class="nav nav-list tree">
-							<li class="desativo"><a href="#" 
-								>Link1</a></li>
-							<li class="desativo"><a href="#" 
-								>Link2</a></li>
-							<li class="desativo"><a href="#" 
-								>Link3</a></li>
+							<li><a onClick="location.href='/consultas/categorias'">Categorias</a></li>
+							<li><a onClick="location.href='/consultas/contratos'">Empresas
+									Telefônicas</a></li>
+							<li><a onClick="location.href='/consultas/limites-atesto'">Limites
+									Atesto</a></li>
 
 						</ul></li>
 
 				</ul>
+
 			</div>
 		</div>
 	</div>
