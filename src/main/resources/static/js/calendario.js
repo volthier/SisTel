@@ -1,19 +1,5 @@
-/*Script caledario input*/
-/*$('.input-group.date').datepicker({
-    format: "dd/mm/yyyy HH:mm:ss",
-    todayBtn: true,
-    clearBtn: true,
-    language: "pt-BR",
-    daysOfWeekDisabled: "0",
-    daysOfWeekHighlighted: "0",
-    autoclose: true,
-    todayHighlight: true
-});*/
-
-/* TESTE CALENDARIO*/
-  
-	  $('#datetimepicker').datetimepicker({
-		  format: 'yyyy/mm/dd hh:ii',
+$('#datetimepicker').datetimepicker({
+		  format: 'dd/mm/yyyy hh:ii',
 	    
 	    todayBtn: true,
 	    clearBtn: true,
@@ -25,7 +11,7 @@
 	  });
 	  
 	  $('#datetimepicker2').datetimepicker({
-		  format: 'yyyy/mm/dd hh:ii',
+		  format: 'dd/mm/yyyy hh:ii',
 	    
 	    todayBtn: true,
 	    clearBtn: true,
@@ -34,4 +20,4 @@
 	    daysOfWeekHighlighted: "0",
 	    autoclose: true,
 	    todayHighlight: true
-	  });
+});

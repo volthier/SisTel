@@ -430,7 +430,9 @@ sem_sombra {
 	width: 105%;
 	margin-left: -15px;
 }
-
+.icone_add {
+	width:115px;
+}
 .center_card {
 	margin-top: 10px;
 }
@@ -763,7 +765,7 @@ a:hover {
 	#input_pesquisa {
 		margin-left: 50px;
 		width: 255px;
-		right: -39%;
+		right: -26%;
     	float: none;
 	}
 	.table {
@@ -780,9 +782,7 @@ a:hover {
 	.col-sm-2 {
 		width: 30%;
 	}
-	.texto_td {
-		margin-left: 17%;
-	}
+	
 	#estoque {
 		margin-left: 44%;
 		font-size: 16px;
