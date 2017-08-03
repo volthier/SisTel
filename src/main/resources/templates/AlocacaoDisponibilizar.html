@@ -107,7 +107,7 @@
 							<div class="col-sm-4">
 								<select name="linha" class="col-sm-4 form-control">
 									<option value="">----Selecione----</option>
-									<option th:each="linha : ${linhas}" th:value="${linha.idLinha}"
+									<option class="numTable" th:each="linha : ${linhas}" th:value="${linha.idLinha}"
 										th:valuetype="linha" th:text="${linha.numeroLinha}"></option>
 								</select>
 							</div>

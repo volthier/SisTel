@@ -180,6 +180,9 @@
 								left : x + 'px'
 							}).addClass("animate");
 						});
+		
+		
+		
 	};
 
 	this.hide = function() {
