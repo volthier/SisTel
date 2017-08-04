@@ -195,7 +195,7 @@
 
 		$('.tree-toggle').click(
 				function(e) {
-					e.preventDefault();
+					/*e.preventDefault();*/
 					var $this = $(this).parent().children('ul.tree');
 					$(".tree").not($this).slideUp(600);
 					$this.toggle(700);
@@ -209,7 +209,7 @@
 
 		$('.sub-tree-toggle').click(
 				function(e) {
-					e.preventDefault();
+					/*e.preventDefault();*/
 					var $this = $(this).parent().children('ul.sub-tree');
 					$(".sub-tree").not($this).slideUp(600);
 					$this.toggle(700);
