@@ -778,7 +778,7 @@ a:hover {
 	#input_pesquisa {
 		margin-left: 50px;
 		width: 255px;
-		right: -26%;
+		right: -19%;
     	float: none;
 	}
 	.table {
@@ -808,6 +808,32 @@ a:hover {
 		text-align: right;
 		margin-left: -23px;
 	}
+	.p_disp {
+		padding: 0px !important;
+
+	}
+	.p_linha {
+		right: -25% !important;
+		padding: 0px !important;
+	}
+	.p_aloc {
+		right:-39% !important;
+		
+	}
+	.arq {
+		width: 33%;
+	}
+	.desc {
+		font-size:15px;
+	}
+	.p_cat {
+		padding:0px !important;
+		right:-20% !important;
+	}
+	.p_cont{
+		padding:0px !important;
+		right: -21% !important;
+	}
 	
 }
 
@@ -817,6 +843,11 @@ a:hover {
 		width: 243px;
 		margin-top: -2px;
 		right: -51px;
+	}
+	.p_chip {
+		right:-27px !important;
+		margin-top:-9px !important;
+	
 	}
 	.col-sm-4 {
 		width: 80%;
@@ -839,6 +870,18 @@ a:hover {
 	}
 	.tab-docs {
 		width: 180px !important;
+	}
+	.p_disp {
+		width: 184px !important;
+		
+	}
+	.p_linha {
+		right: -6% !important;
+		
+	}
+	.p_aloc {
+		right:-13% !important;
+		
 	}
 }
 
@@ -992,6 +1035,28 @@ a:hover {
 		width: 180px !important;
 	}
 	
+	.p_chip {
+		width:194px !important;
+		margin-top:-7px !important;
+	
+	}
+	.p_disp {
+		width: 172px !important;
+		
+	}
+	.p_linha {
+		width:197px !important;
+		
+	}
+	.p_aloc {
+		right:-4% !important;
+		
+	}
+	.p_cat {
+		width:180px !important;
+		right:-4% !important;
+	}
+	
 }
 
 @media screen and (max-width: 320px) {
@@ -1060,6 +1125,27 @@ a:hover {
 	.tab-docs {
 	width: 130px !important;
 	}
+	.p_chip {
+		width:122px !important;
+	}
+	.p_disp {
+		width: 137px !important;
+	}
+	.p_linha {
+		right: -5% !important;
+		
+	}
+	.p_aloc {
+		width:72% !important;
+		right:-18% !important;
+		
+	}
+	.p_cat {
+		width: 138px !important;
+    	right: -5% !important;
+	}
+	
+	
 }
 
 /*FIM HOME*/
