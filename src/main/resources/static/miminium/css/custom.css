@@ -125,17 +125,50 @@
 	#periodic-login {
 		margin-top: -10% important!;
 	}
+	.icones_card {
+		margin-top:3px;
+	}
+	.alturaLogo {
+		margin-top: 88% !important;
+	}
 }
 
 @media screen and (max-width: 1920px) {
 	.alturaLogo {
-		margin-top: 45%;
+		margin-top: 90% !important;
+	}
+	.icones_card {
+		margin-top:6px;
+	}
+	
+}
+
+@media screen and (max-width: 1680px) {
+	.alturaLogo {
+		margin-top: 70% !important;
+	}
+	.icones_card {
+		margin-left: -2px !important;	   
+	    width: 25px !important;
+	    margin-top: 5px !important;
 	}
 }
 
+@media screen and (max-width: 1600px) {
+	.alturaLogo {
+		margin-top: 57% !important;
+	}
+	.icones_card {
+		width: 26px !important;
+    	margin-top: 5px !important;
+    	margin-left: -2px !important;
+	}
+}
+
+
 @media screen and (max-width: 1440px) {
 	.alturaLogo {
-		margin-top: 20%;
+		margin-top: 32% !important;
 	}
 }
 
@@ -149,7 +182,7 @@
 	}
 	.alturaLogo {
 		margin: 0 auto;
-		margin-top: 50%;
+		
 	}
 	.logo-login {
 		width: 110%;
@@ -175,7 +208,23 @@
 	}
 }
 
+@media screen and (max-width: 1366px) {
+	.alturaLogo {
+		margin-top: 20% !important;
+	}
+}
 
+@media screen and (max-width: 1024px) {
+	.alturaLogo {
+		margin-top: 16% !important;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.alturaLogo {
+		margin-top: 0% !important;
+	}
+}
 
 
 @media screen and (max-width: 992px) {
@@ -265,8 +314,8 @@
 	border-radius: 10px;
 	width: 200px;
 	margin-right: -33px;
-	height: 180px;
-	top: 57px;
+	height: 40px;
+    top: 60px;
 }
 
 #icone_usuario {
@@ -425,12 +474,11 @@ sem_sombra {
 }
 
 .icones_card {
-	margin-left: 0px;
-	height: 69px !important;
-	top: -5px;
-	width: 58px !important;
+	
+	
+	width: 25px;
 	position: absolute;
-	left: 16px;
+	
 }
 
 .fone {
@@ -615,7 +663,7 @@ a:hover {
 /*MEDIA QUERIES*/
 @media screen and (min-width: 2200px) {
 	.logo {
-		width: 56% !important;
+		width: 41% !important;
 	}
 }
 
@@ -637,13 +685,7 @@ a:hover {
 		-o-background-size: cover;
 		background-size: cover;
 	}
-	.icones_card {
-		height: 85px !important;
-		width: 74px !important;
-		margin-top: 7px;
-		margin-left: 0px;
-		text-align: center;
-	}
+	
 	
 }
 
@@ -660,8 +702,8 @@ a:hover {
 	.icones_card {
 		height: 24px !important;
 		width: 69px !important;
-		margin-top: 12px;
-		margin-left: -25px;
+		margin-top: 6px !important;
+    	margin-left: -24px !important;
 	}
 	.qtd {
 		margin-top: 31px;
