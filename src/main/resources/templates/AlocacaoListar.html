@@ -4,9 +4,6 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
-<head>
-<title>Lista de Alocações</title>
-</head>
 <section layout:fragment="conteudo">
 	<div layout:include="MensagemSucesso"></div>
 
@@ -80,28 +77,26 @@
 													<th class="text-center col-md2">Área</th>
 													<th class="text-center col-md2">Linha</th>
 													<th class="text-center col-md2">Tipo</th>
-													<th class="text-center col-md2">Documentos</th>
 
 												</tr>
 											</thead>
 
 											<tbody id="linha-info">
 
-												<tr data-toggle="modal" data-target="#infoDocumentosModal">
-													<td class="text-center">#15</td>
-													<td class="text-center">10/10/2010</td>
-													<td class="text-center">João Ipsum</td>
-													<td class="text-center">9563481276</td>
-													<td class="text-center">Ditel</td>
-													<td class="text-center numTable">61993696554</td>
-													<td class="text-center">Tablet</td>
-													<td class="text-center">Lista de Documentos</td>
+												<tr data-toggle="modal" data-target="#infoDocumentosModal" th:each="atv : ${alocacaoAtiva}">
+													<td class="text-center" th:text="${atv.idAlocacao}">#15</td>
+													<td class="text-center" th:text="${atv.dtRecebido}">10/10/2010</td>
+													<td class="text-center" th:text="${atv.usuario.nomeUsuario}">João Ipsum</td>
+													<td class="text-center" th:text="${atv.usuario.cpfUsuario}" >9563481276</td>
+													<td class="text-center" th:text="${atv.usuario.usuarioSigla}">Ditel</td>
+													<td class="text-center numTable" th:text="${atv.linha.numeroLinha}">61993696554</td>
+													<td class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
 
 												</tr>
-												<!-- <tr>
-													<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-														Dispositivo encontrado!!!</td>
-												</tr> -->
+												<tr>
+													<td colspan="9" th:if="${#lists.isEmpty(alocacaoAtiva)}">Nenhum
+														serviço alocado!</td>
+												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -124,28 +119,30 @@
 													<th class="text-center col-md2">Área</th>
 													<th class="text-center col-md2">Linha</th>
 													<th class="text-center col-md2">Tipo</th>
-													<th class="text-center col-md2">Documentos</th>
 
 												</tr>
 											</thead>
 
 											<tbody id="linha-info">
 
-												<tr data-toggle="modal" data-target="#infoDocumentosModal">
-													<td class="text-center">#16</td>
-													<td class="text-center">10/10/2010</td>
-													<td class="text-center">Roberto Ipsum</td>
-													<td class="text-center">9563481276</td>
-													<td class="text-center">Ditel</td>
-													<td class="text-center numTable">61993696554</td>
-													<td class="text-center">Tablet</td>
-													<td class="text-center">Lista de Documentos</td>
+												<tr data-toggle="modal" data-target="#infoDocumentosModal" th:each="atv : ${alocacaoTodas}" > 
+												
+												<!-- th:attr="data-validId=${alocacao.idAlocacao}" 
+											title="Clicar Para Detalhamento" rel="tooltip" data-placement="left" 
+											> -->
+													<td class="text-center" th:text="${atv.idAlocacao}">#15</td>
+													<td class="text-center" th:text="${atv.dtRecebido}">10/10/2010</td>
+													<td class="text-center" th:text="${atv.usuario.nomeUsuario}">João Ipsum</td>
+													<td class="text-center" th:text="${atv.usuario.cpfUsuario}" >9563481276</td>
+													<td class="text-center" th:text="${atv.usuario.usuarioSigla}">Ditel</td>
+													<td class="text-center numTable" th:text="${atv.linha.numeroLinha}">61993696554</td>
+													<td class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
 
 												</tr>
-												<!-- <tr>
-													<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-														Dispositivo encontrado!!!</td>
-												</tr> -->
+												<tr>
+													<td colspan="9" th:if="${#lists.isEmpty(alocacaoTodas)}">Nenhum
+														serviço alocado!</td>
+												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -163,8 +160,6 @@
 			</div>
 		</div>
 	</form>
-
-	<div layout:include="DialogoConfirmacaoExclusao"></div>
 	<div layout:include="InfoDocumentos"></div>
 </section>
 </html>

@@ -111,18 +111,27 @@ public class AlocacaoController {
 	}
 	
 	@RequestMapping("/lista-alocacoes")
-	public ModelAndView consultar(Usuario user, @ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("AlocacaoListar");
+
+		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
+		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
 		
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
-		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
-		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
-		mv.addObject("dispositivos", todosDispositivos);
+		for(Alocacao aloca : todosUsuario){
+			if(aloca.getAutorizar()!=null){
+				possivelDevolver.add(aloca);
+			}
+		}
 		
-		return mv;
+		if(possivelDevolver.size()>1){
+		possivelDevolver.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
+		}
 		
+		mv.addObject("alocacaoAtiva", possivelDevolver);
+		mv.addObject("alocacaoTodas",todosUsuario);
 	
+		return mv;
+
 	}
 	
 	@RequestMapping("/devolver")
