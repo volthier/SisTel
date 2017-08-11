@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="LayoutPadrao">
+    
+    <section layout:fragment="cabecalho">
+    
+        <nav class="navbar navbar-default header navbar-fixed-top padding-0" id="fundo_logo">
+          <div class="col-md-12 nav-wrapper" id="cbc">
+            <div class="navbar-header" style="width:100%;">
+                <div class="col-md-2">
+                  <img src="../miminium/img/logo-sistel-horizontal-branca.png" class="img-fluid logo" alt="Responsive image" id="logo"/>
+                </div>    
+                <div class="col-md-1 btn_menu">
+                  <div class="opener-left-menu is-open transparent botao_fechar">
+                    <span class="top"></span>
+                    <span class="middle"></span>
+                    <span class="bottom"></span>
+                    </div>
+                </div>
+              
 
-<nav id="cabecalho" class="navbar navbar-static-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" th:href="@{/inicio}">
-			<span class="menu-anchor"></span>
-			
-			</a>
-			
-		</div>
-	</div>
-</nav>
+              
 
+              <ul id="menu_usuario" class="nav navbar-nav navbar-right user-nav">
+                <li class="user-name nome_usuario"><span sec:authentication="principal.username"> Moisés Rabelo</span></li>
+                  <li class="dropdown avatar-dropdown" id="li_user">
+                    <span class="fa fa-user li_nav" id="icone_usuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+
+                   <ul class="dropdown-menu user-dropdown dropdown_usuario">
+                    <!--  <li><a href="#"><span class="fa fa-user"></span> Perfil</a></li>
+                     <li role="separator" class="divider"></li>
+                       
+                     <li><a class="texto" th:href="@{/menu-usuario/agenda}"> 
+                     	<span class="fa fa-user"></span> Seus Contatos</a></li>
+                     <li><a class="texto" th:href="@{/menu-usuario/dispositivo}">
+                     	<span class="fa fa-calendar"></span> Seus Dispositivos</a></li>
+                     <li><a class="texto" ><span class="fa fa-calendar"></span> Manuais</a></li> -->
+                     <li><a class="texto" th:action="@{/logout}" href="javascript: document.logoutForm.submit()"><span class="fa fa-power-off"></span> Sair</a></li>
+                    
+                  </ul>
+                </li>
+                <!-- <li data-toggle="tab" href="#right-menu-notif" class="opener-right-menu li_nav"><a><span id="icone_notif" class="fa fa-bell-o fa-2x"></span></a></li> -->
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <form name="logoutForm" th:action="@{/logout}" method="POST">
+		</form>
+    </section>
 </html>

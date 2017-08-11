@@ -3,102 +3,143 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
-<head>
-<title>Cadastro de Pessoas</title>
-</head>
 
 <section layout:fragment="conteudo">
 
-	<form class="form-horizontal" method="POST"
-		th:action="@{/usuarios}" th:object="${usuario}">
+	<form class="form-horizontal" method="POST" th:action="@{/usuarios}"
+		th:object="${usuario}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
+
+
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Usuários</h3>
+				</div>
+
+
+
 				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						Pessoas</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar
-						para Lista</a>
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+						style="margin-right: 5px;"></span>Voltar
+					</a>
+				</div>
+
+
+
+				<div class="col-md-12 panel padding-0">
+					<div class="panel-body bg-panel padding-7 tabela">
+
+
+						<input type="hidden" th:field="*{idUsuario}" />
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('nomeUsuario')} ? has-error">
+							<label for="nome" class="col-sm-2 control-label">Nome</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="nome"
+									th:field="*{nomeUsuario}" />
+							</div>
+						</div>
+
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('nomeUsuario')} ? has-error">
+							<label for="nomePrimeiro" class="col-sm-2 control-label">Primeiro
+								nome</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="nomePrimeiro"
+									th:field="*{primeiroNomeUsuario}" />
+							</div>
+						</div>
+
+
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('nomeUsuario')} ? has-error">
+							<label for="nomeSobrenome" class="col-sm-2 control-label">Segundo
+								nome</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="nomeSobrenome"
+									th:field="*{sobrenomeUsuario}" />
+							</div>
+						</div>
+
+						<!-- Cargo inserir dropdown -->
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('cargoUsuario')} ? has-error">
+							<label for="cargo" class="col-sm-2 control-label">Cargo</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" id="cargo"
+									th:field="*{cargoUsuario}" />
+							</div>
+						</div>
+
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('cpfUsuario')} ? has-error">
+							<label for="cpfUsuario" class="col-sm-2 control-label">CPF</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="cpfUsuario"
+									name="cpfUsuario" th:field="*{cpfUsuario}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<!-- th:classappend="${#fields.hasErrors('email')} ? has-error"> -->
+							<label for="emailUsuario" class="col-sm-2 control-label">Email</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="emailUsuario"
+									name="emailUsuario" th:field="*{emailUsuario}" />
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label for="unidadeSei" class="col-sm-2 control-label">Unidade</label>
+							<div class="col-sm-3">
+								<select class="form-control" name="unidadeSei" id="unidadeSei"
+									th:field="*{lotacaoIdUsuario}">
+									<option value="">----Selecione----</option>
+									<option th:each="sei : ${listaUnidadeSei}"
+										th:value="${sei.idUnidade}" th:valuetype="unidadeSei"
+										th:utext="${sei.sigla+' - '+sei.descricao}"></option>
+								</select>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label for="limiteAtesto" class="col-sm-2 control-label">DAS/FCPE</label>
+							<div class="col-sm-3">
+								<select class="form-control" name="limiteDasAtesto"
+									th:field="*{limiteAtesto}">
+									<option value="">----Selecione----</option>
+									<option th:each="limite : ${limiteAtesto}"
+										th:value="${limite.idLimiteAtesto}"
+										th:valuetype="limiteAtesto" th:text="${limite.dasAtesto}"></option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary texto_td">Salvar</button>
+							</div>
+						</div>
+
+
+
+
+
+					</div>
 				</div>
 			</div>
 
-			<div class="painel-body">
-				<input type="hidden" th:field="*{idUsuario}" />
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('nomeUsuario')} ? has-error">
-					<label for="nome" class="col-sm-2 control-label">Nome</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="nome"
-							th:field="*{nomeUsuario}" />
-					</div>
-				</div>
 
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('cpfUsuario')} ? has-error">
-					<label for="cpf" class="col-sm-2 control-label">CPF</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="cpf" th:field="*{cpfUsuario}" />
-					</div>
-				</div>
-
-<!-- 				<div class="form-group"
-					th:classappend="${#fields.hasErrors('matricula')} ? has-error">
-					<label for="matricula" class="col-sm-2 control-label">Matricula</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="matricula"
-							th:field="*{matricula}"/>
-					</div>
-				</div> -->
-
-<!-- 				<div class="form-group">
-					<label for="status" class="col-sm-2 control-label">Vinculo</label>
-					<div class="col-sm-4">
-						<select class="form-control" name="vinculo" th:field="*{vinculo}">
-							<option th:each="vinculo : ${todosVinculoCadastroPessoa}"
-								th:value="${vinculo}" th:text="${vinculo.descricao}"></option>
-						</select>
-					</div>
-				</div> -->
-				
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('lotacaoUsuario')} ? has-error">
-					<label for="lotacao" class="col-sm-2 control-label">Lotação</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="lotacao"
-							th:field="*{lotacaoUsuario}" />
-					</div>
-				</div>
-				
-				<!-- Cargo inserir dropdown -->
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('cargoUsuario')} ? has-error">
-					<label for="cargo" class="col-sm-2 control-label">Cargo</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control" id="cargo"
-							th:field="*{cargoUsuario}" />
-					</div>
-				</div>
-								
-				<div class="form-group">
-					<label for="status" class="col-sm-2 control-label">DAS/FCPE</label>
-					<div class="col-sm-3">
-						<select class="form-control" name="tipo" th:field="*{limiteAtesto}">
-						<option value="">----Selecione----</option>
-							<option th:each="limite : ${limiteAtesto}"
-								th:value="${limite.idLimiteAtesto}" th:valuetype="limiteAtesto" th:text="${limite.dasAtesto}"></option>
-						</select>
-					</div>
-				</div> 
-								
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-					</div>
-				</div>
-			</div>
 		</div>
 	</form>
 </section>

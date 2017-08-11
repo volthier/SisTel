@@ -4,71 +4,280 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
+<section id="telaInicio" layout:fragment="conteudo">
 
-<head>
-<title>Inicio</title>
 
-</head>
-<section layout:fragment="conteudo">
-	
-<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="clearfix">
-				<h1 class="panel-title dt-dispositivo-panel">Início</h1>
-			</div>
-		</div>
-		
-		
-		<div class="panel-body">			
-		
-		<div>
-		
-			<h3> </h3>
-			<h3>Total de alocações</h3> 
-			<p> Efetuadas:&nbsp; <span th:text="${#lists.size(alocacaoTotal)}"></span> 
-			    Devolvidos:&nbsp; <span th:text="${#lists.size(devolvidosTotal)}"></span>
-			    Habilitados:&nbsp; <span th:text="${#lists.size(habilitadosTotal)}"></span>
-		   </p>
-			
-			<h3> </h3>
-		</div>
-		
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center col-md1">Id alocacao</th>
-							<th class="text-center col-md3">Modelo dispositivo</th>
-							<th class="text-center col-md2">Data devolucao</th>
-							<th class="text-center col-md1">Data recebimento</th>
-							<th class="text-center col-md1">Linha</th>
-							<th class="text-center col-md1">Usuario</th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						<tr th:each="dto : ${alocacaoTotal}" >
-							<td class="text-center" th:text="${dto.idAlocacaoUsuarioLinha}"></td>
-							<td class="text-center" th:text="${dto.dispositivo.modeloDispositivo}"></td>
-							<td class="text-center" th:if="${dto.dtDevolucao == null}">Não devolvida</td>
-							<td class="text-center" th:if="${dto.dtDevolucao != null}" th:text="${dto.dtDevolucao}"></td>
-							<td class="text-center" th:text="${dto.dtRecebido}"></td>
-							<td class="text-center" th:text="${dto.linha.numeroLinha}"></td>
-							<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
-						</tr>
-						<tr>
-							<td colspan="10" th:if="${#lists.isEmpty(alocacaoTotal)}">
-								Nenhuma alocação encontrada!!!
-							</td>
-						</tr>
-					</tbody>
-				</table>
+	<!--CONTEUDO TOTAL-->
+	<div class="col-md-12 sem_sombra padding20">
+		<div class="col-md-12 padding-0 sem_sombra">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Dispositivos em estoque</h3>
 			</div>
 
+			<!--FILTRO MENSAL
+			<div class="form-group col-md-6 padding-0 sem_sombra" >
+				<select class="form-control" id="filtro_data">
+					<option>Janeiro de 2017</option>
+					<option>Fevereiro de 2017</option>
+					<option>Março de 2017</option>
+					<option>Abril  de 2017</option>
+					
+				</select>
+			</div> -->
+
+
+
+			<!--CARDS TOPO-->
+			<div class="col-md-12 padding-0">
+				<!--CARD 1-->
+				<div class="col-md-3 padding-7">
+					<div class="panel box-v1 card_topo">
+						<div class="panel-heading cinza border-none header_card"></div>
+						<div class="text-center col-md-12 padding-0">
+
+							<div class="text-left col-md-12 padding-0">
+
+								<div class="col-md-1">
+									<img src="../miminium/img/new-phone.svg"
+										class="icones_card img-fluid text-left" />
+								</div>
+
+								<div class="col-md-10" id="estoque">
+									<p class="texto_card superior text-left">Celulares em
+										Estoque</p>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="panel-body text-right top10">
+							<h2 class="texto_card text-left qtd">256</h2>
+							<h5 class="texto_card">
+								<a class="n_dispositivos">2002</a> em uso
+							</h5>
+
+
+						</div>
+					</div>
+				</div>
+				<!--CARD 2-->
+				<div class="col-md-3 padding-7">
+					<div class="panel box-v1 card_topo">
+						<div class="panel-heading cinza border-none header_card"></div>
+
+						<div class="text-center col-md-12 padding-0">
+
+							<div class="text-left col-md-12 padding-0">
+
+								<div class="col-md-1">
+									<img src="../miminium/img/new-phone.svg"
+										class="icones_card img-fluid text-left tablet" />
+								</div>
+
+								<div class="col-md-10" id="estoque">
+									<p class="texto_card superior text-left">Tablets em Estoque</p>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="panel-body text-right top10">
+							<h2 class="texto_card text-left qtd">256</h2>
+							<h5 class="texto_card">
+								<a class="n_dispositivos">2002</a> em uso
+							</h5>
+
+
+						</div>
+
+
+					</div>
+				</div>
+				<!--CARD 3-->
+				<div class="col-md-3 padding-7">
+
+					<div class="panel box-v1 card_topo">
+						<div class="panel-heading cinza border-none header_card"></div>
+
+						<div class="text-center col-md-12 padding-0">
+
+							<div class="text-left col-md-12 padding-0">
+
+								<div class="col-md-1">
+									<img src="../miminium/img/new-modem.svg"
+										class="icones_card img-fluid text-left" />
+								</div>
+
+								<div class="col-md-10" id="estoque">
+									<p class="texto_card superior text-left">Modem em Estoque</p>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="panel-body text-right top10">
+							<h2 class="texto_card text-left qtd">256</h2>
+							<h5 class="texto_card">
+								<a class="n_dispositivos">2002</a> em uso
+							</h5>
+
+
+						</div>
+
+					</div>
+				</div>
+				<!--CARD 4-->
+				<div class="col-md-3 padding-7">
+					<div class="panel box-v1 card_topo">
+						<div class="panel-heading border-none cinza header_card"></div>
+
+						<div class="text-center col-md-12 padding-0">
+
+							<div class="text-left col-md-12 padding-0">
+
+								<div class="col-md-1">
+									<img src="../miminium/img/new-telephone.svg"
+										class="icones_card img-fluid text-left" />
+								</div>
+
+								<div class="col-md-10" id="estoque">
+									<p class="texto_card superior text-left">Fixos em Estoque</p>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="panel-body text-right top10">
+							<h2 class="texto_card text-left qtd">256</h2>
+							<h5 class="texto_card">
+								<a class="n_dispositivos">2002</a> em uso
+							</h5>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--FIM CARDS TOPO-->
+
+			<!--GRÁFICO-->
+			<div class="col-md-8 padding-7">
+				<div class="panel tamanho_centro">
+					<div
+						class="panel-heading-white text-center panel-heading altura_titulo titulo">
+						<h4>Evolução do Consumo com telefonia 2017</h4>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+							<canvas class="line-chart grafico"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--FIM GRÁFICO-->
+
+			<!--CARD CENTRO DIREITA-->
+			<div class="col-md-4 padding-7">
+				<div class="panel box-v1 card_topo tamanho_centro ">
+					<div
+						class="panel-heading-white text-center panel-heading altura_titulo titulo">
+
+						<div
+							class="col-md-12 col-sm-6 col-xs-12 text-left padding-0 borda_inf">
+							<h4 class="text-center">Cota Mensal</h4>
+						</div>
+
+					</div>
+
+
+					<div class="panel-body text-center top">
+						<h1>80%</h1>
+						<h4 class="texto_card bold">R$ 120,00</h4>
+						<h4 class="texto_card center_card">Voz/Dados</h4>
+
+					</div>
+				</div>
+			</div>
+
+
+			<!--CARDS INFERIOR-->
+			<div class="col-md-12 padding-0">
+				<!--CARD 1-->
+				<div class="col-md-4 padding-7">
+					<div class="panel box-v1 card_inf">
+
+						<div
+							class="panel-heading-white text-center panel-heading altura_titulo titulo">
+							<div
+								class="col-md-12 col-sm-12 col-xs-12 text-center padding-0 borda_inf">
+								<h4 class="text-center">Telefonia Fixa</h4>
+							</div>
+						</div>
+
+						<div class="panel-body text-center">
+							<h4 class="texto_card center_card bold">R$ 120,00</h4>
+							<h4 class="texto_card center_card">Voz</h4>
+
+						</div>
+
+					</div>
+				</div>
+				<!--CARD 2-->
+				<div class="col-md-4 padding-7">
+					<div class="panel box-v1 card_inf">
+						<div
+							class="panel-heading-white text-center panel-heading altura_titulo titulo">
+							<div
+								class="col-md-12 col-sm-12 col-xs-12 text-center padding-0 borda_inf">
+								<h4 class="text-center">Telefonia Móvel</h4>
+							</div>
+						</div>
+
+						<div class="col-md-6 col-sm-6 col-xs-6 text-center padding-0">
+							<div class="panel-body text-center">
+								<h4 class="texto_card bold top">R$ 200,00</h4>
+								<h4 class="texto_card center_card">Voz</h4>
+
+							</div>
+						</div>
+
+						<div class="col-md-6 col-sm-6 col-xs-6 text-center padding-0">
+							<div class="panel-body text-center">
+								<h4 class="texto_card bold top">R$ 120,00</h4>
+								<h4 class="texto_card center_card">Dados</h4>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--CARD 3-->
+				<div class="col-md-4 padding-7">
+					<div class="panel box-v1 card_inf">
+						<div
+							class="panel-heading-white text-center panel-heading altura_titulo titulo">
+							<div
+								class="col-md-12 col-sm-12 col-xs-12 text-center padding-0 borda_inf">
+								<h4 class="text-center center">Consumo Total</h4>
+							</div>
+
+						</div>
+						<div class="panel-body text-center">
+							<h4 class="texto_card center_card bold">R$ 120,00</h4>
+							<h4 class="texto_card center_card">Voz/Dados</h4>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--FIM CARDS INFERIOR-->
 
 		</div>
 	</div>
+	<!--FIM CONTEÚDO TOTAL-->
 
+
+	<!--FIM CONTAINER-->
 </section>
 </html>

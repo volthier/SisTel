@@ -3,9 +3,6 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
-<head>
-<title>Cadastro de Faturas</title>
-</head>
 
 <section layout:fragment="conteudo">
 
@@ -19,25 +16,45 @@
 			<span th:text="${messageErro}"></span>
 		</div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						Faturas</h1>
-				</div>
-			</div>
-			<div class="painel-body">
-				<div class="form-group">
 
-					<label for="fatura" class="col-sm-2 control-label">Fatura:</label>
-					<input class="btn btn-alert btn-file" type="file" name="file" />
+
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+
+
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Fatura</h3>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button class="btn btn-primary" type="submit" value="Upload">Upload</button>
+
+
+				<div class="clearfix">
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+						style="margin-right: 5px;"></span> <span>Voltar</span>
+					</a>
+				</div>,
+
+
+
+				<div class="col-md-12 panel padding-0">
+					<div class="painel-body bg-panel padding-7 tabela">
+
+						<div class="form-group dt">
+							<label for="fatura" class="col-sm-2 control-label desc">Fatura:</label>
+							<input class="btn btn-alert btn-file arq" type="file" name="file" />
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button class="btn btn-primary texto_td" type="submit" value="Upload">Upload</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+
+
 		</div>
 	</form>
 	<div>

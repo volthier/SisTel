@@ -2,3 +2,5 @@
 .classpath
 .factorypath
 .settings/*
+/.apt_generated/
+/bin/

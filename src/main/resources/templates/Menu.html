@@ -4,111 +4,118 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
-<section id="Menu" layout:fragment="Menu">
 
-	<div>
-	
-	<ul class="dropdown">
 
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-user"><b style="font-family: Arial" th:utext="${#authentication.name}">&nbsp;Usuários&nbsp;</b><span
-						class="caret"></span></a></li>
+<div id="left-menu">
+	<div class="sub-left-menu scroll">
 
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/agenda}">Agenda</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/menu-usuario/dispositivo}">Dispositivos</a></li>
-				</ul>
-			</ul>
-	
-		<ul class="dropdown">
-			<li><a class="glyphicon glyphicon-search" th:href="@{/consulta}"><b style="font-family: Arial">&nbsp;Consultar</b></a></li>
+		<ul class="nav nav-list">
 
-			<li class="dropdown-toggle" data-toggle="dropdown"><a
-				class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Alocação&nbsp;</b><span
-					class="caret"></span></a></li>
+			<li class="ripple"><a href="/inicio"
+				onClick="location.href='/inicio'"
+				class="tree-toggle nav-header texto"><span class="fa-home fa"></span>
+					Início </a></li>
 
-			<ul class="dropdown-menu" id="dropdown-menupage">
-				<li><a class="btn btn-link dt-link-menu"
-					th:href="@{/alocacoes/disponibilizar}" >Disponibilizar</a></li>
-				<li><a class="btn btn-link dt-link-menu" th:href="@{/alocacoes/devolver}">Devolução</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Substituição</a></li>
-				<li><a class="btn btn-link dt-link-menu" href="#">Roaming</a></li>
-			</ul>
+			<li class="ripple"><a class="tree-toggle nav-header texto"><span
+					class="fa fa-dropbox"></span>Inventário <span
+					class="fa-angle-right fa right-arrow text-right"></span> </a>
+
+				<ul class="nav nav-list tree">
+					<li><a href="/consultas/chips" th:href="@{/consultas/chips}">Chips</a></li>
+					<li><a href="/consultas/dispositivos"
+						th:href="@{/consultas/dispositivos}">Dispositivos</a></li>
+					<li><a href="/consultas/linhas" th:href="@{/consultas/linhas}">Linhas</a></li>
+				</ul></li>
+
+			<li class="ripple"><a href="/consultas/usuarios"
+				th:href="@{/consultas/usuarios}"
+				class="tree-toggle nav-header texto"><span class="fa fa-users"></span>Usuários</a></li>
+
+
+			<li class="ripple"><a class="tree-toggle nav-header texto">
+					<span class="fa fa-book"></span>Alocações <span
+					class="fa-angle-right fa right-arrow text-right"></span>
+			</a>
+				<ul class="nav nav-list tree">
+					<li><a href="/alocacoes/disponibilizar"
+						th:href="@{/alocacoes/disponibilizar}">Disponibilizar</a></li>
+
+					<li><a href="/alocacoes/devolver"
+						th:href="@{/alocacoes/devolver}">Devolver</a></li>
+
+					<li><a href="/alocacoes/lista-alocacoes"
+						th:href="@{/alocacoes/lista-alocacoes}">Listar</a></li>
+
+					<li><a href="/pendencia" th:href="@{/pendencia}">Pendências</a></li>
+
+					<!-- <li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Substituir</a></li> -->
+
+					<!-- 3º Entrega
+		
+			 		<li class="ripple"><a class="sub-tree-toggle nav-header"> Roaming <span
+					class="fa-angle-right fa right-arrow text-right"></span> </a>
+				<ul class="nav nav-list sub-tree">
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Listar</a></li>
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Consultar</a></li>
+				</ul></li>
+ -->
+				</ul></li>
+
+
+
+			<li class="ripple"><a class="tree-toggle nav-header texto">
+					<img class="icone_menu" th:src="@{/miminium/img/invoice%20(1).svg}"
+					src="../miminium/img/invoice%20(1).svg" width="34px" height="16px" />Faturas<span
+					class="fa-angle-right fa right-arrow text-right"></span>
+			</a>
+				<ul class="nav nav-list tree">
+					<!-- 				<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Listar</a></li> -->
+					<li><a href="/fatura" th:href="@{/fatura}">Enviar para
+							usuários</a></li>
+					<li><a href="/faturas/nova" th:href="@{/faturas/nova}">Inserir</a></li>
+
+				</ul></li>
+
+			<!-- 			2º Entrega
+
+				<li class="ripple"><a class="tree-toggle nav-header texto"><span
+					class="fa fa-bar-chart" onClick="location.href='relatorio'"></span>Extrato de Documentos
+					<span class="fa-angle-right fa right-arrow text-right"> </span></a>
+				<ul class="nav nav-list tree">
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Listar</a></li>
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Gerar</a></li>
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Resumos</a></li>
+
+				</ul></li> -->
+
+			<!-- 			3º Entrega
+
+				<li class="ripple"><a class="tree-toggle nav-header texto"><span
+					class="fa fa-chain"></span> Links <span
+					class="fa-angle-right fa right-arrow text-right"></span> </a>
+				<ul class="nav nav-list tree">
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Link1</a></li>
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Link2</a></li>
+					<li class="btn" disabled="disabled"><a href="#" class="btn" disabled="disabled">Link3</a></li>
+
+				</ul></li> -->
+
+			<li class="ripple"><a class="tree-toggle nav-header texto"><span
+					class="fa fa-cog"></span> Configurações <span
+					class="fa-angle-right fa right-arrow text-right"></span> </a>
+				<ul class="nav nav-list tree">
+					<li><a href="/consultas/categorias"
+						th:href="@{/consultas/categorias}">Categorias</a></li>
+					<li><a href="/consultas/contratos"
+						th:href="@{/consultas/contratos}">Empresas Telefônicas</a></li>
+					<li><a href="/consultas/limites-atesto"
+						th:href="@{/consultas/limites-atesto}">Limites Atesto</a></li>
+
+				</ul></li>
+
 		</ul>
-
 	</div>
-	
-	<div>
-		<ul>
-			<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-list-alt"><b style="font-family: Arial"> Fatura</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/fatura}">Gerar</a></li>
-				</ul>
-			</ul>
-		</ul>
-	</div>
-
-	<div>
-
-		<ul>
-			<li><a class="glyphicon glyphicon-list" th:href="@{/pendencia}"><b style="font-family: Arial">&nbsp;Pedências</b></a></li>
-
-
-			<ul class="dropdown">
-
-				<li class="dropdown-toggle" data-toggle="dropdown"><a
-					class="glyphicon glyphicon-list-alt"><b style="font-family: Arial">&nbsp;Registrar&nbsp;</b><span
-						class="caret"></span></a></li>
-
-				<ul class="dropdown-menu" id="dropdown-menupage">
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/dispositivos/novo}">Dispositivos</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/usuarios/novo}">Pessoas</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/chips/novo}">Chip's</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/linhas/nova}">Linhas</a></li>
-					<li><a class="btn btn-link dt-link-menu"
-						th:href="@{/faturas/nova}">Faturas</a></li>
-					<li><a class="btn btn-link dt-link-menu" href="#">Link's</a></li>
-				</ul>
-			</ul>
-		</ul>
-	</div>
-
-	<div>
-		<ul>
-			<li><a class="glyphicon glyphicon-signal" th:href="@{/relatorio}"><b style="font-family: Arial">&nbsp;Relatórios&nbsp;</b></a></li>
-
-		</ul>
-	</div>
-
-	<div>
-		<ul>
-			<li><a class="glyphicon glyphicon-warning-sign" href="#"><b style="font-family: Arial">&nbsp;Alertas</b></a></li>
-			<li><a class="glyphicon glyphicon-info-sign" href="#"><b style="font-family: Arial">&nbsp;Manuais</b></a></li>
-
-		</ul>
-	</div>
-	
-	<div>
-		<ul>
-			<li><a class="glyphicon glyphicon-off" href="javascript: document.logoutForm.submit()"><b style="font-family: Arial">&nbsp;Sair</b></a></li>
-		</ul>
-	</div>
-	
-	<form name="logoutForm" th:action="@{/logout}" method="POST">
-	</form>
-
-</section>
+</div>
+<!-- end: Left Menu -->
 </html>
 

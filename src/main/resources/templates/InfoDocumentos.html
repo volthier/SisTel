@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<div id="infoDocumentosModal" class="modal fade" tabindex="-1"
+	data-keyboard="false" data-backdrop="static">
+	<div id="modalInfos" class="modal-dialog">
+<form th:attr="data-url-lista=@{/lista-alocacoes}" method="GET">
+<input type="hidden" name="_method"/>
+
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					Documentos (processo 45656/8)
+					<button type="button" class="text-center  btn btn-circle btn-mn" data-dismiss="modal"
+						style="float: right">
+						<span class="fa fa-close danger"></span>
+					</button>
+				</h4>
+			</div>
+			<div class="modal-body texto_td" id="modalInfos">
+				<p>Nome: João Ipsum</p> 
+				<p>Tipo de Documento: Resumo</p>
+				<p>Assinatura: </p> <p>Validade: 1 ano</p> 
+				<p>Data	Gerada: 10/10/17</p> 
+				<p>Data assinada: 9/10/17</p> 
+				<p>Documentos:</p>
+			</div>
+
+
+		</div>
+
+</form>
+	</div>
+</div>
+</html>

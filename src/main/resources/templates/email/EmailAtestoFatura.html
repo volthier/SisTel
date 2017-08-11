@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	   
+<body>
+
+<p style="text-align: right">
+
+<img src="../../static/images/XXXX"/>
+</p>
+<p>Este e um e-mail automático do SisTel</p>
+<br></br>
+<h1 style="font-size=20px" th:text="|Olá ${faturas[0].alocacao.usuario.nomeUsuario}"> Olá Maria</h1>
+
+<p> Estamos enviando essa notificação de inclusao da fatura referente ao mês <span th:text="${faturas[0].fatura.mesRef}"> </span> <!-- da linha <span th:text="${dto.linha.numeroLinha}">numero</span>--> para atesto!</p> 
+
+<p> Número do processo no sistema SEI: <span th:text="${faturas[0].alocacao.alocacaoSei.numeroExternoProcessoSei}"></span> </p>
+
+<a href="http://seitreinamento.cultura.gov.br/">Link para acesso ao SEI</a>
+
+<p> Para conhecimento de utilização disponibilizados na intranet clique nos links: </p>
+
+<p> Para conhecimento da <b><u><a href="http://intranet.cultura.gov.br/as-novas-regras-de-telefonia-do-minc-ja-estao-valendo/">NORMA OPERCIONAL</a></u></b> na intranet!</p>
+
+<p> Conheça a <b><u><a href="http://intranet.cultura.gov.br/wp-content/uploads/sites/4/2013/07/2013-NO-001_2013-de-18jun2013-Telefonia-Fixa-e-Movel-publ-BA-extra-62-2013smallpdf-com.pdf">Norma Operacional Nº 001</a></u></b> na íntegra</p>
+
+<p> <b><u><a href="http://intranet.cultura.gov.br/novas-regras-para-utilizacao-da-telefonia-movel-funcional/">Regras para utilização da telefonia móvel funcional!</a></u></b></p>
+
+<p> <b><u><a href="http://intranet.cultura.gov.br/wp-content/uploads/sites/4/2013/03/Memorando-Circular-n%C2%B0-11-SEMinC2.pdf">Memorando -Circular n° 11 SEMinC</a></u></b> PDF!</p>
+
+<p><b>Divisão de Telefonia - CGTEC</b></p>
+</body>
+</html>

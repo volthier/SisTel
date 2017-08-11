@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<java.mail>1.5.6</java.mail>
+
 	</properties>
 
 	<dependencies>
@@ -44,7 +45,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -115,45 +116,41 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.ldap</groupId>
 			<artifactId>spring-ldap-core</artifactId>
 			<version>2.3.1.RELEASE</version>
 		</dependency>
-		 
+
 		<!-- Fim LDAP -->
 
 
 		<!-- Bibliotecas de suporte a PDF XPDF e Similares -->
+
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
 			<version>5.5.8</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.itextpdf.tool</groupId>
 			<artifactId>xmlworker</artifactId>
 			<version>5.5.8</version>
 		</dependency>
 
+		<!-- Renderizadordor Css no PDF -->
 		<dependency>
-			<groupId>com.openhtmltopdf</groupId>
-			<artifactId>openhtmltopdf-core</artifactId>
-			<version>0.0.1-RC9</version>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-core</artifactId>
+			<version>9.1.5</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.openhtmltopdf</groupId>
-			<artifactId>openhtmltopdf-pdfbox</artifactId>
-			<version>0.0.1-RC9</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.openhtmltopdf</groupId>
-			<artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
-			<version>0.0.1-RC9</version>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf-itext5</artifactId>
+			<version>9.1.5</version>
 		</dependency>
 		<!-- Fim PDF -->
 
@@ -176,15 +173,12 @@
 			<version>1.0.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-maven-plugin</artifactId>
-			<version>${liquibase.version}</version>
-		</dependency>
+		<!-- LIQUIBASE -->
+		<!-- <dependency> <groupId>org.liquibase</groupId> <artifactId>liquibase-core</artifactId> 
+			</dependency> <dependency> <groupId>org.liquibase</groupId> <artifactId>liquibase-maven-plugin</artifactId> 
+			<version>${liquibase.version}</version> </dependency> -->
+
+		<!-- FIM LIQUIBASE -->
 		<!-- Fim Conectores -->
 
 		<!-- axis2 -->
@@ -221,12 +215,12 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<!-- end axis2 -->
-		
-		<!--  EMAIL -->
-				<dependency>
+
+		<!-- EMAIL -->
+		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
-			<version>${java.mail}</version><!--$NO-MVN-MAN-VER$-->
+			<version>${java.mail}</version><!--$NO-MVN-MAN-VER$ -->
 			<scope>compile</scope>
 		</dependency>
 
@@ -240,14 +234,18 @@
 			<artifactId>spring-boot-starter-artemis</artifactId>
 		</dependency>
 		<!-- Fim EMAIL -->
-		
+
 		<!-- GSON Google -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
-		
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -287,38 +285,23 @@
 			</plugin>
 
 			<!-- liquibase -->
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase.version}</version>
-				<configuration>
-					<propertyFile>src/main/resources/application.properties</propertyFile>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.liquibase.ext</groupId>
-						<artifactId>liquibase-hibernate4</artifactId>
-						<version>${liquibase.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-beans</artifactId>
-						<version>${liquibase.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.springframework.data</groupId>
-						<artifactId>spring-data-jpa</artifactId>
-						<version>${liquibase.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+			<!-- <plugin> <groupId>org.liquibase</groupId> <artifactId>liquibase-maven-plugin</artifactId> 
+				<version>${liquibase.version}</version> <configuration> <propertyFile>src/main/resources/application.properties</propertyFile> 
+				</configuration> <dependencies> <dependency> <groupId>org.liquibase.ext</groupId> 
+				<artifactId>liquibase-hibernate4</artifactId> <version>${liquibase.version}</version> 
+				</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-beans</artifactId> 
+				<version>${liquibase.version}</version> </dependency> <dependency> <groupId>org.springframework.data</groupId> 
+				<artifactId>spring-data-jpa</artifactId> <version>${liquibase.version}</version> 
+				</dependency> </dependencies> </plugin> -->
+
+			<!-- AXIS -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>axistools-maven-plugin</artifactId>
 				<version>1.4</version>
 				<configuration>
 					<urls>
-						<url>http://seihomolog.cultura.gov.br/sei/controlador_ws.php?servico=sei</url>
+						<url>http://seitreinamento.cultura.gov.br/sei/controlador_ws.php?servico=sei</url>
 					</urls>
 					<packageSpace>br.gov.cultura.DitelAdm.wsdl</packageSpace>
 				</configuration>

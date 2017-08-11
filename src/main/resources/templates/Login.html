@@ -1,64 +1,114 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout">
 
 <head>
 
-<meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width" />
+  <meta name="description" content="Sistel"/>
+  <meta name="keyword" content=""/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=10"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="_csrf" content="${_csrf.token}" />
+  <meta name="_csrf_header" content="${_csrf.headerName}" />
+  
+  <title>Sistel</title>
 
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-	
+  <!-- plugins -->
+  	<link rel="stylesheet" type="text/css" href="../miminium/css/bootstrap.min.css"	th:href="@{../miminium/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../miminium/css/plugins/font-awesome.min.css" th:href="@{../miminium/css/plugins/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css" href="../miminium/css/plugins/simple-line-icons.css"	th:href="@{../miminium/css/plugins/simple-line-icons.css}"/> 
+	<link rel="stylesheet" type="text/css" href="../miminium/css/plugins/animate.min.css" th:href="@{../miminium/css/plugins/animate.min.css}"/>
+  	<link rel="stylesheet" type="text/css" href="../miminium/css/plugins/icheck/skins/flat/aero.css" th:href="@{../miminium/css/plugins/icheck/skins/flat/aero.css}"/>
+  	<link rel="stylesheet" href="../miminium/css/style.css" th:href="@{../miminium/css/style.css}"/>
+	<link rel="stylesheet" href="../miminium/css/custom.css" th:href="@{../miminium/css/custom.css}"/>
+  <!-- end: Css -->
+
+	<link rel="icon" type="image/png" href="icon/favicon_um.png" th:href="@{icon/favicon_um.png}"/>
+  
 </head>
-<script th:src="@{/js/jquery-2.2.3.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<body>
-	<form class="form-horizontal" th:action="@{/login}" method="POST">
-	<h1 align="center">SisTel</h1>
-	
-		<!-- <div layout:include="MensagemLoginErro"></div> -->
-		
-		<div style="width:100%;">
-		<div id="loginPainel" class="panel panel-default">
-			<div class="panel-heading">
-				<div class="clearfix">
-					<div class="painel-body">
-						<div class="form-group">
-							<label for="username" class="col-sm-4 control-label" style="padding-top: 3px;">
-								<span class="glyphicon glyphicon-user" style="margin-right: 4px;"></span> Login
-							</label>
-							<div class="col-sm-7">
-								<input type="text" class="form-control" id="username"
-									name="username" placeholder="Id Usuário" autofocus="autofocus"/>
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label for="password" class="col-sm-4 control-label" style="padding-top: 3px">
-								<span class="glyphicon glyphicon-eye-open"></span>  Senha
-							</label>
-							<div class="col-sm-7">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Enter password" />
-							</div>
-						</div>
-							<div class="form-group">
-							<div class="col-sm-offset-5">
-								<button type="submit" class="btn btn-primary btn-sm">
-									<span class="glyphicon glyphicon-off" style="padding:0;"></span> Acessar
-								</button>
-							
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</form>
-</body>
+    <body id="mimin" class="dashboard form-signin-wrapper">
+    
+      <div class="container">
 
+        <form class="form-signin topo" th:action="@{/login}" method="POST">
+          <div id="periodic-login" class="panel periodic-login">
+              
+              <div class="panel-body text-center"> <!-- DIV LOGIN -->
+                  <div class="row">    
+                      <!--LOGO-->    
+                      <div class="col-md-12 alturaLogo"> 
+                          <img src="../miminium/img/tela-login-Recuperado2_06.png" th:src="@{../miminium/img/tela-login-Recuperado2_06.png}" class="img-fluid logo-login" alt="Responsive image"/>
+                      </div>
+
+                      <!-- INPUTS -->                  
+                      <!-- LINHA 1 INPUT-->
+                      <div class="col-md-10 col-md-offset-1">
+                          <div class="form-group form-animate-text">
+                                    <div class="btn btn-round linha">
+                                        <div class="col-md-1 icones">
+                                            <i class="fa fa-user"></i> 
+                                        </div>
+
+                                        <div class="col-md-9 grid_input">
+
+                                            <input autofocus="autofocus" type="text" class="form-text validate" id="username" name="username" placeholder="Usuário" required="required"/>
+
+                                        </div>  
+                                    </div>    
+
+                            </div>
+
+                      </div>
+
+                      <!--LINHA 2 INPUT-->
+                      <div class="col-md-10 col-md-offset-1 alturaDiv">
+
+                                <div class="form-group form-animate-text">
+                                    <div class="btn btn-round linha">
+
+                                        <div class="col-md-1 icones">
+                                            <i class="fa fa-lock"></i> 
+                                        </div>
+                                        <div class="col-md-9 col-md-offset-1 grid_input">
+
+                                            <input type="password" class="form-text validate" id="password" name="password" placeholder="*******************" required="required"/>
+
+
+                                        </div>  
+                                    </div>    
+
+                                </div>
+
+                      </div>
+
+                      <!-- LINHA 3 BUTTON ENTRAR -->  
+                      <div class="col-md-10 col-md-offset-1 alturaDiv">
+                            <div class="form-group form-animate-text">
+                                <input type="submit" id="entrar" class="col-md-12 btn btn-round botao linha" value="ENTRAR"/>
+                            </div>
+
+                      </div>
+                  
+                  </div>
+            </div>
+            </div>
+      </form>
+      </div>
+    </body>  
+      <!-- end: Content -->
+      <!-- start: Javascript -->
+      <script src="../miminium/js/jquery.min.js"></script>
+      <script src="../miminium/js/jquery.ui.min.js"></script>
+      <script src="../miminium/js/bootstrap.min.js"></script>
+
+      <script src="../miminium/js/plugins/moment.min.js"></script>
+      <script src="../miminium/js/plugins/icheck.min.js"></script>
+
+      <!-- custom -->
+      <script src="../miminium/js/main.js"></script>
+      
+    
 </html>

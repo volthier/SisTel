@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<section layout:fragment="conteudo">
+
+
+
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Linhas</h3>
+			</div>
+
+
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}">
+					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar</a>
+			</div>
+
+			<div class="col-md-12 padding-7 pesquisa">
+
+				<div class="col-md-8 pesquisa">
+
+					<div class="btn btn-link texto_td text-center"	th:href="@{/linhas/nova}" 
+					onClick="location.href='/linhas/nova'" id="btn_novo" style="float: left"> 
+							<span class="fa fa-plus-circle" id="add">
+								<span class="tabela"> Nova Linha</span>
+							</span>
+
+					</div>
+					
+				</div>
+
+				<div class="col-md-4 input-group p_linha" id="input_pesquisa">
+					<input class="form-control"
+						placeholder="Digite aqui sua pesquisa" /> <span
+						class="input-group-btn">
+						<button class="btn btn-secondary" type="submit">
+							<span class="fa fa-search text-center b"> </span>
+						</button>
+					</span>
+				</div>
+			</div>
+
+			<form class="form-horizontal" method="POST" th:action="@{/linhas}">
+
+				<div class="col-md-12 panel padding-0 cinza">
+					<div class="painel-body bg-panel padding-7 tabela">
+						<div class="table-responsive">
+							
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">Id</th>
+										<th class="text-center col-md3">Linha</th>
+										<th class="col-md2"></th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr th:each="linha : ${linhas}">
+										<td class="text-center" th:text="${linha.idLinha}"></td>
+										<td class="numTable" th:text="${linha.numeroLinha}"></td>
+										<td class="text-center">
+										<a class="icone_tabela"	th:href="@{/linhas/{id}(id=${linha.idLinha})}" title="Editar"
+											rel="tooltip" data-placement="left"> <span
+												class="fa fa-pencil"></span>
+										</a> 
+										<a class="icone_tabela" data-toggle="modal"
+											data-target="#confirmacaoExclusaoModal"
+											th:attr="data-flag='4',data-excludId=${linha.idLinha}, data-exclude=${linha.numeroLinha}"
+											title="Remover" rel="tooltip" data-placement="left"> <span
+												class="fa fa-remove text-danger"></span>
+										</a></td>
+
+									</tr>
+									<tr>
+										<td colspan="3" th:if="${#lists.isEmpty(linhas)}">Nenhuma
+											Linha encontrada!!!</td>
+									</tr>
+
+
+
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+<div layout:include="DialogoConfirmacaoExclusao"></div>
+</section>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<section layout:fragment="conteudo">
+
+	<form class="form-horizontal" method="POST"
+		th:action="@{/limites-atesto}" th:object="${limiteAtesto}">
+
+		<div layout:include="MensagemSucesso"></div>
+		<div layout:include="MensagemErro"></div>
+
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Limite Atesto</h3>
+				</div>
+
+				<div class="clearfix">
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/consultas/limites-atesto}"> <span
+						class="fa fa-angle-double-left" style="margin-right: 5px;"></span>Voltar</a>
+				</div>
+
+			</div>
+
+
+
+			<div class="col-md-12 panel padding-0">
+				<div class="panel-body bg-panel padding-7 tabela">
+					<input type="hidden" th:field="*{idLimiteAtesto}" />
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('dasAtesto')} ? has-error">
+						<label for="atesto" class="col-sm-2 control-label">DAS
+							Atesto</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="atesto"
+								th:field="*{dasAtesto}" />
+						</div>
+					</div>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('valorLimite')} ? has-error">
+						<label for="valor" class="col-sm-2 control-label">Valor
+							Limite</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control js-valorCss" id="valor"
+								th:field="*{valorLimite}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary texto_td">Salvar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</form>
+</section>
+</html>

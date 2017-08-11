@@ -21,5 +21,10 @@ public class LimiteAtestoService {
 		public List<LimiteAtesto> getLimitesAtesto() {
 			return limitesAtestos.findAll();
 		}
-
+		public LimiteAtesto getLimiteAtestoId(Integer id){
+			return limitesAtestos.findOne(id);
+		}
+		public void excluir(Integer idLimiteAtesto){
+			limitesAtestos.delete(idLimiteAtesto);
+		}
 }

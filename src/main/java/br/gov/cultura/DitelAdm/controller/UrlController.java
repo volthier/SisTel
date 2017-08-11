@@ -1,8 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.dtos.AlocacaoLinhaDispositivoUsuarioDTO;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
-import br.gov.cultura.DitelAdm.service.PendenciaService;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
 
 
 
 @Controller
+@Transactional
 @RequestMapping
 public class UrlController {
 
 @Autowired
-private PendenciaService pendenciaService;
+private AlocacaoService alocacaoService;
 
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
@@ -52,25 +50,26 @@ public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa
 
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		
-		List<AlocacaoLinhaDispositivoUsuarioDTO> lista =  pendenciaService.listaPendencia();
+/*		List<Alocacao> lista = alocacaoService.getIdAlocacao();
+	
+		//Lista de alocados Devolvidos
+		Stream<Alocacao> dto = lista.stream().filter(p-> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido() !=null);
+	
 		
-		/*Lista de alocados Devolvidos*/
-		Stream<AlocacaoLinhaDispositivoUsuarioDTO> dto = lista.stream().filter( p -> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido()!=null);
-		
-		/*Lista de alocados habilitados*/
-		Stream<AlocacaoLinhaDispositivoUsuarioDTO> dto1 = lista.stream().filter( p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao()==null);
+		//Lista de alocados habilitados
+		Stream<Alocacao> dto1 = lista.stream().filter( p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao()==null);
 		
 		//lista de total alocados
 		mv.addObject("alocacaoTotal",lista);
 		
-		/*lista de total alocados Habilitados*/
+		//lista de total alocados Habilitados
 		mv.addObject("devolvidosTotal",dto);
 		
-		/*Lista de alocados habilitados*/
+		//Lista de alocados habilitados
 		mv.addObject("habilitadosTotal",dto1);
 
 		mv.addObject("pendencia",lista);
-		
+		*/
 		return mv;
 	}
 	

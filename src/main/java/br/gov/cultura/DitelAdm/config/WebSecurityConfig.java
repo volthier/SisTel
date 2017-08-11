@@ -1,6 +1,7 @@
 package br.gov.cultura.DitelAdm.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,11 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+    Environment env;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-		.antMatchers("/css/**", "/js/**", "/images/**", "/resources/**", "/webjars/**","/fonts/**").permitAll();
+		.antMatchers("/css/**", "/js/**", "/img/**", "/images/**", "/resources/**", "/webjars/**","/fonts/**","/miminium/**","/icon/**").permitAll();
 		
 		http
 		.authorizeRequests()
@@ -28,22 +32,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.defaultSuccessUrl("/inicio",true)
 			.and()
 		.logout()
-			.logoutSuccessUrl("/login");
-			
-			 
+			.logoutSuccessUrl("/login"); 
+		
+		http
+		.authorizeRequests()
+			.antMatchers("/login").anonymous()
+			.anyRequest().authenticated()
+			.and()
+		.exceptionHandling()
+			.accessDeniedPage("/inicio");
+		
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.ldapAuthentication()
-			.userSearchFilter("(sAMAccountName={0})")
-			.userSearchBase("OU=CGTI,OU=Usuarios,OU=Sede")
+		.userSearchFilter(env.getRequiredProperty("ldap.user.search.filter"))
+			.userSearchBase(env.getRequiredProperty("ldap.user.search.base"))
 				.groupSearchFilter("(member={0})")
-				.groupSearchBase("OU=Seguranca,OU=Grupos,OU=Sede")
+				.groupSearchBase(env.getRequiredProperty("ldap.user.search.base"))
 				.contextSource()
-				.url("ldap://10.0.0.173:389/DC=minc,DC=intra")
-				.managerDn("CN="+System.getenv("USERLDAP")+",OU=CGTI,OU=Usuarios,OU=Sede,DC=minc,DC=intra")
-				.managerPassword(System.getenv("PASSLDAP"));
+				.url(env.getRequiredProperty("ldap.url"))
+				.managerDn(env.getRequiredProperty("ldap.userDn"))
+				.managerPassword(env.getRequiredProperty("ldap.passDn"));
 	}
 }

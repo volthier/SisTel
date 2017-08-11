@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<section layout:fragment="conteudo">
+
+	<div layout:include="MensagemSucesso"></div>
+
+
+
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Contratos</h3>
+			</div>
+
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
+					style="margin-right: 5px;"></span>Voltar</a>
+			</div>
+
+			<div class="col-md-12 padding-7 pesquisa">
+
+				<div class="col-md-8 pesquisa">
+
+
+					<div class="btn btn-link texto_td text-center" th:href="@{/dispositivos/novo}"
+						onClick="location.href='/contratos/novo'" id="btn_novo" style="float: left;">
+						<span class="fa fa-plus-circle" id="add"> <span
+							class="tabela"> Novo Contrato</span>
+						</span>
+
+					</div>
+
+
+				</div>
+
+
+				<form method="get">
+					<div class="col-md-4 input-group p_cont" id="input_pesquisa">
+						<input class="form-control" placeholder="Digite aqui sua pesquisa" />
+						<span class="input-group-btn">
+							<button class="btn btn-secondary" type="submit">
+								<span class="fa fa-search text-center b"> </span>
+							</button>
+						</span>
+					</div>
+				</form>
+
+			</div>
+
+			<form class="form-horizontal" method="POST" td:action="@{/contratos}">
+
+				<div class="col-md-12 panel padding-0">
+					<div class="painel-body bg-panel padding-7 tabela">
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">Id</th>
+										<th class="text-center col-md2">Numero</th>
+										<th class="text-center col-md2">Contratada</th>
+										<th class="text-center col-md2">Vigência</th>
+										<th class="text-center col-md2">Processo nº</th>
+										<th class="text-right col-md2">Valor</th>
+										<th class="col-md2"></th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr>
+										<td class="text-center">1</td>
+										<td class="text-center">020202020202</td>
+										<td class="text-center">CLARO/SA</td>
+										<td class="text-center">01/06/2018</td>
+										<td class="text-center">01400.200178/2017-65</td>
+										<td class="text-center">500.000,00</td>
+										<td class="center">
+											<a class="icone_tabela" title="Consultar" rel="tooltip" data-placement="left"> <span
+												class="fa fa-file-text-o text-success"></span></a> 
+											<a class="icone_tabela" title="Editar" rel="tooltip"
+											data-placement="left"> <span class="fa fa-pencil"></span></a>
+											<a class="icone_tabela" title="Excluir" rel="tooltip"
+											data-placement="left"> <span
+												class="fa fa-close text-danger"></span></a></td>
+									</tr>
+
+									<tr>
+										<td class="text-center">1</td>
+										<td class="text-center">020202020202</td>
+										<td class="text-center">VIVO</td>
+										<td class="text-center">04/10/2017</td>
+										<td class="text-center">01400.200506/2015-65</td>
+										<td class="text-center">100.000,00</td>
+										<td class="center"><a class="icone_tabela "
+											title="Consultar" rel="tooltip" data-placement="left"> <span
+												class="fa fa-file-text-o text-success"></span></a> <a
+											class="icone_tabela" title="Editar" rel="tooltip"
+											data-placement="left"> <span class="fa fa-pencil"></span></a>
+											<a class="icone_tabela" title="Excluir" rel="tooltip"
+											data-placement="left"> <span
+												class="fa fa-close text-danger"></span></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+			</form>
+		</div>
+	</div>
+
+
+
+
+
+
+<div layout:include="DialogoConfirmacaoExclusao"></div>
+</section>
+</html>

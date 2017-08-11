@@ -1,6 +1,8 @@
 package br.gov.cultura.DitelAdm.controller;
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -17,6 +19,7 @@ import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 
 
 @Controller
+@Transactional
 @RequestMapping("/linhas")
 public class LinhaController extends UrlController {
 	
@@ -52,7 +55,7 @@ public class LinhaController extends UrlController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroLinhaService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastro da linha removida com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/linhas";
 		}	
 
 	@RequestMapping("{id}")

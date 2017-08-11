@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -22,6 +24,7 @@ import br.gov.cultura.DitelAdm.service.CadastroChipService;
 
 
 @Controller
+@Transactional
 @RequestMapping("/chips")
 public class ChipController extends UrlController {
 	
@@ -56,15 +59,15 @@ public class ChipController extends UrlController {
 		
 	}
 	
-	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="{idChip}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer idChip, RedirectAttributes attributes){
 		cadastroChipService.excluir(idChip);
 		attributes.addFlashAttribute("mensagem","Cadastrado do chip removido com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/chips";
 		}	
 	
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("idChip") Chip chips){
+	public ModelAndView edicao(@PathVariable("id") Chip chips){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(chips);
 				return mv;
@@ -77,8 +80,9 @@ public class ChipController extends UrlController {
 
 	    Map<String,String> tipoChipMap = new HashMap<String,String> ();
 	    tipoChipMap.put("SimCard","SimCard");
-	    tipoChipMap.put("MicroSim","MicroSim");
-	    tipoChipMap.put("NanoSim","NanoSim");
+	    tipoChipMap.put("MicroSimCard","MicroSimCard");
+	    tipoChipMap.put("NanoSimcard","NanoSimCard");
+	    tipoChipMap.put("FlexSimCard","FlexSimCard");
 	    return tipoChipMap;
 	}
 }

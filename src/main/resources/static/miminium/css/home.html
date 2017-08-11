@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao"> 
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	
+	<meta charset="utf-8"/>
+	<meta name="description" content="Home - Sistel"/>
+	<meta name="keyword" content=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Home - Sistel</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+ 
+    <!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css"/>
+
+      <!-- plugins -->
+      <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
+      <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css"/>
+      <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
+      <link rel="stylesheet" type="text/css" href="asset/fonts/opensans_regular_macroman/stylesheet.css"/>
+      <link href="asset/css/style.css" rel="stylesheet"/>
+	  <link href="custom.css" rel="stylesheet"/>
+        
+	<!-- end: Css -->
+
+	
+
+  </head>
+
+ <body id="home" class="dashboard">
+      <!-- start: Header -->
+
+
+     
+
+      <!-- start: Mobile -->
+      <div id="mimin-mobile" class="reverse">
+        <div class="mimin-mobile-menu-list">
+            <div class="col-md-12 sub-mimin-mobile-menu-list animated" id="largura_menu_mobile">
+                <ul class="nav nav-list" id="menu_nav_mobile">
+                    <li class="ripple bg_inicio">
+                        <a class="tree-toggle nav-header texto"><span class="fa-home fa"></span> Início
+                        </a>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto"><span class="fa-search fa"></span> Consultas
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="#">Dispositivos</a></li>
+                          <li><a href="#">Pessoas</a></li>
+                          <li><a href="#">Chips</a></li>
+                          <li><a href="#">Linhas</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto">
+                        <span class="fa fa-exclamation-triangle"></span> Pendências
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Alocação</a></li>
+                        <li><a href="#">Notificação</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto">
+                        <span class="fa-book fa"></span>Alocações
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Consultar Documentos</a></li>
+                        <li><a href="#">Disponibilizar</a></li>
+                        <li><a href="#">Devolver</a></li>
+                        <li><a href="#">Substituir</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header texto"><span class="icons icon-globe"> </span>Roaming
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="#">Roaming1</a></li>
+                          <li><a href="#">Roaming2</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto">
+                    <img class="icone_menu" src="asset/img/invoice.svg"/>Faturas <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Listar</a></li>
+                        <li><a href="#">Gerar</a></li>
+                        <li><a href="#">Resumos</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-check-square-o"></span>Relatórios  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Listar</a></li>
+                        <li><a href="#">Gerar</a></li>
+                        <li><a href="#">Resumos</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                    <li class="ripple"><a class="tree-toggle nav-header texto"><span class="fa fa-chain"></span> Links  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="#">Link1</a></li>
+                        <li><a href="#">Link2</a></li>
+                        <li><a href="#">Link3</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>       
+      </div>
+      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars" id="btn_mobile"></span>
+      </button>
+       <!-- end: Mobile -->
+
+    <!-- start: Javascript -->
+    <script src="asset/js/jquery.min.js"></script>
+    <script src="asset/js/jquery.ui.min.js"></script>
+    <script src="asset/js/bootstrap.min.js"></script>
+   
+    <!-- plugins -->
+    <script src="asset/js/plugins/moment.min.js"></script>
+    <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+    <script src="asset/js/plugins/chart.min.js"></script>
+     
+    <!-- custom -->
+     <script src="asset/js/main.js"></script>
+     
+  <!-- end: Javascript -->
+  </body>
+</html>

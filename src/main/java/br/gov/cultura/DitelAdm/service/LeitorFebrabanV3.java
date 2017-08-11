@@ -40,7 +40,8 @@ public class LeitorFebrabanV3 {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private SimpleDateFormat sdfh = new SimpleDateFormat("HHmmss");
-
+	private SimpleDateFormat sdfs = new SimpleDateFormat("ss");
+	
 	public FaturaArquivoDTO read(File file) throws IOException {
 
 		String convert;
@@ -268,7 +269,7 @@ public class LeitorFebrabanV3 {
 					if (a == 0) {
 						System.err.println(" Acrescentando 9º digito ao numero: ");
 						numero = data.substring(83, 85).concat("9").concat(data.substring(85, 99)).trim();
-						System.out.print("numero modificado para: " + numero);
+						System.out.println("numero modificado para: " + numero);
 						Linha linha = cadastroLinhaService.getLinhaRegistrada(numero);
 						if (linha != null) {
 							resumo.setLinha(linha);
@@ -524,14 +525,36 @@ public class LeitorFebrabanV3 {
 				 */
 				chamadas.setCnlAreaLocalUso(Integer.parseInt(data.substring(78, 83)));
 
-				/* RECEBE DO RESUMO *//** Numero do recurso *//*
-																 * chamadas.
-																 * setIdChamadas
-																 * (data.
-																 * substring(83,
-																 * 99));
-																 */
+				/** Numero do recurso */
+				chamadas.setNumRecursoChamada(data.substring(83,99).trim());
 
+				String numeroC = data.substring(83,99).trim(); 
+				int aC = 0;
+				try {
+					Linha linha = cadastroLinhaService.getLinhaRegistrada(numeroC);
+					System.out.println("Linha encontrada: " + linha.getNumeroLinha());
+					if (linha != null) {
+						chamadas.setLinha(linha);
+						aC = 1;
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.err.println("Erro na verificação de linha registrada na fatura: " + numeroC+" - "+ e);
+				}
+				try {
+					if (aC == 0) {
+						numeroC = data.substring(83, 85).concat("9").concat(data.substring(85, 99)).trim();
+						Linha linha = cadastroLinhaService.getLinhaRegistrada(numeroC);
+						if (linha != null) {
+							chamadas.setLinha(linha);
+						} else {
+							chamadas.setLinha(null);
+						}
+					}
+				} catch (Exception e) {
+					System.err.println(e + " Linha inexistente no base de dados!");
+				}
+				
 				/** Data da ligação */
 				try {
 					chamadas.setDataLigacao(sdf.parse(data.substring(99, 107)));
@@ -599,7 +622,7 @@ public class LeitorFebrabanV3 {
 
 				/** Duração Ligação**** */
 				try {
-					chamadas.setDuracaoLigacao(sdfh.parse(data.substring(188, 195)));
+					chamadas.setDuracaoLigacao(sdfs.parse(data.substring(188, 195)));
 				} catch (ParseException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -662,7 +685,34 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String chamaMarcaFim(data.substring(349,
 				 * 350);
 				 */
-				for (Resumo r : resumoLista) {
+				
+				
+
+				String verificaCategoriaC = data.substring(201, 226);
+
+					Categoriachamada chama = categoriaChamadaLista.stream()
+							.filter(x -> x != null && x.getDescricao().equals(verificaCategoriaC))
+							.findFirst().orElse(null);
+
+					if (chama != null) {
+						
+						chamadas.setFatura(fatura);
+					
+						chamadas.setCategoriachamada(chama);
+						chamadasLista.add(chamadas);
+						faturaArquivoDTO.setChamadas(chamadasLista);
+					} else {
+						chamadas.setCategoriachamada(categoriaChamada);
+						categoriaChamadaLista.add(categoriaChamada);
+						chamadas.setFatura(fatura);
+						faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
+						chamadasLista.add(chamadas);
+						faturaArquivoDTO.setChamadas(chamadasLista);
+					}
+				
+				
+				
+/*				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(83, 99).trim())) {
 						chamadas.setResumo(r);
 						if (categoriaChamadaLista.isEmpty()) {
@@ -701,7 +751,7 @@ public class LeitorFebrabanV3 {
 					}
 					;
 				}
-				;
+				;*/
 				break;
 
 			case "40":
@@ -748,8 +798,47 @@ public class LeitorFebrabanV3 {
 				 * Numero do recurso
 				 */
 
-				/* servicos.setIdServicos(data.substring(83, 99)); */
+				servicos.setNumRecursoServico(data.substring(83, 99).trim());
 
+				
+				String numeroS = data.substring(83,99).trim(); 
+				int aS = 0;
+				try {
+					Linha linha = cadastroLinhaService.getLinhaRegistrada(numeroS);
+					System.out.println("Linha encontrada: " + linha.getNumeroLinha());
+					if (linha != null) {
+						servicos.setLinha(linha);
+						aC = 1;
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.err.println("Erro na verificação de linha registrada na fatura: " + numeroS+" - "+ e);
+				}
+				try {
+					if (aS == 0) {
+						numeroC = data.substring(83, 85).concat("9").concat(data.substring(85, 99)).trim();
+						Linha linha = cadastroLinhaService.getLinhaRegistrada(numeroS);
+						if (linha != null) {
+							servicos.setLinha(linha);
+						} else {
+							servicos.setLinha(null);
+						}
+					}
+				} catch (Exception e) {
+					System.err.println(e + " Linha inexistente no base de dados!");
+				}
+				
+				/** Data da ligação */
+				try {
+					chamadas.setDataLigacao(sdf.parse(data.substring(99, 107)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				
 				/**
 				 * Data do Serviço
 				 */
@@ -849,7 +938,29 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String servMarcaFim(data.substring(349, 350);
 				 */
 
-				for (Resumo r : resumoLista) {
+				String verificaCategoriaS = data.substring(154, 179);
+
+				Categoriaservico serve = categoriaServicoLista.stream()
+						.filter(x -> x != null && x.getDescricao().equals(verificaCategoriaS))
+						.findFirst().orElse(null);
+
+				if (serve != null) {
+					servicos.setCategoriaservico(serve);
+					servicos.setFatura(fatura);
+					servicosLista.add(servicos);
+					faturaArquivoDTO.setServicos(servicosLista);
+				} else {
+					categoriaServicoLista.add(categoriaServico);
+					servicos.setCategoriaservico(categoriaServico);
+					servicos.setFatura(fatura);
+					servicosLista.add(servicos);
+					faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+					faturaArquivoDTO.setServicos(servicosLista);
+				}
+				
+				
+				
+				/*for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(83, 99).trim())) {
 						servicos.setResumo(r);
 						if (categoriaServicoLista.isEmpty()) {
@@ -889,7 +1000,7 @@ public class LeitorFebrabanV3 {
 					}
 					;
 				}
-				;
+				;*/
 				break;
 
 			case "50":
@@ -1118,12 +1229,44 @@ public class LeitorFebrabanV3 {
 				 */
 
 				/** Identificador Único do Recurso */
-				// planosId.setResumoNumRecurso(data.substring(53, 78));
+				planos.setIdUnicoPlanos(data.substring(53, 78).trim());
 
 				/** Numero do Telefone */
-				/*
-				 * planosId.setResumoNumRecurso(data.substring(78, 94));
-				 */
+				
+				String num = data.substring(78, 94).trim();
+					 planos.setNumRecursoPlanos(num);
+					int b = 0;
+					try {
+
+						Linha linha = cadastroLinhaService.getLinhaRegistrada(num);
+						if (linha != null) {
+							planos.setLinha(linha);
+							b = 1;
+						}
+
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.err.println("Erro na verificação de linha registrada na fatura: " + num+" - "+ e);
+					}
+
+					try {
+						if (b == 0) {
+							num = data.substring(78, 80).concat("9").concat(data.substring(80, 94)).trim();
+							Linha linha = cadastroLinhaService.getLinhaRegistrada(num);
+							if (linha != null) {
+								planos.setLinha(linha);
+							} else {
+								planos.setLinha(null);
+								System.err.println("Numero não vinculado ao Sistema! - " + num);
+							}
+
+						}
+					} catch (Exception e) {
+						System.err.println(e + " Linha inexistente no base de dados!");
+					}
+				 
+				 
+				 
 				/**
 				 * Tipo do Plano
 				 */
@@ -1238,10 +1381,33 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String planoMarcaFim(data.substring(349,
 				 * 350);
 				 */
+				planos.setFatura(fatura);
+	
+				String verificaCategoriaPlano = data.substring(161, 186);
 
-				for (Resumo r : resumoLista) {
+					Categoriaplano plano = categoriaPlanoLista.stream()
+							.filter(catPlan -> catPlan != null
+									&& catPlan.getDescricao().equals(verificaCategoriaPlano))
+							.findFirst().orElse(null);
+
+					if (plano != null) {
+						planos.setCategoriaplano(plano);
+						planosLista.add(planos);
+						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+						faturaArquivoDTO.setPlanos(planosLista);
+					} else {
+						planos.setCategoriaplano(categoriaPlano);
+						planosLista.add(planos);
+						categoriaPlanoLista.add(categoriaPlano);
+						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
+						faturaArquivoDTO.setPlanos(planosLista);
+					}
+				
+				/*			for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(78, 94).trim())) {
 						planos.setResumo(r);
+						}
+				}
 						if (categoriaPlanoLista.isEmpty()) {
 							planos.setCategoriaplano(categoriaPlano);
 							planosLista.add(planos);
@@ -1277,11 +1443,9 @@ public class LeitorFebrabanV3 {
 							;
 
 						}
-						;
-					}
-					;
-				}
-				;
+						
+						;*/
+				
 				break;
 
 			case "70":
@@ -1382,8 +1546,25 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String
 				 * ajustesMarcaFim(data.substring(349,350);
 				 */
+				ajustes.setFatura(fatura);
+				String verificaCategoriaAjuste = data.substring(101, 141);
+				Categoriaajuste ajuste = categoriaAjustesLista.stream().filter(
+							catPlan -> catPlan != null && catPlan.getDescricao().equals(verificaCategoriaAjuste))
+							.findFirst().orElse(null);
 
-				for (Resumo r : resumoLista) {
+					if (ajuste != null) {
+						ajustes.setCategoriaajuste(ajuste);
+						ajustesLista.add(ajustes);
+						faturaArquivoDTO.setAjustes(ajustesLista);
+					} else {
+						categoriaAjustesLista.add(categoriaAjustes);
+						faturaArquivoDTO.setCategoriaAjuste(categoriaAjustesLista);
+						ajustes.setCategoriaajuste(categoriaAjustes);
+						ajustesLista.add(ajustes);
+						faturaArquivoDTO.setAjustes(ajustesLista);
+					}
+
+/*				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(ajustes.getNumRecurso())) {
 						ajustes.setResumo(r);
 					} else {
@@ -1399,11 +1580,11 @@ public class LeitorFebrabanV3 {
 
 				} else {
 
-					String verificaCategoriaPlano = data.substring(101, 141);
+					String verificaCategoriaAjuste = data.substring(101, 141);
 
 					try {
 						Categoriaajuste ajuste = categoriaAjustesLista.stream().filter(
-								catPlan -> catPlan != null && catPlan.getDescricao().equals(verificaCategoriaPlano))
+								catPlan -> catPlan != null && catPlan.getDescricao().equals(verificaCategoriaAjuste))
 								.findFirst().orElse(null);
 
 						if (ajuste != null) {
@@ -1424,7 +1605,7 @@ public class LeitorFebrabanV3 {
 					;
 
 				}
-				;
+				;*/
 
 				break;
 

@@ -1,29 +1,3 @@
-/*Script caledario input*/
-/*$('.input-group.date').datepicker({
-    format: "dd/mm/yyyy HH:mm:ss",
-    todayBtn: true,
-    clearBtn: true,
-    language: "pt-BR",
-    daysOfWeekDisabled: "0",
-    daysOfWeekHighlighted: "0",
-    autoclose: true,
-    todayHighlight: true
-});*/
-
-/* TESTE CALENDARIO*/
-  
-	  $('#datetimepicker').datetimepicker({
-		  format: 'yyyy/mm/dd hh:ii',
-	    
-	    todayBtn: true,
-	    clearBtn: true,
-	    language: "pt-BR",
-	    daysOfWeekDisabled: "0",
-	    daysOfWeekHighlighted: "0",
-	    autoclose: true,
-	    todayHighlight: true
-	  });
-
 /*Script de exclusao(Botão)*/
 $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
@@ -61,7 +35,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	else if(flag == 3){
 		action ='/chips';
-		if(!action.endsWith('')){
+		if(!action.endsWith('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -77,6 +51,36 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 		form.attr('action', action + id); 
 		
 		modal.find('.modal-body span').html('Confirma a exclusão do registro<strong> '+ item +' </strong>?' );
+				
+	}
+	else if(flag == 5){
+		action ='/alocacoes/disponibilizar';
+		if(!action.endsWith('/')){
+			action +='/' ;
+		}
+		form.attr('action', action + id); 
+		
+		modal.find('.modal-body span').html('Confirma a exclusão do registro de vinculo de serviço telecom a <strong> '+ item +' </strong>?' );
+				
+	}
+	else if(flag == 6){
+		action ='/categorias';
+		if(!action.endsWith('/')){
+			action +='/' ;
+		}
+		form.attr('action', action + id); 
+		
+		modal.find('.modal-body span').html('Confirma a exclusão da categoria de serviço: <strong> '+ item +' </strong>?' );
+				
+	}
+	else if(flag == 7){
+		action ='/limites-atesto';
+		if(!action.endsWith('/')){
+			action +='/' ;
+		}
+		form.attr('action', action + id); 
+		
+		modal.find('.modal-body span').html('Confirma a exclusão do limite descrito à: <strong> '+ item +' </strong>?' );
 				
 	}
 	

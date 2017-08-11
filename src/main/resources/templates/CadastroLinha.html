@@ -3,44 +3,57 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
-<head>
-<title>Cadastro de Pessoas</title>
-</head>
 
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST"
-		th:action="@{/linhas}" th:object="${linha}">
+	<form class="form-horizontal" method="POST" th:action="@{/linhas}"
+		th:object="${linha}">
 
 		<div layout:include="MensagemSucesso"></div>
 		<div layout:include="MensagemErro"></div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
+		<div class=" col-md-12  panel sem_sombra padding20 bg">
+			<div class=" col-md-12 sem_sombra padding-0">
+
+				<div class="col-md-6 padding-0 sem_sombra intro">
+					<h3 class="text-left">Cadastrar Linha</h3>
+				</div>
+
 				<div class="clearfix">
-					<h1 class="panel-title dt-dispositivo-panel">Cadastro de
-						Números de Linhas</h1>
-					<a class="btn btn-link dt-link-panel" th:href="@{/inicio}">Voltar
-						para Lista</a>
+
+					<a class="btn btn-link dt-link-panel direita texto_td"
+						th:href="@{/consultas/linhas}"> <span
+						class="fa fa-angle-double-left" style="margin-right: 5px;"></span>Voltar</a>
+				</div>
+
+			</div>
+
+			<div class="col-md-12 panel padding-0">
+				<div class="panel-body bg-panel padding-7 tabela">
+					<input type="hidden" th:field="*{idLinha}" />
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('numeroLinha')} ? has-error">
+						<label for="nlinha" class="col-sm-2 control-label">Numero
+							da Linha</label>
+							
+						<div class="col-sm-4">
+							
+								<input class="form-control mask_input_on mask_visualizar sp_celphones numInput" type="text"/>
+		
+								<input class="mask_input_off" type="hidden" id="nlinha" th:field="*{numeroLinha}"/>
+							
+							
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary texto_td">Salvar</button>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<div class="painel-body">
-				<input type="hidden" th:field="*{idLinha}" />
-				<div class="form-group"
-					th:classappend="${#fields.hasErrors('numeroLinha')} ? has-error">
-					<label for="nlinha" class="col-sm-2 control-label">Numero da Linha</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="nlinha"
-							th:field="*{numeroLinha}" />
-					</div>
-				</div>
-				
-						<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-					</div>
-				</div>
-			</div>
+
 		</div>
 	</form>
 </section>

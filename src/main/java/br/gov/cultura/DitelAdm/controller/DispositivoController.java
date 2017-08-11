@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -25,6 +27,7 @@ import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 @Controller
+@Transactional
 @RequestMapping("/dispositivos")
 public class DispositivoController {
 	
@@ -68,7 +71,7 @@ public class DispositivoController {
 	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
 		cadastroDispositivoService.excluir(id);
 		attributes.addFlashAttribute("mensagem","Cadastro do dispositivo removido com sucesso!");
-		return "redirect:/consulta";
+		return "redirect:/consultas/dispositivos";
 		}	
 	
 	@RequestMapping("{id}")
@@ -91,6 +94,5 @@ public class DispositivoController {
 //	    tipoDispositivoMap.put("NoteBook","NoteBook");
 	    return tipoDispositivoMap;
 	   
-	}
-	
+	}	
 }

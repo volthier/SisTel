@@ -19,6 +19,9 @@ public class ResumoService {
 	public List<Resumo> getResumoFatura(Fatura fatura) {
 		return resumoRepository.findByFatura(fatura);
 	}
+	public Resumo getLinha(Linha linha){
+		return resumoRepository.findByLinha(linha);
+	}
 	
 	public List<Resumo> getResumoFaturaLinha(Fatura fatura, Linha linha) {
 		return resumoRepository.findResumoFaturaLinha(fatura, linha);

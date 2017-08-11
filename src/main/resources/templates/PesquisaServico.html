@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:td="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<section layout:fragment="conteudo">
+
+
+
+	<div class=" col-md-12  panel sem_sombra padding20 bg">
+		<div class=" col-md-12 sem_sombra padding-0">
+			<div class="col-md-6 padding-0 sem_sombra intro">
+				<h3 class="text-left">Categoria de Serviços</h3>
+			</div>
+
+
+
+			<div class="clearfix">
+
+				<a class="btn btn-link dt-link-panel direita texto_td"
+					th:href="@{/inicio}">
+					<span class="fa fa-angle-double-left" style="margin-right:5px;"></span>Voltar</a>
+			</div>
+
+			<div class="col-md-12 padding-7 pesquisa">
+
+				<div class="col-md-8 pesquisa">
+					<div class="btn btn-link icone_add text-center" style="float: left"
+						th:href="@{/categorias/nova}" onClick="location.href='/categorias/nova'"> 
+							<span class="fa fa-plus-circle" id="add">
+								<span class="tabela"> Nova Categoria</span>
+							</span>
+
+					</div>
+
+				</div>
+
+				<div class="col-md-4 input-group" id="input_pesquisa">
+					<input type="text" class="form-control"
+						placeholder="Digite aqui sua pesquisa" /> <span
+						class="input-group-btn">
+						<button class="btn btn-secondary" type="button">
+							<span class="fa fa-search text-center b"> </span>
+						</button>
+					</span>
+				</div>
+
+			</div>
+
+			<form class="form-horizontal" method="POST" td:action="@{/linhas}">
+
+				<div class="col-md-12 padding-0 cinza">
+
+					<div class="painel-body bg-panel padding-7">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<td class=" col-sm1 bold">Id</td>
+										<td class=" col-sm1 bold">Categoria de Serviço</td>
+										<td class=" col-sm1 bold"></td>
+
+									</tr>
+								</thead>
+
+
+
+								<tr>
+									<td>1</td>
+									<td>Voz</td>
+									<td class="center"><a class="icone_tabela" title="Editar"
+										rel="tooltip" data-placement="left"> <span
+											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+										title="Excluir" rel="tooltip" data-placement="left"> <span
+											class="fa fa-close"></span></a></td>
+								</tr>
+
+
+
+								<tr>
+									<td>2</td>
+									<td>Voz e Dados</td>
+									<td class="center"><a class="icone_tabela" title="Editar"
+										rel="tooltip" data-placement="left"> <span
+											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+										title="Excluir" rel="tooltip" data-placement="left"> <span
+											class="fa fa-close"></span></a></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Dados</td>
+									<td class="center"><a class="icone_tabela" title="Editar"
+										rel="tooltip" data-placement="left"> <span
+											class="fa fa-pencil"></span></a> <a class="icone_tabela red"
+										title="Excluir" rel="tooltip" data-placement="left"> <span
+											class="fa fa-close"></span></a></td>
+								</tr>
+
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</section>
+</html>

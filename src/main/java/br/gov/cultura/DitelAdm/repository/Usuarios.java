@@ -11,6 +11,10 @@ public interface Usuarios extends JpaRepository<Usuario, Integer>{
 	
 	public Usuario findByIdUsuario(Integer idUsuario);
 
+	public Usuario findByCpfUsuario(String cpfUsuario);
+	
+	public Usuario findByNomeUsuario(String nomeUsuario);
+	
 	@Query("select u.idUsuario, u.nomeUsuario,u.cargoUsuario,"
 			+ "u.cpfUsuario,u.lotacaoUsuario, u.limiteAtesto.dasAtesto,"
 			+ "u.limiteAtesto.valorLimite from Usuario u")
