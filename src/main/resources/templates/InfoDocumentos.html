@@ -4,36 +4,66 @@
 	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 
-<div id="infoDocumentosModal" class="modal fade" tabindex="-1"
-	data-keyboard="false" data-backdrop="static">
+<div id="infoDocumentosModal" class="modal fade" role="dialog" th:fragment="modalConteudo">
 	<div id="modalInfos" class="modal-dialog">
-<form th:attr="data-url-lista=@{/lista-alocacoes}" method="GET">
-<input type="hidden" name="_method"/>
-
-
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">
-					Documentos (processo 45656/8)
-					<button type="button" class="text-center  btn btn-circle btn-mn" data-dismiss="modal"
+
+<button type="button" class="text-center  btn btn-circle btn-mn" data-dismiss="modal"
 						style="float: right">
 						<span class="fa fa-close danger"></span>
 					</button>
+
+				<h4 class="modal-title" th:text="|Processo nº ${alocacao.alocacaoSei.numeroExternoProcessoSei}|">
+					Documentos (processo 45656/8)
 				</h4>
 			</div>
 			<div class="modal-body texto_td" id="modalInfos">
-				<p>Nome: João Ipsum</p> 
-				<p>Tipo de Documento: Resumo</p>
-				<p>Assinatura: </p> <p>Validade: 1 ano</p> 
-				<p>Data	Gerada: 10/10/17</p> 
-				<p>Data assinada: 9/10/17</p> 
-				<p>Documentos:</p>
+				<p th:text="|Nome: ${alocacao.usuario.nomeUsuario}|">Nome: João Ipsum</p> 
+					
+					<div class="panel padding-0">
+					<div class="painel-body bg-panel tabela">
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">Id</th>
+										<th class="text-center col-md2">Tipo</th>
+										<th class="text-center col-md2">Numero</th>
+										<th class="text-center col-md2">Data Gerado</th>
+										<th class="text-center col-md2">Assinado</th>
+										<th class="text-center col-md2">Assinatura Valida?</th>
+										<th class="text-right col-md2">Data Assinatura</th>
+										<th class="col-md2"></th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr th:each="doc : ${documentos}">
+										<td class="text-center" th:text="${doc.idDocumentosSei}">1</td>
+										<td class="text-center" th:text="${doc.documentosTipo}">020202020202</td>
+										<td class="text-center" th:text="${doc.documentosNumero}">CLARO/SA</td>
+										<td class="text-center" th:text="${doc.documentosDataGerado}">01/06/2018</td>
+										<td class="text-center text-success" th:if="${doc.assinaturaNome != null}" th:text="Sim">01/06/2018</td>
+										<td class="text-center text-danger" th:if="${doc.assinaturaNome == null}" th:text="Não">01/06/2018</td>
+										<td class="text-success" th:if="${doc.assinaturaValida == true}" th:text="Sim"></td>
+										<td class="text-danger" th:if="${doc.assinaturaValida == false}" th:text="Não"></td>
+										<td class="text-center" th:text="${doc.assinaturaHora}">500.000,00</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+				
+				
 			</div>
 
 
 		</div>
-
-</form>
 	</div>
 </div>
 </html>

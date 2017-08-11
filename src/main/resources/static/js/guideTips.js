@@ -1,3 +1,14 @@
+function abrirDocumentacaoModal(id){
+	
+	$.ajax({
+		url: "/alocacoes/lista-alocacoes/" + id,
+		success: function(data){
+			$("#infoDocumentosModalHolder").html(data);
+			$("#infoDocumentosModal").modal("show");
+		}
+	});
+}
+
 $(function(){
 	$('[rel="tooltip"]').tooltip();
 

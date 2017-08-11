@@ -42,6 +42,7 @@
 
 
 
+<div id="infoDocumentosModalHolder"></div>
 
 				<div class="col-md-12 panel padding-0">
 
@@ -83,7 +84,8 @@
 
 											<tbody id="linha-info">
 
-												<tr data-toggle="modal" data-target="#infoDocumentosModal" th:each="atv : ${alocacaoAtiva}">
+												<tr th:if="${atv.dtDevolucao} == null" th:each="atv : ${alocacaoAtiva}"
+												th:onclick="'guideTips:abrirDocumentacaoModal(\''+${atv.idAlocacao}+'\');'">
 													<td class="text-center" th:text="${atv.idAlocacao}">#15</td>
 													<td class="text-center" th:text="${atv.dtRecebido}">10/10/2010</td>
 													<td class="text-center" th:text="${atv.usuario.nomeUsuario}">João Ipsum</td>
@@ -100,7 +102,6 @@
 											</tbody>
 										</table>
 									</div>
-
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="tabs-demo4-area2"
 									aria-labelledby="tabs-demo4-area2">
@@ -125,11 +126,8 @@
 
 											<tbody id="linha-info">
 
-												<tr data-toggle="modal" data-target="#infoDocumentosModal" th:each="atv : ${alocacaoTodas}" > 
-												
-												<!-- th:attr="data-validId=${alocacao.idAlocacao}" 
-											title="Clicar Para Detalhamento" rel="tooltip" data-placement="left" 
-											> -->
+											<tr th:each="atv : ${alocacaoAtiva}"
+												th:onclick="'guideTips:abrirDocumentacaoModal(\''+${atv.idAlocacao}+'\');'">
 													<td class="text-center" th:text="${atv.idAlocacao}">#15</td>
 													<td class="text-center" th:text="${atv.dtRecebido}">10/10/2010</td>
 													<td class="text-center" th:text="${atv.usuario.nomeUsuario}">João Ipsum</td>
@@ -155,11 +153,8 @@
 
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 	</form>
-	<div layout:include="InfoDocumentos"></div>
 </section>
 </html>
