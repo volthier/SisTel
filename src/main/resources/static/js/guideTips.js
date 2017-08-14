@@ -8,7 +8,6 @@ function abrirDocumentacaoModal(id){
 		}
 	});
 }
-
 $(function(){
 	$('[rel="tooltip"]').tooltip();
 
