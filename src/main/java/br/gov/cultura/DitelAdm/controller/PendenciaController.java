@@ -1,14 +1,10 @@
 package br.gov.cultura.DitelAdm.controller;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -29,14 +25,12 @@ import br.gov.cultura.DitelAdm.email.Mailer;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoSei;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
-import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
 import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
 
 @Controller
-@Transactional
 @RequestMapping
 public class PendenciaController {
 

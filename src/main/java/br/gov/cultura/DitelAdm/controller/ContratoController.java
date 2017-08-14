@@ -1,7 +1,5 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -18,7 +16,6 @@ import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.ContratoService;
 
 @Controller
-@Transactional
 @RequestMapping("/contratos")
 public class ContratoController {
 	

@@ -3,8 +3,6 @@ package br.gov.cultura.DitelAdm.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +24,6 @@ import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
-@Transactional
 @RequestMapping("/relatorio")
 public class RelatorioController {
 	
