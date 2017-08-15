@@ -120,6 +120,19 @@
 }
 /*FIM LINHAS*/
 
+.modal-content{
+    
+    right: 7%;
+    margin-top: 20%;
+    box-shadow: 0px 0px 0px transparent;	
+	
+}
+.modal-dialog {
+	top: 15%;
+    width: 750px;
+    
+}
+
 /*MEDIA QUERIES*/
 @media screen and (min-width: 2000px) {
 	#periodic-login {
@@ -129,16 +142,20 @@
 		margin-top:3px;
 	}
 	.alturaLogo {
-		margin-top: 88% !important;
+		margin-top: 130% !important;
 	}
 }
 
 @media screen and (max-width: 1920px) {
 	.alturaLogo {
-		margin-top: 90% !important;
+		margin-top: 75% !important;
 	}
 	.icones_card {
 		margin-top:6px;
+	}
+	.modal-dialog {
+		width: 75%;
+    	top: 15%;
 	}
 	
 }
@@ -260,6 +277,11 @@
 	#mimin {
 		background-image: url("../img/tela-login-Recuperado2.jpg");
 		min-height: 600px;
+	}
+	.modal-dialog {
+    top: 9%;
+    width: 650px;
+    
 	}
 	
 }
@@ -657,7 +679,10 @@ a:hover {
 .desativo {
 	opacity: 0.3;
 }
-
+#usuario-modal {
+	margin-left: 0px !important;
+	
+}
 
 
 /*MEDIA QUERIES*/
@@ -937,6 +962,10 @@ a:hover {
 }
 
 @media screen and (max-width: 479px) {
+	.modal-dialog {
+		width: 95%;
+    	top: 15%;
+	}
 	.dropdown_usuario {
 		margin-right: 0px;
 		font-family: 'open_sansregular';
@@ -1110,10 +1139,18 @@ a:hover {
 		width:180px !important;
 		right:-4% !important;
 	}
+	.modal-dialog {
+		width: 89%;
+    	top: 15%;
+	}
 	
 }
 
 @media screen and (max-width: 320px) {
+	.modal-dialog {
+		width: 93%;
+    	top: 15%;
+	}
 	.grafico {
 		margin-left: 2px;
 		margin-top: 15px;
@@ -1356,7 +1393,7 @@ thead, tbody {
 }
 
 #modalInfos {
-	color: #868686 !important;
+	color: #545353 !important;
 }
 
 #linha-info>tr:hover {

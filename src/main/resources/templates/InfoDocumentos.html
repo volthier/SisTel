@@ -10,8 +10,8 @@
 			<div class="modal-header">
 
 <button type="button" class="text-center  btn btn-circle btn-mn" data-dismiss="modal"
-						style="float: right">
-						<span class="fa fa-close danger"></span>
+						style="float: right; color:red;">
+						<span class="fa fa-close"></span>
 					</button>
 
 				<h4 class="modal-title" th:text="|Processo nº ${alocacao.alocacaoSei.numeroExternoProcessoSei}|">
@@ -19,7 +19,7 @@
 				</h4>
 			</div>
 			<div class="modal-body texto_td" id="modalInfos">
-				<p th:text="|Nome: ${alocacao.usuario.nomeUsuario}|">Nome: João Ipsum</p> 
+				<p id="usuario-modal" th:text="|Nome: ${alocacao.usuario.nomeUsuario}|">Nome: João Ipsum</p> 
 					
 					<div class="panel padding-0">
 					<div class="painel-body bg-panel tabela">
