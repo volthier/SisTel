@@ -21,7 +21,6 @@ import org.thymeleaf.context.Context;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
-import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 
 @Component
@@ -79,7 +78,7 @@ public class Mailer {
 			helper.setTo(alocacao.getUsuario().getEmailUsuario());
 			helper.setSubject("SISTEL - Termo de Responsabilidade");
 			helper.setText(email, true);
-			helper.addInline("logo", new ClassPathResource("../miminium/img/logo-sistel-horizontal-branca.png"));
+			helper.addInline("logo", new ClassPathResource("/static/images/logo-sistel-horizontal-branca.png"));
 
 			mailSender.send(mimeMessage);
 		} catch (MessagingException e) {

@@ -51,9 +51,15 @@
 
 						</div>
 						<div class="panel-body text-right top10">
-							<h2 class="texto_card text-left qtd">256</h2>
+							<h2 class="texto_card text-left qtd" th:if="${dispositivos.?[tipoDispositivo == 'Celular'] != true}" th:text="${#lists.size(dispositivos)}">256</h2>
 							<h5 class="texto_card">
-								<a class="n_dispositivos">2002</a> em uso
+								<th:block th:if="${habilitadosTotal.?[dispositivo != null] != true and habilitadosTotal.?[dispositivo.tipoDispositivo == 'Celular'] != true}">
+								<a class="n_dispositivos" th:if="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Celular'] != true}" th:text="${#lists.size(habilitadosTotal)}">2002</a> em uso
+								</th:block> 
+								
+								<th:block th:if="${habilitadosTotal.?[dispositivo == null] == true or (habilitadosTotal.?[dispositivo.tipoDispositivo != 'Celular'] != true and habilitadosTotal.?[dispositivo == null] == true)}">
+								<a class="n_dispositivos" >0</a> em uso
+								</th:block> 
 							</h5>
 
 
@@ -82,9 +88,17 @@
 
 						</div>
 						<div class="panel-body text-right top10">
-							<h2 class="texto_card text-left qtd">256</h2>
-							<h5 class="texto_card">
-								<a class="n_dispositivos">2002</a> em uso
+						<h2 class="texto_card text-left qtd" th:if="${dispositivos.?[tipoDispositivo == 'Tablet'] == true}" th:text="${#lists.size(dispositivos)}">256</h2>
+						
+							<h5 class="texto_card">								
+								<th:block th:if="${habilitadosTotal.?[dispositivo != null] != true and habilitadosTotal.?[dispositivo.tipoDispositivo == 'Tablet'] != true}">
+								<a class="n_dispositivos" th:if="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Tablet'] == true}" th:text="${#lists.size(habilitadosTotal)}">2002</a> em uso
+								</th:block> 
+								
+								<th:block th:if="${habilitadosTotal.?[dispositivo == null] == true or habilitadosTotal.?[dispositivo.tipoDispositivo != 'Tablet'] != true}">
+								<a class="n_dispositivos" >0</a> em uso
+								</th:block> 
+								
 							</h5>
 
 
