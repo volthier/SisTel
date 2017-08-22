@@ -1,5 +1,6 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -70,10 +71,26 @@ public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa
 		//Lista de alocados habilitados
 		List<Alocacao> dto1 = lista.stream().filter( p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao()==null).collect(Collectors.toList());
 		
+		List<Dispositivo> celular = new ArrayList<Dispositivo>();
+		List<Dispositivo> tablet = new ArrayList<Dispositivo>();
+		List<Dispositivo> fixo = new ArrayList<Dispositivo>();
+		List<Dispositivo> modem = new ArrayList<Dispositivo>();
+		
 		for (Iterator<Alocacao> a = dto1.listIterator(); a.hasNext();) {
-		Alocacao aloc = a.next();
+			Alocacao aloc = a.next();
+			
 				for (Iterator<Dispositivo> d = disp.listIterator(); d.hasNext();) {
 					Dispositivo dis = d.next();
+					if(dis.getTipoDispositivo().equals("Celular")){
+						celular.add(dis);
+					}else if(dis.getTipoDispositivo().equals("Tablet")){
+						tablet.add(dis);
+					}else if(dis.getTipoDispositivo().equals("Modem")){
+						modem.add(dis);
+					}else if(dis.getTipoDispositivo().equals("Fixo")){
+						fixo.add(dis);
+					}
+					
 					if (dis.equals(aloc.getDispositivo())) {
 						d.remove();
 					}

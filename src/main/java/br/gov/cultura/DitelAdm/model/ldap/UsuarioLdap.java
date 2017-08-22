@@ -9,7 +9,7 @@ import org.springframework.ldap.odm.annotations.Id;
 @Entry(objectClasses = { "top", "person" , "organizationalPerson" , "user" }, base = "dc=minc,dc=intra")
 public final class UsuarioLdap {
 
-    @Id
+	@Id
     private Name id;
 
     @Attribute(name = "cn")
