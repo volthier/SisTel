@@ -141,7 +141,7 @@ p {
 
 span {
 	font-weight: bold;
-	padding-left: 7px;
+	padding-left: 0px;
 }
 
 a {
@@ -278,7 +278,7 @@ img {
 																									<td class="specbundle">
 																										<div class="contentEditableContainer contentTextEditable">
 																											<div class="contentEditable" style="text-align: left; line-height: 22px;">
-																												<div style="background-color: white; padding-top: 0px; position: relative; width: 108%; border-top: 3px solid #2d849a;">
+																												<div style="background-color: white; padding-top: 0px; position: relative; width: 98%; border-top: 3px solid #2d849a;">
 																													<br/>
 																													<div class="left">
 																														<h2	style="padding-bottom: 30px; color: #3c5460 !important; font-size: 20px;">
@@ -286,9 +286,8 @@ img {
 																														</h2>
 																														<p>Este é um e-mail automático do
 																															Sistema de Gestão Telefônica - SISTEL</p>
-																														<br/><br/>
-																														<h1 style="" th:inline="text">Olá
-																															[[${dto.usuario.nomeUsuario}]]</h1>
+																														<br/>
+																														
 
 																														<p th:inline="text">
 																															Estamos enviando essa notificação que
@@ -302,16 +301,16 @@ img {
 																															th:if="${dto.dispositivo != null and dto.chip != null}">
 																															Referenciando-se ao
 																															[[${dto.dispositivo.tipoDispositivo}]],
-																															de marca
-																															[[${dto.dispositivo.marcaDispositivo}]],
-																															modelo
+																															de marca 
+																															<b>[[${dto.dispositivo.marcaDispositivo}]]</b>,
+																															<b>modelo
 																															[[${dto.dispositivo.modeloDispositivo}]]
-																															e linha nº [[${dto.linha.numeroLinha}]].</p>
+																															e linha nº [[${dto.linha.numeroLinha}]]</b>.</p>
 																														<p th:inline="text"
 																															th:if="${dto.dispositivo == null and dto.chip != null}">
 																															Referenciando-se ao chip
 																															[[${dto.chip.numeroSerieChip}]], e linha
-																															nº [[${dto.linha.numeroLinha}]].</p>
+																															nº <b>[[${dto.linha.numeroLinha}]]</b>.</p>
 																														<br/>
 
 																														<p>
