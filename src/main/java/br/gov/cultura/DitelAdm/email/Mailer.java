@@ -99,8 +99,9 @@ public class Mailer {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom("ditel@cultura.gov.br");
 			helper.setTo(fatura.get(0).getAlocacao().getUsuario().getEmailUsuario());
-			helper.setSubject("Telefonia - Fatura Telefônica para Atesto!");
+			helper.setSubject("SISTEL - Atesto e/ou Ressarcimento de Fatura Telefônica");
 			helper.setText(email, true);
+			helper.addInline("logo", new ClassPathResource("/static/images/logo-sistel-horizontal-branca.png"));
 
 			mailSender.send(mimeMessage);
 		} catch (MessagingException e) {
