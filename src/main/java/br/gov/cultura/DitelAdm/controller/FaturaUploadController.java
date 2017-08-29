@@ -9,8 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +27,6 @@ import br.gov.cultura.DitelAdm.service.FaturaService;
 import br.gov.cultura.DitelAdm.service.LeitorFebrabanV3;
 
 @Controller
-@Transactional
 public class FaturaUploadController {
 
 	/*

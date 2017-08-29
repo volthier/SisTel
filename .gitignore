@@ -4,3 +4,6 @@
 .settings/*
 /.apt_generated/
 /bin/
+/metadata/
+.metadata
+/RemoteSystemsTempFiles/

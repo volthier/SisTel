@@ -1,14 +1,10 @@
 package br.gov.cultura.DitelAdm.controller;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -33,10 +29,8 @@ import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
 import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
-import br.gov.cultura.DitelAdm.wsdl.Usuario;
 
 @Controller
-@Transactional
 @RequestMapping
 public class PendenciaController {
 
@@ -58,41 +52,11 @@ public class PendenciaController {
 	private LocaleResolver locale;
 	
 	@RequestMapping("/pendencia")
-	public ModelAndView pendencia() throws RemoteException {
+	public ModelAndView pendencia() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<Alocacao> lista = alocacaoService.getIdAlocacao();
-		
-		List<br.gov.cultura.DitelAdm.model.Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
-
-		for (Alocacao alocacao : lista) {
-			
-			List<DocumentoSei> documento = alocacaoService.getDocumentoSeiListaAlocacao(alocacao);
-			documento.forEach(doc -> {
-				try {
-					sei.consultarAssinatura(doc);
-				} catch (RemoteException | ParseException e) {
-
-					System.out.println(e + "Erro de tempo de espera da conexão da verificação de documentos!!!");
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					System.out.println(e + " Erro de interrupção de conexão da verificação de documentos");// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			});
-			
-			if (alocacao.getDtDevolucao() == null) {
-				Usuario usuarioSei = sei.ValidaUsuarioUnidade(alocacao);
-				if (usuarioSei == null) {
-					if (!usuarioErrorSei.contains(alocacao.getUsuario())) {
-
-						usuarioErrorSei.add(alocacao.getUsuario());
-					}
-				}
-			}
-		}
 		List<Alocacao> devolvidos = alocacaoService.getDevolucao();
 		lista.removeAll(devolvidos);
-		mv.addObject("erroUnidade", usuarioErrorSei);
 		mv.addObject("pendencia", lista);
 		return mv;
 	}

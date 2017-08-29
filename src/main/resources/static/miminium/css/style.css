@@ -6481,3 +6481,9 @@ ul li a:focus {
   }
 
 }
+
+/* Dispositivos Patrimonio Radios button */
+
+input#contacts[hidden="hidden"] {
+display: none;
+}

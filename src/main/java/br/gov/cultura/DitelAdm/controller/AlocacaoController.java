@@ -11,11 +11,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 import javax.ws.rs.core.Context;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +29,7 @@ import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
@@ -47,7 +48,6 @@ import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
-@Transactional
 @RequestMapping("/alocacoes")
 public class AlocacaoController {
 
@@ -111,9 +111,39 @@ public class AlocacaoController {
 	}
 	
 	@RequestMapping("/lista-alocacoes")
-	public ModelAndView listar() {
+	public ModelAndView listar() throws RemoteException{
 		ModelAndView mv = new ModelAndView("AlocacaoListar");
+		
+		List<Alocacao> lista = alocacaoService.getIdAlocacao();
+		List<Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
 
+		for (Alocacao alocacao : lista) {
+			
+			List<DocumentoSei> documento = alocacaoService.getDocumentoSeiListaAlocacao(alocacao);
+			documento.forEach(doc -> {
+				try {
+					sei.consultarAssinatura(doc);
+				} catch (RemoteException | ParseException e) {
+
+					System.out.println(e + "Erro de tempo de espera da conexão da verificação de documentos!!!");
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					System.out.println(e + " Erro de interrupção de conexão da verificação de documentos");// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			
+			if (alocacao.getDtDevolucao() == null) {
+				br.gov.cultura.DitelAdm.wsdl.Usuario usuarioSei = sei.ValidaUsuarioUnidade(alocacao);
+				if (usuarioSei == null) {
+					if (!usuarioErrorSei.contains(alocacao.getUsuario())) {
+
+						usuarioErrorSei.add(alocacao.getUsuario());
+					}
+				}
+			}
+		}
+		
 		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
 		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
 		
@@ -132,6 +162,15 @@ public class AlocacaoController {
 	
 		return mv;
 
+	}
+	
+	@RequestMapping("/lista-alocacoes/{id}")
+	public String listarDocumentos(@PathVariable("id") String id, ModelMap model){
+		Alocacao alocacao = alocacaoService.getAlocacao(Integer.parseInt(id));
+		model.addAttribute("alocacao", alocacao);
+		model.addAttribute("documentos", alocacaoService.getDocumentoSeiListaAlocacao(alocacao));
+		return "InfoDocumentos::modalConteudo";
+		
 	}
 	
 	@RequestMapping("/devolver")

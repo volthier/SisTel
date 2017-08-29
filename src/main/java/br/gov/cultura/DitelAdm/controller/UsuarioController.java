@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,6 @@ import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
 @Controller
-@Transactional
 @RequestMapping("/usuarios")
 public class UsuarioController extends UrlController {
 
