@@ -86,12 +86,15 @@ public class Mailer {
 		}
 
 	}
+	
+	
 	@Async
 	public void enviarAtestoFatura(List<FaturaArquivoDTO> fatura ) throws IOException, ParseException, Exception {
 
 			
 		Context context = new Context();
 		context.setVariable("faturas", fatura);
+		context.setVariable("logo", "logo");
 
 		try {
 			String email = thymeleaf.process("email/EmailAtestoFatura", context);
