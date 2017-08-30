@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
@@ -33,6 +34,7 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Servicos;
 import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 
 @Service
+@Transactional
 public class LeitorFebrabanV3 {
 
 	@Autowired

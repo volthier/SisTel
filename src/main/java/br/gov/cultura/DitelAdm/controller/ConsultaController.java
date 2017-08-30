@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.model.Chip;
+import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
@@ -49,6 +51,15 @@ public class ConsultaController {
 		mv.addObject("dispositivos", cadastroDispositivoService.getIdDispositivo());
 		return mv;
 		}
+	
+	@RequestMapping(name="/dispositivos",method = RequestMethod.GET)
+	public ModelAndView pesquisarDispositivos(){
+		
+		ModelAndView mv = new ModelAndView("PesquisaDispositivo");
+		mv.addObject("dispositivos", cadastroDispositivoService.getIdDispositivo());
+		return mv;
+		
+	}
 	
 	@RequestMapping("/usuarios")
 	public ModelAndView consultarUsuario(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
