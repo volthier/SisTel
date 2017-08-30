@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.repository.Chips;
 
 @Service
+@Transactional
 public class CadastroChipService {
 
 	@Autowired

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
@@ -14,10 +15,10 @@ import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.alocacoes.Alocacoes;
 import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesFaturas;
 import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesSei;
-//import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesUsuariosLinhas;
 import br.gov.cultura.DitelAdm.repository.alocacoes.DocumentosSei;
 
 @Service
+@Transactional
 public class AlocacaoService {
 	
 	@Autowired
