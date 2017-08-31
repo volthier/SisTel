@@ -30,7 +30,7 @@ public class CadastroDispositivoService {
 	}
 	
 	public List<Dispositivo> getIdDispositivo() {
-		return dispositivos.findAll();
+		return dispositivos.findByIdDispositivo();
 	}
 	
 	public List<Dispositivo> listarDispositivoDisponivel(){
