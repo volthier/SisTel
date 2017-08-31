@@ -1,6 +1,6 @@
 package br.gov.cultura.DitelAdm.config;
 
-/*import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManagerFactory;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -17,4 +17,3 @@ public class JPAConfiguration {
 		return transactionManager;
 	}
 }
-*/

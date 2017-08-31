@@ -138,7 +138,7 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-		Thread.sleep(5000);
+//		//Thread.sleep(5000);
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
@@ -195,7 +195,7 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
@@ -278,7 +278,7 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
@@ -335,7 +335,7 @@ public class SeiClient {
 		String[] uni = new String[1];
 		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();
 
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
@@ -362,7 +362,7 @@ public class SeiClient {
 		String sin, nin;
 		sin = "S";
 		nin = "N";
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				documento.getDocumentosNumero(), nin, sin, nin);
 
@@ -403,7 +403,7 @@ public class SeiClient {
 				}
 			}
 		}
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		if (documento.getAssinaturaHora() != null) {
 			String cancelar, remover, fechar;
 			cancelar = null;
@@ -415,17 +415,17 @@ public class SeiClient {
 					if (documento.isBlocoDisponibilizado() == true) {
 						cancelar = seiWs.cancelarDisponibilizacaoBloco(siglaSistema, idServico, "110000073",
 								documento.getBlocoId());
-						Thread.sleep(2000);
+						//Thread.sleep(2000);
 						if (cancelar.equalsIgnoreCase("1")) {
 							documento.setBlocoDisponibilizado(false);
 							alocacaoService.salvar(documento);
-							Thread.sleep(2000);
+							//Thread.sleep(2000);
 							remover = seiWs.retirarDocumentoBloco(siglaSistema, idServico, "110000073",
 									documento.getBlocoId(), documento.getDocumentosNumero());
 							cancelar = null;
 							if (remover.equalsIgnoreCase("1")) {
 
-								Thread.sleep(2000);
+								//Thread.sleep(2000);
 								fechar = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
 										documento.getBlocoId());
 								remover = null;
@@ -439,7 +439,7 @@ public class SeiClient {
 							remover = seiWs.retirarDocumentoBloco(siglaSistema, idServico, "110000073",
 									documento.getBlocoId(), documento.getDocumentosNumero());
 							if (remover.equalsIgnoreCase("1")) {
-								Thread.sleep(2000);
+								//Thread.sleep(2000);
 								fechar = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
 										documento.getBlocoId());
 								remover = null;
