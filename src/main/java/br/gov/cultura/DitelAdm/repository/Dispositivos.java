@@ -15,4 +15,6 @@ public interface Dispositivos extends JpaRepository<Dispositivo, Integer> {
 	public List<Dispositivo> findByNumeroSerieDispositivo();
 	
 	public List<Dispositivo> findByIdDispositivo();
+
+
 }

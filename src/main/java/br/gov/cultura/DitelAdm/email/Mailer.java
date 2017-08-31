@@ -37,7 +37,7 @@ public class Mailer {
 	@Autowired
 	private AlocacaoService alocacaoService;
 
-	@Async
+	//@Async
 	public void enviar(Integer id) {
 
 		Alocacao alocacao = alocacaoService.getAlocacao(id);
@@ -60,7 +60,7 @@ public class Mailer {
 		}
 
 	}
-	@Async
+	//@Async
 	public void enviarTermo(Integer id,DocumentoSei documento) throws IOException, ParseException, Exception {
 
 		Alocacao alocacao = alocacaoService.getAlocacao(id);
@@ -88,7 +88,7 @@ public class Mailer {
 	}
 	
 	
-	@Async
+//	@Async
 	public void enviarAtestoFatura(List<FaturaArquivoDTO> fatura ) throws IOException, ParseException, Exception {
 
 			

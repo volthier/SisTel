@@ -206,7 +206,7 @@ public class SeiClient {
 		return documento;
 	}
 
-	@Async
+//	@Async
 	public Usuario ValidaUsuarioUnidade(Alocacao alocacao) throws RemoteException {
 		List<Usuario> usuarioSeiLista = Arrays.asList(
 				seiWs.listarUsuarios(siglaSistema, idServico, alocacao.getUsuario().getLotacaoIdUsuario(), null));
@@ -354,7 +354,7 @@ public class SeiClient {
 		return documento;
 	}
 
-	@Async
+	//@Async
 	public void consultarAssinatura(DocumentoSei documento)
 			throws RemoteException, ParseException, InterruptedException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
