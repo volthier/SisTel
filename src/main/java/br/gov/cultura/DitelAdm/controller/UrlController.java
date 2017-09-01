@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.repository.Dispositivos;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 
 @Controller
 @RequestMapping
@@ -26,7 +26,7 @@ public class UrlController {
 	private AlocacaoService alocacaoService;
 	
 	@Autowired
-	private CadastroDispositivoService cadastroDispositivoService;
+	private Dispositivos dispositivos;
 
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
@@ -45,12 +45,12 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 	return mv;
 }
 
-@RequestMapping(name="/inicio")
+@RequestMapping("/inicio")
 	public ModelAndView inicio(){
 
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		
-		List<Dispositivo> disp = cadastroDispositivoService.getIdDispositivo(); 
+		List<Dispositivo> disp = dispositivos.findAll();
 		List<Alocacao> lista = alocacaoService.getIdAlocacao();
 	
 		//Lista de alocados Devolvidos
