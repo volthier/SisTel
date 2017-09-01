@@ -82,7 +82,7 @@ canvas{
 #particles-js{
   width: 100%;
   height: 100%;
-  background-image: url('http://sistel.dev.cultura.gov.br/miminium/img/tela-login-Recuperado-novo.jpg');
+  background-image: url('../../../../miminium/img/tela-login-Recuperado-novo.jpg');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
