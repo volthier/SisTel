@@ -34,6 +34,7 @@ import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
+import br.gov.cultura.DitelAdm.repository.Dispositivos;
 import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
@@ -50,23 +51,34 @@ import br.gov.cultura.DitelAdm.wsdl.Unidade;
 @Controller
 @RequestMapping("/alocacoes")
 public class AlocacaoController {
+	
+	@Autowired
+	private Dispositivos dispositivos;
 
 	@Autowired
 	private AlocacaoService alocacaoService;
-	@Autowired
-	private CadastroDispositivoService cadastroDispositivoService;
+	
+	//@Autowired
+	//private CadastroDispositivoService cadastroDispositivoService;
+	
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
+	
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
+	
 	@Autowired
 	private CadastroChipService cadastroChipService;
+	
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
+	
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
+	
 	@Autowired
 	private ConsultaLdapService consultaLdapService;
+	
 	@Autowired
 	private SeiClient sei;
 
@@ -85,8 +97,8 @@ public class AlocacaoController {
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limiteAtesto", limiteAtesto);
 
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		List<Dispositivo> todosDispositivos = dispositivos.findAll();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = dispositivos.findByNumeroSerieDispositivo();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
 		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
 		mv.addObject("dispositivos", todosDispositivos);
@@ -389,8 +401,8 @@ public class AlocacaoController {
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limiteAtesto", limiteAtesto);
 
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		List<Dispositivo> todosDispositivos = dispositivos.findAll();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = dispositivos.findByNumeroSerieDispositivo();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
 		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
 		mv.addObject("dispositivos", todosDispositivos);
