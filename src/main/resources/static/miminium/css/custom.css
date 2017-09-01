@@ -1,6 +1,6 @@
 /*LOGIN.HTML*/
 #mimin {
-	background-image: url("../img/tela-login-Recuperado-novo.jpg");
+	/* background-image: url("../img/tela-login-Recuperado-novo.jpg"); */
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -41,7 +41,10 @@
 	margin-top: 8px;
 	
 }
-
+.container {
+	position: relative;
+    z-index: 9999;
+}
 .alturaLogo {
 	max-width: 100%;
 	height: auto;
