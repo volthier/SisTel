@@ -2,45 +2,54 @@
 (function(jQuery) {
 
 	// start: Chart =============
+	if(typeof Chart != 'undefined'){
+		
+	
+		Chart.defaults.global.pointHitDetectionRadius = 1;
+		Chart.defaults.global.customTooltips = function(tooltip) {
 
-	Chart.defaults.global.pointHitDetectionRadius = 1;
-	Chart.defaults.global.customTooltips = function(tooltip) {
+			var tooltipEl = $('#chartjs-tooltip');
 
-		var tooltipEl = $('#chartjs-tooltip');
-
-		if (!tooltip) {
-			tooltipEl.css({
-				opacity : 0
-			});
-			return;
-		}
-
-		tooltipEl.removeClass('above below');
-		tooltipEl.addClass(tooltip.yAlign);
-
-		var innerHtml = '';
-		if (undefined !== tooltip.labels && tooltip.labels.length) {
-			for (var i = tooltip.labels.length - 1; i >= 0; i--) {
-				innerHtml += [
-						'<div class="chartjs-tooltip-section">',
-						'   <span class="chartjs-tooltip-key" style="background-color:'
-								+ tooltip.legendColors[i].fill + '"></span>',
-						'   <span class="chartjs-tooltip-value">'
-								+ tooltip.labels[i] + '</span>', '</div>' ]
-						.join('');
+			if (!tooltip) {
+				tooltipEl.css({
+					opacity : 0
+				});
+				return;
 			}
-			tooltipEl.html(innerHtml);
-		}
 
-		tooltipEl.css({
-			opacity : 1,
-			left : tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
-			top : tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
-			fontFamily : tooltip.fontFamily,
-			fontSize : tooltip.fontSize,
-			fontStyle : tooltip.fontStyle
-		});
-	};
+			tooltipEl.removeClass('above below');
+			tooltipEl.addClass(tooltip.yAlign);
+
+			var innerHtml = '';
+			if (undefined !== tooltip.labels && tooltip.labels.length) {
+				for (var i = tooltip.labels.length - 1; i >= 0; i--) {
+					innerHtml += [
+							'<div class="chartjs-tooltip-section">',
+							'   <span class="chartjs-tooltip-key" style="background-color:'
+									+ tooltip.legendColors[i].fill + '"></span>',
+							'   <span class="chartjs-tooltip-value">'
+									+ tooltip.labels[i] + '</span>', '</div>' ]
+							.join('');
+				}
+				tooltipEl.html(innerHtml);
+			}
+
+			tooltipEl.css({
+				opacity : 1,
+				left : tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+				top : tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+				fontFamily : tooltip.fontFamily,
+				fontSize : tooltip.fontSize,
+				fontStyle : tooltip.fontStyle
+			});
+		};
+	
+	}
+	
+	if(typeof mask != 'undefined'){
+		$('.sp_celphones').mask(SPMaskBehavior, spOptions);
+	}
+	
 
 /*	VISUALIZAR*/
 	$(".mask_visualizar").ready(function() {
@@ -69,7 +78,7 @@
 		}
 	};
 
-	$('.sp_celphones').mask(SPMaskBehavior, spOptions);
+	
 
 	$('.numTable').focusout(function() {
 		var phone, element;
@@ -130,13 +139,19 @@
 
 	window.onload = function() {
 		if (hasClass = "#telaInicio") {
-			var ctx2 = $(".line-chart")[0].getContext("2d");
-			window.myLine = new Chart(ctx2).Line(lineChartData, {
-				responsive : true,
-				showTooltips : true,
-				multiTooltipTemplate : "<%= value %>",
-				maintainAspectRatio : false
-			});
+			
+			
+			if($(".line-chart").length){
+				var ctx2 = $(".line-chart")[0].getContext("2d");
+				window.myLine = new Chart(ctx2).Line(lineChartData, {
+					responsive : true,
+					showTooltips : true,
+					multiTooltipTemplate : "<%= value %>",
+					maintainAspectRatio : false
+				});
+				
+			}
+			
 		}
 	};
 
@@ -472,16 +487,23 @@
 			$('.mail-wrapper').innerHeight());
 	$("#left-menu ul li a").ripple();
 	$(".ripple div").ripple();
-	$("#left-menu .sub-left-menu").niceScroll();
-	$(".sub-mimin-mobile-menu-list").niceScroll({
-		touchbehavior : true,
-		cursorcolor : "#FF00FF",
-		cursoropacitymax : 0.6,
-		cursorwidth : 24,
-		usetransition : true,
-		hwacceleration : true,
-		autohidemode : "hidden"
-	});
+	
+	if(typeof niceScroll != 'undefined'){
+		$("#left-menu .sub-left-menu").niceScroll();
+		$(".sub-mimin-mobile-menu-list").niceScroll({
+			touchbehavior : true,
+			cursorcolor : "#FF00FF",
+			cursoropacitymax : 0.6,
+			cursorwidth : 24,
+			usetransition : true,
+			hwacceleration : true,
+			autohidemode : "hidden"
+		});
+	}
+	
+	
+	
+	
 
 	$("body").tooltip({
 		selector : '[data-toggle=tooltip]'
