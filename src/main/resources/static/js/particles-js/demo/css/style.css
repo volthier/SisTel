@@ -88,6 +88,21 @@ canvas{
   background-repeat: no-repeat;
 }
 .particles-js-canvas-el {
-	top: -510px;
+	top: -77%;
 	position:relative;
 }
+
+@media screen and (max-width: 1024px) {
+	.particles-js-canvas-el {
+	top: -73%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.particles-js-canvas-el {
+	top: -60%;
+	}
+}
+
+
+
