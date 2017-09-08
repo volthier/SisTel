@@ -683,7 +683,26 @@ a:hover {
 }
 
 
+#fatura {
+	display:none;
+}
 
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+.input-lg {
+	background-color:white !important;
+}
+#label-arquivo {
+	text-align: center;
+    font-size: 16px;
+	border: 1px solid #e2e2e2;
+    height: 50px;
+    width: 98%;
+    padding: 12px;
+}
 
 /*MEDIA QUERIES*/
 @media screen and (min-width: 2200px) {
