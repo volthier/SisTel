@@ -683,14 +683,12 @@ a:hover {
 }
 
 
-#fatura {
-	display:none;
+#input_file {
+	margin-right: 15px;
+    margin-left: 0px;
 }
 
-.file {
-  visibility: hidden;
-  position: absolute;
-}
+
 
 .input-lg {
 	background-color:white !important;
