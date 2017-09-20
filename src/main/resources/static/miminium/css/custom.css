@@ -762,16 +762,26 @@ a:hover {
 	
 }
 
+@media screen and (min-width: 1240px) {
+	.col-md-12.alturaLogo {
+    	margin-top: 34% !important;
+	}
+}
+
 @media screen and (max-width: 1240px) {
 	.icones_card {
 		margin-left: -25px;
 	}
+	
+	
 }
 
 @media screen and (min-width: 1024px) {
 	.particles-js-canvas-el {
 		height: 100% !important;
 	}
+	
+	
 }
 
 @media screen and (max-width: 1024px) {
