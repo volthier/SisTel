@@ -96,7 +96,7 @@ canvas{
 	background-size: cover; */
 }
 .particles-js-canvas-el {
-	top: 0;
+	top: -60%;
 	position:absolute;
 }
 
