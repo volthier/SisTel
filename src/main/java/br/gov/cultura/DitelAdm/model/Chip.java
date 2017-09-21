@@ -75,7 +75,7 @@ public class Chip implements java.io.Serializable {
 	public void setTipoChip(String tipoChip) {
 		this.tipoChip = tipoChip;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "chip")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "chip")
 	public Set<Alocacao> getAlocacaos() {
 		return this.alocacaos;
 	}

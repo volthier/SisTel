@@ -183,7 +183,7 @@ public class Dispositivo implements java.io.Serializable {
 		this.valorDispositivo = valorDispositivo;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dispositivo")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "dispositivo")
 	public Set<Alocacao> getAlocacao() {
 		return this.alocacaos;
 	}

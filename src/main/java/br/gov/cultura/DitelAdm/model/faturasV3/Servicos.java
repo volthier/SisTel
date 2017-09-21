@@ -103,7 +103,7 @@ public class Servicos implements java.io.Serializable {
 		this.idServicos = idServicos;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoriaServico_id_catServico", nullable = false)
 	public Categoriaservico getCategoriaservico() {
 		return this.categoriaservico;

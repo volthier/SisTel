@@ -1,11 +1,15 @@
 package br.gov.cultura.DitelAdm.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -40,12 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 		.exceptionHandling()
-			.accessDeniedPage("/inicio");
-		
+			.accessDeniedPage("/inicio");		
 	}
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.ldapAuthentication()
 		.userSearchFilter(env.getRequiredProperty("ldap.user.search.filter"))
@@ -56,5 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.url(env.getRequiredProperty("ldap.url"))
 				.managerDn(env.getRequiredProperty("ldap.userDn"))
 				.managerPassword(env.getRequiredProperty("ldap.passDn"));
+	}
+	
+	@Bean
+	public DefaultSpringSecurityContextSource contextSource() {
+		return  new DefaultSpringSecurityContextSource(Arrays.asList(env.getRequiredProperty("ldap.url")), env.getRequiredProperty("ldap.base"));
 	}
 }

@@ -66,7 +66,7 @@ public class Linha implements java.io.Serializable {
 	public void setNumeroLinha(String numeroLinha) {
 		this.numeroLinha = numeroLinha;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linha")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "linha")
 	public Set<Alocacao> getAlocacaos() {
 		return this.alocacaos;
 	}
@@ -74,7 +74,7 @@ public class Linha implements java.io.Serializable {
 	public void setAlocacaos(Set<Alocacao> alocacaos) {
 		this.alocacaos = alocacaos;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "linha")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "linha")
 	public Set<Resumo> getResumos() {
 		return this.resumos;
 	}

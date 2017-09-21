@@ -88,7 +88,7 @@ public class Usuario implements java.io.Serializable {
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "limite_atesto_id_limite_atesto", nullable = false)
 	public LimiteAtesto getLimiteAtesto() {
 		return this.limiteAtesto;
@@ -181,7 +181,7 @@ public class Usuario implements java.io.Serializable {
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
 	public Set<Alocacao> getAlocacaos() {
 		return this.alocacaos;
 	}
