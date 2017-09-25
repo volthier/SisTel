@@ -6,9 +6,7 @@
 
 <section layout:fragment="conteudo">
 	<div layout:include="MensagemSucesso"></div>
-
-	<form method="POST" th:action="@{/dispositivos}">
-
+<form class="form-horizontal" method="POST" action="/alocacoes/lista-alocacoes" th:object="${filtro}">
 		<div class=" col-md-12  panel sem_sombra padding20 bg">
 			<div class=" col-md-12 sem_sombra padding-0">
 				<div class="col-md-6 padding-0 sem_sombra intro">
@@ -29,7 +27,7 @@
 
 					<div class="col-md-8 pesquisa"></div>
 					<div class="col-md-4 input-group p_aloc" id="input_pesquisa">
-						<input class="form-control" placeholder="Digite aqui sua pesquisa" />
+						<input class="form-control" placeholder="Digite aqui nome para pesquisa" th:field="*{nomeUsuario}" autofocus="autofocus"/>
 						<span class="input-group-btn">
 							<button class="btn btn-secondary" type="submit">
 								<span class="fa fa-search text-center b"> </span>
@@ -39,7 +37,6 @@
 
 
 				</div>
-
 
 
 <div id="infoDocumentosModalHolder"></div>
@@ -150,6 +147,7 @@
 				</div>
 			</div>
 		</div>
-	</form>
+		
+</form>
 </section>
 </html>

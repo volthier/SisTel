@@ -35,11 +35,10 @@ import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
 import br.gov.cultura.DitelAdm.repository.Dispositivos;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
 import br.gov.cultura.DitelAdm.service.CadastroChipService;
-import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
@@ -58,8 +57,8 @@ public class AlocacaoController {
 	@Autowired
 	private AlocacaoService alocacaoService;
 	
-	//@Autowired
-	//private CadastroDispositivoService cadastroDispositivoService;
+
+
 	
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
@@ -83,7 +82,7 @@ public class AlocacaoController {
 	private SeiClient sei;
 
 	@RequestMapping("/disponibilizar")
-	public ModelAndView alocar(Usuario user, @ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	public ModelAndView alocar(Usuario user, @ModelAttribute("filtro") FiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
 
 		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
@@ -123,9 +122,8 @@ public class AlocacaoController {
 	}
 	
 	@RequestMapping("/lista-alocacoes")
-	public ModelAndView listar() throws RemoteException{
+	public ModelAndView listar(@ModelAttribute("filtro") FiltroPesquisa filtro) throws RemoteException{
 		ModelAndView mv = new ModelAndView("AlocacaoListar");
-		
 		List<Alocacao> lista = alocacaoService.getIdAlocacao();
 		List<Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
 
@@ -156,7 +154,7 @@ public class AlocacaoController {
 			}
 		}
 		
-		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
+		List<Alocacao> todosUsuario = alocacaoService.filtroPesquisa(filtro);
 		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
 		
 		for(Alocacao aloca : todosUsuario){
@@ -186,7 +184,7 @@ public class AlocacaoController {
 	}
 	
 	@RequestMapping("/devolver")
-	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro,
+	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") FiltroPesquisa filtro,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
 		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();

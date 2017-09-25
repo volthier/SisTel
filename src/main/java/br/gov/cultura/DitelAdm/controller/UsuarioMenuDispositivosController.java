@@ -15,7 +15,7 @@ import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
@@ -39,7 +39,7 @@ public class UsuarioMenuDispositivosController {
 	private CadastroLinhaService cadastroLinhaService;
 		
 	@RequestMapping("/dispositivo")
-	public ModelAndView dispositivo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView dispositivo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		ModelAndView mv = new ModelAndView("UsuarioMenuDispositivo");
 		 
@@ -67,7 +67,7 @@ public class UsuarioMenuDispositivosController {
 		return mv;
 	}	
 	@RequestMapping("/agenda")
-	public ModelAndView agenda(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView agenda(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		ModelAndView mv = new ModelAndView("UsuarioMenuAgenda");
 		 

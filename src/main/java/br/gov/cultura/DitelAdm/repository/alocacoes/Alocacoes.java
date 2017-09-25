@@ -19,4 +19,6 @@ public interface Alocacoes extends JpaRepository<Alocacao, Integer> {
 	
 	@Query("select a from Alocacao a where usuario = ?1")
 	public List<Alocacao> getAlocacoesUsuario(Usuario usuario);
+	
+	public List<Alocacao> findByUsuario(List<Usuario> usuario);
 }

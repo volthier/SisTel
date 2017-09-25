@@ -23,24 +23,28 @@
 				</a>
 			</div>
 
-
+<form class="form-horizontal" method="POST" action="/consultas/usuarios" th:object="${filtro}">
 
 			<div class="col-md-12 padding-7 pesquisa">
 				<div class="col-md-8 pesquisa"></div>
 
 				<div class="col-md-4 input-group usu" id="input_pesquisa">
-					<input class="form-control" placeholder="Digite aqui sua pesquisa" />
+					<input class="form-control" placeholder="Digite aqui nome para pesquisa" th:field="*{nomeUsuario}" autofocus="autofocus"/>
 					<span class="input-group-btn">
 						<button class="btn btn-secondary" type="submit">
-							<span class="fa fa-search text-center b"> </span>
+							<i class="fa fa-search text-center b"> </i>
 						</button>
 					</span>
 				</div>
 
 			</div>
+					<input type="hidden" th:name="${_csrf.parameterName}"
+			th:value="${_csrf.token}" />
+</form>
 
+<div id="infoDispositivosModalHolder"></div>
 
-			<form class="form-horizontal" method="POST" th:action="@{/usuarios}">
+			
 
 				<div class="col-md-12 panel padding-0">
 					<div class="painel-body bg-panel padding-7 tabela">
@@ -59,9 +63,10 @@
 									</tr>
 								</thead>
 
-								<tbody>
+								<tbody id="linha-info">
 
-									<tr th:each="usuario : ${usuarios}">
+									<tr th:each="usuario : ${usuarios}"
+									th:onclick="'guideTips:abrirListaDispositivoModal(\''+${usuario.idUsuario}+'\');'">
 										<td class="text-center" th:text="${usuario.idUsuario}"></td>
 										<td th:text="${usuario.nomeUsuario}"></td>
 										<td class="text-center" th:text=" ${usuario.cpfUsuario}"></td>
@@ -94,10 +99,6 @@
 					</div>
 				</div>
 
-
-
-
-			</form>
 		</div>
 	</div>
 <div layout:include="DialogoConfirmacaoExclusao"></div>

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.Contrato;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.ContratoService;
 
 @Controller
@@ -25,7 +25,7 @@ public class ContratoController {
 	private ContratoService contratoService;
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Contrato());
 		return mv;

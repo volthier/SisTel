@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.Usuarios;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 
 @Service
 @Transactional
@@ -40,5 +41,10 @@ public class CadastroUsuarioService {
 	}
 	public Usuario getByNome(String nomeUsuario){
 		return usuarios.findByNomeUsuario(nomeUsuario);
+	}
+	
+	public List<Usuario> filtroPesquisa(FiltroPesquisa filtro){
+		String filtroPesquisa =  filtro.getNomeUsuario() == null ? "%" : filtro.getNomeUsuario();
+		return usuarios.findByNomeUsuarioContaining(filtroPesquisa);
 	}
 }

@@ -61,8 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.managerPassword(env.getRequiredProperty("ldap.passDn"));
 	}
 	
-	@Bean
+/*	@Bean
 	public DefaultSpringSecurityContextSource contextSource() {
 		return  new DefaultSpringSecurityContextSource(Arrays.asList(env.getRequiredProperty("ldap.url")), env.getRequiredProperty("ldap.base"));
-	}
+	}*/
 }

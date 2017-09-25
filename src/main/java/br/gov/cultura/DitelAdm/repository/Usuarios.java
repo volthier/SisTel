@@ -19,4 +19,6 @@ public interface Usuarios extends JpaRepository<Usuario, Integer>{
 			+ "u.cpfUsuario,u.lotacaoUsuario, u.limiteAtesto.dasAtesto,"
 			+ "u.limiteAtesto.valorLimite from Usuario u")
 	public List<Usuario> findOne();
+	
+	public List<Usuario> findByNomeUsuarioContaining(String nomeUsuario);
 }

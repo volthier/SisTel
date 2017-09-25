@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
 @Controller
@@ -28,7 +28,7 @@ public class LimiteAtestoController {
 	private LimiteAtestoService limiteAtestoService;
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limiteAtesto", limiteAtesto);

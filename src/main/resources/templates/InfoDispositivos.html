@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<div id="infoDispositivosModal" class="modal fade" role="dialog" th:fragment="modalConteudo">
+	<div id="modalInfos" class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+
+<button type="button" class="text-center  btn btn-circle btn-mn" data-dismiss="modal"
+						style="float: right; color:red;">
+						<span class="fa fa-close"></span>
+					</button>
+			</div>
+			<div class="modal-body texto_td" id="modalInfos">
+				<p id="usuario-modal" th:text="|Nome: ${alocacao[0].usuario.nomeUsuario}|">Nome: João Ipsum</p> 
+					
+					<div class="panel padding-0">
+					<div class="painel-body bg-panel tabela">
+
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">Id</th>
+										<th class="text-center col-md2">marca</th>
+										<th class="text-center col-md2">modelo</th>
+										<th class="text-center col-md2">linha</th>
+										<th class="text-center col-md2">Fornecido</th>
+										<th class="text-center col-md2">Devolvido</th>
+										<th class="text-right col-md2">Chip</th>
+										<th class="col-md2">Numero Chip</th>
+									</tr>
+								</thead>
+
+								<tbody>
+
+									<tr th:each="aloc : ${alocacao}" th:if="${aloc.dispositivo != null}" >
+										<td class="text-center" th:text="${aloc.dispositivo.idDispositivo}">1</td>
+										<td class="text-center" th:text="${aloc.dispositivo.marcaDispositivo}">020202020202</td>
+										<td class="text-center" th:text="${aloc.dispositivo.modeloDispositivo}">CLARO/SA</td>
+										<td class="text-center" th:text="${aloc.linha.numeroLinha}">01/06/2018</td>
+										<td class="text-center" th:text="${aloc.dtRecebido}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.dtDevolucao != null}" th:text="${aloc.dtDevolvido}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.dtDevolucao == null}" >Em uso</td>
+									</tr>
+									
+									<tr th:each="aloc : ${alocacao}" th:if="${aloc.dispositivo == null}" >
+										<td class="text-center" >-</td>
+										<td class="text-center" >-</td>
+										<td class="text-center" >-</td>
+										<td class="text-center" >-</td>
+										<td class="text-center" th:text="${aloc.dtRecebido}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.dtDevolucao != null}" th:text="${aloc.dtDevolvido}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.dtDevolucao == null}" >Em uso</td>
+										<td class="text-center" th:if="${aloc.chip != null}" th:text="${aloc.chip.tipoChip}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.chip != null}" th:text="${aloc.chip.numeroSerieChip}">500.000,00</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+				
+				
+			</div>
+
+
+		</div>
+	</div>
+</div>
+</html>

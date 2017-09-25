@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
+import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.Dispositivos;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 
 @Service
 @Transactional
@@ -40,5 +42,9 @@ public class CadastroDispositivoService {
 	public Dispositivo getDispositivoById(Integer idDispositivo){
 		return dispositivos.findByIdDispositivo(idDispositivo);
 	}
-	
+
+	public List<Dispositivo> filtroPesquisa(FiltroPesquisa filtro){
+		String filtroPesquisa =  filtro.getNumeroSerie() == null ? "%" : filtro.getNumeroSerie();
+		return dispositivos.findByNumeroSerieDispositivoContaining(filtroPesquisa);
+	}
 }
