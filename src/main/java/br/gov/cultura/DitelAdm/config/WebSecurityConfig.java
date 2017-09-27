@@ -1,18 +1,24 @@
 package br.gov.cultura.DitelAdm.config;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private ConsultaLdapService ldap; 
 	
 	@Autowired
     Environment env;
@@ -44,7 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 		.exceptionHandling()
-			.accessDeniedPage("/inicio");		
+			.accessDeniedPage("/inicio");	
+	
+//		UsuarioLdap user = ldap.findOne(SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().getName());
+//		Authentication authentication = user;
 	}
 
 	@Override
@@ -60,9 +69,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.managerDn(env.getRequiredProperty("ldap.userDn"))
 				.managerPassword(env.getRequiredProperty("ldap.passDn"));
 	}
-	
-/*	@Bean
-	public DefaultSpringSecurityContextSource contextSource() {
-		return  new DefaultSpringSecurityContextSource(Arrays.asList(env.getRequiredProperty("ldap.url")), env.getRequiredProperty("ldap.base"));
-	}*/
 }
