@@ -606,6 +606,16 @@ a:hover {
 
 /*FIM CARDS*/
 
+#modal-lista {
+	heigth: 260px !important;
+}
+
+.ct-modal {
+	margin-left: 27% !important;
+    margin-top: -3% !important;
+}
+
+
 /*MENU ESQUERDA*/
 #left-menu .sub-left-menu a {
 	color: #3c5460;
