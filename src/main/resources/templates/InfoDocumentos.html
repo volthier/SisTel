@@ -45,12 +45,12 @@
 										<td class="text-center" th:text="${doc.idDocumentosSei}">1</td>
 										<td class="text-center" th:text="${doc.documentosTipo}">020202020202</td>
 										<td class="text-center" th:text="${doc.documentosNumero}">CLARO/SA</td>
-										<td class="text-center" th:text="${doc.documentosDataGerado}">01/06/2018</td>
+										<td class="text-center" th:text="${#dates.format(doc.documentosDataGerado,'dd/MM/yyyy hh:mm:ss')}">01/06/2018</td>
 										<td class="text-center text-success" th:if="${doc.assinaturaNome != null}" th:text="Sim">01/06/2018</td>
 										<td class="text-center text-danger" th:if="${doc.assinaturaNome == null}" th:text="Não">01/06/2018</td>
 										<td class="text-success" th:if="${doc.assinaturaValida == true}" th:text="Sim"></td>
 										<td class="text-danger" th:if="${doc.assinaturaValida == false}" th:text="Não"></td>
-										<td class="text-center" th:text="${doc.assinaturaHora}">500.000,00</td>
+										<td class="text-center" th:text="${#dates.format(doc.assinaturaHora, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
 									</tr>
 								</tbody>
 							</table>
