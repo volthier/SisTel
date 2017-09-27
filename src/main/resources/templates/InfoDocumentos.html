@@ -50,7 +50,8 @@
 										<td class="text-center text-danger" th:if="${doc.assinaturaNome == null}" th:text="Não">01/06/2018</td>
 										<td class="text-success" th:if="${doc.assinaturaValida == true}" th:text="Sim"></td>
 										<td class="text-danger" th:if="${doc.assinaturaValida == false}" th:text="Não"></td>
-										<td class="text-center" th:text="${#dates.format(doc.assinaturaHora, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
+										<td class="text-center" th:if="${doc.assinaturaHora != null}" th:text="${#dates.format(doc.assinaturaHora, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
+										<td class="text-center" th:if="${doc.assinaturaHora == null}" ></td>
 									</tr>
 								</tbody>
 							</table>
