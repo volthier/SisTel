@@ -57,9 +57,6 @@ public class AlocacaoController {
 	@Autowired
 	private AlocacaoService alocacaoService;
 	
-
-
-	
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
 	

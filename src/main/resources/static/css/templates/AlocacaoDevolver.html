@@ -38,10 +38,10 @@
 							<div class="col-sm-4">
 								<select name="idAlocacao" class="col-sm-4 form-control">
 									<option value="">----Selecione----</option>
-									<option th:each="devolucao : ${usuariosDispositivos}"
+									<option id="datepickerObj" th:each="devolucao : ${usuariosDispositivos}"
 										th:if="${devolucao.dtDevolucao == null}"
 										th:value="${devolucao.idAlocacao}"
-										th:utext="${devolucao.usuario.nomeUsuario+' | '+devolucao.linha.numeroLinha}"></option>
+										th:utext="${devolucao.usuario.nomeUsuario+' | '+devolucao.linha.numeroLinha}" th:onclick="'calendario:dataBlock(\''+ ${devolucao.dtRecebido} +'\')'"></option>
 								</select>
 							</div>
 						</div>
@@ -49,7 +49,7 @@
 						<div class="form-group">
 							<label for="dtDevolucao" class="col-sm-2 control-label">Data
 								da devolução</label>
-							<div id="datetimepicker"
+							<div id="datetimepicker3"
 								class="col-sm-4 input-group input-append date dt">
 								<input type="text" name="dtDevolucao"
 									class="col-sm-2 form-control" /> <span
