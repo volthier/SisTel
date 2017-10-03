@@ -51,9 +51,12 @@
 
 						</div>
 						<div class="panel-body text-right top10">
-							<h2 class="texto_card text-left qtd">256</h2>
+							<h2 class="texto_card text-left qtd" th:text="${celulares.size()}">256</h2>
 							<h5 class="texto_card">
-								<a class="n_dispositivos" th:text="${dispositivos.size()}">2002</a> em uso
+							
+								<a class="n_dispositivos" th:if="${not habilitadosTotal.?[dispositivo.tipoDispositivo == 'Celular'].isEmpty() }" th:text="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Celular'].size()}">2002</a> 
+								<a class="n_dispositivos" th:if="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Celular'].isEmpty() }">0</a> em uso
+							
 							</h5>
 
 
@@ -83,9 +86,10 @@
 						</div>
 						
 						<div class="panel-body text-right top10">
-							<h2 class="texto_card text-left qtd">256</h2>
+							<h2 class="texto_card text-left qtd" th:text="${tablets.size()}">256</h2>
 							<h5 class="texto_card">
-								<a class="n_dispositivos">2002</a> em uso
+								<a class="n_dispositivos" th:if="${not habilitadosTotal.?[dispositivo.tipoDispositivo == 'Tablet'].isEmpty() }" th:text="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Tablet'].size()}">2002</a>
+								<a class="n_dispositivos" th:if="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Tablet'].isEmpty() }">0</a> em uso
 							</h5>
 
 
@@ -117,9 +121,10 @@
 
 						</div>
 						<div class="panel-body text-right top10">
-							<h2 class="texto_card text-left qtd">256</h2>
+							<h2 class="texto_card text-left qtd" th:text="${modens.size()}">256</h2>
 							<h5 class="texto_card">
-								<a class="n_dispositivos">2002</a> em uso
+								<a class="n_dispositivos" th:if="${not habilitadosTotal.?[dispositivo.tipoDispositivo == 'Modem'].isEmpty() }" th:text="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Modem'].size()}">2002</a> 
+								<a class="n_dispositivos" th:if="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Modem'].isEmpty() }">0</a> em uso
 							</h5>
 
 
@@ -149,9 +154,10 @@
 
 						</div>
 						<div class="panel-body text-right top10">
-							<h2 class="texto_card text-left qtd">256</h2>
+							<h2 class="texto_card text-left qtd" th:text="${fixos.size()}">256</h2>
 							<h5 class="texto_card">
-								<a class="n_dispositivos">2002</a> em uso
+								<a class="n_dispositivos" th:if="${not habilitadosTotal.?[dispositivo.tipoDispositivo == 'Fixo'].isEmpty() }" th:text="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Fixo'].size()}">2002</a> 
+								<a class="n_dispositivos" th:if="${habilitadosTotal.?[dispositivo.tipoDispositivo == 'Fixo'].isEmpty() }">0</a> em uso
 							</h5>
 
 

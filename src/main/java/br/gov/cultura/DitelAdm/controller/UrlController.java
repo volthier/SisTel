@@ -63,12 +63,10 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 		List<Dispositivo> tablet = new ArrayList<Dispositivo>();
 		List<Dispositivo> fixo = new ArrayList<Dispositivo>();
 		List<Dispositivo> modem = new ArrayList<Dispositivo>();
-		
-		for (Iterator<Alocacao> a = dto1.listIterator(); a.hasNext();) {
-			Alocacao aloc = a.next();
 			
 				for (Iterator<Dispositivo> d = disp.listIterator(); d.hasNext();) {
 					Dispositivo dis = d.next();
+					
 					if(dis.getTipoDispositivo().equals("Celular")){
 						celular.add(dis);
 					}else if(dis.getTipoDispositivo().equals("Tablet")){
@@ -79,19 +77,38 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 						fixo.add(dis);
 					}
 					
-					if (dis.equals(aloc.getDispositivo())) {
-						d.remove();
-					}
+					for (Iterator<Alocacao> a = dto1.listIterator(); a.hasNext();) {
+						Alocacao aloc = a.next();
+						if (dis.getIdDispositivo().equals(aloc.getDispositivo().getIdDispositivo())) {
+							d.remove();
+						}
+						celular.remove(aloc.getDispositivo());
+						modem.remove(aloc.getDispositivo());
+						tablet.remove(aloc.getDispositivo());
+						fixo.remove(aloc.getDispositivo());
 				}
 			}
 		
 		//lista de total alocados
 		mv.addObject("alocacaoTotal",lista);
+		
 		//lista de total alocados Habilitados
 		mv.addObject("devolvidosTotal",dto);
+		
 		//Lista de alocados habilitados
 		mv.addObject("habilitadosTotal",dto1);
-		mv.addObject("dispositivos", disp);
+		
+		//Celulares no estoque
+		mv.addObject("celulares", celular);
+		
+		//Tablets no estoque
+		mv.addObject("tablets", tablet);
+		
+		//Modens no estoque
+		mv.addObject("modens", modem);
+		
+		//Fixo no estoque
+		mv.addObject("fixos", fixo);
 	
 		return mv;
 	}
