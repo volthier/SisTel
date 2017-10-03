@@ -137,6 +137,12 @@
     
 }
 
+
+.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 46em !important;
+    z-index:9999999;
+}
+
 /*MEDIA QUERIES*/
 @media screen and (min-width: 2000px) {
 	#periodic-login {
@@ -282,6 +288,11 @@
 	
 	.modal-dialog {
 		margin-left: 18%;
+	}
+	
+	.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    	margin-top: -130%;
+    	top: 0px !important;
 	}
 }
 
@@ -955,6 +966,13 @@ a:hover {
 }
 
 @media screen and (max-width: 425px) {
+	.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    	margin-top: -130%;
+    	width: 25em !important;
+    	left: 30px !important;
+    	
+	}
+	
 	#input_pesquisa {
 		margin-left: 24%;
 		width: 243px;
