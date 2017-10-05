@@ -43,7 +43,7 @@
 										<td class="text-center" th:text="${aloc.dispositivo.modeloDispositivo}">CLARO/SA</td>
 										<td class="text-center" th:text="${aloc.linha.numeroLinha}">01/06/2018</td>
 										<td class="text-center" th:text="${#dates.format(aloc.dtRecebido, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
-										<td class="text-center" th:if="${aloc.dtDevolucao != null}" th:text="${#dates.format(aloc.dtDevolvido, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.dtDevolucao != null}" th:text="${#dates.format(aloc.dtDevolucao, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
 										<td class="text-center text-success" th:if="${aloc.dtDevolucao == null}" >Em uso</td>
 										<td class="text-center" th:if="${aloc.chip != null}" th:text="${aloc.chip.tipoChip}">500.000,00</td>
 										<td class="text-center" th:if="${aloc.chip != null}" th:text="${aloc.chip.numeroSerieChip}">500.000,00</td>
@@ -55,7 +55,7 @@
 										<td class="text-center" >-</td>
 										<td class="text-center" >-</td>
 										<td class="text-center" th:text="${#dates.format(aloc.dtRecebido, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
-										<td class="text-center" th:if="${aloc.dtDevolucao != null}" th:text="${#dates.format(aloc.dtDevolvido, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
+										<td class="text-center" th:if="${aloc.dtDevolucao != null}" th:text="${#dates.format(aloc.dtDevolucao, 'dd/MM/yyyy hh:mm:ss')}">500.000,00</td>
 										<td class="text-center text-success" th:if="${aloc.dtDevolucao == null}" >Em uso</td>
 										<td class="text-center" th:if="${aloc.chip != null}" th:text="${aloc.chip.tipoChip}">500.000,00</td>
 										<td class="text-center" th:if="${aloc.chip != null}" th:text="${aloc.chip.numeroSerieChip}">500.000,00</td>

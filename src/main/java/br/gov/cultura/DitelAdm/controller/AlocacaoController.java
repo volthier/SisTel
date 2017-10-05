@@ -212,7 +212,7 @@ public class AlocacaoController {
 		if (servletRequest.getParameter("idAlocacao") != null) {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacao"));
 			alocacao = alocacaoService.getAlocacao(idAlocacaoUsuarioLinha);
-			Date dtDevolucao = new SimpleDateFormat("yyyy/MM/dd HH:mm")
+			Date dtDevolucao = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
 					.parse(servletRequest.getParameter("dtDevolucao"));
 			Date dtRecebimentoReplicador = alocacao.getDtRecebido();
 			Linha idReciver = alocacao.getLinha();
