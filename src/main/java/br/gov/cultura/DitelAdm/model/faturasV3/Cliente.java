@@ -16,6 +16,7 @@ import javax.persistence.Table;
 /**
  * Cliente MODEL: Padrão FEBRABAN v3
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "cliente", catalog = "dbditel")
 public class Cliente implements java.io.Serializable {
@@ -56,7 +57,7 @@ public class Cliente implements java.io.Serializable {
 		this.codCliente = codCliente;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "operadora_codOperadora", nullable = false)
 	public Operadora getOperadora() {
 		return this.operadora;
@@ -84,7 +85,7 @@ public class Cliente implements java.io.Serializable {
 		this.cnpj = cnpj;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
 	public Set<Fatura> getFaturas() {
 		return this.faturas;
 	}

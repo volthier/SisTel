@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 
@@ -37,7 +37,7 @@ public class DispositivoController {
 	private LimiteAtestoService limiteAtestoService;
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();

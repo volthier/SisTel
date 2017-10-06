@@ -14,7 +14,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	if(flag == 1){
 		action ='/dispositivos';
-	if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 		action +='/' ;
 	}
 	form.attr('action', action + id); 
@@ -24,7 +24,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 2){
 		action ='/usuarios';
-		if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -35,7 +35,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	
 	else if(flag == 3){
 		action ='/chips';
-		if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -45,7 +45,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 4){
 		action ='/linhas';
-		if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -55,7 +55,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 5){
 		action ='/alocacoes/disponibilizar';
-		if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -65,7 +65,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 6){
 		action ='/categorias';
-		if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 
@@ -75,7 +75,7 @@ $('#confirmacaoExclusaoModal').on('shown.bs.modal', function(event){
 	}
 	else if(flag == 7){
 		action ='/limites-atesto';
-		if(!action.endsWith('/')){
+		if(action.substr(-1) !=('/')){
 			action +='/' ;
 		}
 		form.attr('action', action + id); 

@@ -49,7 +49,7 @@
 							<tbody>
 
 								<tr th:each="dto : ${pendencia}" th:if="${dto.autorizar == null}">
-									<td class="text-center" th:text="${dto.linha.numeroLinha}"></td>
+									<td class="text-center numTable" th:text="${dto.linha.numeroLinha}"></td>
 									<td class="text-center" th:text="${dto.usuario.nomeUsuario}"></td>
 									<td class="text-center"
 										th:text="${dto.usuario.limiteAtesto.dasAtesto}"></td>

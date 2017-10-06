@@ -1,68 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout"
-	layout:decorator="LayoutPadrao">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultroq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
 
-<section layout:fragment="conteudo">
-
+  <section layout:fragment="conteudo">
 	<form class="form-horizontal" method="POST"
-		enctype="multipart/form-data" th:action="@{/faturas/nova}">
-
-		<div id="fatura" class="alert alert-success" th:if="${messageSucesso}">
-			<span th:text="${messageSucesso}"></span>
-		</div>
-		<div id="fatura" class="alert alert-danger" th:if="${messageErro}">
-			<span th:text="${messageErro}"></span>
-		</div>
+enctype="multipart/form-data" th:action="@{/faturas/nova}">
 
 
-
-		<div class=" col-md-12  panel sem_sombra padding20 bg">
-			<div class=" col-md-12 sem_sombra padding-0">
-
-
-				<div class="col-md-6 padding-0 sem_sombra intro">
-					<h3 class="text-left">Cadastrar Fatura</h3>
-				</div>
-
-
-				<div class="clearfix">
-
-					<a class="btn btn-link dt-link-panel direita texto_td"
-						th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
-						style="margin-right: 5px;"></span> <span>Voltar</span>
-					</a>
-				</div>,
+    <div id="fatura" class="alert alert-success" th:if="${messageSucesso}">
+      <span th:text="${messageSucesso}"></span>
+    </div>
+    <div id="fatura" class="alert alert-danger" th:if="${messageErro}">
+      <span th:text="${messageErro}"></span>
+    </div>
 
 
 
-				<div class="col-md-12 panel padding-0">
-					<div class="painel-body bg-panel padding-7 tabela">
-
-						<div class="form-group dt">
-							<label for="fatura" class="col-sm-2 control-label desc">Fatura:</label>
-							<input class="btn btn-alert btn-file arq" type="file" name="file"/>
-						</div>
-
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<button class="btn btn-primary texto_td" type="submit" value="Upload">Upload</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+    <div class=" col-md-12  panel sem_sombra padding20 bg">
+      <div class=" col-md-12 sem_sombra padding-0">
 
 
-		</div>
-	</form>
-	<div>
-		<ul>
-			<li th:each="file : ${files}"><a th:href="${file.href}"
-				th:text="${file.rel}"></a></li>
-		</ul>
-	</div>
+        <div class="col-md-6 padding-0 sem_sombra intro">
+          <h3 class="text-left">Cadastrar Fatura</h3>
+        </div>
 
-</section>
+
+        <div class="clearfix">
+
+          <a class="btn btn-link dt-link-panel direita texto_td" th:href="@{/inicio}"> <span class="fa fa-angle-double-left" style="margin-right: 5px;"></span> <span>Voltar</span>
+          </a>
+        </div>
+
+
+
+        <div class="col-md-12 panel padding-0">
+          <div class="painel-body bg-panel padding-7 tabela">
+
+            <div class="form-group dt">
+              <!-- <label for="fatura" id="label-arquivo" class="col-sm-2 control-label desc"><i class="fa fa-cloud-upload"></i> Carregue sua fatura <a>aqui</a></label>
+							<input class="btn btn-alert btn-file arq" id="fatura" type="file" name="file"/> -->
+
+				 <div class="form-group files color" id="input_file">
+                		
+                		<input type="file" name="file" class="form-control btn btn-file"/>
+              	 </div>              
+	                
+	                
+			   
+
+                 <div class="form-group">
+	                  <div class="col-sm-10">
+	                    <button class="btn btn-primary texto_td" type="submit" value="Upload">Enviar</button>
+	                  </div>
+               	 </div>  
+               
+             
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+
+    <div>
+      <ul>
+        <li th:each="file : ${files}">
+          <a th:href="${file.href}" th:text="${file.rel}"></a>
+        </li>
+      </ul>
+    </div>
+	</form> 
+  </section>
+
 </html>

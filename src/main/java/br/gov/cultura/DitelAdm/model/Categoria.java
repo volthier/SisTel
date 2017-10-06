@@ -63,7 +63,7 @@ public class Categoria implements java.io.Serializable {
 		this.descricaoCategoria = descricaoCategoria;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoria")
 	public Set<Alocacao> getAlocacao() {
 		return this.alocacaos;
 	}

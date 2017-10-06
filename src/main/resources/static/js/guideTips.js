@@ -9,6 +9,17 @@ function abrirDocumentacaoModal(id){
 	});
 }
 
+function abrirListaDispositivoModal(id){
+	
+	$.ajax({
+		url: "/usuarios/lista-dispositivos/" + id,
+		success: function(data){
+			$("#infoDispositivosModalHolder").html(data);
+			$("#infoDispositivosModal").modal("show");
+		}
+	});
+}
+
 // BOTÃO RADIO DISPOSITIVOS PATRIMONIO/COMODATO
 $(function() {
 	  $types = $('.syncTypes');

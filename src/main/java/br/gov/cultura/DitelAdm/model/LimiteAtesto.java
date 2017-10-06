@@ -88,7 +88,7 @@ public class LimiteAtesto implements java.io.Serializable {
 		this.valorLimite = valorLimite;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "limiteAtesto")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "limiteAtesto")
 	public Set<Usuario> getUsuarios() {
 		return this.usuarios;
 	}

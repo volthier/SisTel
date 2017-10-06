@@ -6,9 +6,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private ConsultaLdapService ldap; 
 	
 	@Autowired
     Environment env;
@@ -40,12 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 		.exceptionHandling()
-			.accessDeniedPage("/inicio");
-		
+			.accessDeniedPage("/inicio");	
+	
+//		UsuarioLdap user = ldap.findOne(SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().getName());
+//		Authentication authentication = user;
 	}
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.ldapAuthentication()
 		.userSearchFilter(env.getRequiredProperty("ldap.user.search.filter"))

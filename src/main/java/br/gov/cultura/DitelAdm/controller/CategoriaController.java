@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.Categoria;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
 
 @Controller
@@ -28,7 +28,7 @@ public class CategoriaController {
 	private CadastroCategoriaService cadastroCategoriaService;
 	
 	@RequestMapping("/nova")
-	public ModelAndView novo(@ModelAttribute("filtro")CadastroFiltroPesquisa filtro){
+	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<Categoria> categoria = cadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias", categoria);

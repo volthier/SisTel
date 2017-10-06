@@ -8,17 +8,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
@@ -34,6 +39,8 @@ public class UsuarioController extends UrlController {
 	private CadastroUsuarioService cadastroUsuarioService;
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
+	@Autowired
+	private AlocacaoService alocacaoService;
 	@Autowired
 	private SeiClient sei;
 
@@ -91,5 +98,13 @@ public class UsuarioController extends UrlController {
 		mv.addObject("listaUnidadeSei", uni);
 		mv.addObject(usuario);
 		return mv;
+	}
+	
+	@RequestMapping("/lista-dispositivos/{id}")
+	public String listarDocumentos(@PathVariable("id") String id, ModelMap model){
+		List<Alocacao> alocacao = alocacaoService.getAlocacoesUsuario(cadastroUsuarioService.getUsuarioById(Integer.parseInt(id)));
+		model.addAttribute("alocacao", alocacao);
+		return "InfoDispositivos::modalConteudo";
+		
 	}
 }

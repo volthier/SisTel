@@ -1,6 +1,6 @@
 /*LOGIN.HTML*/
 #mimin {
-	background-image: url("../img/tela-login-Recuperado-novo.jpg");
+	background-image: url("../img/tela-login-Recuperado-novo.jpg"); 
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -9,6 +9,7 @@
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -41,7 +42,10 @@
 	margin-top: 8px;
 	
 }
-
+.form-signin {
+	position: relative;
+    z-index: 9999;
+}
 .alturaLogo {
 	max-width: 100%;
 	height: auto;
@@ -131,6 +135,12 @@
 	
     margin-left: 30%;
     
+}
+
+
+.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 46em !important;
+    z-index:9999999;
 }
 
 /*MEDIA QUERIES*/
@@ -278,6 +288,11 @@
 	
 	.modal-dialog {
 		margin-left: 18%;
+	}
+	
+	.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    	margin-top: -130%;
+    	top: 0px !important;
 	}
 }
 
@@ -602,6 +617,16 @@ a:hover {
 
 /*FIM CARDS*/
 
+#modal-lista {
+	heigth: 260px !important;
+}
+
+.ct-modal {
+	margin-left: 27% !important;
+    margin-top: -3% !important;
+}
+
+
 /*MENU ESQUERDA*/
 #left-menu .sub-left-menu a {
 	color: #3c5460;
@@ -680,6 +705,25 @@ a:hover {
 }
 
 
+#input_file {
+	margin-right: 15px;
+    margin-left: 0px;
+}
+
+
+
+.input-lg {
+	background-color:white !important;
+}
+#label-arquivo {
+	text-align: center;
+    font-size: 16px;
+	border: 1px solid #e2e2e2;
+    height: 50px;
+    width: 98%;
+    padding: 12px;
+}
+
 /*MEDIA QUERIES*/
 @media screen and (min-width: 2200px) {
 	.logo {
@@ -739,10 +783,26 @@ a:hover {
 	
 }
 
+@media screen and (min-width: 1240px) {
+	.col-md-12.alturaLogo {
+    	margin-top: 34% !important;
+	}
+}
+
 @media screen and (max-width: 1240px) {
 	.icones_card {
 		margin-left: -25px;
 	}
+	
+	
+}
+
+@media screen and (min-width: 1024px) {
+	.particles-js-canvas-el {
+		height: 100% !important;
+	}
+	
+	
 }
 
 @media screen and (max-width: 1024px) {
@@ -906,6 +966,13 @@ a:hover {
 }
 
 @media screen and (max-width: 425px) {
+	.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    	margin-top: -130%;
+    	width: 25em !important;
+    	left: 30px !important;
+    	
+	}
+	
 	#input_pesquisa {
 		margin-left: 24%;
 		width: 243px;

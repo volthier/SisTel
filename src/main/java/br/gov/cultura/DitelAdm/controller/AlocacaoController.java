@@ -34,11 +34,11 @@ import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.Dispositivos;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
 import br.gov.cultura.DitelAdm.service.CadastroChipService;
-import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
@@ -50,28 +50,36 @@ import br.gov.cultura.DitelAdm.wsdl.Unidade;
 @Controller
 @RequestMapping("/alocacoes")
 public class AlocacaoController {
+	
+	@Autowired
+	private Dispositivos dispositivos;
 
 	@Autowired
 	private AlocacaoService alocacaoService;
-	@Autowired
-	private CadastroDispositivoService cadastroDispositivoService;
+	
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
+	
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
+	
 	@Autowired
 	private CadastroChipService cadastroChipService;
+	
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
+	
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
+	
 	@Autowired
 	private ConsultaLdapService consultaLdapService;
+	
 	@Autowired
 	private SeiClient sei;
 
 	@RequestMapping("/disponibilizar")
-	public ModelAndView alocar(Usuario user, @ModelAttribute("filtro") CadastroFiltroPesquisa filtro) {
+	public ModelAndView alocar(Usuario user, @ModelAttribute("filtro") FiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
 
 		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
@@ -85,8 +93,8 @@ public class AlocacaoController {
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limiteAtesto", limiteAtesto);
 
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		List<Dispositivo> todosDispositivos = dispositivos.findAll();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = dispositivos.findByNumeroSerieDispositivo();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
 		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
 		mv.addObject("dispositivos", todosDispositivos);
@@ -111,9 +119,8 @@ public class AlocacaoController {
 	}
 	
 	@RequestMapping("/lista-alocacoes")
-	public ModelAndView listar() throws RemoteException{
+	public ModelAndView listar(@ModelAttribute("filtro") FiltroPesquisa filtro) throws RemoteException{
 		ModelAndView mv = new ModelAndView("AlocacaoListar");
-		
 		List<Alocacao> lista = alocacaoService.getIdAlocacao();
 		List<Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
 
@@ -144,7 +151,7 @@ public class AlocacaoController {
 			}
 		}
 		
-		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
+		List<Alocacao> todosUsuario = alocacaoService.filtroPesquisa(filtro);
 		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
 		
 		for(Alocacao aloca : todosUsuario){
@@ -174,7 +181,7 @@ public class AlocacaoController {
 	}
 	
 	@RequestMapping("/devolver")
-	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro,
+	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") FiltroPesquisa filtro,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
 		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
@@ -205,7 +212,7 @@ public class AlocacaoController {
 		if (servletRequest.getParameter("idAlocacao") != null) {
 			Integer idAlocacaoUsuarioLinha = Integer.parseInt(servletRequest.getParameter("idAlocacao"));
 			alocacao = alocacaoService.getAlocacao(idAlocacaoUsuarioLinha);
-			Date dtDevolucao = new SimpleDateFormat("yyyy/MM/dd HH:mm")
+			Date dtDevolucao = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
 					.parse(servletRequest.getParameter("dtDevolucao"));
 			Date dtRecebimentoReplicador = alocacao.getDtRecebido();
 			Linha idReciver = alocacao.getLinha();
@@ -389,8 +396,8 @@ public class AlocacaoController {
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limiteAtesto", limiteAtesto);
 
-		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
-		List<Dispositivo> todosDispositivosNaoDisponiveis = cadastroDispositivoService.listarDispositivoDisponivel();
+		List<Dispositivo> todosDispositivos = dispositivos.findAll();
+		List<Dispositivo> todosDispositivosNaoDisponiveis = dispositivos.findByNumeroSerieDispositivo();
 		todosDispositivos.removeAll(todosDispositivosNaoDisponiveis);
 		todosDispositivos.sort((d1, d2) -> d1.getMarcaDispositivo().compareTo(d2.getMarcaDispositivo()));
 		mv.addObject("dispositivos", todosDispositivos);

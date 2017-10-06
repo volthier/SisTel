@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import br.gov.cultura.DitelAdm.model.Linha;
-import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.repository.Linhas;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 
 @Service
+@Transactional
 public class CadastroLinhaService {
 
 	@Autowired
@@ -20,7 +21,6 @@ public class CadastroLinhaService {
 	}
 
 	public void excluir(Integer id) {
-		// TODO Auto-generated method stub
 		linhas.delete(id);
 	}
 
@@ -38,6 +38,11 @@ public class CadastroLinhaService {
 	
 	public Linha getLinhaById(Integer idLinha){
 		return linhas.findByIdLinha(idLinha);
+	}
+	
+	public List<Linha> filtroPesquisa(FiltroPesquisa filtro){
+		String filtroPesquisa =  filtro.getNumeroSerie() == null ? "%" : filtro.getNumeroSerie();
+		return linhas.findByNumeroLinhaContaining(filtroPesquisa);
 	}
 	
 }

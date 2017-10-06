@@ -5,12 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,11 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
-import br.gov.cultura.DitelAdm.repository.filtro.CadastroFiltroPesquisa;
+import br.gov.cultura.DitelAdm.repository.Dispositivos;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
-
-
 
 @Controller
 @RequestMapping
@@ -32,7 +26,7 @@ public class UrlController {
 	private AlocacaoService alocacaoService;
 	
 	@Autowired
-	private CadastroDispositivoService cadastroDispositivoService;
+	private Dispositivos dispositivos;
 
 @RequestMapping("/login")
 public ModelAndView login(@RequestParam(value = "error",required = false) String error,
@@ -51,18 +45,12 @@ public ModelAndView login(@RequestParam(value = "error",required = false) String
 	return mv;
 }
 
-@RequestMapping("/passo-a-passo")
-public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa filtro){
-	ModelAndView mv = new ModelAndView("CadastroPassoAPasso");
-	return mv;
-	
-}
-	@RequestMapping("/inicio")
+@RequestMapping("/inicio")
 	public ModelAndView inicio(){
 
 		ModelAndView mv = new ModelAndView("TelaInicio");
 		
-		List<Dispositivo> disp = cadastroDispositivoService.getIdDispositivo(); 
+		List<Dispositivo> disp = dispositivos.findAll();
 		List<Alocacao> lista = alocacaoService.getIdAlocacao();
 	
 		//Lista de alocados Devolvidos
@@ -75,12 +63,10 @@ public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa
 		List<Dispositivo> tablet = new ArrayList<Dispositivo>();
 		List<Dispositivo> fixo = new ArrayList<Dispositivo>();
 		List<Dispositivo> modem = new ArrayList<Dispositivo>();
-		
-		for (Iterator<Alocacao> a = dto1.listIterator(); a.hasNext();) {
-			Alocacao aloc = a.next();
 			
 				for (Iterator<Dispositivo> d = disp.listIterator(); d.hasNext();) {
 					Dispositivo dis = d.next();
+					
 					if(dis.getTipoDispositivo().equals("Celular")){
 						celular.add(dis);
 					}else if(dis.getTipoDispositivo().equals("Tablet")){
@@ -91,19 +77,38 @@ public ModelAndView passoApasso(@ModelAttribute("filtro") CadastroFiltroPesquisa
 						fixo.add(dis);
 					}
 					
-					if (dis.equals(aloc.getDispositivo())) {
-						d.remove();
-					}
+					for (Iterator<Alocacao> a = dto1.listIterator(); a.hasNext();) {
+						Alocacao aloc = a.next();
+						if (dis.getIdDispositivo().equals(aloc.getDispositivo().getIdDispositivo())) {
+							d.remove();
+						}
+						celular.remove(aloc.getDispositivo());
+						modem.remove(aloc.getDispositivo());
+						tablet.remove(aloc.getDispositivo());
+						fixo.remove(aloc.getDispositivo());
 				}
 			}
 		
 		//lista de total alocados
 		mv.addObject("alocacaoTotal",lista);
+		
 		//lista de total alocados Habilitados
 		mv.addObject("devolvidosTotal",dto);
+		
 		//Lista de alocados habilitados
 		mv.addObject("habilitadosTotal",dto1);
-		mv.addObject("dispositivos", disp);
+		
+		//Celulares no estoque
+		mv.addObject("celulares", celular);
+		
+		//Tablets no estoque
+		mv.addObject("tablets", tablet);
+		
+		//Modens no estoque
+		mv.addObject("modens", modem);
+		
+		//Fixo no estoque
+		mv.addObject("fixos", fixo);
 	
 		return mv;
 	}

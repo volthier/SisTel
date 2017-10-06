@@ -1,9 +1,11 @@
 package br.gov.cultura.DitelAdm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
@@ -11,13 +13,15 @@ import br.gov.cultura.DitelAdm.model.AlocacaoSei;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.repository.Usuarios;
 import br.gov.cultura.DitelAdm.repository.alocacoes.Alocacoes;
 import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesFaturas;
 import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesSei;
-//import br.gov.cultura.DitelAdm.repository.alocacoes.AlocacoesUsuariosLinhas;
 import br.gov.cultura.DitelAdm.repository.alocacoes.DocumentosSei;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 
 @Service
+@Transactional
 public class AlocacaoService {
 	
 	@Autowired
@@ -31,6 +35,9 @@ public class AlocacaoService {
 	
 	@Autowired
 	private AlocacoesSei alocacaoSeis;
+	
+	@Autowired
+	private Usuarios usuarios;
 	
 	public void salvar(List<AlocacaoSei> alocacoes){
 		alocacaoSeis.save(alocacoes);
@@ -101,6 +108,16 @@ public class AlocacaoService {
 
 	public List<Alocacao> getAlocacoesUsuario(Usuario usuario){
 		return alocacoes.getAlocacoesUsuario(usuario);
+	}
+	
+	public List<Alocacao> filtroPesquisa(FiltroPesquisa filtro){
+		String filtroPesquisa =  filtro.getNumeroSerie() == null ? "%" : filtro.getNumeroSerie();
+		List<Usuario> usuario = usuarios.findByNomeUsuarioContaining(filtroPesquisa);
+		List<Alocacao> aloc = new ArrayList<Alocacao>();
+		for(Usuario u : usuario){
+			aloc.addAll(alocacoes.getAlocacoesUsuario(u));
+		}	 
+		return aloc;
 	}
 	
 }

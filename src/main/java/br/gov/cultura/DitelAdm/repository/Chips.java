@@ -15,5 +15,7 @@ public interface Chips extends JpaRepository<Chip, Integer>{
 	
 	@Query("select l from Chip l inner join l.alocacaos al WHERE al.dtDevolucao IS NULL")
 	public List<Chip> findByNumeroSerieChip();
+	
+	public List<Chip> findByNumeroSerieChipContaining(String numeroSerieChip);
 
 }

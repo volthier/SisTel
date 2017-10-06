@@ -6,133 +6,104 @@
 
 <section layout:fragment="conteudo">
 
-
-	
 	<div layout:include="MensagemSucesso"></div>
-
-
 
 	<div class=" col-md-12  panel sem_sombra padding20 bg">
 		<div class=" col-md-12 sem_sombra padding-0">
 			<div class="col-md-6 padding-0 sem_sombra intro">
 				<h3 class="text-left">Dispositivos</h3>
 			</div>
-
-
 			<div class="clearfix">
-
 				<a class="btn btn-link dt-link-panel direita texto_td"
 					th:href="@{/inicio}"> <span class="fa fa-angle-double-left"
 					style="margin-right: 5px;"></span> <span>Voltar</span>
 				</a>
 			</div>
-
-			<div class="col-md-12 padding-7 pesquisa">
-
-				<div class="col-md-8 pesquisa">
-
-
-					<div class="btn btn-link texto_td text-center" th:href="@{/dispositivos/novo}"
-						onClick="location.href='/dispositivos/novo'" id="btn_novo" style="float: left;">
-						<span class="fa fa-plus-circle" id="add"> <span
-							class="tabela"> Novo Dispositivo</span>
-						</span>
-
+			<form class="form-horizontal" method="POST"
+				action="/consultas/dispositivos" th:object="${filtro}">
+				<div class="col-md-12 padding-7 pesquisa">
+					<div class="col-md-8 pesquisa">
+						<div class="btn btn-link texto_td text-center"
+							th:href="@{/dispositivos/novo}" onClick="location.href='/dispositivos/novo'"  id="btn_novo"
+							style="float: left;">
+							<span class="fa fa-plus-circle" id="add"> <span
+								class="tabela"> Novo Dispositivo</span>
+							</span>
+						</div>
 					</div>
 
-
-				</div>
-
-
-				<form method="get">
 					<div class="col-md-4 input-group p_disp" id="input_pesquisa">
-						<input class="form-control" placeholder="Digite aqui sua pesquisa" />
-						<span class="input-group-btn">
+						<input class="form-control"
+							placeholder="Digite aqui numero de serie para pesquisa"
+							th:field="*{numeroSerie}" autofocus="autofocus" /> <span
+							class="input-group-btn">
 							<button class="btn btn-secondary" type="submit">
-								<span class="fa fa-search text-center b"> </span>
+								<i class="fa fa-search text-center b"> </i>
 							</button>
 						</span>
 					</div>
-				</form>
-
-			</div>
-
-			<form method="POST" th:action="@{/dispositivos}">
-
-				<div class="col-md-12 panel padding-0">
-
-					<div class="painel-body bg-panel padding-7 tabela">
-
-						<div class="table-responsive">
-							<table class="table table-bordered table-striped tabela">
-								<thead>
-									<tr>
-										<th class="text-center col-md1">Id</th>
-										<th class="text-center col-md2">Marca</th>
-										<th class="text-center col-md2">Modelo</th>
-										<th class="text-center col-md2">Número de Série</th>
-										<th class="text-center col-md2">IMEI</th>
-										<th class="text-center col-md2">Patrimonio</th>
-										<th class="text-center col-md2">Tipo</th>
-										<th class="text-right col-md2">Valor</th>
-										<th class="col-md2" style="color: transparent;">------------</th>
-									</tr>
-								</thead>
-
-								<tbody>
-
-									<tr th:each="dispositivo : ${dispositivos}">
-										<td class="text-center" th:text="${dispositivo.idDispositivo}"></td>
-										<td class="text-center"
-											th:text="${dispositivo.marcaDispositivo}"></td>
-										<td class="text-center"
-											th:text="${dispositivo.modeloDispositivo}"></td>
-										<td class="text-center"
-											th:text="${dispositivo.numeroSerieDispositivo}"></td>
-										<td class="text-center"
-											th:text="${dispositivo.imeiDispositivo}"></td>
-										<td class="text-center"
-											th:text="${dispositivo.patrimonioDispositivo}"></td>
-										<td class="text-center"
-											th:text="${dispositivo.tipoDispositivo}"></td>
-										<td class="text-right"
-											th:text="|R$ ${{dispositivo.valorDispositivo}}|"></td>
-										<td class="text-center"><a class="icone_tabela"
-											th:href="@{/dispositivos/{id}(id=${dispositivo.idDispositivo})}"
-											title="Editar" rel="tooltip" data-placement="left"> <span
-												class="fa fa-pencil"></span>
-										</a> <a class="icone_tabela" data-toggle="modal"
-											data-target="#confirmacaoExclusaoModal"
-											th:attr="data-flag='1',data-excludId=${dispositivo.idDispositivo}, data-exclude=${dispositivo.modeloDispositivo}"
-											title="Remover" rel="tooltip" data-placement="left"> <span
-												class="fa fa-remove text-danger"></span>
-										</a></td>
-
-									</tr>
-									<tr>
-										<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
-											Dispositivo encontrado!!!</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</div>
+			</form>
+			<div class="col-md-12 panel padding-0">
+				<div class="painel-body bg-panel padding-7 tabela">
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped tabela">
+							<thead>
+								<tr>
+									<th class="text-center col-md1">Id</th>
+									<th class="text-center col-md2">Marca</th>
+									<th class="text-center col-md2">Modelo</th>
+									<th class="text-center col-md2">Número de Série</th>
+									<th class="text-center col-md2">IMEI</th>
+									<th class="text-center col-md2">Patrimonio</th>
+									<th class="text-center col-md2">Tipo</th>
+									<th class="text-right col-md2">Valor</th>
+									<th class="col-md2" style="color: transparent;">------------</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="dispositivo : ${dispositivos}">
+									<td class="text-center" th:text="${dispositivo.idDispositivo}"></td>
+									<td class="text-center"
+										th:text="${dispositivo.marcaDispositivo}"></td>
+									<td class="text-center"
+										th:text="${dispositivo.modeloDispositivo}"></td>
+									<td class="text-center"
+										th:text="${dispositivo.numeroSerieDispositivo}"></td>
+									<td class="text-center"
+										th:text="${dispositivo.imeiDispositivo}"></td>
+									<td class="text-center"
+										th:text="${dispositivo.patrimonioDispositivo}"></td>
+									<td class="text-center"
+										th:text="${dispositivo.tipoDispositivo}"></td>
+									<td class="text-right"
+										th:text="|R$ ${{dispositivo.valorDispositivo}}|"></td>
+									<td class="text-center"><a class="icone_tabela"
+										th:href="@{/dispositivos/{id}(id=${dispositivo.idDispositivo})}"
+										title="Editar" rel="tooltip" data-placement="left"> <span
+											class="fa fa-pencil"></span>
+									</a> <a class="icone_tabela" data-toggle="modal"
+										data-target="#confirmacaoExclusaoModal"
+										th:attr="data-flag='1',data-excludId=${dispositivo.idDispositivo}, data-exclude=${dispositivo.modeloDispositivo}"
+										title="Remover" rel="tooltip" data-placement="left"> <span
+											class="fa fa-remove text-danger"></span>
+									</a></td>
+								</tr>
+								<tr>
+									<td colspan="9" th:if="${#lists.isEmpty(dispositivos)}">Nenhum
+										Dispositivo encontrado!!!</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-
-
-
-
-			</form>
+			</div>
 		</div>
 	</div>
 
-
 	<div layout:include="DialogoConfirmacaoExclusao"></div>
-
-
-
-
 
 </section>
 </html>
