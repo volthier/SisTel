@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -97,40 +98,25 @@ public class FaturaController {
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody ModelAndView executarFatura() throws RemoteException {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		List<Alocacao> alocacaoList = alocacaoService.getIdAlocacao();
-		List<br.gov.cultura.DitelAdm.model.Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
 
-/*		for (Alocacao alocacao : alocacaoList) {
-			if (alocacao.getDtDevolucao() == null) {
-				br.gov.cultura.DitelAdm.wsdl.Usuario usuarioSei = sei.ValidaUsuarioUnidade(alocacao);
-				if (usuarioSei == null) {
-					if (!usuarioErrorSei.contains(alocacao.getUsuario())) {
-
-						usuarioErrorSei.add(alocacao.getUsuario());
-					}
-				}
-			}
-		}
-*/
-		// verificar
 		List<Fatura> faturasNaoGeradas = faturaService.getFaturasNaoGeradas();
 		List<AlocacaoFatura> faturasGeradas = alocacaoService.getIdAlocacaoFatura();
 		mv.addObject("faturasNaoGeradas", faturasNaoGeradas);
 		mv.addObject("faturasGeradas", faturasGeradas);
-		/*mv.addObject("erroUnidade", usuarioErrorSei);*/
 		return mv;
 	}
 
 	/** EXECUTA A FUNÇÃO DE GERAR FATURAS E ENVIO PARA SEI */
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody ModelAndView executarFatura(HttpServletRequest request, Model model) throws Exception {
+	public @ResponseBody ModelAndView executarFatura(@RequestParam(value="fatura") int[] idFatura, HttpServletRequest request, Model model) throws Exception {
 		ModelAndView mv = new ModelAndView("FaturaLinhas");
 		SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
 		CalculadorDTO cal = new CalculadorDTO();
 
-		Integer idFatura = Integer.parseInt(request.getParameter("fatura"));
-
-		Fatura fatura = faturaService.getFatura(idFatura);
+		
+		for(int count = 0; count < idFatura.length; count++ ){
+		
+		Fatura fatura = faturaService.getFatura(idFatura[count]);
 		List<Planos> planosLista = planoService.getPlanoFatura(fatura);
 		List<Resumo> resumosLista = resumoService.getResumoFatura(fatura);
 		List<Servicos> servicosLista = servicoService.getServicosFatura(fatura);
@@ -156,9 +142,9 @@ public class FaturaController {
 					
 					faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
 					AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
-					cal.setValorTotalAtesto(0);
-
 					List<Alocacao> alocacaoRepasse = new ArrayList<Alocacao>();
+					
+					cal.setValorTotalAtesto(0);
 					alocacaoListaUsuario = alocacaoService.getAlocacoesUsuario(usuario);
 					usuarioLista.remove(usuario);
 
@@ -174,52 +160,35 @@ public class FaturaController {
 
 									if (((plano.getDataIniCiclo().compareTo(alocacao.getDtRecebido()) > 0)
 											|| (plano.getDataIniCiclo().compareTo(alocacao.getDtRecebido()) == 0)
-											|| (alocacao.getDtRecebido().getMonth() == plano.getDataIniCiclo()
-													.getMonth()
-													&& alocacao.getDtRecebido().getYear() == plano.getDataIniCiclo()
-															.getYear()))
-											&& ((plano.getDataFimCiclo().compareTo(alocacao.getDtRecebido()) > 0)
-													|| (plano.getDataFimCiclo()
-															.compareTo(alocacao.getDtRecebido()) == 0)
-													|| (alocacao.getDtRecebido().getMonth() == plano.getDataFimCiclo()
-															.getMonth()
-															&& alocacao.getDtRecebido().getYear() == plano
-																	.getDataFimCiclo().getYear()))) {
+											|| (alocacao.getDtRecebido().getMonth() == plano.getDataIniCiclo().getMonth()
+											&& alocacao.getDtRecebido().getYear() == plano.getDataIniCiclo().getYear()))
+										&& ((plano.getDataFimCiclo().compareTo(alocacao.getDtRecebido()) > 0)
+											|| (plano.getDataFimCiclo().compareTo(alocacao.getDtRecebido()) == 0)
+											|| (alocacao.getDtRecebido().getMonth() == plano.getDataFimCiclo().getMonth()
+											&& alocacao.getDtRecebido().getYear() == plano.getDataFimCiclo().getYear()))) {
 
 										if (alocacao.getDtDevolucao() != null) {
 											if ((plano.getDataIniCiclo().compareTo(alocacao.getDtDevolucao()) < 0
-													|| plano.getDataIniCiclo()
-															.compareTo(alocacao.getDtDevolucao()) == 0)
+													|| plano.getDataIniCiclo().compareTo(alocacao.getDtDevolucao()) == 0)
 													&& (plano.getDataFimCiclo().compareTo(alocacao.getDtDevolucao()) < 0
-															|| plano.getDataFimCiclo()
-																	.compareTo(alocacao.getDtDevolucao()) == 0
-															|| (plano.getDataFimCiclo().getMonth() == alocacao
-																	.getDtDevolucao().getMonth()
-																	&& plano.getDataFimCiclo().getYear() == alocacao
-																			.getDtDevolucao().getYear()))) {
+													|| plano.getDataFimCiclo().compareTo(alocacao.getDtDevolucao()) == 0
+													|| (plano.getDataFimCiclo().getMonth() == alocacao.getDtDevolucao().getMonth()
+													&& plano.getDataFimCiclo().getYear() == alocacao.getDtDevolucao().getYear()))) {
 												planosVinculados.add(plano);
 											}
 
 										} else if (alocacao.getDtDevolucao() == null) {
-
 											planosVinculados.add(plano);
 										}
-									} else if (((alocacao.getDtRecebido().getMonth() == plano.getDataIniCiclo()
-											.getMonth()
-											&& alocacao.getDtRecebido().getYear() == plano.getDataIniCiclo().getYear())
-											|| (alocacao.getDtDevolucao().getMonth() == plano.getDataIniCiclo()
-													.getMonth()
-													&& alocacao.getDtDevolucao().getYear() == plano.getDataIniCiclo()
-															.getYear()))
-											|| ((alocacao.getDtRecebido().getMonth() == plano.getDataFimCiclo()
-													.getMonth()
-													&& alocacao.getDtRecebido().getYear() == plano.getDataFimCiclo()
-															.getYear())
-													|| (alocacao.getDtDevolucao().getMonth() == plano.getDataFimCiclo()
-															.getMonth()
-															&& alocacao.getDtDevolucao().getYear() == plano
-																	.getDataFimCiclo().getYear()))) {
-										planosVinculados.add(plano);
+									} else if (((alocacao.getDtRecebido().getMonth() == plano.getDataIniCiclo().getMonth()
+													&& alocacao.getDtRecebido().getYear() == plano.getDataIniCiclo().getYear())
+													|| (alocacao.getDtDevolucao().getMonth() == plano.getDataIniCiclo().getMonth()
+													&& alocacao.getDtDevolucao().getYear() == plano.getDataIniCiclo().getYear()))
+													|| ((alocacao.getDtRecebido().getMonth() == plano.getDataFimCiclo().getMonth()
+													&& alocacao.getDtRecebido().getYear() == plano.getDataFimCiclo().getYear())
+													|| (alocacao.getDtDevolucao().getMonth() == plano.getDataFimCiclo().getMonth()
+													&& alocacao.getDtDevolucao().getYear() == plano.getDataFimCiclo().getYear()))) {
+														planosVinculados.add(plano);
 									}
 								}
 							}
@@ -239,28 +208,17 @@ public class FaturaController {
 									if (alocacao.getLinha().equals(chamada.getLinha())) {
 										if (((chamada.getDataLigacao().compareTo(alocacao.getDtRecebido()) > 0)
 												|| (chamada.getDataLigacao().compareTo(alocacao.getDtRecebido()) == 0))
-												&& ((chamada.getHoraLigacao().getHours() > alocacao.getDtRecebido()
-														.getHours()
-														|| chamada.getHoraLigacao().getHours() == alocacao
-																.getDtRecebido().getHours())
-														&& (chamada.getHoraLigacao().getMinutes() > alocacao
-																.getDtRecebido().getMinutes()
-																|| chamada.getHoraLigacao().getMinutes() == alocacao
-																		.getDtRecebido().getMinutes())
-														&& (chamada.getHoraLigacao().getSeconds() > alocacao
-																.getDtRecebido().getSeconds()
-																|| chamada.getHoraLigacao().getSeconds() == alocacao
-																		.getDtRecebido().getSeconds()))) {
+												&& ((chamada.getHoraLigacao().getHours() > alocacao.getDtRecebido().getHours()
+														|| chamada.getHoraLigacao().getHours() == alocacao.getDtRecebido().getHours())
+														&& (chamada.getHoraLigacao().getMinutes() > alocacao.getDtRecebido().getMinutes()
+																|| chamada.getHoraLigacao().getMinutes() == alocacao.getDtRecebido().getMinutes())
+														&& (chamada.getHoraLigacao().getSeconds() > alocacao.getDtRecebido().getSeconds()
+																|| chamada.getHoraLigacao().getSeconds() == alocacao.getDtRecebido().getSeconds()))) {
 											if (alocacao.getDtDevolucao() != null) {
 												if (((chamada.getDataLigacao().compareTo(alocacao.getDtDevolucao()) < 0)
-														|| (chamada.getDataLigacao()
-																.compareTo(alocacao.getDtDevolucao()) == 0))
-														&& (chamada.getHoraLigacao()
-																.compareTo(alocacao.getDtDevolucao()) < 0
-																|| chamada.getHoraLigacao()
-																		.compareTo(alocacao.getDtDevolucao()) == 0)
-
-												) {
+														|| (chamada.getDataLigacao().compareTo(alocacao.getDtDevolucao()) == 0))
+														&& (chamada.getHoraLigacao().compareTo(alocacao.getDtDevolucao()) < 0
+																|| chamada.getHoraLigacao().compareTo(alocacao.getDtDevolucao()) == 0)) {
 
 													if (cal.getDataA() == null) {
 														cal.setResultadoF(chamada.getDuracaoLigacao().getTime());
@@ -517,7 +475,9 @@ public class FaturaController {
 		mv.addObject("alocacoesSei",alocacoesFaturas);
 		mv.addObject("fatura",fatura);
 
-	return mv;}
+	}
+		return mv;	
+	}
 
 	/** CONSULTA FATURAS JÁ GERADAS E ENVIADAS */
 	@RequestMapping("/resumo/{fatura}/{alocacao}")

@@ -1,12 +1,15 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
 // Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -44,7 +47,7 @@ public class Categoriadesconto implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id_catDesconto", unique = true, nullable = false)
 	public int getIdCatDesconto() {
 		return this.idCatDesconto;
