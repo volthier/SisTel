@@ -8,8 +8,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-md-8 col-md-offset-2">
-				<h3 th:text="${fatura.numFatura} +  ' - ' + ${fatura.descriCobranca}">
-				</h3>
+				<!-- <h3 th:text="${fatura.fatura.numFatura} +  ' - ' + ${fatura.fatura.descriCobranca}"></h3> -->
 			</div>
 		</div>
 		<div class="row">
@@ -20,6 +19,7 @@
 							<tr>
 								<td>Usuario</td>
 								<td>Linha</td>
+								<td>Operadora</td>
 								<td>Ressarcimento</td>
 								<td>Nº Processo SEI</td>
 								<td>Ações</td>
@@ -29,11 +29,12 @@
 							<tr th:each="alocacao : ${alocacoesSei}">
 								<td th:text="${alocacao.alocacao.usuario.nomeUsuario}"></td>
 								<td th:text="${alocacao.alocacao.linha.numeroLinha}"></td>
+								<td th:text="${alocacao.fatura.cliente.operadora.nome}"></td>
 								<td class="text-danger" th:if="${alocacao.ressarcimento == true}" th:text="Sim"></td>
 								<td class="text-success" th:if="${alocacao.ressarcimento == false}" th:text="Não"></td>
 								<td th:text="${alocacao.alocacao.alocacaoSei.numeroExternoProcessoSei}"></td>
 								<!-- <td th:text="${alocacao.documentoSei.documentosNumero}"></td> -->
-								<td><a class="btn btn-primary" th:href="@{'/fatura/resumo/' + ${fatura.idFatura} + '/' + ${alocacao.alocacao.idAlocacao}}" role="button">Resumo</a></td>
+								<td><a class="btn btn-primary" th:href="@{'/fatura/resumo/' + ${alocacao.fatura.idFatura} + '/' + ${alocacao.alocacao.idAlocacao}}" role="button">Resumo</a></td>
 							</tr>
 						</tbody>
 					</table>

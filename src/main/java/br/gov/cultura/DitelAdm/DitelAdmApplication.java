@@ -22,7 +22,6 @@ import br.gov.cultura.DitelAdm.ws.SeiClient;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class DitelAdmApplication extends SpringBootServletInitializer {
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(DitelAdmApplication.class, args);
 	}

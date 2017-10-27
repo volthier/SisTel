@@ -275,7 +275,7 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 			<tr>
 				<td th:text="${alocacao.linha.numeroLinha}">61 99999 9999&nbsp;</td>
-				<td
+				<td th:if="${planoData.dataIniCiclo != null}"
 					th:text="${planoData.dataIniCicloFormatada()} + ' a ' + ${planoData.dataFimCicloFormatada()}">
 					22/01/2017</td>
 				<td
@@ -284,14 +284,14 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	<table>
+	<table th:if="${alocacao.dispositivo.tipoDispositivo != 'Fixo'}">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
 			</tr>
 		</tbody>
 	</table>
-	<table class="table table-dotted">
+	<table class="table table-dotted" th:if="${alocacao.dispositivo.tipoDispositivo != 'Fixo'}">
 		<thead>
 			<tr>
 				<th>Descri&ccedil;&atilde;o</th>
