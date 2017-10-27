@@ -181,7 +181,7 @@ public class Usuario implements java.io.Serializable {
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	public Set<Alocacao> getAlocacaos() {
 		return this.alocacaos;
 	}

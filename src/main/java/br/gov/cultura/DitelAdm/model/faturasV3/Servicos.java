@@ -154,7 +154,7 @@ public class Servicos implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "horaServico", nullable = false, length = 19)
+	@Column(name = "horaServico", length = 19)
 	public Date getHoraServico() {
 		return this.horaServico;
 	}

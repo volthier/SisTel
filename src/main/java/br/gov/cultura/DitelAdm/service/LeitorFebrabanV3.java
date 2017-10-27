@@ -215,6 +215,7 @@ public class LeitorFebrabanV3 {
 				break;
 
 			case "10":
+				System.out.println("Entrou 10");
 				/**
 				 * 10_RESUMO do guide Telecom padrão FEBRABAN-V3R0 Somatório dos
 				 * Valores por Recurso
@@ -365,11 +366,11 @@ public class LeitorFebrabanV3 {
 				resumo.setFatura(fatura);
 				resumoLista.add(resumo);
 				faturaArquivoDTO.setResumo(resumoLista);
-
+				System.out.println("passou 10");
 				break;
 
 			case "20":
-
+				System.out.println("Entrou 20");
 				/**
 				 * 20_ENDEREÇOS do guia Telecom padrão FEBRABAN-V3R0
 				 * Identificação dos endereçõs dos recursos cobrados na fatura
@@ -483,11 +484,11 @@ public class LeitorFebrabanV3 {
 				enderecos.setFatura(fatura);
 				enderecosLista.add(enderecos);
 				faturaArquivoDTO.setEnderecos(enderecosLista);
-
+				System.out.println("passou 20");
 				break;
 
 			case "30":
-
+				System.out.println("Entrou 30"); 
 				/**
 				 * 30_CHAMADAS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
 				 * de chamadas de VOZ cobradas na fatura
@@ -525,11 +526,12 @@ public class LeitorFebrabanV3 {
 				 * chamada **** Código Nacional de localidade: Fixo - definido
 				 * pela ANATEL; Móvel definido pela ABR Telecom
 				 */
+				
 				chamadas.setCnlAreaLocalUso(Integer.parseInt(data.substring(78, 83)));
-
+				
 				/** Numero do recurso */
 				chamadas.setNumRecursoChamada(data.substring(83,99).trim());
-
+				
 				String numeroC = data.substring(83,99).trim(); 
 				int aC = 0;
 				try {
@@ -541,7 +543,7 @@ public class LeitorFebrabanV3 {
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
-					System.err.println("Erro na verificação de linha registrada na fatura: " + numeroC+" - "+ e);
+					System.err.println("Erro na verificação de linha registrada na fatura CHAMADAS: " + numeroC+" - "+ e);
 				}
 				try {
 					if (aC == 0) {
@@ -554,7 +556,7 @@ public class LeitorFebrabanV3 {
 						}
 					}
 				} catch (Exception e) {
-					System.err.println(e + " Linha inexistente no base de dados!");
+					System.err.println(e + " Linha inexistente no base de dados! CHAMADAS");
 				}
 				
 				/** Data da ligação */
@@ -564,44 +566,44 @@ public class LeitorFebrabanV3 {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				
 				/**
 				 * CNL da localidade de Destino da Chamada **** Código Nacional
 				 * de localidade: Fixo - definido pela ANATEL; Móvel definido
 				 * pela ABR Telecom
 				 */
 				chamadas.setCnlLocalDestino(Integer.parseInt(data.substring(107, 112)));
-
+				
 				/** Nome da Localidade de Destino da Chamada */
 				chamadas.setNomeLocalDestino(data.substring(112, 137));
-
+				
 				/** UF do Telefone de Destino da Chamada */
 				chamadas.setUfTelDestino(data.substring(137, 139));
-
+				
 				/** Código Nacional/Internacional */
 				chamadas.setCodNacInt(data.substring(139, 141));
-
+				
 				/**
 				 * Código de Seleção da Prestadora - CSP **** Preenchimento
 				 * obrigatório para chamadas de longa distância.
 				 */
 				chamadas.setCodCsp(data.substring(141, 143));
-
+				
 				/**
 				 * Nome Operadora CSP **** Preenchimento obrigatório para
 				 * chamadas de longa distância.
 				 */
 				chamadas.setNomeOpCsp(data.substring(143, 163));
-
+				
 				/**
 				 * Númerpo do Telefone Chamado **** Para ligações nacionais
 				 * obedecer o formato: YYNNNNNNNN, onde: "YY" - Código de area e
 				 * "NNNNNNNN" - numero chamado. Para chamadas internacionais
 				 * preencher o código do país de destino e número chamado
 				 */
-
+				
 				chamadas.setNumTelefoneChamado(data.substring(163, 180));
-
+				
 				/**
 				 * Código da Operadora de Roaming **** Preencher com o código da
 				 * rede móvel utilizada em roaming. MCC+MNC (MCC - Mobile
@@ -610,7 +612,7 @@ public class LeitorFebrabanV3 {
 				 * móveis, quando em roaming.
 				 */
 				chamadas.setCodOpRoaming(Integer.parseInt(data.substring(180, 185)));
-
+				
 				/**
 				 * Operadora a Qual o Terminal de Destino está
 				 * Vinculado(portabilidade)**** Número EOT (Empresa Operadora de
@@ -621,7 +623,7 @@ public class LeitorFebrabanV3 {
 				 * ´http://www.abr.net.br/grupos/grupos_cadastro.htm
 				 */
 				chamadas.setOpTerminalVincDestino(data.substring(185, 188));
-
+				
 				/** Duração Ligação**** */
 				try {
 					chamadas.setDuracaoLigacao(sdfs.parse(data.substring(188, 195)));
@@ -629,16 +631,16 @@ public class LeitorFebrabanV3 {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-
+				
 				/** Código da Categoria Chamada**** */
 				categoriaChamada.setCodCatChamada(Integer.parseInt(data.substring(195, 198)));
-
+				
 				/** Sigla da Categoria Chamada */
 				categoriaChamada.setSigla(data.substring(198, 201));
-
+				
 				/** Descrição da Categoria Chamada */
 				categoriaChamada.setDescricao(data.substring(201, 226));
-
+				
 				/** Horário da ligação */
 				try {
 					chamadas.setHoraLigacao(sdfh.parse(data.substring(226, 232)));
@@ -646,36 +648,36 @@ public class LeitorFebrabanV3 {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-
+				
 				/** Alíquota ICMS */
-				chamadas.setIcms(Integer.parseInt(data.substring(232, 237)));
-
+				chamadas.setIcms(Integer.parseInt(data.substring(232, 237).trim()));
+				
 				/** Valor da ligação com imposto */
 				convert = ((data.substring(237, 248)).concat(".").concat(data.substring(248, 250)));
 				chamadas.setValLigImp(Float.parseFloat(convert));
-
+				
 				/** Valor da Ligação sem Imposto */
 				convert = ((data.substring(250, 261)).concat(".").concat(data.substring(261, 265)));
 				chamadas.setValLigSemImp(Float.parseFloat(convert));
-
+				
 				/** Tipo NF */
 				chamadas.setTipoNf(Integer.parseInt(data.substring(265, 266)));
-
+				
 				/** Numero da Nota Fiscal */
 				chamadas.setNumNf(data.substring(266, 278));
-
+				
 				/** Tipo de Chamada (TC) */
 				chamadas.setTipoChamada(data.substring(278, 279));
-
+				
 				/** Grupo Hórario Tarifário */
 				chamadas.setGrupoHoraTarif(data.substring(279, 280));
-
+				
 				/** Descrição do Horário Tarifário */
 				chamadas.setDesHoraTarif(data.substring(280, 295));
-
+				
 				/** Degrau da Ligação */
 				chamadas.setDegrauLigacao(Integer.parseInt(data.substring(295, 297)));
-
+				
 				/**
 				 * Filler String chamaFiller(data.substring(297, 324);
 				 */
@@ -687,32 +689,25 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String chamaMarcaFim(data.substring(349,
 				 * 350);
 				 */
-				
-				
 
+				chamadas.setFatura(fatura);
 				String verificaCategoriaC = data.substring(201, 226);
 
 					Categoriachamada chama = categoriaChamadaLista.stream()
 							.filter(x -> x != null && x.getDescricao().equals(verificaCategoriaC))
 							.findFirst().orElse(null);
 
-					if (chama != null) {
-						
-						chamadas.setFatura(fatura);
-					
+					if (chama != null) {					
 						chamadas.setCategoriachamada(chama);
 						chamadasLista.add(chamadas);
 						faturaArquivoDTO.setChamadas(chamadasLista);
 					} else {
 						chamadas.setCategoriachamada(categoriaChamada);
 						categoriaChamadaLista.add(categoriaChamada);
-						chamadas.setFatura(fatura);
 						faturaArquivoDTO.setCategoriaChamadas(categoriaChamadaLista);
 						chamadasLista.add(chamadas);
 						faturaArquivoDTO.setChamadas(chamadasLista);
 					}
-				
-				
 				
 /*				for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(83, 99).trim())) {
@@ -754,9 +749,13 @@ public class LeitorFebrabanV3 {
 					;
 				}
 				;*/
+					
+					System.out.println("Passou 30");
 				break;
 
 			case "40":
+				System.out.println("Entrou 40");
+				
 				/**
 				 * 40_SERVIÇOS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
 				 * dos serviços faturados
@@ -837,9 +836,6 @@ public class LeitorFebrabanV3 {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
-				
 				
 				/**
 				 * Data do Serviço
@@ -939,7 +935,8 @@ public class LeitorFebrabanV3 {
 				/**
 				 * Marcação de Fim String servMarcaFim(data.substring(349, 350);
 				 */
-
+				servicos.setFatura(fatura);
+				
 				String verificaCategoriaS = data.substring(154, 179);
 
 				Categoriaservico serve = categoriaServicoLista.stream()
@@ -948,21 +945,16 @@ public class LeitorFebrabanV3 {
 
 				if (serve != null) {
 					servicos.setCategoriaservico(serve);
-					servicos.setFatura(fatura);
 					servicosLista.add(servicos);
 					faturaArquivoDTO.setServicos(servicosLista);
 				} else {
 					categoriaServicoLista.add(categoriaServico);
-					servicos.setCategoriaservico(categoriaServico);
-					servicos.setFatura(fatura);
-					servicosLista.add(servicos);
 					faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
+					servicos.setCategoriaservico(categoriaServico);
+					servicosLista.add(servicos);
 					faturaArquivoDTO.setServicos(servicosLista);
 				}
-				
-				
-				
-				/*for (Resumo r : resumoLista) {
+			/*for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(83, 99).trim())) {
 						servicos.setResumo(r);
 						if (categoriaServicoLista.isEmpty()) {
@@ -1003,9 +995,13 @@ public class LeitorFebrabanV3 {
 					;
 				}
 				;*/
+				
+				System.out.println("Passou 40");
 				break;
 
 			case "50":
+				
+				System.out.println("Entrou 50");
 				/**
 				 * 50_DESCONTOS do guia Telecom padrão FEBRABAN-V3R0
 				 * Detalhamento dos descontos concedidos
@@ -1155,51 +1151,34 @@ public class LeitorFebrabanV3 {
 				 * Marcação de Fim String descMarcaFim(data.substring(349, 350);
 				 */
 
-				descontos.setCategoriadesconto(categoriaDesconto);
-				categoriaDescontoLista.add(categoriaDesconto);
-				descontos.setResumo(resumo);
-				descontosLista.add(descontos);
-				faturaArquivoDTO.setCategoriaDescontos(categoriaDescontoLista);
-				faturaArquivoDTO.setDescontos(descontosLista);
+				descontos.setFatura(fatura);
+				
+				String verificaCategoriaD = data.substring(101, 126);
+				
+				Categoriadesconto desconto = categoriaDescontoLista.stream()
+						.filter(catDesc -> catDesc != null
+								&& catDesc.getDescricao().equals(verificaCategoriaD))
+						.findFirst().orElse(null);
 
-				/*
-				 * DESCONTO A SER IMPLEMENTADO POR FALTA DE INFORMATIVOS PARA
-				 * TESTE
-				 * 
-				 * 
-				 * if (r.getNumRecurso().equals(data.substring(83, 99))) {
-				 * servicos.setResumo(r); if (categoriaChamadaLista.isEmpty()) {
-				 * categoriaServicoLista.add(categoriaServico);
-				 * servicos.setCategoriaservico(categoriaServico);
-				 * servicosLista.add(servicos);
-				 * faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
-				 * faturaArquivoDTO.setServicos(servicosLista);
-				 * 
-				 * } else {
-				 * 
-				 * String verificaCategoria = data.substring(154, 179);
-				 * 
-				 * try { Categoriaservico serve = categoriaServicoLista.stream()
-				 * .filter(x -> x != null &&
-				 * x.getDescricao().equals(verificaCategoria))
-				 * .findFirst().orElse(null);
-				 * 
-				 * if (serve != null) {
-				 * servicos.setCategoriaservico(categoriaServico);
-				 * servicosLista.add(servicos);
-				 * faturaArquivoDTO.setServicos(servicosLista); } else {
-				 * categoriaServicoLista.add(categoriaServico);
-				 * servicos.setCategoriaservico(categoriaServico);
-				 * servicosLista.add(servicos);
-				 * faturaArquivoDTO.setCategoriaServicos(categoriaServicoLista);
-				 * faturaArquivoDTO.setServicos(servicosLista); }
-				 * 
-				 * } catch (Exception e) { e.printStackTrace(); } ; } ; } ; } ;
-				 */
-
+				if (desconto != null) {
+					descontos.setCategoriadesconto(desconto);
+					descontosLista.add(descontos);
+					faturaArquivoDTO.setDescontos(descontosLista);
+				} else {
+					categoriaDescontoLista.add(categoriaDesconto);
+					faturaArquivoDTO.setCategoriaDescontos(categoriaDescontoLista);
+					descontos.setCategoriadesconto(categoriaDesconto);
+					descontosLista.add(descontos);
+					faturaArquivoDTO.setDescontos(descontosLista);
+				};
+				if (desconto != null)
+				System.out.println(" OU :" + verificaCategoriaD + " EI" + desconto.getDescricao());
+				System.out.println("Passou 50");
 				break;
 
 			case "60":
+				
+				System.out.println("Entrou 60");
 				/**
 				 * 60_PLANOS do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
 				 * dos planos faturados
@@ -1395,7 +1374,6 @@ public class LeitorFebrabanV3 {
 					if (plano != null) {
 						planos.setCategoriaplano(plano);
 						planosLista.add(planos);
-						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
 						faturaArquivoDTO.setPlanos(planosLista);
 					} else {
 						planos.setCategoriaplano(categoriaPlano);
@@ -1404,6 +1382,7 @@ public class LeitorFebrabanV3 {
 						faturaArquivoDTO.setCategoriaPlano(categoriaPlanoLista);
 						faturaArquivoDTO.setPlanos(planosLista);
 					}
+										
 				
 				/*			for (Resumo r : resumoLista) {
 					if (r.getNumRecurso().equals(data.substring(78, 94).trim())) {
@@ -1447,10 +1426,11 @@ public class LeitorFebrabanV3 {
 						}
 						
 						;*/
-				
+					System.out.println("Passou 60");
 				break;
 
 			case "70":
+				System.out.println("Entrou 70");
 				/**
 				 * 70_AJUSTES do guia Telecom padrão FEBRABAN-V3R0 Detalhamento
 				 * dos ajustes financeiros de movimentos anteriores
@@ -1608,10 +1588,11 @@ public class LeitorFebrabanV3 {
 
 				}
 				;*/
-
+					System.out.println("Passou 70");
 				break;
 
 			case "80":
+				System.out.println("Entrou 80");
 				/**
 				 * 80_NF do guia Telecom padrão FEBRABAN-V3R0 Totalizador por
 				 * nota fiscal apresentada
@@ -1673,12 +1654,16 @@ public class LeitorFebrabanV3 {
 				notaFiscal.setFatura(fatura);
 				notaFiscalLista.add(notaFiscal);
 				faturaArquivoDTO.setNotaFiscal(notaFiscalLista);
+				
+				System.out.println("Passou 80");
 				break;
 
 			case "90":
+				System.out.println(">>>>>Entrou 90<<<<<");
 				break;
 
 			case "99":
+				System.out.println("Entrou 99");
 				/**
 				 * 99_TRAILLER do guia Telecom padrão FEBRABAN-V3R0 Consolidação
 				 * de valores da conta faturada
@@ -1835,6 +1820,7 @@ public class LeitorFebrabanV3 {
 				trailler.setFatura(fatura);
 				traillerLista.add(trailler);
 				faturaArquivoDTO.setTrailler(traillerLista);
+				System.out.println("Passou 99");
 				break;
 			}
 

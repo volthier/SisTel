@@ -25,32 +25,21 @@
 					</a>
 				</div>
 
-
-
-				<!-- <div class="alert alert-warning col-md-12"
-					th:if="${erroUnidade}!=null" role="alert">
-					<div th:each="user : ${erroUnidade}" class="row">
-						<a class="alert-link col-md-offset-2"
-							th:text="|Unidade de registro estão diferentes: ${user.nomeUsuario}"
-							th:href="@{/usuarios/{id}(id=${user.idUsuario})}" title="Editar"
-							rel="tooltip" data-placement="auto"></a>
-
-					</div>
-
-				</div> -->
-
-
-
 				<div class="col-md-12 panel padding-0">
 					<div class="painel-body bg-panel padding-7 tabela">
 						<div class="form-group">
 							<label id="fatura" for="status" class="col-sm-2 control-label">Fatura</label>
 							<div class="col-sm-6">
-								<select class="form-control" name="fatura">
+<!-- 								<select class="form-control" name="fatura">
 									<option th:each="fatura : ${faturasNaoGeradas}"
 										th:value="${fatura.idFatura}"
 										th:text="${fatura.numFatura} +  ' - ' + ${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)} + ' - '+ ${fatura.cliente.operadora.nome}" />
-								</select>
+								</select> -->
+								
+								<th:block th:each="fatura : ${faturasNaoGeradas}">
+								<input type="checkbox" name="fatura" th:value="${fatura.idFatura}"/>
+								<label th:text="${fatura.numFatura} +  ' - ' + ${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)} + ' - '+ ${fatura.cliente.operadora.nome}" ></label>
+								</th:block>
 							</div>
 
 						</div>

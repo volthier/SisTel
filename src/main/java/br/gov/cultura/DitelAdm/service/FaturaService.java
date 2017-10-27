@@ -147,7 +147,9 @@ public class FaturaService {
 	public void salvarTrailler(FaturaArquivoDTO faturaArquivoDTO){
 		traillers.save(faturaArquivoDTO.getTrailler());
 	}
-	
+	public Fatura salvarFaturaGerada(Fatura fatura){
+		return faturas.saveAndFlush(fatura);
+	}
 	public List<Fatura> getFaturas() {
 		return faturas.findAll();
 	}

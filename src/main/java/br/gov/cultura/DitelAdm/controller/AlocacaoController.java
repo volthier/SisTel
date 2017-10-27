@@ -118,6 +118,7 @@ public class AlocacaoController {
 		return mv;
 	}
 	
+	
 	@RequestMapping("/lista-alocacoes")
 	public ModelAndView listar(@ModelAttribute("filtro") FiltroPesquisa filtro) throws RemoteException{
 		ModelAndView mv = new ModelAndView("AlocacaoListar");
@@ -135,7 +136,7 @@ public class AlocacaoController {
 					System.out.println(e + "Erro de tempo de espera da conexão da verificação de documentos!!!");
 					e.printStackTrace();
 				} catch (InterruptedException e) {
-					System.out.println(e + " Erro de interrupção de conexão da verificação de documentos");// TODO Auto-generated catch block
+					System.out.println(e + " Erro de interrupção de conexão da verificação de documentos");
 					e.printStackTrace();
 				}
 			});

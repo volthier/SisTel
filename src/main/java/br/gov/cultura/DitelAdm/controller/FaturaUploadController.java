@@ -100,8 +100,13 @@ public class FaturaUploadController {
 				faturaService.salvarServicos(faturaArquivoDTO);
 				faturaService.salvarCategoriasDescontos(faturaArquivoDTO);
 				faturaService.salvarDescontos(faturaArquivoDTO);
+				
+				if(faturaArquivoDTO.getCategoriaPlano() != null)
 				faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
+				
+				if(faturaArquivoDTO.getPlanos() !=null)
 				faturaService.SalvarPlanos(faturaArquivoDTO);
+				
 				faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
 				faturaService.salvarAjustes(faturaArquivoDTO);
 				faturaService.salvarNotaFiscal(faturaArquivoDTO);
