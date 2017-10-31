@@ -33,7 +33,7 @@ public class DitelAdmApplication extends SpringBootServletInitializer {
 		
 		@Bean
 		CommandLineRunner init(SeiClient client) {
-			return (args) -> {
+			return args -> {
 				if(!Files.exists(Paths.get(FaturaUploadController.ROOT), LinkOption.NOFOLLOW_LINKS))
 					Files.createDirectory(Paths.get(FaturaUploadController.ROOT));
 			};

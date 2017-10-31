@@ -285,14 +285,14 @@ table td[class*="col-"], table th[class*="col-"] {
 	
 	<div th:each="fat : ${fatura}">
 	 <h4 th:text="| Detalhamento da linha ${fat.alocacao.linha.numeroLinha}"></h4>
-	 <table>
+	 <table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'}">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
 			</tr>
 		</tbody>
 	</table>
-	<table class="table table-dotted">
+	<table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'}" class="table table-dotted">
 		<thead>
 			<tr>
 				<th>Descri&ccedil;&atilde;o</th>
@@ -315,14 +315,14 @@ table td[class*="col-"], table th[class*="col-"] {
 		</tbody>
 	</table>
 
-	<table th:if="${fat.chamadas !=null }">
+	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" >
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Liga&ccedil;&otilde;es</td>
 			</tr>
 		</tbody>
 	</table>
-	<table border="0" cellpadding="10" cellspacing="10" class="table">
+	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" border="0" cellpadding="10" cellspacing="10" class="table">
 		<thead>
 			<tr>
 				<th>Data</th>
@@ -353,13 +353,13 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${fat.chamadas != null}" class="borda-redonda-foot">
+	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" class="borda-redonda-foot">
 		<tbody>
 			<tr>
 				<td colspan="4"><b>Sub Total</b></td>
-		<!-- 		<td style="text-align: center;"> <b><span th:text="${#dates.format(fat.totalHorasChamadas, 'HH:mm:ss')}">aqui</span></b></td> -->
+		 		<td style="text-align: center;"> <b><span th:text="${#dates.format(fat.totalHorasChamadas, 'HH:mm:ss')}">aqui</span></b></td>
 				<td colspan="2"></td>
-			<!-- 	<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(fat.chamadas.![valLigImp]),0,2)}">ali</span></b></td> -->
+			<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(fat.chamadas.![valLigImp]),0,2)}">ali</span></b></td>
 			</tr>
 		</tbody>
 	</table>
@@ -378,7 +378,7 @@ table td[class*="col-"], table th[class*="col-"] {
 					<td style="text-align: center;"><b>Valor Cobrado (R$)</b></td>
 				</tr>
 			</thead>
-			<!-- <tbody>
+			<tbody>
 				<tr th:each="servico : ${fat.servicosCategoria}">
 					<td th:text="${servico.categoria.descricao}"></td>
 					<td style="text-align: center;" th:text="${servico.quantidade}"></td>
@@ -389,8 +389,17 @@ table td[class*="col-"], table th[class*="col-"] {
 					<td style="text-align: center;"
 						th:text="${#numbers.formatDecimal(servico.valorCobrado,1,2)}"></td>
 				</tr>
-			</tbody> -->
+			</tbody>
 		</table>
+			<table th:if="${fat.servicosCategoria != null and !fat.servicosCategoria.isEmpty()}" class="borda-redonda-foot">
+		<tbody>
+			<tr>
+				<td colspan="4"><b>Sub Total</b></td>
+		 		
+			<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(fat.servicosCategoria.![valorCobrado]),0,2)}">ali</span></b></td>
+			</tr>
+		</tbody>
+	</table>
 	</div>
 	</div>
 	<p>&nbsp;</p>
