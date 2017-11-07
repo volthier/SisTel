@@ -4,22 +4,17 @@ import java.io.ByteArrayOutputStream;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -125,42 +120,46 @@ public class FaturaController {
 
 		List<AlocacaoFatura> alocacoesFaturas = new ArrayList<AlocacaoFatura>();
 		List<Fatura> faturaLista = new ArrayList<Fatura>();
-		for (int count = 0; count < idFatura.length; count++) {
+		List<Usuario> usuarioLista = usuarioService.getIdUsuario();
 
-			Fatura fatura = faturaService.getFatura(idFatura[count]);
-			List<Planos> planosLista = new ArrayList<Planos>(fatura.getPlanoses());
-			List<Resumo> resumosLista = new ArrayList<Resumo>(fatura.getResumos());
-			List<Servicos> servicosLista = new ArrayList<Servicos>(fatura.getServicoses());
-			List<Chamadas> chamadasLista = new ArrayList<Chamadas>(fatura.getChamadases());
-			List<Usuario> usuarioLista = usuarioService.getIdUsuario();
-			
-			List<Alocacao> alocacaoListaUsuario = new ArrayList<Alocacao>();
-			
-			List<Planos> planosVinculados = new ArrayList<Planos>();
-			List<Servicos> servicosVinculados = new ArrayList<Servicos>();
-			List<Chamadas> chamadasVinculados = new ArrayList<Chamadas>();
-			List<Resumo> resumoVinculados = new ArrayList<Resumo>();
-			List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
-			ServicosCategoria servicoCategoria = null;
-			List<FaturaArquivoDTO> faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
-			FaturaArquivoDTO faturaDTO = new FaturaArquivoDTO();
+		List<Alocacao> alocacaoListaUsuario = new ArrayList<>();
 
-			int i, not;
+		List<Planos> planosVinculados = new ArrayList<Planos>();
+		List<Servicos> servicosVinculados = new ArrayList<Servicos>();
+		List<Chamadas> chamadasVinculados = new ArrayList<Chamadas>();
+		List<Resumo> resumoVinculados = new ArrayList<Resumo>();
+		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
+		ServicosCategoria servicoCategoria = null;
+		List<FaturaArquivoDTO> faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
+		FaturaArquivoDTO faturaDTO = new FaturaArquivoDTO();
 
-			not = 0;
+		int i, not;
+		int usercounter = 0;
 
-			while (usuarioLista.size() != 0) {
-					for (Usuario usuario : usuarioLista) {
-						faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
-						AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
-						List<Alocacao> alocacaoRepasse = new ArrayList<Alocacao>();
-						cal.setValorTotalAtesto(0);
-						alocacaoListaUsuario = alocacaoService.getAlocacoesUsuario(usuario);
-						usuarioLista.remove(usuario);
+		not = 0;
 
-						if (!alocacaoListaUsuario.isEmpty()) {
+		while (usuarioLista.size() != 0 && usercounter != usuarioLista.size()) {
+			if (usuarioLista.size() != 0 && usercounter != usuarioLista.size()) {
+				for (Usuario usuario : usuarioLista) {
+					System.out.println(usuario.getNomeUsuario());
+					
+					faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
+					AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
+					List<Alocacao> alocacaoRepasse = new ArrayList<Alocacao>();
+					cal.setValorTotalAtesto(0);
+					
+					alocacaoListaUsuario = alocacaoService.getAlocacoesUsuario(usuario);
+					//usuarioLista.remove(usuario);
+					usercounter++;
+					if (!alocacaoListaUsuario.isEmpty()) {
 
-							LimiteAtesto limiteAtesto = usuario.getLimiteAtesto();
+						for (int count = 0; count < idFatura.length; count++) {
+
+							Fatura fatura = faturaService.getFatura(idFatura[count]);
+							List<Planos> planosLista = new ArrayList<Planos>(fatura.getPlanoses());
+							List<Resumo> resumosLista = new ArrayList<Resumo>(fatura.getResumos());
+							List<Servicos> servicosLista = new ArrayList<Servicos>(fatura.getServicoses());
+							List<Chamadas> chamadasLista = new ArrayList<Chamadas>(fatura.getChamadases());
 
 							for (Alocacao alocacao : alocacaoListaUsuario) {
 
@@ -225,34 +224,40 @@ public class FaturaController {
 									valorPlano = true;
 									for (Planos plano : planosLista) {
 										if (alocacao.getLinha().equals(plano.getLinha())) {
-											
+
 											LocalDate alRecebimento, dataInicio, dataFim, alDevolucao;
 											alDevolucao = null;
 
 											dataInicio = LocalDate.parse(plano.getDataIniCiclo().toString());
 											dataFim = LocalDate.parse(plano.getDataFimCiclo().toString());
-											alRecebimento = LocalDate.parse(alocacao.getDtRecebido().toString().substring(0,10));
-											
+											alRecebimento = LocalDate
+													.parse(alocacao.getDtRecebido().toString().substring(0, 10));
+
 											if (alocacao.getDtDevolucao() != null) {
-												alDevolucao = LocalDate.parse(alocacao.getDtDevolucao().toString().substring(0,10));
+												alDevolucao = LocalDate
+														.parse(alocacao.getDtDevolucao().toString().substring(0, 10));
 											}
-											
-											if ((dataInicio.compareTo(alRecebimento) > 0 || dataInicio.compareTo(alRecebimento) == 0)
-												&& (dataFim.compareTo(alRecebimento) > 0 || dataFim.compareTo(alRecebimento) == 0)){
+
+											if ((dataInicio.compareTo(alRecebimento) > 0
+													|| dataInicio.compareTo(alRecebimento) == 0)
+													&& (dataFim.compareTo(alRecebimento) > 0
+															|| dataFim.compareTo(alRecebimento) == 0)) {
 
 												if (alocacao.getDtDevolucao() != null) {
-													if ((dataInicio.compareTo(alDevolucao) < 0 || dataInicio.compareTo(alDevolucao) == 0)
-														&& (dataInicio.compareTo(alDevolucao) < 0 || dataInicio.compareTo(alDevolucao) == 0)){
-														
+													if ((dataInicio.compareTo(alDevolucao) < 0
+															|| dataInicio.compareTo(alDevolucao) == 0)
+															&& (dataInicio.compareTo(alDevolucao) < 0
+																	|| dataInicio.compareTo(alDevolucao) == 0)) {
+
 														planosVinculados.add(plano);
 													}
 
 												} else if (alocacao.getDtDevolucao() == null) {
 													planosVinculados.add(plano);
 												}
-											} else if (((alRecebimento == dataInicio) || (alDevolucao == dataInicio)) 
+											} else if (((alRecebimento == dataInicio) || (alDevolucao == dataInicio))
 													|| ((alRecebimento == dataFim) || (alDevolucao == dataFim))) {
-												
+
 												planosVinculados.add(plano);
 											}
 										}
@@ -274,11 +279,14 @@ public class FaturaController {
 								if (planosVinculados.size() != 0) {
 									faturaDTO.setPlanos(planosVinculados);
 								}
-								
+
 								if (Validador == true) {
 									System.out.println("Existe Chamadas: Sim");
 
 									for (Chamadas chamada : chamadasLista) {
+										if(chamada.getNumRecursoChamada().equals("6120242059")){
+											System.out.println("Aqui esta");
+										}
 										++i;
 										if (alocacao.getLinha().equals(chamada.getLinha())) {
 
@@ -298,13 +306,11 @@ public class FaturaController {
 														alocacao.getDtDevolucao().toInstant(), ZoneId.of("GMT-3"));
 											}
 
-											if (data.compareTo(alRecebimento) > 0
-													|| data.compareTo(alRecebimento) == 0) {
+											if (data.compareTo(alRecebimento) > 0 || data.compareTo(alRecebimento) == 0) {
 
 												if (alocacao.getDtDevolucao() != null) {
 
-													if (data.compareTo(alDevolucao) < 0
-															|| data.compareTo(alDevolucao) == 0) {
+													if (data.compareTo(alDevolucao) < 0	|| data.compareTo(alDevolucao) == 0) {
 
 														chamadasVinculados.add(chamada);
 														if (cal.getDataA() == null) {
@@ -335,7 +341,7 @@ public class FaturaController {
 												}
 											}
 										}
-									} 
+									}
 								}
 								cal.setResultadoF(0);
 
@@ -358,7 +364,7 @@ public class FaturaController {
 												&& p.getLinha().getNumeroLinha().trim() == alocacao.getLinha()
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
-								
+
 								if (Validador == true) {
 									valorPlano = false;
 									System.out.println("Existe resumo: Sim");
@@ -370,7 +376,8 @@ public class FaturaController {
 									}
 									;
 
-									if (!(resumoVinculados.isEmpty())) {
+									if (!resumoVinculados.isEmpty()
+											&& !alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
 										if (resumoVinculados.get(0).getDataDesativ() != null) {
 											long diasTotal = ((planosVinculados.get(0).getDataFimCiclo().getTime()
 													- planosVinculados.get(0).getDataIniCiclo().getTime() + 3600000)
@@ -382,11 +389,11 @@ public class FaturaController {
 
 											cal.setResultadoF((valor / diasTotal) * diasUtilizado);
 
-										} else {
+										} else if (!alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
 											cal.setResultadoF(4.9f);
 
 										}
-									} else {
+									} else if (!alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
 										cal.setResultadoF(4.9f);
 									}
 								}
@@ -519,7 +526,7 @@ public class FaturaController {
 								;
 
 								/* Calculador de Totais */
-								if(valorPlano == true && cal.getResultadoF()==0){
+								if (valorPlano == true && cal.getResultadoF() == 0) {
 									cal.setResultadoF(4.9f);
 								}
 								float valorTotal = this.valorTotal(chamadasVinculados, servicosVinculados,
@@ -527,6 +534,10 @@ public class FaturaController {
 
 								faturaDTO.setValorContratoPlano(cal.getResultadoF());
 								cal.setFloatA(cal.getResultadoF());
+
+								if (alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
+									cal.setDoubleA(valorTotal);
+								}
 
 								faturaDTO.setValorTotal(valorTotal);
 								cal.setFloatB(valorTotal);
@@ -570,28 +581,39 @@ public class FaturaController {
 								servicosVinculados = new ArrayList<Servicos>();
 							}
 
-							/*
-							 * TODO >>>> REFATORAR VALIDADOR DE RESSARCIMENTO e
-							 * ATESTO
-							 */
-							/* ATESTOS E ENVIO PARA O SEI FATURA GERADA */
+							fatura.setGerada(true);
+							faturaService.salvarFaturaGerada(fatura);
+						}
+						/*
+						 * TODO >>>> REFATORAR VALIDADOR DE RESSARCIMENTO e
+						 * ATESTO
+						 */
+						/* ATESTOS E ENVIO PARA O SEI FATURA GERADA */
 
-							
-							if(faturaDTOLista.size() !=0){
-								
-							if (cal.getValorTotalAtesto() > limiteAtesto.getValorLimite()) {
+						if (faturaDTOLista.size() != 0) {
+
+							for (FaturaArquivoDTO fat : faturaDTOLista) {
+								cal.setResultadoD(cal.getResultadoD() + fat.getValorTotal());
+							}
+
+							if ((cal.getResultadoD() - cal.getDoubleA()) > usuario.getLimiteAtesto().getValorLimite()) {
 
 								for (AlocacaoFatura alocacaoFaturaRessarcimento : alocacoesFaturas) {
-									alocacaoFaturaRessarcimento.setRessarcimento(true);
-									alocacaoService.salvar(alocacaoFaturaRessarcimento);
-									cal = new CalculadorDTO();
+									if (!alocacaoFaturaRessarcimento.getAlocacao().getDispositivo().getTipoDispositivo()
+											.equals("Fixo")) {
+										alocacaoFaturaRessarcimento.setRessarcimento(true);
+										alocacaoService.salvar(alocacaoFaturaRessarcimento);
+										cal = new CalculadorDTO();
+									} else {
+										alocacaoFaturaRessarcimento.setRessarcimento(false);
+										alocacaoService.salvar(alocacaoFaturaRessarcimento);
+										cal = new CalculadorDTO();
+									}
 								}
-
-								// sei.enviarMemorando(alocacaoRepasse,
-								// gerarMemorando(request));
+								sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
 								alocacaoFatura.setDocumentoSei(sei.enviarFaturasCompostas(alocacaoRepasse,
 										gerarPdfFaturaComposta(faturaDTOLista, request)));
-								// mailer.enviarAtestoFatura(faturaDTOLista);
+								mailer.enviarAtestoFatura(faturaDTOLista);
 								servicosPorCategoria = new ArrayList<ServicosCategoria>();
 
 							} else {
@@ -603,29 +625,35 @@ public class FaturaController {
 
 								}
 
-								// sei.enviarMemorando(alocacaoRepasse,
-								// gerarMemorando(request));
+								sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
 								alocacaoFatura.setDocumentoSei(sei.enviarFaturasCompostas(alocacaoRepasse,
 										gerarPdfFaturaComposta(faturaDTOLista, request)));
-								// mailer.enviarAtestoFatura(faturaDTOLista);
+								mailer.enviarAtestoFatura(faturaDTOLista);
 								servicosPorCategoria = new ArrayList<ServicosCategoria>();
 
 							}
 						}
-						}
+
+						cal.setDoubleA(0);
+					
 						if (usuarioLista.size() == 0) {
 
 							break;
-				}
+						}
 					}
+					if (usuarioLista.size() == 0) {
+
+						break;
+					}
+					if(usercounter >= usuarioLista.size()){
+						break;
+					}
+				}
 			}
-			fatura.setGerada(true);
-			faturaService.salvarFaturaGerada(fatura);
 		}
-		
 		mv.addObject("alocacoesSei", alocacoesFaturas);
 		mv.addObject("fatura", faturaLista);
-		
+
 		return mv;
 	}
 

@@ -69,17 +69,17 @@
 	});
 
 /*APLICA A MÁSCARA NO CADASTRO*/	
-	var SPMaskBehavior = function(val) {
-		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000'
-				: '(00) 0000-00009';
-	}, spOptions = {
-		onKeyPress : function(val, e, field, options) {
-			field.mask(SPMaskBehavior.apply({}, arguments), options);
+	var SPMaskBehavior = function (val) {
+		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+		},
+		spOptions = {
+		onKeyPress: function(val, e, field, options) {
+		field.mask(SPMaskBehavior.apply({}, arguments), options);
 		}
-	};
+		};
 
+		$('.mask_celphones').mask(SPMaskBehavior, spOptions);
 	
-
 	$('.numTable').focusout(function() {
 		var phone, element;
 		element = $(this);
