@@ -12,8 +12,8 @@
 	<p th:inline="text" align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eu,
 		<b>[[${dto.usuario.nomeUsuario}]]</b>, portador do CPF:
 		<b>[[${dto.usuario.cpfUsuario}]]</b>, ocupante do cargo de 
-		<b>[[${dto.usuario.cargoUsuario}]]</b>, lotado (a) no (a) GM no Ministério da Cultura, DAS
-		<b>[[${dto.usuario.limiteAtesto.dasAtesto}]]</b>, declaro para os devidos fins que sou responsável pelo bem patrimonial como datado abaixo relacionado, que se encontra em perfeitas condições de uso e funcionamento, e comprometo-me a zelar pela sua boa utilização e conservação, ciente de que:
+		<b>[[${dto.usuario.cargoUsuario}]]</b>, lotado (a) no (a) <b>[[${dto.usuario.descricaoUsuario}]]</b> , DAS
+		<b>[[${dto.usuario.limiteAtesto.dasAtesto}]]</b>, declaro para os devidos fins que sou responsável pelo bem patrimonial comodatado abaixo relacionado, que se encontra em perfeitas condições de uso e funcionamento, e comprometo-me a zelar pela sua boa utilização e conservação, ciente de que:
     </p>
 
 
@@ -23,7 +23,7 @@
         </li>
 		<br></br>
 
-		<li style="text-align: justify">Declaro conhecer o inteiro teor da Norma Operacional n° 001, de 18/07/2013, cominado com o Memorando –Circular nº 11/SE/MinC, de 21/02/2013 (anexos), do Ministério da Cultura, que fixa valores limites para custeio de despesas de telefonia móvel, responsabilizando-me integralmente pelos valores excedentes a esses limites (<a href=""><i>Norma disponível na intranet no link Normas e tarifas da Telefonia Móvel do MinC</i></a>);
+		<li style="text-align: justify">Declaro conhecer o inteiro teor da Norma Operacional n° 001, de 18/07/2013, cominado com o Memorando Circular nº 11/SE/MinC, de 21/02/2013 (anexos), do Ministério da Cultura, que fixa valores limites para custeio de despesas de telefonia móvel, responsabilizando-me integralmente pelos valores excedentes a esses limites (<a href=""><i>Norma disponível na intranet no link Normas e tarifas da Telefonia Móvel do MinC</i></a>);
         </li>
 		<br></br>
 
@@ -52,7 +52,7 @@
 				<b>IMEI</b><i><span th:text="${dto.dispositivo.imeiDispositivo}">0000000000000000</span></i>,
 				1 carregador, 1 cabo USB, 1 fone de ouvido. 1 Chip tipo <span
 				th:text="${dto.chip.tipoChip}"> simcard</span>, numero de serie <span
-				th:text="${dto.chip.numeroSerieChip}">9809</span> Linha: <span
+				th:text="${dto.chip.numeroSerieChip}">9809</span> Linha: <span class="numTable"
 				th:text="${dto.linha.numeroLinha}">0000000000000000</span>.
 			</b>
 		</p>
@@ -86,6 +86,30 @@
 		</p>
 
 	</span>
+	
+		<span th:if="${dto.dispositivo !=null and dto.chip == null}">
+		<p style="margin-left: 7%" align="justify">
+			<b>1 aparelho telefônico marca: <span
+				th:text="${dto.dispositivo.marcaDispositivo}">XXXXX</span>, modelo:
+				<span th:text="${dto.dispositivo.modeloDispositivo}">XXXX</span>,
+				<b>Numero de Serie:</b><i><span th:text="${dto.dispositivo.numeroSerieDispositivo}">0000000000000000</span></i>,
+				<b>Patrimônio:</b><i><span th:text="${dto.dispositivo.patrimonioDispositivo}">0000000000000000</span></i> e
+				Linha: <span class="numTable"
+				th:text="${dto.linha.numeroLinha}">0000000000000000</span>.
+			</b>
+		</p>
 
+		<p style="margin-left: 7%">
+			<b>VALOR DO BEM: R$ <span
+				th:text="${#numbers.formatDecimal(dto.dispositivo.valorDispositivo,0,2,'COMMA')}">000,0(XXXXXXXXXXXXXXXXXXXXXX)</span>.
+			</b>
+		</p> <br></br>
+
+		<p style="border: solid" align="justify">
+			DECLARO QUE CONFERI O APARELHO ACIMA ESPECIFICADO E O MESMO
+			ENCONTRA-SE EM PERFEITAS CONDIÇÕES DE USO, NÃO APRESENTANDO DEFEITOS
+			OU AVARIAS DE QUALQUER NATUREZA.<br></br>
+		</p> <br></br>
+	</span>
 </body>
 </html>

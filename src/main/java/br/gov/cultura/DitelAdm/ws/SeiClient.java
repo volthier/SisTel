@@ -195,8 +195,6 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-		//Thread.sleep(5000);
-
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));

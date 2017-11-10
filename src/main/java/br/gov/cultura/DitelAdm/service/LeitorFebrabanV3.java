@@ -110,7 +110,6 @@ public class LeitorFebrabanV3 {
 				try {
 					fatura.setDataEmissao(sdf.parse(data.substring(39, 47)));
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -129,7 +128,6 @@ public class LeitorFebrabanV3 {
 				try {
 					fatura.setDataVenc(sdf.parse(data.substring(61, 69)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -264,7 +262,6 @@ public class LeitorFebrabanV3 {
 					}
 
 				} catch (Exception e) {
-					// TODO: handle exception
 					System.err.println("Erro na verificação de linha registrada na fatura: " + numero+" - "+ e);
 				}
 
@@ -293,8 +290,8 @@ public class LeitorFebrabanV3 {
 				try {
 					resumo.setDataAtiv(sdf.parse(data.substring(103, 111)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.err.println("Erro em resumo data vazia");
 				}
 				String i = "";
 				i = data.substring(111, 119);
@@ -305,7 +302,6 @@ public class LeitorFebrabanV3 {
 					try {
 						resumo.setDataDesativ(sdf.parse(data.substring(111, 119)));
 					} catch (ParseException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -345,7 +341,6 @@ public class LeitorFebrabanV3 {
 				try {
 					resumo.setDataVenc(sdf.parse(data.substring(202, 210)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -563,7 +558,6 @@ public class LeitorFebrabanV3 {
 				try {
 					chamadas.setDataLigacao(sdf.parse(data.substring(99, 107)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -833,7 +827,6 @@ public class LeitorFebrabanV3 {
 				try {
 					chamadas.setDataLigacao(sdf.parse(data.substring(99, 107)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -843,7 +836,6 @@ public class LeitorFebrabanV3 {
 				try {
 					servicos.setDataServico(sdf.parse(data.substring(99, 107)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -884,7 +876,6 @@ public class LeitorFebrabanV3 {
 				try {
 					servicos.setHoraServico(sdfh.parse(data.substring(142, 148)));
 				} catch (ParseException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 
@@ -1103,7 +1094,6 @@ public class LeitorFebrabanV3 {
 				try {
 					descontos.setDataInicio(sdf.parse(data.substring(171, 179)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -1114,7 +1104,6 @@ public class LeitorFebrabanV3 {
 				try {
 					descontos.setHoraInicio(sdfh.parse(data.substring(179, 185)));
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -1125,7 +1114,6 @@ public class LeitorFebrabanV3 {
 				try {
 					descontos.setDataFim(sdf.parse(data.substring(185, 193)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -1136,7 +1124,6 @@ public class LeitorFebrabanV3 {
 				try {
 					descontos.setHoraFim(sdfh.parse(data.substring(193, 199)));
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -1226,8 +1213,7 @@ public class LeitorFebrabanV3 {
 						}
 
 					} catch (Exception e) {
-						// TODO: handle exception
-						System.err.println("Erro na verificação de linha registrada na fatura: " + num+" - "+ e);
+						System.err.println("Erro na verificação de Planos da linha registrada na fatura: " + num+" - "+ e);
 					}
 
 					try {
@@ -1238,12 +1224,12 @@ public class LeitorFebrabanV3 {
 								planos.setLinha(linha);
 							} else {
 								planos.setLinha(null);
-								System.err.println("Numero não vinculado ao Sistema! - " + num);
+								System.err.println("Numero não vinculado ao Sistema! (Planos) - " + num);
 							}
 
 						}
 					} catch (Exception e) {
-						System.err.println(e + " Linha inexistente no base de dados!");
+						System.err.println(e + " Linha inexistente no base de dados! (Planos)");
 					}
 				 
 				 
@@ -1260,7 +1246,6 @@ public class LeitorFebrabanV3 {
 				try {
 					planos.setDataIniCiclo(sdf.parse(data.substring(95, 103)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -1271,7 +1256,6 @@ public class LeitorFebrabanV3 {
 				try {
 					planos.setDataFimCiclo(sdf.parse(data.substring(103, 111)));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 

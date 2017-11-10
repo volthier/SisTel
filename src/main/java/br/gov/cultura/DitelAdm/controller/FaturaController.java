@@ -141,7 +141,6 @@ public class FaturaController {
 		while (usuarioLista.size() != 0 && usercounter != usuarioLista.size()) {
 			if (usuarioLista.size() != 0 && usercounter != usuarioLista.size()) {
 				for (Usuario usuario : usuarioLista) {
-					System.out.println(usuario.getNomeUsuario());
 					
 					faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
 					AlocacaoFatura alocacaoFatura = new AlocacaoFatura();
@@ -149,8 +148,8 @@ public class FaturaController {
 					cal.setValorTotalAtesto(0);
 					
 					alocacaoListaUsuario = alocacaoService.getAlocacoesUsuario(usuario);
-					//usuarioLista.remove(usuario);
 					usercounter++;
+
 					if (!alocacaoListaUsuario.isEmpty()) {
 
 						for (int count = 0; count < idFatura.length; count++) {
@@ -165,14 +164,12 @@ public class FaturaController {
 
 								not = 0;
 
-								System.out.println("**Numero da Linha: " + alocacao.getLinha().getNumeroLinha());
 								Boolean Validador = planosLista.stream()
 										.filter(p -> p.getLinha() != null && p.getLinha().getNumeroLinha() != null
 												&& p.getLinha().getNumeroLinha().trim() == alocacao.getLinha()
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
 								if (Validador == false) {
-									System.out.println("Existe Plano: Não");
 									not += 1;
 								}
 								;
@@ -183,7 +180,6 @@ public class FaturaController {
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
 								if (Validador == false) {
-									System.out.println("Existe Serviço: Não");
 									not += 1;
 								}
 								;
@@ -194,7 +190,6 @@ public class FaturaController {
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
 								if (Validador == false) {
-									System.out.println("Existe chamada: Não");
 									not += 1;
 								}
 								;
@@ -205,7 +200,6 @@ public class FaturaController {
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
 								if (Validador == false) {
-									System.out.println("Existe resumo: Não");
 									not += 1;
 								}
 								;
@@ -217,10 +211,11 @@ public class FaturaController {
 												&& p.getLinha().getNumeroLinha().trim() == alocacao.getLinha()
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
+
 								boolean valorPlano = false;
+
 								if (Validador == true) {
 
-									System.out.println("Existe Plano: Sim");
 									valorPlano = true;
 									for (Planos plano : planosLista) {
 										if (alocacao.getLinha().equals(plano.getLinha())) {
@@ -281,12 +276,8 @@ public class FaturaController {
 								}
 
 								if (Validador == true) {
-									System.out.println("Existe Chamadas: Sim");
 
 									for (Chamadas chamada : chamadasLista) {
-										if(chamada.getNumRecursoChamada().equals("6120242059")){
-											System.out.println("Aqui esta");
-										}
 										++i;
 										if (alocacao.getLinha().equals(chamada.getLinha())) {
 
@@ -367,8 +358,7 @@ public class FaturaController {
 
 								if (Validador == true) {
 									valorPlano = false;
-									System.out.println("Existe resumo: Sim");
-
+									
 									for (Resumo resumo : resumosLista) {
 										if (alocacao.getLinha().equals(resumo.getLinha())) {
 											resumoVinculados.add(resumo);
@@ -412,8 +402,7 @@ public class FaturaController {
 														.getNumeroLinha().trim())
 										.findAny().isPresent();
 								if (Validador == true) {
-									System.out.println("Existe Serviço: Sim");
-
+									
 									for (Servicos servico : servicosLista) {
 
 										if (alocacao.getLinha().equals(servico.getLinha())) {
@@ -584,10 +573,7 @@ public class FaturaController {
 							fatura.setGerada(true);
 							faturaService.salvarFaturaGerada(fatura);
 						}
-						/*
-						 * TODO >>>> REFATORAR VALIDADOR DE RESSARCIMENTO e
-						 * ATESTO
-						 */
+
 						/* ATESTOS E ENVIO PARA O SEI FATURA GERADA */
 
 						if (faturaDTOLista.size() != 0) {
@@ -622,7 +608,6 @@ public class FaturaController {
 									alocacaoFaturaRessarcimento.setRessarcimento(false);
 									alocacaoService.salvar(alocacaoFaturaRessarcimento);
 									cal = new CalculadorDTO();
-
 								}
 
 								sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));

@@ -274,6 +274,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				<td th:if="${fat.alocacao.linha != null}" th:text="${fat.alocacao.linha.numeroLinha}">61 99999 9999&nbsp;</td>
 				<td th:if="${fat.planos != null}" th:text="${fat.planos[1].dataIniCicloFormatada()} + ' a ' + ${fat.planos[1].dataFimCicloFormatada()}">
 					22/01/2017</td>
+					<td th:if="${fat.planos == null}"> </td>
 				<td
 					th:text="| R$ ${#numbers.formatDecimal(fat.valorTotal,0,2,'COMMA')}">R$
 					&nbsp; 411,89</td>
