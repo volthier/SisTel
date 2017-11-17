@@ -1,0 +1,98 @@
+## DEVELOPMENT config
+## spring:
+##    devtools:
+##        livereload.enabled: true
+##
+## security
+##    user.role: debug
+##
+## logging
+##    level.org.org.springframework.web: debug
+##    level.org.hibernate.SQL: debug
+##    level.org.hibernate.type.descriptor.sql: trace
+##
+## End Development Options Configurations
+
+server:
+     context-path: /
+
+#THYMELEAF Config
+spring:
+
+  thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      mode: HTML5
+      encoding: UTF-8
+      content-type: text/html; charset=utf-8
+      cache: true
+
+#HIBERNATE Config      
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+  jta:
+    enabled: false
+
+#DataSource Config
+  datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://${ENVDB}:5432/dbditel
+      username: ${USERDB}
+      password: ${PASSDB}
+      test-on-connect: true
+      test-on-borrow: true
+      validation-query: SELECT 1
+      idle-timeout: 60
+      connection-timeout: 0
+
+#Limitador de Upload de Arquivos.
+multipart:
+    max-file-size: 15Mb
+    max-request-size: 15Mb  
+
+#LIQUIBASE Config MySql
+#liquibase:
+#      enabled: true
+#      change-log: classpath:/data/changelog/ChangeLogMaster.json
+#      check-change-log-location: true
+#      default-schema: dbditel
+#      url: jdbc:mysql://${ENVDB}:3306/dbditel
+#      user: admin
+#      password: admin
+
+#LIQUIBASE Config Postgres
+#liquibase:
+#      enabled: true
+#      check-change-log-location: true
+#      change-log: classpath:/data/changelog/db.changelog.xml
+#      default-schema: dbditel
+#      url: jdbc:postgresql://${ENVDB}:5432/dbditel
+#      user: ${USERDB}
+#      password: ${PASSDB}
+
+
+#SEI Config
+sei:
+   sistema: ${SEISISTEMA}
+   servico: ${SEISERVICO}
+
+#LDAP configurações
+ldap:
+   userDn: ${LDAPUSERDN}
+   passDn: ${LDAPPASS}
+   url: ${LDAPURL}
+   base: ${LDAPBASE}
+   user.search.filter: ${LDAPUSERSEARCHFILTER}
+   user.search.base: ${LDAPUSERSEARCHBASE}
+   clean: true
+#EMAIL
+email:
+    host: ${ENVMAILHOST}
+    port: ${ENVMAILPORT}
+    protocol: ${ENVMAILPROTOCOL}
+    smtp.aut: ${ENVSMTPAUTH}
+    tls.enable: ${ENVTLSENABLE}
+    debug: ${ENVMAILDEBUG}
+    timeout: ${ENVMAILTIMEOUT}
