@@ -3,7 +3,7 @@ services:
 
   #container2   
   db:
-    build: ./postgres/
+    build: ./docker/postgres/
 
     container_name: sistel_db
     
@@ -13,14 +13,14 @@ services:
       - "5432:5432"
     
     volumes: 
-      - /home/minc1/git/SisTel/src/main/resources/data:/var/www/project/sistel-db/data
+      - /src/main/resources/data:/var/www/project/sistel-db/data
 
     env_file:
-      - app-variables.env
+      - ./docker/postgres/db-variables.env
 
   #container1
   app:
-    build: ./app/
+    build: ./docker/app/
 
     container_name: sistel
 
@@ -33,7 +33,7 @@ services:
       - /var/sistel/log/:/opt/jboss/wildfly/standalone/log/
 
     env_file:
-      - app-variables.env
+      - ./docker/app/app-variables.env
 
     links:
       - "db"
