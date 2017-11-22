@@ -1,0 +1,40 @@
+version: '2'
+services:
+
+  #container2   
+  db:
+    build: ./docker/postgres/
+
+    container_name: sistel_db
+    
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    
+    volumes: 
+      - /src/main/resources/data:/var/www/project/sistel-db/data
+
+    env_file:
+      - ./docker/postgres/db-variables.env
+
+  #container1
+  app:
+    build: ./docker/app/
+
+    container_name: sistel
+
+    ports:
+      - "80:8080"
+
+    volumes: 
+      - /var/sistel/target/:/opt/jboss/wildfly/standalone/deployments/
+      - /var/sistel/upload-dir/:/opt/jboss/upload-dir/
+      - /var/sistel/log/:/opt/jboss/wildfly/standalone/log/
+
+    env_file:
+      - ./docker/app/app-variables.env
+
+    links:
+      - "db"
+
