@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.cultura.DitelAdm.model.Contrato;
 import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.ContratoService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @Controller
 @RequestMapping("/contratos")
@@ -24,10 +25,15 @@ public class ContratoController {
 	@Autowired
 	private ContratoService contratoService;
 	
+	@Autowired
+	private ConsultaLdapService ldap;
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Contrato());
+		ldap.usuarioInfos(mv);
+
 		return mv;
 	}
 
@@ -57,6 +63,8 @@ public class ContratoController {
 	public ModelAndView edicao(@PathVariable("id") Contrato contrato){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(contrato);
+		ldap.usuarioInfos(mv);
+
 		return mv;
 	}
 	

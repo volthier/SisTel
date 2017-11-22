@@ -31,7 +31,7 @@ public class Fatura implements java.io.Serializable {
 
 	private Integer idFatura;
 	private Cliente cliente;
-	private int numFatura;
+	private String numFatura;
 	private Date dataEmissao;
 	private String indConta;
 	private String mesRef;
@@ -72,7 +72,7 @@ public class Fatura implements java.io.Serializable {
 	public Fatura() {
 	}
 
-	public Fatura(Cliente cliente, int numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
+	public Fatura(Cliente cliente, String numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
 			String codCobranca, String descriCobranca, Date dataGeraArquivo, String versaoFormato) {
 		this.cliente = cliente;
 		this.numFatura = numFatura;
@@ -86,7 +86,7 @@ public class Fatura implements java.io.Serializable {
 		this.versaoFormato = versaoFormato;
 	}
 
-	public Fatura(Cliente cliente, int numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
+	public Fatura(Cliente cliente, String numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
 			String codBarra, String codCobranca, String descriCobranca, String bancoCobranca, String agenciaCobranca,
 			String ccCobranca, String fisco, Date dataGeraArquivo, String versaoFormato, String campoLivreOp,
 			Set<Trailler> traillers, Set<Enderecos> enderecoses, Set<Notafiscal> notafiscals, Set<Resumo> resumos, Set<Servicos> servicoses, Set<Chamadas> chamadases, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
@@ -142,11 +142,11 @@ public class Fatura implements java.io.Serializable {
 	}
 
 	@Column(name = "numFatura", nullable = false)
-	public int getNumFatura() {
+	public String getNumFatura() {
 		return this.numFatura;
 	}
 
-	public void setNumFatura(int numFatura) {
+	public void setNumFatura(String numFatura) {
 		this.numFatura = numFatura;
 	}
 

@@ -51,6 +51,7 @@ import br.gov.cultura.DitelAdm.service.FaturaService;
 import br.gov.cultura.DitelAdm.service.PlanoService;
 import br.gov.cultura.DitelAdm.service.ResumoService;
 import br.gov.cultura.DitelAdm.service.ServicoService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 
 /**
@@ -98,6 +99,9 @@ public class FaturaController {
 
 	@Autowired
 	private ViewResolver viewResolver;
+	
+	@Autowired
+	private ConsultaLdapService ldap;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody ModelAndView executarFatura() throws RemoteException {
@@ -107,6 +111,8 @@ public class FaturaController {
 		List<AlocacaoFatura> faturasGeradas = alocacaoService.getIdAlocacaoFatura();
 		mv.addObject("faturasNaoGeradas", faturasNaoGeradas);
 		mv.addObject("faturasGeradas", faturasGeradas);
+		
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 
@@ -336,18 +342,19 @@ public class FaturaController {
 								}
 								cal.setResultadoF(0);
 
-								if (chamadasVinculados.isEmpty() && (chamadasLista.size() == i)) {
+/*								if (chamadasVinculados.isEmpty() && (chamadasLista.size() == i)) {
 									chamadasVinculados = new ArrayList<Chamadas>();
 									chamadasVinculados.add(new Chamadas());
-								}
+								}*/
 
 								if (!chamadasVinculados.isEmpty()) {
 									chamadasVinculados.sort(Comparator.comparing(Chamadas::getDataLigacao)
 											.thenComparing(Chamadas::getHoraLigacao));
 								}
-
+								
+								if(!chamadasVinculados.isEmpty()){
 								faturaDTO.setChamadas(chamadasVinculados);
-
+								}
 								/* RESUMO */
 
 								Validador = resumosLista.stream()
@@ -638,6 +645,7 @@ public class FaturaController {
 		}
 		mv.addObject("alocacoesSei", alocacoesFaturas);
 		mv.addObject("fatura", faturaLista);
+		ldap.usuarioInfos(mv);
 
 		return mv;
 	}
@@ -794,7 +802,8 @@ public class FaturaController {
 		mv.addObject("planos", planosVinculados);
 		mv.addObject("planoData", planoDatas);
 		mv.addObject("servicos", servicosPorCategoria);
-
+		ldap.usuarioInfos(mv);
+		
 		return mv;
 	}
 

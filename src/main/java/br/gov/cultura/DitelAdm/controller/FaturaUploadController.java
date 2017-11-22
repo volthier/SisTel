@@ -23,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
 import br.gov.cultura.DitelAdm.service.FaturaService;
 import br.gov.cultura.DitelAdm.service.LeitorFebrabanV3;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @Controller
 public class FaturaUploadController {
@@ -38,6 +40,9 @@ public class FaturaUploadController {
 
 	@Autowired
 	private LeitorFebrabanV3 leitorFebrabanV3;
+	
+	@Autowired
+	private ConsultaLdapService ldap;
 
 	@Autowired
 	public FaturaUploadController(ResourceLoader resourceLoader) {
@@ -47,6 +52,8 @@ public class FaturaUploadController {
 	@RequestMapping(method = RequestMethod.GET, value = "/faturas/nova")
 	public String provideUploadInfo(Model model) throws IOException {
 
+		UsuarioLdap user = ldap.userInfoUploadFatura();
+		model.addAttribute("usuarioInfos",user);
 		model.addAttribute("files",
 				Files.walk(Paths.get(ROOT)).filter(path -> !path.equals(Paths.get(ROOT)))
 						.map(path -> Paths.get(ROOT).relativize(path))
@@ -95,13 +102,13 @@ public class FaturaUploadController {
 				faturaService.salvarServicos(faturaArquivoDTO);
 				faturaService.salvarCategoriasDescontos(faturaArquivoDTO);
 				faturaService.salvarDescontos(faturaArquivoDTO);
-				
-				if(faturaArquivoDTO.getCategoriaPlano() != null)
-				faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
-				
-				if(faturaArquivoDTO.getPlanos() !=null)
-				faturaService.SalvarPlanos(faturaArquivoDTO);
-				
+
+				if (faturaArquivoDTO.getCategoriaPlano() != null)
+					faturaService.salvarCategoriasPlanos(faturaArquivoDTO);
+
+				if (faturaArquivoDTO.getPlanos() != null)
+					faturaService.SalvarPlanos(faturaArquivoDTO);
+
 				faturaService.salvarCategoriasAjustes(faturaArquivoDTO);
 				faturaService.salvarAjustes(faturaArquivoDTO);
 				faturaService.salvarNotaFiscal(faturaArquivoDTO);

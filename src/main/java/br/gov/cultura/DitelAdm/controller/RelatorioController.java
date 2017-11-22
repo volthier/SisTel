@@ -20,6 +20,7 @@ import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.Unidade;
 
@@ -45,11 +46,15 @@ public class RelatorioController {
 	@Autowired
 	private AlocacaoService alocacaoservice;
 	
+	@Autowired
+	private ConsultaLdapService ldap;
+	
 	@RequestMapping
 	public ModelAndView relatorios(){
 		ModelAndView mv = new ModelAndView("Relatorio");
 		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
 		mv.addObject("lista",uni);	
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 	

@@ -73,7 +73,7 @@ public class AlocacaoController {
 	private CadastroCategoriaService cadastroCategoriaService;
 	
 	@Autowired
-	private ConsultaLdapService consultaLdapService;
+	private ConsultaLdapService ldap;
 	
 	@Autowired
 	private SeiClient sei;
@@ -86,7 +86,7 @@ public class AlocacaoController {
 		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
 		mv.addObject("listaUnidadeSei", uni);
 
-		List<UsuarioLdap> todosUsuarios = consultaLdapService.findAll();
+		List<UsuarioLdap> todosUsuarios = ldap.findAll();
 		todosUsuarios.sort((user1, user2) -> user1.getFullName().compareTo(user2.getFullName()));
 		mv.addObject("usuarios", todosUsuarios);
 
@@ -114,7 +114,7 @@ public class AlocacaoController {
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
 		todasCategorias.sort((cat1, cat2) -> cat1.getDescricaoCategoria().compareTo(cat2.getDescricaoCategoria()));
 		mv.addObject("categorias", todasCategorias);
-
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 	
@@ -167,7 +167,8 @@ public class AlocacaoController {
 		
 		mv.addObject("alocacaoAtiva", possivelDevolver);
 		mv.addObject("alocacaoTodas",todosUsuario);
-	
+		ldap.usuarioInfos(mv);
+		
 		return mv;
 
 	}
@@ -199,7 +200,7 @@ public class AlocacaoController {
 		}
 		
 		mv.addObject("usuariosDispositivos", possivelDevolver);
-
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 
@@ -268,7 +269,7 @@ public class AlocacaoController {
 			String cpf = servletRequest.getParameter("nomeUsuario");
 			Usuario usuarioCad = cadastroUsuarioService.getByCpf(cpf);
 			if (usuarioCad == null) {
-				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
+				UsuarioLdap usuarioLdap = ldap.findOne(cpf);
 				usuario.setCpfUsuario(usuarioLdap.getCpf());
 				usuario.setNomeUsuario(usuarioLdap.getFullName());
 				usuario.setPrimeiroNomeUsuario(usuarioLdap.getFirstName());
@@ -288,7 +289,7 @@ public class AlocacaoController {
 				cadastroUsuarioService.salvar(usuario);
 			} else if (usuarioCad != null) {
 				usuario = usuarioCad;
-				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
+				UsuarioLdap usuarioLdap = ldap.findOne(cpf);
 
 				if (usuario.getEmailUsuario() == null) {
 					usuario.setEmailUsuario(usuarioLdap.getEmail());
@@ -390,7 +391,7 @@ public class AlocacaoController {
 		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
 		mv.addObject("listaUnidadeSei", uni);
 
-		List<UsuarioLdap> todosUsuarios = consultaLdapService.findAll();
+		List<UsuarioLdap> todosUsuarios = ldap.findAll();
 		todosUsuarios.sort((user1, user2) -> user1.getFullName().compareTo(user2.getFullName()));
 		mv.addObject("usuarios", todosUsuarios);
 
@@ -420,7 +421,7 @@ public class AlocacaoController {
 		mv.addObject("categorias", todasCategorias);
 		 
 		mv.addObject(alocacao);
-		
+		ldap.usuarioInfos(mv);
 				return mv;
 	}
 

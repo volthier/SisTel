@@ -346,7 +346,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				<td style="text-align: center;"
 					th:text="${chamada.numTelefoneChamado}"></td>
 				<td style="text-align: center;" th:text="${chamada.duracaoLigacao}"></td>
-				<td style="text-align: center;" th:if="${chamada.tarifa() != null and !chamada.tarifa().isEmpty() }" th:text="${chamada.tarifa()}"></td>
+				<td style="text-align: center;" th:if="${chamada.tarifa() != null or !chamada.tarifa().isEmpty()}" th:text="${chamada.tarifa()}"></td>
 				<td style="text-align: center;"
 					th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
 				<td style="text-align: center;"

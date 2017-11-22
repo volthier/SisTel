@@ -159,7 +159,7 @@ public class LeitorFebrabanV3 {
 				fatura.setVersaoFormato(data.substring(164, 168));
 
 				/** Numero da Fatura */
-				fatura.setNumFatura(Integer.parseInt(data.substring(168, 184)));
+				fatura.setNumFatura(data.substring(168, 184));
 
 				/** Codigo de Barra */
 				fatura.setCodBarra(data.substring(184, 234));

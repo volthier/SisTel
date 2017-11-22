@@ -408,8 +408,7 @@ public class Chamadas implements java.io.Serializable {
 		hora = ((float)this.getDuracaoLigacao().getHours())*60;
 		minuto = (float)this.getDuracaoLigacao().getMinutes();
 		segundo = ((float)this.getDuracaoLigacao().getSeconds())/60;
-
-		float result = hora+minuto+segundo;
+		
 		float retorno = (this.getValLigImp() / (hora+minuto+segundo));
 	
 		return decimalFormatFinal.format(retorno);
