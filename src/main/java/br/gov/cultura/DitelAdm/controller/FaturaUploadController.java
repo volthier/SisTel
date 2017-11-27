@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
@@ -124,5 +125,12 @@ public class FaturaUploadController {
 					"Falha ao carregar fatura! Erro: " + file.getOriginalFilename() + " because it was empty");
 		}
 		return "redirect:/faturas/nova";
+	}
+	
+	@RequestMapping("/listar")
+	public ModelAndView listaFaturas(){
+		
+		
+		return null;
 	}
 }

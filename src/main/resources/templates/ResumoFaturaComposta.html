@@ -286,14 +286,14 @@ table td[class*="col-"], table th[class*="col-"] {
 	
 	<div th:each="fat : ${fatura}">
 	 <h4 th:text="| Detalhamento da linha ${fat.alocacao.linha.numeroLinha}"></h4>
-	 <table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'}">
+	 <table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'}" class="table table-dotted">
+	<table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}" class="table table-dotted">
 		<thead>
 			<tr>
 				<th>Descri&ccedil;&atilde;o</th>
@@ -368,7 +368,7 @@ table td[class*="col-"], table th[class*="col-"] {
 	<p th:if="${fat.servicosCategoria != null}">
 		<b>Servi&ccedil;os (Torpedos, Hits, Jogos, etc.)</b>
 	</p>
-	<div>
+	<div th:if="${fat.servicosCategoria != null}">
 		<table class="table table-bordered" th:if="${fat.servicosCategoria != null}">
 			<thead>
 				<tr>
@@ -392,7 +392,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				</tr>
 			</tbody>
 		</table>
-			<table th:if="${fat.servicosCategoria != null and !fat.servicosCategoria.isEmpty()}" class="borda-redonda-foot">
+			<table th:if="${fat.servicosCategoria != null and !fat.servicosCategoria.isEmpty() and (#aggregates.sum(fat.servicosCategoria.![valorCobrado])) &gt; 0}" class="borda-redonda-foot">
 		<tbody>
 			<tr>
 				<td colspan="4"><b>Sub Total</b></td>
