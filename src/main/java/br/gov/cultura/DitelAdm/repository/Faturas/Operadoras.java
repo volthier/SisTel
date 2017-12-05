@@ -9,4 +9,6 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Operadora;
 public interface Operadoras extends JpaRepository<Operadora, Long>{
 
 	public List<Operadora> findByCodOperadora(int nome);
+
+	public Operadora findByCnpj(String cnpj);
 }

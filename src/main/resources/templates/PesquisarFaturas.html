@@ -13,9 +13,8 @@
 
 
 				<div class="col-md-6 padding-0 sem_sombra intro">
-					<h3 class="text-left">Gerar Fatura</h3>
+					<h3 class="text-left">Consultar Faturas</h3>
 				</div>
-
 
 				<div class="clearfix">
 
@@ -30,12 +29,10 @@
 						<div class="form-group">
 							<label id="fatura" for="status" class="col-sm-2 control-label">Fatura</label>
 							<div class="col-sm-6">
-
+								
 								<th:block th:each="fatura : ${faturasNaoGeradas}">
-									<input type="checkbox" name="fatura"
-										th:value="${fatura.idFatura}" />
-									<label
-										th:text="${fatura.numFatura} +  ' - ' + ${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)} + ' - '+ ${fatura.cliente.operadora.nome}"></label>
+								<input type="checkbox" name="fatura" th:value="${fatura.idFatura}"/>
+								<label th:text="${fatura.numFatura} +  ' - ' + ${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)} + ' - '+ ${fatura.cliente.operadora.nome}" ></label>
 								</th:block>
 							</div>
 
@@ -59,32 +56,17 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<td>Mes Ref</td>
 							<td>Número Fatura</td>
-							<td>Operadora</td>
-							<td>UF</td>
-							<td>CNPJ</td>
-							<td>Num Conta</td>
-							<td>Data Venc</td>
-							<td>Valor Com imposto</td>
 							<td>Ações</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="fatura : ${faturasGeradas}">
 							<td
-								th:text="${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)}"></td>
-							<td th:text="${fatura.numFatura}"></td>
-							<td th:text="${fatura.cliente.operadora.nome}"></td>
-							<td th:text="${fatura.cliente.operadora.uf}"></td>
-							<td th:text="${fatura.cliente.operadora.cnpj}"></td>
-							<td th:text="${fatura.indConta}"></td>
-							<td th:text="${fatura.dataVenc}"></td>
-							<td th:text="${fatura.traillers[0].valTotal}"></td>
-						 	<td th:if="${!#lists.isEmpty(fatura.notafiscals)}" th:text="${fatura.notafiscals[0].valorNfimp}"></td> 
-							<!-- <td><a class="btn btn-primary"
+								th:text="${fatura.fatura.numFatura} + ' - ' + ${#strings.substring(fatura.fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.fatura.mesRef,0,4)} + ' - '+${fatura.alocacao.usuario.nomeUsuario}+' - '+${fatura.alocacao.linha.numeroLinha}"></td>
+							<td><a class="btn btn-primary"
 								th:href="@{/fatura/resumo} + '/' + ${fatura.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}"
-								role="button">Resumo</a></td> -->
+								role="button">Resumo</a></td>
 						</tr>
 					</tbody>
 				</table>

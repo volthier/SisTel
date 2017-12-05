@@ -36,6 +36,9 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 @Service
 @Transactional
 public class LeitorFebrabanV3 {
+	
+	@Autowired
+	private FaturaService faturaService;
 
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
@@ -130,7 +133,9 @@ public class LeitorFebrabanV3 {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-
+				
+				Operadora op = faturaService.retornarOperadoraCNPJ(data.substring(87, 102));
+				
 				/** Codigo da Operadora */
 				operadora.setCodOperadora(Integer.parseInt(data.substring(69, 72)));
 
@@ -142,15 +147,15 @@ public class LeitorFebrabanV3 {
 
 				/** UF da Operadora */
 				operadora.setUf(data.substring(102, 104));
-
+					
 				/** Codigo do Cliente */
-				cliente.setCodCliente(data.substring(104, 119));
+				cliente.setCodCliente(data.substring(104, 119).trim());
 
 				/** Nome do Cliente */
-				cliente.setNome(data.substring(119, 149));
+				cliente.setNome(data.substring(119, 149).trim());
 
 				/** CNPJ do Cliente */
-				cliente.setCnpj(data.substring(149, 164));
+				cliente.setCnpj(data.substring(149, 164).trim());
 
 				/**
 				 * Versão do Formato do Documento >>> (Tem que aparecer V3R0)
@@ -203,11 +208,40 @@ public class LeitorFebrabanV3 {
 				 * Marcação de FIM String headerMarcaFim(data.substring(349,
 				 * 350);
 				 */
-
+				
+				List<Cliente> listCli = faturaService.retornarClientesIguais(data.substring(104, 119).trim(), data.substring(149, 164).trim());
+				Cliente cli = new Cliente();
+				
+				if (op != null) {
+					if (listCli == null) {
+						cli = faturaService.retornarCliente(data.substring(104, 119).trim(),
+								data.substring(149, 164).trim());
+					} else if (listCli != null) {
+						for (Cliente cli2 : listCli) {
+							if (cli2.getOperadora().getCnpj().equals(op.getCnpj())) {
+								cli = cli2;
+							}
+						}
+					}
+				
+					faturaArquivoDTO.setOperadora(op);
+				}else{
 				faturaArquivoDTO.setOperadora(operadora);
+				}
+				
+				if(cli.getIdCliente() !=null){
+					faturaArquivoDTO.setCliente(cli);
+					fatura.setCliente(cli);
+				}
+				if(op!=null && cli.getIdCliente() == null){
+					cliente.setOperadora(op);
+					faturaArquivoDTO.setCliente(cliente);
+					fatura.setCliente(cliente);
+					}else if(op==null){
 				cliente.setOperadora(operadora);
 				faturaArquivoDTO.setCliente(cliente);
 				fatura.setCliente(cliente);
+				}
 				faturaArquivoDTO.setFatura(fatura);
 
 				break;

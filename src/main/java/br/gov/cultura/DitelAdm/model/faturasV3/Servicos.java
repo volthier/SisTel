@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.gov.cultura.DitelAdm.model.Linha;
 
 /**
@@ -27,9 +29,13 @@ import br.gov.cultura.DitelAdm.model.Linha;
 public class Servicos implements java.io.Serializable {
 
 	private Integer idServicos;
+	@JsonIgnore
 	private Categoriaservico categoriaservico;
+	@JsonIgnore
 	private Fatura fatura;
+	@JsonIgnore
 	private Resumo resumo;
+	@JsonIgnore
 	private Linha linha;
 	private Date dataServico;
 	private Date horaServico;

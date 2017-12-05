@@ -34,7 +34,6 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import br.gov.cultura.DitelAdm.email.Mailer;
 import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
-import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.model.Usuario;
 import br.gov.cultura.DitelAdm.model.dtos.CalculadorDTO;
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
@@ -107,10 +106,12 @@ public class FaturaController {
 	public @ResponseBody ModelAndView executarFatura() throws RemoteException {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 
-		List<Fatura> faturasNaoGeradas = faturaService.getFaturasNaoGeradas();
-		List<AlocacaoFatura> faturasGeradas = alocacaoService.getIdAlocacaoFatura();
-		mv.addObject("faturasNaoGeradas", faturasNaoGeradas);
-		mv.addObject("faturasGeradas", faturasGeradas);
+		List<Fatura> faturasOperadorasNaoGeradas = faturaService.getFaturasNaoGeradas();
+		List<Fatura> faturasOperadorasGeradas = faturaService.getFaturasGeradas();
+		List<AlocacaoFatura> faturasGeradasLinhas = alocacaoService.getIdAlocacaoFatura();
+		mv.addObject("faturasNaoGeradas", faturasOperadorasNaoGeradas);
+		mv.addObject("faturasGeradasLinhas", faturasGeradasLinhas);
+		mv.addObject("faturasGeradas",faturasOperadorasGeradas);
 		
 		ldap.usuarioInfos(mv);
 		return mv;

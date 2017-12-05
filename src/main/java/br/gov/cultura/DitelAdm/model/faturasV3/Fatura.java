@@ -19,6 +19,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 
 /**
@@ -30,6 +35,7 @@ import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 public class Fatura implements java.io.Serializable {
 
 	private Integer idFatura;
+	@JsonIgnore
 	private Cliente cliente;
 	private String numFatura;
 	private Date dataEmissao;
@@ -66,6 +72,7 @@ public class Fatura implements java.io.Serializable {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Servicos> servicoses = new HashSet(0);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@JsonIgnore
 	private Set<AlocacaoFatura> alocacaoFaturas = new HashSet(0);
 
 
@@ -132,7 +139,7 @@ public class Fatura implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cliente_codCliente", nullable = false)
+	@JoinColumn(name = "cliente_id_cliente", nullable = false)
 	public Cliente getCliente() {
 		return this.cliente;
 	}

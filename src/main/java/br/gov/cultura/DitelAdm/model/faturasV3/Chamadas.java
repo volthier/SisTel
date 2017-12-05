@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.gov.cultura.DitelAdm.model.Linha;
 
 /**
@@ -30,9 +32,13 @@ import br.gov.cultura.DitelAdm.model.Linha;
 public class Chamadas implements java.io.Serializable {
 
 	private Integer idChamadas;
+	@JsonIgnore
 	private Categoriachamada categoriachamada;
+	@JsonIgnore
 	private Fatura fatura;
+	@JsonIgnore
 	private Resumo resumo;
+	@JsonIgnore
 	private Linha linha;
 	private String numRecursoChamada;
 	private String numTelefoneChamado;
