@@ -77,7 +77,7 @@ public class SeiClient {
 
 	public RetornoGeracaoProcedimento gerarProcedimentoAlocacao() throws RemoteException {
 		Procedimento p = new Procedimento();
-		p.setIdTipoProcedimento("100000513"); //TODO:Ver codigo do processo SEI Produção.
+		p.setIdTipoProcedimento("100000513");
 		p.setAssuntos(new Assunto[0]);
 		p.setInteressados(new Interessado[0]);
 		p.setObservacao("");
