@@ -90,6 +90,7 @@ public class SeiClient {
 		return retorno;
 	}
 
+	
 	public RetornoConsultaProcedimento consutaProcessoSei(String protocoloProcedimento) throws RemoteException {
 
 		String sin, nin;
