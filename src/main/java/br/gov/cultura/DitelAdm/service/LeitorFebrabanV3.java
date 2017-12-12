@@ -134,7 +134,7 @@ public class LeitorFebrabanV3 {
 					e.printStackTrace();
 				}
 				
-				Operadora op = faturaService.retornarOperadoraCNPJ(data.substring(87, 102));
+				Operadora op = faturaService.retornarOperadoraCNPJ(data.substring(87, 102),Integer.parseInt(data.substring(69, 72)));
 				
 				/** Codigo da Operadora */
 				operadora.setCodOperadora(Integer.parseInt(data.substring(69, 72)));

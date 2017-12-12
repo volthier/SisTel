@@ -49,7 +49,7 @@ public class UrlController {
 		return mv;
 	}
 
-	@RequestMapping("/inicio")
+	@RequestMapping({"/inicio",""})
 	public ModelAndView inicio() {
 
 		ModelAndView mv = new ModelAndView("TelaInicio");
@@ -59,12 +59,12 @@ public class UrlController {
 
 		// Lista de alocados Devolvidos
 		List<Alocacao> dto = lista.stream()
-				.filter(p -> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido() != null)
+				.filter(p -> Objects.nonNull(p.getDtDevolucao()) && p.getDtRecebido() != null && p.getDispositivo() != null)
 				.collect(Collectors.toList());
 
 		// Lista de alocados habilitados
 		List<Alocacao> dto1 = lista.stream()
-				.filter(p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao() == null)
+				.filter(p -> Objects.nonNull(p.getDtRecebido()) && p.getDtDevolucao() == null && p.getDispositivo() != null)
 				.collect(Collectors.toList());
 
 		List<Dispositivo> celular = new ArrayList<Dispositivo>();
@@ -74,7 +74,7 @@ public class UrlController {
 
 		for (Iterator<Dispositivo> d = disp.listIterator(); d.hasNext();) {
 			Dispositivo dis = d.next();
-
+			
 			if (dis.getTipoDispositivo().equals("Celular")) {
 				celular.add(dis);
 			} else if (dis.getTipoDispositivo().equals("Tablet")) {
@@ -87,7 +87,7 @@ public class UrlController {
 
 			for (Iterator<Alocacao> a = dto1.listIterator(); a.hasNext();) {
 				Alocacao aloc = a.next();
-				if (dis.getIdDispositivo().equals(aloc.getDispositivo().getIdDispositivo())) {
+				if (aloc.getDispositivo() !=null && dis.getIdDispositivo().equals(aloc.getDispositivo().getIdDispositivo())) {
 					d.remove();
 				}
 				celular.remove(aloc.getDispositivo());

@@ -48,16 +48,14 @@ public class ChipController extends UrlController {
 		//TODO: Salva no banco de dados
 		
 		if(errors.hasErrors()){
-	 		return CADASTRO_VIEW;
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+	 		return "redirect:/chips/novo";
 	 	}
-		try {
+		else {
 			cadastroChipService.salvar(cadastroChip);
 			attributes.addFlashAttribute("mensagem","Dispositivo cadastrado com sucesso!");
 			return "redirect:/chips/novo";		
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
- 		}
+		} 
 		
 	}
 	

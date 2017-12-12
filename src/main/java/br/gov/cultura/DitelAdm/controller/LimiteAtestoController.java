@@ -43,15 +43,13 @@ public class LimiteAtestoController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated LimiteAtesto limiteAtesto, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
-			return CADASTRO_VIEW;
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/limites-atesto/novo";
 		}
-		try {
+		else {
 			limiteAtestoService.salvar(limiteAtesto);
 			attributes.addFlashAttribute("mensagem", "Limite atesto cadastrado com sucesso!");
 			return "redirect:/limites-atesto/novo";
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
 		}
 	}
 

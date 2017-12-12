@@ -262,12 +262,12 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	<table border="0" cellpadding="1" cellspacing="1" class="resumo">
+	<table border="0" cellpadding="1" cellspacing="1" class="resumo table">
 		<tbody>
 			<tr>
 				<td>N&uacute;mero da linha</td>
 				<td>Per&iacute;odo de Uso</td>
-				<td>Total a Pagar</td>
+				<td>Valor</td>
 			</tr>
 			 
 			<tr th:each="fat : ${fatura}" >
@@ -279,21 +279,28 @@ table td[class*="col-"], table th[class*="col-"] {
 					th:text="| R$ ${#numbers.formatDecimal(fat.valorTotal,0,2,'COMMA')}">R$
 					&nbsp; 411,89</td>
 			</tr>
-			
+			<tr>
+			<td> <b>Total a Pagar</b> </td>
+			<td></td>
+			<td th:utext="|R$ ${#numbers.formatDecimal(#aggregates.sum(fatura.![valorTotal]),0,2,'COMMA')}"> 
+			</td>
+			</tr>
 		</tbody>
 	</table>
 	<br/>
 	
 	<div th:each="fat : ${fatura}">
 	 <h4 th:text="| Detalhamento da linha ${fat.alocacao.linha.numeroLinha}"></h4>
-	 <table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}">
+	 
+	 <div th:if="${fat.alocacao.dispositivo == null}"> 
+	 <table th:if="${fat.planos != null}">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}" class="table table-dotted">
+	<table th:if="${fat.planos != null}" class="table table-dotted">
 		<thead>
 			<tr>
 				<th>Descri&ccedil;&atilde;o</th>
@@ -315,7 +322,43 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-
+	</div>
+	
+	
+	<div th:if="${fat.alocacao.dispositivo != null}"> 
+	 <table th:if="${fat.alocacao.dispositivo == null} and ${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}">
+		<tbody>
+			<tr>
+				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
+			</tr>
+		</tbody>
+	</table>
+	<table th:if="${fat.alocacao.dispositivo == null} and ${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}" class="table table-dotted">
+		<thead>
+			<tr>
+				<th>Descri&ccedil;&atilde;o</th>
+				<th style="text-align: center;">Total (R$)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>GESTOR ONLINE - CONTROLE COMPLETO</td>
+				<td th:if="${fat.valorContratoPlano != null }" style="text-align: center;"
+					th:text="${#numbers.formatDecimal(fat.valorContratoPlano,0,2,'COMMA')}">Valor
+					0</td>
+			</tr>
+			<tr th:if="${fat.planos[0] != null}" th:each="plano : ${fat.planos}">
+				<td
+					th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
+				<td style="text-align: center;"
+					th:text="${#numbers.formatDecimal(plano.valComImp,1,2)}"></td>
+			</tr>
+			
+		</tbody>
+	</table>
+	</div>
+	
+	
 	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" >
 		<tbody>
 			<tr>

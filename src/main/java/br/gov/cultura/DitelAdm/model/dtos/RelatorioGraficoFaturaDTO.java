@@ -10,14 +10,16 @@ public class RelatorioGraficoFaturaDTO {
 	private Integer idFatura;
 	private String mesRef;
 	private Date dataVenc;
+	private String cnLocalidade;
 	private float valTotal;
 	
 	public RelatorioGraficoFaturaDTO() {
 	}
 
-	public RelatorioGraficoFaturaDTO(Integer idFatura, String mesRef, Date dataVenc, float valTotal) {
+	public RelatorioGraficoFaturaDTO(Integer idFatura, String cnLocalidade, String mesRef, Date dataVenc, float valTotal) {
 		super();
 		this.idFatura = idFatura;
+		this.cnLocalidade = cnLocalidade;
 		this.mesRef = mesRef;
 		this.dataVenc = dataVenc;
 		this.valTotal = valTotal;
@@ -31,6 +33,14 @@ public class RelatorioGraficoFaturaDTO {
 		this.idFatura = idFatura;
 	}
 
+	public String getCnLocalidade(){
+		return cnLocalidade;
+	}
+	
+	public void setCnLocalidade(String cnLocalidade){
+		this.cnLocalidade = cnLocalidade;
+	}
+	
 	public String getMesRef() {
 		return mesRef;
 	}

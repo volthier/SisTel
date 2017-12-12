@@ -10,5 +10,5 @@ public interface Operadoras extends JpaRepository<Operadora, Long>{
 
 	public List<Operadora> findByCodOperadora(int nome);
 
-	public Operadora findByCnpj(String cnpj);
+	public Operadora findByCnpjAndCodOperadora(String cnpj, int codOperadora);
 }

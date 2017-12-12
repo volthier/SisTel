@@ -37,15 +37,13 @@ public class LinhaController extends UrlController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Linha linha, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
-			return CADASTRO_VIEW;
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/linhas/nova";
 		}
-		try {
+		else {
 			cadastroLinhaService.salvar(linha);
 			attributes.addFlashAttribute("mensagem", "Linha cadastrada com sucesso!");
 			return "redirect:/linhas/nova";
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
 		}
 
 	}

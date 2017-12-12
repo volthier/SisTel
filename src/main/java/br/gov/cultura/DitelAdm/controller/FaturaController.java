@@ -399,7 +399,7 @@ public class FaturaController {
 									};
 
 									if (!resumoVinculados.isEmpty()
-											&& !alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
+											&& (alocacao.getDispositivo() == null || !alocacao.getDispositivo().getTipoDispositivo().equals("Fixo"))) {
 										if (resumoVinculados.get(0).getDataDesativ() != null) {
 											long diasTotal = ((planosVinculados.get(0).getDataFimCiclo().getTime()
 													- planosVinculados.get(0).getDataIniCiclo().getTime() + 3600000)
@@ -411,11 +411,11 @@ public class FaturaController {
 
 											cal.setResultadoF((valor / diasTotal) * diasUtilizado);
 
-										} else if (!alocacao.getDispositivo().getTipoDispositivo().equals("Fixo") && (!planosVinculados.isEmpty())) {
+										} else if ((alocacao.getDispositivo() == null || !alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) && (!planosVinculados.isEmpty())) {
 											cal.setResultadoF(4.9f);
 
 										}
-									} else if (!alocacao.getDispositivo().getTipoDispositivo().equals("Fixo") && (!planosVinculados.isEmpty())) {
+									} else if ((alocacao.getDispositivo() == null || !alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) && (!planosVinculados.isEmpty())) {
 										cal.setResultadoF(4.9f);
 									}
 								}
@@ -533,10 +533,12 @@ public class FaturaController {
 								faturaDTO.setValorContratoPlano(cal.getResultadoF());
 								cal.setFloatA(cal.getResultadoF());
 
-								if (alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
-									cal.setDoubleA(valorTotal);
+								if(alocacao.getDispositivo() != null){
+									if (alocacao.getDispositivo().getTipoDispositivo().equals("Fixo")) {
+										cal.setDoubleA(valorTotal);
+									}
 								}
-
+								
 								faturaDTO.setValorTotal(valorTotal);
 								cal.setFloatB(valorTotal);
 
@@ -597,7 +599,8 @@ public class FaturaController {
 							if ((cal.getResultadoD() - cal.getDoubleA()) > usuario.getLimiteAtesto().getValorLimite()) {
 
 								for (AlocacaoFatura alocacaoFaturaRessarcimento : alocacoesFaturas) {
-									if (!alocacaoFaturaRessarcimento.getAlocacao().getDispositivo().getTipoDispositivo()
+									
+									if (alocacaoFaturaRessarcimento.getAlocacao().getDispositivo() == null || !alocacaoFaturaRessarcimento.getAlocacao().getDispositivo().getTipoDispositivo()
 											.equals("Fixo")) {
 										alocacaoFaturaRessarcimento.setRessarcimento(true);
 										alocacaoService.salvar(alocacaoFaturaRessarcimento);
@@ -608,7 +611,7 @@ public class FaturaController {
 										cal = new CalculadorDTO();
 									}
 								}
-								sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
+								sei.enviarMemorandoRessarcimento(alocacaoRepasse, gerarMemorandoRessarcimento(request,alocacaoRepasse,faturaDTOLista));
 								alocacaoFatura.setDocumentoSei(sei.enviarFaturasCompostas(alocacaoRepasse,
 										gerarPdfFaturaComposta(faturaDTOLista, request)));
 								mailer.enviarAtestoFatura(faturaDTOLista);
@@ -622,7 +625,7 @@ public class FaturaController {
 									cal = new CalculadorDTO();
 								}
 
-								sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request));
+								sei.enviarMemorando(alocacaoRepasse, gerarMemorando(request,alocacaoRepasse,faturaDTOLista));
 								alocacaoFatura.setDocumentoSei(sei.enviarFaturasCompostas(alocacaoRepasse,
 										gerarPdfFaturaComposta(faturaDTOLista, request)));
 								mailer.enviarAtestoFatura(faturaDTOLista);
@@ -894,11 +897,20 @@ public class FaturaController {
 	}
 
 	// ENVIA MEMORANDO DE FATURAMENTO
-	private byte[] gerarMemorando(HttpServletRequest request) throws Exception {
+	private byte[] gerarMemorando(HttpServletRequest request, List<Alocacao> alocacaoRepasse, List<FaturaArquivoDTO> faturaDTOLista) throws Exception {
 		View view = this.viewResolver.resolveViewName("/documentos/memorandos/MemorandoFaturaTelefonica",
 				locale.resolveLocale(request));
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
-		view.render(new ModelAndView().getModelMap(), request, mockResp);
+		view.render(new ModelAndView().getModelMap().addAttribute("alocacaoRepasse",alocacaoRepasse).addAttribute("faturaLista", faturaDTOLista), request, mockResp);
+
+		return mockResp.getContentAsByteArray();
+	}
+	
+	private byte[] gerarMemorandoRessarcimento(HttpServletRequest request, List<Alocacao> alocacaoRepasse, List<FaturaArquivoDTO> faturaDTOLista) throws Exception {
+		View view = this.viewResolver.resolveViewName("/documentos/memorandos/MemorandoRessarcimentoFaturaTelefonica",
+				locale.resolveLocale(request));
+		MockHttpServletResponse mockResp = new MockHttpServletResponse();
+		view.render(new ModelAndView().getModelMap().addAttribute("alocacaoRepasse",alocacaoRepasse).addAttribute("faturaLista", faturaDTOLista), request, mockResp);
 
 		return mockResp.getContentAsByteArray();
 	}

@@ -45,11 +45,13 @@ public class CategoriaController {
 	public String salvar(@Validated Categoria categoria, Errors errors, RedirectAttributes attributes){
 
 		if(errors.hasErrors()){
-	 		return CADASTRO_VIEW;
-	 	}
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/categorias/nova";	
+	 	}else{
 			cadastroCategoriaService.salvar(categoria);
 			attributes.addFlashAttribute("mensagem","Categoria cadastrada com sucesso!");
-			return "redirect:/categorias/nova";		
+			return "redirect:/categorias/nova";	
+	 	}
 		
 	}
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)

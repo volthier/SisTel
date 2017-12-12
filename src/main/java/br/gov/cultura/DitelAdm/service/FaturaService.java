@@ -1,7 +1,10 @@
 package br.gov.cultura.DitelAdm.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import javax.ws.rs.core.StreamingOutput;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +14,13 @@ import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
 import br.gov.cultura.DitelAdm.model.dtos.RelatorioGraficoClienteDTO;
 import br.gov.cultura.DitelAdm.model.dtos.RelatorioGraficoFaturaDTO;
 import br.gov.cultura.DitelAdm.model.dtos.RelatorioGraficoOperadoraDTO;
+import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
 import br.gov.cultura.DitelAdm.model.faturasV3.Cliente;
 import br.gov.cultura.DitelAdm.model.faturasV3.Enderecos;
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 import br.gov.cultura.DitelAdm.model.faturasV3.Operadora;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
 import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 import br.gov.cultura.DitelAdm.repository.Faturas.Ajustesas;
 import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasAjustes;
@@ -159,8 +164,8 @@ public class FaturaService {
 		return faturas.saveAndFlush(fatura);
 	}
 	
-	public Operadora retornarOperadoraCNPJ(String cnpj){
-		return operadoras.findByCnpj(cnpj);
+	public Operadora retornarOperadoraCNPJ(String cnpj, int codOperadora){
+		return operadoras.findByCnpjAndCodOperadora(cnpj,codOperadora);
 	}
 	
 	public Cliente retornarCliente(String codCliente, String cnpj){
@@ -196,6 +201,29 @@ public class FaturaService {
 					relatorioFatura.setIdFatura(fa.getIdFatura());
 					relatorioFatura.setMesRef(fa.getMesRef());
 					relatorioFatura.setDataVenc(fa.getDataVenc());
+					
+					while (relatorioFatura.getCnLocalidade() == null) {
+
+						for (Chamadas cha : fa.getChamadases()) {
+							if (relatorioFatura.getCnLocalidade() == null) {
+								relatorioFatura.setCnLocalidade(cha.getNumRecursoChamada().trim().substring(0, 2));
+							}
+						}
+
+						for (Resumo resumo : fa.getResumos()) {
+							if (relatorioFatura.getCnLocalidade() == null) {
+								relatorioFatura.setCnLocalidade(String.valueOf(resumo.getCnl()));
+							}
+						}
+
+						for (Planos plano : fa.getPlanoses()) {
+							if (relatorioFatura.getCnLocalidade() == null) {
+								relatorioFatura
+										.setCnLocalidade(String.valueOf(plano.getNumRecursoPlanos().substring(0, 2)));
+							}
+						}
+					}
+						
 							for (Trailler tr : fa.getTraillers()){
 								relatorioFatura.setValTotal(tr.getValTotal());
 								fatura.add(relatorioFatura);
@@ -207,6 +235,11 @@ public class FaturaService {
 			relatorio.setRelatorioGraficoClienteDTO(cliente);
 			lista.add(relatorio);	
 		}
+		return lista;
+	}
+	
+	public List<RelatorioGraficoOperadoraDTO> getFaturasGraficoMensal(){
+		List<RelatorioGraficoOperadoraDTO> lista = getFaturasGrafico();
 		return lista;
 	}
 	

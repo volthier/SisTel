@@ -88,7 +88,6 @@ public class SeiClient {
 		RetornoGeracaoProcedimento retorno = seiWs.gerarProcedimento(siglaSistema, idServico, "110000073", p,
 				new Documento[0], new String[0], new String[0], null, null, null, null, null);
 		return retorno;
-
 	}
 
 	public RetornoConsultaProcedimento consutaProcessoSei(String protocoloProcedimento) throws RemoteException {
@@ -138,8 +137,6 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-//		//Thread.sleep(5000);
-
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
@@ -165,9 +162,7 @@ public class SeiClient {
 				}
 			}
 		}
-		
-		
-		
+
 		Documento doc = new Documento();
 		doc.setTipo("R");
 		doc.setIdProcedimento(alocacaoLista.get(ponteiro).getAlocacaoSei().getNumeroProcessoSei());
@@ -251,7 +246,7 @@ public class SeiClient {
 		Documento doc = new Documento();
 		doc.setTipo("G");
 		doc.setIdProcedimento(alocacaoLista.get(ponteiro).getAlocacaoSei().getNumeroProcessoSei());
-		doc.setIdSerie("12");
+		doc.setIdSerie("270");
 		doc.setNumero("");
 		doc.setData("");
 		doc.setDescricao("");
@@ -276,7 +271,67 @@ public class SeiClient {
 		sin = "S";
 		nin = "N";
 
-		//Thread.sleep(1000);
+		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
+				response.getDocumentoFormatado(), sin, nin, nin);
+		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
+
+		alocacaoService.salvar(documento);
+		return response;
+	}
+	
+	public RetornoInclusaoDocumento enviarMemorandoRessarcimento(List<Alocacao> alocacaoLista, byte[] memorando)
+			throws IOException, ParseException, InterruptedException {
+		byte[] encoded = Base64.getEncoder().encode(memorando);
+		String encodedFile = new String(encoded, "ISO-8859-1");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
+		if(alocacaoLista.isEmpty()){	
+		}
+		
+		int ponteiro = 0;
+		for(Alocacao aloc : alocacaoLista){
+			for(Alocacao aloca : alocacaoLista){
+				if(aloc.getDtRecebido().compareTo(aloca.getDtRecebido())>0){
+					ponteiro = alocacaoLista.indexOf(aloc);
+				}else if(aloc.getDtRecebido().compareTo(aloca.getDtRecebido())<0){
+					ponteiro = alocacaoLista.indexOf(aloca);
+				}
+			}
+		}
+		
+		Destinatario[] destinatario = new Destinatario[1];
+		Destinatario dest = new Destinatario();
+		dest.setNome(alocacaoLista.get(ponteiro).getUsuario().getNomeUsuario());
+		dest.setSigla(alocacaoLista.get(ponteiro).getUsuario().getCpfUsuario());
+		destinatario[0] = dest;
+
+		Documento doc = new Documento();
+		doc.setTipo("G");
+		doc.setIdProcedimento(alocacaoLista.get(ponteiro).getAlocacaoSei().getNumeroProcessoSei());
+		doc.setIdSerie("271");
+		doc.setNumero("");
+		doc.setData("");
+		doc.setDescricao("");
+		doc.setRemetente(new Remetente("", ""));
+		doc.setInteressados(new Interessado[0]);
+		doc.setDestinatarios(destinatario);
+		doc.setObservacao("");
+		doc.setNomeArquivo("");
+		doc.setConteudo(encodedFile);
+		doc.setNivelAcesso("0");
+
+		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
+
+		DocumentoSei documento = new DocumentoSei();
+		documento.setDocumentosLink(response.getLinkAcesso());
+		documento.setDocumentoIdSei(response.getIdDocumento());
+		documento.setDocumentosNumero(response.getDocumentoFormatado());
+		documento.setDocumentosTipo("Memorando de Atesto");
+		documento.setAlocacaoSei(alocacaoLista.get(ponteiro).getAlocacaoSei());
+		documento.setAlocacao(new HashSet<Alocacao>(alocacaoLista));
+		String sin, nin;
+		sin = "S";
+		nin = "N";
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
@@ -333,8 +388,6 @@ public class SeiClient {
 		String[] uni = new String[1];
 		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();
 
-		//Thread.sleep(1000);
-
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				response.getDocumentoFormatado(), sin, nin, nin);
 
@@ -360,7 +413,7 @@ public class SeiClient {
 		String sin, nin;
 		sin = "S";
 		nin = "N";
-		//Thread.sleep(1000);
+
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
 				documento.getDocumentosNumero(), nin, sin, nin);
 
@@ -401,7 +454,7 @@ public class SeiClient {
 				}
 			}
 		}
-		//Thread.sleep(5000);
+
 		if (documento.getAssinaturaHora() != null) {
 			String cancelar, remover, fechar;
 			cancelar = null;
@@ -413,17 +466,16 @@ public class SeiClient {
 					if (documento.isBlocoDisponibilizado() == true) {
 						cancelar = seiWs.cancelarDisponibilizacaoBloco(siglaSistema, idServico, "110000073",
 								documento.getBlocoId());
-						//Thread.sleep(2000);
+
 						if (cancelar.equalsIgnoreCase("1")) {
 							documento.setBlocoDisponibilizado(false);
 							alocacaoService.salvar(documento);
-							//Thread.sleep(2000);
+
 							remover = seiWs.retirarDocumentoBloco(siglaSistema, idServico, "110000073",
 									documento.getBlocoId(), documento.getDocumentosNumero());
 							cancelar = null;
 							if (remover.equalsIgnoreCase("1")) {
 
-								//Thread.sleep(2000);
 								fechar = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
 										documento.getBlocoId());
 								remover = null;
@@ -437,7 +489,7 @@ public class SeiClient {
 							remover = seiWs.retirarDocumentoBloco(siglaSistema, idServico, "110000073",
 									documento.getBlocoId(), documento.getDocumentosNumero());
 							if (remover.equalsIgnoreCase("1")) {
-								//Thread.sleep(2000);
+
 								fechar = seiWs.excluirBloco(siglaSistema, idServico, "110000073",
 										documento.getBlocoId());
 								remover = null;
@@ -447,7 +499,6 @@ public class SeiClient {
 						}
 					}
 				}
-
 			}
 		}
 	}

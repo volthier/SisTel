@@ -92,7 +92,7 @@
 													<td class="text-center" th:text="${atv.usuario.cpfUsuario}" >9563481276</td>
 													<td class="text-center" th:text="${atv.usuario.lotacaoUsuario}">Ditel</td>
 													<td class="text-center numTable" th:text="${atv.linha.numeroLinha}">61993696554</td>
-													<td class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
+													<td th:if="${atv.dispositivo != null}" class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
 
 												</tr>
 												<tr>
@@ -134,7 +134,7 @@
 													<td class="text-center" th:text="${atv.usuario.cpfUsuario}" >9563481276</td>
 													<td class="text-center" th:text="${atv.usuario.lotacaoUsuario}">Ditel</td>
 													<td class="text-center numTable" th:text="${atv.linha.numeroLinha}">61993696554</td>
-													<td class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
+													<td th:if="${atv.dispositivo != null}" class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
 												</tr>
 												<tr>
 													<td colspan="9" th:if="${#lists.isEmpty(alocacaoTodas)}">Nenhum

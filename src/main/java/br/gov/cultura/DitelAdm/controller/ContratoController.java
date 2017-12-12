@@ -40,15 +40,13 @@ public class ContratoController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Contrato contrato, Errors errors, RedirectAttributes attributes){
 		if(errors.hasErrors()){
-	 		return CADASTRO_VIEW;
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/contratos/novo";		
 	 	}
-		try{
+		else{
 			contratoService.salvar(contrato);
 			attributes.addFlashAttribute("mensagem","Contrato cadastrado com sucesso!");
 			return "redirect:/contratos/novo";		
-		}catch(IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
 		}
 	}
 

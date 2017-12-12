@@ -56,16 +56,14 @@ public class DispositivoController {
 	public String salvar(@Validated Dispositivo cadastroDispositivo, Errors errors, RedirectAttributes attributes) {
 
 		if (errors.hasErrors()) {
-			return CADASTRO_VIEW;
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/dispositivos/novo";
 		}
-		try {
+		else {
 			cadastroDispositivoService.salvar(cadastroDispositivo);
 			attributes.addFlashAttribute("mensagem", "Dispositivo cadastrado com sucesso!");
 			return "redirect:/dispositivos/novo";
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
-		}
+		} 
 
 	}
 
