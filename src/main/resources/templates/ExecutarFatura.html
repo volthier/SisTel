@@ -64,6 +64,7 @@
 							<td>Num Conta</td>
 							<td>Data Venc</td>
 							<td>Valor Com imposto</td>
+							<td>Valor Nota Fiscal</td>
 							<td>Ações</td>
 						</tr>
 					</thead>
@@ -78,10 +79,14 @@
 							<td th:text="${fatura.indConta}"></td>
 							<td th:text="${fatura.dataVenc}"></td>
 							<td th:text="${fatura.traillers[0].valTotal}"></td>
-						 	<td th:if="${!#lists.isEmpty(fatura.notafiscals)}" th:text="${fatura.notafiscals[0].valorNfimp}"></td> 
-							<!-- <td><a class="btn btn-primary"
-								th:href="@{/fatura/resumo} + '/' + ${fatura.fatura.idFatura}+ '/' + ${fatura.alocacao.idAlocacao}"
-								role="button">Resumo</a></td> -->
+						 	
+						 	<td th:if="${!#lists.isEmpty(fatura.notafiscals)}" th:text="${fatura.notafiscals[0].valorNfimp}"></td>
+							<td class="center">
+							<a th:href="@{/fatura}+ '/' + ${fatura.idFatura}" class="icone_tabela" title="Consultar"	rel="tooltip" data-placement="left" role="button"> 
+								<span class="fa fa-file-text-o text-success"></span>
+							</a>
+							</td>
+						 	
 						</tr>
 					</tbody>
 				</table>

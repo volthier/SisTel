@@ -659,11 +659,21 @@ public class FaturaController {
 		return mv;
 	}
 
+
+	
+	/** CONSULTA DE GESTÃO DAS FATURAS JÁ GERADAS E ENVIADAS */
+	@RequestMapping("/{fatura}")
+	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura, HttpServletRequest request) throws ParseException {
+		ModelAndView mv = new ModelAndView("/faturas/FaturaGerencial");
+		Fatura fatura = faturaService.getFatura(idFatura);
+		mv.addObject("fatura", fatura);
+		return mv;
+	}
+
 	/** CONSULTA FATURAS JÁ GERADAS E ENVIADAS */
 	@RequestMapping("/resumo/{fatura}/{alocacao}")
 	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura,
 			@PathVariable("alocacao") int idAlocacao, HttpServletRequest request) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 		SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
 		ModelAndView mv = new ModelAndView("Resumo");

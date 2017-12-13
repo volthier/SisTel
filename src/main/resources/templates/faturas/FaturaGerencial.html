@@ -289,8 +289,9 @@ table td[class*="col-"], table th[class*="col-"] {
 	</table>
 	<br/>
 	
-	<div th:each="fat : ${fatura.planoses}">
-	 <h4 th:if="${#ids.seq(fat.numRecursoPlanos) != #ids.next(fat.numRecursoPlanos)}" th:text="| Detalhamento da linha ${fat.numRecursoPlanos}"></h4>
+	<div th:each="fat : ${fatura.planoses}" >
+	 <h4 th:text="| Detalhamento da linha ${fat.numRecursoPlanos}"></h4>
+	 <p th:text="|id = ${fat.idPlanos}|"></p>
 	 
 	 </div>
 	 <!-- 
