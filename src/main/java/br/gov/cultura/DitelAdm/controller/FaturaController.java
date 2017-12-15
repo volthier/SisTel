@@ -133,9 +133,9 @@ public class FaturaController {
 		List<Alocacao> alocacaoListaUsuario = new ArrayList<>();
 
 		List<Planos> planosVinculados = new ArrayList<Planos>();
-		List<Servicos> servicosVinculados = new ArrayList<Servicos>();
 		List<Chamadas> chamadasVinculados = new ArrayList<Chamadas>();
 		List<Resumo> resumoVinculados = new ArrayList<Resumo>();
+		List<Servicos> servicosVinculados = new ArrayList<Servicos>();
 		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
 		ServicosCategoria servicoCategoria = null;
 		List<FaturaArquivoDTO> faturaDTOLista = new ArrayList<FaturaArquivoDTO>();
@@ -666,7 +666,98 @@ public class FaturaController {
 	public @ResponseBody ModelAndView gerarResumo(@PathVariable("fatura") int idFatura, HttpServletRequest request) throws ParseException {
 		ModelAndView mv = new ModelAndView("/faturas/FaturaGerencial");
 		Fatura fatura = faturaService.getFatura(idFatura);
+		String numero;
+		List<String> numeros = new ArrayList<>();
+		
+		List<Servicos> servicosVinculados = new ArrayList<Servicos>();
+		List<ServicosCategoria> servicosPorCategoria = new ArrayList<ServicosCategoria>();
+		ServicosCategoria servicoCategoria = null;
+		
+		int i=0;
+		
+		if (fatura.getChamadases() != null) {
+			for (Chamadas chamadas : fatura.getChamadases()) {
+				numero = "";
+				numero = chamadas.getNumRecursoChamada().trim();
+				if (!numeros.contains(numero)) {
+					numeros.add(numero);
+				}
+			}
+		}
+		if (fatura.getPlanoses() != null) {
+			for (Planos planos : fatura.getPlanoses()) {
+				numero = "";
+				numero = planos.getNumRecursoPlanos().trim();
+				if (!numeros.contains(numero)) {
+					numeros.add(numero);
+				}
+			}
+		}
+	
+		if (fatura.getResumos() != null) {
+			for (Resumo resumos : fatura.getResumos()) {
+				numero = "";
+				numero = resumos.getNumRecurso().trim();
+				if (!numeros.contains(numero)) {
+					numeros.add(numero);
+				}
+			}
+		}
+
+		if (fatura.getServicoses() != null) {
+			for (Servicos servicos : fatura.getServicoses()) {
+				numero = "";
+				numero = servicos.getNumRecursoServico().trim();
+				if (!numeros.contains(numero)) {
+					numeros.add(numero);
+				}
+			}
+		}
+		
+if(!fatura.getServicoses().isEmpty()){
+	for(String num :numeros){	
+			
+			for (Servicos servico : fatura.getServicoses()) {
+
+				if (num.equals(servico.getNumRecursoServico().trim())) {
+
+								servicosVinculados.add(servico);
+
+								if (servicoCategoria == null) {
+
+									servicoCategoria = new ServicosCategoria();
+
+								} else if (servicoCategoria.getCategoria().getCodCatServico() != servico.getCategoriaservico().getCodCatServico() && !servicoCategoria.getCategoria().getDescricao().equals(servico.getCategoriaservico().getDescricao())) {
+									servicoCategoria.setNumRecurso(num);
+									servicosPorCategoria.add(servicoCategoria);
+									servicoCategoria = new ServicosCategoria();
+
+								}
+								servicoCategoria.setNumRecurso(num);
+								servicoCategoria.setCategoria(servico.getCategoriaservico());
+
+								if (servico.getUnidadeServico().equals("MB") || servico.getUnidadeServico().equals("KB")) {
+
+									servicoCategoria.setQuantidade((servico.getUnidadeServico().equals("KB")
+													? servico.getQuantUtil() / 1000
+													: servico.getQuantUtil())
+													+ servicoCategoria.getQuantidade());
+								} else {
+									servicoCategoria.setQuantidade(servicoCategoria.getQuantidade() + 1);
+									servicoCategoria.setTarifa(servico.getValServImp());
+									servicoCategoria.setValorCobrado(servico.getValServImp() + servicoCategoria.getValorCobrado());
+									servicoCategoria.setValorTotal(servico.getValServImp() + servicoCategoria.getValorTotal());
+								}
+							}
+						}
+
+			servicoCategoria.setNumRecurso(num);
+			servicosPorCategoria.add(servicoCategoria);
+	}
+}	
 		mv.addObject("fatura", fatura);
+		mv.addObject("numeros",numeros);
+		mv.addObject("servicos", servicosPorCategoria);
 		return mv;
 	}
 

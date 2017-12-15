@@ -245,7 +245,7 @@ table td[class*="col-"], table th[class*="col-"] {
 }
 </style>
 </head>
-<body style="cursor: auto;">
+<body style="cursor: auto; ">
 
 
 	<page size="A4">
@@ -285,170 +285,224 @@ table td[class*="col-"], table th[class*="col-"] {
 				<td
 					th:utext="|R$ ${#numbers.formatDecimal(fatura.traillers[0].valTotal,0,2,'COMMA')}"></td>
 			</tr>
-		</tbody>
-	</table>
-	<br/>
-	
-	<div th:each="fat : ${fatura.planoses}" >
-	 <h4 th:text="| Detalhamento da linha ${fat.numRecursoPlanos}"></h4>
-	 <p th:text="|id = ${fat.idPlanos}|"></p>
-	 
-	 </div>
-	 <!-- 
-	 <div th:if="${fat.alocacao.dispositivo == null}"> 
-	 <table th:if="${fat.planos != null}">
-		<tbody>
 			<tr>
-				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
+				<td colspan="4">Codigo de Barra</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="text-align: center;" th:text="${fatura.codBarra}">
+				</td>
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${fat.planos != null}" class="table table-dotted">
-		<thead>
-			<tr>
-				<th>Descri&ccedil;&atilde;o</th>
-				<th style="text-align: center;">Total (R$)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>GESTOR ONLINE - CONTROLE COMPLETO</td>
-				<td th:if="${fat.valorContratoPlano != null }" style="text-align: center;"
-					th:text="${#numbers.formatDecimal(fat.valorContratoPlano,0,2,'COMMA')}">Valor
-					0</td>
-			</tr>
-			<tr th:if="${fat.planos[0] != null}" th:each="plano : ${fat.planos}">
-				<td
-					th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
-				<td style="text-align: center;"
-					th:text="${#numbers.formatDecimal(plano.valComImp,1,2)}"></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-	
-	
-	<div th:if="${fat.alocacao.dispositivo != null}"> 
-	 <table th:if="${fat.alocacao.dispositivo == null} and ${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}">
-		<tbody>
-			<tr>
-				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
-			</tr>
-		</tbody>
-	</table>
-	<table th:if="${fat.alocacao.dispositivo == null} and ${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}" class="table table-dotted">
-		<thead>
-			<tr>
-				<th>Descri&ccedil;&atilde;o</th>
-				<th style="text-align: center;">Total (R$)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>GESTOR ONLINE - CONTROLE COMPLETO</td>
-				<td th:if="${fat.valorContratoPlano != null }" style="text-align: center;"
-					th:text="${#numbers.formatDecimal(fat.valorContratoPlano,0,2,'COMMA')}">Valor
-					0</td>
-			</tr>
-			<tr th:if="${fat.planos[0] != null}" th:each="plano : ${fat.planos}">
-				<td
-					th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
-				<td style="text-align: center;"
-					th:text="${#numbers.formatDecimal(plano.valComImp,1,2)}"></td>
-			</tr>
-			
-		</tbody>
-	</table>
-	</div>
-	
-	
-	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" >
-		<tbody>
-			<tr>
-				<td class="borda-redonda">Liga&ccedil;&otilde;es</td>
-			</tr>
-		</tbody>
-	</table>
-	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" border="0" cellpadding="10" cellspacing="10" class="table">
-		<thead>
-			<tr>
-				<th>Data</th>
-				<th style="text-align: center;">Hora</th>
-				<th style="text-align: center;">Origem(UF)-Destino</th>
-				<th style="text-align: center;">N&uacute;mero</th>
-				<th style="text-align: center;">Dura&ccedil;&atilde;o</th>
-				<th style="text-align: center;">Tarifa (R$)</th>
-				<th style="text-align: center;">Valor Total (R$)</th>
-				<th style="text-align: center;">Valor Cobrado (R$)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="chamada : ${fat.chamadas}"
-				style="border-bottom: 1px dashed black !important;">
-				<td th:if="${chamada.dataLigacao != null}" th:text="${#dates.format(chamada.dataLigacao, 'dd/MM')}"></td>
-				<td style="text-align: center;" th:text="${chamada.horaLigacao}"></td>
-				<td style="text-align: center;"
-					th:text="${chamada.nomeLocalDestino}"></td>
-				<td style="text-align: center;"
-					th:text="${chamada.numTelefoneChamado}"></td>
-				<td style="text-align: center;" th:text="${chamada.duracaoLigacao}"></td>
-				<td style="text-align: center;" th:if="${chamada.tarifa() != null or !chamada.tarifa().isEmpty()}" th:text="${chamada.tarifa()}"></td>
-				<td style="text-align: center;"
-					th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
-				<td style="text-align: center;"
-					th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
-			</tr>
-		</tbody>
-	</table>
-	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" class="borda-redonda-foot">
-		<tbody>
-			<tr>
-				<td colspan="4"><b>Sub Total</b></td>
-		 		<td style="text-align: center;"> <b><span th:if="${fat.totalHorasChamadas != null}" th:text="${#dates.format(fat.totalHorasChamadas, 'HH:mm:ss')}">aqui</span></b></td>
-				<td colspan="2"></td>
-			<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(fat.chamadas.![valLigImp]),0,2)}">ali</span></b></td>
-			</tr>
-		</tbody>
-	</table>
+	<br />
 
-	<p th:if="${fat.servicosCategoria != null}">
-		<b>Servi&ccedil;os (Torpedos, Hits, Jogos, etc.)</b>
-	</p>
-	<div th:if="${fat.servicosCategoria != null}">
-		<table class="table table-bordered" th:if="${fat.servicosCategoria != null}">
-			<thead>
-				<tr>
-					<td><b>Descri&ccedil;&atilde;o</b></td>
-					<td style="text-align: center;"><b>Quantidade</b></td>
-					<td style="text-align: center;"><b>Tarifa (R$)</b></td>
-					<td style="text-align: center;"><b>Valor Total (R$)</b></td>
-					<td style="text-align: center;"><b>Valor Cobrado (R$)</b></td>
-				</tr>
-			</thead>
+	<div th:if="${!fatura.notafiscals.isEmpty()}">
+		<table border="0" cellpadding="10" cellspacing="10" class="resumo table">
 			<tbody>
-				<tr th:each="servico : ${fat.servicosCategoria}">
-					<td th:text="${servico.categoria.descricao}"></td>
-					<td style="text-align: center;" th:text="${servico.quantidade}"></td>
-					<td style="text-align: center;"
-						th:text="${#numbers.formatDecimal(servico.tarifa,1,2)}"></td>
-					<td style="text-align: center;"
-						th:text="${#numbers.formatDecimal(servico.valorTotal,1,2)}"></td>
-					<td style="text-align: center;"
-						th:text="${#numbers.formatDecimal(servico.valorCobrado,1,2)}"></td>
+			<tr>
+			<td colspan="3">Nota Fiscal</td>
+			</tr>
+			<tr>
+					<td style="text-align: center;">Nº Nota Fiscal</td>
+					<td style="text-align: center;">Valor da Nota</td>
+					<td style="text-align: center;">Tipo de Nota Fiscal</td>
+
+				</tr>
+
+				<tr th:each="nota : ${fatura.notafiscals}">
+					<td style="text-align: center;" th:text="${nota.numNf}"></td>
+					<td style="text-align: center;" th:text="|R$ ${#numbers.formatDecimal(nota.valorNfimp,0,2,'COMMA')}|"></td>
+					<td style="text-align: center;" th:if="${nota.tipoNf == '1'}">Própria</td>
+					<td style="text-align: center;" th:if="${nota.tipoNf == '2'}">Terceiros</td>
 				</tr>
 			</tbody>
 		</table>
-			<table th:if="${fat.servicosCategoria != null and !fat.servicosCategoria.isEmpty() and (#aggregates.sum(fat.servicosCategoria.![valorCobrado])) &gt; 0}" class="borda-redonda-foot">
-		<tbody>
-			<tr>
-				<td colspan="4"><b>Sub Total</b></td>
-		 		
-			<td style="text-align: center;"><b><span th:utext="${#numbers.formatDecimal(#aggregates.sum(fat.servicosCategoria.![valorCobrado]),0,2)}">ali</span></b></td>
-			</tr>
-		</tbody>
-	</table>
 	</div>
-	</div>-->
+
+	<div th:each="num:${numeros}">
+		<h4 th:text="|Detalhamento da linha ${num}|"
+			th:if="${fatura.planoses.size() != 0}"></h4>
+			
+	<div th:if="${#arrays.contains(fatura.resumos.![numRecurso], num)}">
+			<table class="table table-bordered">
+			
+				<thead>
+				<tr>
+				<td colspan="8"><b>Resumo</b></td>
+				</tr>
+				</thead>
+				<tbody>
+				
+					<tr>
+						<td style="text-align: center;"><b>Data de Ativação</b></td>
+						<td style="text-align: center;"><b>Data de Desativação</b></td>
+						
+						<td style="text-align: center;"><b>Quantidade de Chamadas</b></td>
+						<td style="text-align: center;"><b>Valor com Imposto das Chamadas (R$)</b></td>
+						
+						<td style="text-align: center;"><b>Quantidade de Serviços</b></td>
+						<td style="text-align: center;"><b>Valor com Imposto dos Serviços(R$)</b></td>
+						
+						<td style="text-align: center;"><b>Valor Total Cobrado (R$)</b></td>
+						<td style="text-align: center;"><b>Imposto do Total Cobrado (R$)</b></td>
+					</tr>
+					
+					<tr th:each="resumo : ${fatura.resumos}" th:if="${#strings.equals(num, resumo.numRecurso)}">
+						
+						<td style="text-align: center;" th:if="${resumo.dataAtiv != null and resumo.dataDesativ != ''}" th:text="${#dates.format(resumo.dataAtiv,'dd/MM/yyyy')}"></td>
+						<td style="text-align: center;" th:if="${resumo.dataDesativ != null and resumo.dataDesativ != ''}" th:text="${#dates.format(resumo.dataDesativ,'dd/MM/yyyy')}"></td>
+						<td style="text-align: center;" th:if="${resumo.dataDesativ == null}" th:text="| - |" > - </td>
+						<td style="text-align: center;" th:if="${resumo.dataDesativ == ''}" th:text="| - |" > - </td>
+						<td style="text-align: center;" th:text="${resumo.quantRegCham}"></td>
+						<td style="text-align: center;"	th:text="${#numbers.formatDecimal(resumo.valorTotalRegChamadaImp,1,2)}"></td>
+						
+						<td style="text-align: center;" th:text="${resumo.quantRegServ}"></td>
+						<td style="text-align: center;"	th:text="${#numbers.formatDecimal(resumo.valorTotalRegServImp,1,2)}"></td>
+						
+						<td style="text-align: center;"	th:text="${#numbers.formatDecimal(resumo.valorTotalContaRecursoImp,1,2)}"></td>
+						<td style="text-align: center;"	th:text="${#numbers.formatDecimal(resumo.valorTotalImp,1,2)}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>			
+			
+		<table class="table table-bordered"
+			th:if="${fatura.planoses.size() != 0}">
+			<tr>
+				<th>Descri&ccedil;&atilde;o dos Planos</th>
+				<th style="text-align: center;">Valor Com Imposto (R$)</th>
+				<th style="text-align: center;">Valor Sem Imposto (R$)</th>
+			</tr>
+			<tr th:each="planos : ${fatura.planoses}">
+				<td class=""
+					th:if="${#strings.equals(num, planos.numRecursoPlanos)}"
+					th:text="${#strings.capitalize(#strings.toLowerCase(planos.descricaoPlano+' - de '+#dates.format(planos.dataIniCiclo, 'dd/MM/yyyy')+' a '+#dates.format(planos.dataFimCiclo, 'dd/MM/yyyy')))}"></td>
+				<td style="text-align: center;" class=""
+					th:if="${#strings.equals(num, planos.numRecursoPlanos)}"
+					th:text="| R$ ${#numbers.formatDecimal(planos.valComImp,2,2,'COMMA')}|"></td>
+				<td style="text-align: center;" class=""
+					th:if="${#strings.equals(num, planos.numRecursoPlanos)}"
+					th:text="| R$ ${#numbers.formatDecimal(planos.valSemImp,2,2,'COMMA')}|"></td>
+			</tr>
+		</table>
+		<div th:if="${#arrays.contains(servicos.![numRecurso], num)}">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<td><b>Descri&ccedil;&atilde;o dos Serviços</b></td>
+						<td style="text-align: center;"><b>Quantidade</b></td>
+						<td style="text-align: center;"><b>Tarifa (R$)</b></td>
+						<td style="text-align: center;"><b>Valor Total (R$)</b></td>
+						<td style="text-align: center;"><b>Valor Cobrado (R$)</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="servico : ${servicos}"
+						th:if="${#strings.equals(num, servico.numRecurso)}">
+						<td th:text="${servico.categoria.descricao}"></td>
+						<td style="text-align: center;" th:text="${servico.quantidade}"></td>
+						<td style="text-align: center;"
+							th:text="${#numbers.formatDecimal(servico.tarifa,1,2)}"></td>
+						<td style="text-align: center;"
+							th:text="${#numbers.formatDecimal(servico.valorTotal,1,2)}"></td>
+						<td style="text-align: center;"
+							th:text="${#numbers.formatDecimal(servico.valorCobrado,1,2)}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:each="num:${numeros}">
+
+		<p th:utext="|Detalhamento de Chamadas da Linha ${num}|"
+			th:if="${#arrays.contains(fatura.chamadases.![numRecursoChamada], num)}">
+		</p>
+
+		<table border="0" cellpadding="10" cellspacing="10" class="table"
+			th:if="${#arrays.contains(fatura.chamadases.![numRecursoChamada], num)}">
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th style="text-align: center;">Hora</th>
+					<th style="text-align: center;">Origem(UF)-Destino</th>
+					<th style="text-align: center;">N&uacute;mero</th>
+					<th style="text-align: center;">Dura&ccedil;&atilde;o</th>
+					<th style="text-align: center;">Tarifa (R$)</th>
+					<th style="text-align: center;">Valor Total (R$)</th>
+					<th style="text-align: center;">Valor Cobrado (R$)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="chamada : ${fatura.chamadases}"
+					th:if="${#strings.equals(num, chamada.numRecursoChamada)}"
+					style="border-bottom: 1px dashed black !important;">
+					<td th:if="${chamada.dataLigacao != null}"
+						th:text="${#dates.format(chamada.dataLigacao, 'dd/MM')}"></td>
+					<td style="text-align: center;" th:text="${chamada.horaLigacao}"></td>
+					<td style="text-align: center;"
+						th:text="${chamada.nomeLocalDestino}"></td>
+					<td style="text-align: center;"
+						th:text="${chamada.numTelefoneChamado}"></td>
+					<td style="text-align: center;" th:text="${chamada.duracaoLigacao}"></td>
+					<td style="text-align: center;"
+						th:if="${chamada.tarifa() != null or !chamada.tarifa().isEmpty()}"
+						th:text="${chamada.tarifa()}"></td>
+					<td style="text-align: center;"
+						th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
+					<td style="text-align: center;"
+						th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+	<!-- 	<table class="borda-redonda-foot"
+			th:if="${#arrays.contains(fatura.chamadases.![numRecursoChamada], num)}">
+			<tbody>
+				<tr>
+					<td colspan="4"><b>Sub Total</b></td>
+					<td style="text-align: center;"> <b><span th:if="${#arrays.contains(fatura.chamadases.![numRecursoChamada], num)}" th:text="${#calendars.listFormat(fatura.chamadases.![duracaoLigacao], 'HH:mm:ss')}">aqui</span></b></td> 
+					<td colspan="2"></td>
+					<td style="text-align: center;"><b><span
+							th:if="${#arrays.contains(fatura.chamadases.![numRecursoChamada], num)}"
+							th:utext="${#numbers.formatDecimal(#aggregates.sum(fatura.chamadases.![valLigImp]),0,2)}">ali</span></b></td>
+				</tr>
+			</tbody>
+		</table> -->
+
+	</div>
+
+	<div th:if="${!fatura.ajusteses.isEmpty()}">
+		<p>
+			<b>Ajustes Na Fatura</b>
+		</p>
+		<table border="0" cellpadding="10" cellspacing="10" class="table">
+			<thead>
+				<tr>
+					<th style="text-align: center;">Descrição</th>
+					<th style="text-align: center;">Tipo de Ajuste (Conta /
+						Recurso)</th>
+					<th style="text-align: center;">Periodo</th>
+					<th style="text-align: center;">Valor (R$)</th>
+					<th style="text-align: center;">Numero Associado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ajuste : ${fatura.ajusteses}">
+					<td style="text-align: center;"
+						th:text="${ajuste.categoriaajuste.descricao}"></td>
+					<td style="text-align: center;" th:if="${ajuste.tipo == 'C'}">Conta</td>
+					<td style="text-align: center;" th:if="${ajuste.tipo == 'R'}">Numero</td>
+					<td style="text-align: center;"
+						th:text="${#dates.format(ajuste.dataInicio,'dd/MM/yyyy')+' '+#dates.format(ajuste.horaInicio, 'HH:mm:ss')+' - '+#dates.format(ajuste.dataFim, 'dd/MM/yyyy')+' '+#dates.format(ajuste.horaFim, 'HH:mm:ss')}"></td>
+					<td style="text-align: center;"
+						th:text="${ajuste.sinal+'  '+#numbers.formatDecimal(ajuste.valor,2,2)}"></td>
+					<td style="text-align: center;" th:text="${ajuste.numRecurso}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 	<p>&nbsp;</p>
 	</page>
 

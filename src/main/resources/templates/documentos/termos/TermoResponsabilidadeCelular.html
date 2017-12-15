@@ -47,11 +47,11 @@
 
 	<span th:if="${dto.dispositivo !=null and dto.chip!=null}">
 		<p style="margin-left: 7%" align="justify">
-			<b>1 aparelho telefônico marca: <span
+			<b>1 aparelho <span th:text="${dto.dispositivo.tipoDispositivo}"></span> marca: <span
 				th:text="${dto.dispositivo.marcaDispositivo}">XXXXX</span>, modelo:
 				<span th:text="${dto.dispositivo.modeloDispositivo}">XXXX</span>,
 				<b>IMEI</b><i><span th:text="${dto.dispositivo.imeiDispositivo}">0000000000000000</span></i>,
-				1 carregador, 1 cabo USB, 1 fone de ouvido. 1 Chip tipo <span
+				<span th:if="${dto.dispositivo.tipoDispositivo != 'Modem'}">1 carregador, 1 fone de ouvido,</span> 1 cabo USB. 1 Chip tipo <span
 				th:text="${dto.chip.tipoChip}"> simcard</span>, numero de serie <span
 				th:text="${dto.chip.numeroSerieChip}">9809</span> Linha: <span class="numTable"
 				th:text="${dto.linha.numeroLinha}">0000000000000000</span>.
