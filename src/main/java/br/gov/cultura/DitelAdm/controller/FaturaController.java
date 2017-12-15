@@ -107,12 +107,19 @@ public class FaturaController {
 	public @ResponseBody ModelAndView executarFatura() throws RemoteException {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 
+		List<Fatura> faturas = faturaService.getFaturas();
+		faturas.sort(Comparator.comparing(Fatura::getMesRef).reversed());
 		List<Fatura> faturasOperadorasNaoGeradas = faturaService.getFaturasNaoGeradas();
+		faturasOperadorasNaoGeradas.sort(Comparator.comparing(Fatura::getMesRef).reversed());
 		List<Fatura> faturasOperadorasGeradas = faturaService.getFaturasGeradas();
+		faturasOperadorasGeradas.sort(Comparator.comparing(Fatura::getMesRef).reversed());
+		
 		List<AlocacaoFatura> faturasGeradasLinhas = alocacaoService.getIdAlocacaoFatura();
+		
 		mv.addObject("faturasNaoGeradas", faturasOperadorasNaoGeradas);
 		mv.addObject("faturasGeradasLinhas", faturasGeradasLinhas);
 		mv.addObject("faturasGeradas",faturasOperadorasGeradas);
+		mv.addObject("faturas", faturas);
 		
 		ldap.usuarioInfos(mv);
 		return mv;

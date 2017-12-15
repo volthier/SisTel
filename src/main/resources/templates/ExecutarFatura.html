@@ -50,49 +50,191 @@
 		</div>
 	</form>
 
-	<div class="row">
-		<div class="col-xs-12 col-md-8 col-md-offset-2">
-			<div class="table-responsive">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<td>Mes Ref</td>
-							<td>Número Fatura</td>
-							<td>Operadora</td>
-							<td>UF</td>
-							<td>CNPJ</td>
-							<td>Num Conta</td>
-							<td>Data Venc</td>
-							<td>Valor Com imposto</td>
-							<td>Valor Nota Fiscal</td>
-							<td>Ações</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="fatura : ${faturasGeradas}">
-							<td
-								th:text="${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)}"></td>
-							<td th:text="${fatura.numFatura}"></td>
-							<td th:text="${fatura.cliente.operadora.nome}"></td>
-							<td th:text="${fatura.cliente.operadora.uf}"></td>
-							<td th:text="${fatura.cliente.operadora.cnpj}"></td>
-							<td th:text="${fatura.indConta}"></td>
-							<td th:text="${fatura.dataVenc}"></td>
-							<td th:text="${fatura.traillers[0].valTotal}"></td>
-						 	
-						 	<td th:if="${!#lists.isEmpty(fatura.notafiscals)}" th:text="${fatura.notafiscals[0].valorNfimp}"></td>
-							<td class="center">
-							<a th:href="@{/fatura}+ '/' + ${fatura.idFatura}" class="icone_tabela" title="Consultar"	rel="tooltip" data-placement="left" role="button"> 
-								<span class="fa fa-file-text-o text-success"></span>
-							</a>
-							</td>
-						 	
-						</tr>
-					</tbody>
-				</table>
+
+	<div class="col-md-12 panel padding-0">
+
+		<div class="painel-body bg-panel padding-7 tabela">
+			<div class="col-md-12 tabs-area">
+				<ul id="tabs-demo4" class="nav nav-tabs nav-tabs-v3 panel-body row"
+					role="tablist">
+					<li role="presentation" class="active text-center tab-docs"><a
+						href="#tabs-demo4-area1" id="tabs-demo4-1" role="tab"
+						data-toggle="tab" aria-expanded="true">GERADAS</a></li>
+					<li role="presentation" class="text-center tab-docs"><a
+						href="#tabs-demo4-area2" role="tab" id="tabs-demo4-2"
+						data-toggle="tab" aria-expanded="false">A GERAR</a></li>
+					<li role="presentation" class="text-center tab-docs"><a
+						href="#tabs-demo4-area3" role="tab" id="tabs-demo4-3"
+						data-toggle="tab" aria-expanded="false">TODAS</a></li>
+					<li style="float: right;"></li>
+
+				</ul>
+				<div id="tabsDemo4Content" class="tab-content tab-content-v3">
+					<div role="tabpanel" class="tab-pane fade active in"
+						id="tabs-demo4-area1" aria-labelledby="tabs-demo4-area1">
+
+						<div class="table-responsive" style="margin-top: 10px;">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">MÊS REFERÉNCIA</th>
+										<th class="text-center col-md1">NÚMERO DA FATURA</th>
+										<th class="text-center col-md1">OPERADORA</th>
+										<th class="text-center col-md1">UF</th>
+										<th class="text-center col-md1">CNPJ</th>
+										<th class="text-center col-md1">NUMERO DA CONTA</th>
+										<th class="text-center col-md1">DATA VENCIMENTO</th>
+										<th class="text-center col-md1">VALOR (R$)</th>
+										<th class="text-center col-md1">VALOR NF (R$)</th>
+										<th class="text-center col-md1">CONSULTAR</th>
+									</tr>
+								</thead>
+
+								<tbody id="linha-info">
+
+									<tr th:each="fatura : ${faturasGeradas}">
+										<td
+											th:text="${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)}"></td>
+										<td th:text="${fatura.numFatura}"></td>
+										<td th:text="${fatura.cliente.operadora.nome}"></td>
+										<td th:text="${fatura.cliente.operadora.uf}"></td>
+										<td th:text="${fatura.cliente.operadora.cnpj}"></td>
+										<td th:text="${fatura.indConta}"></td>
+										<td th:text="${#dates.format(fatura.dataVenc,'dd/MM/yyyy')}"></td>
+										<td th:text="${fatura.traillers[0].valTotal}"></td>
+
+										<td th:if="${!#lists.isEmpty(fatura.notafiscals)}"
+											th:text="${fatura.notafiscals[0].valorNfimp}"></td>
+										<td class="center"><a
+											th:href="@{/fatura}+ '/' + ${fatura.idFatura}"
+											class="icone_tabela" title="Consultar" rel="tooltip"
+											data-placement="left" role="button"> <span
+												class="fa fa-file-text-o text-success"></span>
+										</a></td>
+
+									</tr>
+									<tr>
+										<td colspan="12" th:if="${#lists.isEmpty(faturasGeradas)}">Nenhuma
+											Fatura Gerada e Enviada!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="tabs-demo4-area2"
+						aria-labelledby="tabs-demo4-area2">
+
+						<div class="table-responsive" style="margin-top: 10px;">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">MÊS REFERÉNCIA</th>
+										<th class="text-center col-md1">NÚMERO DA FATURA</th>
+										<th class="text-center col-md1">OPERADORA</th>
+										<th class="text-center col-md1">UF</th>
+										<th class="text-center col-md1">CNPJ</th>
+										<th class="text-center col-md1">NUMERO DA CONTA</th>
+										<th class="text-center col-md1">DATA VENCIMENTO</th>
+										<th class="text-center col-md1">VALOR (R$)</th>
+										<th class="text-center col-md1">VALOR NF (R$)</th>
+										<th class="text-center col-md1">CONSULTAR</th>
+									</tr>
+								</thead>
+
+								<tbody id="linha-info">
+
+									<tr th:each="fatura : ${faturasNaoGeradas}">
+										<td
+											th:text="${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)}"></td>
+										<td th:text="${fatura.numFatura}"></td>
+										<td th:text="${fatura.cliente.operadora.nome}"></td>
+										<td th:text="${fatura.cliente.operadora.uf}"></td>
+										<td th:text="${fatura.cliente.operadora.cnpj}"></td>
+										<td th:text="${fatura.indConta}"></td>
+										<td th:text="${#dates.format(fatura.dataVenc,'dd/MM/yyyy')}"></td>
+										<td th:text="${fatura.traillers[0].valTotal}"></td>
+
+										<td th:if="${!#lists.isEmpty(fatura.notafiscals)}"
+											th:text="${fatura.notafiscals[0].valorNfimp}"></td>
+										<td class="center"><a
+											th:href="@{/fatura}+ '/' + ${fatura.idFatura}"
+											class="icone_tabela" title="Consultar" rel="tooltip"
+											data-placement="left" role="button"> <span
+												class="fa fa-file-text-o text-success"></span>
+										</a></td>
+
+									</tr>
+									<tr>
+										<td style="text-align: center;" colspan="12"
+											th:if="${#lists.isEmpty(faturasNaoGeradas)}">Nenhuma
+											Fatura pendente de envio!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div role="tabpanel" class="tab-pane fade" id="tabs-demo4-area3"
+						aria-labelledby="tabs-demo4-area3">
+
+						<div class="table-responsive" style="margin-top: 10px;">
+							<table class="table table-bordered table-striped tabela">
+								<thead>
+									<tr>
+										<th class="text-center col-md1">MÊS REFERÉNCIA</th>
+										<th class="text-center col-md1">NÚMERO DA FATURA</th>
+										<th class="text-center col-md1">OPERADORA</th>
+										<th class="text-center col-md1">UF</th>
+										<th class="text-center col-md1">CNPJ</th>
+										<th class="text-center col-md1">NUMERO DA CONTA</th>
+										<th class="text-center col-md1">DATA VENCIMENTO</th>
+										<th class="text-center col-md1">VALOR (R$)</th>
+										<th class="text-center col-md1">VALOR NF (R$)</th>
+										<th class="text-center col-md1">CONSULTAR</th>
+									</tr>
+								</thead>
+
+								<tbody id="linha-info">
+
+									<tr th:each="fatura : ${faturas}">
+										<td
+											th:text="${#strings.substring(fatura.mesRef,4,6)} +'/'+ ${#strings.substring(fatura.mesRef,0,4)}"></td>
+										<td th:text="${fatura.numFatura}"></td>
+										<td th:text="${fatura.cliente.operadora.nome}"></td>
+										<td th:text="${fatura.cliente.operadora.uf}"></td>
+										<td th:text="${fatura.cliente.operadora.cnpj}"></td>
+										<td th:text="${fatura.indConta}"></td>
+										<td th:text="${#dates.format(fatura.dataVenc,'dd/MM/yyyy')}"></td>
+										<td th:text="${fatura.traillers[0].valTotal}"></td>
+
+										<td th:if="${!#lists.isEmpty(fatura.notafiscals)}"
+											th:text="${fatura.notafiscals[0].valorNfimp}"></td>
+										<td class="center"><a
+											th:href="@{/fatura}+ '/' + ${fatura.idFatura}"
+											class="icone_tabela" title="Consultar" rel="tooltip"
+											data-placement="left" role="button"> <span
+												class="fa fa-file-text-o text-success"></span>
+										</a></td>
+
+									</tr>
+									<tr>
+										<td style="text-align: center;" colspan="12"
+											th:if="${#lists.isEmpty(faturas)}">Nenhuma
+											Fatura carregada no sistema!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+				</div>
 			</div>
 		</div>
 	</div>
+
+
+
+	
 
 </section>
 </html>
