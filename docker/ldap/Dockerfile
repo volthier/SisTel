@@ -18,4 +18,8 @@
 # https://www.ibm.com/support/knowledgecenter/en/SSPREK_9.0.6/com.ibm.isam.doc/admin/concept/con_docker_user_registry.html #
 #                                                                                                                          #
 ############################################################################################################################
+#
+#       MORE :   https://github.com/osixia/docker-openldap
+#                https://hub.docker.com/r/osixia/openldap
+###########################################################################################################################
 FROM ibmcom/isam-openldap:latest
