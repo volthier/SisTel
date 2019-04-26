@@ -1,49 +1,28 @@
 package br.gov.cultura.DitelAdm.ws;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.xml.rpc.ServiceException;
-
+import br.gov.cultura.DitelAdm.model.Alocacao;
+import br.gov.cultura.DitelAdm.model.DocumentoSei;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.wsdl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import br.gov.cultura.DitelAdm.model.Alocacao;
-import br.gov.cultura.DitelAdm.model.DocumentoSei;
-import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
-import br.gov.cultura.DitelAdm.wsdl.Assinatura;
-import br.gov.cultura.DitelAdm.wsdl.Assunto;
-import br.gov.cultura.DitelAdm.wsdl.Destinatario;
-import br.gov.cultura.DitelAdm.wsdl.Documento;
-import br.gov.cultura.DitelAdm.wsdl.Interessado;
-import br.gov.cultura.DitelAdm.wsdl.Procedimento;
-import br.gov.cultura.DitelAdm.wsdl.Remetente;
-import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaDocumento;
-import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
-import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
-import br.gov.cultura.DitelAdm.wsdl.RetornoInclusaoDocumento;
-import br.gov.cultura.DitelAdm.wsdl.SeiPortType;
-import br.gov.cultura.DitelAdm.wsdl.SeiServiceLocator;
-import br.gov.cultura.DitelAdm.wsdl.Unidade;
-import br.gov.cultura.DitelAdm.wsdl.Usuario;
+import javax.xml.rpc.ServiceException;
+import java.io.IOException;
+import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
 public class SeiClient {
 
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
-	
+
 	private SeiPortType seiWs;
 
 	@Value("${sei.sistema}")
@@ -86,11 +65,12 @@ public class SeiClient {
 		// Unidade 110000073 -- DITEL -- Divisão de Telefonia e Serviços
 		// Unidade 110000069 -- COSIN -- Coordenação de Sistemas de Informação
 		RetornoGeracaoProcedimento retorno = seiWs.gerarProcedimento(siglaSistema, idServico, "110000073", p,
-				new Documento[0], new String[0], new String[0], null, null, null, null, null);
+				new Documento[0], new String[0], new String[0], null, null,
+				null, null, null, "", "");
 		return retorno;
 	}
 
-	
+
 	public RetornoConsultaProcedimento consutaProcessoSei(String protocoloProcedimento) throws RemoteException {
 
 		String sin, nin;
@@ -123,10 +103,10 @@ public class SeiClient {
 
 		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
 		Alocacao alocacao = alocacaoService.getAlocacao(idAlocacao);
-		
+
 		List<Alocacao> alocacaoLista = new ArrayList<Alocacao>();
 				alocacaoLista.add(alocacao);
-		
+
 		DocumentoSei documento = new DocumentoSei();
 		documento.setDocumentosLink(response.getLinkAcesso());
 		documento.setDocumentoIdSei(response.getIdDocumento());
@@ -139,14 +119,14 @@ public class SeiClient {
 		nin = "N";
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
-				response.getDocumentoFormatado(), sin, nin, nin);
+				response.getDocumentoFormatado(), sin, nin, nin, "");
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
 
 		alocacaoService.salvar(documento);
 
 		return documento;
 	}
-	
+
 	public DocumentoSei enviarFaturasCompostas(List<Alocacao> alocacaoLista, byte[] fatura)
 			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(fatura);
@@ -192,7 +172,7 @@ public class SeiClient {
 		nin = "N";
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
-				response.getDocumentoFormatado(), sin, nin, nin);
+				response.getDocumentoFormatado(), sin, nin, nin, "");
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
 
 		alocacaoService.salvar(documento);
@@ -222,11 +202,11 @@ public class SeiClient {
 		byte[] encoded = Base64.getEncoder().encode(memorando);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		
+
 		if(alocacaoLista.isEmpty()){
-		
+
 		}
-		
+
 		int ponteiro = 0;
 		for(Alocacao aloc : alocacaoLista){
 			for(Alocacao aloca : alocacaoLista){
@@ -237,7 +217,7 @@ public class SeiClient {
 				}
 			}
 		}
-		
+
 		Destinatario[] destinatario = new Destinatario[1];
 		Destinatario dest = new Destinatario();
 		dest.setNome(alocacaoLista.get(ponteiro).getUsuario().getNomeUsuario());
@@ -273,22 +253,22 @@ public class SeiClient {
 		nin = "N";
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
-				response.getDocumentoFormatado(), sin, nin, nin);
+				response.getDocumentoFormatado(), sin, nin, nin, "");
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
 
 		alocacaoService.salvar(documento);
 		return response;
 	}
-	
+
 	public RetornoInclusaoDocumento enviarMemorandoRessarcimento(List<Alocacao> alocacaoLista, byte[] memorando)
 			throws IOException, ParseException, InterruptedException {
 		byte[] encoded = Base64.getEncoder().encode(memorando);
 		String encodedFile = new String(encoded, "ISO-8859-1");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		
-		if(alocacaoLista.isEmpty()){	
+
+		if(alocacaoLista.isEmpty()){
 		}
-		
+
 		int ponteiro = 0;
 		for(Alocacao aloc : alocacaoLista){
 			for(Alocacao aloca : alocacaoLista){
@@ -299,7 +279,7 @@ public class SeiClient {
 				}
 			}
 		}
-		
+
 		Destinatario[] destinatario = new Destinatario[1];
 		Destinatario dest = new Destinatario();
 		dest.setNome(alocacaoLista.get(ponteiro).getUsuario().getNomeUsuario());
@@ -335,7 +315,7 @@ public class SeiClient {
 		nin = "N";
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
-				response.getDocumentoFormatado(), sin, nin, nin);
+				response.getDocumentoFormatado(), sin, nin, nin, "");
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
 
 		alocacaoService.salvar(documento);
@@ -369,10 +349,10 @@ public class SeiClient {
 		doc.setNivelAcesso("0");
 
 		RetornoInclusaoDocumento response = seiWs.incluirDocumento(siglaSistema, idServico, "110000073", doc);
-		
+
 		List<Alocacao> alocacaoLista = new ArrayList<Alocacao>();
 		alocacaoLista.add(alocacao);
-		
+
 		DocumentoSei documento = new DocumentoSei();
 		documento.setDocumentosLink(response.getLinkAcesso());
 		documento.setDocumentoIdSei(response.getIdDocumento());
@@ -390,7 +370,7 @@ public class SeiClient {
 		uni[0] = alocacao.getUsuario().getLotacaoIdUsuario();
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
-				response.getDocumentoFormatado(), sin, nin, nin);
+				response.getDocumentoFormatado(), sin, nin, nin, "");
 
 		documento.setDocumentosDataGerado(sdf.parse(consultarDocumento.getAndamentoGeracao().getDataHora()));
 
@@ -416,12 +396,12 @@ public class SeiClient {
 		nin = "N";
 
 		RetornoConsultaDocumento consultarDocumento = seiWs.consultarDocumento(siglaSistema, idServico, "110000073",
-				documento.getDocumentosNumero(), nin, sin, nin);
+				documento.getDocumentosNumero(), nin, sin, nin, "");
 
 		consultarDocumento.getAssinaturas();
-		
+
 		br.gov.cultura.DitelAdm.model.Usuario usuario = new br.gov.cultura.DitelAdm.model.Usuario();
-	 
+
 		for(Alocacao alocacao :documento.getAlocacao()){
 		 usuario = alocacao.getUsuario();
 		 break;
