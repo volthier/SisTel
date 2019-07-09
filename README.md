@@ -1,7 +1,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/acf4d9d69142d1d4c717/maintainability)](https://codeclimate.com/github/volthier/SisTel/maintainability)
 
 # SisTel
-Sistema de telefonia
+Sistema de gestão telefonica com integração ao LDAP e SEI.
 
 ## Como desenvolver
 
@@ -21,5 +21,3 @@ Sistema de telefonia
 
 * execute o comando:
   * `docker-compose up`
-
-* Criar um database e um schema chamados dbditel.
