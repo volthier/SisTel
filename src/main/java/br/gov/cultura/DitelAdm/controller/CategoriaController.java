@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.cultura.DitelAdm.model.Categoria;
 import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @Controller
 @RequestMapping("/categorias")
@@ -27,12 +28,16 @@ public class CategoriaController {
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
 	
+	@Autowired
+	private ConsultaLdapService ldap;
+	
 	@RequestMapping("/nova")
 	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<Categoria> categoria = cadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias", categoria);
 		mv.addObject(new Categoria());
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 
@@ -40,11 +45,13 @@ public class CategoriaController {
 	public String salvar(@Validated Categoria categoria, Errors errors, RedirectAttributes attributes){
 
 		if(errors.hasErrors()){
-	 		return CADASTRO_VIEW;
-	 	}
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/categorias/nova";	
+	 	}else{
 			cadastroCategoriaService.salvar(categoria);
 			attributes.addFlashAttribute("mensagem","Categoria cadastrada com sucesso!");
-			return "redirect:/categorias/nova";		
+			return "redirect:/categorias/nova";	
+	 	}
 		
 	}
 	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
@@ -58,6 +65,7 @@ public class CategoriaController {
 	public ModelAndView edicao(@PathVariable("id") Categoria categoria){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(categoria);
+		ldap.usuarioInfos(mv);
 				return mv;
 	}
 	

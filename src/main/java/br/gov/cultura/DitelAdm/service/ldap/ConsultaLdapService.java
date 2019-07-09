@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
 import br.gov.cultura.DitelAdm.repository.ldap.UsuariosLdaps;
@@ -33,5 +37,17 @@ public class ConsultaLdapService implements UsuariosLdaps {
 
 	public void setLdapTemplate(LdapTemplate ldapTemplate) {
 		this.ldapTemplate = ldapTemplate;
+	}
+	
+	@RequestMapping(value="usuarioInfos", method=RequestMethod.GET)
+	public ModelAndView usuarioInfos(ModelAndView mv){
+		 UsuarioLdap user = ldapTemplate.findOne(query().where("cn").is(SecurityContextHolder.getContext().getAuthentication().getName()), UsuarioLdap.class);
+		 mv.addObject("usuarioInfos", user);
+		 return mv;
+	}
+	
+	public UsuarioLdap userInfoUploadFatura(){
+		UsuarioLdap user = ldapTemplate.findOne(query().where("cn").is(SecurityContextHolder.getContext().getAuthentication().getName()), UsuarioLdap.class);
+		return user;
 	}
 }

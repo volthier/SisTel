@@ -19,6 +19,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 
 /**
@@ -30,8 +35,9 @@ import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 public class Fatura implements java.io.Serializable {
 
 	private Integer idFatura;
+	@JsonIgnore
 	private Cliente cliente;
-	private int numFatura;
+	private String numFatura;
 	private Date dataEmissao;
 	private String indConta;
 	private String mesRef;
@@ -66,13 +72,14 @@ public class Fatura implements java.io.Serializable {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Set<Servicos> servicoses = new HashSet(0);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@JsonIgnore
 	private Set<AlocacaoFatura> alocacaoFaturas = new HashSet(0);
 
 
 	public Fatura() {
 	}
 
-	public Fatura(Cliente cliente, int numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
+	public Fatura(Cliente cliente, String numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
 			String codCobranca, String descriCobranca, Date dataGeraArquivo, String versaoFormato) {
 		this.cliente = cliente;
 		this.numFatura = numFatura;
@@ -86,7 +93,7 @@ public class Fatura implements java.io.Serializable {
 		this.versaoFormato = versaoFormato;
 	}
 
-	public Fatura(Cliente cliente, int numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
+	public Fatura(Cliente cliente, String numFatura, Date dataEmissao, String indConta, String mesRef, Date dataVenc,
 			String codBarra, String codCobranca, String descriCobranca, String bancoCobranca, String agenciaCobranca,
 			String ccCobranca, String fisco, Date dataGeraArquivo, String versaoFormato, String campoLivreOp,
 			Set<Trailler> traillers, Set<Enderecos> enderecoses, Set<Notafiscal> notafiscals, Set<Resumo> resumos, Set<Servicos> servicoses, Set<Chamadas> chamadases, Set<Ajustes> ajusteses, Set<Descontos> descontoses,
@@ -132,7 +139,7 @@ public class Fatura implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cliente_codCliente", nullable = false)
+	@JoinColumn(name = "cliente_id_cliente", nullable = false)
 	public Cliente getCliente() {
 		return this.cliente;
 	}
@@ -142,11 +149,11 @@ public class Fatura implements java.io.Serializable {
 	}
 
 	@Column(name = "numFatura", nullable = false)
-	public int getNumFatura() {
+	public String getNumFatura() {
 		return this.numFatura;
 	}
 
-	public void setNumFatura(int numFatura) {
+	public void setNumFatura(String numFatura) {
 		this.numFatura = numFatura;
 	}
 

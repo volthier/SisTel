@@ -4,6 +4,8 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Categoriaservico;
 
 public class ServicosCategoria {
 	
+	private String numRecurso;
+	
 	private Integer quantidade;
 	
 	private Float tarifa;
@@ -26,7 +28,14 @@ public class ServicosCategoria {
 		this.setValorTotal(new Float(0));
 		this.setValorProporcional(new Float(0));
 	}
-	
+
+	public String getNumRecurso() {
+		return numRecurso;
+	}
+
+	public void setNumRecurso(String numRecurso) {
+		this.numRecurso = numRecurso;
+	}
 
 	public Integer getQuantidade() {
 		return quantidade;
@@ -80,7 +89,6 @@ public class ServicosCategoria {
 	public void setValorProporcional(Float valorProporcional) {
 		this.valorProporcional = valorProporcional;
 	}
-
 
 	public Categoriaservico getCategoria() {
 		return this.categoria;

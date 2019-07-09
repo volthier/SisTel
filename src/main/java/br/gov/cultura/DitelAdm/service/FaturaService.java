@@ -1,14 +1,27 @@
 package br.gov.cultura.DitelAdm.service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import javax.ws.rs.core.StreamingOutput;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.cultura.DitelAdm.model.dtos.FaturaArquivoDTO;
+import br.gov.cultura.DitelAdm.model.dtos.RelatorioGraficoClienteDTO;
+import br.gov.cultura.DitelAdm.model.dtos.RelatorioGraficoFaturaDTO;
+import br.gov.cultura.DitelAdm.model.dtos.RelatorioGraficoOperadoraDTO;
+import br.gov.cultura.DitelAdm.model.faturasV3.Chamadas;
+import br.gov.cultura.DitelAdm.model.faturasV3.Cliente;
+import br.gov.cultura.DitelAdm.model.faturasV3.Enderecos;
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
+import br.gov.cultura.DitelAdm.model.faturasV3.Operadora;
 import br.gov.cultura.DitelAdm.model.faturasV3.Planos;
+import br.gov.cultura.DitelAdm.model.faturasV3.Resumo;
+import br.gov.cultura.DitelAdm.model.faturasV3.Trailler;
 import br.gov.cultura.DitelAdm.repository.Faturas.Ajustesas;
 import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasAjustes;
 import br.gov.cultura.DitelAdm.repository.Faturas.CategoriasChamadas;
@@ -83,15 +96,15 @@ public class FaturaService {
 	private Traillers traillers;
 	
 	public void salvarOperadora(FaturaArquivoDTO faturaArquivoDTO) {
-		operadoras.save(faturaArquivoDTO.getOperadora());
+		operadoras.saveAndFlush(faturaArquivoDTO.getOperadora());
 	}
 
 	public void salvarCliente(FaturaArquivoDTO faturaArquivoDTO) {
-		clientes.save(faturaArquivoDTO.getCliente());
+		clientes.saveAndFlush(faturaArquivoDTO.getCliente());
 	}
 
 	public void salvarFatura(FaturaArquivoDTO faturaArquivoDTO) {
-		faturas.save(faturaArquivoDTO.getFatura());
+		faturas.saveAndFlush(faturaArquivoDTO.getFatura());
 	}
 
 	public void salvarResumo(FaturaArquivoDTO faturaArquivoDTO) {
@@ -150,6 +163,86 @@ public class FaturaService {
 	public Fatura salvarFaturaGerada(Fatura fatura){
 		return faturas.saveAndFlush(fatura);
 	}
+	
+	public Operadora retornarOperadoraCNPJ(String cnpj, int codOperadora){
+		return operadoras.findByCnpjAndCodOperadora(cnpj,codOperadora);
+	}
+	
+	public Cliente retornarCliente(String codCliente, String cnpj){
+		return clientes.findByCodClienteAndCnpj(codCliente, cnpj);
+	}
+	public List<Cliente> retornarClientesIguais(String codCliente, String cnpj){
+		return clientes.findByCodClienteAndCnpjContaining(codCliente, cnpj);
+	}
+	
+	public List<Operadora> getOperadoras(){
+		return operadoras.findAll();
+	}
+	
+	public List<RelatorioGraficoOperadoraDTO> getFaturasGrafico(){
+		List<Operadora> operadora = operadoras.findAll();
+		List<RelatorioGraficoOperadoraDTO> lista = new ArrayList<>();
+		for (Operadora op : operadora) {
+			List<RelatorioGraficoClienteDTO> cliente = new ArrayList<>();
+			RelatorioGraficoOperadoraDTO relatorio = new RelatorioGraficoOperadoraDTO();
+			relatorio.setIdOperadora(op.getIdOperadora());
+			relatorio.setNomeOperadora(op.getNome());
+			relatorio.setUfOperadora(op.getUf());
+			relatorio.setCnpjOperadora(op.getCnpj());
+			for(Cliente cl :op.getClientes()){
+				List<RelatorioGraficoFaturaDTO> fatura = new ArrayList<>();
+				RelatorioGraficoClienteDTO relatorioCliente = new RelatorioGraficoClienteDTO();
+				relatorioCliente.setIdCliente(cl.getIdCliente());
+				relatorioCliente.setCnpjCliente(cl.getCnpj());
+				relatorioCliente.setCodCliente(cl.getCodCliente());
+				relatorioCliente.setNomeCliente(cl.getNome());
+				for(Fatura fa : cl.getFaturas()){
+					RelatorioGraficoFaturaDTO relatorioFatura = new RelatorioGraficoFaturaDTO();
+					relatorioFatura.setIdFatura(fa.getIdFatura());
+					relatorioFatura.setMesRef(fa.getMesRef());
+					relatorioFatura.setDataVenc(fa.getDataVenc());
+					
+					while (relatorioFatura.getCnLocalidade() == null) {
+
+						for (Chamadas cha : fa.getChamadases()) {
+							if (relatorioFatura.getCnLocalidade() == null) {
+								relatorioFatura.setCnLocalidade(cha.getNumRecursoChamada().trim().substring(0, 2));
+							}
+						}
+
+						for (Resumo resumo : fa.getResumos()) {
+							if (relatorioFatura.getCnLocalidade() == null) {
+								relatorioFatura.setCnLocalidade(String.valueOf(resumo.getCnl()));
+							}
+						}
+
+						for (Planos plano : fa.getPlanoses()) {
+							if (relatorioFatura.getCnLocalidade() == null) {
+								relatorioFatura
+										.setCnLocalidade(String.valueOf(plano.getNumRecursoPlanos().substring(0, 2)));
+							}
+						}
+					}
+						
+							for (Trailler tr : fa.getTraillers()){
+								relatorioFatura.setValTotal(tr.getValTotal());
+								fatura.add(relatorioFatura);
+							};
+				}
+				relatorioCliente.setRelatorioGraficoFaturaDTO(fatura);
+				cliente.add(relatorioCliente);
+			}
+			relatorio.setRelatorioGraficoClienteDTO(cliente);
+			lista.add(relatorio);	
+		}
+		return lista;
+	}
+	
+	public List<RelatorioGraficoOperadoraDTO> getFaturasGraficoMensal(){
+		List<RelatorioGraficoOperadoraDTO> lista = getFaturasGrafico();
+		return lista;
+	}
+	
 	public List<Fatura> getFaturas() {
 		return faturas.findAll();
 	}

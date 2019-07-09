@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.service.CadastroChipService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 
 @Controller
@@ -30,10 +31,14 @@ public class ChipController extends UrlController {
 	@Autowired
 	private CadastroChipService cadastroChipService;
 	
+	@Autowired
+	private ConsultaLdapService ldap;
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo(){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Chip());
+		ldap.usuarioInfos(mv);
 		return mv;
 		
 	}
@@ -43,16 +48,14 @@ public class ChipController extends UrlController {
 		//TODO: Salva no banco de dados
 		
 		if(errors.hasErrors()){
-	 		return CADASTRO_VIEW;
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+	 		return "redirect:/chips/novo";
 	 	}
-		try {
+		else {
 			cadastroChipService.salvar(cadastroChip);
 			attributes.addFlashAttribute("mensagem","Dispositivo cadastrado com sucesso!");
 			return "redirect:/chips/novo";		
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
- 		}
+		} 
 		
 	}
 	
@@ -67,6 +70,7 @@ public class ChipController extends UrlController {
 	public ModelAndView edicao(@PathVariable("id") Chip chips){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(chips);
+		ldap.usuarioInfos(mv);
 				return mv;
 	}
 	

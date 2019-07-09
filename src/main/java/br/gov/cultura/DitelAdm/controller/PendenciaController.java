@@ -26,6 +26,7 @@ import br.gov.cultura.DitelAdm.model.Alocacao;
 import br.gov.cultura.DitelAdm.model.AlocacaoSei;
 import br.gov.cultura.DitelAdm.model.DocumentoSei;
 import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 import br.gov.cultura.DitelAdm.ws.SeiClient;
 import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
 import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
@@ -51,6 +52,9 @@ public class PendenciaController {
 	@Autowired
 	private LocaleResolver locale;
 	
+	@Autowired
+	private ConsultaLdapService ldap;
+	
 	@RequestMapping("/pendencia")
 	public ModelAndView pendencia() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
@@ -58,6 +62,7 @@ public class PendenciaController {
 		List<Alocacao> devolvidos = alocacaoService.getDevolucao();
 		lista.removeAll(devolvidos);
 		mv.addObject("pendencia", lista);
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 

@@ -1,6 +1,5 @@
 package br.gov.cultura.DitelAdm.controller;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
@@ -23,73 +22,77 @@ import br.gov.cultura.DitelAdm.model.LimiteAtesto;
 import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @Controller
 @RequestMapping("/dispositivos")
 public class DispositivoController {
-	
+
 	private static final String CADASTRO_VIEW = "CadastroDispositivo";
- 	
+
 	@Autowired
 	private CadastroDispositivoService cadastroDispositivoService;
-	
+
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
-	
+
+	@Autowired
+	private ConsultaLdapService ldap;
+
 	@RequestMapping("/novo")
-	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
+	public ModelAndView novo(@ModelAttribute("filtro") FiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
 		List<LimiteAtesto> limiteAtesto = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("dispositivos", todosDispositivos);
 		mv.addObject("limiteAtesto", limiteAtesto);
 		mv.addObject(new Dispositivo());
+
+		ldap.usuarioInfos(mv);
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Dispositivo cadastroDispositivo, Errors errors, RedirectAttributes attributes){
+	public String salvar(@Validated Dispositivo cadastroDispositivo, Errors errors, RedirectAttributes attributes) {
 
-		if(errors.hasErrors()){
-	 		return CADASTRO_VIEW;
-	 	}
-		try {
+		if (errors.hasErrors()) {
+			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
+			return "redirect:/dispositivos/novo";
+		}
+		else {
 			cadastroDispositivoService.salvar(cadastroDispositivo);
-			attributes.addFlashAttribute("mensagem","Dispositivo cadastrado com sucesso!");
-			return "redirect:/dispositivos/novo";		
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
- 		}
-		
+			attributes.addFlashAttribute("mensagem", "Dispositivo cadastrado com sucesso!");
+			return "redirect:/dispositivos/novo";
+		} 
+
 	}
 
-	@RequestMapping(value="{id}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Integer id, RedirectAttributes attributes){
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Integer id, RedirectAttributes attributes) {
 		cadastroDispositivoService.excluir(id);
-		attributes.addFlashAttribute("mensagem","Cadastro do dispositivo removido com sucesso!");
+		attributes.addFlashAttribute("mensagem", "Cadastro do dispositivo removido com sucesso!");
 		return "redirect:/consultas/dispositivos";
-		}	
-	
+	}
+
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") Dispositivo dispositivos){
+	public ModelAndView edicao(@PathVariable("id") Dispositivo dispositivos) {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(dispositivos);
-				return mv;
+		ldap.usuarioInfos(mv);
+		return mv;
 	}
-	
-	//DropDownMenu Atributos
-	@ModelAttribute("tipoDispositivoMap")
-	public Map<String,String> populateTipoDispositivoMap() throws MalformedURLException, IOException 
-	{
 
-	    Map<String,String> tipoDispositivoMap = new HashMap<String,String> ();
-	    tipoDispositivoMap.put("Fixo","Fixo");
-	    tipoDispositivoMap.put("Celular","Celular");
-	    tipoDispositivoMap.put("Tablet","Tablet");
-	    tipoDispositivoMap.put("Modem","Modem");
-//	    tipoDispositivoMap.put("NoteBook","NoteBook");
-	    return tipoDispositivoMap;
-	   
-	}	
+	// DropDownMenu Atributos
+	@ModelAttribute("tipoDispositivoMap")
+	public Map<String, String> populateTipoDispositivoMap() throws MalformedURLException, IOException {
+
+		Map<String, String> tipoDispositivoMap = new HashMap<String, String>();
+		tipoDispositivoMap.put("Fixo", "Fixo");
+		tipoDispositivoMap.put("Celular", "Celular");
+		tipoDispositivoMap.put("Tablet", "Tablet");
+		tipoDispositivoMap.put("Modem", "Modem");
+		// tipoDispositivoMap.put("NoteBook","NoteBook");
+		return tipoDispositivoMap;
+
+	}
 }

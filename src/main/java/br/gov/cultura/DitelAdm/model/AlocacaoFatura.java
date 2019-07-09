@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 
 /**
@@ -23,9 +25,13 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 public class AlocacaoFatura implements java.io.Serializable {
 
 	private Integer idAlocacaoFatura;
+	@JsonIgnore
 	private Fatura fatura;
+	@JsonIgnore
 	private Alocacao alocacao;
+	@JsonIgnore
 	private Linha linha;
+	@JsonIgnore
 	private DocumentoSei documentoSei;
 	private boolean ressarcimento;
 

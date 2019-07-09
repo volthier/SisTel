@@ -6,16 +6,7 @@
 
 <body style="margin: 40px 80px 60px 140px">
 
-	<p>
-		Memo n° 201 DITEL/COINT/CGTI/SPOA/SE/MinC
-	</p>
-	<div align="justify" th:inline="text">
-		<p>
-            <b>Ao Sr. [[${dto.usuario.nomeUsuario}]]</b>
-        </p>
-        <p>
-            <b>[[${dto.usuario.cargoUsuario}]]</b>
-        </p>
+	<div align="justify">
         <p>
             Assunto: <b>Uso de Linha Móvel Celular e/ou internet.</b>
         </p>
@@ -25,14 +16,14 @@
 	<ol type="1" style="margin-left: 5%">
 
 		<li style="text-align: justify">Encaminhamos a Vossa Senhoria faturas dos serviços de 
-		telefonia móvel e/ou internet, prestados a este Ministério pelas operadoras Claro S.A e Embratel S/A, 
-		referente ao mês de dezembro de 2015. 
+		telefonia móvel e/ou internet, prestados a este Ministério pelas operadoras Claro S.A, 
+		referente a <span th:text="${#strings.substring(faturaLista[0].fatura.mesRef,4,6)}" ></span>/<span th:text="${#strings.substring(faturaLista[0].fatura.mesRef,0,4)}"></span>. 
         </li>
 		<br></br>
 
 		<li style="text-align: justify">Ressaltamos ainda que, em virtude da emissão de faturas de telefone 
-		celular e modem com valores equivocados por parte da operadora Claro S.A, a Divisão de Telefonia (DITEL) 
-		da Coordenação-Geral de Tecnologia da Informação (CGTI) refez os cálculos das faturas conforme o contratado. 
+		celular e modem com valores equivocados por parte da operadora Claro S.A, a Divisão de Telefonia e Serviços(DITEL) 
+		da Coordenação-Geral de Infraestrutura Tecnológica (CGTEC) refez os cálculos das faturas conforme o contratado. 
 		Os valores apontados foram devidamente conferidos e de acordo com o estabelecido na Norma Operacional 
 		nº 1, de 18 de junho de 2013, há uma diferença entre o limite permitido pelo MinC e aquele efetivamente 
 		utilizado por Vossa Senhoria, conforme consta no quadro abaixo, a importância de:        
@@ -41,18 +32,18 @@
         
         <table style="width:100%; border: 1px solid;">
             <tr>
-                <th>MÊS</th>
-                <th>ANO</th> 
-                <th>COTA</th>
-                <th>VALOR DAS FATURAS</th>
-                <th>VALOR EXCEDENTE</th>
+                <th style="text-align: center;" >MÊS</th>
+                <th style="text-align: center;" >ANO</th> 
+                <th style="text-align: center;" >COTA</th>
+                <th style="text-align: center;" >VALOR DAS FATURAS</th>
+                <th style="text-align: center;" >VALOR EXCEDENTE</th>
             </tr>
             <tr>
-                <td>Outubro</td>
-                <td>2015</td> 
-                <td>R$ 300,00</td>
-                <td>R$ 1290,60</td>
-                <td>R$ 990,60</td>
+                <td style="text-align: center;" th:text="${#strings.substring(faturaLista[0].fatura.mesRef,4,6)}">Outubro</td>
+                <td style="text-align: center;" th:text="${#strings.substring(faturaLista[0].fatura.mesRef,0,4)}">2015</td> 
+                <td style="text-align: center;" th:text="|R$ ${#numbers.formatDecimal(alocacaoRepasse[0].usuario.limiteAtesto.valorLimite,0,2,'COMMA')}|" >R$ 300,00</td>
+                <td style="text-align: center;" th:text="|R$ ${#numbers.formatDecimal(#aggregates.sum(faturaLista.![valorTotal]),0,2,'COMMA')}|">R$ 1290,60</td>
+                <td style="text-align: center;" th:text="|R$ ${#numbers.formatDecimal(#aggregates.sum(faturaLista.![valorTotal]) - alocacaoRepasse[0].usuario.limiteAtesto.valorLimite,0,2,'COMMA')}|" >R$ 990,60</td>
                 
             </tr>
             
@@ -95,11 +86,11 @@
     
     <p>
         <b>
-            HAYLANDER RODRIGUES DE SOUSA 
+            CAMILA DA SILVA PANZA AMORIM
         </b>
     </p>
     <p>
-        Chefe de Serviço    
+        Chefe de Divisão  
     </p>
 
     </div>

@@ -6,24 +6,28 @@ package br.gov.cultura.DitelAdm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.cultura.DitelAdm.model.Chip;
 import br.gov.cultura.DitelAdm.model.Dispositivo;
 import br.gov.cultura.DitelAdm.model.Linha;
 import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
 import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.CadastroChipService;
 import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
 import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
 import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 
 @Controller
-@RequestMapping("/menu-usuario")
+@RequestMapping
 public class UsuarioMenuDispositivosController {
 	
 	@Autowired
@@ -37,7 +41,10 @@ public class UsuarioMenuDispositivosController {
 	
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
-		
+	
+	@Autowired
+	private ConsultaLdapService ldap;
+	
 	@RequestMapping("/dispositivo")
 	public ModelAndView dispositivo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.getIdDispositivo();
@@ -62,7 +69,7 @@ public class UsuarioMenuDispositivosController {
 		mv.addObject("linhas", todasLinhas);
 		
 				
-		
+		ldap.usuarioInfos(mv);
 		
 		return mv;
 	}	
@@ -90,7 +97,7 @@ public class UsuarioMenuDispositivosController {
 		mv.addObject("linhas", todasLinhas);
 		
 				
-		
+		ldap.usuarioInfos(mv);
 		
 		return mv;
 	}	

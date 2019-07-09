@@ -1,15 +1,21 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
 // Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Operadora MODEL: Padrão FEBRABAN v3
@@ -19,6 +25,7 @@ import javax.persistence.Table;
 @Table(name = "operadora", catalog = "dbditel")
 public class Operadora implements java.io.Serializable {
 
+	private Integer idOperadora; 
 	private int codOperadora;
 	private String nome;
 	private String cnpj;
@@ -29,14 +36,16 @@ public class Operadora implements java.io.Serializable {
 	public Operadora() {
 	}
 
-	public Operadora(int codOperadora, String nome, String cnpj, String uf) {
+	public Operadora(Integer idOperadora, int codOperadora, String nome, String cnpj, String uf) {
+		this.idOperadora = idOperadora;
 		this.codOperadora = codOperadora;
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.uf = uf;
 	}
 
-	public Operadora(int codOperadora, String nome, String cnpj, String uf, Set<Cliente> clientes) {
+	public Operadora(Integer idOperadora, int codOperadora, String nome, String cnpj, String uf, Set<Cliente> clientes) {
+		this.idOperadora= idOperadora;
 		this.codOperadora = codOperadora;
 		this.nome = nome;
 		this.cnpj = cnpj;
@@ -45,7 +54,18 @@ public class Operadora implements java.io.Serializable {
 	}
 
 	@Id
-	@Column(name = "codOperadora", unique = true, nullable = false)
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id_operadora", unique = true, nullable = false)
+	public Integer getIdOperadora() {
+		return this.idOperadora;
+	}
+
+	public void setIdOperadora(Integer idOperadora) {
+		this.idOperadora = idOperadora;
+	}
+	
+	@Column(name = "cod_operadora", nullable = false)
 	public int getCodOperadora() {
 		return this.codOperadora;
 	}

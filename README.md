@@ -5,18 +5,19 @@ Sistema de gestão telefonica com integração ao LDAP e SEI.
 
 ## Como desenvolver
 
-1. Suba um serviço de banco postgres à sua escolha
+1. Instale o **Docker**.
 
-Caso queira um banco rapido, sugerimos o container de postgres usado no salic :D
+  * [Tutorial](https://docs.docker.com/engine/installation/)
 
-```
-docker run --name db-postgres -p 5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_USER=postgres -e PGDATA=/var/lib/postgresql/data -v [pasta data local]:[pasta data container] -d culturagovbr/salic-db
+* Instale o **docker-compose**.
 
-```
+  * [Tutorial](https://docs.docker.com/compose/install/)
 
-2. Criar um database e um schema chamados dbditel
+* Atualize as variáveis de ambiente nos arquivos `.env` para serem mapeadas para o container. Em cada arquivo contém uma breve descrição do conteúdo de cada variável.
 
-3. Subir o container do nosso repositorio docker-sistel - https://github.com/culturagovbr/docker-sistel
+  * Variáveis de ambiente do container da aplicação estão no arquivo `docker/app/app-variables.env`
 
-4. Efetuar os passo-a-passo do repositorio [docker sistel](https://github.com/culturagovbr/docker-sistel).
+  * Variáveis de ambiente do container de banco estão no arquivo `docker/postgres/db-variables.env`
 
+* execute o comando:
+  * `docker-compose up`
