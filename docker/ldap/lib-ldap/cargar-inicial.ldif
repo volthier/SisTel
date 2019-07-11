@@ -1,0 +1,69 @@
+dn: dc=minc,dc=intra
+dc: minc
+o: CGTI
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+
+dn: cn=admin,dc=minc,dc=intra
+userPassword: {SSHA}NRP765SRmh6YT/FjtFIGswofKhpvPKZe
+description: LDAP administrator
+cn: admin
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+
+dn: ou=sede,dc=minc,dc=intra
+ou: sede
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=grupos,ou=sede,dc=minc,dc=intra
+ou: grupos
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=usuarios,ou=sede,dc=minc,dc=intra
+ou: usuarios
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=seguranca,ou=grupos,ou=sede,dc=minc,dc=intra
+ou: seguranca
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=cgti,ou=usuarios,ou=sede,dc=minc,dc=intra
+ou: cgti
+objectClass: top
+objectClass: organizationalUnit
+
+dn: cn=72381817115,ou=cgti,ou=usuarios,ou=sede,dc=minc,dc=intra
+userPassword: {md5}4QrcOUm6Wau+VuBX8g+IPg==
+uid: 72381817115
+sn: Leonardo
+cn: 72381817115
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+
+dn: cn=gs_sistel,ou=seguranca,ou=grupos,ou=sede,dc=minc,dc=intra
+member: cn=72381817115,ou=cgti,ou=usuarios,ou=sede,dc=minc,dc=intra
+cn: gs_sistel
+objectClass: top
+objectClass: groupOfNames
+
+dn: ou=servicos,ou=usuarios,ou=sede,dc=minc,dc=intra
+ou: servicos
+objectClass: top
+objectClass: organizationalUnit
+
+dn: cn=svc_sistel,ou=servicos,ou=usuarios,ou=sede,dc=minc,dc=intra
+userPassword: {md5}4zIBgA8YwOHkXBi6U/aOVA==
+sn: svc_sistel
+cn: svc_sistel
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+

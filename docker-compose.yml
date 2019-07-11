@@ -1,29 +1,19 @@
 version: '2'
 
-#networks:
-#  osinet:
-#    driver: bridge
-#    driver_opts:
-#      com.docker.network.bridge.name: osinet
-
 services:
   ldap:
     container_name: sistel_ldap
     image: osixia/openldap
     command: --loglevel debug
     environment:
-    # - LDAP_OPENLDAP_GID=1000 # leftover from when I was trying to set that without building.....
-    # - LDAP_OPENLDAP_UID=1000
       - LDAP_ORGANISATION=CGTI
       - LDAP_DOMAIN=minc.intra
       - LDAP_ADMIN_PASSWORD=root
 #    volumes:
-#      - ./data/ldap/var-lib-ldap:/var/lib/ldap
-#      - ./data/ldap/etc-ldap-slap.d:/etc/ldap/slap.d
+#       - ./docker/ldap/lib-ldap/:/var/lib/ldap
+#       - ./docker/ldap/slapd/config/:/etc/ldap/slap.d
     ports:
       - 389:389
-#    networks:
-#      - osinet
     restart: on-failure
 
   #container2
