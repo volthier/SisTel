@@ -1,10 +1,10 @@
 version: '2'
 
-networks:
-  osinet:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: osinet
+#networks:
+#  osinet:
+#    driver: bridge
+#    driver_opts:
+#      com.docker.network.bridge.name: osinet
 
 services:
   ldap:
@@ -62,4 +62,5 @@ services:
 
     links:
       - "db"
+      - "ldap"
 
