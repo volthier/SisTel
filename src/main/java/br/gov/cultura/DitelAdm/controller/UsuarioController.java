@@ -1,11 +1,13 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import br.gov.cultura.DitelAdm.model.Alocacao;
+import br.gov.cultura.DitelAdm.model.LimiteAtesto;
+import br.gov.cultura.DitelAdm.model.Usuario;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
+import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.Unidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,15 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.model.Alocacao;
-import br.gov.cultura.DitelAdm.model.LimiteAtesto;
-import br.gov.cultura.DitelAdm.model.Usuario;
-import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
-import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
-import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
-import br.gov.cultura.DitelAdm.ws.SeiClient;
-import br.gov.cultura.DitelAdm.wsdl.Unidade;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -42,8 +39,6 @@ public class UsuarioController extends UrlController {
 	private AlocacaoService alocacaoService;
 	@Autowired
 	private SeiClient sei;
-	@Autowired
-	private ConsultaLdapService ldap;
 
 	@RequestMapping("/novo")
 	public ModelAndView nova() {
@@ -53,9 +48,8 @@ public class UsuarioController extends UrlController {
 		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
 		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
 		mv.addObject("listaUnidadeSei", uni);
-		
+
 		mv.addObject(new Usuario());
-		ldap.usuarioInfos(mv);
 		return mv;
 	}
 
@@ -69,7 +63,7 @@ public class UsuarioController extends UrlController {
 			List<Unidade> uni = Arrays.asList(sei.listarUnidades());
 			for (Unidade item : uni) {
 				if (item.getIdUnidade().equals(usuario.getLotacaoIdUsuario())) {
-					
+
 					usuario.setDescricaoUsuario(item.getDescricao());
 					usuario.setLotacaoUsuario(item.getSigla());
 				}
@@ -99,15 +93,14 @@ public class UsuarioController extends UrlController {
 		mv.addObject("limiteAtesto", limiteAtesto);
 		mv.addObject("listaUnidadeSei", uni);
 		mv.addObject(usuario);
-		ldap.usuarioInfos(mv);
 		return mv;
 	}
-	
+
 	@RequestMapping("/lista-dispositivos/{id}")
 	public String listarDocumentos(@PathVariable("id") String id, ModelMap model){
 		List<Alocacao> alocacao = alocacaoService.getAlocacoesUsuario(cadastroUsuarioService.getUsuarioById(Integer.parseInt(id)));
 		model.addAttribute("alocacao", alocacao);
 		return "InfoDispositivos::modalConteudo";
-		
+
 	}
 }

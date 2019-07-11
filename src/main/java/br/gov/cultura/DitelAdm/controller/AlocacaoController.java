@@ -1,5 +1,26 @@
 package br.gov.cultura.DitelAdm.controller;
 
+import br.gov.cultura.DitelAdm.model.*;
+import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
+import br.gov.cultura.DitelAdm.repository.Dispositivos;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
+import br.gov.cultura.DitelAdm.service.*;
+import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
+import br.gov.cultura.DitelAdm.wsdl.Unidade;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.Context;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,73 +29,34 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.Context;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import br.gov.cultura.DitelAdm.model.Alocacao;
-import br.gov.cultura.DitelAdm.model.Categoria;
-import br.gov.cultura.DitelAdm.model.Chip;
-import br.gov.cultura.DitelAdm.model.Dispositivo;
-import br.gov.cultura.DitelAdm.model.DocumentoSei;
-import br.gov.cultura.DitelAdm.model.LimiteAtesto;
-import br.gov.cultura.DitelAdm.model.Linha;
-import br.gov.cultura.DitelAdm.model.Usuario;
-import br.gov.cultura.DitelAdm.model.ldap.UsuarioLdap;
-import br.gov.cultura.DitelAdm.repository.Dispositivos;
-import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
-import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
-import br.gov.cultura.DitelAdm.service.CadastroChipService;
-import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
-import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
-import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
-import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
-import br.gov.cultura.DitelAdm.ws.SeiClient;
-import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
-import br.gov.cultura.DitelAdm.wsdl.Unidade;
-
 @Controller
 @RequestMapping("/alocacoes")
 public class AlocacaoController {
-	
+
 	@Autowired
 	private Dispositivos dispositivos;
 
 	@Autowired
 	private AlocacaoService alocacaoService;
-	
+
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
-	
+
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
-	
+
 	@Autowired
 	private CadastroChipService cadastroChipService;
-	
+
 	@Autowired
 	private CadastroLinhaService cadastroLinhaService;
-	
+
 	@Autowired
 	private CadastroCategoriaService cadastroCategoriaService;
-	
+
 	@Autowired
-	private ConsultaLdapService ldap;
-	
+	private ConsultaLdapService consultaLdapService;
+
 	@Autowired
 	private SeiClient sei;
 
@@ -86,7 +68,7 @@ public class AlocacaoController {
 		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
 		mv.addObject("listaUnidadeSei", uni);
 
-		List<UsuarioLdap> todosUsuarios = ldap.findAll();
+		List<UsuarioLdap> todosUsuarios = consultaLdapService.findAll();
 		todosUsuarios.sort((user1, user2) -> user1.getFullName().compareTo(user2.getFullName()));
 		mv.addObject("usuarios", todosUsuarios);
 
@@ -114,11 +96,11 @@ public class AlocacaoController {
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
 		todasCategorias.sort((cat1, cat2) -> cat1.getDescricaoCategoria().compareTo(cat2.getDescricaoCategoria()));
 		mv.addObject("categorias", todasCategorias);
-		ldap.usuarioInfos(mv);
+
 		return mv;
 	}
-	
-	
+
+
 	@RequestMapping("/lista-alocacoes")
 	public ModelAndView listar(@ModelAttribute("filtro") FiltroPesquisa filtro) throws RemoteException{
 		ModelAndView mv = new ModelAndView("AlocacaoListar");
@@ -126,7 +108,7 @@ public class AlocacaoController {
 		List<Usuario> usuarioErrorSei = new ArrayList<br.gov.cultura.DitelAdm.model.Usuario>();
 
 		for (Alocacao alocacao : lista) {
-			
+
 			List<DocumentoSei> documento = alocacaoService.getDocumentoSeiListaAlocacao(alocacao);
 			documento.forEach(doc -> {
 				try {
@@ -140,7 +122,7 @@ public class AlocacaoController {
 					e.printStackTrace();
 				}
 			});
-			
+
 			if (alocacao.getDtDevolucao() == null) {
 				br.gov.cultura.DitelAdm.wsdl.Usuario usuarioSei = sei.ValidaUsuarioUnidade(alocacao);
 				if (usuarioSei == null) {
@@ -151,56 +133,55 @@ public class AlocacaoController {
 				}
 			}
 		}
-		
+
 		List<Alocacao> todosUsuario = alocacaoService.filtroPesquisa(filtro);
 		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
-		
+
 		for(Alocacao aloca : todosUsuario){
 			if(aloca.getAutorizar()!=null){
 				possivelDevolver.add(aloca);
 			}
 		}
-		
+
 		if(possivelDevolver.size()>1){
 		possivelDevolver.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
 		}
-		
+
 		mv.addObject("alocacaoAtiva", possivelDevolver);
 		mv.addObject("alocacaoTodas",todosUsuario);
-		ldap.usuarioInfos(mv);
-		
+
 		return mv;
 
 	}
-	
+
 	@RequestMapping("/lista-alocacoes/{id}")
 	public String listarDocumentos(@PathVariable("id") String id, ModelMap model){
 		Alocacao alocacao = alocacaoService.getAlocacao(Integer.parseInt(id));
 		model.addAttribute("alocacao", alocacao);
 		model.addAttribute("documentos", alocacaoService.getDocumentoSeiListaAlocacao(alocacao));
 		return "InfoDocumentos::modalConteudo";
-		
+
 	}
-	
+
 	@RequestMapping("/devolver")
 	public @ResponseBody @Context ModelAndView devolver(@ModelAttribute("filtro") FiltroPesquisa filtro,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("AlocacaoDevolver");
 		List<Alocacao> todosUsuario = alocacaoService.getIdAlocacao();
 		List<Alocacao> possivelDevolver = new ArrayList<Alocacao>();
-		
+
 		for(Alocacao aloca : todosUsuario){
 			if(aloca.getAutorizar()!=null){
 				possivelDevolver.add(aloca);
 			}
 		}
-		
+
 		if(possivelDevolver.size()>1){
 		possivelDevolver.sort((ul1, ul2) -> ul1.getUsuario().getNomeUsuario().compareTo(ul2.getUsuario().getNomeUsuario()));
 		}
-		
+
 		mv.addObject("usuariosDispositivos", possivelDevolver);
-		ldap.usuarioInfos(mv);
+
 		return mv;
 	}
 
@@ -269,7 +250,7 @@ public class AlocacaoController {
 			String cpf = servletRequest.getParameter("nomeUsuario");
 			Usuario usuarioCad = cadastroUsuarioService.getByCpf(cpf);
 			if (usuarioCad == null) {
-				UsuarioLdap usuarioLdap = ldap.findOne(cpf);
+				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
 				usuario.setCpfUsuario(usuarioLdap.getCpf());
 				usuario.setNomeUsuario(usuarioLdap.getFullName());
 				usuario.setPrimeiroNomeUsuario(usuarioLdap.getFirstName());
@@ -289,7 +270,7 @@ public class AlocacaoController {
 				cadastroUsuarioService.salvar(usuario);
 			} else if (usuarioCad != null) {
 				usuario = usuarioCad;
-				UsuarioLdap usuarioLdap = ldap.findOne(cpf);
+				UsuarioLdap usuarioLdap = consultaLdapService.findOne(cpf);
 
 				if (usuario.getEmailUsuario() == null) {
 					usuario.setEmailUsuario(usuarioLdap.getEmail());
@@ -382,16 +363,16 @@ public class AlocacaoController {
 		attributes.addFlashAttribute("mensagem", "Fornecimento CANCELADO com sucesso!");
 		return "redirect:/pendencia";
 	}
-	
+
 	@RequestMapping("/disponibilizar/{id}")
 	public ModelAndView edicao(@PathVariable("id") Alocacao alocacao){
-		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");		
-		
+		ModelAndView mv = new ModelAndView("AlocacaoDisponibilizar");
+
 		List<Unidade> uni = Arrays.asList(sei.listarUnidades());
 		uni.sort((u1, u2) -> u1.getDescricao().compareTo(u2.getDescricao()));
 		mv.addObject("listaUnidadeSei", uni);
 
-		List<UsuarioLdap> todosUsuarios = ldap.findAll();
+		List<UsuarioLdap> todosUsuarios = consultaLdapService.findAll();
 		todosUsuarios.sort((user1, user2) -> user1.getFullName().compareTo(user2.getFullName()));
 		mv.addObject("usuarios", todosUsuarios);
 
@@ -419,9 +400,9 @@ public class AlocacaoController {
 		List<Categoria> todasCategorias = cadastroCategoriaService.getIdCategoria();
 		todasCategorias.sort((cat1, cat2) -> cat1.getDescricaoCategoria().compareTo(cat2.getDescricaoCategoria()));
 		mv.addObject("categorias", todasCategorias);
-		 
+
 		mv.addObject(alocacao);
-		ldap.usuarioInfos(mv);
+
 				return mv;
 	}
 

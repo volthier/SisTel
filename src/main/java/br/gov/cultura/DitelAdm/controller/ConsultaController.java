@@ -1,25 +1,15 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.util.List;
+import br.gov.cultura.DitelAdm.model.*;
+import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
+import br.gov.cultura.DitelAdm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import br.gov.cultura.DitelAdm.model.Categoria;
-import br.gov.cultura.DitelAdm.model.Chip;
-import br.gov.cultura.DitelAdm.model.Dispositivo;
-import br.gov.cultura.DitelAdm.model.LimiteAtesto;
-import br.gov.cultura.DitelAdm.model.Linha;
-import br.gov.cultura.DitelAdm.model.Usuario;
-import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
-import br.gov.cultura.DitelAdm.service.CadastroCategoriaService;
-import br.gov.cultura.DitelAdm.service.CadastroChipService;
-import br.gov.cultura.DitelAdm.service.CadastroDispositivoService;
-import br.gov.cultura.DitelAdm.service.CadastroLinhaService;
-import br.gov.cultura.DitelAdm.service.CadastroUsuarioService;
-import br.gov.cultura.DitelAdm.service.LimiteAtestoService;
-import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/consultas")
@@ -42,17 +32,12 @@ public class ConsultaController {
 
 	@Autowired
 	private LimiteAtestoService limiteAtestoService;
-	
-	@Autowired
-	private ConsultaLdapService ldap;
 
 	@RequestMapping("/dispositivos")
 	public ModelAndView consultarDispositivo(@ModelAttribute("filtro") FiltroPesquisa filtro) {
 		List<Dispositivo> todosDispositivos = cadastroDispositivoService.filtroPesquisa(filtro);
 		ModelAndView mv = new ModelAndView("PesquisaDispositivo");
 		mv.addObject("dispositivos", todosDispositivos);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
@@ -61,8 +46,6 @@ public class ConsultaController {
 		List<Usuario> todosUsuarios = cadastroUsuarioService.filtroPesquisa(filtro);
 		ModelAndView mv = new ModelAndView("PesquisaUsuario");
 		mv.addObject("usuarios", todosUsuarios);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
@@ -71,8 +54,6 @@ public class ConsultaController {
 		List<Chip> todosChips = cadastroChipService.filtroPesquisa(filtro);
 		ModelAndView mv = new ModelAndView("PesquisaChip");
 		mv.addObject("chips", todosChips);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
@@ -81,8 +62,6 @@ public class ConsultaController {
 		List<Linha> todasLinhas = cadastroLinhaService.filtroPesquisa(filtro);
 		ModelAndView mv = new ModelAndView("PesquisaLinha");
 		mv.addObject("linhas", todasLinhas);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
@@ -91,8 +70,6 @@ public class ConsultaController {
 		ModelAndView mv = new ModelAndView("PesquisaCategoria");
 		List<Categoria> todasCategorias = CadastroCategoriaService.getIdCategoria();
 		mv.addObject("categorias", todasCategorias);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
@@ -101,16 +78,12 @@ public class ConsultaController {
 		ModelAndView mv = new ModelAndView("PesquisaLimiteAtesto");
 		List<LimiteAtesto> todosOsLimites = limiteAtestoService.getLimitesAtesto();
 		mv.addObject("limites", todosOsLimites);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
 	@RequestMapping("/contratos")
 	public ModelAndView consultarContrato(@ModelAttribute("filtro") FiltroPesquisa filtro) {
 		ModelAndView mv = new ModelAndView("PesquisaContrato");
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 

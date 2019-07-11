@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Trailler MODEL: Padrão FEBRABAN v3
  */
@@ -23,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Trailler implements java.io.Serializable {
 
 	private Integer idTrailler;
-	@JsonIgnore
 	private Fatura fatura;
 	private int quanReg10;
 	private int quanReg20;

@@ -262,45 +262,37 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	<table border="0" cellpadding="1" cellspacing="1" class="resumo table">
+	<table border="0" cellpadding="1" cellspacing="1" class="resumo">
 		<tbody>
 			<tr>
 				<td>N&uacute;mero da linha</td>
 				<td>Per&iacute;odo de Uso</td>
-				<td>Valor</td>
+				<td>Total a Pagar</td>
 			</tr>
 			 
 			<tr th:each="fat : ${fatura}" >
 				<td th:if="${fat.alocacao.linha != null}" th:text="${fat.alocacao.linha.numeroLinha}">61 99999 9999&nbsp;</td>
 				<td th:if="${fat.planos != null}" th:text="${fat.planos[1].dataIniCicloFormatada()} + ' a ' + ${fat.planos[1].dataFimCicloFormatada()}">
 					22/01/2017</td>
-					<td th:if="${fat.planos == null}"> </td>
 				<td
 					th:text="| R$ ${#numbers.formatDecimal(fat.valorTotal,0,2,'COMMA')}">R$
 					&nbsp; 411,89</td>
 			</tr>
-			<tr>
-			<td> <b>Total a Pagar</b> </td>
-			<td></td>
-			<td th:utext="|R$ ${#numbers.formatDecimal(#aggregates.sum(fatura.![valorTotal]),0,2,'COMMA')}"> 
-			</td>
-			</tr>
+			
 		</tbody>
 	</table>
 	<br/>
 	
 	<div th:each="fat : ${fatura}">
 	 <h4 th:text="| Detalhamento da linha ${fat.alocacao.linha.numeroLinha}"></h4>
-	 
-	 <div th:if="${fat.alocacao.dispositivo == null}"> 
-	 <table th:if="${fat.planos != null}">
+	 <table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'}">
 		<tbody>
 			<tr>
 				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
 			</tr>
 		</tbody>
 	</table>
-	<table th:if="${fat.planos != null}" class="table table-dotted">
+	<table th:if="${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'}" class="table table-dotted">
 		<thead>
 			<tr>
 				<th>Descri&ccedil;&atilde;o</th>
@@ -322,43 +314,7 @@ table td[class*="col-"], table th[class*="col-"] {
 			</tr>
 		</tbody>
 	</table>
-	</div>
-	
-	
-	<div th:if="${fat.alocacao.dispositivo != null}"> 
-	 <table th:if="${fat.alocacao.dispositivo == null} and ${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}">
-		<tbody>
-			<tr>
-				<td class="borda-redonda">Mensalidade e Pacotes Promocionais</td>
-			</tr>
-		</tbody>
-	</table>
-	<table th:if="${fat.alocacao.dispositivo == null} and ${fat.alocacao.dispositivo.tipoDispositivo != 'Fixo'} and  ${fat.planos != null}" class="table table-dotted">
-		<thead>
-			<tr>
-				<th>Descri&ccedil;&atilde;o</th>
-				<th style="text-align: center;">Total (R$)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>GESTOR ONLINE - CONTROLE COMPLETO</td>
-				<td th:if="${fat.valorContratoPlano != null }" style="text-align: center;"
-					th:text="${#numbers.formatDecimal(fat.valorContratoPlano,0,2,'COMMA')}">Valor
-					0</td>
-			</tr>
-			<tr th:if="${fat.planos[0] != null}" th:each="plano : ${fat.planos}">
-				<td
-					th:text="${plano.descricaoPlano} + ' - de ' + ${plano.dataIniCicloFormatada()} + ' a ' + ${plano.dataFimCicloFormatada()}"></td>
-				<td style="text-align: center;"
-					th:text="${#numbers.formatDecimal(plano.valComImp,1,2)}"></td>
-			</tr>
-			
-		</tbody>
-	</table>
-	</div>
-	
-	
+
 	<table th:if="${fat.chamadas != null and !fat.chamadas.isEmpty()}" >
 		<tbody>
 			<tr>
@@ -389,7 +345,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				<td style="text-align: center;"
 					th:text="${chamada.numTelefoneChamado}"></td>
 				<td style="text-align: center;" th:text="${chamada.duracaoLigacao}"></td>
-				<td style="text-align: center;" th:if="${chamada.tarifa() != null or !chamada.tarifa().isEmpty()}" th:text="${chamada.tarifa()}"></td>
+				<td style="text-align: center;" th:if="${chamada.tarifa() != null and !chamada.tarifa().isEmpty() }" th:text="${chamada.tarifa()}"></td>
 				<td style="text-align: center;"
 					th:text="${#numbers.formatDecimal(chamada.valLigImp,1,2)}"></td>
 				<td style="text-align: center;"
@@ -411,7 +367,7 @@ table td[class*="col-"], table th[class*="col-"] {
 	<p th:if="${fat.servicosCategoria != null}">
 		<b>Servi&ccedil;os (Torpedos, Hits, Jogos, etc.)</b>
 	</p>
-	<div th:if="${fat.servicosCategoria != null}">
+	<div>
 		<table class="table table-bordered" th:if="${fat.servicosCategoria != null}">
 			<thead>
 				<tr>
@@ -435,7 +391,7 @@ table td[class*="col-"], table th[class*="col-"] {
 				</tr>
 			</tbody>
 		</table>
-			<table th:if="${fat.servicosCategoria != null and !fat.servicosCategoria.isEmpty() and (#aggregates.sum(fat.servicosCategoria.![valorCobrado])) &gt; 0}" class="borda-redonda-foot">
+			<table th:if="${fat.servicosCategoria != null and !fat.servicosCategoria.isEmpty()}" class="borda-redonda-foot">
 		<tbody>
 			<tr>
 				<td colspan="4"><b>Sub Total</b></td>

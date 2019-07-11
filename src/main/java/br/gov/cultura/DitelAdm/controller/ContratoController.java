@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.cultura.DitelAdm.model.Contrato;
 import br.gov.cultura.DitelAdm.repository.filtro.FiltroPesquisa;
 import br.gov.cultura.DitelAdm.service.ContratoService;
-import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
 
 @Controller
 @RequestMapping("/contratos")
@@ -25,28 +24,25 @@ public class ContratoController {
 	@Autowired
 	private ContratoService contratoService;
 	
-	@Autowired
-	private ConsultaLdapService ldap;
-	
 	@RequestMapping("/novo")
 	public ModelAndView novo(@ModelAttribute("filtro")FiltroPesquisa filtro){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Contrato());
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Contrato contrato, Errors errors, RedirectAttributes attributes){
 		if(errors.hasErrors()){
-			attributes.addFlashAttribute("messageErro","Erro no cadastrado!");
-			return "redirect:/contratos/novo";		
+	 		return CADASTRO_VIEW;
 	 	}
-		else{
+		try{
 			contratoService.salvar(contrato);
 			attributes.addFlashAttribute("mensagem","Contrato cadastrado com sucesso!");
 			return "redirect:/contratos/novo";		
+		}catch(IllegalArgumentException e) {
+			errors.rejectValue("dataVencimento", null, e.getMessage());
+			return CADASTRO_VIEW;
 		}
 	}
 
@@ -61,8 +57,6 @@ public class ContratoController {
 	public ModelAndView edicao(@PathVariable("id") Contrato contrato){
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(contrato);
-		ldap.usuarioInfos(mv);
-
 		return mv;
 	}
 	

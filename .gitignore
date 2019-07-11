@@ -7,3 +7,8 @@
 /metadata/
 .metadata
 /RemoteSystemsTempFiles/
+.idea
+jaf-1.1.1*
+Sistel.iml
+jaf-1_1_1.zip
+ws_sei.wsdl

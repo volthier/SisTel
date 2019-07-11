@@ -1,25 +1,9 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
 // Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
-import static javax.persistence.GenerationType.IDENTITY;
-
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Cliente MODEL: Padrão FEBRABAN v3
@@ -29,9 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @Table(name = "cliente", catalog = "dbditel")
 public class Cliente implements java.io.Serializable {
 
-	private Integer idCliente;
 	private String codCliente;
-	@JsonIgnore
 	private Operadora operadora;
 	private String nome;
 	private String cnpj;
@@ -41,16 +23,14 @@ public class Cliente implements java.io.Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(Integer idCliente, String codCliente, Operadora operadora, String nome, String cnpj) {
-		this.idCliente = idCliente;
+	public Cliente(String codCliente, Operadora operadora, String nome, String cnpj) {
 		this.codCliente = codCliente;
 		this.operadora = operadora;
 		this.nome = nome;
 		this.cnpj = cnpj;
 	}
 
-	public Cliente(Integer idCliente, String codCliente, Operadora operadora, String nome, String cnpj, Set<Fatura> faturas) {
-		this.idCliente = idCliente;
+	public Cliente(String codCliente, Operadora operadora, String nome, String cnpj, Set<Fatura> faturas) {
 		this.codCliente = codCliente;
 		this.operadora = operadora;
 		this.nome = nome;
@@ -59,18 +39,8 @@ public class Cliente implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "id_cliente", unique = true, nullable = false)
-	public Integer getIdCliente() {
-		return this.idCliente;
-	}
-
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
-	
-	@Column(name = "codCliente", nullable = false, length = 15)
+	@Column(name = "codCliente", unique = true, nullable = false, length = 15)
 	public String getCodCliente() {
 		return this.codCliente;
 	}
@@ -80,7 +50,7 @@ public class Cliente implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "operadora_id_operadora", nullable = false)
+	@JoinColumn(name = "operadora_codOperadora", nullable = false)
 	public Operadora getOperadora() {
 		return this.operadora;
 	}

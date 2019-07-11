@@ -6,7 +6,7 @@
 	layout:decorator="LayoutPadrao">
     
     <section layout:fragment="cabecalho">
-   
+    
         <nav class="navbar navbar-default header navbar-fixed-top padding-0" id="fundo_logo">
           <div class="col-md-12 nav-wrapper" id="cbc">
             <div class="navbar-header" style="width:100%;">
@@ -22,9 +22,10 @@
                 </div>
               
 
-         
+              
+
               <ul id="menu_usuario" class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name nome_usuario"><span th:text="${usuarioInfos.firstName}"> Moisés Rabelo</span></li>
+                <li class="user-name nome_usuario"><span sec:authentication="principal.username"> Moisés Rabelo</span></li>
                   <li class="dropdown avatar-dropdown" id="li_user">
                     <span class="fa fa-user li_nav" id="icone_usuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
 
@@ -43,7 +44,6 @@
                 </li>
                 <!-- <li data-toggle="tab" href="#right-menu-notif" class="opener-right-menu li_nav"><a><span id="icone_notif" class="fa fa-bell-o fa-2x"></span></a></li> -->
               </ul>
-         
             </div>
           </div>
         </nav>

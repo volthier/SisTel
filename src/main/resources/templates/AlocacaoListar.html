@@ -63,6 +63,10 @@
 								<div role="tabpanel" class="tab-pane fade active in"
 									id="tabs-demo4-area1" aria-labelledby="tabs-demo4-area1">
 
+									<span
+										style="font-size: 14px; font-family: 'open_sansregular'; color: #c1c1c1;">
+										EXIBINDO AS LINHAS NO PERÍODO</span>
+
 									<div class="table-responsive" style="margin-top: 10px;">
 										<table class="table table-bordered table-striped tabela">
 											<thead>
@@ -86,9 +90,9 @@
 													<td class="text-center" th:text="${atv.dtRecebido}">10/10/2010</td>
 													<td class="text-center" th:text="${atv.usuario.nomeUsuario}">João Ipsum</td>
 													<td class="text-center" th:text="${atv.usuario.cpfUsuario}" >9563481276</td>
-													<td class="text-center" th:text="${atv.usuario.lotacaoUsuario}">Ditel</td>
+													<td class="text-center" th:text="${atv.usuario.usuarioSigla}">Ditel</td>
 													<td class="text-center numTable" th:text="${atv.linha.numeroLinha}">61993696554</td>
-													<td th:if="${atv.dispositivo != null}" class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
+													<td class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
 
 												</tr>
 												<tr>
@@ -101,6 +105,9 @@
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="tabs-demo4-area2"
 									aria-labelledby="tabs-demo4-area2">
+									<span
+										style="font-size: 14px; font-family: 'open_sansregular'; color: #c1c1c1;">
+										EXIBINDO AS LINHAS NO PERÍODO</span>
 
 									<div class="table-responsive" style="margin-top: 10px;">
 										<table class="table table-bordered table-striped tabela">
@@ -125,9 +132,9 @@
 													<td class="text-center" th:text="${atv.dtRecebido}">10/10/2010</td>
 													<td class="text-center" th:text="${atv.usuario.nomeUsuario}">João Ipsum</td>
 													<td class="text-center" th:text="${atv.usuario.cpfUsuario}" >9563481276</td>
-													<td class="text-center" th:text="${atv.usuario.lotacaoUsuario}">Ditel</td>
+													<td class="text-center" th:text="${atv.usuario.usuarioSigla}">Ditel</td>
 													<td class="text-center numTable" th:text="${atv.linha.numeroLinha}">61993696554</td>
-													<td th:if="${atv.dispositivo != null}" class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
+													<td class="text-center" th:text="${atv.dispositivo.tipoDispositivo}">Tablet</td>
 												</tr>
 												<tr>
 													<td colspan="9" th:if="${#lists.isEmpty(alocacaoTodas)}">Nenhum

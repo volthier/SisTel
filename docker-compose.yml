@@ -1,18 +1,43 @@
 version: '2'
-services:
 
-  #container2   
+networks:
+  osinet:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: osinet
+
+services:
+  ldap:
+    container_name: sistel_ldap
+    image: osixia/openldap
+    command: --loglevel debug
+    environment:
+    # - LDAP_OPENLDAP_GID=1000 # leftover from when I was trying to set that without building.....
+    # - LDAP_OPENLDAP_UID=1000
+      - LDAP_ORGANISATION=CGTI
+      - LDAP_DOMAIN=minc.intra
+      - LDAP_ADMIN_PASSWORD=root
+#    volumes:
+#      - ./data/ldap/var-lib-ldap:/var/lib/ldap
+#      - ./data/ldap/etc-ldap-slap.d:/etc/ldap/slap.d
+    ports:
+      - 389:389
+#    networks:
+#      - osinet
+    restart: on-failure
+
+  #container2
   db:
     build: ./docker/postgres/
 
     container_name: sistel_db
-    
+
     expose:
       - "5432"
     ports:
       - "5432:5432"
-    
-    volumes: 
+
+    volumes:
       - /src/main/resources/data:/var/www/project/sistel-db/data
 
     env_file:
@@ -27,7 +52,7 @@ services:
     ports:
       - "80:8080"
 
-    volumes: 
+    volumes:
       - /var/sistel/target/:/opt/jboss/wildfly/standalone/deployments/
       - /var/sistel/upload-dir/:/opt/jboss/upload-dir/
       - /var/sistel/log/:/opt/jboss/wildfly/standalone/log/

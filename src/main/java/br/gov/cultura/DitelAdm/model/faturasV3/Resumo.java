@@ -19,9 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.gov.cultura.DitelAdm.model.AlocacaoFatura;
 import br.gov.cultura.DitelAdm.model.Linha;
 
@@ -34,9 +31,7 @@ import br.gov.cultura.DitelAdm.model.Linha;
 public class Resumo implements java.io.Serializable {
 
 	private Integer idResumo;
-	@JsonIgnore
 	private Fatura fatura;
-	@JsonIgnore
 	private Linha linha;
 	private String idUnico;
 	private int cnl;

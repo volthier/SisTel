@@ -21,5 +21,7 @@
 #
 #       MORE :   https://github.com/osixia/docker-openldap
 #                https://hub.docker.com/r/osixia/openldap
+#
+#  Aplicativo para acessar ldap Admin: http://www.ldapbrowserlinux.com/
 ###########################################################################################################################
 FROM ibmcom/isam-openldap:latest

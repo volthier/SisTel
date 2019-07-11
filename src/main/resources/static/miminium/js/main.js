@@ -111,100 +111,35 @@
 	var randomScalingFactor = function() {
 		return Math.round(Math.random() * 100);
 	};
-	
-	
-	
-
-	window.onload = function() {
-		if (hasClass = "#telaInicio") {
-
-//			$.ajax({
-//			  url: "http://localhost:8080/relatorio/linhas",
-//			  context: document.body
-//			}).done(function(result) {
-//			});
-	
-//			
-//			[
-//				'mes_apelido' : 'JAN',
-//				'operadoras' : [
-//					['name': 'Claro', 'value': '18'],
-//					['name': 'Oi'],
-//					['name': 'Vivo']
-//				]
-//			]
-//			
-//			[
-//				'name': 'Oi',
-//				'value': [18, 9, 5, 7, 4.5, 4, 5, 7, 8, 9, 8, 9]
-//			]
-
-				
 	var lineChartData = {
 		labels : [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago",
 				"Set", "Out", "Nov", "Dez" ],
-				datasets : [ 
-					{
-						label : "My First dataset",
-						fillColor : "rgba(21,186,103,0.4)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(66,69,67,0.3)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						// ----------GRÁFICO VERDE------------
-						data : [ 18, 9, 5, 7, 4.5, 4, 5, 7, 8, 9, 8, 9 ]
-					}, {
-						label : "My Second dataset",
-						fillColor : "rgba(21,113,186,0.5)",
-						strokeColor : "rgba(151,187,205,1)",
-						pointColor : "rgba(151,187,205,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(151,187,205,1)",
-						// ----------GRÁFICO AZUL------------
-						data : [ 4, 7, 5, 18, 4.5, 4, 5, 4.5, 6, 5.6, 7.5, 7 ]
-					} 
-				]
-			};
-				
-				if($(".line-chart").length){
-					var ctx2 = $(".line-chart")[0].getContext("2d");
-					window.myLine = new Chart(ctx2).Line(lineChartData, {
-						responsive : true,
-						showTooltips : true,
-						multiTooltipTemplate : "<%= value %>",
-						maintainAspectRatio : false
-					});
-					
-				}
+		datasets : [ {
+			label : "My First dataset",
+			fillColor : "rgba(21,186,103,0.4)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(66,69,67,0.3)",
+			pointStrokeColor : "#fff",
+			pointHighlightFill : "#fff",
+			pointHighlightStroke : "rgba(220,220,220,1)",
+			// ----------GRÁFICO VERDE------------
+			data : [ 18, 9, 5, 7, 4.5, 4, 5, 7, 8, 9, 8, 9 ]
+		}, {
+			label : "My Second dataset",
+			fillColor : "rgba(21,113,186,0.5)",
+			strokeColor : "rgba(151,187,205,1)",
+			pointColor : "rgba(151,187,205,1)",
+			pointStrokeColor : "#fff",
+			pointHighlightFill : "#fff",
+			pointHighlightStroke : "rgba(151,187,205,1)",
+			// ----------GRÁFICO AZUL------------
+			data : [ 4, 7, 5, 18, 4.5, 4, 5, 4.5, 6, 5.6, 7.5, 7 ]
+		} ]
+	};
+
+	window.onload = function() {
+		if (hasClass = "#telaInicio") {
 			
-			
-var lineChartData = {
-	labels : [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago",
-			"Set", "Out", "Nov", "Dez" ],
-			datasets : [ {
-				label : "My First dataset",
-				fillColor : "rgba(21,186,103,0.4)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(66,69,67,0.3)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rgba(220,220,220,1)",
-				// ----------GRÁFICO VERDE------------
-				data : [ 18, 9, 5, 7, 4.5, 4, 5, 7, 8, 9, 8, 9 ]
-			}, {
-				label : "My Second dataset",
-				fillColor : "rgba(21,113,186,0.5)",
-				strokeColor : "rgba(151,187,205,1)",
-				pointColor : "rgba(151,187,205,1)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rgba(151,187,205,1)",
-				// ----------GRÁFICO AZUL------------
-				data : [ 4, 7, 5, 18, 4.5, 4, 5, 4.5, 6, 5.6, 7.5, 7 ]
-			} ]
-		};
 			
 			if($(".line-chart").length){
 				var ctx2 = $(".line-chart")[0].getContext("2d");

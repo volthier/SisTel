@@ -1,18 +1,13 @@
 package br.gov.cultura.DitelAdm.model.faturasV3;
 // Generated 29/08/2016 10:12:50 by Hibernate Tools 4.3.4.Final
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Notafiscal MODEL: Padrão FEBRABAN v3
@@ -21,10 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "nota_fiscal", catalog = "dbditel")
 public class Notafiscal implements java.io.Serializable {
-	
-	private Integer idNotaFiscal;
+
 	private String numNf;
-	@JsonIgnore
 	private Fatura fatura;
 	private float valorNfimp;
 	private String tipoNf;
@@ -33,16 +26,14 @@ public class Notafiscal implements java.io.Serializable {
 	public Notafiscal() {
 	}
 
-	public Notafiscal(Integer idNotaFiscal,String numNf, Fatura fatura, float valorNfimp, String tipoNf) {
-		this.idNotaFiscal = idNotaFiscal;
+	public Notafiscal(String numNf, Fatura fatura, float valorNfimp, String tipoNf) {
 		this.numNf = numNf;
 		this.fatura = fatura;
 		this.valorNfimp = valorNfimp;
 		this.tipoNf = tipoNf;
 	}
 
-	public Notafiscal(Integer idNotaFiscal, String numNf, Fatura fatura, float valorNfimp, String tipoNf, String campoLivreOp) {
-		this.idNotaFiscal = idNotaFiscal;
+	public Notafiscal(String numNf, Fatura fatura, float valorNfimp, String tipoNf, String campoLivreOp) {
 		this.numNf = numNf;
 		this.fatura = fatura;
 		this.valorNfimp = valorNfimp;
@@ -51,17 +42,8 @@ public class Notafiscal implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id_nota_fiscal", unique = true, nullable = false)
-	public Integer getIdNotaFiscal() {
-		return idNotaFiscal;
-	}
 
-	public void setIdNotaFiscal(Integer idNotaFiscal) {
-		this.idNotaFiscal = idNotaFiscal;
-	}	
-
-	@Column(name = "numNF", nullable = false, length = 12)
+	@Column(name = "numNF", unique = true, nullable = false, length = 12)
 	public String getNumNf() {
 		return this.numNf;
 	}

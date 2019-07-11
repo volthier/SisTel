@@ -1,11 +1,13 @@
 package br.gov.cultura.DitelAdm.controller;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import br.gov.cultura.DitelAdm.email.Mailer;
+import br.gov.cultura.DitelAdm.model.Alocacao;
+import br.gov.cultura.DitelAdm.model.AlocacaoSei;
+import br.gov.cultura.DitelAdm.model.DocumentoSei;
+import br.gov.cultura.DitelAdm.service.AlocacaoService;
+import br.gov.cultura.DitelAdm.ws.SeiClient;
+import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
+import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.Authentication;
@@ -21,40 +23,32 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.gov.cultura.DitelAdm.email.Mailer;
-import br.gov.cultura.DitelAdm.model.Alocacao;
-import br.gov.cultura.DitelAdm.model.AlocacaoSei;
-import br.gov.cultura.DitelAdm.model.DocumentoSei;
-import br.gov.cultura.DitelAdm.service.AlocacaoService;
-import br.gov.cultura.DitelAdm.service.ldap.ConsultaLdapService;
-import br.gov.cultura.DitelAdm.ws.SeiClient;
-import br.gov.cultura.DitelAdm.wsdl.RetornoConsultaProcedimento;
-import br.gov.cultura.DitelAdm.wsdl.RetornoGeracaoProcedimento;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 @RequestMapping
 public class PendenciaController {
 
 	private static final String CADASTRO_VIEW = "Pendencia";
-	
+
 	@Autowired
 	private AlocacaoService alocacaoService;
-	
+
 	@Autowired
 	private Mailer mailer;
-	
+
 	@Autowired
 	private SeiClient sei;
 
 	@Autowired
 	private ViewResolver viewResolver;
-	
+
 	@Autowired
 	private LocaleResolver locale;
-	
-	@Autowired
-	private ConsultaLdapService ldap;
-	
+
 	@RequestMapping("/pendencia")
 	public ModelAndView pendencia() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
@@ -62,7 +56,6 @@ public class PendenciaController {
 		List<Alocacao> devolvidos = alocacaoService.getDevolucao();
 		lista.removeAll(devolvidos);
 		mv.addObject("pendencia", lista);
-		ldap.usuarioInfos(mv);
 		return mv;
 	}
 
@@ -73,7 +66,7 @@ public class PendenciaController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		alocacao = alocacaoService.getAlocacao(Integer.parseInt(id));
 		String cpf = alocacao.getUsuario().getCpfUsuario();
-		
+
 
 		if (alocacao.getAlocacaoSei() != null) {
 			RetornoConsultaProcedimento processo = sei
@@ -83,7 +76,7 @@ public class PendenciaController {
 				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			    String name = auth.getName(); //get logged in username
 			    alocacao.setAutorizar(name);
-				alocacaoService.salvar(alocacao);				
+				alocacaoService.salvar(alocacao);
 				mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 				alocacao.getDocumentoSeis();
 				attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
@@ -122,7 +115,7 @@ public class PendenciaController {
 							Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 						    String name = auth.getName(); //get logged in username
 						    alocacao.setAutorizar(name);
-							alocacaoService.salvar(alocacao);		
+							alocacaoService.salvar(alocacao);
 							mailer.enviarTermo(Integer.parseInt(id), gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 							attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 							i = 1;
@@ -143,12 +136,12 @@ public class PendenciaController {
 					alocacaoSei.setDtAberturaProcesso(sdf.parse(consulta.getAndamentoGeracao().getDataHora()));
 					alocacaoService.salvar(alocacaoSei);
 					alocacao.setAlocacaoSei(alocacaoSei);
-					
+
 					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 				    String name = auth.getName(); //get logged in username
 				    alocacao.setAutorizar(name);
-					alocacaoService.salvar(alocacao);						
-		
+					alocacaoService.salvar(alocacao);
+
 					mailer.enviarTermo(Integer.parseInt(id),gerarTermoResponsabilidade(new DocumentoSei(),request,alocacao));
 					attributes.addFlashAttribute("mensagem", "E-mail encaminhado com sucesso!");
 				}
@@ -158,13 +151,13 @@ public class PendenciaController {
 		return "redirect:/pendencia";
 	}
 	private DocumentoSei gerarTermoResponsabilidade(DocumentoSei documento, HttpServletRequest request,Alocacao alocacao) throws Exception {
-		
+
 		View view = this.viewResolver.resolveViewName("/documentos/termos/TermoResponsabilidadeCelular",
 				locale.resolveLocale(request));
 		MockHttpServletResponse mockResp = new MockHttpServletResponse();
 		view.render(new ModelAndView().getModelMap().addAttribute("dto", alocacao), request, mockResp);
-		
+
 		documento = sei.enviarTermoResponsabilidade(alocacao, mockResp.getContentAsByteArray());
-		return documento;	
-	}	
+		return documento;
+	}
 }

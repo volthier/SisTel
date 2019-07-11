@@ -19,8 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.gov.cultura.DitelAdm.model.Linha;
 
 /**
@@ -32,13 +30,9 @@ import br.gov.cultura.DitelAdm.model.Linha;
 public class Chamadas implements java.io.Serializable {
 
 	private Integer idChamadas;
-	@JsonIgnore
 	private Categoriachamada categoriachamada;
-	@JsonIgnore
 	private Fatura fatura;
-	@JsonIgnore
 	private Resumo resumo;
-	@JsonIgnore
 	private Linha linha;
 	private String numRecursoChamada;
 	private String numTelefoneChamado;
@@ -414,7 +408,8 @@ public class Chamadas implements java.io.Serializable {
 		hora = ((float)this.getDuracaoLigacao().getHours())*60;
 		minuto = (float)this.getDuracaoLigacao().getMinutes();
 		segundo = ((float)this.getDuracaoLigacao().getSeconds())/60;
-		
+
+		float result = hora+minuto+segundo;
 		float retorno = (this.getValLigImp() / (hora+minuto+segundo));
 	
 		return decimalFormatFinal.format(retorno);

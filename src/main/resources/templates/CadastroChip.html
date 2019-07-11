@@ -10,9 +10,7 @@
 			th:object="${chip}">
 
 			<div layout:include="MensagemSucesso"></div>
-			    <div class="alert alert-danger" th:if="${messageErro}">
-      <span th:text="${messageErro}"></span>
-    </div>
+			<div layout:include="MensagemErro"></div>
 
 			<div class=" col-md-12  panel sem_sombra padding20 bg">
 				<div class=" col-md-12 sem_sombra padding-0">

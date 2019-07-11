@@ -1,20 +1,11 @@
 package br.gov.cultura.DitelAdm.model;
 // Generated 27/04/2017 16:07:37 by Hibernate Tools 4.0.0.Final
 
-import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
+
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * AlocacaoFatura MODEL
@@ -25,13 +16,9 @@ import br.gov.cultura.DitelAdm.model.faturasV3.Fatura;
 public class AlocacaoFatura implements java.io.Serializable {
 
 	private Integer idAlocacaoFatura;
-	@JsonIgnore
 	private Fatura fatura;
-	@JsonIgnore
 	private Alocacao alocacao;
-	@JsonIgnore
 	private Linha linha;
-	@JsonIgnore
 	private DocumentoSei documentoSei;
 	private boolean ressarcimento;
 
@@ -74,7 +61,7 @@ public class AlocacaoFatura implements java.io.Serializable {
 	public void setAlocacao(Alocacao alocacao) {
 		this.alocacao = alocacao;
 	}
-	
+
 	@Column(name = "ressarcimento", nullable = false)
 	public boolean isRessarcimento() {
 		return this.ressarcimento;
@@ -89,11 +76,11 @@ public class AlocacaoFatura implements java.io.Serializable {
 	public void setLinha(Linha linha) {
 		this.linha = linha;
 	}
-	
+
 	public void setRessarcimento(boolean ressarcimento) {
 		this.ressarcimento = ressarcimento;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_documentos_sei")
 	public DocumentoSei getDocumentoSei() {
@@ -103,7 +90,7 @@ public class AlocacaoFatura implements java.io.Serializable {
 	public void setDocumentoSei(DocumentoSei documentoSei) {
 		this.documentoSei = documentoSei;
 	}
-	
-	
+
+
 
 }

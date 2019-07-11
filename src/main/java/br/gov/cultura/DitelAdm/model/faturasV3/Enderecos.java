@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Enderecos MODEL: Padrão FEBRABAN v3
  */
@@ -20,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Enderecos implements java.io.Serializable {
 
 	private String idEnderecos;
-	@JsonIgnore
 	private Fatura fatura;
 	private String tipoEndereco;
 	private String cnlRecEnd;
@@ -56,6 +53,7 @@ public class Enderecos implements java.io.Serializable {
 	}
 
 	@Id
+
 	@Column(name = "id_enderecos", unique = true, nullable = false, length = 18)
 	public String getIdEnderecos() {
 		return this.idEnderecos;
